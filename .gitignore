@@ -1,0 +1,9 @@
+# dependencies\
+node_modules/
+
+# misc
+.DS_Store
+.npmrc
+*.log
+release.json
+**/package-lock.json
