@@ -2,26 +2,10 @@
   "name": "@puttingpoker/ui",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1",
-    "reakit": "^1.0.0-beta.4",
-    "styled-components": "^4.3.2",
-    "styled-reset-advanced": "^1.0.1",
-    "stylelint": "^10.1.0",
-    "stylelint-config-recommended": "^2.2.0",
-    "stylelint-config-styled-components": "^0.1.1",
-    "stylelint-order": "^3.0.1",
-    "stylelint-prettier": "^1.1.1",
-    "stylelint-processor-styled-components": "^1.8.0"
-  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -38,7 +22,21 @@
       "last 1 safari version"
     ]
   },
+  "dependencies": {
+    "@craco/craco": "^5.2.4",
+    "prop-types": "^15.7.2",
+    "ramda": "^0.26.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "3.0.1",
+    "reakit": "^1.0.0-beta.4",
+    "styled-components": "^4.3.2",
+    "styled-reset-advanced": "^1.0.1"
+  },
   "devDependencies": {
+    "babel-plugin-add-react-displayname": "^0.0.5",
+    "babel-plugin-jsx-remove-data-test-id": "^2.0.0",
+    "babel-plugin-styled-components": "^1.10.6",
     "eslint": "^6.1.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-import-resolver-lerna": "^1.1.0",
@@ -53,7 +51,12 @@
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^1.7.0",
     "prettier": "^1.18.2",
-    "ramda": "^0.26.1",
-    "react-axe": "^3.2.0"
+    "react-axe": "^3.2.0",
+    "stylelint": "^10.1.0",
+    "stylelint-config-recommended": "^2.2.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-order": "^3.0.1",
+    "stylelint-prettier": "^1.1.1",
+    "stylelint-processor-styled-components": "^1.8.0"
   }
 }
