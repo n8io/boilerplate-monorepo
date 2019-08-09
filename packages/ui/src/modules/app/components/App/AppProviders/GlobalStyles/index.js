@@ -6,6 +6,7 @@ const GlobalStyle = () => {
   const { site } = useContext(ThemeContext);
 
   const Styled = createGlobalStyle`
+  /* stylelint-disable-next-line selector-type-no-unknown */
   ${reset}
 
   :root {

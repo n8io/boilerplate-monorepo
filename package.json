@@ -10,7 +10,9 @@
   ],
   "scripts": {
     "bootstrap": "lerna boostrap",
-    "lint": "eslint '**/*.js'",
+    "lint:css": "yarn -s linter:css 'packages/ui/**/*.js'",
+    "lint:js": "yarn -s linter:js '**/*.js'",
+    "linter:css": "stylelint",
     "linter:js": "eslint"
   },
   "devDependencies": {
@@ -27,6 +29,7 @@
     "eslint-plugin-jest": "^22.15.0",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-ramda": "^2.5.1",
-    "lerna": "^2.8.0"
+    "lerna": "^2.8.0",
+    "prettier": "^1.18.2"
   }
 }
