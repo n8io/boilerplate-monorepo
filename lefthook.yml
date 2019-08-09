@@ -1,0 +1,9 @@
+pre-commit:
+  parallel: true
+  commands:
+    # lint-css:
+    #   glob: '*.js'
+    #   run: yarn -s linter:css --max-warnings=0 --allow-empty-input {staged_files}
+    lint-js:
+      glob: '*.js'
+      run: yarn -s linter:js {staged_files} --strict
