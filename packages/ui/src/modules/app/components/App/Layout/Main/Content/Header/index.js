@@ -3,6 +3,7 @@ import styled from 'styled-components/macro';
 import theme from 'styled-theming';
 import { Color } from 'types/color';
 import { Layout } from 'types/layout';
+import { Spacing } from '../spacing';
 
 const domTestId = 'Header';
 const { border } = Color;
@@ -10,32 +11,23 @@ const { COMFORTABLE, COMPACT, DEFAULT } = Layout;
 
 const layoutStyles = theme('layout', {
   [COMFORTABLE]: {
-    height: '2.5rem',
+    padding: Spacing[COMFORTABLE],
   },
   [COMPACT]: {
-    height: '2.25rem',
+    padding: Spacing[COMPACT],
   },
   [DEFAULT]: {
-    height: '2.75rem',
+    padding: Spacing[DEFAULT],
   },
 });
 
 const Styled = styled.header`
-  align-items: center;
   border-bottom: 1px solid ${border};
-  display: flex;
-  font-size: 2rem;
+  font-size: 1.75rem;
 
   ${layoutStyles}
 `;
 
-const Header = () => (
-  <Styled data-testid={domTestId}>
-    <span role="img" title="" aria-hidden>
-      ⛳
-    </span>
-    PuttingPoker.com
-  </Styled>
-);
+const Header = () => <Styled data-testid={domTestId}>Header</Styled>;
 
 export { domTestId, Header };

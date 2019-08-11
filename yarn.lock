@@ -10858,6 +10858,11 @@ styled-reset-advanced@^1.0.1:
   resolved "https://registry.npmjs.org/styled-reset-advanced/-/styled-reset-advanced-1.0.1.tgz#e43375f0b5c78b9d45ac89cb51961c3e1e03071a"
   integrity sha512-gH3EdUebUfVogCnlT014zO0LbVnQJ+lGIH1raZyAk4xWUGAtjrH8StE99afztTdvuu/Wy8Yj5IvS3+YKL757/Q==
 
+styled-theming@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.npmjs.org/styled-theming/-/styled-theming-2.2.0.tgz#3084e43d40eaab4bc11ebafd3de04e3622fee37e"
+  integrity sha1-MITkPUDqq0vBHrr9PeBONiL+434=
+
 stylehacks@^4.0.0:
   version "4.0.3"
   resolved "https://registry.npmjs.org/stylehacks/-/stylehacks-4.0.3.tgz#6718fcaf4d1e07d8a1318690881e8d96726a71d5"

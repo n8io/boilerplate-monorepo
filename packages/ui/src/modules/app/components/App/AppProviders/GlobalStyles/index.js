@@ -1,31 +1,29 @@
-import React, { useContext } from 'react';
-import { createGlobalStyle, ThemeContext } from 'styled-components/macro';
+import React from 'react';
+import { createGlobalStyle } from 'styled-components/macro';
 import reset from 'styled-reset-advanced';
+import { Color } from 'types/color';
 
-const GlobalStyle = () => {
-  const { site } = useContext(ThemeContext);
+const { focusRing } = Color;
 
-  const Styled = createGlobalStyle`
+const Styled = createGlobalStyle`
   /* stylelint-disable-next-line selector-type-no-unknown */
   ${reset}
 
-  :root {
-    --site-background-color: ${site.backgroundColor};
-    --site-font-color: ${site.color};
-    --site-font-family: ${site.fontFamily};
-    --site-font-family-numerals: ${site.fontFamilyNumerals};
-  }
-
   html,body {
-    background-color: var(--site-background-color);
-    color: var(--site-font-color);
-    font-family: var(--site-font-family);
     height: 100vh;
     width: 100vw;
   }
+
+  #root {
+    height: 100%;
+  }
+
+  body[modality="keyboard"] *:focus {
+    outline: 0.375rem solid ${focusRing} !important; /* for non-webkit browsers */
+    outline: 0.375rem auto -webkit-focus-ring-color !important;
+  }
 `;
 
-  return <Styled />;
-};
+const GlobalStyle = () => <Styled />;
 
 export { GlobalStyle };

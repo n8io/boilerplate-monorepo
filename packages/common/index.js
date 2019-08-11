@@ -1,1 +1,2 @@
-export { johnny } from './src/johnny';
+export { debounce } from './src/debounce';
+export { noop } from './src/noop';

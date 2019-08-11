@@ -1,18 +1,19 @@
 import { node } from 'prop-types';
 import React from 'react';
-import { ThemeProvider } from 'styled-components/macro';
-import { Theme } from '../theme';
 import { FontLoader } from './FontLoader';
 import { GlobalStyle } from './GlobalStyles';
+import { Modality } from './Modality';
+import { Theme } from './Theme';
 
 const AppProviders = ({ children }) => (
-  <ThemeProvider theme={Theme.default}>
+  <Theme>
     <>
       <FontLoader />
       <GlobalStyle />
+      <Modality />
       {children}
     </>
-  </ThemeProvider>
+  </Theme>
 );
 
 AppProviders.propTypes = {

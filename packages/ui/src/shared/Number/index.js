@@ -1,11 +1,14 @@
 import { node, string } from 'prop-types';
 import React, { useContext } from 'react';
 import styled, { ThemeContext } from 'styled-components/macro';
+import { Font } from 'types/font';
 
 const domTestId = 'Number';
 
+const { numeralsFamilyName } = Font;
+
 const Styled = styled.span`
-  font-family: ${({ theme }) => theme.site.fontFamilyNumerals};
+  font-family: ${numeralsFamilyName};
   letter-spacing: 0.125rem;
 
   ${({ className }) => className}
