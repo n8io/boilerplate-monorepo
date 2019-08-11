@@ -1,5 +1,5 @@
 {
-  "name": "puttingpoker.com",
+  "name": "puttingpoker",
   "private": true,
   "engines": {
     "node": "^12"
@@ -9,7 +9,8 @@
     "packages/*"
   ],
   "scripts": {
-    "bootstrap": "lerna boostrap",
+    "bootstrap": "lerna bootstrap",
+    "lint": "npm-run-all --parallel lint:*",
     "lint:css": "yarn -s linter:css 'packages/ui/**/*.js'",
     "lint:js": "yarn -s linter:js '**/*.js'",
     "linter:css": "stylelint",
@@ -30,6 +31,7 @@
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-ramda": "^2.5.1",
     "lerna": "^2.8.0",
+    "npm-run-all": "^4.1.5",
     "prettier": "^1.18.2"
   }
 }
