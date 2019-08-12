@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { Button } from 'shared/Button';
+import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
 import { DisplayMode } from 'types/displayMode';
 import { Layout } from 'types/layout';
@@ -15,8 +16,13 @@ const { CONTENT, NAVIGATION } = GridTemplateArea;
 const { COMFORTABLE, COMPACT, DEFAULT } = Layout;
 const layouts = [DEFAULT, COMFORTABLE, COMPACT];
 
+// eslint-disable-next-line max-statements
 const Main = () => {
   const [layoutIndex, setLayoutIndex] = useState(1);
+  const t = useTranslate({
+    component: 'main',
+    namespace: 'app',
+  });
   const { theme, updateTheme } = useThemeSwitcher();
   const { layout, mode } = theme;
 
@@ -71,7 +77,7 @@ const Main = () => {
       <Content>
         <Ctas>
           <Button onClick={onModeToggle}>
-            Switch to {mode === LIGHT ? 'Dark' : 'Light'} Mode
+            {mode === LIGHT ? t('switchToDarkMode') : t('switchToLightMode')}
           </Button>
           <Button onClick={onLayoutToggle}>Switch to {nextLayout} Mode</Button>
         </Ctas>
