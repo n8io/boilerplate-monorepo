@@ -3,10 +3,9 @@ import React from 'react';
 import styled from 'styled-components/macro';
 import theme from 'styled-theming';
 import { Layout } from 'types/layout';
-import { Body } from './Body';
-import { Footer } from './Footer';
-import { Header } from './Header';
 import { GridTemplateArea } from './gridTemplateArea';
+
+export const domTestId = 'Content';
 
 const { BODY, FOOTER, HEADER } = GridTemplateArea;
 const { COMFORTABLE, COMPACT, DEFAULT } = Layout;
@@ -31,18 +30,16 @@ const Styled = styled.div`
   ${layoutStyles}
 `;
 
-const domId = 'main-content';
-
 const Content = ({ children }) => (
-  <Styled id={domId}>
-    <Header />
-    <Body>{children}</Body>
-    <Footer />
-  </Styled>
+  <Styled data-testid={domTestId}>{children}</Styled>
 );
 
 Content.propTypes = {
   children: node.isRequired,
 };
 
-export { domId, Content };
+export { Body } from './Body';
+export { Footer } from './Footer';
+export { GridTemplateArea } from './gridTemplateArea';
+export { Header } from './Header';
+export { Content };

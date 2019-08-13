@@ -19,7 +19,7 @@ export const initializeTranslations = () =>
     .use(initReactI18next)
     .init({
       debug: config.isDevelopment,
-      fallbackLng: defaultLanguage,
+      fallbackLng: 'en',
       fallbackNS: I18N_DEFAULT_NAMESPACE,
       interpolation: {
         escapeValue: false,

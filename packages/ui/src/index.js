@@ -13,7 +13,7 @@ if (isProduction) {
 } else {
   import(
     /* webpackChunkName: "devTools" */
-    'modules/devTools'
+    'devTools'
   ).then(async ({ load }) => {
     await load();
     ReactDOM.render(<App />, document.getElementById('root'));

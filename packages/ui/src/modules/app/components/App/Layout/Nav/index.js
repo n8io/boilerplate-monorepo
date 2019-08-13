@@ -5,15 +5,15 @@ import { GridTemplateArea } from '../gridTemplateArea';
 
 const { border } = Color;
 
-const { NAVIGATION } = GridTemplateArea;
+const { NAV } = GridTemplateArea;
 
-const Styled = styled.div`
+const Styled = styled.nav`
   border-right: 1px solid ${border};
   display: grid;
-  grid-area: ${NAVIGATION};
+  grid-area: ${NAV};
   overflow-y: auto;
 `;
 
-const Nav = () => <Styled>[nav]</Styled>;
+const Nav = () => <Styled role="navigation">[nav]</Styled>;
 
 export { Nav };

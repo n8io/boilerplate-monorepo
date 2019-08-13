@@ -6,7 +6,7 @@ import { DisplayMode } from 'types/displayMode';
 import { Font } from 'types/font';
 import { Header } from './Header';
 import { Main } from './Main';
-import { SkipNavLink } from './SkipNavLink';
+import { Nav } from './Nav';
 
 const domTestId = 'Layout';
 
@@ -30,6 +30,8 @@ const Styled = styled.div`
   box-sizing: border-box;
   display: grid;
   font-family: ${familyName};
+  grid-template-areas: 'header header' 'nav main' '. footer';
+  grid-template-columns: 10rem 1fr;
   grid-template-rows: auto 1fr;
   height: 100%;
   margin: 0;
@@ -43,8 +45,8 @@ const Styled = styled.div`
 
 const Layout = () => (
   <Styled data-testid={domTestId}>
-    <SkipNavLink />
     <Header />
+    <Nav />
     <Main />
   </Styled>
 );

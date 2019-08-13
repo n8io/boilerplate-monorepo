@@ -3,11 +3,9 @@ import styled from 'styled-components/macro';
 import theme from 'styled-theming';
 import { Color } from 'types/color';
 import { Layout } from 'types/layout';
-import { GridTemplateArea } from '../gridTemplateArea';
 import { Spacing } from '../spacing';
 
-const domTestId = 'Footer';
-const { FOOTER } = GridTemplateArea;
+const domTestId = 'Header';
 const { border } = Color;
 const { COMFORTABLE, COMPACT, DEFAULT } = Layout;
 
@@ -23,15 +21,28 @@ const layoutStyles = theme('layout', {
   },
 });
 
-const Styled = styled.footer`
-  align-items: center;
-  border-top: 1px solid ${border};
-  display: flex;
-  grid-area: ${FOOTER};
+const Styled = styled.div`
+  border-bottom: 1px solid ${border};
+  font-size: 1.75rem;
 
   ${layoutStyles}
 `;
 
-const Footer = () => <Styled data-testid={domTestId}>Footer</Styled>;
+const Header = ({ children, title }) => (
+  <Styled data-testid={domTestId}>
+    {children ? children : <h1>{title}</h1>}
+  </Styled>
+);
 
-export { domTestId, Footer };
+const checkChildrenOrTitle = ({ children, title }) => {
+  if (children || title) return;
+
+  throw new Error('Either children or a title is required');
+};
+
+Header.propTypes = {
+  children: checkChildrenOrTitle,
+  title: checkChildrenOrTitle,
+};
+
+export { domTestId, Header };

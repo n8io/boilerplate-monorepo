@@ -1,11 +1,14 @@
+import { node } from 'prop-types';
 import React from 'react';
 import styled from 'styled-components/macro';
 import theme from 'styled-theming';
 import { Color } from 'types/color';
 import { Layout } from 'types/layout';
+import { GridTemplateArea } from '../gridTemplateArea';
 import { Spacing } from '../spacing';
 
-const domTestId = 'Header';
+const domTestId = 'Footer';
+const { FOOTER } = GridTemplateArea;
 const { border } = Color;
 const { COMFORTABLE, COMPACT, DEFAULT } = Layout;
 
@@ -21,13 +24,21 @@ const layoutStyles = theme('layout', {
   },
 });
 
-const Styled = styled.header`
-  border-bottom: 1px solid ${border};
-  font-size: 1.75rem;
+const Styled = styled.footer`
+  align-items: center;
+  border-top: 1px solid ${border};
+  display: flex;
+  grid-area: ${FOOTER};
 
   ${layoutStyles}
 `;
 
-const Header = () => <Styled data-testid={domTestId}>Header</Styled>;
+const Footer = ({ children }) => (
+  <Styled data-testid={domTestId}>{children}</Styled>
+);
 
-export { domTestId, Header };
+Footer.propTypes = {
+  children: node.isRequired,
+};
+
+export { domTestId, Footer };

@@ -1,8 +1,13 @@
 import React from 'react';
+import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
 import theme from 'styled-theming';
 import { Color } from 'types/color';
 import { Layout } from 'types/layout';
+import { GridTemplateArea } from '../gridTemplateArea';
+import { SkipNavLink } from './SkipNavLink';
+
+const { HEADER } = GridTemplateArea;
 
 const domTestId = 'Header';
 const { border } = Color;
@@ -25,17 +30,23 @@ const Styled = styled.header`
   border-bottom: 1px solid ${border};
   display: flex;
   font-size: 2rem;
+  grid-area: ${HEADER};
 
   ${layoutStyles}
 `;
 
-const Header = () => (
-  <Styled data-testid={domTestId}>
-    <span role="img" title="" aria-hidden>
-      ⛳
-    </span>
-    PuttingPoker.com
-  </Styled>
-);
+const Header = () => {
+  const t = useTranslate({
+    component: 'app',
+    namespace: 'app',
+  });
+
+  return (
+    <Styled data-testid={domTestId} role="banner">
+      <SkipNavLink />
+      <h1>{t('name')}</h1>
+    </Styled>
+  );
+};
 
 export { domTestId, Header };

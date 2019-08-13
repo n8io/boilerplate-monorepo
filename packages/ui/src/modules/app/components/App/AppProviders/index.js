@@ -1,5 +1,6 @@
 import { node } from 'prop-types';
 import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { Suspense } from 'shared/Suspense';
 import { ErrorBoundary } from './ErrorBoundary';
 import { FontLoader } from './FontLoader';
@@ -17,7 +18,7 @@ const AppProviders = ({ children }) => (
           <GlobalStyle />
           <Modality />
           <TranslationSync />
-          {children}
+          <Router>{children}</Router>
         </>
       </Theme>
     </Suspense>

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/macro';
-import { domId } from '../Main';
+import { domId } from '../../Main';
 
 const Styled = styled.a`
   clip: rect(1px, 1px, 1px, 1px);
