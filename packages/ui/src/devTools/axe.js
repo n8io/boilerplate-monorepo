@@ -1,6 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+const config = {
+  rules: [
+    {
+      enabled: false,
+      id: 'skip-link',
+    },
+  ],
+};
+
 const load = () =>
   new Promise((resolve, reject) =>
     import(
@@ -8,7 +17,7 @@ const load = () =>
       'react-axe'
     )
       .then(({ default: axe }) => {
-        axe(React, ReactDOM, 1000);
+        axe(React, ReactDOM, 2000, config);
 
         return resolve();
       })

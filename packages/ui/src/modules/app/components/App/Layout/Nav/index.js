@@ -1,19 +1,30 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import { Color } from 'types/color';
+import { Route } from 'types/route';
 import { GridTemplateArea } from '../gridTemplateArea';
-
-const { border } = Color;
-
-const { NAV } = GridTemplateArea;
+import { NavItem } from './NavItem';
 
 const Styled = styled.nav`
-  border-right: 1px solid ${border};
+  box-shadow: 1px 0 0 0 ${Color.border};
   display: grid;
-  grid-area: ${NAV};
+  grid-area: ${GridTemplateArea.NAV};
   overflow-y: auto;
 `;
 
-const Nav = () => <Styled role="navigation">[nav]</Styled>;
+const NavList = styled.ul`
+  align-items: start;
+  display: flex;
+  flex-direction: column;
+`;
+
+const Nav = () => (
+  <Styled role="navigation">
+    <NavList>
+      <NavItem route={Route.ROOT} />
+      <NavItem route={Route.DASHBOARD} />
+    </NavList>
+  </Styled>
+);
 
 export { Nav };

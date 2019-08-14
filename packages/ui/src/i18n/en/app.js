@@ -1,7 +1,13 @@
 export const app = {
-  main: {
-    switchToDarkMode: 'Switch to Dark mode',
-    switchToLightMode: 'Switch to Light mode',
+  nav: {
+    dashboard: 'Dashboard',
+    root: 'Home',
   },
-  name: 'Acme Inc.',
+  skipLink: 'Skip to content',
+  title: '<title>',
+  toggles: {
+    layout: 'Layout',
+    theme: 'Theme',
+    toggleTheme: 'Toggle between themes',
+  },
 };

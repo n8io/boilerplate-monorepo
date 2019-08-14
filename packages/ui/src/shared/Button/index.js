@@ -5,41 +5,23 @@ import styled from 'styled-components/macro';
 import theme from 'styled-theming';
 import { Color } from 'types/color';
 import { DisplayMode } from 'types/displayMode';
-import { Layout } from 'types/layout';
 
 const domTestId = 'Button';
 
-const { black, white } = Color;
-const { DARK, LIGHT } = DisplayMode;
-const { COMFORTABLE, COMPACT, DEFAULT } = Layout;
-
 const modeStyles = theme('mode', {
-  [DARK]: {
-    backgroundColor: white,
-    color: black,
+  [DisplayMode.DARK]: {
+    backgroundColor: Color.white,
+    color: Color.black,
   },
-  [LIGHT]: {
-    backgroundColor: black,
-    color: white,
-  },
-});
-
-const layoutStyles = theme('layout', {
-  [COMFORTABLE]: {
-    padding: '0.5rem',
-  },
-  [COMPACT]: {
-    padding: '0.375rem',
-  },
-  [DEFAULT]: {
-    padding: '0.675rem',
+  [DisplayMode.LIGHT]: {
+    backgroundColor: Color.black,
+    color: Color.white,
   },
 });
 
 const Styled = styled.button`
   border-radius: 0.125rem;
-  
-  ${layoutStyles} 
+
   ${modeStyles}
   ${({ className }) => className}
 `;

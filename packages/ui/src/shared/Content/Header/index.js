@@ -1,36 +1,31 @@
 import React from 'react';
 import styled from 'styled-components/macro';
-import theme from 'styled-theming';
 import { Color } from 'types/color';
 import { Layout } from 'types/layout';
-import { Spacing } from '../spacing';
+import { GridTemplateArea } from '../gridTemplateArea';
 
 const domTestId = 'Header';
-const { border } = Color;
-const { COMFORTABLE, COMPACT, DEFAULT } = Layout;
-
-const layoutStyles = theme('layout', {
-  [COMFORTABLE]: {
-    padding: Spacing[COMFORTABLE],
-  },
-  [COMPACT]: {
-    padding: Spacing[COMPACT],
-  },
-  [DEFAULT]: {
-    padding: Spacing[DEFAULT],
-  },
-});
+const domId = 'main-content';
 
 const Styled = styled.div`
-  border-bottom: 1px solid ${border};
+  align-items: center;
+  box-shadow: 0 1px 0 0 ${Color.border};
+  display: flex;
   font-size: 1.75rem;
-
-  ${layoutStyles}
+  grid-area: ${GridTemplateArea.HEADER};
+  height: ${Layout.MAIN_HEADER_HEIGHT}rem;
+  padding: 0 1rem;
 `;
 
 const Header = ({ children, title }) => (
   <Styled data-testid={domTestId}>
-    {children ? children : <h1>{title}</h1>}
+    {children ? (
+      children
+    ) : (
+      <h1 id={domId} tabIndex="-1">
+        {title}
+      </h1>
+    )}
   </Styled>
 );
 
@@ -45,4 +40,4 @@ Header.propTypes = {
   title: checkChildrenOrTitle,
 };
 
-export { domTestId, Header };
+export { Header, domId, domTestId };

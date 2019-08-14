@@ -3,22 +3,20 @@ import styled from 'styled-components/macro';
 import { Router } from '../../Router';
 import { GridTemplateArea } from '../gridTemplateArea';
 
-const { MAIN } = GridTemplateArea;
-
 const domTestId = 'Main';
-const domId = 'main-content';
 
 const Main = () => {
   const Styled = styled.main`
     display: grid;
-    grid-area: ${MAIN};
+    grid-area: ${GridTemplateArea.MAIN};
+    height: 100%;
   `;
 
   return (
-    <Styled data-testid={domTestId} id={domId} role="main">
+    <Styled data-testid={domTestId} role="main">
       <Router />
     </Styled>
   );
 };
 
-export { domId, domTestId, Main };
+export { domTestId, Main };

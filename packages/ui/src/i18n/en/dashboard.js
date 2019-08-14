@@ -1,7 +1,7 @@
 export const dashboard = {
   dashboard: {
-    body: 'body',
-    footer: 'footer',
-    title: 'header',
+    body: '<body>',
+    footer: '<footer>',
+    title: 'Dashboard',
   },
 };

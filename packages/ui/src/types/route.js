@@ -1,13 +1,17 @@
-export const routes = Object.entries({
-  DASHBOARD: '/dashboard',
-  LOGIN: '/login',
-  LOGOUT: '/logout',
-  ROOT: '/',
-}).reduce((acc, entry) => {
-  const [key, value] = entry;
+import { shape, string } from 'prop-types';
 
-  return {
-    ...acc,
-    [key]: value,
-  };
-}, {});
+export const propTypes = shape({
+  key: string.isRequired,
+  path: string.isRequired,
+});
+
+export const Route = {
+  DASHBOARD: {
+    name: 'dashboard',
+    path: '/dashboard',
+  },
+  ROOT: {
+    name: 'root',
+    path: '/',
+  },
+};

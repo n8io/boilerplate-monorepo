@@ -1,38 +1,23 @@
 import React from 'react';
 import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
-import theme from 'styled-theming';
 import { Color } from 'types/color';
 import { Layout } from 'types/layout';
 import { GridTemplateArea } from '../gridTemplateArea';
 import { SkipNavLink } from './SkipNavLink';
-
-const { HEADER } = GridTemplateArea;
+import { Toggles } from './Toggles';
 
 const domTestId = 'Header';
-const { border } = Color;
-const { COMFORTABLE, COMPACT, DEFAULT } = Layout;
-
-const layoutStyles = theme('layout', {
-  [COMFORTABLE]: {
-    height: '2.5rem',
-  },
-  [COMPACT]: {
-    height: '2.25rem',
-  },
-  [DEFAULT]: {
-    height: '2.75rem',
-  },
-});
 
 const Styled = styled.header`
   align-items: center;
-  border-bottom: 1px solid ${border};
+  box-shadow: 0 1px 0 0 ${Color.border};
   display: flex;
   font-size: 2rem;
-  grid-area: ${HEADER};
-
-  ${layoutStyles}
+  grid-area: ${GridTemplateArea.HEADER};
+  height: ${Layout.HEADER_HEIGHT}rem;
+  justify-content: space-between;
+  padding: 0 1rem;
 `;
 
 const Header = () => {
@@ -44,7 +29,8 @@ const Header = () => {
   return (
     <Styled data-testid={domTestId} role="banner">
       <SkipNavLink />
-      <h1>{t('name')}</h1>
+      <h1>{t('title')}</h1>
+      <Toggles />
     </Styled>
   );
 };

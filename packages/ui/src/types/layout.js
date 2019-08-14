@@ -1,5 +1,7 @@
+// All units are rem
 export const Layout = {
-  COMFORTABLE: 'comfortable',
-  COMPACT: 'compact',
-  DEFAULT: 'default',
+  HEADER_HEIGHT: 2.75,
+  MAIN_FOOTER_HEIGHT: 2.25,
+  MAIN_HEADER_HEIGHT: 2.75,
+  NAV_WIDTH: 10,
 };

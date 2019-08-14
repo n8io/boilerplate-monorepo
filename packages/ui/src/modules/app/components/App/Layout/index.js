@@ -4,24 +4,22 @@ import theme from 'styled-theming';
 import { Color } from 'types/color';
 import { DisplayMode } from 'types/displayMode';
 import { Font } from 'types/font';
+import { Layout } from 'types/layout';
 import { Header } from './Header';
 import { Main } from './Main';
 import { Nav } from './Nav';
+import { GridTemplateArea } from './gridTemplateArea';
 
 const domTestId = 'Layout';
 
-const { black, white } = Color;
-const { familyName } = Font;
-const { DARK, LIGHT } = DisplayMode;
-
 const modeStyles = theme('mode', {
-  [DARK]: {
-    backgroundColor: black,
-    color: white,
+  [DisplayMode.DARK]: {
+    backgroundColor: Color.black,
+    color: Color.white,
   },
-  [LIGHT]: {
-    backgroundColor: white,
-    color: black,
+  [DisplayMode.LIGHT]: {
+    backgroundColor: Color.white,
+    color: Color.black,
   },
 });
 
@@ -29,9 +27,10 @@ const Styled = styled.div`
   border: 0;
   box-sizing: border-box;
   display: grid;
-  font-family: ${familyName};
-  grid-template-areas: 'header header' 'nav main' '. footer';
-  grid-template-columns: 10rem 1fr;
+  font-family: ${Font.familyName};
+  grid-template-areas: '${GridTemplateArea.HEADER} ${GridTemplateArea.HEADER}'
+    '${GridTemplateArea.NAV} ${GridTemplateArea.MAIN}';
+  grid-template-columns: ${Layout.NAV_WIDTH}rem 1fr;
   grid-template-rows: auto 1fr;
   height: 100%;
   margin: 0;
@@ -43,7 +42,7 @@ const Styled = styled.div`
   ${modeStyles}
 `;
 
-const Layout = () => (
+const AppLayout = () => (
   <Styled data-testid={domTestId}>
     <Header />
     <Nav />
@@ -51,4 +50,4 @@ const Layout = () => (
   </Styled>
 );
 
-export { domTestId, Layout };
+export { domTestId, AppLayout as Layout };
