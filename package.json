@@ -10,10 +10,17 @@
   ],
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "lint": "npm-run-all --parallel lint:*",
-    "lint:css": "stylelint 'packages/ui/**/*.js'",
-    "lint:js:eslint": "eslint '**/*.js'",
-    "lint:js:prettier": "prettier '**/*.js'"
+    "format": "yarn -s run run-all format:*",
+    "format:js-eslint": "eslint --cache --fix '**/*.js'",
+    "format:js-prettier": "prettier --write '**/*.js'",
+    "lint": "yarn -s run run-all lint:*",
+    "lint:css": "yarn -s linter:stylelint 'packages/ui/**/*.js'",
+    "lint:js-eslint": "yarn -s linter:eslint '**/*.js'",
+    "lint:js-prettier": "yarn -s linter:prettier '**/*.js'",
+    "linter:eslint": "eslint --max-warnings 0 --report-unused-disable-directives",
+    "linter:prettier": "prettier --check",
+    "linter:stylelint": "stylelint --max-warnings=0 --allow-empty-input",
+    "run-all": "npm-run-all --parallel"
   },
   "devDependencies": {
     "@arkweid/lefthook": "^0.6.3",
