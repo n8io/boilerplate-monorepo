@@ -11,10 +11,9 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "lint": "npm-run-all --parallel lint:*",
-    "lint:css": "yarn -s linter:css 'packages/ui/**/*.js'",
-    "lint:js": "yarn -s linter:js '**/*.js'",
-    "linter:css": "stylelint",
-    "linter:js": "eslint"
+    "lint:css": "stylelint 'packages/ui/**/*.js'",
+    "lint:js:eslint": "eslint '**/*.js'",
+    "lint:js:prettier": "prettier '**/*.js'"
   },
   "devDependencies": {
     "@arkweid/lefthook": "^0.6.3",
