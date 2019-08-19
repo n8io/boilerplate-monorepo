@@ -13,11 +13,15 @@ const Styled = styled.header`
   align-items: center;
   box-shadow: 0 1px 0 0 ${Color.border};
   display: flex;
-  font-size: 2rem;
   grid-area: ${GridTemplateArea.HEADER};
   height: ${Layout.HEADER_HEIGHT}rem;
   justify-content: space-between;
   padding: 0 1rem;
+`;
+
+const H1 = styled.h1`
+  font-size: 2rem;
+  margin-bottom: 0;
 `;
 
 const Header = () => {
@@ -29,7 +33,7 @@ const Header = () => {
   return (
     <Styled data-testid={domTestId} role="banner">
       <SkipNavLink />
-      <h1>{t('title')}</h1>
+      <H1>{t('title')}</H1>
       <Toggles />
     </Styled>
   );

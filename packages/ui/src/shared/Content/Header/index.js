@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components/macro';
 import { Color } from 'types/color';
 import { Layout } from 'types/layout';
+import { topStyles as fadeTopStyles } from '../fade';
 import { GridTemplateArea } from '../gridTemplateArea';
 
 const domTestId = 'Header';
@@ -9,12 +10,18 @@ const domId = 'main-content';
 
 const Styled = styled.div`
   align-items: center;
-  box-shadow: 0 1px 0 0 ${Color.border};
+  border-bottom: 1px solid ${Color.border};
   display: flex;
-  font-size: 1.75rem;
   grid-area: ${GridTemplateArea.HEADER};
   height: ${Layout.MAIN_HEADER_HEIGHT}rem;
   padding: 0 1rem;
+
+  /* stylelint-disable-next-line order/properties-alphabetical-order */
+  ${fadeTopStyles}
+`;
+
+const H1 = styled.h1`
+  margin-bottom: 0;
 `;
 
 const Header = ({ children, title }) => (
@@ -22,9 +29,9 @@ const Header = ({ children, title }) => (
     {children ? (
       children
     ) : (
-      <h1 id={domId} tabIndex="-1">
+      <H1 id={domId} tabIndex="-1">
         {title}
-      </h1>
+      </H1>
     )}
   </Styled>
 );

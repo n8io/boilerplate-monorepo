@@ -27,6 +27,7 @@ export const initializeTranslations = () =>
       lng: defaultLanguage,
       ns: I18N_DEFAULT_NAMESPACE,
       react: {
-        useSuspense: true,
+        useSuspense: false,
+        wait: true,
       },
     });

@@ -8,10 +8,10 @@ const domTestId = 'Content';
 const Styled = styled.div`
   display: grid;
   grid-template-areas: 
+    '${GridTemplateArea.BREADCRUMBS}' 
     '${GridTemplateArea.HEADER}' 
     '${GridTemplateArea.BODY}' 
     '${GridTemplateArea.FOOTER}';
-  grid-template-rows: auto 1fr auto;
 `;
 
 const Content = ({ children }) => (
@@ -23,6 +23,7 @@ Content.propTypes = {
 };
 
 export { Body } from './Body';
+export { Breadcrumbs } from './Breadcrumbs';
 export { Footer } from './Footer';
 export { GridTemplateArea } from './gridTemplateArea';
 export { Header, domId as mainContentDomId } from './Header';

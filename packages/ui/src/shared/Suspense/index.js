@@ -1,9 +1,9 @@
 import { node } from 'prop-types';
 import React from 'react';
-import { Loading } from '../Loading';
+import { Loader } from '../Loader';
 
 const Suspense = ({ children }) => (
-  <React.Suspense fallback={<Loading />}>{children}</React.Suspense>
+  <React.Suspense fallback={<Loader />}>{children}</React.Suspense>
 );
 
 Suspense.defaultProps = {

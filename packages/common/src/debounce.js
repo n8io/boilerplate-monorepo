@@ -1,14 +1,17 @@
-export const debounce = (delay, fn) => {
+// eslint-disable-next-line no-undef
+const globals = window || global;
+
+export const debounce = fn => {
   let timerId = null;
 
   return (...args) => {
     if (timerId) {
-      clearTimeout(timerId);
+      globals.cancelAnimationFrame(timerId);
     }
 
-    timerId = setTimeout(() => {
+    timerId = globals.requestAnimationFrame(() => {
       fn(...args);
       timerId = null;
-    }, delay);
+    });
   };
 };

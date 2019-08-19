@@ -14,11 +14,11 @@ const domTestId = 'Layout';
 
 const modeStyles = theme('mode', {
   [DisplayMode.DARK]: {
-    backgroundColor: Color.black,
+    'background-color': Color.black,
     color: Color.white,
   },
   [DisplayMode.LIGHT]: {
-    backgroundColor: Color.white,
+    'background-color': Color.white,
     color: Color.black,
   },
 });
@@ -35,8 +35,7 @@ const Styled = styled.div`
   height: 100%;
   margin: 0;
   padding: 0;
-  transition: color 200ms ease, background-color 200ms ease,
-    font-size 200ms ease;
+  transition: color 200ms ease, background-color 200ms ease;
 
   /* stylelint-disable-next-line order/properties-alphabetical-order */
   ${modeStyles}

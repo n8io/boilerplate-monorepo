@@ -1,20 +1,10 @@
-import React from 'react';
-import { Body, Content, Footer, Header } from 'shared/Content';
-import { useTranslate } from 'shared/useTranslate';
+import { lazy } from 'react';
 
-const NotFound = () => {
-  const t = useTranslate({
-    component: 'notFound',
-    namespace: 'notFound',
-  });
+const Lazy = lazy(() =>
+  import(
+    /* webpackChunkName: "notFound" */
+    './component'
+  ).then(({ NotFound }) => ({ default: NotFound }))
+);
 
-  return (
-    <Content>
-      <Header title={t('title')} />
-      <Body>{t('body')}</Body>
-      <Footer>{t('footer')}</Footer>
-    </Content>
-  );
-};
-
-export { NotFound };
+export { Lazy as NotFound };

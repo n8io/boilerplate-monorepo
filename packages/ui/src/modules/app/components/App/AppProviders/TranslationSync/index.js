@@ -3,14 +3,17 @@ import { object, string } from 'prop-types';
 import { useEffect } from 'react';
 import { withTranslation } from 'react-i18next';
 
-const TranslationSync = ({ defaultLocale, i18n }) => {
+const readLocal = fallbackLocale =>
+  localStorage.getItem('language') || fallbackLocale;
+
+const TranslationSync = ({ locale, i18n }) => {
   useEffect(() => {
     const sync = () => {
-      i18n.changeLanguage(defaultLocale);
+      i18n.changeLanguage(readLocal(locale));
     };
 
     sync();
-  }, [defaultLocale]);
+  }, [locale]);
 
   return null;
 };

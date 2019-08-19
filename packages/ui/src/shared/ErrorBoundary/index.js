@@ -1,6 +1,6 @@
 import { func, node } from 'prop-types';
 import React, { Component } from 'react';
-import { ErrorPage } from 'shared/ErrorPage';
+import { ErrorPage } from '../ErrorPage';
 
 class ErrorBoundary extends Component {
   static defaultProps = {

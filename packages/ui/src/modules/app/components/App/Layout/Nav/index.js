@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import { Color } from 'types/color';
-import { Route } from 'types/route';
+import { Navigation } from 'types/route';
 import { GridTemplateArea } from '../gridTemplateArea';
 import { NavItem } from './NavItem';
 
@@ -21,8 +21,9 @@ const NavList = styled.ul`
 const Nav = () => (
   <Styled role="navigation">
     <NavList>
-      <NavItem route={Route.ROOT} />
-      <NavItem route={Route.DASHBOARD} />
+      {Navigation.map(route => (
+        <NavItem key={route.name} route={route} />
+      ))}
     </NavList>
   </Styled>
 );
