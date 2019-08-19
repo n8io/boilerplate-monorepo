@@ -3,9 +3,11 @@ import { AppProviders } from './AppProviders';
 import { Layout } from './Layout';
 
 const App = () => (
-  <AppProviders>
-    <Layout />
-  </AppProviders>
+  <React.Suspense fallback={null}>
+    <AppProviders>
+      <Layout />
+    </AppProviders>
+  </React.Suspense>
 );
 
 export { App, AppProviders };
