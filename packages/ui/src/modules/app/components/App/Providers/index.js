@@ -8,7 +8,7 @@ import { Modality } from './Modality';
 import { Theme } from './Theme';
 import { TranslationSync } from './TranslationSync';
 
-const AppProviders = ({ children }) => (
+const Providers = ({ children }) => (
   <Suspense>
     <Theme>
       <>
@@ -22,8 +22,8 @@ const AppProviders = ({ children }) => (
   </Suspense>
 );
 
-AppProviders.propTypes = {
+Providers.propTypes = {
   children: node.isRequired,
 };
 
-export { AppProviders };
+export { Providers };

@@ -1,13 +1,13 @@
 import React from 'react';
-import { AppProviders } from './AppProviders';
 import { Layout } from './Layout';
+import { Providers } from './Providers';
 
 const App = () => (
   <React.Suspense fallback={null}>
-    <AppProviders>
+    <Providers>
       <Layout />
-    </AppProviders>
+    </Providers>
   </React.Suspense>
 );
 
-export { App, AppProviders };
+export { App, Providers as AppProviders };

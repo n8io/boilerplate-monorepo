@@ -3,7 +3,7 @@ import { Button } from 'shared/Button';
 import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
 import { DisplayMode } from 'types/displayMode';
-import { useThemeSwitcher } from '../../../AppProviders/Theme';
+import { useThemeSwitcher } from '../../../Providers/Theme';
 
 const Styled = styled.section`
   display: grid;
