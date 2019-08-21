@@ -16,7 +16,7 @@ const Styled = createGlobalStyle`
   #root {
     height: 100%;
   }
-  
+
   ${modalityStyles}
   ${elementStyles}
   ${headerStyles}

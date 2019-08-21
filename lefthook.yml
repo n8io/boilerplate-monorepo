@@ -3,7 +3,10 @@ pre-commit:
   commands:
     lint-css:
       glob: 'packages/ui/**/*.js'
-      run: yarn -s linter:css --max-warnings=0 --allow-empty-input {staged_files}
-    lint-js:
+      run: yarn -s linter:stylelint {staged_files}
+    lint-js-eslint:
       glob: '*.js'
-      run: yarn -s linter:js {staged_files}
+      run: yarn -s linter:eslint {staged_files}
+    lint-js-prettier:
+      glob: '*.js'
+      run: yarn -s linter:prettier {staged_files}
