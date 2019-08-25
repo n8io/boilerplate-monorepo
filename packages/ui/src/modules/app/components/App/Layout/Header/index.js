@@ -5,7 +5,6 @@ import { Color } from 'types/color';
 import { Layout } from 'types/layout';
 import { GridTemplateArea } from '../gridTemplateArea';
 import { SkipNavLink } from './SkipNavLink';
-import { Toggles } from './Toggles';
 
 const domTestId = 'Header';
 
@@ -34,7 +33,6 @@ const Header = () => {
     <Styled data-testid={domTestId} role="banner">
       <SkipNavLink />
       <H1>{t('title')}</H1>
-      <Toggles />
     </Styled>
   );
 };

@@ -15,7 +15,6 @@ const Styled = styled.a`
     background-color: ${Color.white};
     border-radius: 0.25rem;
     clip: auto !important;
-    color: ${Color.link};
     display: block;
     font-size: 1rem;
     height: auto;

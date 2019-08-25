@@ -1,9 +1,9 @@
 import { number } from 'prop-types';
 import React from 'react';
-import { ScreenReaderNotification } from 'shared/ScreenReaderNotification';
-import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
 import { Color } from 'types/color';
+import { ScreenReaderNotification } from '../ScreenReaderNotification';
+import { useTranslate } from '../useTranslate';
 
 const Styled = styled.div`
   left: 50%;

@@ -46,7 +46,7 @@ const ErrorPage = ({ message }) => {
           )}
         </Center>
       </Styled>
-      <Footer>{t('footer')}</Footer>
+      <Footer />
     </Content>
   );
 };

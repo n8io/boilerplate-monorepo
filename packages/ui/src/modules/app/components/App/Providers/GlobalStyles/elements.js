@@ -1,4 +1,14 @@
+import { lighten } from 'polished';
+import { pipe, path } from 'ramda';
 import { css } from 'styled-components/macro';
+import { Color } from 'types/color';
+import { DisplayMode } from 'types/displayMode';
+
+const themeMode = fn =>
+  pipe(
+    path(['theme', 'mode']),
+    fn
+  );
 
 export const styles = css`
   details,
@@ -29,5 +39,16 @@ export const styles = css`
     color: #f00;
     font-family: monospace;
     padding: 0.5rem;
+  }
+
+  a,
+  a:visited {
+    color: ${themeMode(mode =>
+      mode === DisplayMode.DARK ? lighten(0.2, Color.primary) : Color.primary
+    )};
+  }
+
+  strong {
+    font-weight: bold;
   }
 `;

@@ -1,8 +1,10 @@
+import { node } from 'prop-types';
 import React from 'react';
-import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
 import { Color } from 'types/color';
 import { Layout } from 'types/layout';
+import { Routes } from 'types/routes';
+import { useTranslate } from '../../useTranslate';
 import { GridTemplateArea } from '../gridTemplateArea';
 import { Breadcrumb } from './Breadcrumb';
 
@@ -18,18 +20,23 @@ const Styled = styled.ul`
   padding: 0 1rem;
 `;
 
-const Breadcrumbs = () => {
-  const t = useTranslate({
-    component: 'common',
-    namespace: 'common',
-  });
+const Breadcrumbs = ({ children }) => {
+  const t = useTranslate();
 
   return (
     <Styled>
-      <Breadcrumb>{t('home')}</Breadcrumb>
-      <Breadcrumb>{t('dashboard')}</Breadcrumb>
+      <Breadcrumb
+        exact={Routes.ROOT.exact}
+        text={t('home')}
+        to={Routes.ROOT.path}
+      />
+      {children}
     </Styled>
   );
 };
 
-export { Breadcrumbs };
+Breadcrumbs.propTypes = {
+  children: node.isRequired,
+};
+
+export { Breadcrumb, Breadcrumbs };

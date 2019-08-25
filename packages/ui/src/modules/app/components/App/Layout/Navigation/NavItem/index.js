@@ -1,5 +1,4 @@
-import { lighten } from 'polished';
-import { path as rPath, pipe } from 'ramda';
+import { lighten, rgba } from 'polished';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useTranslate } from 'shared/useTranslate';
@@ -8,7 +7,7 @@ import theme from 'styled-theming';
 import { Color } from 'types/color';
 import { DisplayMode } from 'types/displayMode';
 import { Layout } from 'types/layout';
-import { propTypes } from 'types/route';
+import { propTypes } from 'types/routes';
 
 const StyledListItem = styled.li`
   align-items: center;
@@ -17,7 +16,7 @@ const StyledListItem = styled.li`
   width: 100%;
 `;
 
-const themeConfig = {
+const activeStyles = theme('mode', {
   [DisplayMode.DARK]: {
     backgroundColor: Color.white,
     color: Color.primary,
@@ -26,9 +25,18 @@ const themeConfig = {
     backgroundColor: Color.primary,
     color: Color.white,
   },
-};
+});
 
-const activeStyles = theme('mode', themeConfig);
+const hoverStyles = theme('mode', {
+  [DisplayMode.DARK]: {
+    backgroundColor: rgba(Color.white, 0.5),
+    color: lighten(0.5, Color.primary),
+  },
+  [DisplayMode.LIGHT]: {
+    backgroundColor: lighten(0.1, Color.primary),
+    color: Color.white,
+  },
+});
 
 const Styled = styled(NavLink)`
   align-items: center;
@@ -41,14 +49,7 @@ const Styled = styled(NavLink)`
 
   &:focus,
   &:hover {
-    background-color: ${pipe(
-      rPath(['theme', 'mode']),
-      mode => {
-        return mode === DisplayMode.DARK
-          ? Color.primary
-          : lighten(0.4, Color.primary);
-      }
-    )};
+    ${hoverStyles}
   }
 
   &.active {

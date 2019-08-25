@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import { Color } from 'types/color';
-import { Navigation } from 'types/route';
 import { GridTemplateArea } from '../gridTemplateArea';
 import { NavItem } from './NavItem';
+import { Navigation } from './navigation';
 
 const Styled = styled.nav`
   box-shadow: 1px 0 0 0 ${Color.border};

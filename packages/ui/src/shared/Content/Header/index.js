@@ -1,7 +1,10 @@
+import { string } from 'prop-types';
 import React from 'react';
+import { MoveFocusInside } from 'react-focus-lock';
 import styled from 'styled-components/macro';
 import { Color } from 'types/color';
 import { Layout } from 'types/layout';
+import { PageTitle } from '../../PageTitle';
 import { topStyles as fadeTopStyles } from '../fade';
 import { GridTemplateArea } from '../gridTemplateArea';
 
@@ -24,27 +27,19 @@ const H1 = styled.h1`
   margin-bottom: 0;
 `;
 
-const Header = ({ children, title }) => (
+const Header = ({ title }) => (
   <Styled data-testid={domTestId}>
-    {children ? (
-      children
-    ) : (
+    <PageTitle title={title} />
+    <MoveFocusInside>
       <H1 id={domId} tabIndex="-1">
         {title}
       </H1>
-    )}
+    </MoveFocusInside>
   </Styled>
 );
 
-const checkChildrenOrTitle = ({ children, title }) => {
-  if (children || title) return;
-
-  throw new Error('Either children or a title is required');
-};
-
 Header.propTypes = {
-  children: checkChildrenOrTitle,
-  title: checkChildrenOrTitle,
+  title: string.isRequired,
 };
 
 export { Header, domId, domTestId };

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route as RouterRoute, Switch } from 'react-router-dom';
-import { Navigation, Route as Routes } from 'types/route';
+import { Routes } from 'types/routes';
+import { Navigation } from '../Layout/Navigation/navigation';
 import { Route } from './Route';
 
 const { NOT_FOUND } = Routes;

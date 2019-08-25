@@ -7,7 +7,7 @@ import { Font } from 'types/font';
 import { Layout } from 'types/layout';
 import { Header } from './Header';
 import { Main } from './Main';
-import { Nav } from './Nav';
+import { Nav } from './Navigation';
 import { GridTemplateArea } from './gridTemplateArea';
 
 const domTestId = 'Layout';

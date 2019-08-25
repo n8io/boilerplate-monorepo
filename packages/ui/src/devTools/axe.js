@@ -1,3 +1,4 @@
+import { seconds } from '@puttingpoker/common';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -6,6 +7,10 @@ const config = {
     {
       enabled: false,
       id: 'skip-link',
+    },
+    {
+      enabled: false,
+      id: 'color-contrast',
     },
   ],
 };
@@ -17,7 +22,7 @@ const load = () =>
       'react-axe'
     )
       .then(({ default: axe }) => {
-        axe(React, ReactDOM, 2000, config);
+        axe(React, ReactDOM, seconds(5), config);
 
         return resolve();
       })

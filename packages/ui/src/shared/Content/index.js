@@ -23,7 +23,7 @@ Content.propTypes = {
 };
 
 export { Body } from './Body';
-export { Breadcrumbs } from './Breadcrumbs';
+export { Breadcrumb, Breadcrumbs } from './Breadcrumbs';
 export { Footer } from './Footer';
 export { GridTemplateArea } from './gridTemplateArea';
 export { Header, domId as mainContentDomId } from './Header';
