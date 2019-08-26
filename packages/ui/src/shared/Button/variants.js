@@ -8,6 +8,7 @@ const themeProp = 'mode';
 
 const Context = {
   DEFAULT: 'default',
+  MENU_ITEM: 'menuItem',
   PRIMARY: 'primary',
 };
 
@@ -15,6 +16,10 @@ const backgroundColor = variants(themeProp, contextProp, {
   [Context.DEFAULT]: {
     [DisplayMode.DARK]: Color.white,
     [DisplayMode.LIGHT]: Color.black,
+  },
+  [Context.MENU_ITEM]: {
+    [DisplayMode.DARK]: Color.white,
+    [DisplayMode.LIGHT]: Color.primary,
   },
   [Context.PRIMARY]: {
     [DisplayMode.DARK]: Color.white,
@@ -27,6 +32,10 @@ const border = variants(themeProp, contextProp, {
     [DisplayMode.DARK]: `1px solid ${lighten(0.2, Color.white)}`,
     [DisplayMode.LIGHT]: `1px solid ${darken(0.2, Color.black)}`,
   },
+  [Context.MENU_ITEM]: {
+    [DisplayMode.DARK]: `transparent`,
+    [DisplayMode.LIGHT]: `transparent`,
+  },
   [Context.PRIMARY]: {
     [DisplayMode.DARK]: `1px solid ${Color.primary}`,
     [DisplayMode.LIGHT]: `1px solid ${darken(0.2, Color.primary)}`,
@@ -36,6 +45,10 @@ const border = variants(themeProp, contextProp, {
 const color = variants(themeProp, contextProp, {
   [Context.DEFAULT]: {
     [DisplayMode.DARK]: Color.black,
+    [DisplayMode.LIGHT]: Color.white,
+  },
+  [Context.MENU_ITEM]: {
+    [DisplayMode.DARK]: Color.primary,
     [DisplayMode.LIGHT]: Color.white,
   },
   [Context.PRIMARY]: {

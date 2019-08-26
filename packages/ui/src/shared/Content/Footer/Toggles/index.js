@@ -2,13 +2,14 @@ import React, { useCallback } from 'react';
 import styled from 'styled-components/macro';
 import { DisplayMode } from 'types/displayMode';
 import { useTheme } from '../../../useTheme';
+import { Language } from './Language';
 import { Theme } from './Theme';
 
 const Styled = styled.section`
   display: grid;
   font-size: 0.75rem;
   grid-gap: 0.5rem;
-  grid-template-columns: auto;
+  grid-template-columns: auto auto;
 `;
 
 const Toggles = () => {
@@ -25,6 +26,7 @@ const Toggles = () => {
 
   return (
     <Styled>
+      <Language />
       <Theme isDarkMode={mode === DisplayMode.DARK} onToggle={onToggleTheme} />
     </Styled>
   );

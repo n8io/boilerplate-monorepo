@@ -10,12 +10,4 @@ export const app = {
   },
   skipLink: 'Skip to content',
   title: siteName,
-  toggles: {
-    layout: 'Layout',
-    modes: {
-      dark: 'Set app theme to Dark Mode',
-      light: 'Set app theme to Light Mode',
-    },
-    theme: 'Theme',
-  },
 };
