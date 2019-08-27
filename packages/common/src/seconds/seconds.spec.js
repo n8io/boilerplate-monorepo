@@ -1,4 +1,4 @@
-import { seconds } from './seconds';
+import { seconds } from '.';
 
 describe('seconds', () => {
   test('to return the proper value in milliseconds', () => {
