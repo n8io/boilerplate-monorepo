@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaLanguage } from 'react-icons/fa';
 import { Language as LanguageType, Languages } from 'types/language';
-import { LOCAL_STORAGE_LANGUAGE_KEY } from 'modules/app/components/App/Providers/TranslationSync';
+import { LocalStorage } from 'types/localStorage';
 import { Context } from '../../../../Button';
 import { Menu } from '../../../../Menu';
 import { ToggleButton } from '../ToggleButton';
@@ -15,7 +15,7 @@ const i18nKeyMap = {
 const makeOptions = ({ i18n, t }) => {
   const updateLanguage = language => () => {
     i18n.changeLanguage(language);
-    localStorage.setItem(LOCAL_STORAGE_LANGUAGE_KEY, language);
+    localStorage.setItem(LocalStorage.LANGUAGE, language);
   };
 
   return Languages.map(language => ({

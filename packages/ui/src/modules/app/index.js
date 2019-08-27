@@ -1,1 +1,1 @@
-export { AppProviders, App } from './components/App';
+export { App, Providers } from './components/App';

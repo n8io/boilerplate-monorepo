@@ -4,8 +4,7 @@ import React, { useState } from 'react';
 import { useTheme } from 'shared/useTheme';
 import { ThemeProvider } from 'styled-components/macro';
 import { DisplayMode } from 'types/displayMode';
-
-const LOCAL_STORAGE_KEY = 'theme';
+import { LocalStorage } from 'types/localStorage';
 
 const Theme = ({ children }) => {
   const { provider: ThemeSwitcherProvider } = useTheme();
@@ -13,13 +12,13 @@ const Theme = ({ children }) => {
     {
       mode: DisplayMode.LIGHT,
     },
-    JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
+    JSON.parse(localStorage.getItem(LocalStorage.THEME))
   );
 
   const [theme, updateTheme] = useState(defaultTheme);
 
   const updateThemeProxy = newTheme => {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newTheme));
+    localStorage.setItem(LocalStorage.THEME, JSON.stringify(newTheme));
     updateTheme(newTheme);
   };
 

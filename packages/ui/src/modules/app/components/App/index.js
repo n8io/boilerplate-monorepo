@@ -10,4 +10,4 @@ const App = () => (
   </React.Suspense>
 );
 
-export { App, Providers as AppProviders };
+export { App, Providers };

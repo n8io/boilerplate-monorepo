@@ -5,6 +5,8 @@ import { Color } from 'types/color';
 import { ScreenReaderNotification } from '../ScreenReaderNotification';
 import { useTranslate } from '../useTranslate';
 
+export const domTestId = 'Loader';
+
 const Styled = styled.div`
   left: 50%;
   position: absolute;
@@ -56,7 +58,7 @@ const Loader = ({ size }) => {
   });
 
   return (
-    <Styled>
+    <Styled data-testid={domTestId}>
       <Ring size={size}>
         <div></div>
         <div></div>

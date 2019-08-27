@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Loader/> renders properly 1`] = `
+<div
+  class="Loader__Styled-asn1uq-0 isGCVA"
+  data-testid="Loader"
+>
+  <div
+    class="Loader__Ring-asn1uq-1 kyuWgN"
+    size="24"
+  >
+    <div />
+    <div />
+    <div />
+    <div />
+  </div>
+  <div
+    aria-live="polite"
+    class="ScreenReaderNotification__Styled-o4wxu2-0 hZyAuJ"
+  >
+    t(loadingScreenReader)
+  </div>
+</div>
+`;

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FontLoader/> renders properlsy 1`] = `
+<style
+  data-testid="FontLoader"
+>
+  @import url(
+  https://fonts.googleapis.com/css?family=Permanent%20Marker:400,700|Cabin&display=swap
+  );
+</style>
+`;
