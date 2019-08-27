@@ -31,7 +31,7 @@ const Header = ({ title }) => (
   <Styled data-testid={domTestId}>
     <PageTitle title={title} />
     <MoveFocusInside>
-      <H1 id={domId} tabIndex="-1">
+      <H1 id={domId} tabIndex="0">
         {title}
       </H1>
     </MoveFocusInside>

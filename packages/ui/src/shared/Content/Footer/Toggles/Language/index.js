@@ -7,7 +7,7 @@ import { Menu } from '../../../../Menu';
 import { ToggleButton } from '../ToggleButton';
 
 const makeOptions = ({ i18n, t }) => {
-  const updateLanguage = language => {
+  const updateLanguage = language => () => {
     i18n.changeLanguage(language);
     localStorage.setItem(LOCAL_STORAGE_LANGUAGE_KEY, language);
   };
@@ -15,12 +15,12 @@ const makeOptions = ({ i18n, t }) => {
   return [
     {
       label: t('languages.english'),
-      onClick: () => updateLanguage('en'),
+      onClick: updateLanguage('en'),
       text: t('languages.english'),
     },
     {
       label: t('languages.fake'),
-      onClick: () => updateLanguage('dev'),
+      onClick: updateLanguage('dev'),
       text: t('languages.fake'),
     },
   ];
@@ -38,6 +38,7 @@ const Language = () => {
       label={t('selectALanguage')}
       menuLabel={t('availableLanguages')}
       options={makeOptions({ i18n, t })}
+      tabindex="-1"
     >
       <ToggleButton context={Context.PRIMARY} label={t('selectALanguage')}>
         <FaLanguage />

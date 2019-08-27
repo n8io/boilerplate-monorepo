@@ -18,7 +18,7 @@ const Styled = styled.header`
   padding: 0 1rem;
 `;
 
-const H1 = styled.h1`
+const Title = styled.div`
   font-size: 2rem;
   margin-bottom: 0;
 `;
@@ -32,7 +32,7 @@ const Header = () => {
   return (
     <Styled data-testid={domTestId} role="banner">
       <SkipNavLink />
-      <H1>{t('title')}</H1>
+      <Title>{t('title')}</Title>
     </Styled>
   );
 };

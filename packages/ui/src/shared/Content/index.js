@@ -25,6 +25,5 @@ Content.propTypes = {
 export { Body } from './Body';
 export { Breadcrumb, Breadcrumbs } from './Breadcrumbs';
 export { Footer } from './Footer';
-export { GridTemplateArea } from './gridTemplateArea';
 export { Header, domId as mainContentDomId } from './Header';
-export { Content, domTestId };
+export { Content, GridTemplateArea, domTestId };

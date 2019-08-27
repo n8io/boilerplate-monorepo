@@ -63,7 +63,7 @@ const Menu = ({ children, label, menuLabel, options }) => {
 
   return (
     <>
-      <MenuDisclosure {...menu} aria-label={label} as="div">
+      <MenuDisclosure {...menu} aria-label={label} as="div" tabIndex="-1">
         {children}
       </MenuDisclosure>
       <RMenu {...menu} style={styles} aria-label={menuLabel} as="ul">
