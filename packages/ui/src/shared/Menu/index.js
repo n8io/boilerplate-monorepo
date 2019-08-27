@@ -1,4 +1,4 @@
-import { arrayOf, node, string } from 'prop-types';
+import { arrayOf, object, node, string } from 'prop-types';
 import React from 'react';
 import {
   Menu as RMenu,
@@ -28,8 +28,11 @@ const menuItemStyles = theme('mode', {
 
 const StyledMenuItem = styled(MenuItem)`
   cursor: pointer;
-  padding: 0.5rem 1rem;
-  width: 100%;
+  overflow-x: hidden;
+  padding: 0.5rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: calc(100% - 1px);
 
   /* stylelint-disable-next-line order/properties-alphabetical-order */
   ${menuItemStyles}
@@ -41,9 +44,10 @@ const StyledMenuItem = styled(MenuItem)`
 `;
 
 const renderOptions = ({ menu, options }) =>
-  options.map(({ label, onClick, text }) => (
+  options.map(({ label, onClick, text, ...props }) => (
     <StyledMenuItem
       {...menu}
+      {...props}
       aria-label={label}
       key={text}
       onClick={makeOnClickProxy({ menu, onClick })}
@@ -58,8 +62,8 @@ const styles = {
   zIndex: 100,
 };
 
-const Menu = ({ children, label, menuLabel, options }) => {
-  const menu = useMenuState();
+const Menu = ({ children, label, menuLabel, menuOptions, options }) => {
+  const menu = useMenuState(menuOptions);
 
   return (
     <>
@@ -73,10 +77,15 @@ const Menu = ({ children, label, menuLabel, options }) => {
   );
 };
 
+Menu.defaultProps = {
+  menuOptions: undefined,
+};
+
 Menu.propTypes = {
   children: node.isRequired,
   label: string.isRequired,
   menuLabel: string.isRequired,
+  menuOptions: object,
   options: arrayOf(menuOptionPropTypes.isRequired).isRequired,
 };
 
