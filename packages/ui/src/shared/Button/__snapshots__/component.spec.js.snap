@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Button/> renders children properly 1`] = `
+<button
+  aria-disabled="false"
+  aria-label="LABEL"
+  class="Button__Styled-sc-13kes55-0 dVNaCg"
+  data-testid="Button"
+  type="button"
+>
+  <x-child />
+</button>
+`;
+
+exports[`<Button/> renders default size context properly 1`] = `
+<button
+  aria-disabled="false"
+  aria-label="TEXT"
+  class="Button__Styled-sc-13kes55-0 dVNaCg"
+  data-testid="Button"
+  type="button"
+>
+  TEXT
+</button>
+`;
+
+exports[`<Button/> renders large size context properly 1`] = `
+<button
+  aria-disabled="false"
+  aria-label="TEXT"
+  class="Button__Styled-sc-13kes55-0 eakAET"
+  data-testid="Button"
+  type="button"
+>
+  TEXT
+</button>
+`;
+
+exports[`<Button/> renders menu item context properly 1`] = `
+<button
+  aria-disabled="false"
+  aria-label="LABEL"
+  class="Button__Styled-sc-13kes55-0 enGHiC"
+  data-testid="Button"
+  type="button"
+>
+  TEXT
+</button>
+`;
+
+exports[`<Button/> renders primary context properly 1`] = `
+<button
+  aria-disabled="false"
+  aria-label="LABEL"
+  class="Button__Styled-sc-13kes55-0 fgcjcs"
+  data-testid="Button"
+  type="button"
+>
+  TEXT
+</button>
+`;
+
+exports[`<Button/> renders small size context properly 1`] = `
+<button
+  aria-disabled="false"
+  aria-label="TEXT"
+  class="Button__Styled-sc-13kes55-0 jTnnQd"
+  data-testid="Button"
+  type="button"
+>
+  TEXT
+</button>
+`;

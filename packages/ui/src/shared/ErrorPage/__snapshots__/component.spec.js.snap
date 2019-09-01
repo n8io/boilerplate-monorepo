@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ErrorPage/> renders in production properly 1`] = `
+<div
+  class="Content__Styled-sc-1ovcgwr-0 ginwwh"
+  data-testid="ErrorPage"
+>
+  <div
+    class="Header__Styled-sc-1wj09bb-0 kDHlTu"
+    data-testid="Header"
+  >
+    <div
+      data-autofocus-inside="true"
+    >
+      <h1
+        class="Header__H1-sc-1wj09bb-1 dbepyo"
+        id="main-content"
+        tabindex="0"
+      >
+        t(title)
+      </h1>
+    </div>
+  </div>
+  <section
+    class="ErrorPage__Styled-y0bbzq-0 bQBAQL Body__Styled-sc-4524au-0 cnhjhz"
+    data-testid="Body"
+  >
+    <div />
+    <div
+      class="ErrorPage__Center-y0bbzq-1 kRztOy"
+    >
+      <img
+        alt="t(officePanda)"
+        src="officePanda.gif"
+      />
+      <p>
+        t(body)
+      </p>
+    </div>
+  </section>
+  <footer
+    class="Footer__Styled-sc-18g9rsu-0 jRwNDo"
+    data-testid="Footer"
+  >
+    <span>
+      t(footer)
+    </span>
+    <div />
+    <section
+      class="Toggles__Styled-pxa8zq-0 AJWad"
+      data-testid="Toggles"
+    >
+      <button
+        aria-disabled="false"
+        aria-label="t(modes.dark)"
+        class="ToggleButton__ProxyButton-sc-1lul5b-0 etiKNI Button__Styled-sc-13kes55-0 UmzYp"
+        data-testid="ToggleTheme"
+        type="button"
+      >
+        <svg
+          fill="none"
+          height="1em"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+          />
+        </svg>
+      </button>
+    </section>
+  </footer>
+</div>
+`;

@@ -1,14 +1,18 @@
+import React from 'react';
 import styled from 'styled-components/macro';
-import { Button } from '../../../../Button';
+import { Button, Context, Size } from '../../../../Button';
 
-const ToggleButton = styled(Button)`
+const domTestId = 'ToggleButton';
+
+const ProxyButton = styled(Button)`
   align-items: center;
   display: grid;
-  font-size: 1rem;
   justify-items: center;
-  padding: 0.25rem;
   text-align: center;
-  text-transform: lowercase;
 `;
 
-export { ToggleButton };
+const ToggleButton = props => (
+  <ProxyButton {...props} context={Context.PRIMARY} size={Size.SMALL} />
+);
+
+export { ToggleButton, domTestId };

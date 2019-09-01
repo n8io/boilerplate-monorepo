@@ -5,6 +5,8 @@ import { useTheme } from '../../../useTheme';
 import { Language } from './Language';
 import { Theme } from './Theme';
 
+const domTestId = 'Toggles';
+
 const Styled = styled.section`
   display: grid;
   font-size: 0.75rem;
@@ -25,11 +27,11 @@ const Toggles = () => {
   }, [mode, theme, updateTheme]);
 
   return (
-    <Styled>
+    <Styled data-testid={domTestId}>
       <Language />
       <Theme isDarkMode={mode === DisplayMode.DARK} onToggle={onToggleTheme} />
     </Styled>
   );
 };
 
-export { Toggles };
+export { Toggles, domTestId };

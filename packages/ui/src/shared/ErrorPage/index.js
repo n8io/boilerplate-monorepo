@@ -6,6 +6,8 @@ import styled from 'styled-components/macro';
 import { Body, Content, Footer, Header } from '../Content';
 import { useTranslate } from '../useTranslate';
 
+const domTestId = 'ErrorPage';
+
 const Styled = styled(Body)`
   align-items: center;
   display: grid;
@@ -30,13 +32,13 @@ const ErrorPage = ({ message }) => {
   });
 
   return (
-    <Content>
+    <Content data-testid={domTestId}>
       <Header title={t('title')} />
       <Styled hasBreadcrumbs={false}>
         <div />
         <Center>
           {config.isDevelopment ? (
-            <pre>{message}</pre>
+            <pre data-testid="errorDetails">{message}</pre>
           ) : (
             <>
               <img src={officePanda} alt={t('officePanda')} />
@@ -55,4 +57,4 @@ ErrorPage.propTypes = {
   message: string.isRequired,
 };
 
-export { ErrorPage };
+export { ErrorPage, domTestId };

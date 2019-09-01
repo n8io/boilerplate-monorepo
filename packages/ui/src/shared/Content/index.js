@@ -1,4 +1,4 @@
-import { node } from 'prop-types';
+import { node, string } from 'prop-types';
 import React from 'react';
 import styled from 'styled-components/macro';
 import { GridTemplateArea } from './gridTemplateArea';
@@ -14,12 +14,17 @@ const Styled = styled.div`
     '${GridTemplateArea.FOOTER}';
 `;
 
-const Content = ({ children }) => (
-  <Styled data-testid={domTestId}>{children}</Styled>
+const Content = ({ children, 'data-testid': dataTestId }) => (
+  <Styled data-testid={dataTestId}>{children}</Styled>
 );
+
+Content.defaultProps = {
+  'data-testid': domTestId,
+};
 
 Content.propTypes = {
   children: node.isRequired,
+  'data-testid': string,
 };
 
 export { Body } from './Body';

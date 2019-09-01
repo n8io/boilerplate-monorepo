@@ -1,4 +1,7 @@
 import { darken, lighten } from 'polished';
+import { oneOf } from 'prop-types';
+import { values } from 'ramda';
+import { css } from 'styled-components/macro';
 import { variants } from 'styled-theming';
 import { Color } from 'types/color';
 import { DisplayMode } from 'types/displayMode';
@@ -12,54 +15,45 @@ const Context = {
   PRIMARY: 'primary',
 };
 
-const backgroundColor = variants(themeProp, contextProp, {
+const styles = variants(themeProp, contextProp, {
   [Context.DEFAULT]: {
-    [DisplayMode.DARK]: Color.white,
-    [DisplayMode.LIGHT]: Color.black,
+    [DisplayMode.DARK]: css`
+      background-color: ${Color.white};
+      border-color: ${lighten(0.2, Color.white)};
+      color: ${Color.black};
+    `,
+    [DisplayMode.LIGHT]: css`
+      background-color: ${Color.black};
+      border-color: ${darken(0.2, Color.black)};
+      color: ${Color.white};
+    `,
   },
   [Context.MENU_ITEM]: {
-    [DisplayMode.DARK]: Color.white,
-    [DisplayMode.LIGHT]: Color.primary,
+    [DisplayMode.DARK]: css`
+      background-color: ${Color.white};
+      border-color: transparent;
+      color: ${Color.primary};
+    `,
+    [DisplayMode.LIGHT]: css`
+      background-color: ${Color.primary};
+      border-color: transparent;
+      color: ${Color.white};
+    `,
   },
   [Context.PRIMARY]: {
-    [DisplayMode.DARK]: Color.white,
-    [DisplayMode.LIGHT]: Color.primary,
+    [DisplayMode.DARK]: css`
+      background-color: ${Color.white};
+      border-color: ${Color.primary};
+      color: ${Color.primary};
+    `,
+    [DisplayMode.LIGHT]: css`
+      background-color: ${Color.primary};
+      border-color: ${darken(0.2, Color.primary)};
+      color: ${Color.white};
+    `,
   },
 });
 
-const border = variants(themeProp, contextProp, {
-  [Context.DEFAULT]: {
-    [DisplayMode.DARK]: `1px solid ${lighten(0.2, Color.white)}`,
-    [DisplayMode.LIGHT]: `1px solid ${darken(0.2, Color.black)}`,
-  },
-  [Context.MENU_ITEM]: {
-    [DisplayMode.DARK]: `transparent`,
-    [DisplayMode.LIGHT]: `transparent`,
-  },
-  [Context.PRIMARY]: {
-    [DisplayMode.DARK]: `1px solid ${Color.primary}`,
-    [DisplayMode.LIGHT]: `1px solid ${darken(0.2, Color.primary)}`,
-  },
-});
+const propTypes = oneOf(values(Context));
 
-const color = variants(themeProp, contextProp, {
-  [Context.DEFAULT]: {
-    [DisplayMode.DARK]: Color.black,
-    [DisplayMode.LIGHT]: Color.white,
-  },
-  [Context.MENU_ITEM]: {
-    [DisplayMode.DARK]: Color.primary,
-    [DisplayMode.LIGHT]: Color.white,
-  },
-  [Context.PRIMARY]: {
-    [DisplayMode.DARK]: Color.primary,
-    [DisplayMode.LIGHT]: Color.white,
-  },
-});
-
-export const Variants = {
-  Context,
-  backgroundColor,
-  border,
-  color,
-};
+export { Context, propTypes, styles };

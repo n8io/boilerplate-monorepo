@@ -1,8 +1,10 @@
-import { node } from 'prop-types';
+import { node, string } from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import FocusLock from 'react-focus-lock';
 
-const Page = ({ children }) => {
+const domTestId = 'Page';
+
+const Page = ({ children, 'data-testid': dataTestId }) => {
   const [isLoading, beLoading] = useState(true);
 
   useEffect(() => {
@@ -13,11 +15,20 @@ const Page = ({ children }) => {
     return () => clearTimeout(timeout);
   }, [isLoading, beLoading]);
 
-  return <FocusLock disabled={!isLoading}>{children}</FocusLock>;
+  return (
+    <FocusLock disabled={!isLoading} data-testid={dataTestId}>
+      {children}
+    </FocusLock>
+  );
+};
+
+Page.defaultProps = {
+  'data-testid': domTestId,
 };
 
 Page.propTypes = {
   children: node.isRequired,
+  'data-testid': string,
 };
 
 export { Page };

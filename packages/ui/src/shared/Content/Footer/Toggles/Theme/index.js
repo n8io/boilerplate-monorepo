@@ -2,9 +2,10 @@ import { bool, func } from 'prop-types';
 import React from 'react';
 import { FiMoon, FiSun } from 'react-icons/fi';
 import { DisplayMode } from 'types/displayMode';
-import { Context } from '../../../../Button';
 import { useTranslate } from '../../../../useTranslate';
 import { ToggleButton } from '../ToggleButton';
+
+const domTestId = 'ToggleTheme';
 
 const Theme = ({ isDarkMode, onToggle }) => {
   const t = useTranslate({
@@ -15,11 +16,7 @@ const Theme = ({ isDarkMode, onToggle }) => {
   const i18nkey = `modes.${isDarkMode ? DisplayMode.LIGHT : DisplayMode.DARK}`;
 
   return (
-    <ToggleButton
-      context={Context.PRIMARY}
-      label={t(i18nkey)}
-      onClick={onToggle}
-    >
+    <ToggleButton data-testid={domTestId} label={t(i18nkey)} onClick={onToggle}>
       {isDarkMode ? <FiSun /> : <FiMoon />}
     </ToggleButton>
   );
@@ -30,4 +27,4 @@ Theme.propTypes = {
   onToggle: func.isRequired,
 };
 
-export { Theme };
+export { Theme, domTestId };

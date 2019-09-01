@@ -13,6 +13,8 @@ import { Page } from 'shared/Page';
 import { useTranslate } from 'shared/useTranslate';
 import { Routes } from 'types/routes';
 
+const domTestId = 'NotFound';
+
 const NotFound = ({ history }) => {
   const t = useTranslate({
     component: 'notFound',
@@ -35,7 +37,7 @@ const NotFound = ({ history }) => {
 
   return (
     <Page>
-      <Content>
+      <Content data-testid={domTestId}>
         <Breadcrumbs>
           <Breadcrumb isEnd text={t('title')} to={Routes.NOT_FOUND.path} />
         </Breadcrumbs>
@@ -56,4 +58,4 @@ NotFound.propTypes = {
   }).isRequired,
 };
 
-export { NotFound };
+export { NotFound, domTestId };

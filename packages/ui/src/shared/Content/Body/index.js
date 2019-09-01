@@ -26,10 +26,15 @@ const Styled = styled.section`
   padding: 1rem;
 `;
 
-const Body = ({ className, children, hasBreadcrumbs }) => (
+const Body = ({
+  className,
+  children,
+  'data-testid': dataTestId,
+  hasBreadcrumbs,
+}) => (
   <Styled
     className={className}
-    data-testid={domTestId}
+    data-testid={dataTestId}
     hasBreadcrumbs={hasBreadcrumbs}
   >
     {children}
@@ -38,13 +43,15 @@ const Body = ({ className, children, hasBreadcrumbs }) => (
 
 Body.defaultProps = {
   className: undefined,
+  'data-testid': domTestId,
   hasBreadcrumbs: true,
 };
 
 Body.propTypes = {
   children: node.isRequired,
   className: string,
+  'data-testid': string,
   hasBreadcrumbs: bool,
 };
 
-export { Body };
+export { Body, domTestId };

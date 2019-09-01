@@ -17,6 +17,7 @@ exports[`<Loader/> renders properly 1`] = `
   <div
     aria-live="polite"
     class="ScreenReaderNotification__Styled-o4wxu2-0 hZyAuJ"
+    data-testid="ScreenReaderNotification"
   >
     t(loadingScreenReader)
   </div>

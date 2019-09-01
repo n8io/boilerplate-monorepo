@@ -3,6 +3,8 @@ import React from 'react';
 import styled from 'styled-components/macro';
 import { Politeness, propTypes as politenessPropTypes } from 'types/politeness';
 
+const domTestId = 'ScreenReaderNotification';
+
 const Styled = styled.div`
   clip: rect(1px, 1px, 1px, 1px);
   clip-path: inset(50%);
@@ -15,7 +17,9 @@ const Styled = styled.div`
 `;
 
 const ScreenReaderNotification = ({ children, politeness }) => (
-  <Styled aria-live={politeness}>{children}</Styled>
+  <Styled aria-live={politeness} data-testid={domTestId}>
+    {children}
+  </Styled>
 );
 
 ScreenReaderNotification.defaultProps = {
@@ -27,4 +31,4 @@ ScreenReaderNotification.propTypes = {
   politeness: politenessPropTypes,
 };
 
-export { ScreenReaderNotification };
+export { ScreenReaderNotification, domTestId };

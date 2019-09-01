@@ -1,14 +1,26 @@
-import { cleanup, render } from '@testing-library/react';
-import { curry } from 'ramda';
+import { render } from '@testing-library/react';
+import { node } from 'prop-types';
 import React from 'react';
-import { Providers } from 'modules/app';
+import { MemoryRouter as Router } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components/macro';
+import { Theme } from 'types/theme';
 
 export * from '@testing-library/react';
 
-const customRender = curry((Component, defaultProps = {}, overrides = {}) =>
-  render(<Component {...defaultProps} {...overrides} />, {
-    wrapper: Providers,
-  })
+jest.mock('shared/useTheme');
+jest.mock('shared/useTranslate');
+
+const AllTheProviders = ({ children }) => (
+  <Router>
+    <ThemeProvider theme={Theme.example()}>{children}</ThemeProvider>
+  </Router>
 );
 
-export { cleanup, customRender as render };
+AllTheProviders.propTypes = {
+  children: node.isRequired,
+};
+
+const customRender = (ui, options) =>
+  render(ui, { wrapper: AllTheProviders, ...options });
+
+export { customRender as render };

@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Content/> renders properly 1`] = `
+<div
+  class="Content__Styled-sc-1ovcgwr-0 ginwwh"
+  data-testid="Content"
+>
+  <x-child />
+</div>
+`;

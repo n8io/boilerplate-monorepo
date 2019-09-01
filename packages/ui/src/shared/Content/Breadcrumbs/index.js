@@ -8,6 +8,8 @@ import { useTranslate } from '../../useTranslate';
 import { GridTemplateArea } from '../gridTemplateArea';
 import { Breadcrumb } from './Breadcrumb';
 
+const domTestId = 'Breadcrumbs';
+
 const Styled = styled.ul`
   align-items: center;
   box-shadow: 0 1px 0 0 ${Color.border};
@@ -24,7 +26,7 @@ const Breadcrumbs = ({ children }) => {
   const t = useTranslate();
 
   return (
-    <Styled>
+    <Styled data-testid={domTestId}>
       <Breadcrumb
         exact={Routes.ROOT.exact}
         text={t('home')}
@@ -39,4 +41,4 @@ Breadcrumbs.propTypes = {
   children: node.isRequired,
 };
 
-export { Breadcrumb, Breadcrumbs };
+export { Breadcrumb, Breadcrumbs, domTestId };

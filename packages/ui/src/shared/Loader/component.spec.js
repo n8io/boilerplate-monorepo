@@ -1,13 +1,9 @@
 import React from 'react';
-import { cleanup, render } from '@testing-library/react';
-import { domTestId, Loader } from '..';
-
-jest.mock('shared/useTranslate');
+import { render } from 'testHelpers';
+import { domTestId, Loader } from '.';
 
 describe('<Loader/>', () => {
   const defaultProps = {};
-
-  afterEach(cleanup);
 
   it('renders properly', () => {
     const { getByTestId } = render(<Loader {...defaultProps} />);

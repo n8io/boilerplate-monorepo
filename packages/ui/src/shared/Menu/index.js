@@ -10,7 +10,9 @@ import styled from 'styled-components/macro';
 import theme from 'styled-theming';
 import { Color } from 'types/color';
 import { DisplayMode } from 'types/displayMode';
-import { propTypes as menuOptionPropTypes } from 'types/menuOption';
+import { MenuOption } from 'types/menuOption';
+
+const domTestId = 'Menu';
 
 const makeOnClickProxy = ({ menu, onClick }) => () => {
   onClick();
@@ -32,7 +34,7 @@ const StyledMenuItem = styled(MenuItem)`
   padding: 0.5rem;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: calc(100% - 1px);
+  width: 100%;
 
   /* stylelint-disable-next-line order/properties-alphabetical-order */
   ${menuItemStyles}
@@ -57,36 +59,44 @@ const renderOptions = ({ menu, options }) =>
   ));
 
 const styles = {
-  border: `1px solid ${Color.primary}`,
-  borderRadius: '2px',
+  boxShadow: `0 0 0 1px ${Color.primary}`,
   zIndex: 100,
 };
 
-const Menu = ({ children, label, menuLabel, menuOptions, options }) => {
+const Menu = ({
+  children,
+  'data-testid': dataTestId,
+  label,
+  menuLabel,
+  menuOptions,
+  options,
+}) => {
   const menu = useMenuState(menuOptions);
 
   return (
-    <>
+    <x-menu data-testid={dataTestId}>
       <MenuDisclosure {...menu} aria-label={label} as="div" tabIndex="-1">
         {children}
       </MenuDisclosure>
       <RMenu {...menu} style={styles} aria-label={menuLabel} as="ul">
         {renderOptions({ menu, options })}
       </RMenu>
-    </>
+    </x-menu>
   );
 };
 
 Menu.defaultProps = {
+  'data-testid': domTestId,
   menuOptions: undefined,
 };
 
 Menu.propTypes = {
   children: node.isRequired,
+  'data-testid': string,
   label: string.isRequired,
   menuLabel: string.isRequired,
   menuOptions: object,
-  options: arrayOf(menuOptionPropTypes.isRequired).isRequired,
+  options: arrayOf(MenuOption.propTypes.isRequired).isRequired,
 };
 
-export { Menu };
+export { Menu, domTestId };

@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header/> renders properly 1`] = `
+<div
+  class="Header__Styled-sc-1wj09bb-0 kDHlTu"
+  data-testid="Header"
+>
+  <x-move-focus-inside-mock>
+    <h1
+      class="Header__H1-sc-1wj09bb-1 dbepyo"
+      id="main-content"
+      tabindex="0"
+    >
+      TITLE
+    </h1>
+  </x-move-focus-inside-mock>
+</div>
+`;

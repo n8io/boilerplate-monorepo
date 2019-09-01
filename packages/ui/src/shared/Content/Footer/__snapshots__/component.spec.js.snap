@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Footer/> renders properly 1`] = `
+<footer
+  class="Footer__Styled-sc-18g9rsu-0 jRwNDo"
+  data-testid="Footer"
+>
+  <span>
+    t(footer)
+  </span>
+  <div>
+    <x-child />
+  </div>
+  <section
+    class="Toggles__Styled-pxa8zq-0 AJWad"
+    data-testid="Toggles"
+  >
+    <button
+      aria-disabled="false"
+      aria-label="t(modes.dark)"
+      class="ToggleButton__ProxyButton-sc-1lul5b-0 etiKNI Button__Styled-sc-13kes55-0 UmzYp"
+      data-testid="ToggleTheme"
+      type="button"
+    >
+      <svg
+        fill="none"
+        height="1em"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+        />
+      </svg>
+    </button>
+  </section>
+</footer>
+`;

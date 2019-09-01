@@ -7,6 +7,8 @@ import theme from 'styled-theming';
 import { Color } from 'types/color';
 import { DisplayMode } from 'types/displayMode';
 
+const domTestId = 'Breadcrumb';
+
 const activeLinkStyles = theme('mode', {
   [DisplayMode.DARK]: {
     color: lighten(0.1, Color.muted),
@@ -64,7 +66,7 @@ const StyledEnd = styled.span`
 `;
 
 const Breadcrumb = ({ isEnd, text, ...props }) => (
-  <StyledLi>
+  <StyledLi data-testid={domTestId}>
     {isEnd ? (
       <StyledEnd>{text}</StyledEnd>
     ) : (
@@ -82,4 +84,4 @@ Breadcrumb.propTypes = {
   text: string.isRequired,
 };
 
-export { Breadcrumb };
+export { Breadcrumb, domTestId };

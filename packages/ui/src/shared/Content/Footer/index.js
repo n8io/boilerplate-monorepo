@@ -43,4 +43,4 @@ Footer.propTypes = {
   children: node,
 };
 
-export { domTestId, Footer };
+export { Footer, domTestId };
