@@ -10,8 +10,8 @@ export const shared = {
     languages,
     layout: 'Layout',
     modes: {
-      dark: 'Set app theme to Dark Mode',
-      light: 'Set app theme to Light Mode',
+      dark: 'Set theme to Dark Mode',
+      light: 'Set theme to Light Mode',
     },
     theme: 'Theme',
     ...languages,
