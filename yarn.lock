@@ -7331,6 +7331,16 @@ loglevel@^1.4.1:
   resolved "https://registry.npmjs.org/loglevel/-/loglevel-1.6.3.tgz#77f2eb64be55a404c9fd04ad16d57c1d6d6b1280"
   integrity sha512-LoEDv5pgpvWgPF4kNYuIp0qqSJVWak/dML0RY74xlzMZiT9w77teNAwKYKWBTYjlokMirg+o3jBwp+vlLrcfAA==
 
+logrocket-react@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.npmjs.org/logrocket-react/-/logrocket-react-3.0.1.tgz#fed9d04f89e1ff94972daf356ab23dae97ccf453"
+  integrity sha512-xRkeQIZxaP+Mzqh20X7c1Urxv2mEES877eIumgB2e2BDhICGngHyK8NqNHeDLiMej+unus9svKZxAWH5e+BAGQ==
+
+logrocket@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.npmjs.org/logrocket/-/logrocket-1.0.3.tgz#43354e29099c123d5608fcc18799ce53a87931b4"
+  integrity sha512-0N5AhHNE2MTS09J2FIXj1bSVjTdkn0IVrKkO7rwhtXDPpqbQMICZuq25edGnyXJxppQAxBpOOt2bFgIZBlEZ0g==
+
 longest-streak@^2.0.1:
   version "2.0.3"
   resolved "https://registry.npmjs.org/longest-streak/-/longest-streak-2.0.3.tgz#3de7a3f47ee18e9074ded8575b5c091f5d0a4105"

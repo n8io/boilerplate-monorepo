@@ -4,12 +4,14 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Suspense } from 'shared/Suspense';
 import { FontLoader } from './FontLoader';
 import { GlobalStyle } from './GlobalStyles';
+import { Logging } from './Logging';
 import { Modality } from './Modality';
 import { Theme } from './Theme';
 import { TranslationSync } from './TranslationSync';
 
 const Providers = ({ children }) => (
   <Suspense>
+    <Logging />
     <Theme>
       <>
         <FontLoader />
