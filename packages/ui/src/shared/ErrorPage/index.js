@@ -3,7 +3,7 @@ import { config } from 'config';
 import { string, func } from 'prop-types';
 import React from 'react';
 import styled from 'styled-components/macro';
-import { Button } from '../Button';
+import { Button, Context } from '../Button';
 import { Body, Content, Footer, Header } from '../Content';
 import { useTranslate } from '../useTranslate';
 
@@ -48,7 +48,11 @@ const ErrorPage = ({ message, onFeedbackClick }) => {
             </>
           )}
           <p>
-            <Button onClick={onFeedbackClick} text={t('submitFeedback')} />
+            <Button
+              context={Context.PRIMARY}
+              onClick={onFeedbackClick}
+              text={t('submitFeedback')}
+            />
           </p>
         </Center>
       </Styled>

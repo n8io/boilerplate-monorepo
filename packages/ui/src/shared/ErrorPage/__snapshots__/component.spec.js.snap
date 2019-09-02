@@ -36,15 +36,17 @@ exports[`<ErrorPage/> renders in production properly 1`] = `
       <p>
         t(body)
       </p>
-      <button
-        aria-disabled="false"
-        aria-label="t(submitFeedback)"
-        class="Button__Styled-sc-13kes55-0 dVNaCg"
-        data-testid="Button"
-        type="button"
-      >
-        t(submitFeedback)
-      </button>
+      <p>
+        <button
+          aria-disabled="false"
+          aria-label="t(submitFeedback)"
+          class="Button__Styled-sc-13kes55-0 fgcjcs"
+          data-testid="Button"
+          type="button"
+        >
+          t(submitFeedback)
+        </button>
+      </p>
     </div>
   </section>
   <footer
