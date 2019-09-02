@@ -3,8 +3,12 @@ import { render } from 'testHelpers';
 import { ErrorPage, domTestId } from '.';
 
 describe('<ErrorPage/>', () => {
+  const defaultProps = {
+    message: 'MESSAGE',
+    onFeedbackClick: jest.fn().mockName('onFeedbackClick'),
+  };
+
   it('renders in production properly', () => {
-    const defaultProps = { message: 'MESSAGE' };
     const { getByTestId } = render(<ErrorPage {...defaultProps} />);
     const snapshot = getByTestId(domTestId);
 
@@ -12,7 +16,6 @@ describe('<ErrorPage/>', () => {
   });
 
   it('should not render the error stack in production', () => {
-    const defaultProps = { message: 'MESSAGE' };
     const { queryByTestId } = render(<ErrorPage {...defaultProps} />);
     const snapshot = queryByTestId('errorDetails');
 

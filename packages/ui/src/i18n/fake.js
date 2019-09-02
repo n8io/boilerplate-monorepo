@@ -92,7 +92,6 @@ const bumpLength = str => {
   return output;
 };
 
-// eslint-disable-next-line max-statements
 const transformTokenized = str => {
   // eslint-disable-next-line prefer-named-capture-group
   const regex = /\{\{[-]?\s*\w+([.]\w+)*\s*\}\}/gu;

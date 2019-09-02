@@ -33,6 +33,11 @@ module.exports = {
     'react-hooks',
   ],
   root: false,
+  rules: {
+    'max-statements': 'off',
+    'no-process-env': 'warn',
+    'prefer-named-capture-group': 'warn',
+  },
   settings: {
     'import/resolver': {
       'eslint-import-resolver-lerna': {

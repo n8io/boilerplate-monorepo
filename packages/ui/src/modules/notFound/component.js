@@ -1,5 +1,8 @@
 import { seconds } from '@puttingpoker/common';
+import * as Sentry from '@sentry/browser';
+import LogRocket from 'logrocket';
 import { func, shape } from 'prop-types';
+import { prop } from 'ramda';
 import React, { useEffect, useState } from 'react';
 import {
   Body,
@@ -11,9 +14,20 @@ import {
 } from 'shared/Content';
 import { Page } from 'shared/Page';
 import { useTranslate } from 'shared/useTranslate';
+import { LogLevel } from 'types/logLevels';
 import { Routes } from 'types/routes';
 
 const domTestId = 'NotFound';
+
+const logNotFound = () => {
+  Sentry.withScope(scope => {
+    scope.setExtra('sessionUrl', LogRocket.sessionURL);
+    scope.setExtra('pathname', prop('pathname', window.location));
+    scope.setTag('search', prop('search', window.location));
+    scope.setLevel(LogLevel.INFO);
+    Sentry.captureException(new Error('User visited an undefined resource'));
+  });
+};
 
 const NotFound = ({ history }) => {
   const t = useTranslate({
@@ -22,6 +36,10 @@ const NotFound = ({ history }) => {
   });
 
   const [tics, setTics] = useState(15);
+
+  useEffect(() => {
+    logNotFound();
+  });
 
   useEffect(() => {
     let interval = null;
@@ -59,3 +77,36 @@ NotFound.propTypes = {
 };
 
 export { NotFound, domTestId };
+
+/*
+import * as Sentry from '@sentry/browser';
+import LogRocket from 'logrocket';
+import { prop } from 'ramda';
+import { compose, lifecycle, setDisplayName, withHandlers } from 'recompose';
+import { INFO } from 'shared/logLevels';
+
+const logNotFound = () => () => {
+  Sentry.withScope(scope => {
+    scope.setExtra('sessionUrl', LogRocket.sessionURL);
+    scope.setTag('pathname', prop('pathname', window.location));
+    scope.setTag('search', prop('search', window.location));
+    scope.setLevel(INFO);
+    Sentry.captureException('User visited an undefined resource');
+  });
+};
+
+export const enhance = compose(
+  setDisplayName('enhance'),
+  withHandlers({
+    logNotFound,
+  }),
+  lifecycle({
+    componentDidMount() {
+      const { logNotFound } = this.props;
+
+      logNotFound();
+    },
+  })
+);
+
+ */

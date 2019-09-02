@@ -1,8 +1,9 @@
 import officePanda from 'assets/images/officePanda.gif';
 import { config } from 'config';
-import { string } from 'prop-types';
+import { string, func } from 'prop-types';
 import React from 'react';
 import styled from 'styled-components/macro';
+import { Button } from '../Button';
 import { Body, Content, Footer, Header } from '../Content';
 import { useTranslate } from '../useTranslate';
 
@@ -25,7 +26,7 @@ const Center = styled.div`
   justify-items: center;
 `;
 
-const ErrorPage = ({ message }) => {
+const ErrorPage = ({ message, onFeedbackClick }) => {
   const t = useTranslate({
     component: 'error',
     namespace: 'error',
@@ -46,6 +47,9 @@ const ErrorPage = ({ message }) => {
               {config.isDebug && <pre>{message}</pre>}
             </>
           )}
+          <p>
+            <Button onClick={onFeedbackClick} text={t('submitFeedback')} />
+          </p>
         </Center>
       </Styled>
       <Footer />
@@ -55,6 +59,7 @@ const ErrorPage = ({ message }) => {
 
 ErrorPage.propTypes = {
   message: string.isRequired,
+  onFeedbackClick: func.isRequired,
 };
 
 export { ErrorPage, domTestId };

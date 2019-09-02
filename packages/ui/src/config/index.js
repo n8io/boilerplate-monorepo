@@ -4,6 +4,7 @@ import { LocalStorage } from 'types/localStorage';
 const DEVELOPMENT_PREFIX = 'dev';
 const PRODUCTION_PREFIX = 'prod';
 
+// eslint-disable-next-line no-process-env
 const { NODE_ENV = PRODUCTION_PREFIX, ...envVars } = process.env;
 
 const REACT_APP_PREFIX = 'REACT_APP_';

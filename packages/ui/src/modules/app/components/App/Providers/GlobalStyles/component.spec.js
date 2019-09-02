@@ -1,19 +1,23 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 import { ThemeProvider } from 'styled-components/macro';
-import { domTestId, FontLoader } from '..';
 import { Theme } from 'types/theme';
+import { GlobalStyle } from '.';
 
-describe('<FontLoader/>', () => {
+jest.mock('styled-reset-advanced', () => () => '/* reset css here */');
+
+describe('<GlobalStyle/>', () => {
   const theme = Theme.example();
-  const { getByTestId } = render(
+
+  render(
     <ThemeProvider theme={theme}>
-      <FontLoader />
+      <GlobalStyle />
     </ThemeProvider>
   );
-  const snapshot = getByTestId(domTestId);
 
-  it('renders properlsy', () => {
+  const snapshot = document.head.querySelector('style[data-styled]');
+
+  it('renders style in the document head properly', () => {
     expect(snapshot).toMatchSnapshot();
   });
 });

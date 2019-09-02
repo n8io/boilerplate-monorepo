@@ -18,8 +18,9 @@ export const styles = css`
   h4,
   h5,
   h6,
-  p,
   input,
+  p,
+  pre,
   select,
   summary {
     margin-bottom: 1rem;

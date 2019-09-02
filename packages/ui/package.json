@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "craco start",
     "build": "craco build",
+    "prebuild": "node .prebuild",
+    "start": "craco start",
     "test": "craco test"
   },
   "eslintConfig": {
@@ -24,6 +25,7 @@
   },
   "dependencies": {
     "@craco/craco": "^5.2.4",
+    "@sentry/browser": "^5.6.3",
     "i18next": "^17.0.11",
     "logrocket": "^1.0.3",
     "logrocket-react": "^3.0.1",
@@ -49,6 +51,7 @@
     "babel-plugin-add-react-displayname": "^0.0.5",
     "babel-plugin-jsx-remove-data-test-id": "^2.0.0",
     "babel-plugin-styled-components": "^1.10.6",
+    "dotenv": "^8.1.0",
     "eslint": "^6.1.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-import-resolver-lerna": "^1.1.0",
@@ -62,13 +65,17 @@
     "eslint-plugin-ramda": "^2.5.1",
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^1.7.0",
+    "git-rev-sync": "^1.12.0",
     "prettier": "^1.18.2",
     "react-axe": "^3.2.0",
+    "sentry-files": "^1.0.1",
+    "shelljs": "^0.8.3",
     "stylelint": "^10.1.0",
     "stylelint-config-recommended": "^2.2.0",
     "stylelint-config-styled-components": "^0.1.1",
     "stylelint-order": "^3.0.1",
     "stylelint-prettier": "^1.1.1",
-    "stylelint-processor-styled-components": "^1.8.0"
+    "stylelint-processor-styled-components": "^1.8.0",
+    "update-dotenv": "^1.1.1"
   }
 }
