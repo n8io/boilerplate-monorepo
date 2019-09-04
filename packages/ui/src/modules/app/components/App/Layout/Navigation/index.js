@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/macro';
+import media from 'styled-media-query';
 import { Color } from 'types/color';
 import { GridTemplateArea } from '../gridTemplateArea';
 import { NavItem } from './NavItem';
@@ -10,6 +11,12 @@ const Styled = styled.nav`
   display: grid;
   grid-area: ${GridTemplateArea.NAV};
   overflow-y: auto;
+  width: 10rem;
+
+  /* stylelint-disable-next-line order/properties-alphabetical-order */
+  ${media.lessThan('medium')`
+    width: 0;
+  `}
 `;
 
 const NavList = styled.ul`

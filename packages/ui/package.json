@@ -42,6 +42,7 @@
     "react-scripts": "3.0.1",
     "reakit": "^1.0.0-beta.4",
     "styled-components": "^4.3.2",
+    "styled-media-query": "^2.1.2",
     "styled-reset-advanced": "^1.0.1",
     "styled-theming": "^2.2.0"
   },

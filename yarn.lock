@@ -11411,6 +11411,11 @@ styled-components@^4.3.2:
     stylis-rule-sheet "^0.0.10"
     supports-color "^5.5.0"
 
+styled-media-query@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.npmjs.org/styled-media-query/-/styled-media-query-2.1.2.tgz#d59e8d91bc4bcff210dc511bdcecedf16eb2c5b7"
+  integrity sha512-ds24iBxOrfIhdHP+e23y6kj1gbosgWu+tgAuxvMrYmnp6Sju/LjuY8lfkiVnn6P7mcdhtwpC2Z43o+apT9UdJg==
+
 styled-reset-advanced@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npmjs.org/styled-reset-advanced/-/styled-reset-advanced-1.0.1.tgz#e43375f0b5c78b9d45ac89cb51961c3e1e03071a"

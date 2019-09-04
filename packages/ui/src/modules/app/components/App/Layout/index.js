@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/macro';
+import media from 'styled-media-query';
 import theme from 'styled-theming';
 import { Color } from 'types/color';
 import { DisplayMode } from 'types/displayMode';
@@ -39,6 +40,12 @@ const Styled = styled.div`
 
   /* stylelint-disable-next-line order/properties-alphabetical-order */
   ${modeStyles}
+
+  /* stylelint-disable-next-line order/properties-alphabetical-order */
+  ${media.lessThan('medium')`
+    grid-template-areas: '${GridTemplateArea.HEADER} ${GridTemplateArea.HEADER}'
+      '${GridTemplateArea.MAIN} ${GridTemplateArea.MAIN}';
+  `}
 `;
 
 const AppLayout = () => (
