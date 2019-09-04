@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button } from 'shared/Button';
 import { Body, Content, Footer, Header } from 'shared/Content';
 import { Page } from 'shared/Page';
 import { useTranslate } from 'shared/useTranslate';
@@ -18,7 +17,6 @@ const Dashboard = () => {
         <Header title={t('title')} />
         <Body hasBreadcrumbs={false}>
           <h2>Lorem ipsum dolor sit amet consectetuer adipiscing elit</h2>
-          <Button label="Focusable button">Focusable button</Button>
           <p>
             Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
             commodo ligula eget dolor. Aenean massa <strong>strong</strong>. Cum

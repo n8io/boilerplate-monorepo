@@ -29,15 +29,6 @@ exports[`<Dashboard/> renders properly 1`] = `
     <h2>
       Lorem ipsum dolor sit amet consectetuer adipiscing elit
     </h2>
-    <button
-      aria-disabled="false"
-      aria-label="Focusable button"
-      class="Button__Styled-sc-13kes55-0 dVNaCg"
-      data-testid="Button"
-      type="button"
-    >
-      Focusable button
-    </button>
     <p>
       Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa 
       <strong>
