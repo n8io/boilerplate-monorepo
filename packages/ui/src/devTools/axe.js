@@ -3,16 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 const config = {
-  rules: [
-    {
-      enabled: false,
-      id: 'skip-link',
-    },
-    {
-      enabled: false,
-      id: 'color-contrast',
-    },
-  ],
+  // override rules here
 };
 
 const load = () =>

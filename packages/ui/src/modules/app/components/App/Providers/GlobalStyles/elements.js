@@ -1,16 +1,13 @@
-import { lighten } from 'polished';
-import { pipe, path } from 'ramda';
 import { css } from 'styled-components/macro';
 import { Color } from 'types/color';
-import { DisplayMode } from 'types/displayMode';
-
-const themeMode = fn =>
-  pipe(
-    path(['theme', 'mode']),
-    fn
-  );
 
 export const styles = css`
+  html,
+  body {
+    height: 100vh;
+    width: 100vw;
+  }
+
   details,
   h1,
   h2,
@@ -44,9 +41,7 @@ export const styles = css`
 
   a,
   a:visited {
-    color: ${themeMode(mode =>
-      mode === DisplayMode.DARK ? lighten(0.2, Color.primary) : Color.primary
-    )};
+    ${Color.linkStyles}
   }
 
   strong {

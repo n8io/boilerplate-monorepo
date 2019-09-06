@@ -8,11 +8,6 @@ import { styles as headerStyles } from './headers';
 const Styled = createGlobalStyle`
   ${reset}
 
-  html,body {
-    height: 100vh;
-    width: 100vw;
-  }
-
   #root {
     height: 100%;
   }

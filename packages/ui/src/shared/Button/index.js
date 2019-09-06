@@ -20,8 +20,11 @@ const Styled = styled.button`
   border-style: solid;
   border-width: 1px;
   cursor: pointer;
-
+  display: grid;
+  justify-items: center;
   opacity: 1;
+  text-align: center;
+  width: 100%;
 
   /* stylelint-disable-next-line order/properties-alphabetical-order */
   ${contextStyles}
@@ -50,8 +53,6 @@ const Styled = styled.button`
         pointer-events: none;
       }
     `}
-
-  transition: all 200ms ease;
 
   /* stylelint-disable-next-line order/properties-alphabetical-order */
   ${({ className }) => className}

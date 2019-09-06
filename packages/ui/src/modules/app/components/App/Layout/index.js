@@ -36,7 +36,6 @@ const Styled = styled.div`
   height: 100%;
   margin: 0;
   padding: 0;
-  transition: color 200ms ease, background-color 200ms ease;
 
   /* stylelint-disable-next-line order/properties-alphabetical-order */
   ${modeStyles}

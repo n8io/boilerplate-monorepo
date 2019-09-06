@@ -12,7 +12,6 @@ const Styled = styled.a`
   width: 1px;
 
   &:focus {
-    background-color: ${Color.white};
     border-radius: 0.25rem;
     clip: auto !important;
     display: block;
@@ -26,6 +25,9 @@ const Styled = styled.a`
     top: 0rem;
     width: auto;
     z-index: 100000;
+
+    /* stylelint-disable-next-line order/properties-alphabetical-order */
+    ${Color.skipLinkStyles}
   }
 `;
 

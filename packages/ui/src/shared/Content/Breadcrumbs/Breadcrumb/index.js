@@ -1,31 +1,9 @@
-import { lighten } from 'polished';
 import { bool, string } from 'prop-types';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components/macro';
-import theme from 'styled-theming';
-import { Color } from 'types/color';
-import { DisplayMode } from 'types/displayMode';
 
 const domTestId = 'Breadcrumb';
-
-const activeLinkStyles = theme('mode', {
-  [DisplayMode.DARK]: {
-    color: lighten(0.1, Color.muted),
-  },
-  [DisplayMode.LIGHT]: {
-    color: Color.muted,
-  },
-});
-
-const dividerStyles = theme('mode', {
-  [DisplayMode.DARK]: {
-    color: lighten(0.1, Color.muted),
-  },
-  [DisplayMode.LIGHT]: {
-    color: Color.muted,
-  },
-});
 
 const StyledLi = styled.li`
   & + & {
@@ -34,9 +12,6 @@ const StyledLi = styled.li`
       left: -0.25rem;
       position: relative;
       transform: translateX(-50%);
-
-      /* stylelint-disable-next-line order/properties-alphabetical-order */
-      ${dividerStyles}
     }
   }
 `;
@@ -52,17 +27,15 @@ const StyledNavLink = styled(NavLink)`
   &.active {
     pointer-events: none;
 
-    /* stylelint-disable-next-line order/properties-alphabetical-order */
-    ${activeLinkStyles}
-
-    &:focus, &:hover {
+    &:focus,
+    &:hover {
       text-decoration: none;
     }
   }
 `;
 
 const StyledEnd = styled.span`
-  ${activeLinkStyles}
+  color: inherit;
 `;
 
 const Breadcrumb = ({ isEnd, text, ...props }) => (

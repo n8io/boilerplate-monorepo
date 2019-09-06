@@ -36,6 +36,7 @@ const Body = ({
     className={className}
     data-testid={dataTestId}
     hasBreadcrumbs={hasBreadcrumbs}
+    tabIndex={0}
   >
     {children}
   </Styled>
