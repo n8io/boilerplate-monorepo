@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { css } from 'styled-components/macro';
 import { Color } from 'types/color';
 
+const MODALITY_ATTRIBUTE = 'modality';
 const MODALITY_KEYBOARD = 'keyboard';
 const MODALITY_MOUSE = 'mouse';
 const TAB_KEY_CODE = 9;
@@ -24,11 +25,11 @@ export const Modality = () => {
     const onTabDown = debounce(e => {
       if (e.keyCode !== TAB_KEY_CODE) return;
 
-      document.body.setAttribute('modality', MODALITY_KEYBOARD);
+      document.body.setAttribute(MODALITY_ATTRIBUTE, MODALITY_KEYBOARD);
     });
 
     const onMouseDown = debounce(() =>
-      document.body.setAttribute('modality', MODALITY_MOUSE)
+      document.body.setAttribute(MODALITY_ATTRIBUTE, MODALITY_MOUSE)
     );
 
     window.addEventListener('keydown', onTabDown);
