@@ -1,62 +1,91 @@
-import { map, pipe, prop, sortBy } from 'ramda';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { FaLanguage } from 'react-icons/fa';
-import { Language as LanguageType, Languages } from 'types/language';
+import { MdLanguage } from 'react-icons/md';
+import { Menu, MenuDisclosure, MenuItem, useMenuState } from 'reakit/Menu';
+import { Context, Size, styles } from 'shared/Button';
+import styled from 'styled-components/macro';
+import theme from 'styled-theming';
+import { Color } from 'types/color';
+import { DisplayMode } from 'types/displayMode';
+import { Languages } from 'types/language';
+import { LanguageDisplay } from 'types/languageDisplay';
 import { LocalStorage } from 'types/localStorage';
-import { Menu } from '../../../../Menu';
-import { ToggleButton } from '../ToggleButton';
 
-const domTestId = 'Language';
+const menuItemStyles = theme('mode', {
+  [DisplayMode.DARK]: {
+    backgroundColor: Color.black,
+  },
+  [DisplayMode.LIGHT]: {
+    backgroundColor: Color.white,
+  },
+});
 
-const i18nKeyMap = {
-  [LanguageType.ENGLISH]: 'en',
-  [LanguageType.FAKE]: 'dev',
-  [LanguageType.FRENCH]: 'fr',
-  [LanguageType.SPANISH]: 'es',
-};
+const StyledDisclosure = styled(MenuDisclosure)`
+  ${styles}
+`;
 
-const makeOptions = ({ i18n, t }) => {
-  const updateLanguage = language => () => {
-    i18n.changeLanguage(language);
-    localStorage.setItem(LocalStorage.LANGUAGE, language);
-  };
+const StyledMenu = styled(Menu)`
+  background-color: var(--grayscale-white);
+  border: 1px solid var(--color-type-primary);
+  z-index: 1000;
+`;
 
-  const languageToOption = language => ({
-    label: t(`languages.${i18nKeyMap[language]}`),
-    onClick: updateLanguage(language),
-    text: t(`languages.${i18nKeyMap[language]}`),
-  });
+const StyledMenuItem = styled(MenuItem)`
+  display: block;
+  padding: calc(var(--layout-base-unit) * 0.5);
+  width: 100%;
 
-  return pipe(
-    map(languageToOption),
-    sortBy(prop('label'))
-  )(Languages);
-};
+  /* stylelint-disable-next-line order/properties-alphabetical-order */
+  ${menuItemStyles}
+
+  &[tabindex='0'] {
+    background-color: var(--color-type-primary);
+    color: var(--grayscale-white);
+    cursor: pointer;
+  }
+`;
 
 const Language = () => {
-  if (Languages.length <= 1) return null;
-
+  const menu = useMenuState({ placement: 'top-end' });
   const component = 'toggles';
   const namespace = 'shared';
   const { i18n, t: originalT } = useTranslation(namespace);
   const t = (key, options) =>
     key && originalT([`${component}.${key}`, key], options);
 
+  const onLanguageClick = language => {
+    i18n.changeLanguage(language);
+    localStorage.setItem(LocalStorage.LANGUAGE, language);
+    menu.hide();
+  };
+
+  if (Languages.length <= 1) return null;
   return (
-    <Menu
-      data-testid={domTestId}
-      label={t('chooseALanguage')}
-      menuLabel={t('availableLanguages')}
-      menuOptions={{ placement: 'top-end' }}
-      options={makeOptions({ i18n, t })}
-      tabindex="-1"
-    >
-      <ToggleButton label={t('chooseALanguage')}>
-        <FaLanguage />
-      </ToggleButton>
-    </Menu>
+    <div>
+      <StyledDisclosure
+        {...menu}
+        aria-label={t('chooseALanguage')}
+        context={Context.PRIMARY}
+        size={Size.SMALL}
+      >
+        <MdLanguage />
+      </StyledDisclosure>
+      <StyledMenu {...menu} aria-label={t('chooseALanguage')}>
+        {Languages.map(language => (
+          <StyledMenuItem
+            {...menu}
+            aria-label={t('setLanguage', {
+              language: LanguageDisplay[language],
+            })}
+            key={language}
+            onClick={() => onLanguageClick(language)}
+          >
+            {LanguageDisplay[language]}
+          </StyledMenuItem>
+        ))}
+      </StyledMenu>
+    </div>
   );
 };
 
-export { Language, domTestId };
+export { Language };

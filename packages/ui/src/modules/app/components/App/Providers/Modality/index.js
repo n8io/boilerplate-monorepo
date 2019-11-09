@@ -22,7 +22,7 @@ export const styles = css`
 
 export const Modality = () => {
   useEffect(() => {
-    const onTabDown = debounce(e => {
+    const onKeyDown = debounce(e => {
       if (e.keyCode !== TAB_KEY_CODE) return;
 
       document.body.setAttribute(MODALITY_ATTRIBUTE, MODALITY_KEYBOARD);
@@ -32,11 +32,11 @@ export const Modality = () => {
       document.body.setAttribute(MODALITY_ATTRIBUTE, MODALITY_MOUSE)
     );
 
-    window.addEventListener('keydown', onTabDown);
+    window.addEventListener('keydown', onKeyDown);
     window.addEventListener('mousedown', onMouseDown);
 
     return () => {
-      window.removeEventListener('keydown', onTabDown);
+      window.removeEventListener('keydown', onKeyDown);
       window.removeEventListener('mousedown', onMouseDown);
     };
   }, []);

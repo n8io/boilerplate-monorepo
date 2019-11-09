@@ -13,6 +13,7 @@ export const shared = {
       dark: 'Set theme to Dark Mode',
       light: 'Set theme to Light Mode',
     },
+    setLanguage: 'Set language to {{language}}',
     theme: 'Theme',
     ...languages,
   },

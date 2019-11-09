@@ -20,7 +20,27 @@ export const styles = css`
   pre,
   select,
   summary {
-    margin-bottom: 1rem;
+    font-size: var(--layout-base-unit);
+    margin-bottom: var(--layout-base-unit);
+  }
+
+  blockquote,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  li,
+  ol,
+  p,
+  pre,
+  table,
+  td,
+  th,
+  tr,
+  ul {
+    user-select: text;
   }
 
   div,
@@ -28,15 +48,16 @@ export const styles = css`
   header,
   main,
   section {
+    font-size: var(--layout-base-unit);
     position: relative;
   }
 
   pre {
     background: #ffe8e8;
-    border-radius: 0.25rem;
+    border-radius: calc(var(--layout-base-unit) * 0.25);
     color: #f00;
     font-family: monospace;
-    padding: 0.5rem;
+    padding: calc(var(--layout-base-unit) * 0.5);
   }
 
   a,

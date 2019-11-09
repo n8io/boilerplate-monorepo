@@ -1,8 +1,6 @@
 import React from 'react';
 import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
-import { Color } from 'types/color';
-import { Layout } from 'types/layout';
 import { GridTemplateArea } from '../gridTemplateArea';
 import { SkipNavLink } from './SkipNavLink';
 
@@ -10,16 +8,16 @@ const domTestId = 'Header';
 
 const Styled = styled.header`
   align-items: center;
-  box-shadow: 0 1px 0 0 ${Color.border};
+  box-shadow: 0 1px 0 0 var(--border-color);
   display: flex;
   grid-area: ${GridTemplateArea.HEADER};
-  height: ${Layout.HEADER_HEIGHT}rem;
+  height: var(--layout-header-height);
   justify-content: space-between;
-  padding: 0 1rem;
+  padding: 0 var(--layout-base-unit);
 `;
 
 const Title = styled.div`
-  font-size: 2rem;
+  font-size: calc(var(--layout-base-unit) * 2);
   margin-bottom: 0;
 `;
 

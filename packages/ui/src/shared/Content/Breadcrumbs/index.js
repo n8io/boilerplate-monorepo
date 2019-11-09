@@ -1,8 +1,6 @@
 import { node } from 'prop-types';
 import React from 'react';
 import styled from 'styled-components/macro';
-import { Color } from 'types/color';
-import { Layout } from 'types/layout';
 import { Routes } from 'types/routes';
 import { useTranslate } from '../../useTranslate';
 import { GridTemplateArea } from '../gridTemplateArea';
@@ -12,14 +10,14 @@ const domTestId = 'Breadcrumbs';
 
 const Styled = styled.ul`
   align-items: center;
-  box-shadow: 0 1px 0 0 ${Color.border};
+  box-shadow: 0 1px 0 0 var(--border-color);
   display: grid;
   grid-area: ${GridTemplateArea.BREADCRUMBS};
   grid-auto-flow: column;
-  grid-gap: 0 0.5rem;
+  grid-gap: 0 calc(var(--layout-base-unit) * 0.5);
   justify-content: start;
-  min-height: ${Layout.MAIN_BREADCRUMB_HEIGHT}rem;
-  padding: 0 1rem;
+  min-height: var(--layout-main-breadcrumb-height);
+  padding: 0 var(--layout-base-unit);
 `;
 
 const Breadcrumbs = ({ children }) => {

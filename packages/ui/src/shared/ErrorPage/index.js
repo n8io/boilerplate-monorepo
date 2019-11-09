@@ -16,8 +16,8 @@ const Styled = styled(Body)`
   justify-items: center;
 
   img {
-    border-radius: 1rem;
-    margin-bottom: 1rem;
+    border-radius: var(--layout-base-unit);
+    margin-bottom: var(--layout-base-unit);
   }
 `;
 

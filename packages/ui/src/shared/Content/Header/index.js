@@ -2,8 +2,6 @@ import { string } from 'prop-types';
 import React from 'react';
 import { MoveFocusInside } from 'react-focus-lock';
 import styled from 'styled-components/macro';
-import { Color } from 'types/color';
-import { Layout } from 'types/layout';
 import { PageTitle } from '../../PageTitle';
 import { topStyles as fadeTopStyles } from '../fade';
 import { GridTemplateArea } from '../gridTemplateArea';
@@ -13,11 +11,11 @@ const domId = 'main-content';
 
 const Styled = styled.div`
   align-items: center;
-  border-bottom: 1px solid ${Color.border};
+  border-bottom: 1px solid var(--border-color);
   display: flex;
   grid-area: ${GridTemplateArea.HEADER};
-  height: ${Layout.MAIN_HEADER_HEIGHT}rem;
-  padding: 0 1rem;
+  height: var(--layout-main-header-height);
+  padding: 0 var(--layout-base-unit);
 
   /* stylelint-disable-next-line order/properties-alphabetical-order */
   ${fadeTopStyles}

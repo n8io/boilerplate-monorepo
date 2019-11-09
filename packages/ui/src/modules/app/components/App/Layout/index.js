@@ -5,13 +5,10 @@ import theme from 'styled-theming';
 import { Color } from 'types/color';
 import { DisplayMode } from 'types/displayMode';
 import { Font } from 'types/font';
-import { Layout } from 'types/layout';
 import { Header } from './Header';
 import { Main } from './Main';
 import { Nav } from './Navigation';
 import { GridTemplateArea } from './gridTemplateArea';
-
-const domTestId = 'Layout';
 
 const modeStyles = theme('mode', {
   [DisplayMode.DARK]: {
@@ -31,7 +28,7 @@ const Styled = styled.div`
   font-family: ${Font.familyName};
   grid-template-areas: '${GridTemplateArea.HEADER} ${GridTemplateArea.HEADER}'
     '${GridTemplateArea.NAV} ${GridTemplateArea.MAIN}';
-  grid-template-columns: ${Layout.NAV_WIDTH}rem 1fr;
+  grid-template-columns: var(--layout-nav-width) 1fr;
   grid-template-rows: auto 1fr;
   height: 100%;
   margin: 0;
@@ -48,11 +45,11 @@ const Styled = styled.div`
 `;
 
 const AppLayout = () => (
-  <Styled data-testid={domTestId}>
+  <Styled>
     <Header />
     <Nav />
     <Main />
   </Styled>
 );
 
-export { domTestId, AppLayout as Layout };
+export { AppLayout as Layout };

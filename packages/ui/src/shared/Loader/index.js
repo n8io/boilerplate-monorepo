@@ -1,7 +1,6 @@
 import { number } from 'prop-types';
 import React from 'react';
 import styled from 'styled-components/macro';
-import { Color } from 'types/color';
 import { ScreenReaderNotification } from '../ScreenReaderNotification';
 import { useTranslate } from '../useTranslate';
 
@@ -22,8 +21,8 @@ const Ring = styled.div`
 
   div {
     animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border: ${({ size }) => size / 10}px solid ${Color.primary};
-    border-color: ${Color.primary} transparent transparent transparent;
+    border: ${({ size }) => size / 10}px solid var(--color-type-primary);
+    border-color: var(--color-type-primary) transparent transparent transparent;
     border-radius: 50%;
     box-sizing: border-box;
     display: block;

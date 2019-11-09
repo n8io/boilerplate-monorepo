@@ -3,7 +3,8 @@ import { createGlobalStyle } from 'styled-components/macro';
 import reset from 'styled-reset-advanced';
 import { styles as modalityStyles } from '../Modality';
 import { styles as elementStyles } from './elements';
-import { styles as headerStyles } from './headers';
+import { styles as typographyStyles } from './typography';
+import { styles as variables } from './variables';
 
 const Styled = createGlobalStyle`
   ${reset}
@@ -12,9 +13,10 @@ const Styled = createGlobalStyle`
     height: 100%;
   }
 
+  ${variables}
   ${modalityStyles}
   ${elementStyles}
-  ${headerStyles}
+  ${typographyStyles}
 `;
 
 const GlobalStyle = () => <Styled />;

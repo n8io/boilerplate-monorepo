@@ -40,8 +40,8 @@ const StyledMenuItem = styled(MenuItem)`
   ${menuItemStyles}
 
   &[tabindex='0'] {
-    background-color: ${Color.primary};
-    color: ${Color.white};
+    background-color: var(--color-type-primary);
+    color: var(--grayscale-white);
   }
 `;
 
@@ -59,7 +59,7 @@ const renderOptions = ({ menu, options }) =>
   ));
 
 const styles = {
-  boxShadow: `0 0 0 1px ${Color.primary}`,
+  boxShadow: `0 0 0 1px var(--color-type-primary)`,
   zIndex: 100,
 };
 

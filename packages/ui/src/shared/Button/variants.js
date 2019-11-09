@@ -18,38 +18,38 @@ const Context = {
 const styles = variants(themeProp, contextProp, {
   [Context.DEFAULT]: {
     [DisplayMode.DARK]: css`
-      background-color: ${Color.white};
+      background-color: var(--grayscale-white);
       border-color: ${lighten(0.2, Color.white)};
       color: ${Color.black};
     `,
     [DisplayMode.LIGHT]: css`
       background-color: ${Color.black};
       border-color: ${darken(0.2, Color.black)};
-      color: ${Color.white};
+      color: var(--grayscale-white);
     `,
   },
   [Context.MENU_ITEM]: {
     [DisplayMode.DARK]: css`
-      background-color: ${Color.white};
+      background-color: var(--grayscale-white);
       border-color: transparent;
-      color: ${Color.primary};
+      color: var(--color-type-primary);
     `,
     [DisplayMode.LIGHT]: css`
-      background-color: ${Color.primary};
+      background-color: var(--color-type-primary);
       border-color: transparent;
-      color: ${Color.white};
+      color: var(--grayscale-white);
     `,
   },
   [Context.PRIMARY]: {
     [DisplayMode.DARK]: css`
-      background-color: ${Color.white};
-      border-color: ${Color.primary};
-      color: ${Color.primary};
+      background-color: var(--grayscale-white);
+      border-color: var(--color-type-primary);
+      color: var(--color-type-primary);
     `,
     [DisplayMode.LIGHT]: css`
-      background-color: ${Color.primary};
+      background-color: var(--color-type-primary);
       border-color: ${darken(0.2, Color.primary)};
-      color: ${Color.white};
+      color: var(--grayscale-white);
     `,
   },
 });

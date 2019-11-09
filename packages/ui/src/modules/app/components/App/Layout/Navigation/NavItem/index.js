@@ -2,8 +2,6 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
-import { Color } from 'types/color';
-import { Layout } from 'types/layout';
 import { propTypes } from 'types/routes';
 
 const StyledListItem = styled.li`
@@ -15,14 +13,29 @@ const StyledListItem = styled.li`
 
 const Styled = styled(NavLink)`
   align-items: center;
-  border-bottom: 1px ${Color.border} solid;
+  border-bottom: 1px var(--border-color) solid;
   display: grid;
-  height: ${Layout.MAIN_BREADCRUMB_HEIGHT}rem;
-  padding: 0 0.5rem;
+  height: calc(var(--layout-main-breadcrumb-height) + 1px);
+  padding: 0 calc(var(--layout-base-unit) * 0.5);
   width: 100%;
 
-  /* stylelint-disable-next-line order/properties-alphabetical-order */
-  ${Color.navLinkStyles}
+  &:focus:not([aria-current='page']),
+  &:hover:not([aria-current='page']) {
+    background-color: var(--nav-link-background-color-hover);
+    color: var(--nav-link-color-hover);
+  }
+
+  &[aria-current='page'] {
+    background-color: var(--nav-link-color);
+    color: var(--nav-link-background-color);
+    cursor: default;
+
+    &:focus,
+    &:hover {
+      background-color: var(--nav-link-color);
+      color: var(--nav-link-background-color);
+    }
+  }
 `;
 
 const NavItem = ({ route }) => {

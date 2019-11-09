@@ -15,7 +15,7 @@ import {
 
 const domTestId = 'Button';
 
-const Styled = styled.button`
+const styles = css`
   border-radius: 0.125rem;
   border-style: solid;
   border-width: 1px;
@@ -24,6 +24,7 @@ const Styled = styled.button`
   justify-items: center;
   opacity: 1;
   text-align: center;
+  transition: opacity var(--transition-delay) var(--transition-timing-function);
   width: 100%;
 
   /* stylelint-disable-next-line order/properties-alphabetical-order */
@@ -58,6 +59,10 @@ const Styled = styled.button`
   ${({ className }) => className}
 `;
 
+const Styled = styled.button`
+  ${styles}
+`;
+
 const Button = ({
   children,
   className,
@@ -79,6 +84,7 @@ const Button = ({
     data-testid={dataTestId}
     disabled={disabled}
     onClick={onClick}
+    role="button"
     type={type}
   >
     {children || text}
@@ -120,4 +126,4 @@ Button.propTypes = {
   type: string,
 };
 
-export { Button, Context, Size, domTestId };
+export { Button, Context, Size, domTestId, styles };

@@ -19,7 +19,8 @@ const Styled = styled.a`
     height: auto;
     left: 0.5rem;
     line-height: normal;
-    padding: 0.25rem 0.5rem;
+    padding: calc(var(--layout-base-unit) * 0.25)
+      calc(var(--layout-base-unit) * 0.5);
     position: fixed;
     text-decoration: none;
     top: 0rem;

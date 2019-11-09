@@ -23,8 +23,8 @@ const themeStyles = placement =>
       background: linear-gradient(
         to ${placement},
         ${rgba(Color.white, 0)} 0%,
-        ${Color.white} 80%,
-        ${Color.white} 100%
+        var(--grayscale-white) 80%,
+        var(--grayscale-white) 100%
       );
     `,
   });

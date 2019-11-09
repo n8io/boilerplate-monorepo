@@ -1,7 +1,6 @@
 import { oneOf } from 'prop-types';
 import { values } from 'ramda';
 import { css } from 'styled-components/macro';
-import { Layout } from 'types/layout';
 
 const Size = {
   DEFAULT: 'default',
@@ -14,18 +13,18 @@ const styles = css`
     switch (size) {
       case Size.LARGE:
         return css`
-          font-size: ${1.125 * Layout.BASE_UNIT}rem;
-          padding: ${Layout.BASE_UNIT}rem;
+          font-size: calc(var(--layout-base-unit) * 1.125);
+          padding: var(--layout-base-unit);
         `;
       case Size.SMALL:
         return css`
-          font-size: ${0.875 * Layout.BASE_UNIT}rem;
-          padding: ${0.25 * Layout.BASE_UNIT}rem;
+          font-size: calc(var(--layout-base-unit) * 0.875);
+          padding: calc(var(--layout-base-unit) * 0.25);
         `;
       default:
         return css`
-          font-size: ${Layout.BASE_UNIT}rem;
-          padding: ${0.5 * Layout.BASE_UNIT}rem;
+          font-size: var(--layout-base-unit);
+          padding: calc(var(--layout-base-unit) * 0.5);
         `;
     }
   }}

@@ -6,8 +6,8 @@ import { Palette } from './palette';
 
 export const styles = theme('mode', {
   [DisplayMode.DARK]: css`
-    background-color: ${Palette.white};
-    color: ${Palette.primary};
+    background-color: var(--grayscale-white);
+    color: var(--color-type-primary);
 
     &:focus,
     &:hover {
@@ -15,7 +15,7 @@ export const styles = theme('mode', {
     }
   `,
   [DisplayMode.LIGHT]: css`
-    background-color: ${Palette.black};
+    background-color: var(--grayscale-black);
     color: ${lighten(0.15, Palette.primary)};
 
     &:focus,
