@@ -8,7 +8,7 @@ import { Theme } from 'types/theme';
 
 const baseUrl =
   'https://ui-avatars.com/api/?rounded=true&bold=true&size=32&font-size=0.75';
-const hexColorToParam = hexColor => hexColor.replace('#', '');
+const hexColorToParam = hexColor => hexColor.replace('#', '').substring(0, 6);
 const themeToIconUrl = displayMode => {
   const url = new URL(baseUrl);
   const [firstInitial] = Site.name.split('');
