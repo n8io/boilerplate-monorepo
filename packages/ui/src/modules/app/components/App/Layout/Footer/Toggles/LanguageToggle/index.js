@@ -4,7 +4,7 @@ import { MdLanguage } from 'react-icons/md';
 import { Menu, MenuDisclosure, MenuItem, useMenuState } from 'reakit/Menu';
 import { Context, Size, styles } from 'shared/Button';
 import styled from 'styled-components/macro';
-import { Languages } from 'types/language';
+import { Language } from 'types/language';
 import { LanguageDisplay } from 'types/languageDisplay';
 import { LocalStorage } from 'types/localStorage';
 import * as ThemeStyles from './theme';
@@ -53,7 +53,7 @@ const LanguageToggle = () => {
     menu.hide();
   };
 
-  if (Languages.length <= 1) return null;
+  if (Language.values.length <= 1) return null;
 
   return (
     <div>
@@ -65,11 +65,16 @@ const LanguageToggle = () => {
       >
         <MdLanguage />
       </StyledDisclosure>
-      <StyledMenu {...menu} aria-label={t('chooseALanguage')}>
-        {Languages.map(language => (
+      <StyledMenu
+        {...menu}
+        aria-label={t('chooseALanguage')}
+        // eslint-disable-next-line jsx-a11y/aria-proptypes
+        aria-modal={undefined} // Fixes a11y violation (invalid aria attribute on role="menu")
+      >
+        {Language.values.map(language => (
           <StyledMenuItem
             {...menu}
-            aria-label={t('setLanguage', {
+            aria-label={t('setLanguages', {
               language: LanguageDisplay[language],
             })}
             key={language}
