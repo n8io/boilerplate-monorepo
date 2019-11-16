@@ -1,17 +1,20 @@
 import { css } from 'styled-components/macro';
+import { Color } from 'types/color';
 
 export const styles = css`
-  --color-type-error: #db0000;
-  --color-type-primary: #6d4baa;
-  --color-type-success: #0c9c0c;
-  --color-type-warn: #dfdf00;
+  --color-type-error: ${Color.ERROR};
+  --color-type-primary: ${Color.PRIMARY};
+  --color-type-primary-dark: ${Color.PRIMARY_DARK};
+  --color-type-primary-light: ${Color.PRIMARY_LIGHT};
+  --color-type-success: ${Color.SUCCESS};
+  --color-type-warn: ${Color.WARN};
 
-  --nav-link-background-color: #ffffff;
-  --nav-link-background-color-hover: #b3a0d5;
-  --nav-link-color: #6d4baa;
-  --nav-link-color-hover: #110e17;
+  --nav-link-background-color: var(--grayscale-white);
+  --nav-link-background-color-hover: var(--color-type-primary-light);
+  --nav-link-color: var(--color-type-primary);
+  --nav-link-color-hover: var(--color-type-primary-dark);
 
-  --link-background-color: #ffffff;
-  --link-color: #6d4baa;
-  --link-color-hover: #8d72bc;
+  --link-background-color: var(--grayscale-white);
+  --link-color: var(--color-type-primary);
+  --link-color-hover: var(--color-type-primary-dark);
 `;

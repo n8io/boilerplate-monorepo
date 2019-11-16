@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components/macro';
 import { ScreenReaderNotification } from '../ScreenReaderNotification';
 import { useTranslate } from '../useTranslate';
+import { styles as themeStyles } from './theme';
 
 export const domTestId = 'Loader';
 
@@ -29,6 +30,9 @@ const Ring = styled.div`
     height: ${({ size }) => size}px;
     position: absolute;
     width: ${({ size }) => size}px;
+
+    /* stylelint-disable-next-line order/properties-alphabetical-order */
+    ${themeStyles}
   }
 
   div:nth-child(1) {

@@ -3,14 +3,14 @@ import { defaultTo } from 'ramda';
 import React, { useState } from 'react';
 import { useTheme } from 'shared/useTheme';
 import { ThemeProvider } from 'styled-components/macro';
-import { DisplayMode } from 'types/displayMode';
 import { LocalStorage } from 'types/localStorage';
+import { Theme as ThemeType } from 'types/theme';
 
 const Theme = ({ children }) => {
   const { provider: ThemeSwitcherProvider } = useTheme();
   const defaultTheme = defaultTo(
     {
-      mode: DisplayMode.LIGHT,
+      [ThemeType.PROP_NAME]: ThemeType.initial,
     },
     JSON.parse(localStorage.getItem(LocalStorage.THEME))
   );

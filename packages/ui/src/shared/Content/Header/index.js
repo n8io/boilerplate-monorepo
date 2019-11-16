@@ -2,8 +2,8 @@ import { string } from 'prop-types';
 import React from 'react';
 import { MoveFocusInside } from 'react-focus-lock';
 import styled from 'styled-components/macro';
+import { Fade } from 'types/fade';
 import { PageTitle } from '../../PageTitle';
-import { topStyles as fadeTopStyles } from '../fade';
 import { GridTemplateArea } from '../gridTemplateArea';
 
 const domTestId = 'Header';
@@ -18,7 +18,7 @@ const Styled = styled.div`
   padding: 0 var(--layout-base-unit);
 
   /* stylelint-disable-next-line order/properties-alphabetical-order */
-  ${fadeTopStyles}
+  ${Fade.top}
 `;
 
 const H1 = styled.h1`

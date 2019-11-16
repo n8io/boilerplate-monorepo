@@ -13,4 +13,10 @@ export const styles = css`
   h4 {
     font-size: calc(var(--layout-base-unit) * 1.25);
   }
+  h5 {
+    font-size: calc(var(--layout-base-unit) * 1);
+  }
+  h6 {
+    font-size: calc(var(--layout-base-unit) * 0.75);
+  }
 `;

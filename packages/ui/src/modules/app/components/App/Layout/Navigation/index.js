@@ -1,9 +1,12 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import media from 'styled-media-query';
+import { A11y } from 'types/a11y';
 import { GridTemplateArea } from '../gridTemplateArea';
 import { NavItem } from './NavItem';
 import { Navigation } from './navigation';
+
+const { Role } = A11y;
 
 const Styled = styled.nav`
   box-shadow: 1px 0 0 0 var(--border-color);
@@ -25,7 +28,7 @@ const NavList = styled.ul`
 `;
 
 const Nav = () => (
-  <Styled role="navigation">
+  <Styled role={Role.NAVIGATION}>
     <NavList>
       {Navigation.map(route => (
         <NavItem key={route.name} route={route} />

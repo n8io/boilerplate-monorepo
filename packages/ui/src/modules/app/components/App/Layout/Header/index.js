@@ -1,9 +1,11 @@
 import React from 'react';
 import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
+import { A11y } from 'types/a11y';
 import { GridTemplateArea } from '../gridTemplateArea';
 import { SkipNavLink } from './SkipNavLink';
 
+const { Role } = A11y;
 const domTestId = 'Header';
 
 const Styled = styled.header`
@@ -28,7 +30,7 @@ const Header = () => {
   });
 
   return (
-    <Styled data-testid={domTestId} role="banner">
+    <Styled data-testid={domTestId} role={Role.BANNER}>
       <SkipNavLink />
       <Title>{t('title')}</Title>
     </Styled>

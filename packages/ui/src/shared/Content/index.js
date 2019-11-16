@@ -11,7 +11,6 @@ const Styled = styled.div`
     '${GridTemplateArea.BREADCRUMBS}' 
     '${GridTemplateArea.HEADER}' 
     '${GridTemplateArea.BODY}' 
-    '${GridTemplateArea.FOOTER}';
 `;
 
 const Content = ({ children, 'data-testid': dataTestId }) => (
@@ -29,6 +28,5 @@ Content.propTypes = {
 
 export { Body } from './Body';
 export { Breadcrumb, Breadcrumbs } from './Breadcrumbs';
-export { Footer } from './Footer';
 export { Header, domId as mainContentDomId } from './Header';
 export { Content, GridTemplateArea, domTestId };

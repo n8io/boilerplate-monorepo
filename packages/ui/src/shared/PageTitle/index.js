@@ -8,9 +8,7 @@ const PageTitle = ({ title }) => {
 
   return (
     <Helmet>
-      <title>
-        {t('siteName')} :: {title}
-      </title>
+      <title>{t('siteName', { title })}</title>
     </Helmet>
   );
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Body, Content, Footer, Header } from 'shared/Content';
+import { Body, Content, Header } from 'shared/Content';
 import { Page } from 'shared/Page';
 import { useTranslate } from 'shared/useTranslate';
 
@@ -108,7 +108,6 @@ const Dashboard = () => {
             Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
           </p>
         </Body>
-        <Footer />
       </Content>
     </Page>
   );
