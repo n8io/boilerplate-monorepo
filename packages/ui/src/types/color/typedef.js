@@ -1,9 +1,10 @@
 export const Enumeration = {
   BLACK: '#212121',
   ERROR: '#DB0000',
-  PRIMARY: '#6d4baa',
+  INFO: '#4685E5',
+  PRIMARY: '#6D4BAA',
   PRIMARY_DARK: '#553490',
-  PRIMARY_LIGHT: '#e5d5ff',
+  PRIMARY_LIGHT: '#E5D5FF',
   SUCCESS: '#0C9C0C',
   WARN: '#DFDF00',
   WHITE: '#FFFFFF',

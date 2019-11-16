@@ -14,7 +14,7 @@ export const styles = css`
 
   /* stylelint-disable-next-line no-duplicate-selectors */
   body[modality='${MODALITY_KEYBOARD}'] *:focus {
-    outline: 0.375rem auto -webkit-focus-ring-color !important;
+    outline: calc(var(--layout-base-unit) * 0.375) auto -webkit-focus-ring-color !important;
   }
 `;
 
