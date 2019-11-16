@@ -1,20 +1,13 @@
 import { node, string } from 'prop-types';
 import React from 'react';
-import styled from 'styled-components/macro';
-import { GridTemplateArea } from './gridTemplateArea';
+import { Body } from './Body';
+import { Breadcrumb, Breadcrumbs } from './Breadcrumbs';
+import { domId as mainContentDomId, Header } from './Header';
 
 const domTestId = 'Content';
 
-const Styled = styled.div`
-  display: grid;
-  grid-template-areas: 
-    '${GridTemplateArea.BREADCRUMBS}' 
-    '${GridTemplateArea.HEADER}' 
-    '${GridTemplateArea.BODY}' 
-`;
-
 const Content = ({ children, 'data-testid': dataTestId }) => (
-  <Styled data-testid={dataTestId}>{children}</Styled>
+  <div data-testid={dataTestId}>{children}</div>
 );
 
 Content.defaultProps = {
@@ -26,7 +19,12 @@ Content.propTypes = {
   'data-testid': string,
 };
 
-export { Body } from './Body';
-export { Breadcrumb, Breadcrumbs } from './Breadcrumbs';
-export { Header, domId as mainContentDomId } from './Header';
-export { Content, GridTemplateArea, domTestId };
+export {
+  Body,
+  Breadcrumb,
+  Breadcrumbs,
+  Content,
+  Header,
+  domTestId,
+  mainContentDomId,
+};

@@ -1,12 +1,10 @@
 import { bool, node, string } from 'prop-types';
 import React from 'react';
 import styled from 'styled-components/macro';
-import { GridTemplateArea } from '../gridTemplateArea';
 
 const domTestId = 'Body';
 
 const Styled = styled.section`
-  grid-area: ${GridTemplateArea.BODY};
   height: calc(
     100vh -
       (
