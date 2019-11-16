@@ -1,6 +1,6 @@
 import { Theme } from 'types/theme';
 
 export const useTheme = () => ({
-  theme: Theme.example(),
+  theme: Theme.initial,
   updateTheme: jest.fn().mockName('updateTheme'),
 });

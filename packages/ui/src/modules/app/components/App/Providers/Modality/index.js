@@ -1,7 +1,6 @@
 import { debounce } from '@puttingpoker/common';
 import { useEffect } from 'react';
 import { css } from 'styled-components/macro';
-import { Color } from 'types/color';
 
 const MODALITY_ATTRIBUTE = 'modality';
 const MODALITY_KEYBOARD = 'keyboard';
@@ -9,20 +8,19 @@ const MODALITY_MOUSE = 'mouse';
 const TAB_KEY_CODE = 9;
 
 export const styles = css`
-  body[modality="${MODALITY_MOUSE}"] *:focus {
+  body[modality='${MODALITY_MOUSE}'] *:focus {
     outline: none !important;
   }
 
   /* stylelint-disable-next-line no-duplicate-selectors */
-  body[modality="${MODALITY_KEYBOARD}"] *:focus {
-    outline: 0.375rem solid ${Color.focusRing} !important; /* for non-webkit browsers */
+  body[modality='${MODALITY_KEYBOARD}'] *:focus {
     outline: 0.375rem auto -webkit-focus-ring-color !important;
   }
 `;
 
 export const Modality = () => {
   useEffect(() => {
-    const onTabDown = debounce(e => {
+    const onKeyDown = debounce(e => {
       if (e.keyCode !== TAB_KEY_CODE) return;
 
       document.body.setAttribute(MODALITY_ATTRIBUTE, MODALITY_KEYBOARD);
@@ -32,11 +30,11 @@ export const Modality = () => {
       document.body.setAttribute(MODALITY_ATTRIBUTE, MODALITY_MOUSE)
     );
 
-    window.addEventListener('keydown', onTabDown);
+    window.addEventListener('keydown', onKeyDown);
     window.addEventListener('mousedown', onMouseDown);
 
     return () => {
-      window.removeEventListener('keydown', onTabDown);
+      window.removeEventListener('keydown', onKeyDown);
       window.removeEventListener('mousedown', onMouseDown);
     };
   }, []);

@@ -1,4 +1,4 @@
-import { arrayOf, object, node, string } from 'prop-types';
+import { arrayOf, node, object, string } from 'prop-types';
 import React from 'react';
 import {
   Menu as RMenu,
@@ -7,9 +7,6 @@ import {
   useMenuState,
 } from 'reakit/Menu';
 import styled from 'styled-components/macro';
-import theme from 'styled-theming';
-import { Color } from 'types/color';
-import { DisplayMode } from 'types/displayMode';
 import { MenuOption } from 'types/menuOption';
 
 const domTestId = 'Menu';
@@ -19,15 +16,6 @@ const makeOnClickProxy = ({ menu, onClick }) => () => {
   menu.hide();
 };
 
-const menuItemStyles = theme('mode', {
-  [DisplayMode.DARK]: {
-    backgroundColor: Color.black,
-  },
-  [DisplayMode.LIGHT]: {
-    backgroundColor: Color.white,
-  },
-});
-
 const StyledMenuItem = styled(MenuItem)`
   cursor: pointer;
   overflow-x: hidden;
@@ -36,12 +24,9 @@ const StyledMenuItem = styled(MenuItem)`
   white-space: nowrap;
   width: 100%;
 
-  /* stylelint-disable-next-line order/properties-alphabetical-order */
-  ${menuItemStyles}
-
   &[tabindex='0'] {
-    background-color: ${Color.primary};
-    color: ${Color.white};
+    background-color: var(--color-type-primary);
+    color: var(--grayscale-white);
   }
 `;
 
@@ -59,7 +44,7 @@ const renderOptions = ({ menu, options }) =>
   ));
 
 const styles = {
-  boxShadow: `0 0 0 1px ${Color.primary}`,
+  boxShadow: `0 0 0 1px var(--color-type-primary)`,
   zIndex: 100,
 };
 

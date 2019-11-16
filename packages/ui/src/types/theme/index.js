@@ -1,5 +1,9 @@
-import { example } from './examples';
+import { initial } from './creation';
+import { displayMode } from './selectors';
+import { Enumeration } from './typedef';
 
 export const Theme = {
-  example,
+  ...Enumeration,
+  displayMode,
+  initial,
 };

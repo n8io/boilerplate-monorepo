@@ -4,14 +4,7 @@ import LogRocket from 'logrocket';
 import { func, shape } from 'prop-types';
 import { prop } from 'ramda';
 import React, { useEffect, useState } from 'react';
-import {
-  Body,
-  Content,
-  Footer,
-  Header,
-  Breadcrumb,
-  Breadcrumbs,
-} from 'shared/Content';
+import { Body, Breadcrumb, Breadcrumbs, Content, Header } from 'shared/Content';
 import { Page } from 'shared/Page';
 import { useTranslate } from 'shared/useTranslate';
 import { LogLevel } from 'types/logLevels';
@@ -64,7 +57,6 @@ const NotFound = ({ history }) => {
           <p>{t('body')}</p>
           <p>{t('returning', { seconds: tics })}</p>
         </Body>
-        <Footer />
       </Content>
     </Page>
   );

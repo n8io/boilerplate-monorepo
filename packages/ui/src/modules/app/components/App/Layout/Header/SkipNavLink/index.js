@@ -2,7 +2,6 @@ import React from 'react';
 import { mainContentDomId } from 'shared/Content';
 import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
-import { Color } from 'types/color';
 
 const Styled = styled.a`
   clip: rect(1px, 1px, 1px, 1px);
@@ -12,6 +11,7 @@ const Styled = styled.a`
   width: 1px;
 
   &:focus {
+    background-color: var(--grayscale-white);
     border-radius: 0.25rem;
     clip: auto !important;
     display: block;
@@ -19,15 +19,13 @@ const Styled = styled.a`
     height: auto;
     left: 0.5rem;
     line-height: normal;
-    padding: 0.25rem 0.5rem;
+    padding: calc(var(--layout-base-unit) * 0.25)
+      calc(var(--layout-base-unit) * 0.5);
     position: fixed;
     text-decoration: none;
     top: 0rem;
     width: auto;
     z-index: 100000;
-
-    /* stylelint-disable-next-line order/properties-alphabetical-order */
-    ${Color.skipLinkStyles}
   }
 `;
 

@@ -2,9 +2,8 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
-import { Color } from 'types/color';
-import { Layout } from 'types/layout';
 import { propTypes } from 'types/routes';
+import { variables as themeVariables } from './theme';
 
 const StyledListItem = styled.li`
   align-items: center;
@@ -14,15 +13,38 @@ const StyledListItem = styled.li`
 `;
 
 const Styled = styled(NavLink)`
-  align-items: center;
-  border-bottom: 1px ${Color.border} solid;
-  display: grid;
-  height: ${Layout.MAIN_BREADCRUMB_HEIGHT}rem;
-  padding: 0 0.5rem;
-  width: 100%;
+  ${themeVariables}
 
   /* stylelint-disable-next-line order/properties-alphabetical-order */
-  ${Color.navLinkStyles}
+  align-items: center;
+  border-bottom: 1px var(--border-color) solid;
+  display: grid;
+  grid-auto-flow: column;
+  grid-column-gap: 0.25rem;
+  height: calc(var(--layout-main-breadcrumb-height) + 1px);
+  justify-content: start;
+  padding: 0 calc(var(--layout-base-unit) * 0.5);
+  text-overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+
+  &:focus:not([aria-current='page']),
+  &:hover:not([aria-current='page']) {
+    background-color: var(--nav-link-background-color-hover);
+    color: var(--nav-link-color-hover);
+  }
+
+  &[aria-current='page'] {
+    background-color: var(--nav-link-color);
+    color: var(--nav-link-background-color);
+    cursor: default;
+
+    &:focus,
+    &:hover {
+      background-color: var(--nav-link-color);
+      color: var(--nav-link-background-color);
+    }
+  }
 `;
 
 const NavItem = ({ route }) => {
@@ -31,11 +53,12 @@ const NavItem = ({ route }) => {
     namespace: 'app',
   });
 
-  const { name, path } = route;
+  const { icon: Icon, name, path } = route;
 
   return (
     <StyledListItem>
       <Styled exact to={path}>
+        {Icon && <Icon />}
         {t(name)}
       </Styled>
     </StyledListItem>

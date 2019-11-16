@@ -1,10 +1,10 @@
 import officePanda from 'assets/images/officePanda.gif';
 import { config } from 'config';
-import { string, func } from 'prop-types';
+import { func, string } from 'prop-types';
 import React from 'react';
 import styled from 'styled-components/macro';
 import { Button, Context } from '../Button';
-import { Body, Content, Footer, Header } from '../Content';
+import { Body, Content, Header } from '../Content';
 import { useTranslate } from '../useTranslate';
 
 const domTestId = 'ErrorPage';
@@ -16,8 +16,8 @@ const Styled = styled(Body)`
   justify-items: center;
 
   img {
-    border-radius: 1rem;
-    margin-bottom: 1rem;
+    border-radius: var(--layout-base-unit);
+    margin-bottom: var(--layout-base-unit);
   }
 `;
 
@@ -56,7 +56,6 @@ const ErrorPage = ({ message, onFeedbackClick }) => {
           </p>
         </Center>
       </Styled>
-      <Footer />
     </Content>
   );
 };

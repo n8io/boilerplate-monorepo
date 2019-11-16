@@ -2,39 +2,36 @@ import { noop } from '@puttingpoker/common';
 import { bool, func, node, string } from 'prop-types';
 import React from 'react';
 import styled, { css } from 'styled-components/macro';
-import {
-  Size,
-  propTypes as sizePropTypes,
-  styles as sizeStyles,
-} from './sizes';
-import {
-  Context,
-  propTypes as contextPropTypes,
-  styles as contextStyles,
-} from './variants';
+import { A11y } from 'types/a11y';
+import { Context } from './context';
+import { Size } from './size';
+import { Style } from './style';
+import { Type } from './type';
+
+const { Role } = A11y;
 
 const domTestId = 'Button';
 
-const Styled = styled.button`
+const styles = css` 
   border-radius: 0.125rem;
   border-style: solid;
   border-width: 1px;
   cursor: pointer;
   display: grid;
   justify-items: center;
-  opacity: 1;
+  opacity: 0.95;
   text-align: center;
+  transition: opacity var(--transition-delay) var(--transition-timing-function);
   width: 100%;
 
   /* stylelint-disable-next-line order/properties-alphabetical-order */
-  ${contextStyles}
-  /* stylelint-disable-next-line order/properties-alphabetical-order */
-  ${sizeStyles}
+  ${Style.context}
+  ${Style.size}
 
   &:active,
   &:focus,
   &:hover {
-    opacity: 0.95;
+    opacity: 1;
   }
 
   /* stylelint-disable-next-line order/properties-alphabetical-order */
@@ -58,6 +55,10 @@ const Styled = styled.button`
   ${({ className }) => className}
 `;
 
+const Styled = styled.button`
+  ${styles}
+`;
+
 const Button = ({
   children,
   className,
@@ -79,6 +80,7 @@ const Button = ({
     data-testid={dataTestId}
     disabled={disabled}
     onClick={onClick}
+    role={Role.BUTTON}
     type={type}
   >
     {children || text}
@@ -94,13 +96,13 @@ Button.defaultProps = {
   label: undefined,
   onClick: noop,
   size: Size.DEFAULT,
-  type: 'button',
+  type: Type.BUTTON,
 };
 
 Button.propTypes = {
   children: node,
   className: string,
-  context: contextPropTypes,
+  context: Context.propTypes,
   'data-testid': string,
   disabled: bool,
   label: ({ label, text }) => {
@@ -109,7 +111,7 @@ Button.propTypes = {
     return new Error('The `label` prop is required when no text is set');
   },
   onClick: func,
-  size: sizePropTypes,
+  size: Size.propTypes,
   text: ({ children, text }) => {
     if (children || text) return undefined;
 
@@ -117,7 +119,7 @@ Button.propTypes = {
       `The 'text' prop is required when no children are provided`
     );
   },
-  type: string,
+  type: Type.propTypes,
 };
 
-export { Button, Context, Size, domTestId };
+export { Button, Context, Size, domTestId, styles };

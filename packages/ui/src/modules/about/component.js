@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Body,
-  Content,
-  Footer,
-  Header,
-  Breadcrumbs,
-  Breadcrumb,
-} from 'shared/Content';
+import { Body, Breadcrumb, Breadcrumbs, Content, Header } from 'shared/Content';
 import { Page } from 'shared/Page';
 import { useTranslate } from 'shared/useTranslate';
 import { Routes } from 'types/routes';
@@ -122,7 +115,6 @@ const About = () => {
             Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
           </p>
         </Body>
-        <Footer />
       </Content>
     </Page>
   );

@@ -1,4 +1,4 @@
-export const siteName = 'Acme LLC';
+import { siteName } from './extracted/siteName';
 
 export const app = {
   nav: {

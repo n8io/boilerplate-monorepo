@@ -9,7 +9,7 @@ const StyledLi = styled.li`
   & + & {
     ::before {
       content: '/';
-      left: -0.25rem;
+      left: calc(var(--layout-base-unit) * -0.25);
       position: relative;
       transform: translateX(-50%);
     }
