@@ -115,10 +115,7 @@ const transformTokenized = str => {
       .reduce((acc, ftwp, index) => [...acc, ftwp, tokens[index]], [])
       .join('');
   } else {
-    output = pipe(
-      bumpLength,
-      transformStringToFake
-    )(output);
+    output = pipe(bumpLength, transformStringToFake)(output);
   }
 
   return output;
