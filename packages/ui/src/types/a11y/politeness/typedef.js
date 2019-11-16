@@ -1,9 +1,9 @@
 import { oneOf } from 'prop-types';
 import { values } from 'ramda';
 
-export const Politeness = {
+export const Enumeration = {
   ASSERTIVE: 'assertive',
   POLITE: 'polite',
 };
 
-export const propTypes = oneOf(values(Politeness));
+export const propTypes = oneOf(values(Enumeration));

@@ -1,11 +1,11 @@
-import { siteName } from '../extracted/siteName';
+import { Site } from 'types/site';
 
 export const common = {
   about: 'About',
   dashboard: 'Dashboard',
-  footer: `©️ {{fullYear}} ${siteName}. All Rights reserved.`,
+  footer: `©️ {{fullYear}} ${Site.name}. All Rights reserved.`,
   home: 'Home',
   loading: 'Loading',
   loadingScreenReader: 'Please wait while content is being loaded',
-  siteName: `${siteName} :: {{title}}`,
+  siteName: `${Site.name} :: {{title}}`,
 };

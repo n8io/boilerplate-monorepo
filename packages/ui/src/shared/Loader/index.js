@@ -1,11 +1,14 @@
 import { number } from 'prop-types';
 import React from 'react';
 import styled from 'styled-components/macro';
+import { A11y } from 'types/a11y';
 import { ScreenReaderNotification } from '../ScreenReaderNotification';
 import { useTranslate } from '../useTranslate';
 import { styles as themeStyles } from './theme';
 
-export const domTestId = 'Loader';
+const { Politeness } = A11y;
+
+const domTestId = 'Loader';
 
 const Styled = styled.div`
   left: 50%;
@@ -68,7 +71,7 @@ const Loader = ({ size }) => {
         <div></div>
         <div></div>
       </Ring>
-      <ScreenReaderNotification>
+      <ScreenReaderNotification politeness={Politeness.POLITE}>
         {t('loadingScreenReader')}
       </ScreenReaderNotification>
     </Styled>
@@ -83,4 +86,4 @@ Loader.propTypes = {
   size: number,
 };
 
-export { Loader };
+export { domTestId, Loader };

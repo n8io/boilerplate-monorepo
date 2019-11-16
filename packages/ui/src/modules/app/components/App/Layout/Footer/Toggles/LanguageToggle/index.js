@@ -7,7 +7,7 @@ import styled from 'styled-components/macro';
 import { Languages } from 'types/language';
 import { LanguageDisplay } from 'types/languageDisplay';
 import { LocalStorage } from 'types/localStorage';
-import { styles as themeStyles } from './theme';
+import * as ThemeStyles from './theme';
 
 const StyledDisclosure = styled(MenuDisclosure)`
   ${styles}
@@ -17,6 +17,9 @@ const StyledMenu = styled(Menu)`
   background-color: var(--grayscale-white);
   border: 1px solid var(--color-type-primary);
   z-index: 1000;
+
+  /* stylelint-disable-next-line order/properties-alphabetical-order */
+  ${ThemeStyles.menu}
 `;
 
 const StyledMenuItem = styled(MenuItem)`
@@ -33,7 +36,7 @@ const StyledMenuItem = styled(MenuItem)`
   }
 
   /* stylelint-disable-next-line order/properties-alphabetical-order */
-  ${themeStyles}
+  ${ThemeStyles.menuItem}
 `;
 
 const LanguageToggle = () => {

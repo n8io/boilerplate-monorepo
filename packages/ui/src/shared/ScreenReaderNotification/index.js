@@ -1,8 +1,9 @@
 import { node } from 'prop-types';
 import React from 'react';
 import styled from 'styled-components/macro';
-import { Politeness, propTypes as politenessPropTypes } from 'types/politeness';
+import { A11y } from 'types/a11y';
 
+const { Politeness } = A11y;
 const domTestId = 'ScreenReaderNotification';
 
 const Styled = styled.div`
@@ -22,13 +23,9 @@ const ScreenReaderNotification = ({ children, politeness }) => (
   </Styled>
 );
 
-ScreenReaderNotification.defaultProps = {
-  politeness: Politeness.POLITE,
-};
-
 ScreenReaderNotification.propTypes = {
   children: node.isRequired,
-  politeness: politenessPropTypes,
+  politeness: Politeness.propTypes.isRequired,
 };
 
 export { ScreenReaderNotification, domTestId };

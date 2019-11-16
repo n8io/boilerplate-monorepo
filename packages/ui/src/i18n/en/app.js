@@ -1,4 +1,4 @@
-import { siteName } from './extracted/siteName';
+import { Site } from 'types/site';
 
 export const app = {
   nav: {
@@ -9,5 +9,5 @@ export const app = {
     testPage: 'Test Page',
   },
   skipLink: 'Skip to content',
-  title: siteName,
+  title: Site.name,
 };
