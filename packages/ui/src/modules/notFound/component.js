@@ -11,6 +11,7 @@ import { LogLevel } from 'types/logLevel';
 import { Route } from 'types/route';
 
 const domTestId = 'NotFound';
+const SECONDS_TO_REDIRECT = 15;
 
 const logNotFound = () => {
   Sentry.withScope(scope => {
@@ -28,7 +29,7 @@ const NotFound = ({ history }) => {
     namespace: 'notFound',
   });
 
-  const [tics, setTics] = useState(15);
+  const [tics, setTics] = useState(SECONDS_TO_REDIRECT);
 
   useEffect(() => {
     logNotFound();
