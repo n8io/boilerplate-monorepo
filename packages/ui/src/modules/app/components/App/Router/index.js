@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route as RouterRoute, Switch } from 'react-router-dom';
-import { Routes } from 'types/routes';
+import { Route as RouteType } from 'types/route';
 import { Navigation } from '../Layout/Navigation/navigation';
 import { Route } from './Route';
 
-const { NOT_FOUND } = Routes;
+const { NOT_FOUND } = RouteType;
 
 const Router = () => (
   <Switch>

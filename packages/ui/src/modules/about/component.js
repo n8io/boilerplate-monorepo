@@ -2,7 +2,7 @@ import React from 'react';
 import { Body, Breadcrumb, Breadcrumbs, Content, Header } from 'shared/Content';
 import { Page } from 'shared/Page';
 import { useTranslate } from 'shared/useTranslate';
-import { Routes } from 'types/routes';
+import { Route } from 'types/route';
 
 const About = () => {
   const t = useTranslate({
@@ -15,10 +15,10 @@ const About = () => {
       <Content>
         <Breadcrumbs>
           <Breadcrumb
-            exact={Routes.ABOUT.exact}
+            exact={Route.ABOUT.exact}
             isEnd
             text={t('title')}
-            to={Routes.ABOUT.path}
+            to={Route.ABOUT.path}
           />
         </Breadcrumbs>
         <Header title={t('title')} />

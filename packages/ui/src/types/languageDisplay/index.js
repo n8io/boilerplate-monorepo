@@ -1,8 +1,6 @@
-import { values as ramdaValues } from 'ramda';
-import { Enumeration } from './typedef';
+import { Enumeration, values } from './typedef';
 
 export const LanguageDisplay = {
   ...Enumeration,
+  values,
 };
-
-export const values = ramdaValues(Enumeration);

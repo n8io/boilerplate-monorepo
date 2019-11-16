@@ -1,13 +1,15 @@
 export const Enumeration = {
-  BLACK: '#212121',
-  ERROR: '#DB0000',
-  INFO: '#4685E5',
-  PRIMARY: '#6D4BAA',
-  PRIMARY_DARK: '#553490',
-  PRIMARY_LIGHT: '#E5D5FF',
-  SUCCESS: '#0C9C0C',
-  WARN: '#DFDF00',
-  WHITE: '#FFFFFF',
+  BLACK: '#212121ff',
+  ERROR: '#db0000ff',
+  ERROR_LIGHT: '#ffe8e8ff',
+  INFO: '#4685e5ff',
+  PRIMARY: '#6d4baaff',
+  PRIMARY_DARK: '#553490ff',
+  PRIMARY_LIGHT: '#e5d5ffff',
+  SUCCESS: '#0c9c0cff',
+  TRANSPARENT: '#ffffff00',
+  WARN: '#dfdf00ff',
+  WHITE: '#ffffffff',
 };
 
 // https://coolors.co/212121-dcdcdc-db0000-6d4baa-553490

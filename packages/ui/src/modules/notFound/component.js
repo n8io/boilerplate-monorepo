@@ -7,8 +7,8 @@ import React, { useEffect, useState } from 'react';
 import { Body, Breadcrumb, Breadcrumbs, Content, Header } from 'shared/Content';
 import { Page } from 'shared/Page';
 import { useTranslate } from 'shared/useTranslate';
-import { LogLevel } from 'types/logLevels';
-import { Routes } from 'types/routes';
+import { LogLevel } from 'types/logLevel';
+import { Route } from 'types/route';
 
 const domTestId = 'NotFound';
 
@@ -50,7 +50,7 @@ const NotFound = ({ history }) => {
     <Page>
       <Content data-testid={domTestId}>
         <Breadcrumbs>
-          <Breadcrumb isEnd text={t('title')} to={Routes.NOT_FOUND.path} />
+          <Breadcrumb isEnd text={t('title')} to={Route.NOT_FOUND.path} />
         </Breadcrumbs>
         <Header title={t('title')} />
         <Body>

@@ -1,4 +1,4 @@
-export const DisplayMode = {
+export const Enumeration = {
   DARK: 'dark',
   LIGHT: 'light',
 };

@@ -1,4 +1,4 @@
-export const LogLevel = {
+export const Enumeration = {
   DEBUG: 'debug',
   ERROR: 'error',
   FATAL: 'fatal',

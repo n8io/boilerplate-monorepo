@@ -8,7 +8,7 @@ import {
   sortBy,
   values,
 } from 'ramda';
-import { Routes, SORT_PROP_NAME } from 'types/routes';
+import { Route } from 'types/route';
 import { About } from 'modules/about';
 import { Dashboard } from 'modules/dashboard';
 import { NotFound } from 'modules/notFound';
@@ -29,8 +29,8 @@ const addComponent = route => {
 };
 
 export const Navigation = pipe(
-  filter(prop(SORT_PROP_NAME)),
+  filter(prop(Route.SORT_PROP_NAME)),
   values,
-  sortBy(prop(SORT_PROP_NAME)),
+  sortBy(prop(Route.SORT_PROP_NAME)),
   map(addComponent)
-)(Routes);
+)(Route.values);

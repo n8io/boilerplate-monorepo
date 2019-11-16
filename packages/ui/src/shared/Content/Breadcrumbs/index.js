@@ -1,7 +1,7 @@
 import { node } from 'prop-types';
 import React from 'react';
 import styled from 'styled-components/macro';
-import { Routes } from 'types/routes';
+import { Route } from 'types/route';
 import { useTranslate } from '../../useTranslate';
 import { Breadcrumb } from './Breadcrumb';
 
@@ -24,9 +24,9 @@ const Breadcrumbs = ({ children }) => {
   return (
     <Styled data-testid={domTestId}>
       <Breadcrumb
-        exact={Routes.ROOT.exact}
+        exact={Route.ROOT.exact}
         text={t('home')}
-        to={Routes.ROOT.path}
+        to={Route.ROOT.path}
       />
       {children}
     </Styled>

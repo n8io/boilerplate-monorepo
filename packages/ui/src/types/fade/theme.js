@@ -12,8 +12,12 @@ export const bottom = theme(Theme.PROP_NAME, {
     );
   `,
   [DisplayMode.LIGHT]: css`
-    background: #ffffff00;
-    background: linear-gradient(to bottom, #ffffff00, #ffffffff);
+    background: var(--color-type-transparent);
+    background: linear-gradient(
+      to bottom,
+      var(--color-type-transparent),
+      var(--grayscale-white)
+    );
   `,
 });
 
@@ -26,7 +30,11 @@ export const top = theme(Theme.PROP_NAME, {
     );
   `,
   [DisplayMode.LIGHT]: css`
-    background: #ffffff00;
-    background: linear-gradient(to top, #ffffff00, #ffffffff);
+    background: var(--color-type-transparent);
+    background: linear-gradient(
+      to top,
+      var(--color-type-transparent),
+      var(--grayscale-white)
+    );
   `,
 });

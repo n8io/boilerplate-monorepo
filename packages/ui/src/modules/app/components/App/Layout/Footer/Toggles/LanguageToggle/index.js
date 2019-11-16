@@ -74,7 +74,7 @@ const LanguageToggle = () => {
         {Language.values.map(language => (
           <StyledMenuItem
             {...menu}
-            aria-label={t('setLanguages', {
+            aria-label={t('setLanguage', {
               language: LanguageDisplay[language],
             })}
             key={language}

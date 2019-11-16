@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
-import { propTypes } from 'types/routes';
+import { Route } from 'types/route';
 import { variables as themeVariables } from './theme';
 
 const StyledListItem = styled.li`
@@ -66,7 +66,7 @@ const NavItem = ({ route }) => {
 };
 
 NavItem.propTypes = {
-  route: propTypes.isRequired,
+  route: Route.propTypes.isRequired,
 };
 
 export { NavItem };

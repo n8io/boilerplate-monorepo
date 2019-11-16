@@ -53,9 +53,9 @@ export const styles = css`
   }
 
   pre {
-    background: #ffe8e8;
+    background-color: var(--color-type-error-ligh);
     border-radius: calc(var(--layout-base-unit) * 0.25);
-    color: #f00;
+    color: var(--color-type-error);
     font-family: monospace;
     padding: calc(var(--layout-base-unit) * 0.5);
   }
