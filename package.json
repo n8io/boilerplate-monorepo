@@ -2,7 +2,7 @@
   "name": "puttingpoker",
   "private": true,
   "engines": {
-    "node": "^12"
+    "node": "^13.1.0"
   },
   "license": "MIT",
   "workspaces": [
@@ -10,6 +10,16 @@
   ],
   "scripts": {
     "bootstrap": "lerna bootstrap",
+    "clean": "yarn run -s dcd && yarn run -s dc down --remove-orphans",
+    "dc": "docker-compose",
+    "dcd": "yarn run -s dc kill",
+    "dclf": "yarn run -s dc logs -f",
+    "dcu": "yarn run -s dc up",
+    "dcud": "yarn run -s dcu -d --build",
+    "dev:ui": "yarn run -s dcud ui && yarn run -s logs:ui",
+    "dev": "yarn run -s run-all dev:*",
+    "down": "yarn run -s clean",
+    "down:ui": "yarn run -s dcd ui",
     "format": "yarn -s run run-all format:*",
     "format:js-eslint": "eslint --cache --fix '**/*.js'",
     "format:js-prettier": "prettier --write '**/*.js'",
@@ -20,7 +30,11 @@
     "linter:eslint": "eslint --max-warnings 0 --report-unused-disable-directives",
     "linter:prettier": "prettier --check",
     "linter:stylelint": "stylelint --max-warnings=0 --allow-empty-input",
-    "run-all": "npm-run-all --parallel"
+    "logs": "yarn run -s run-all logs:*",
+    "logs:ui": "yarn run -s dclf ui",
+    "run-all": "npm-run-all --parallel",
+    "start:ui": "lerna run start --loglevel silent --scope \"@${npm_package_name}/ui\" --stream",
+    "start": "yarn run run-all start:*"
   },
   "devDependencies": {
     "@arkweid/lefthook": "^0.6.3",
