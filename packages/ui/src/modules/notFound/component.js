@@ -1,12 +1,13 @@
 import { seconds } from '@puttingpoker/common';
 import * as Sentry from '@sentry/browser';
 import LogRocket from 'logrocket';
-import { func, shape } from 'prop-types';
+import { func, shape, string } from 'prop-types';
 import { prop } from 'ramda';
 import React, { useEffect, useState } from 'react';
 import { Body, Breadcrumb, Breadcrumbs, Content, Header } from 'shared/Content';
 import { Page } from 'shared/Page';
 import { useTranslate } from 'shared/useTranslate';
+import styled from 'styled-components/macro';
 import { LogLevel } from 'types/logLevel';
 import { Route } from 'types/route';
 
@@ -23,7 +24,7 @@ const logNotFound = () => {
   });
 };
 
-const NotFound = ({ history }) => {
+const NotFound = ({ history, location }) => {
   const t = useTranslate({
     component: 'notFound',
     namespace: 'notFound',
@@ -47,15 +48,24 @@ const NotFound = ({ history }) => {
     return () => clearInterval(interval);
   }, [history, tics, setTics]);
 
+  const { pathname } = location;
+
+  const Italicize = styled.span`
+    font-style: italic;
+    margin-left: 0.25rem;
+  `;
+
   return (
     <Page>
       <Content data-testid={domTestId}>
         <Breadcrumbs>
           <Breadcrumb isEnd text={t('title')} to={Route.NOT_FOUND.path} />
         </Breadcrumbs>
-        <Header title={t('title')} />
+        <Header icon={Route.NOT_FOUND.icon} title={t('title')} />
         <Body>
-          <p>{t('body')}</p>
+          <p>
+            {t('resourceNotFound')}:<Italicize>{pathname}</Italicize>
+          </p>
           <p>{t('returning', { seconds: tics })}</p>
         </Body>
       </Content>
@@ -67,6 +77,9 @@ NotFound.propTypes = {
   history: shape({
     goBack: func.isRequired,
   }).isRequired,
+  location: shape({
+    pathname: string.isRequired,
+  }),
 };
 
 export { NotFound, domTestId };

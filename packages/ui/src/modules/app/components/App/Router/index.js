@@ -1,17 +1,15 @@
 import React from 'react';
-import { Route as RouterRoute, Switch } from 'react-router-dom';
-import { Route as RouteType } from 'types/route';
+import { Switch } from 'react-router-dom';
+import { NotFound } from 'modules/notFound';
 import { Navigation } from '../Layout/Navigation/navigation';
-import { Route } from './Route';
-
-const { NOT_FOUND } = RouteType;
+import { Route as CustomRoute } from './Route';
 
 const Router = () => (
   <Switch>
     {Navigation.map(route => (
-      <Route key={route.name} {...route} />
+      <CustomRoute key={route.name} {...route} />
     ))}
-    <RouterRoute component={NOT_FOUND.component} />
+    <CustomRoute component={NotFound} />
   </Switch>
 );
 

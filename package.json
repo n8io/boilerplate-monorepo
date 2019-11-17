@@ -15,7 +15,7 @@
     "dcd": "yarn run -s dc kill",
     "dclf": "yarn run -s dc logs -f",
     "dcu": "yarn run -s dc up",
-    "dcud": "yarn run -s dcu -d --build",
+    "dcud": "yarn run -s dcu -d",
     "dev:ui": "yarn run -s dcud ui && yarn run -s logs:ui",
     "dev": "yarn run -s run-all dev:*",
     "down": "yarn run -s clean",
@@ -34,7 +34,7 @@
     "logs:ui": "yarn run -s dclf ui",
     "run-all": "npm-run-all --parallel",
     "start:ui": "lerna run start --loglevel silent --scope \"@${npm_package_name}/ui\" --stream",
-    "start": "yarn run run-all start:*"
+    "start": "yarn run -s run-all start:*"
   },
   "devDependencies": {
     "@arkweid/lefthook": "^0.6.3",
