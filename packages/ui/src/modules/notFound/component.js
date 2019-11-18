@@ -1,9 +1,9 @@
 import { seconds } from '@puttingpoker/common';
 import * as Sentry from '@sentry/browser';
 import LogRocket from 'logrocket';
-import { func, shape, string } from 'prop-types';
 import { prop } from 'ramda';
 import React, { useEffect, useState } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import { Body, Breadcrumb, Breadcrumbs, Content, Header } from 'shared/Content';
 import { Page } from 'shared/Page';
 import { useTranslate } from 'shared/useTranslate';
@@ -20,21 +20,24 @@ const logNotFound = () => {
     scope.setExtra('pathname', prop('pathname', window.location));
     scope.setTag('search', prop('search', window.location));
     scope.setLevel(LogLevel.INFO);
-    Sentry.captureException(new Error('User visited an undefined resource'));
+    Sentry.captureException(
+      new Error('User visited a resource that could not be found')
+    );
   });
 };
 
-const NotFound = ({ history, location }) => {
+const NotFound = () => {
   const t = useTranslate({
     component: 'notFound',
     namespace: 'notFound',
   });
-
   const [tics, setTics] = useState(SECONDS_TO_REDIRECT);
+  const history = useHistory();
+  const location = useLocation();
 
   useEffect(() => {
     logNotFound();
-  });
+  }, []);
 
   useEffect(() => {
     let interval = null;
@@ -61,7 +64,7 @@ const NotFound = ({ history, location }) => {
         <Breadcrumbs>
           <Breadcrumb isEnd text={t('title')} to={Route.NOT_FOUND.path} />
         </Breadcrumbs>
-        <Header icon={Route.NOT_FOUND.icon} title={t('title')} />
+        <Header title={t('title')} />
         <Body>
           <p>
             {t('resourceNotFound')}:<Italicize>{pathname}</Italicize>
@@ -71,15 +74,6 @@ const NotFound = ({ history, location }) => {
       </Content>
     </Page>
   );
-};
-
-NotFound.propTypes = {
-  history: shape({
-    goBack: func.isRequired,
-  }).isRequired,
-  location: shape({
-    pathname: string.isRequired,
-  }),
 };
 
 export { NotFound, domTestId };

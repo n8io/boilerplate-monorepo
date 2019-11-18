@@ -3,9 +3,11 @@ import { top as themeStyles } from './theme';
 
 export const top = css`
   &::before {
-    bottom: calc((-1.5 - 0.05675) * 1rem);
+    bottom: calc(
+      var(--layout-base-unit) - (var(--layout-base-unit) * 2) + -1px
+    );
     content: '';
-    height: 1.5rem;
+    height: var(--layout-base-unit);
     left: var(--layout-base-unit);
     pointer-events: none;
     position: absolute;

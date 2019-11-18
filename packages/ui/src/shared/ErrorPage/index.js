@@ -3,28 +3,32 @@ import { config } from 'config';
 import { func, string } from 'prop-types';
 import React from 'react';
 import styled from 'styled-components/macro';
-import { Route } from 'types/route';
-import { Button, Context } from '../Button';
-import { Body, Content, Header } from '../Content';
+import { Button as SharedButton, Context } from '../Button';
+import { Body as ContentBody, Content, Header } from '../Content';
 import { useTranslate } from '../useTranslate';
+
+const { isDebug } = config;
 
 const domTestId = 'ErrorPage';
 
-const Styled = styled(Body)`
-  align-items: center;
-  display: grid;
-  grid-template-rows: auto 1fr;
+const Body = styled(ContentBody)`
   justify-items: center;
+  text-align: center;
 
   img {
-    border-radius: var(--layout-base-unit);
+    border-radius: calc(var(--layout-base-unit) * 0.25);
     margin-bottom: var(--layout-base-unit);
   }
 `;
 
-const Center = styled.div`
-  display: grid;
-  justify-items: center;
+const Code = styled.pre`
+  white-space: normal;
+  width: auto;
+`;
+
+const Button = styled(SharedButton)`
+  margin: 0 auto;
+  width: auto;
 `;
 
 const ErrorPage = ({ message, onFeedbackClick }) => {
@@ -35,28 +39,19 @@ const ErrorPage = ({ message, onFeedbackClick }) => {
 
   return (
     <Content data-testid={domTestId}>
-      <Header icon={Route.TEST_PAGE.icon} title={t('title')} />
-      <Styled hasBreadcrumbs={false}>
-        <div />
-        <Center>
-          {config.isDevelopment ? (
-            <pre data-testid="errorDetails">{message}</pre>
-          ) : (
-            <>
-              <img src={officePanda} alt={t('officePanda')} />
-              <p>{t('body')}</p>
-              {config.isDebug && <pre>{message}</pre>}
-            </>
-          )}
-          <p>
-            <Button
-              context={Context.PRIMARY}
-              onClick={onFeedbackClick}
-              text={t('submitFeedback')}
-            />
-          </p>
-        </Center>
-      </Styled>
+      <Header title={t('title')} />
+      <Body hasBreadcrumbs={false}>
+        {isDebug && <Code>{message}</Code>}
+        <img src={officePanda} alt={t('officePanda')} />
+        <p>{t('statement')}</p>
+        <p>
+          <Button
+            context={Context.PRIMARY}
+            onClick={onFeedbackClick}
+            text={t('tellUsMore')}
+          />
+        </p>
+      </Body>
     </Content>
   );
 };

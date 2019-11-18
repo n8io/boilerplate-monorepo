@@ -50,13 +50,12 @@ class ErrorBoundary extends Component {
 
   onFeedbackClick() {
     const { eventId } = this.state;
-    const { i18n, t } = this.props;
+    const { i18n } = this.props;
     const { lang } = i18n;
 
     Sentry.showReportDialog({
       eventId,
       lang,
-      title: t('feedbackForm.title'),
     });
   }
 

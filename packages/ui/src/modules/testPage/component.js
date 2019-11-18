@@ -1,5 +1,5 @@
 const TestPage = () => {
-  throw new Error('Throw an error to test the Error Page');
+  throw new Error('Got a pirate program here. Says his name is Clu.');
 };
 
 export { TestPage };

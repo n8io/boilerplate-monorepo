@@ -12,7 +12,7 @@ const Logging = () => {
     });
 
     setupLogRocketReact(LogRocket);
-  });
+  }, []);
 
   return null;
 };

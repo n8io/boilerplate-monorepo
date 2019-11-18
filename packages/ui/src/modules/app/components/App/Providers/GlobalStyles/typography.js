@@ -1,22 +1,16 @@
 import { css } from 'styled-components/macro';
 
+const coefficient = 1.5;
+const decrement = size => coefficient - (size - 1) * 0.075;
+const sizes = Array.from({ length: 6 }, (_, k) => k + 1); // [1,2,3,...]
+
+const generateHeaderStyle = size => `
+  h${size} {
+    font-size: calc(var(--layout-base-unit) * ${decrement(size)});
+    user-select: none;
+  }
+`;
+
 export const styles = css`
-  h1 {
-    font-size: calc(var(--layout-base-unit) * 2);
-  }
-  h2 {
-    font-size: calc(var(--layout-base-unit) * 1.75);
-  }
-  h3 {
-    font-size: calc(var(--layout-base-unit) * 1.5);
-  }
-  h4 {
-    font-size: calc(var(--layout-base-unit) * 1.25);
-  }
-  h5 {
-    font-size: calc(var(--layout-base-unit) * 1);
-  }
-  h6 {
-    font-size: calc(var(--layout-base-unit) * 0.75);
-  }
+  ${sizes.map(generateHeaderStyle)}
 `;

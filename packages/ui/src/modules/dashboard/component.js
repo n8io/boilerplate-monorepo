@@ -16,7 +16,12 @@ const Dashboard = () => {
       <Content data-testid={domTestId}>
         <Header title={t('title')} />
         <Body hasBreadcrumbs={false}>
-          <h2>Lorem ipsum dolor sit amet consectetuer adipiscing elit</h2>
+          <h1>H1 Lorem ipsum dolor sit amet consectetuer adipiscing elit</h1>
+          <h2>H2 Aenean commodo ligula eget dolor aenean massa</h2>
+          <h3>H3 Nulla consequat massa quis enimt</h3>
+          <h4>H4 Donec pedejusto, fringilla vel, aliquet nec, vulputate</h4>
+          <h5>H5 In enimjusto, rhoncus ut, imperdiet a</h5>
+          <h6>H6 Phasellus viverra nulla ut metus varius laoreet</h6>
           <p>
             Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
             commodo ligula eget dolor. Aenean massa <strong>strong</strong>. Cum
@@ -34,7 +39,6 @@ const Dashboard = () => {
             ullamcorper ultricies nisi.
           </p>
           <h2>Lorem ipsum dolor sit amet consectetuer adipiscing elit</h2>
-          <h3>Aenean commodo ligula eget dolor aenean massa</h3>
           <p>
             Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
             commodo ligula eget dolor. Aenean massa. Cum sociis natoque
