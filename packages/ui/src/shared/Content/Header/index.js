@@ -1,6 +1,6 @@
-import { string } from 'prop-types';
+import { node, string } from 'prop-types';
 import React from 'react';
-import { MoveFocusInside } from 'react-focus-lock';
+import { useModality } from 'shared/useModality';
 import styled from 'styled-components/macro';
 import { Fade } from 'types/fade';
 import { PageTitle } from '../../PageTitle';
@@ -20,21 +20,32 @@ const Styled = styled.div`
 `;
 
 const H1 = styled.h1`
+  align-items: center;
+  display: grid;
+  grid-auto-flow: column;
   margin-bottom: 0;
 `;
 
-const Header = ({ title }) => (
-  <Styled data-testid={domTestId}>
-    <PageTitle title={title} />
-    <MoveFocusInside>
-      <H1 id={domId} tabIndex="0">
-        {title}
+const Header = ({ children, title }) => {
+  const { isEnabled: isModalityEnabled } = useModality();
+  const autoFocus = isModalityEnabled && { 'data-autofocus': true };
+
+  return (
+    <Styled data-testid={domTestId}>
+      <PageTitle title={title} />
+      <H1 id={domId} tabIndex={0} {...autoFocus}>
+        {children || title}
       </H1>
-    </MoveFocusInside>
-  </Styled>
-);
+    </Styled>
+  );
+};
+
+Header.defaultProps = {
+  children: undefined,
+};
 
 Header.propTypes = {
+  children: node,
   title: string.isRequired,
 };
 

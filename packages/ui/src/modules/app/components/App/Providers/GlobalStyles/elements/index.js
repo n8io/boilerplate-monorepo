@@ -53,7 +53,7 @@ export const styles = css`
   }
 
   pre {
-    background-color: var(--color-type-error-ligh);
+    background-color: var(--color-type-error-light);
     border-radius: calc(var(--layout-base-unit) * 0.25);
     color: var(--color-type-error);
     font-family: monospace;

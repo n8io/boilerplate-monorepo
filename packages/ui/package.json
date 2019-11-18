@@ -2,6 +2,9 @@
   "name": "@puttingpoker/ui",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": "^13.1.0"
+  },
   "scripts": {
     "build": "craco build",
     "prebuild": "node .prebuild",

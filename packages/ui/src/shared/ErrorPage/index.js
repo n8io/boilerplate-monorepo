@@ -3,6 +3,7 @@ import { config } from 'config';
 import { func, string } from 'prop-types';
 import React from 'react';
 import styled from 'styled-components/macro';
+import { Route } from 'types/route';
 import { Button, Context } from '../Button';
 import { Body, Content, Header } from '../Content';
 import { useTranslate } from '../useTranslate';
@@ -34,7 +35,7 @@ const ErrorPage = ({ message, onFeedbackClick }) => {
 
   return (
     <Content data-testid={domTestId}>
-      <Header title={t('title')} />
+      <Header icon={Route.TEST_PAGE.icon} title={t('title')} />
       <Styled hasBreadcrumbs={false}>
         <div />
         <Center>
