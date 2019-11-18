@@ -2,8 +2,9 @@ import React from 'react';
 import { mainContentDomId } from 'shared/Content';
 import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
+import { styles as themeStyles } from './theme';
 
-const Styled = styled.a`
+const StyledLink = styled.a`
   clip: rect(1px, 1px, 1px, 1px);
   height: 1px;
   overflow: hidden;
@@ -11,31 +12,34 @@ const Styled = styled.a`
   width: 1px;
 
   &:focus {
-    background-color: var(--grayscale-white);
-    border-radius: 0.25rem;
+    border-radius: 0 0 0.25rem 0.25rem;
     clip: auto !important;
     display: block;
     font-size: 1rem;
     height: auto;
-    left: 0.5rem;
+    left: 50%;
     line-height: normal;
     padding: calc(var(--layout-base-unit) * 0.25)
       calc(var(--layout-base-unit) * 0.5);
     position: fixed;
     text-decoration: none;
-    top: 0rem;
+    top: 0;
+    transform: translateX(-50%);
     width: auto;
     z-index: 100000;
   }
+
+  /* stylelint-disable-next-line order/properties-alphabetical-order */
+  ${themeStyles}
 `;
 
-const SkipNavLink = () => {
+const SkipLink = () => {
   const t = useTranslate({
     component: 'app',
     namespace: 'app',
   });
 
-  return <Styled href={`#${mainContentDomId}`}>{t('skipLink')}</Styled>;
+  return <StyledLink href={`#${mainContentDomId}`}>{t('skipLink')}</StyledLink>;
 };
 
-export { SkipNavLink };
+export { SkipLink };

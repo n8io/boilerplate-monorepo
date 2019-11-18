@@ -8,7 +8,8 @@ import { Navigation } from './navigation';
 
 const { Role } = A11y;
 
-const Styled = styled.nav`
+const StyledNav = styled.nav`
+  align-content: start;
   box-shadow: 1px 0 0 0 var(--border-color);
   display: grid;
   grid-area: ${GridTemplateArea.NAV};
@@ -21,20 +22,12 @@ const Styled = styled.nav`
   `}
 `;
 
-const NavList = styled.ul`
-  align-items: start;
-  display: flex;
-  flex-direction: column;
-`;
-
 const Nav = () => (
-  <Styled role={Role.NAVIGATION}>
-    <NavList>
-      {Navigation.map(route => (
-        <NavItem key={route.name} route={route} />
-      ))}
-    </NavList>
-  </Styled>
+  <StyledNav role={Role.NAVIGATION}>
+    {Navigation.map(route => (
+      <NavItem key={route.name} route={route} />
+    ))}
+  </StyledNav>
 );
 
 export { Nav };

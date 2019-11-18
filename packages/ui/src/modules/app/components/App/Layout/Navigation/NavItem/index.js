@@ -5,14 +5,7 @@ import styled from 'styled-components/macro';
 import { Route } from 'types/route';
 import { variables as themeVariables } from './theme';
 
-const StyledListItem = styled.li`
-  align-items: center;
-  display: grid;
-  justify-items: center;
-  width: 100%;
-`;
-
-const Styled = styled(NavLink)`
+const StyledNavLink = styled(NavLink)`
   ${themeVariables}
 
   /* stylelint-disable-next-line order/properties-alphabetical-order */
@@ -56,12 +49,10 @@ const NavItem = ({ route }) => {
   const { icon: Icon, name, path } = route;
 
   return (
-    <StyledListItem>
-      <Styled exact to={path}>
-        {Icon && <Icon />}
-        {t(name)}
-      </Styled>
-    </StyledListItem>
+    <StyledNavLink exact to={path}>
+      {Icon && <Icon />}
+      {t(name)}
+    </StyledNavLink>
   );
 };
 

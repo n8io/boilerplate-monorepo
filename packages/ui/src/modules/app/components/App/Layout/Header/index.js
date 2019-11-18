@@ -3,7 +3,7 @@ import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
 import { A11y } from 'types/a11y';
 import { GridTemplateArea } from '../gridTemplateArea';
-import { SkipNavLink } from './SkipNavLink';
+import { SkipLink } from './SkipLink';
 
 const { Role } = A11y;
 const domTestId = 'Header';
@@ -31,7 +31,7 @@ const Header = () => {
 
   return (
     <Styled data-testid={domTestId} role={Role.BANNER}>
-      <SkipNavLink />
+      <SkipLink />
       <Title>{t('title')}</Title>
     </Styled>
   );
