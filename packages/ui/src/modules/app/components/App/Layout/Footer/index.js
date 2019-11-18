@@ -4,7 +4,7 @@ import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
 import { A11y } from 'types/a11y';
 import { Fade } from 'types/fade';
-import { GridTemplateArea } from '../gridTemplateArea';
+import { GridTemplateArea } from 'types/gridTemplateArea';
 import { Toggles } from './Toggles';
 
 const { Role } = A11y;

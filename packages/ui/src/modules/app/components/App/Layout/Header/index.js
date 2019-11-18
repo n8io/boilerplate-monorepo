@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
 import { A11y } from 'types/a11y';
-import { GridTemplateArea } from '../gridTemplateArea';
+import { GridTemplateArea } from 'types/gridTemplateArea';
 import { SkipLink } from './SkipLink';
 
 const { Role } = A11y;

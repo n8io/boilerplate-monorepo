@@ -2,13 +2,13 @@ import React from 'react';
 import styled from 'styled-components/macro';
 import media from 'styled-media-query';
 import { Font } from 'types/font';
+import { GridTemplateArea } from 'types/gridTemplateArea';
 import { FavIcon } from './FavIcon';
 import { Footer } from './Footer';
 import { Header } from './Header';
 import { Main } from './Main';
 import { Meta } from './Meta';
 import { Nav } from './Navigation';
-import { GridTemplateArea } from './gridTemplateArea';
 import { styles as themeStyles } from './theme';
 
 const Styled = styled.div`

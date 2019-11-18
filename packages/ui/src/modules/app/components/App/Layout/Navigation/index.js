@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components/macro';
 import media from 'styled-media-query';
 import { A11y } from 'types/a11y';
-import { GridTemplateArea } from '../gridTemplateArea';
+import { GridTemplateArea } from 'types/gridTemplateArea';
 import { NavItem } from './NavItem';
 import { Navigation } from './navigation';
 

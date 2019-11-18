@@ -14,7 +14,7 @@
     "dc": "docker-compose",
     "dcd": "yarn run -s dc kill",
     "dclf": "yarn run -s dc logs -f",
-    "dcu": "yarn run -s dc up",
+    "dcu": "yarn run -s dc up --force-recreate",
     "dcud": "yarn run -s dcu -d",
     "dev:ui": "yarn run -s dcud ui && yarn run -s logs:ui",
     "dev": "yarn run -s run-all dev:*",
