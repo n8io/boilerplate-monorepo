@@ -10,7 +10,7 @@ export const bottom = css`
     position: absolute;
     right: var(--layout-base-unit);
     top: calc(var(--layout-base-unit) - (var(--layout-base-unit) * 2) + -1px);
-    z-index: 10;
+    z-index: var(--z-index-fade);
 
     /* stylelint-disable-next-line order/properties-alphabetical-order */
     ${themeStyles}

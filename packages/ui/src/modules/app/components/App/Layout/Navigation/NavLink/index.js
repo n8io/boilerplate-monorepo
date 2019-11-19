@@ -1,24 +1,23 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink as RouterNavLink } from 'react-router-dom';
+import { EllipsiedText } from 'shared/EllipsiedText';
 import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
 import { Route } from 'types/route';
 import { variables as themeVariables } from './theme';
 
-const StyledNavLink = styled(NavLink)`
+const StyledNavLink = styled(RouterNavLink)`
   ${themeVariables}
 
   /* stylelint-disable-next-line order/properties-alphabetical-order */
   align-items: center;
   border-bottom: 1px var(--border-color) solid;
   display: grid;
-  grid-auto-flow: column;
   grid-column-gap: 0.25rem;
+  grid-template-columns: auto 1fr;
   height: calc(var(--layout-main-breadcrumb-height) + 1px);
   justify-content: start;
   padding: 0 calc(var(--layout-base-unit) * 0.5);
-  text-overflow: hidden;
-  white-space: nowrap;
   width: 100%;
 
   &:focus:not([aria-current='page']),
@@ -40,24 +39,24 @@ const StyledNavLink = styled(NavLink)`
   }
 `;
 
-const NavItem = ({ route }) => {
+const NavLink = ({ route }) => {
   const t = useTranslate({
-    component: 'nav',
+    component: 'nav.links',
     namespace: 'app',
   });
 
   const { icon: Icon, name, path } = route;
 
   return (
-    <StyledNavLink exact to={path}>
+    <StyledNavLink exact title={t(name)} to={path}>
       {Icon && <Icon />}
-      {t(name)}
+      <EllipsiedText>{t(name)}</EllipsiedText>
     </StyledNavLink>
   );
 };
 
-NavItem.propTypes = {
+NavLink.propTypes = {
   route: Route.propTypes.isRequired,
 };
 
-export { NavItem };
+export { NavLink };

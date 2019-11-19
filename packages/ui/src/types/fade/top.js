@@ -12,7 +12,7 @@ export const top = css`
     pointer-events: none;
     position: absolute;
     right: var(--layout-base-unit);
-    z-index: 10;
+    z-index: var(--z-index-fade);
 
     /* stylelint-disable-next-line order/properties-alphabetical-order */
     ${themeStyles}

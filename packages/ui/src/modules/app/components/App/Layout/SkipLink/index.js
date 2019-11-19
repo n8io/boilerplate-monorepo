@@ -26,7 +26,7 @@ const StyledLink = styled.a`
     top: 0;
     transform: translateX(-50%);
     width: auto;
-    z-index: 100000;
+    z-index: var(--z-index-skip-link);
   }
 
   /* stylelint-disable-next-line order/properties-alphabetical-order */

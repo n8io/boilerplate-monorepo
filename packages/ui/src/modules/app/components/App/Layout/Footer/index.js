@@ -1,5 +1,6 @@
 import { node } from 'prop-types';
 import React from 'react';
+import { EllipsiedText } from 'shared/EllipsiedText';
 import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
 import { A11y } from 'types/a11y';
@@ -28,7 +29,9 @@ const Footer = ({ children }) => {
 
   return (
     <Styled data-testid={domTestId} role={Role.FOOTER}>
-      <span>{t('footer', { fullYear: new Date().getFullYear() })}</span>
+      <EllipsiedText>
+        {t('footer', { fullYear: new Date().getFullYear() })}
+      </EllipsiedText>
       <div>{children}</div>
       <Toggles />
     </Styled>

@@ -3,4 +3,5 @@ export const Enumeration = {
   HEADER: 'header',
   MAIN: 'main',
   NAV: 'nav',
+  NAV_MOBILE: 'nav-mobile',
 };

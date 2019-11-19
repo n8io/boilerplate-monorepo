@@ -18,6 +18,7 @@ const Body = styled(ContentBody)`
   img {
     border-radius: calc(var(--layout-base-unit) * 0.25);
     margin-bottom: var(--layout-base-unit);
+    max-width: 100%;
   }
 `;
 
@@ -31,6 +32,11 @@ const Button = styled(SharedButton)`
   width: auto;
 `;
 
+const Container = styled.div`
+  margin: 0 auto;
+  max-width: 250px;
+`;
+
 const ErrorPage = ({ message, onFeedbackClick }) => {
   const t = useTranslate({
     component: 'error',
@@ -42,7 +48,9 @@ const ErrorPage = ({ message, onFeedbackClick }) => {
       <Header title={t('title')} />
       <Body hasBreadcrumbs={false}>
         {isDebug && <Code>{message}</Code>}
-        <img src={officePanda} alt={t('officePanda')} />
+        <Container>
+          <img src={officePanda} alt={t('officePanda')} />
+        </Container>
         <p>{t('statement')}</p>
         <p>
           <Button

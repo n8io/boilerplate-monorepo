@@ -49,6 +49,7 @@ export const styles = css`
   main,
   section {
     font-size: var(--layout-base-unit);
+    line-height: normal;
     position: relative;
   }
 

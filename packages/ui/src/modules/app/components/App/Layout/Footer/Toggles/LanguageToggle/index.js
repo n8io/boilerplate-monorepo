@@ -16,7 +16,7 @@ const StyledDisclosure = styled(MenuDisclosure)`
 const StyledMenu = styled(Menu)`
   background-color: var(--grayscale-white);
   border: 1px solid var(--color-type-primary);
-  z-index: 1000;
+  z-index: var(--z-index-language-toggle);
 
   /* stylelint-disable-next-line order/properties-alphabetical-order */
   ${ThemeStyles.menu}

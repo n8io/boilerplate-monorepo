@@ -5,15 +5,10 @@ import styled from 'styled-components/macro';
 const domTestId = 'Body';
 
 const Styled = styled.section`
-  height: calc(
-    100vh -
-      (
-        ${({ hasBreadcrumbs }) =>
-            hasBreadcrumbs ? 'var(--layout-main-breadcrumb-height)' : '0rem'} +
-          var(--layout-header-height) + var(--layout-main-header-height) +
-          var(--layout-main-footer-height)
-      )
-  );
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 0;
   overflow-y: auto;
   padding: var(--layout-base-unit);
 `;

@@ -17,6 +17,18 @@ const styles = variants(Theme.PROP_NAME, Context.PROP_NAME, {
       color: var(--grayscale-white);
     `,
   },
+  [Context.LINK]: {
+    [DisplayMode.DARK]: css`
+      background-color: var(--color-type-transparent);
+      border-color: var(--color-type-transparent);
+      color: var(--grayscale-white-2);
+    `,
+    [DisplayMode.LIGHT]: css`
+      background-color: var(--color-type-transparent);
+      border-color: var(--color-type-transparent);
+      color: var(--grayscale-primary);
+    `,
+  },
   [Context.MENU_ITEM]: {
     [DisplayMode.DARK]: css`
       background-color: var(--grayscale-white);
