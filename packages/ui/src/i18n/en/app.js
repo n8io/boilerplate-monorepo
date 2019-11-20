@@ -2,6 +2,7 @@ import { Site } from 'types/site';
 
 export const app = {
   nav: {
+    closeNavigation: 'Close navigation',
     links: {
       about: 'About',
       dashboard: 'Dashboard',
@@ -10,6 +11,7 @@ export const app = {
       testPage: 'Test Page',
     },
     openNavigation: 'Open navigation',
+    tapHereOrSwipeToClose: 'Tap here or swipe to close',
   },
   skipLink: 'Skip to content',
   title: Site.name,

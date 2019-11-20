@@ -1,4 +1,3 @@
-import { noop } from '@puttingpoker/common';
 import { bool, func, node, string } from 'prop-types';
 import React from 'react';
 import styled, { css } from 'styled-components/macro';
@@ -94,7 +93,6 @@ Button.defaultProps = {
   'data-testid': domTestId,
   disabled: false,
   label: undefined,
-  onClick: noop,
   size: Size.DEFAULT,
   type: Type.BUTTON,
 };
@@ -110,7 +108,7 @@ Button.propTypes = {
 
     return new Error('The `label` prop is required when no text is set');
   },
-  onClick: func,
+  onClick: func.isRequired,
   size: Size.propTypes,
   text: ({ children, text }) => {
     if (children || text) return undefined;

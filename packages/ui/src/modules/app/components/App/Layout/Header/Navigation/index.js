@@ -1,82 +1,111 @@
-import { node } from 'prop-types';
+import { func } from 'prop-types';
 import React, { useCallback, useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import MediaQuery from 'react-responsive';
 import SideBar from 'react-sidebar';
-import { Button, Context } from 'shared/Button';
+import { Button, Context, Size } from 'shared/Button';
 import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
 import { defaultBreakpoints, pxToRem } from 'styled-media-query';
 import { A11y } from 'types/a11y';
 import { BreakPoint } from 'types/breakpoint';
 import { GridTemplateArea } from 'types/gridTemplateArea';
+import { Route } from 'types/route';
+import { NavLink } from './NavLink';
+import { styles as themeStyles } from './theme';
 
 const { Role } = A11y;
 const { LINK } = Context;
+const routes = Route.navigation(Route.values);
 const { [BreakPoint.MOBILE]: breakpoint } = pxToRem(defaultBreakpoints, 16);
+const TOUCH_HANDLE_DISTANCE = 15;
 
 const StyledNav = styled.nav`
-  align-items: center;
-  box-shadow: 1px 0 0 0 var(--border-color);
   display: grid;
   grid-area: ${GridTemplateArea.NAV_MOBILE};
+  grid-template-rows: 1fr auto;
+  height: 100%;
   justify-items: end;
+  overflow-y: auto;
+  width: 100vw;
+
+  /* stylelint-disable-next-line order/properties-alphabetical-order */
+  ${themeStyles}
 `;
 
-const Menu = ({ children }) => (
-  <StyledNav role={Role.NAVIGATION}>{children}</StyledNav>
+const Container = styled.div`
+  align-content: start;
+  display: grid;
+  width: 100%;
+`;
+
+const InnerSideBar = ({ onClose, t }) => (
+  <StyledNav aria-label="sidebar" role={Role.NAVIGATION}>
+    <Container>
+      {routes.map(route => (
+        <NavLink key={route.name} onClick={onClose} route={route} />
+      ))}
+    </Container>
+    <Button
+      context={Context.LINK}
+      onClick={onClose}
+      size={Size.LARGE}
+      text={t('tapHereOrSwipeToClose')}
+    />
+  </StyledNav>
 );
 
-Menu.propTypes = {
-  children: node.isRequired,
+InnerSideBar.propTypes = {
+  onClose: func.isRequired,
+  t: func.isRequired,
 };
+
+const OpenNavButton = styled(Button)`
+  font-size: calc(var(--layout-base-unit) * 1.5);
+`;
 
 const styles = {
   overlay: {
     zIndex: 'var(--z-index-side-bar-overlay)',
   },
   sidebar: {
-    backgroundColor: 'var(--grayscale-white)',
     position: 'fixed',
-    width: '75vw',
     zIndex: 'var(--z-index-side-bar)',
   },
 };
 
-const Navigation = ({ children }) => {
+const Navigation = () => {
   const t = useTranslate({
     component: 'nav',
     namespace: 'app',
   });
   const [isOpen, beOpen] = useState(false);
   const onSetOpen = useCallback(beOpen, [beOpen]);
+  const onClose = () => onSetOpen(false);
 
   return (
     <MediaQuery maxWidth={breakpoint}>
-      <Button
+      <OpenNavButton
         context={LINK}
         label={t('openNavigation')}
         onClick={() => onSetOpen(true)}
       >
         <GiHamburgerMenu />
-      </Button>
+      </OpenNavButton>
       <div>
         <SideBar
-          sidebar={<Menu>{children}</Menu>}
           open={isOpen}
           onSetOpen={onSetOpen}
           pullRight
+          sidebar={<InnerSideBar onClose={onClose} t={t} />}
           styles={styles}
+          touchHandleWidth={TOUCH_HANDLE_DISTANCE}
         >
-          {' '}
+          <></>
         </SideBar>
       </div>
     </MediaQuery>
   );
-};
-
-Navigation.propTypes = {
-  children: node.isRequired,
 };
 
 export { Navigation };

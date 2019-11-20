@@ -5,9 +5,7 @@ import { useModality } from 'shared/useModality';
 import styled from 'styled-components/macro';
 import { Fade } from 'types/fade';
 import { GridTemplateArea } from 'types/gridTemplateArea';
-import { Route } from 'types/route';
 import { PageTitle } from '../../PageTitle';
-import { Navigation } from './Navigation';
 
 const domTestId = 'Header';
 const domId = 'main-content';
@@ -30,8 +28,6 @@ const H1 = styled(EllipsiedText)`
   margin-bottom: 0;
 `;
 
-const routes = Route.navigation(Route.values);
-
 const Header = ({ children, title }) => {
   const { isEnabled: isModalityEnabled } = useModality();
   const autoFocus = isModalityEnabled && { 'data-autofocus': true };
@@ -43,7 +39,6 @@ const Header = ({ children, title }) => {
         {children || title}
       </H1>
       <div />
-      <Navigation>{routes.map(route => route.name)}</Navigation>
     </Styled>
   );
 };

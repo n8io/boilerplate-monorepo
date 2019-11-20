@@ -4,24 +4,27 @@ import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
 import { A11y } from 'types/a11y';
 import { GridTemplateArea } from 'types/gridTemplateArea';
+import { Navigation } from './Navigation';
 
 const { Role } = A11y;
-const domTestId = 'Header';
-
-const StyledHeader = styled.header`
+const Container = styled.div`
   align-items: center;
   box-shadow: 0 1px 0 0 var(--border-color);
-  display: flex;
+  display: grid;
   grid-area: ${GridTemplateArea.HEADER};
-  grid-template-areas: auto 1fr auto;
-  height: var(--layout-header-height);
-  justify-content: space-between;
+  grid-auto-flow: column;
+  grid-template-areas: '. ${GridTemplateArea.NAV_MOBILE} .';
+  grid-template-columns: 1fr auto 0;
   padding: 0 var(--layout-base-unit);
 `;
 
-const Title = styled(EllipsiedText)`
+const StyledHeader = styled(EllipsiedText)`
+  align-items: center;
   font-size: calc(var(--layout-base-unit) * 2);
+  height: var(--layout-header-height);
+  justify-content: space-between;
   margin-bottom: 0;
+  width: 100%;
 `;
 
 const Header = () => {
@@ -31,10 +34,13 @@ const Header = () => {
   });
 
   return (
-    <StyledHeader data-testid={domTestId} role={Role.BANNER}>
-      <Title>{t('title')}</Title>
-    </StyledHeader>
+    <Container>
+      <StyledHeader as="header" role={Role.BANNER} title={t('title')}>
+        {t('title')}
+      </StyledHeader>
+      <Navigation />
+    </Container>
   );
 };
 
-export { domTestId, Header };
+export { Header };
