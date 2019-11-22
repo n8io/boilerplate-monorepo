@@ -60,7 +60,6 @@ const Button = ({
   children,
   className,
   context,
-  'data-testid': dataTestId,
   disabled,
   label,
   onClick,
@@ -74,7 +73,6 @@ const Button = ({
     aria-label={label || text}
     className={className}
     context={context}
-    data-testid={dataTestId}
     disabled={disabled}
     onClick={onClick}
     role={Role.BUTTON}
@@ -98,7 +96,6 @@ Button.propTypes = {
   children: node,
   className: string,
   context: Context.propTypes,
-  'data-testid': string,
   disabled: bool,
   label: ({ label, text }) => {
     if (text || label) return undefined;
