@@ -5,7 +5,6 @@ import { GridTemplateArea } from 'types/gridTemplateArea';
 import { Router } from '../../Router';
 
 const { Role } = A11y;
-const domTestId = 'Main';
 
 const Main = () => {
   const Styled = styled.main`
@@ -15,10 +14,10 @@ const Main = () => {
   `;
 
   return (
-    <Styled data-testid={domTestId} role={Role.MAIN}>
+    <Styled role={Role.MAIN}>
       <Router />
     </Styled>
   );
 };
 
-export { domTestId, Main };
+export { Main };

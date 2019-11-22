@@ -2,8 +2,6 @@ import { bool, node, string } from 'prop-types';
 import React from 'react';
 import styled from 'styled-components/macro';
 
-const domTestId = 'Body';
-
 const Styled = styled.section`
   display: flex;
   flex-direction: column;
@@ -31,7 +29,6 @@ const Body = ({
 
 Body.defaultProps = {
   className: undefined,
-  'data-testid': domTestId,
   hasBreadcrumbs: true,
 };
 
@@ -42,4 +39,4 @@ Body.propTypes = {
   hasBreadcrumbs: bool,
 };
 
-export { Body, domTestId };
+export { Body };

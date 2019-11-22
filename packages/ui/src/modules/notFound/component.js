@@ -11,7 +11,6 @@ import styled from 'styled-components/macro';
 import { LogLevel } from 'types/logLevel';
 import { Route } from 'types/route';
 
-const domTestId = 'NotFound';
 const SECONDS_TO_REDIRECT = 15;
 
 const logNotFound = () => {
@@ -60,7 +59,7 @@ const NotFound = () => {
 
   return (
     <Page>
-      <Content data-testid={domTestId}>
+      <Content>
         <Breadcrumbs>
           <Breadcrumb isEnd text={t('title')} to={Route.NOT_FOUND.path} />
         </Breadcrumbs>
@@ -76,37 +75,4 @@ const NotFound = () => {
   );
 };
 
-export { NotFound, domTestId };
-
-/*
-import * as Sentry from '@sentry/browser';
-import LogRocket from 'logrocket';
-import { prop } from 'ramda';
-import { compose, lifecycle, setDisplayName, withHandlers } from 'recompose';
-import { INFO } from 'shared/logLevels';
-
-const logNotFound = () => () => {
-  Sentry.withScope(scope => {
-    scope.setExtra('sessionUrl', LogRocket.sessionURL);
-    scope.setTag('pathname', prop('pathname', window.location));
-    scope.setTag('search', prop('search', window.location));
-    scope.setLevel(INFO);
-    Sentry.captureException('User visited an undefined resource');
-  });
-};
-
-export const enhance = compose(
-  setDisplayName('enhance'),
-  withHandlers({
-    logNotFound,
-  }),
-  lifecycle({
-    componentDidMount() {
-      const { logNotFound } = this.props;
-
-      logNotFound();
-    },
-  })
-);
-
- */
+export { NotFound };

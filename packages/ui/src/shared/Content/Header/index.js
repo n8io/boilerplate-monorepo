@@ -7,10 +7,9 @@ import { Fade } from 'types/fade';
 import { GridTemplateArea } from 'types/gridTemplateArea';
 import { PageTitle } from '../../PageTitle';
 
-const domTestId = 'Header';
 const domId = 'main-content';
 
-const Styled = styled.div`
+const Conainer = styled.div`
   align-items: center;
   border-bottom: 1px solid var(--border-color);
   display: grid;
@@ -33,13 +32,13 @@ const Header = ({ children, title }) => {
   const autoFocus = isModalityEnabled && { 'data-autofocus': true };
 
   return (
-    <Styled data-testid={domTestId}>
+    <Conainer>
       <PageTitle title={title} />
       <H1 as="h1" id={domId} tabIndex={0} {...autoFocus}>
         {children || title}
       </H1>
       <div />
-    </Styled>
+    </Conainer>
   );
 };
 
@@ -52,4 +51,4 @@ Header.propTypes = {
   title: string.isRequired,
 };
 
-export { Header, domId, domTestId };
+export { Header, domId };

@@ -5,8 +5,6 @@ import { Route } from 'types/route';
 import { useTranslate } from '../../useTranslate';
 import { Breadcrumb } from './Breadcrumb';
 
-const domTestId = 'Breadcrumbs';
-
 const Styled = styled.ul`
   align-items: center;
   box-shadow: 0 1px 0 0 var(--border-color);
@@ -22,7 +20,7 @@ const Breadcrumbs = ({ children }) => {
   const t = useTranslate();
 
   return (
-    <Styled data-testid={domTestId}>
+    <Styled>
       <Breadcrumb
         exact={Route.ROOT.exact}
         text={t('home')}
@@ -37,4 +35,4 @@ Breadcrumbs.propTypes = {
   children: node.isRequired,
 };
 
-export { Breadcrumb, Breadcrumbs, domTestId };
+export { Breadcrumb, Breadcrumbs };

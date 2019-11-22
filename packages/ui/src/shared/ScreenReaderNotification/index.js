@@ -4,9 +4,8 @@ import styled from 'styled-components/macro';
 import { A11y } from 'types/a11y';
 
 const { Politeness } = A11y;
-const domTestId = 'ScreenReaderNotification';
 
-const Styled = styled.div`
+const Container = styled.div`
   clip: rect(1px, 1px, 1px, 1px);
   clip-path: inset(50%);
   height: 1px;
@@ -18,9 +17,7 @@ const Styled = styled.div`
 `;
 
 const ScreenReaderNotification = ({ children, politeness }) => (
-  <Styled aria-live={politeness} data-testid={domTestId}>
-    {children}
-  </Styled>
+  <Container aria-live={politeness}>{children}</Container>
 );
 
 ScreenReaderNotification.propTypes = {
@@ -28,4 +25,4 @@ ScreenReaderNotification.propTypes = {
   politeness: Politeness.propTypes.isRequired,
 };
 
-export { ScreenReaderNotification, domTestId };
+export { ScreenReaderNotification };

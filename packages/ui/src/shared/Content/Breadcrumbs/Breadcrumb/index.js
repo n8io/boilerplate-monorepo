@@ -3,9 +3,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components/macro';
 
-const domTestId = 'Breadcrumb';
-
-const StyledLi = styled.li`
+const StyledListItem = styled.li`
   & + & {
     ::before {
       content: '/';
@@ -39,13 +37,13 @@ const StyledEnd = styled.span`
 `;
 
 const Breadcrumb = ({ isEnd, text, ...props }) => (
-  <StyledLi data-testid={domTestId}>
+  <StyledListItem>
     {isEnd ? (
       <StyledEnd>{text}</StyledEnd>
     ) : (
       <StyledNavLink {...props}>{text}</StyledNavLink>
     )}
-  </StyledLi>
+  </StyledListItem>
 );
 
 Breadcrumb.defaultProps = {
@@ -57,4 +55,4 @@ Breadcrumb.propTypes = {
   text: string.isRequired,
 };
 
-export { Breadcrumb, domTestId };
+export { Breadcrumb };

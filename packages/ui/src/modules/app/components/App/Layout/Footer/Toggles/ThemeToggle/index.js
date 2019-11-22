@@ -10,8 +10,6 @@ import { DisplayMode } from 'types/displayMode';
 import { Theme } from 'types/theme';
 import { ToggleButton } from '../ToggleButton';
 
-const domTestId = 'ToggleTheme';
-
 /* eslint complexity: ["warn", 6] */
 const ThemeToggle = ({ isDarkMode, onToggle }) => {
   const t = useTranslate({
@@ -40,7 +38,6 @@ const ThemeToggle = ({ isDarkMode, onToggle }) => {
   return (
     <ToggleButton
       {...longPressProps}
-      data-testid={domTestId}
       disabled={!isEnabled}
       label={t(i18nkey)}
       onClick={onToggleProxy}
@@ -55,4 +52,4 @@ ThemeToggle.propTypes = {
   onToggle: func.isRequired,
 };
 
-export { ThemeToggle, domTestId };
+export { ThemeToggle };

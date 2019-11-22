@@ -9,8 +9,6 @@ import { Type } from './type';
 
 const { Role } = A11y;
 
-const domTestId = 'Button';
-
 const styles = css`
   border-radius: 0.125rem;
   border-style: solid;
@@ -90,7 +88,6 @@ Button.defaultProps = {
   children: undefined,
   className: undefined,
   context: Context.DEFAULT,
-  'data-testid': domTestId,
   disabled: false,
   label: undefined,
   size: Size.DEFAULT,
@@ -120,4 +117,4 @@ Button.propTypes = {
   type: Type.propTypes,
 };
 
-export { Button, Context, Size, domTestId, styles };
+export { Button, Context, Size, styles };

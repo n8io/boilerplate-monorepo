@@ -9,8 +9,6 @@ import { useTranslate } from '../useTranslate';
 
 const { isDebug } = config;
 
-const domTestId = 'ErrorPage';
-
 const Body = styled(ContentBody)`
   justify-items: center;
   text-align: center;
@@ -44,7 +42,7 @@ const ErrorPage = ({ message, onFeedbackClick }) => {
   });
 
   return (
-    <Content data-testid={domTestId}>
+    <Content>
       <Header title={t('title')} />
       <Body hasBreadcrumbs={false}>
         {isDebug && <Code>{message}</Code>}
@@ -69,4 +67,4 @@ ErrorPage.propTypes = {
   onFeedbackClick: func.isRequired,
 };
 
-export { ErrorPage, domTestId };
+export { ErrorPage };

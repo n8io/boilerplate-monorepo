@@ -2,9 +2,7 @@ import { node } from 'prop-types';
 import React from 'react';
 import styled from 'styled-components/macro';
 
-const domTestId = 'ScreenReader';
-
-const Styled = styled.div`
+const Container = styled.div`
   clip: rect(1px, 1px, 1px, 1px);
   clip-path: inset(50%);
   height: 1px;
@@ -15,12 +13,10 @@ const Styled = styled.div`
   width: 1px;
 `;
 
-const ScreenReader = ({ children }) => (
-  <Styled data-testid={domTestId}>{children}</Styled>
-);
+const ScreenReader = ({ children }) => <Container>{children}</Container>;
 
 ScreenReader.propTypes = {
   children: node.isRequired,
 };
 
-export { ScreenReader, domTestId };
+export { ScreenReader };

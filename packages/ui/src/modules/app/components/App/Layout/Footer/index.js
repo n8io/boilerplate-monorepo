@@ -10,7 +10,6 @@ import { Site } from 'types/site';
 import { Toggles } from './Toggles';
 
 const { Role } = A11y;
-const domTestId = 'Footer';
 
 const Styled = styled.footer`
   align-items: center;
@@ -29,7 +28,7 @@ const Footer = ({ children }) => {
   const t = useTranslate();
 
   return (
-    <Styled data-testid={domTestId} role={Role.FOOTER}>
+    <Styled role={Role.FOOTER}>
       <EllipsiedText>
         {t('footer', { fullYear: new Date().getFullYear(), name: Site.name })}
       </EllipsiedText>
@@ -47,4 +46,4 @@ Footer.propTypes = {
   children: node,
 };
 
-export { Footer, domTestId };
+export { Footer };

@@ -6,8 +6,6 @@ import { Theme } from 'types/theme';
 import { LanguageToggle } from './LanguageToggle';
 import { ThemeToggle } from './ThemeToggle';
 
-const domTestId = 'Toggles';
-
 const Styled = styled.section`
   display: grid;
   font-size: 0.75rem;
@@ -28,7 +26,7 @@ const Toggles = () => {
   }, [displayMode, theme, updateTheme]);
 
   return (
-    <Styled data-testid={domTestId}>
+    <Styled>
       <LanguageToggle />
       <ThemeToggle
         isDarkMode={displayMode === DisplayMode.DARK}
@@ -38,4 +36,4 @@ const Toggles = () => {
   );
 };
 
-export { Toggles, domTestId };
+export { Toggles };

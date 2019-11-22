@@ -3,8 +3,6 @@ import { Body, Content, Header } from 'shared/Content';
 import { Page } from 'shared/Page';
 import { useTranslate } from 'shared/useTranslate';
 
-const domTestId = 'Dashboard';
-
 const Dashboard = () => {
   const t = useTranslate({
     component: 'dashboard',
@@ -13,7 +11,7 @@ const Dashboard = () => {
 
   return (
     <Page>
-      <Content data-testid={domTestId}>
+      <Content>
         <Header title={t('title')} />
         <Body hasBreadcrumbs={false}>
           <h1>H1 Lorem ipsum dolor sit amet consectetuer adipiscing elit</h1>
@@ -117,4 +115,4 @@ const Dashboard = () => {
   );
 };
 
-export { Dashboard, domTestId };
+export { Dashboard };

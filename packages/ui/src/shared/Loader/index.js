@@ -8,9 +8,7 @@ import { styles as themeStyles } from './theme';
 
 const { Politeness } = A11y;
 
-const domTestId = 'Loader';
-
-const Styled = styled.div`
+const Container = styled.div`
   left: 50%;
   position: absolute;
   top: 50%;
@@ -64,7 +62,7 @@ const Loader = ({ size }) => {
   });
 
   return (
-    <Styled data-testid={domTestId}>
+    <Container>
       <Ring size={size}>
         <div></div>
         <div></div>
@@ -74,7 +72,7 @@ const Loader = ({ size }) => {
       <ScreenReaderNotification politeness={Politeness.POLITE}>
         {t('loadingScreenReader')}
       </ScreenReaderNotification>
-    </Styled>
+    </Container>
   );
 };
 
@@ -86,4 +84,4 @@ Loader.propTypes = {
   size: number,
 };
 
-export { domTestId, Loader };
+export { Loader };
