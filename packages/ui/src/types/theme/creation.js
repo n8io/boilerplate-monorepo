@@ -1,3 +1,7 @@
 import { DisplayMode } from 'types/displayMode';
 
-export const initial = DisplayMode.LIGHT;
+const prefersDarkMode = Boolean(
+  window.matchMedia('(prefers-color-scheme: dark)').matches
+);
+
+export const initial = prefersDarkMode ? DisplayMode.DARK : DisplayMode.LIGHT;

@@ -1,6 +1,6 @@
 import { node } from 'prop-types';
 import { defaultTo } from 'ramda';
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useModality } from 'shared/useModality';
 import { useTheme } from 'shared/useTheme';
 import { ThemeProvider } from 'styled-components/macro';
@@ -20,17 +20,28 @@ const Theme = ({ children }) => {
   const [theme, updateTheme] = useState(defaultTheme);
   const [modality, updateModality] = useState();
 
-  const updateThemeProxy = nextTheme => {
-    localStorage.setItem(LocalStorage.THEME, JSON.stringify(nextTheme));
-    updateTheme(nextTheme);
-  };
+  const clearTheme = useCallback(() =>
+    localStorage.removeItem(LocalStorage.THEME)
+  );
 
-  const updateModalityProxy = nextModality => {
-    document.body.setAttribute(Modality.DOM_ATTRIBUTE, nextModality);
-    updateModality(nextModality);
-  };
+  const updateThemeProxy = useCallback(
+    nextTheme => {
+      localStorage.setItem(LocalStorage.THEME, JSON.stringify(nextTheme));
+      updateTheme(nextTheme);
+    },
+    [updateTheme]
+  );
+
+  const updateModalityProxy = useCallback(
+    nextModality => {
+      document.body.setAttribute(Modality.DOM_ATTRIBUTE, nextModality);
+      updateModality(nextModality);
+    },
+    [updateModality]
+  );
 
   const themeContext = {
+    clearTheme,
     theme,
     updateTheme: updateThemeProxy,
   };
