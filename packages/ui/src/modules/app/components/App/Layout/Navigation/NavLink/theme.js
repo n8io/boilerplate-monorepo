@@ -1,6 +1,5 @@
 import { css } from 'styled-components/macro';
 import theme from 'styled-theming';
-import { Color } from 'types/color';
 import { DisplayMode } from 'types/displayMode';
 import { Theme } from 'types/theme';
 
@@ -8,7 +7,7 @@ export const variables = theme(Theme.PROP_NAME, {
   [DisplayMode.DARK]: css`
     &:not([aria-current='page']),
     &:not([aria-current='page']) {
-      color: ${Color.PRIMARY_LIGHT};
+      color: var(--color-type-primary-light);
     }
 
     &:focus:not([aria-current='page']),
