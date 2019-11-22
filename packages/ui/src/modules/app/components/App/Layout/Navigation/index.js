@@ -5,13 +5,14 @@ import { defaultBreakpoints, pxToRem } from 'styled-media-query';
 import { A11y } from 'types/a11y';
 import { BreakPoint } from 'types/breakpoint';
 import { GridTemplateArea } from 'types/gridTemplateArea';
+import { SkipToDestination } from 'types/skipToDestination';
 import { routes } from '../../routes';
 import { NavLink } from './NavLink';
 
 const { Role } = A11y;
 const { [BreakPoint.MOBILE]: breakpoint } = pxToRem(defaultBreakpoints, 16);
 
-const StyledNav = styled.nav`
+const Container = styled.nav`
   align-content: start;
   box-shadow: 1px 0 0 0 var(--border-color);
   display: grid;
@@ -20,13 +21,15 @@ const StyledNav = styled.nav`
   width: max-content;
 `;
 
+const toNavLink = (route, index) => {
+  const id = index === 0 ? SkipToDestination.NAVIGATION : undefined;
+
+  return <NavLink id={id} key={route.name} route={route} />;
+};
+
 const Navigation = () => (
   <MediaQuery minWidth={breakpoint}>
-    <StyledNav role={Role.NAVIGATION}>
-      {routes.map(route => (
-        <NavLink key={route.name} route={route} />
-      ))}
-    </StyledNav>
+    <Container role={Role.NAVIGATION}>{routes.map(toNavLink)}</Container>
   </MediaQuery>
 );
 

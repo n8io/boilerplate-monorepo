@@ -1,14 +1,14 @@
+import { string } from 'prop-types';
 import React from 'react';
-import { mainContentDomId } from 'shared/Content';
-import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
+import { SkipToDestination } from 'types/skipToDestination';
 import { styles as themeStyles } from './theme';
 
-const StyledLink = styled.a`
+const Container = styled.a`
   clip: rect(1px, 1px, 1px, 1px);
   height: 1px;
   overflow: hidden;
-  position: absolute !important;
+  position: fixed !important;
   width: 1px;
 
   &:focus {
@@ -33,13 +33,13 @@ const StyledLink = styled.a`
   ${themeStyles}
 `;
 
-const SkipLink = () => {
-  const t = useTranslate({
-    component: 'app',
-    namespace: 'app',
-  });
+const SkipLink = ({ id, text }) => (
+  <Container href={`#${id}`}>{text}</Container>
+);
 
-  return <StyledLink href={`#${mainContentDomId}`}>{t('skipLink')}</StyledLink>;
+SkipLink.propTypes = {
+  id: SkipToDestination.propTypes.isRequired,
+  text: string.isRequired,
 };
 
 export { SkipLink };

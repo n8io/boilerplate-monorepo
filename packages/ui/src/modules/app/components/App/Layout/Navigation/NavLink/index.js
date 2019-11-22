@@ -44,7 +44,7 @@ const StyledNavLink = styled(RouterNavLink)`
 
 const { [BreakPoint.TABLET]: breakpoint } = pxToRem(defaultBreakpoints, 16);
 
-const NavLink = ({ route }) => {
+const NavLink = ({ route, ...props }) => {
   const t = useTranslate({
     component: 'nav.links',
     namespace: 'app',
@@ -53,7 +53,7 @@ const NavLink = ({ route }) => {
   const { icon: Icon, name, path } = route;
 
   return (
-    <StyledNavLink exact title={t(name)} to={path}>
+    <StyledNavLink exact title={t(name)} to={path} {...props}>
       {Icon && <Icon />}
       <MediaQuery minWidth={breakpoint}>
         <EllipsiedText>{t(name)}</EllipsiedText>

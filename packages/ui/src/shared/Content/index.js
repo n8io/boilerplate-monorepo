@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components/macro';
 import { Body } from './Body';
 import { Breadcrumb, Breadcrumbs } from './Breadcrumbs';
-import { domId as mainContentDomId, Header } from './Header';
+import { Header } from './Header';
 
 const Container = styled.div`
   display: flex;
@@ -17,4 +17,4 @@ Content.propTypes = {
   children: node.isRequired,
 };
 
-export { Body, Breadcrumb, Breadcrumbs, Content, Header, mainContentDomId };
+export { Body, Breadcrumb, Breadcrumbs, Content, Header };

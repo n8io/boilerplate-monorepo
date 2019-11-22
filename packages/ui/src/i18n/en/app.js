@@ -13,6 +13,7 @@ export const app = {
     openNavigation: 'Open navigation',
     tapHereOrSwipeToClose: 'Tap here or swipe to close',
   },
-  skipLink: 'Skip to content',
+  skipToContentLink: 'Skip to content',
+  skipToNavigationLink: 'Skip to navigation',
   title: Site.name,
 };

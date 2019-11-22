@@ -10,7 +10,7 @@ import { Header } from './Header';
 import { Main } from './Main';
 import { Meta } from './Meta';
 import { Navigation } from './Navigation';
-import { SkipLink } from './SkipLink';
+import { SkipToContentLink } from './SkipToContentLink';
 import { styles as themeStyles } from './theme';
 
 const Container = styled.div`
@@ -40,7 +40,7 @@ const Layout = () => (
   <Container>
     <Meta />
     <FavIcon />
-    <SkipLink />
+    <SkipToContentLink />
     <Header />
     <Navigation />
     <Main />

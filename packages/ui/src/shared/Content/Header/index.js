@@ -5,9 +5,9 @@ import { useModality } from 'shared/useModality';
 import styled from 'styled-components/macro';
 import { Fade } from 'types/fade';
 import { GridTemplateArea } from 'types/gridTemplateArea';
+import { SkipToDestination } from 'types/skipToDestination';
 import { PageTitle } from '../../PageTitle';
-
-const domId = 'main-content';
+import { SkipToNavLink } from './SkipToNavLink';
 
 const Conainer = styled.div`
   align-items: center;
@@ -34,7 +34,8 @@ const Header = ({ children, title }) => {
   return (
     <Conainer>
       <PageTitle title={title} />
-      <H1 as="h1" id={domId} tabIndex={0} {...autoFocus}>
+      {isModalityEnabled && <SkipToNavLink />}
+      <H1 as="h1" id={SkipToDestination.MAIN} tabIndex={0} {...autoFocus}>
         {children || title}
       </H1>
       <div />
@@ -51,4 +52,4 @@ Header.propTypes = {
   title: string.isRequired,
 };
 
-export { Header, domId };
+export { Header };
