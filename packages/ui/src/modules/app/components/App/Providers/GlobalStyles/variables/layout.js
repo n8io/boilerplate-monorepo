@@ -1,7 +1,7 @@
 import { css } from 'styled-components/macro';
 
 export const styles = css`
-  --layout-size: 1;
+  --layout-size: 1.25;
   --layout-base-unit: calc(var(--layout-size) * 1rem);
   --layout-header-height: calc(var(--layout-base-unit) * 2.75);
   --layout-main-header-height: calc(var(--layout-base-unit) * 2.75);
