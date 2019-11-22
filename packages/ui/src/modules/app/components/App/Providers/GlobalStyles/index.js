@@ -6,7 +6,7 @@ import { styles as elementStyles } from './elements';
 import { styles as typographyStyles } from './typography';
 import { styles as variables } from './variables';
 
-const Styled = createGlobalStyle`
+const Container = createGlobalStyle`
   ${reset}
 
   #root {
@@ -19,6 +19,6 @@ const Styled = createGlobalStyle`
   ${typographyStyles}
 `;
 
-const GlobalStyle = () => <Styled />;
+const GlobalStyle = () => <Container />;
 
 export { GlobalStyle };

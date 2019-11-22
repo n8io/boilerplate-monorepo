@@ -6,18 +6,16 @@ import { Router } from '../../Router';
 
 const { Role } = A11y;
 
-const Main = () => {
-  const Styled = styled.main`
-    display: grid;
-    grid-area: ${GridTemplateArea.MAIN};
-    height: 100%;
-  `;
+const Container = styled.main`
+  display: grid;
+  grid-area: ${GridTemplateArea.MAIN};
+  height: 100%;
+`;
 
-  return (
-    <Styled role={Role.MAIN}>
-      <Router />
-    </Styled>
-  );
-};
+const Main = () => (
+  <Container role={Role.MAIN}>
+    <Router />
+  </Container>
+);
 
 export { Main };

@@ -2,7 +2,7 @@ import { bool, node, string } from 'prop-types';
 import React from 'react';
 import styled from 'styled-components/macro';
 
-const Styled = styled.section`
+const Container = styled.section`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -17,14 +17,14 @@ const Body = ({
   'data-testid': dataTestId,
   hasBreadcrumbs,
 }) => (
-  <Styled
+  <Container
     className={className}
     data-testid={dataTestId}
     hasBreadcrumbs={hasBreadcrumbs}
     tabIndex={0}
   >
     {children}
-  </Styled>
+  </Container>
 );
 
 Body.defaultProps = {

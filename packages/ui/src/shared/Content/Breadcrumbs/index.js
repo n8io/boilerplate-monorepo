@@ -5,7 +5,7 @@ import { Route } from 'types/route';
 import { useTranslate } from '../../useTranslate';
 import { Breadcrumb } from './Breadcrumb';
 
-const Styled = styled.ul`
+const Container = styled.ul`
   align-items: center;
   box-shadow: 0 1px 0 0 var(--border-color);
   display: grid;
@@ -20,14 +20,14 @@ const Breadcrumbs = ({ children }) => {
   const t = useTranslate();
 
   return (
-    <Styled>
+    <Container>
       <Breadcrumb
         exact={Route.ROOT.exact}
         text={t('home')}
         to={Route.ROOT.path}
       />
       {children}
-    </Styled>
+    </Container>
   );
 };
 

@@ -52,7 +52,7 @@ const styles = css`
   ${({ className }) => className}
 `;
 
-const Styled = styled.button`
+const Container = styled.button`
   ${styles}
 `;
 
@@ -68,7 +68,7 @@ const Button = ({
   type,
   ...props
 }) => (
-  <Styled
+  <Container
     {...props}
     aria-disabled={disabled}
     aria-label={label || text}
@@ -81,7 +81,7 @@ const Button = ({
     type={type}
   >
     {children || text}
-  </Styled>
+  </Container>
 );
 
 Button.defaultProps = {

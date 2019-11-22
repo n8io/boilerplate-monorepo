@@ -11,7 +11,7 @@ import { Toggles } from './Toggles';
 
 const { Role } = A11y;
 
-const Styled = styled.footer`
+const Container = styled.footer`
   align-items: center;
   border-top: 1px solid var(--border-color);
   display: grid;
@@ -28,13 +28,13 @@ const Footer = ({ children }) => {
   const t = useTranslate();
 
   return (
-    <Styled role={Role.FOOTER}>
+    <Container role={Role.FOOTER}>
       <EllipsiedText>
         {t('footer', { fullYear: new Date().getFullYear(), name: Site.name })}
       </EllipsiedText>
       <div>{children}</div>
       <Toggles />
-    </Styled>
+    </Container>
   );
 };
 

@@ -6,7 +6,7 @@ import { Theme } from 'types/theme';
 import { LanguageToggle } from './LanguageToggle';
 import { ThemeToggle } from './ThemeToggle';
 
-const Styled = styled.section`
+const Container = styled.section`
   display: grid;
   font-size: 0.75rem;
   grid-gap: 0.5rem;
@@ -26,13 +26,13 @@ const Toggles = () => {
   }, [displayMode, theme, updateTheme]);
 
   return (
-    <Styled>
+    <Container>
       <LanguageToggle />
       <ThemeToggle
         isDarkMode={displayMode === DisplayMode.DARK}
         onToggle={onToggleTheme}
       />
-    </Styled>
+    </Container>
   );
 };
 

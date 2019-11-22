@@ -13,7 +13,7 @@ import { Navigation } from './Navigation';
 import { SkipLink } from './SkipLink';
 import { styles as themeStyles } from './theme';
 
-const Styled = styled.div`
+const Container = styled.div`
   border: 0;
   box-sizing: border-box;
   display: grid;
@@ -37,7 +37,7 @@ const Styled = styled.div`
 `;
 
 const Layout = () => (
-  <Styled>
+  <Container>
     <Meta />
     <FavIcon />
     <SkipLink />
@@ -45,7 +45,7 @@ const Layout = () => (
     <Navigation />
     <Main />
     <Footer />
-  </Styled>
+  </Container>
 );
 
 export { Layout };
