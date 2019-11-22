@@ -1,4 +1,4 @@
-import { noop } from '@puttingpoker/common';
+import { noop } from '@boilerplate-monorepo/common';
 import { useState, useEffect, useCallback } from 'react';
 
 export const useLongPress = (callback = noop, milliseconds = 600) => {

@@ -1,4 +1,4 @@
-import { seconds } from '@puttingpoker/common';
+import { seconds } from '@boilerplate-monorepo/common';
 import * as Sentry from '@sentry/browser';
 import LogRocket from 'logrocket';
 import { prop } from 'ramda';

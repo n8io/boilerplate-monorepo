@@ -1,5 +1,5 @@
 {
-  "name": "puttingpoker",
+  "name": "boilerplate-monorepo",
   "private": true,
   "engines": {
     "node": "^13.1.0"

@@ -1,5 +1,5 @@
 {
-  "name": "@puttingpoker/ui",
+  "name": "@boilerplate-monorepo/ui",
   "version": "1.0.0",
   "private": true,
   "engines": {

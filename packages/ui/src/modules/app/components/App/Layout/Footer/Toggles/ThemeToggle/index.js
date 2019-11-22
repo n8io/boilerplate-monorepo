@@ -1,4 +1,4 @@
-import { noop } from '@puttingpoker/common';
+import { noop } from '@boilerplate-monorepo/common';
 import { bool, func } from 'prop-types';
 import React, { useCallback, useState } from 'react';
 import { FiMoon, FiSun } from 'react-icons/fi';

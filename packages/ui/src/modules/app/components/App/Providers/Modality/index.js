@@ -1,4 +1,4 @@
-import { debounce } from '@puttingpoker/common';
+import { debounce } from '@boilerplate-monorepo/common';
 import { useEffect } from 'react';
 import { useModality } from 'shared/useModality';
 import { css } from 'styled-components/macro';

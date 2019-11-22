@@ -1,4 +1,4 @@
-import { seconds } from '@puttingpoker/common';
+import { seconds } from '@boilerplate-monorepo/common';
 import React from 'react';
 import ReactDOM from 'react-dom';
 

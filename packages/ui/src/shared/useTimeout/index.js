@@ -1,4 +1,4 @@
-import { noop } from '@puttingpoker/common';
+import { noop } from '@boilerplate-monorepo/common';
 import { useEffect, useRef } from 'react';
 
 export const useTimeout = (callback, delay) => {
