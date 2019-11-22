@@ -1,6 +1,7 @@
 import { func } from 'prop-types';
 import React, { useCallback, useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
+import { MdClose } from 'react-icons/md';
 import MediaQuery from 'react-responsive';
 import SideBar from 'react-sidebar';
 import { Button, Context, Size } from 'shared/Button';
@@ -39,6 +40,14 @@ const Container = styled.div`
   width: 100%;
 `;
 
+const ButtonContainer = styled.div`
+  align-items: center;
+  display: grid;
+  grid-auto-flow: column;
+  grid-column-gap: 1rem;
+  justify-content: center;
+`;
+
 const InnerSideBar = ({ onClose, t }) => (
   <StyledNav aria-label="sidebar" role={Role.NAVIGATION}>
     <Container>
@@ -48,10 +57,15 @@ const InnerSideBar = ({ onClose, t }) => (
     </Container>
     <Button
       context={Context.LINK}
+      label={t('tapHereOrSwipeToClose')}
       onClick={onClose}
       size={Size.LARGE}
-      text={t('tapHereOrSwipeToClose')}
-    />
+    >
+      <ButtonContainer>
+        <MdClose />
+        <span>{t('tapHereOrSwipeToClose')}</span>
+      </ButtonContainer>
+    </Button>
   </StyledNav>
 );
 
