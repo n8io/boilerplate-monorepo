@@ -1,9 +1,9 @@
 import React from 'react';
 import { EllipsiedText } from 'shared/EllipsiedText';
-import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
 import { A11y } from 'types/a11y';
 import { GridTemplateArea } from 'types/gridTemplateArea';
+import { Site } from 'types/site';
 import { Navigation } from './Navigation';
 
 const { Role } = A11y;
@@ -27,20 +27,13 @@ const StyledHeader = styled(EllipsiedText)`
   width: 100%;
 `;
 
-const Header = () => {
-  const t = useTranslate({
-    component: 'app',
-    namespace: 'app',
-  });
-
-  return (
-    <Container>
-      <StyledHeader as="header" role={Role.BANNER} title={t('title')}>
-        {t('title')}
-      </StyledHeader>
-      <Navigation />
-    </Container>
-  );
-};
+const Header = () => (
+  <Container>
+    <StyledHeader as="header" role={Role.BANNER} title={Site.name}>
+      {Site.name}
+    </StyledHeader>
+    <Navigation />
+  </Container>
+);
 
 export { Header };

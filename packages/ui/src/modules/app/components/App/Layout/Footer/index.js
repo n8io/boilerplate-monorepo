@@ -6,6 +6,7 @@ import styled from 'styled-components/macro';
 import { A11y } from 'types/a11y';
 import { Fade } from 'types/fade';
 import { GridTemplateArea } from 'types/gridTemplateArea';
+import { Site } from 'types/site';
 import { Toggles } from './Toggles';
 
 const { Role } = A11y;
@@ -30,7 +31,7 @@ const Footer = ({ children }) => {
   return (
     <Styled data-testid={domTestId} role={Role.FOOTER}>
       <EllipsiedText>
-        {t('footer', { fullYear: new Date().getFullYear() })}
+        {t('footer', { fullYear: new Date().getFullYear(), name: Site.name })}
       </EllipsiedText>
       <div>{children}</div>
       <Toggles />
