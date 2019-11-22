@@ -11,7 +11,7 @@ const { Role } = A11y;
 
 const domTestId = 'Button';
 
-const styles = css` 
+const styles = css`
   border-radius: 0.125rem;
   border-style: solid;
   border-width: 1px;
