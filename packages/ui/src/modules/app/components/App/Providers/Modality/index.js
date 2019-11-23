@@ -1,8 +1,8 @@
 import { debounce } from '@boilerplate-monorepo/common';
+import { Modality as ModalityType } from '@boilerplate-monorepo/ui-common';
 import { useEffect } from 'react';
 import { useModality } from 'shared/useModality';
 import { css } from 'styled-components/macro';
-import { Modality as ModalityType } from 'types/modality';
 
 const TAB_KEY_CODE = 9;
 
