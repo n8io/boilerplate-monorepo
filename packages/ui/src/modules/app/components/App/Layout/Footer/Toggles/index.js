@@ -1,8 +1,7 @@
-import { DisplayMode } from '@boilerplate-monorepo/ui-common';
+import { DisplayMode, Theme } from '@boilerplate-monorepo/ui-common';
 import React, { useCallback } from 'react';
 import { useTheme } from 'shared/useTheme';
 import styled from 'styled-components/macro';
-import { Theme } from 'types/theme';
 import { LanguageToggle } from './LanguageToggle';
 import { ThemeToggle } from './ThemeToggle';
 

@@ -1,7 +1,6 @@
-import { DisplayMode } from '@boilerplate-monorepo/ui-common';
+import { DisplayMode, Theme } from '@boilerplate-monorepo/ui-common';
 import { css } from 'styled-components/macro';
 import theme from 'styled-theming';
-import { Theme } from 'types/theme';
 
 const styles = theme(Theme.PROP_NAME, {
   [DisplayMode.DARK]: css`
