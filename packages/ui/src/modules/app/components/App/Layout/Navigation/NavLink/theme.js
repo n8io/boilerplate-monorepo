@@ -1,6 +1,6 @@
+import { DisplayMode } from '@boilerplate-monorepo/ui-common';
 import { css } from 'styled-components/macro';
 import theme from 'styled-theming';
-import { DisplayMode } from 'types/displayMode';
 import { Theme } from 'types/theme';
 
 export const variables = theme(Theme.PROP_NAME, {

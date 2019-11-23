@@ -1,4 +1,4 @@
-import { DisplayMode } from 'types/displayMode';
+import { DisplayMode } from '@boilerplate-monorepo/ui-common';
 
 const prefersDarkMode = Boolean(
   window.matchMedia('(prefers-color-scheme: dark)').matches

@@ -1,4 +1,5 @@
 import { noop } from '@boilerplate-monorepo/common';
+import { DisplayMode } from '@boilerplate-monorepo/ui-common';
 import { bool, func } from 'prop-types';
 import React, { useCallback, useState } from 'react';
 import { FiMoon, FiSun } from 'react-icons/fi';
@@ -6,7 +7,6 @@ import { useLongPress } from 'shared/useLongPress';
 import { useTheme } from 'shared/useTheme';
 import { useTimeout } from 'shared/useTimeout';
 import { useTranslate } from 'shared/useTranslate';
-import { DisplayMode } from 'types/displayMode';
 import { Theme } from 'types/theme';
 import { ToggleButton } from '../ToggleButton';
 

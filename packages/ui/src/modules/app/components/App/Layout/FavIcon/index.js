@@ -1,8 +1,8 @@
+import { DisplayMode } from '@boilerplate-monorepo/ui-common';
 import React from 'react';
 import Helmet from 'react-helmet';
 import { useTheme } from 'shared/useTheme';
 import { Color } from 'types/color';
-import { DisplayMode } from 'types/displayMode';
 import { Site } from 'types/site';
 import { Theme } from 'types/theme';
 
