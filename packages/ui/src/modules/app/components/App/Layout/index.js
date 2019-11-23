@@ -2,7 +2,6 @@ import { Breakpoint } from '@boilerplate-monorepo/ui-common';
 import React from 'react';
 import styled from 'styled-components/macro';
 import media from 'styled-media-query';
-import { Font } from 'types/font';
 import { GridTemplateArea } from 'types/gridTemplateArea';
 import { FavIcon } from './FavIcon';
 import { Footer } from './Footer';
@@ -17,7 +16,6 @@ const Container = styled.div`
   border: 0;
   box-sizing: border-box;
   display: grid;
-  font-family: ${Font.familyName};
   grid-template-areas: '${GridTemplateArea.HEADER} ${GridTemplateArea.HEADER}'
       '${GridTemplateArea.MAIN} ${GridTemplateArea.MAIN}'
       '${GridTemplateArea.FOOTER} ${GridTemplateArea.FOOTER}';
