@@ -2,6 +2,7 @@ export { A11y } from './src/a11y';
 export { Breakpoint } from './src/breakpoint';
 export { Color } from './src/color';
 export { DisplayMode } from './src/displayMode';
+export { LocalStorage } from './src/localStorage';
 export { Modality } from './src/modality';
 export { Site } from './src/site';
 export { SkipToDestination } from './src/skipToDestination';
