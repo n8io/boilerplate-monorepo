@@ -2668,7 +2668,7 @@
     "@sentry/types" "5.7.1"
     tslib "^1.9.3"
 
-"@sentry/types@5.7.1":
+"@sentry/types@5.7.1", "@sentry/types@^5.7.1":
   version "5.7.1"
   resolved "https://registry.npmjs.org/@sentry/types/-/types-5.7.1.tgz#4c4c1d4d891b6b8c2c3c7b367d306a8b1350f090"
   integrity sha512-tbUnTYlSliXvnou5D4C8Zr+7/wJrHLbpYX1YkLXuIJRU0NSi81bHMroAuHWILcQKWhVjaV/HZzr7Y/hhWtbXVQ==

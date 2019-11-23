@@ -1,4 +1,4 @@
-import { noop } from '@boilerplate-monorepo/common';
+import { Utils } from '@boilerplate-monorepo/common';
 import { DisplayMode, Theme } from '@boilerplate-monorepo/ui-common';
 import { bool, func } from 'prop-types';
 import React, { useCallback, useState } from 'react';
@@ -26,9 +26,12 @@ const ThemeToggle = ({ isDarkMode, onToggle }) => {
     1000
   );
 
-  useTimeout(isEnabled ? noop : () => beEnabled(true), isEnabled ? 0 : 3000);
+  useTimeout(
+    isEnabled ? Utils.noop : () => beEnabled(true),
+    isEnabled ? 0 : 3000
+  );
 
-  const onToggleProxy = isLongPressing ? noop : onToggle;
+  const onToggleProxy = isLongPressing ? Utils.noop : onToggle;
 
   const i18nkey = `${Theme.PROP_NAME}.${
     isDarkMode ? DisplayMode.LIGHT : DisplayMode.DARK
