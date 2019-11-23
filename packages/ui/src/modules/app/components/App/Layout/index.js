@@ -1,7 +1,7 @@
+import { Breakpoint } from '@boilerplate-monorepo/ui-common';
 import React from 'react';
 import styled from 'styled-components/macro';
 import media from 'styled-media-query';
-import { BreakPoint } from 'types/breakpoint';
 import { Font } from 'types/font';
 import { GridTemplateArea } from 'types/gridTemplateArea';
 import { FavIcon } from './FavIcon';
@@ -28,7 +28,7 @@ const Container = styled.div`
   padding: 0;
 
   /* stylelint-disable-next-line order/properties-alphabetical-order */
-  ${media.greaterThan(BreakPoint.MOBILE)`
+  ${media.greaterThan(Breakpoint.MOBILE)`
     grid-template-areas: '${GridTemplateArea.HEADER} ${GridTemplateArea.HEADER}'
       '${GridTemplateArea.NAV} ${GridTemplateArea.MAIN}'
       '${GridTemplateArea.NAV} ${GridTemplateArea.FOOTER}';

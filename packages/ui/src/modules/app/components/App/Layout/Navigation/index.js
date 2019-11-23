@@ -1,16 +1,15 @@
-import { A11y } from '@boilerplate-monorepo/ui-common';
+import { A11y, Breakpoint } from '@boilerplate-monorepo/ui-common';
 import React from 'react';
 import MediaQuery from 'react-responsive';
 import styled from 'styled-components/macro';
 import { defaultBreakpoints, pxToRem } from 'styled-media-query';
-import { BreakPoint } from 'types/breakpoint';
 import { GridTemplateArea } from 'types/gridTemplateArea';
 import { SkipToDestination } from 'types/skipToDestination';
 import { routes } from '../../routes';
 import { NavLink } from './NavLink';
 
 const { Role } = A11y;
-const { [BreakPoint.MOBILE]: breakpoint } = pxToRem(defaultBreakpoints, 16);
+const { [Breakpoint.MOBILE]: breakpoint } = pxToRem(defaultBreakpoints, 16);
 
 const Container = styled.nav`
   align-content: start;

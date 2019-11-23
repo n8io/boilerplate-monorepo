@@ -1,5 +1,5 @@
 import { Enumeration } from './typedef';
 
-export const BreakPoint = {
+export const Breakpoint = {
   ...Enumeration,
 };

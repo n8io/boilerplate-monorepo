@@ -1,3 +1,4 @@
+import { Breakpoint } from '@boilerplate-monorepo/ui-common';
 import React from 'react';
 import MediaQuery from 'react-responsive';
 import { NavLink as RouterNavLink } from 'react-router-dom';
@@ -5,7 +6,6 @@ import { EllipsiedText } from 'shared/EllipsiedText';
 import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
 import { defaultBreakpoints, pxToRem } from 'styled-media-query';
-import { BreakPoint } from 'types/breakpoint';
 import { Route } from 'types/route';
 import { variables as themeVariables } from './theme';
 
@@ -42,7 +42,7 @@ const StyledNavLink = styled(RouterNavLink)`
   }
 `;
 
-const { [BreakPoint.TABLET]: breakpoint } = pxToRem(defaultBreakpoints, 16);
+const { [Breakpoint.TABLET]: breakpoint } = pxToRem(defaultBreakpoints, 16);
 
 const NavLink = ({ route, ...props }) => {
   const t = useTranslate({
