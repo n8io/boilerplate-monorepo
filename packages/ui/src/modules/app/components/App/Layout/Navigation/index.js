@@ -1,10 +1,13 @@
-import { A11y, Breakpoint } from '@boilerplate-monorepo/ui-common';
+import {
+  A11y,
+  Breakpoint,
+  SkipToDestination,
+} from '@boilerplate-monorepo/ui-common';
 import React from 'react';
 import MediaQuery from 'react-responsive';
 import styled from 'styled-components/macro';
 import { defaultBreakpoints, pxToRem } from 'styled-media-query';
 import { GridTemplateArea } from 'types/gridTemplateArea';
-import { SkipToDestination } from 'types/skipToDestination';
 import { routes } from '../../routes';
 import { NavLink } from './NavLink';
 

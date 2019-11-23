@@ -4,4 +4,5 @@ export { Color } from './src/color';
 export { DisplayMode } from './src/displayMode';
 export { Modality } from './src/modality';
 export { Site } from './src/site';
+export { SkipToDestination } from './src/skipToDestination';
 export { Theme } from './src/theme';
