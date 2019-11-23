@@ -12,7 +12,7 @@ services:
       - node_modules-cache:/app/node_modules
       - node_modules-cache-common:/app/packages/common/node_modules
       - node_modules-cache-ui:/app/packages/ui/node_modules
-      - node_modules-cache-ui:/app/packages/ui-common/node_modules
+      - node_modules-cache-ui-common:/app/packages/ui-common/node_modules
       - yarn-cache:/yarn
 
 volumes:
