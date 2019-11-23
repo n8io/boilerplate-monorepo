@@ -1,7 +1,7 @@
+import { A11y } from '@boilerplate-monorepo/ui-common';
 import { bool, func, node, string } from 'prop-types';
 import React from 'react';
 import styled, { css } from 'styled-components/macro';
-import { A11y } from 'types/a11y';
 import { Context } from './context';
 import { Size } from './size';
 import { Style } from './style';

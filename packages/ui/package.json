@@ -27,6 +27,8 @@
     ]
   },
   "dependencies": {
+    "@boilerplate-monorepo/common": "^1.0.0",
+    "@boilerplate-monorepo/ui-common": "^1.0.0",
     "@craco/craco": "^5.2.4",
     "@sentry/browser": "^5.6.3",
     "i18next": "^17.0.11",

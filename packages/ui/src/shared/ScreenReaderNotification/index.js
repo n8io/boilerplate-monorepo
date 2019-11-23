@@ -1,7 +1,7 @@
+import { A11y } from '@boilerplate-monorepo/ui-common';
 import { node } from 'prop-types';
 import React from 'react';
 import styled from 'styled-components/macro';
-import { A11y } from 'types/a11y';
 
 const { Politeness } = A11y;
 

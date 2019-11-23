@@ -1,8 +1,8 @@
+import { A11y } from '@boilerplate-monorepo/ui-common';
 import React from 'react';
 import MediaQuery from 'react-responsive';
 import styled from 'styled-components/macro';
 import { defaultBreakpoints, pxToRem } from 'styled-media-query';
-import { A11y } from 'types/a11y';
 import { BreakPoint } from 'types/breakpoint';
 import { GridTemplateArea } from 'types/gridTemplateArea';
 import { SkipToDestination } from 'types/skipToDestination';
