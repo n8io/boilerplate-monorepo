@@ -19,7 +19,7 @@ const { Role } = A11y;
 const { LINK } = Context;
 const routes = Route.navigation(Route.values);
 const { [BreakPoint.MOBILE]: breakpoint } = pxToRem(defaultBreakpoints, 16);
-const TOUCH_HANDLE_DISTANCE = 15;
+const TOUCH_HANDLE_DISTANCE = 20;
 
 const StyledNav = styled.nav`
   display: grid;
