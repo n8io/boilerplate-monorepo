@@ -1,9 +1,8 @@
-import { A11y } from '@boilerplate-monorepo/ui-common';
+import { A11y, Site } from '@boilerplate-monorepo/ui-common';
 import React from 'react';
 import { EllipsiedText } from 'shared/EllipsiedText';
 import styled from 'styled-components/macro';
 import { GridTemplateArea } from 'types/gridTemplateArea';
-import { Site } from 'types/site';
 import { Navigation } from './Navigation';
 
 const { Role } = A11y;

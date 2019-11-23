@@ -1,9 +1,8 @@
-import { DisplayMode, Theme } from '@boilerplate-monorepo/ui-common';
+import { DisplayMode, Theme, Site } from '@boilerplate-monorepo/ui-common';
 import React from 'react';
 import Helmet from 'react-helmet';
 import { useTheme } from 'shared/useTheme';
 import { Color } from 'types/color';
-import { Site } from 'types/site';
 
 const baseUrl =
   'https://ui-avatars.com/api/?rounded=true&bold=true&size=32&font-size=0.75';
