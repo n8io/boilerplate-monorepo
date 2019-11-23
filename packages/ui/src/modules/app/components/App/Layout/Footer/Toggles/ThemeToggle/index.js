@@ -1,4 +1,5 @@
-import { noop } from '@boilerplate-monorepo/common';
+import { Utils } from '@boilerplate-monorepo/common';
+import { DisplayMode, Theme } from '@boilerplate-monorepo/ui-common';
 import { bool, func } from 'prop-types';
 import React, { useCallback, useState } from 'react';
 import { FiMoon, FiSun } from 'react-icons/fi';
@@ -6,8 +7,6 @@ import { useLongPress } from 'shared/useLongPress';
 import { useTheme } from 'shared/useTheme';
 import { useTimeout } from 'shared/useTimeout';
 import { useTranslate } from 'shared/useTranslate';
-import { DisplayMode } from 'types/displayMode';
-import { Theme } from 'types/theme';
 import { ToggleButton } from '../ToggleButton';
 
 /* eslint complexity: ["warn", 6] */
@@ -27,9 +26,12 @@ const ThemeToggle = ({ isDarkMode, onToggle }) => {
     1000
   );
 
-  useTimeout(isEnabled ? noop : () => beEnabled(true), isEnabled ? 0 : 3000);
+  useTimeout(
+    isEnabled ? Utils.noop : () => beEnabled(true),
+    isEnabled ? 0 : 3000
+  );
 
-  const onToggleProxy = isLongPressing ? noop : onToggle;
+  const onToggleProxy = isLongPressing ? Utils.noop : onToggle;
 
   const i18nkey = `${Theme.PROP_NAME}.${
     isDarkMode ? DisplayMode.LIGHT : DisplayMode.DARK

@@ -1,8 +1,8 @@
+import { LocalStorage } from '@boilerplate-monorepo/ui-common';
 import { I18N_DEFAULT_NAMESPACE } from 'i18n';
 import { object, string } from 'prop-types';
 import { useEffect } from 'react';
 import { withTranslation } from 'react-i18next';
-import { LocalStorage } from 'types/localStorage';
 
 const readLocal = fallbackLocale =>
   localStorage.getItem(LocalStorage.LANGUAGE) || fallbackLocale;

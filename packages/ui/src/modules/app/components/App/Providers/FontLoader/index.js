@@ -1,9 +1,9 @@
+import { Font } from '@boilerplate-monorepo/ui-common';
 import React from 'react';
-import { Font } from 'types/font';
 
 const href = `https://fonts.googleapis.com/css?family=${encodeURI(
-  Font.numeralsFamilyName
-)}:400,700|${encodeURI(Font.familyName)}`;
+  Font.familyName
+)}:400,700`;
 
 const FontLoader = () => <link href={href} rel="stylesheet" />;
 

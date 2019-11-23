@@ -1,7 +1,7 @@
+import { SkipToDestination } from '@boilerplate-monorepo/ui-common';
 import { string } from 'prop-types';
 import React from 'react';
 import styled from 'styled-components/macro';
-import { SkipToDestination } from 'types/skipToDestination';
 import { styles as themeStyles } from './theme';
 
 const Container = styled.a`

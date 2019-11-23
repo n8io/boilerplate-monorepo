@@ -1,7 +1,7 @@
+import { SkipToDestination } from '@boilerplate-monorepo/ui-common';
 import React from 'react';
 import { SkipLink } from 'shared/SkipLink';
 import { useTranslate } from 'shared/useTranslate';
-import { SkipToDestination } from 'types/skipToDestination';
 
 const SkipToContentLink = () => {
   const t = useTranslate({

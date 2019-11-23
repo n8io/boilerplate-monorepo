@@ -1,5 +1,6 @@
-import { seconds } from '@boilerplate-monorepo/common';
+import { Time } from '@boilerplate-monorepo/common';
 import * as Sentry from '@sentry/browser';
+import { LogLevel } from '@sentry/types';
 import LogRocket from 'logrocket';
 import { prop } from 'ramda';
 import React, { useEffect, useState } from 'react';
@@ -8,7 +9,6 @@ import { Body, Breadcrumb, Breadcrumbs, Content, Header } from 'shared/Content';
 import { Page } from 'shared/Page';
 import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
-import { LogLevel } from 'types/logLevel';
 import { Route } from 'types/route';
 
 const SECONDS_TO_REDIRECT = 15;
@@ -45,7 +45,7 @@ const NotFound = () => {
 
     const ticToc = () => setTics(tics - 1);
 
-    interval = setInterval(ticToc, seconds(1));
+    interval = setInterval(ticToc, Time.seconds(1));
 
     return () => clearInterval(interval);
   }, [history, tics, setTics]);

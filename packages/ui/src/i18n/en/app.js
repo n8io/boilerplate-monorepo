@@ -1,4 +1,4 @@
-import { Site } from 'types/site';
+import { Site } from '@boilerplate-monorepo/ui-common';
 
 export const app = {
   nav: {

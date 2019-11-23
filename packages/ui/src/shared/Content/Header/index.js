@@ -1,3 +1,4 @@
+import { SkipToDestination } from '@boilerplate-monorepo/ui-common';
 import { node, string } from 'prop-types';
 import React from 'react';
 import { EllipsiedText } from 'shared/EllipsiedText';
@@ -5,7 +6,6 @@ import { useModality } from 'shared/useModality';
 import styled from 'styled-components/macro';
 import { Fade } from 'types/fade';
 import { GridTemplateArea } from 'types/gridTemplateArea';
-import { SkipToDestination } from 'types/skipToDestination';
 import { PageTitle } from '../../PageTitle';
 import { SkipToNavLink } from './SkipToNavLink';
 

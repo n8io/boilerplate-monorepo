@@ -1,5 +1,5 @@
+import { Color } from '@boilerplate-monorepo/ui-common';
 import { css } from 'styled-components/macro';
-import { Color } from 'types/color';
 
 export const styles = css`
   --color-type-error: ${Color.ERROR};

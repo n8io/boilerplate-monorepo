@@ -4,6 +4,7 @@ import { styles as themeStyles } from './theme';
 export const styles = css`
   html,
   body {
+    font-family: var(--font-family);
     height: 100vh;
     width: 100vw;
   }

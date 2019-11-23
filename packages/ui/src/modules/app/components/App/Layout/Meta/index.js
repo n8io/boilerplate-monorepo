@@ -1,6 +1,6 @@
+import { Color } from '@boilerplate-monorepo/ui-common';
 import React from 'react';
 import Helmet from 'react-helmet';
-import { Color } from 'types/color';
 
 const Meta = () => (
   <Helmet>

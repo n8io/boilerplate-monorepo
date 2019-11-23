@@ -1,4 +1,4 @@
-import { Theme } from 'types/theme';
+import { Theme } from '@boilerplate-monorepo/ui-common';
 
 export const useTheme = () => ({
   theme: Theme.initial,

@@ -1,12 +1,11 @@
+import { A11y, Site } from '@boilerplate-monorepo/ui-common';
 import { node } from 'prop-types';
 import React from 'react';
 import { EllipsiedText } from 'shared/EllipsiedText';
 import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
-import { A11y } from 'types/a11y';
 import { Fade } from 'types/fade';
 import { GridTemplateArea } from 'types/gridTemplateArea';
-import { Site } from 'types/site';
 import { Toggles } from './Toggles';
 
 const { Role } = A11y;

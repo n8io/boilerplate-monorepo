@@ -1,3 +1,4 @@
+import { A11y, Breakpoint } from '@boilerplate-monorepo/ui-common';
 import { func } from 'prop-types';
 import React, { useCallback, useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
@@ -8,8 +9,6 @@ import { Button, Context, Size } from 'shared/Button';
 import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
 import { defaultBreakpoints, pxToRem } from 'styled-media-query';
-import { A11y } from 'types/a11y';
-import { BreakPoint } from 'types/breakpoint';
 import { GridTemplateArea } from 'types/gridTemplateArea';
 import { Route } from 'types/route';
 import { NavLink } from './NavLink';
@@ -18,7 +17,7 @@ import { styles as themeStyles } from './theme';
 const { Role } = A11y;
 const { LINK } = Context;
 const routes = Route.navigation(Route.values);
-const { [BreakPoint.MOBILE]: breakpoint } = pxToRem(defaultBreakpoints, 16);
+const { [Breakpoint.MOBILE]: breakpoint } = pxToRem(defaultBreakpoints, 16);
 const TOUCH_HANDLE_DISTANCE = 20;
 
 const StyledNav = styled.nav`

@@ -1,9 +1,9 @@
+import { Theme } from '@boilerplate-monorepo/ui-common';
 import { render } from '@testing-library/react';
 import { node } from 'prop-types';
 import React from 'react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components/macro';
-import { Theme } from 'types/theme';
 
 export * from '@testing-library/react';
 

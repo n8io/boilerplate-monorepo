@@ -1,4 +1,4 @@
-import { seconds } from '@boilerplate-monorepo/common';
+import { Time } from '@boilerplate-monorepo/common';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -13,7 +13,7 @@ const load = () =>
       'react-axe'
     )
       .then(({ default: axe }) => {
-        axe(React, ReactDOM, seconds(5), config);
+        axe(React, ReactDOM, Time.seconds(5), config);
 
         return resolve();
       })

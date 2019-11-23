@@ -1,7 +1,6 @@
+import { DisplayMode, Theme } from '@boilerplate-monorepo/ui-common';
 import { css } from 'styled-components/macro';
 import { variants } from 'styled-theming';
-import { DisplayMode } from 'types/displayMode';
-import { Theme } from 'types/theme';
 import { Context } from '../context';
 
 const styles = variants(Theme.PROP_NAME, Context.PROP_NAME, {

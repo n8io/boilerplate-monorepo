@@ -1,6 +1,6 @@
+import { A11y } from '@boilerplate-monorepo/ui-common';
 import React from 'react';
 import styled from 'styled-components/macro';
-import { A11y } from 'types/a11y';
 import { GridTemplateArea } from 'types/gridTemplateArea';
 import { Router } from '../../Router';
 

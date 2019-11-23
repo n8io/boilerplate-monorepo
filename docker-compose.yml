@@ -8,14 +8,16 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - .:/app
+      - .:/app:ro
       - node_modules-cache:/app/node_modules
       - node_modules-cache-common:/app/packages/common/node_modules
       - node_modules-cache-ui:/app/packages/ui/node_modules
+      - node_modules-cache-ui:/app/packages/ui-common/node_modules
       - yarn-cache:/yarn
 
 volumes:
   node_modules-cache:
   node_modules-cache-common:
   node_modules-cache-ui:
+  node_modules-cache-ui-common:
   yarn-cache:

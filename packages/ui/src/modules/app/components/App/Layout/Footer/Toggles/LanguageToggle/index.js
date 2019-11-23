@@ -1,3 +1,4 @@
+import { LocalStorage } from '@boilerplate-monorepo/ui-common';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdLanguage } from 'react-icons/md';
@@ -6,7 +7,6 @@ import { Context, Size, styles } from 'shared/Button';
 import styled from 'styled-components/macro';
 import { Language } from 'types/language';
 import { LanguageDisplay } from 'types/languageDisplay';
-import { LocalStorage } from 'types/localStorage';
 import * as ThemeStyles from './theme';
 
 const StyledDisclosure = styled(MenuDisclosure)`

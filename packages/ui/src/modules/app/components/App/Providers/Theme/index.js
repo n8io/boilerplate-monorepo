@@ -1,12 +1,14 @@
+import {
+  LocalStorage,
+  Modality,
+  Theme as ThemeType,
+} from '@boilerplate-monorepo/ui-common';
 import { node } from 'prop-types';
 import { defaultTo } from 'ramda';
-import React, { useState, useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useModality } from 'shared/useModality';
 import { useTheme } from 'shared/useTheme';
 import { ThemeProvider } from 'styled-components/macro';
-import { LocalStorage } from 'types/localStorage';
-import { Modality } from 'types/modality';
-import { Theme as ThemeType } from 'types/theme';
 
 const Theme = ({ children }) => {
   const { provider: ThemeSwitcherProvider } = useTheme();

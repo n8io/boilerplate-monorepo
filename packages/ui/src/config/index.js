@@ -1,5 +1,5 @@
+import { LocalStorage } from '@boilerplate-monorepo/ui-common';
 import { defaultTo, filter, fromPairs, keys, map, pipe } from 'ramda';
-import { LocalStorage } from 'types/localStorage';
 
 const DEVELOPMENT_PREFIX = 'dev';
 const PRODUCTION_PREFIX = 'prod';

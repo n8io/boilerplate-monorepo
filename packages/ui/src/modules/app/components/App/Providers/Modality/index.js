@@ -1,8 +1,8 @@
-import { debounce } from '@boilerplate-monorepo/common';
+import { Utils } from '@boilerplate-monorepo/common';
+import { Modality as ModalityType } from '@boilerplate-monorepo/ui-common';
 import { useEffect } from 'react';
 import { useModality } from 'shared/useModality';
 import { css } from 'styled-components/macro';
-import { Modality as ModalityType } from 'types/modality';
 
 const TAB_KEY_CODE = 9;
 
@@ -21,13 +21,15 @@ export const Modality = () => {
   const { update: updateModality } = useModality();
 
   useEffect(() => {
-    const onKeyDown = debounce(e => {
+    const onKeyDown = Utils.debounce(e => {
       if (e.keyCode !== TAB_KEY_CODE) return;
 
       updateModality(ModalityType.KEYBOARD);
     });
 
-    const onMouseDown = debounce(() => updateModality(ModalityType.MOUSE));
+    const onMouseDown = Utils.debounce(() =>
+      updateModality(ModalityType.MOUSE)
+    );
 
     window.addEventListener('keydown', onKeyDown);
     window.addEventListener('mousedown', onMouseDown);
