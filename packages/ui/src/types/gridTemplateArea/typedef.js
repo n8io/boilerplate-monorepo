@@ -1,4 +1,5 @@
 export const Enumeration = {
+  AVATAR: 'avatar',
   FOOTER: 'footer',
   HEADER: 'header',
   MAIN: 'main',

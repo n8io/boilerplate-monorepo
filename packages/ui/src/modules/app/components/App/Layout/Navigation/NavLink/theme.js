@@ -5,7 +5,6 @@ import { CustomProperty } from 'types/customProperties';
 
 export const variables = theme(Theme.PROP_NAME, {
   [DisplayMode.DARK]: css`
-    &:not([aria-current='page']),
     &:not([aria-current='page']) {
       color: ${CustomProperty.COLOR_PRIMARY_LIGHT};
     }
@@ -24,6 +23,28 @@ export const variables = theme(Theme.PROP_NAME, {
       &:hover {
         background-color: ${CustomProperty.NAV_LINK_BACKGROUND_COLOR};
         color: ${CustomProperty.NAV_LINK_COLOR};
+      }
+    }
+  `,
+  [DisplayMode.LIGHT]: css`
+    &:not([aria-current='page']) {
+      color: ${CustomProperty.NAV_LINK_COLOR_HOVER};
+    }
+
+    &:focus:not([aria-current='page']),
+    &:hover:not([aria-current='page']) {
+      background-color: ${CustomProperty.NAV_LINK_BACKGROUND_COLOR_HOVER};
+      color: ${CustomProperty.NAV_LINK_COLOR_HOVER};
+    }
+
+    &[aria-current='page'] {
+      background-color: ${CustomProperty.NAV_LINK_COLOR};
+      color: ${CustomProperty.NAV_LINK_BACKGROUND_COLOR};
+
+      &:focus,
+      &:hover {
+        background-color: ${CustomProperty.NAV_LINK_COLOR};
+        color: ${CustomProperty.NAV_LINK_BACKGROUND_COLOR};
       }
     }
   `,

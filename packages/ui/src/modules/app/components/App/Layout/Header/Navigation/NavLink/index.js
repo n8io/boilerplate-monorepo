@@ -6,6 +6,7 @@ import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
 import { CustomProperty } from 'types/customProperties';
 import { Route } from 'types/route';
+import { styles as themeStyles } from './theme';
 
 const StyledNavLink = styled(RouterNavLink)`
   align-items: center;
@@ -17,7 +18,16 @@ const StyledNavLink = styled(RouterNavLink)`
   height: calc(${CustomProperty.LAYOUT_MAIN_BREADCRUMB_HEIGHT} * 2);
   justify-content: start;
   padding: 0 calc(${CustomProperty.BASE_UNIT} * 1);
+  user-select: none;
   width: 100%;
+
+  &[aria-current='page'] {
+    cursor: default;
+    pointer-events: none;
+  }
+
+  /* stylelint-disable-next-line order/properties-alphabetical-order */
+  ${themeStyles}
 `;
 
 const NavLink = ({ onClick, route }) => {

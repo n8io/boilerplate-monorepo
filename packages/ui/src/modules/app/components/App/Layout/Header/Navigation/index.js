@@ -1,14 +1,13 @@
-import { A11y, Breakpoint } from '@boilerplate-monorepo/ui-common';
+import { A11y } from '@boilerplate-monorepo/ui-common';
 import { func } from 'prop-types';
 import React, { useCallback, useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { MdClose } from 'react-icons/md';
-import MediaQuery from 'react-responsive';
 import SideBar from 'react-sidebar';
+import { Mobile } from 'shared/Breakpoints';
 import { Button, Context, Size } from 'shared/Button';
 import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
-import { defaultBreakpoints, pxToRem } from 'styled-media-query';
 import { CustomProperty } from 'types/customProperties';
 import { GridTemplateArea } from 'types/gridTemplateArea';
 import { Route } from 'types/route';
@@ -18,7 +17,6 @@ import { styles as themeStyles } from './theme';
 const { Role } = A11y;
 const { LINK } = Context;
 const routes = Route.navigation(Route.values);
-const { [Breakpoint.MOBILE]: breakpoint } = pxToRem(defaultBreakpoints, 16);
 const TOUCH_HANDLE_DISTANCE = 20;
 
 const StyledNav = styled.nav`
@@ -99,7 +97,7 @@ const Navigation = () => {
   const onClose = () => onSetOpen(false);
 
   return (
-    <MediaQuery maxWidth={breakpoint}>
+    <Mobile>
       <OpenNavButton
         context={LINK}
         label={t('openNavigation')}
@@ -119,7 +117,7 @@ const Navigation = () => {
           <></>
         </SideBar>
       </div>
-    </MediaQuery>
+    </Mobile>
   );
 };
 

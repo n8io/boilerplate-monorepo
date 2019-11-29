@@ -1,19 +1,13 @@
-import {
-  A11y,
-  Breakpoint,
-  SkipToDestination,
-} from '@boilerplate-monorepo/ui-common';
+import { A11y, SkipToDestination } from '@boilerplate-monorepo/ui-common';
 import React from 'react';
-import MediaQuery from 'react-responsive';
+import { GreaterThanMobile } from 'shared/Breakpoints';
 import styled from 'styled-components/macro';
-import { defaultBreakpoints, pxToRem } from 'styled-media-query';
 import { CustomProperty } from 'types/customProperties';
 import { GridTemplateArea } from 'types/gridTemplateArea';
 import { routes } from '../../routes';
 import { NavLink } from './NavLink';
 
 const { Role } = A11y;
-const { [Breakpoint.MOBILE]: breakpoint } = pxToRem(defaultBreakpoints, 16);
 
 const Container = styled.nav`
   align-content: start;
@@ -31,9 +25,9 @@ const toNavLink = (route, index) => {
 };
 
 const Navigation = () => (
-  <MediaQuery minWidth={breakpoint}>
+  <GreaterThanMobile>
     <Container role={Role.NAVIGATION}>{routes.map(toNavLink)}</Container>
-  </MediaQuery>
+  </GreaterThanMobile>
 );
 
 export { Navigation };

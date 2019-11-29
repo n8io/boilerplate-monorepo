@@ -1,10 +1,15 @@
 import { A11y, Site } from '@boilerplate-monorepo/ui-common';
+import { config } from 'config';
 import React from 'react';
+import { GreaterThanMobile } from 'shared/Breakpoints';
 import { EllipsiedText } from 'shared/EllipsiedText';
 import styled from 'styled-components/macro';
 import { CustomProperty } from 'types/customProperties';
 import { GridTemplateArea } from 'types/gridTemplateArea';
+import { Avatar } from './Avatar';
 import { Navigation } from './Navigation';
+
+const { AVATAR_EMAIL } = config;
 
 const { Role } = A11y;
 const Container = styled.div`
@@ -13,8 +18,8 @@ const Container = styled.div`
   display: grid;
   grid-area: ${GridTemplateArea.HEADER};
   grid-auto-flow: column;
-  grid-template-areas: '. ${GridTemplateArea.NAV_MOBILE} .';
-  grid-template-columns: 1fr auto 0;
+  grid-template-areas: '. ${GridTemplateArea.NAV_MOBILE} ${GridTemplateArea.AVATAR}';
+  grid-template-columns: 1fr auto auto;
   padding: 0 ${CustomProperty.BASE_UNIT};
 `;
 
@@ -32,6 +37,9 @@ const Header = () => (
     <StyledHeader as="header" role={Role.BANNER} title={Site.name}>
       {Site.name}
     </StyledHeader>
+    <GreaterThanMobile>
+      {AVATAR_EMAIL && <Avatar email={AVATAR_EMAIL} />}
+    </GreaterThanMobile>
     <Navigation />
   </Container>
 );
