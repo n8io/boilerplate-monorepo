@@ -6,13 +6,12 @@ export const bottom = css`
   &::after {
     content: '';
     height: ${CustomProperty.BASE_UNIT};
-    left: ${CustomProperty.BASE_UNIT};
+    left: 1px;
     pointer-events: none;
     position: absolute;
-    right: ${CustomProperty.BASE_UNIT};
+    right: 1px;
     top: calc(
-      ${CustomProperty.BASE_UNIT} -
-        (${CustomProperty.BASE_UNIT} * 2) + -1px
+      ${CustomProperty.BASE_UNIT} - (${CustomProperty.BASE_UNIT} * 2) + -1px
     );
     z-index: ${CustomProperty.Z_INDEX_FADE};
 
