@@ -2,6 +2,7 @@ import { SkipToDestination } from '@boilerplate-monorepo/ui-common';
 import { string } from 'prop-types';
 import React from 'react';
 import styled from 'styled-components/macro';
+import { CustomProperty } from 'types/customProperties';
 import { styles as themeStyles } from './theme';
 
 const Container = styled.a`
@@ -19,14 +20,14 @@ const Container = styled.a`
     height: auto;
     left: 50%;
     line-height: normal;
-    padding: calc(var(--layout-base-unit) * 0.25)
-      calc(var(--layout-base-unit) * 0.5);
+    padding: calc(${CustomProperty.BASE_UNIT} * 0.25)
+      calc(${CustomProperty.BASE_UNIT} * 0.5);
     position: fixed;
     text-decoration: none;
     top: 0;
     transform: translateX(-50%);
     width: auto;
-    z-index: var(--z-index-skip-link);
+    z-index: ${CustomProperty.Z_INDEX_SKIP_LINK};
   }
 
   /* stylelint-disable-next-line order/properties-alphabetical-order */

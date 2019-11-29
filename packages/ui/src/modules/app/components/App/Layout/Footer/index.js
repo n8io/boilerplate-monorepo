@@ -4,6 +4,7 @@ import React from 'react';
 import { EllipsiedText } from 'shared/EllipsiedText';
 import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
+import { CustomProperty } from 'types/customProperties';
 import { Fade } from 'types/fade';
 import { GridTemplateArea } from 'types/gridTemplateArea';
 import { Toggles } from './Toggles';
@@ -12,12 +13,13 @@ const { Role } = A11y;
 
 const Container = styled.footer`
   align-items: center;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid ${CustomProperty.CUSTOM_BORDER_COLOR};
   display: grid;
   grid-area: ${GridTemplateArea.FOOTER};
+  grid-column-gap: calc(${CustomProperty.BASE_UNIT} * 0.25);
   grid-template-columns: auto 1fr auto;
-  height: var(--layout-main-footer-height);
-  padding: 0 var(--layout-base-unit);
+  height: ${CustomProperty.LAYOUT_MAIN_FOOTER_HEIGHT};
+  padding: 0 ${CustomProperty.BASE_UNIT};
 
   /* stylelint-disable-next-line order/properties-alphabetical-order */
   ${Fade.bottom}

@@ -1,25 +1,26 @@
 import { DisplayMode, Theme } from '@boilerplate-monorepo/ui-common';
 import { css } from 'styled-components/macro';
 import theme from 'styled-theming';
+import { CustomProperty } from 'types/customProperties';
 
 export const styles = theme(Theme.PROP_NAME, {
   [DisplayMode.DARK]: css`
-    border: 1px solid var(--color-type-primary-light);
+    border: 1px solid ${CustomProperty.COLOR_PRIMARY_LIGHT};
     border-top: 0;
-    color: var(--color-type-primary-light);
+    color: ${CustomProperty.COLOR_PRIMARY_LIGHT};
 
     &:focus {
-      background-color: var(--grayscale-black);
-      color: var(--color-type-primary-light);
+      background-color: ${CustomProperty.GRAYSCALE_BLACK};
+      color: ${CustomProperty.COLOR_PRIMARY_LIGHT};
     }
   `,
   [DisplayMode.LIGHT]: css`
-    border: 1px solid var(--color-type-primary);
-    color: var(--color-type-primary);
+    border: 1px solid ${CustomProperty.COLOR_PRIMARY};
+    color: ${CustomProperty.COLOR_PRIMARY};
 
     &:focus {
-      background-color: var(--grayscale-white);
-      color: var(--color-type-primary);
+      background-color: ${CustomProperty.GRAYSCALE_WHITE};
+      color: ${CustomProperty.COLOR_PRIMARY};
     }
   `,
 });

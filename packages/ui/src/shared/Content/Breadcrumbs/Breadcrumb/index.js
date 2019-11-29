@@ -2,12 +2,14 @@ import { bool, string } from 'prop-types';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components/macro';
+import { CustomProperty } from 'types/customProperties';
+import { styles as themeStyles } from './theme';
 
 const StyledListItem = styled.li`
   & + & {
     ::before {
       content: '/';
-      left: calc(var(--layout-base-unit) * -0.25);
+      left: calc(${CustomProperty.BASE_UNIT} * -0.25);
       position: relative;
       transform: translateX(-50%);
     }
@@ -30,6 +32,9 @@ const StyledNavLink = styled(NavLink)`
       text-decoration: none;
     }
   }
+
+  /* stylelint-disable-next-line order/properties-alphabetical-order */
+  ${themeStyles}
 `;
 
 const StyledEnd = styled.span`

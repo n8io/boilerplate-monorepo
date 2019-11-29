@@ -4,19 +4,19 @@ import { NavLink as RouterNavLink } from 'react-router-dom';
 import { EllipsiedText } from 'shared/EllipsiedText';
 import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
+import { CustomProperty } from 'types/customProperties';
 import { Route } from 'types/route';
-// import { variables as themeVariables } from './theme';
 
 const StyledNavLink = styled(RouterNavLink)`
   align-items: center;
-  border-bottom: 1px var(--border-color) solid;
+  border-bottom: 1px ${CustomProperty.CUSTOM_BORDER_COLOR} solid;
   display: grid;
-  font-size: calc(var(--layout-base-unit) * 3);
+  font-size: calc(${CustomProperty.BASE_UNIT} * 1.5);
   grid-column-gap: 0.25rem;
   grid-template-columns: auto 1fr;
-  height: calc(var(--layout-main-breadcrumb-height) * 2);
+  height: calc(${CustomProperty.LAYOUT_MAIN_BREADCRUMB_HEIGHT} * 2);
   justify-content: start;
-  padding: 0 calc(var(--layout-base-unit) * 1);
+  padding: 0 calc(${CustomProperty.BASE_UNIT} * 1);
   width: 100%;
 `;
 

@@ -3,6 +3,7 @@ import { Modality as ModalityType } from '@boilerplate-monorepo/ui-common';
 import { useEffect } from 'react';
 import { useModality } from 'shared/useModality';
 import { css } from 'styled-components/macro';
+import { CustomProperty } from 'types/customProperties';
 
 const TAB_KEY_CODE = 9;
 
@@ -13,7 +14,7 @@ export const styles = css`
 
   /* stylelint-disable-next-line no-duplicate-selectors */
   body[modality='${ModalityType.KEYBOARD}'] *:focus {
-    outline: calc(var(--layout-base-unit) * 0.375) auto -webkit-focus-ring-color !important;
+    outline: calc(${CustomProperty.BASE_UNIT} * 0.375) auto -webkit-focus-ring-color !important;
   }
 `;
 

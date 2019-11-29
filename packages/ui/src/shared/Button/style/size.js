@@ -1,4 +1,5 @@
 import { css } from 'styled-components/macro';
+import { CustomProperty } from 'types/customProperties';
 import { Size } from '../size';
 
 const styles = css`
@@ -6,18 +7,18 @@ const styles = css`
     switch (size) {
       case Size.LARGE:
         return css`
-          font-size: calc(var(--layout-base-unit) * 1.125);
-          padding: var(--layout-base-unit);
+          font-size: calc(${CustomProperty.BASE_UNIT} * 1.125);
+          padding: ${CustomProperty.BASE_UNIT};
         `;
       case Size.SMALL:
         return css`
-          font-size: calc(var(--layout-base-unit) * 0.875);
-          padding: calc(var(--layout-base-unit) * 0.25);
+          font-size: calc(${CustomProperty.BASE_UNIT} * 0.875);
+          padding: calc(${CustomProperty.BASE_UNIT} * 0.25);
         `;
       default:
         return css`
-          font-size: var(--layout-base-unit);
-          padding: calc(var(--layout-base-unit) * 0.5);
+          font-size: ${CustomProperty.BASE_UNIT};
+          padding: calc(${CustomProperty.BASE_UNIT} * 0.5);
         `;
     }
   }}

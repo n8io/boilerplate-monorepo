@@ -1,10 +1,12 @@
 import { css } from 'styled-components/macro';
+import { CustomProperty } from 'types/customProperties';
 import { styles as themeStyles } from './theme';
 
 export const styles = css`
   html,
   body {
-    font-family: var(--font-family);
+    font-family: ${CustomProperty.FONT_FAMILY};
+    font-size: ${CustomProperty.BASE_UNIT};
     height: 100vh;
     width: 100vw;
   }
@@ -21,8 +23,7 @@ export const styles = css`
   pre,
   select,
   summary {
-    font-size: var(--layout-base-unit);
-    margin-bottom: var(--layout-base-unit);
+    margin-bottom: ${CustomProperty.BASE_UNIT};
   }
 
   blockquote,
@@ -49,26 +50,8 @@ export const styles = css`
   header,
   main,
   section {
-    font-size: var(--layout-base-unit);
     line-height: normal;
     position: relative;
-  }
-
-  pre {
-    background-color: var(--color-type-error-light);
-    border-radius: calc(var(--layout-base-unit) * 0.25);
-    color: var(--color-type-error);
-    font-family: monospace;
-    padding: calc(var(--layout-base-unit) * 0.5);
-  }
-
-  a {
-    color: var(--link-color);
-
-    &:focus,
-    &:hover {
-      color: var(--link-color-hover);
-    }
   }
 
   strong {

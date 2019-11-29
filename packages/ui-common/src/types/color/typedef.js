@@ -9,7 +9,7 @@ export const Enumeration = {
   SUCCESS: '#0c9c0cff',
   TRANSPARENT: '#ffffff00',
   WARN: '#dfdf00ff',
-  WHITE: '#ffffffff',
+  WHITE: '#f6f6f6ff',
 };
 
 // https://coolors.co/212121-dcdcdc-db0000-6d4baa-553490
