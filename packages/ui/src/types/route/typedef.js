@@ -2,7 +2,7 @@ import { config } from 'config';
 import { shape, string } from 'prop-types';
 import { values as ramdaValues } from 'ramda';
 import { AiOutlineFileSearch } from 'react-icons/ai';
-import { FaRegAddressBook } from 'react-icons/fa';
+import { FaRegAddressBook, FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
 import { GiFireBowl } from 'react-icons/gi';
 import { MdDashboard } from 'react-icons/md';
 
@@ -23,10 +23,15 @@ export const Enumeration = {
     name: 'dashboard',
     path: '/',
   },
+  LOGIN: {
+    icon: FaSignInAlt,
+    name: 'logIn',
+    path: '/login',
+  },
   LOGOUT: {
-    icon: AiOutlineFileSearch,
+    icon: FaSignOutAlt,
     name: 'logOut',
-    path: '/',
+    path: '/logout',
   },
   NOT_FOUND: {
     [SORT_PROP_NAME]: config.isDebug ? 100 : undefined,

@@ -45,7 +45,7 @@ const Header = () => {
     namespace: 'common',
   });
 
-  const { isAuthenticated, login, logout, user } = useAuth();
+  const { isAuthenticated, logout, user } = useAuth();
   const email = prop('email', user);
 
   return (
@@ -55,7 +55,7 @@ const Header = () => {
         <EllipsiedText>{Site.name}</EllipsiedText>
         <Navigation />
         <GreaterThanMobile>
-          {isAuthenticated ? (
+          {isAuthenticated && (
             <ImageButton
               context={Context.LINK}
               label={t('logOut')}
@@ -63,8 +63,6 @@ const Header = () => {
             >
               <Avatar email={email} />
             </ImageButton>
-          ) : (
-            <Button context={Context.LINK} onClick={login} text={t('logIn')} />
           )}
         </GreaterThanMobile>
       </Container>

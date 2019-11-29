@@ -39,6 +39,10 @@ const NotFound = () => {
   }, []);
 
   useEffect(() => {
+    setTics(SECONDS_TO_REDIRECT);
+  }, [location]);
+
+  useEffect(() => {
     let interval = null;
 
     if (tics <= 1) return history.goBack();
@@ -48,7 +52,7 @@ const NotFound = () => {
     interval = setInterval(ticToc, Time.seconds(1));
 
     return () => clearInterval(interval);
-  }, [history, tics, setTics]);
+  }, [history, location, tics, setTics]);
 
   const { pathname } = location;
 

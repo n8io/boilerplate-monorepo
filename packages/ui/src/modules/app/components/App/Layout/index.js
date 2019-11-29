@@ -1,5 +1,6 @@
 import { Breakpoint } from '@boilerplate-monorepo/ui-common';
 import React from 'react';
+import { GreaterThanMobile } from 'shared/Breakpoints';
 import styled from 'styled-components/macro';
 import media from 'styled-media-query';
 import { GridTemplateArea } from 'types/gridTemplateArea';
@@ -38,7 +39,9 @@ const Layout = () => (
     <Meta />
     <FavIcon />
     <Header />
-    <Navigation />
+    <GreaterThanMobile>
+      <Navigation />
+    </GreaterThanMobile>
     <Main />
     <Footer />
   </Container>
