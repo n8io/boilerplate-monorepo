@@ -5,6 +5,7 @@ import { MdLanguage } from 'react-icons/md';
 import { Menu, MenuDisclosure, MenuItem, useMenuState } from 'reakit/Menu';
 import { Context, Size, styles } from 'shared/Button';
 import styled from 'styled-components/macro';
+import { CustomProperty } from 'types/customProperties';
 import { Language } from 'types/language';
 import { LanguageDisplay } from 'types/languageDisplay';
 import * as ThemeStyles from './theme';
@@ -14,24 +15,24 @@ const StyledDisclosure = styled(MenuDisclosure)`
 `;
 
 const StyledMenu = styled(Menu)`
-  background-color: var(--grayscale-white);
-  border: 1px solid var(--color-type-primary);
-  z-index: var(--z-index-language-toggle);
+  background-color: ${CustomProperty.GRAYSCALE_WHITE};
+  border: 1px solid ${CustomProperty.COLOR_PRIMARY};
+  z-index: ${CustomProperty.Z_INDEX_LANGUAGE_TOGGLE};
 
   /* stylelint-disable-next-line order/properties-alphabetical-order */
   ${ThemeStyles.menu}
 `;
 
 const StyledMenuItem = styled(MenuItem)`
-  background-color: var(--grayscale-white);
-  color: var(--color-type-primary);
+  background-color: ${CustomProperty.GRAYSCALE_WHITE};
+  color: ${CustomProperty.COLOR_PRIMARY};
   display: block;
-  padding: calc(var(--layout-base-unit) * 0.5);
+  padding: calc(${CustomProperty.BASE_UNIT} * 0.5);
   width: 100%;
 
   &[tabindex='0'] {
-    background-color: var(--color-type-primary);
-    color: var(--grayscale-white);
+    background-color: ${CustomProperty.COLOR_PRIMARY};
+    color: ${CustomProperty.GRAYSCALE_WHITE};
     cursor: pointer;
   }
 

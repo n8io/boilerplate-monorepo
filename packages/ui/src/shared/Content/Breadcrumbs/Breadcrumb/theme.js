@@ -5,9 +5,19 @@ import { CustomProperty } from 'types/customProperties';
 
 export const styles = theme(Theme.PROP_NAME, {
   [DisplayMode.DARK]: css`
-    --border-color: ${CustomProperty.GRAYSCALE_BLACK_1};
+    color: ${CustomProperty.COLOR_PRIMARY_LIGHT};
 
-    background-color: ${CustomProperty.GRAYSCALE_BLACK};
-    color: ${CustomProperty.GRAYSCALE_WHITE_2};
+    &:focus,
+    &:hover {
+      color: ${CustomProperty.GRAYSCALE_GRAY_1};
+    }
+  `,
+  [DisplayMode.LIGHT]: css`
+    color: ${CustomProperty.LINK_COLOR};
+
+    &:focus,
+    &:hover {
+      color: ${CustomProperty.LINK_COLOR};
+    }
   `,
 });

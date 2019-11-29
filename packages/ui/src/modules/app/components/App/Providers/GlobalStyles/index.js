@@ -1,10 +1,10 @@
 import React from 'react';
 import { createGlobalStyle } from 'styled-components/macro';
 import reset from 'styled-reset-advanced';
+import { styles as customPropertyDefinitions } from 'types/customProperties';
 import { styles as modalityStyles } from '../Modality';
 import { styles as elementStyles } from './elements';
 import { styles as typographyStyles } from './typography';
-import { styles as variables } from './variables';
 
 const Container = createGlobalStyle`
   ${reset}
@@ -13,7 +13,7 @@ const Container = createGlobalStyle`
     height: 100%;
   }
 
-  ${variables}
+  ${customPropertyDefinitions}
   ${modalityStyles}
   ${elementStyles}
   ${typographyStyles}

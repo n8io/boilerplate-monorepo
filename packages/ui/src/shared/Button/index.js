@@ -2,6 +2,7 @@ import { A11y } from '@boilerplate-monorepo/ui-common';
 import { bool, func, node, string } from 'prop-types';
 import React from 'react';
 import styled, { css } from 'styled-components/macro';
+import { CustomProperty } from 'types/customProperties';
 import { Context } from './context';
 import { Size } from './size';
 import { Style } from './style';
@@ -18,7 +19,9 @@ const styles = css`
   justify-items: center;
   opacity: 0.95;
   text-align: center;
-  transition: opacity var(--transition-delay) var(--transition-timing-function);
+  transition: opacity ${CustomProperty.TRANSITION_DELAY} ${
+  CustomProperty.TRANSITION_TIMING_FUNCTION
+};
   width: 100%;
 
   /* stylelint-disable-next-line order/properties-alphabetical-order */

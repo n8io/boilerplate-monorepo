@@ -7,7 +7,6 @@ import { ThemeToggle } from './ThemeToggle';
 
 const Container = styled.section`
   display: grid;
-  font-size: 0.75rem;
   grid-gap: 0.5rem;
   grid-template-columns: auto auto;
 `;

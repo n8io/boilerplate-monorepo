@@ -7,6 +7,7 @@ import React from 'react';
 import MediaQuery from 'react-responsive';
 import styled from 'styled-components/macro';
 import { defaultBreakpoints, pxToRem } from 'styled-media-query';
+import { CustomProperty } from 'types/customProperties';
 import { GridTemplateArea } from 'types/gridTemplateArea';
 import { routes } from '../../routes';
 import { NavLink } from './NavLink';
@@ -16,7 +17,7 @@ const { [Breakpoint.MOBILE]: breakpoint } = pxToRem(defaultBreakpoints, 16);
 
 const Container = styled.nav`
   align-content: start;
-  box-shadow: 1px 0 0 0 var(--border-color);
+  box-shadow: 1px 0 0 0 ${CustomProperty.CUSTOM_BORDER_COLOR};
   display: grid;
   grid-area: ${GridTemplateArea.NAV};
   overflow-y: auto;

@@ -1,6 +1,7 @@
 import { bool, node, string } from 'prop-types';
 import React from 'react';
 import styled from 'styled-components/macro';
+import { CustomProperty } from 'types/customProperties';
 
 const Container = styled.section`
   display: flex;
@@ -8,7 +9,7 @@ const Container = styled.section`
   flex-grow: 1;
   height: 0;
   overflow-y: auto;
-  padding: var(--layout-base-unit);
+  padding: ${CustomProperty.BASE_UNIT};
 `;
 
 const Body = ({

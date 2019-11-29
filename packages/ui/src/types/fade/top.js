@@ -1,18 +1,19 @@
 import { css } from 'styled-components/macro';
+import { CustomProperty } from 'types/customProperties';
 import { top as themeStyles } from './theme';
 
 export const top = css`
   &::before {
     bottom: calc(
-      var(--layout-base-unit) - (var(--layout-base-unit) * 2) + -1px
+      ${CustomProperty.BASE_UNIT} - (${CustomProperty.BASE_UNIT} * 2) + -1px
     );
     content: '';
-    height: var(--layout-base-unit);
-    left: var(--layout-base-unit);
+    height: ${CustomProperty.BASE_UNIT};
+    left: 1px;
     pointer-events: none;
     position: absolute;
-    right: var(--layout-base-unit);
-    z-index: var(--z-index-fade);
+    right: 1px;
+    z-index: ${CustomProperty.Z_INDEX_FADE};
 
     /* stylelint-disable-next-line order/properties-alphabetical-order */
     ${themeStyles}

@@ -9,6 +9,7 @@ import { Button, Context, Size } from 'shared/Button';
 import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
 import { defaultBreakpoints, pxToRem } from 'styled-media-query';
+import { CustomProperty } from 'types/customProperties';
 import { GridTemplateArea } from 'types/gridTemplateArea';
 import { Route } from 'types/route';
 import { NavLink } from './NavLink';
@@ -45,6 +46,7 @@ const ButtonContainer = styled.div`
   grid-auto-flow: column;
   grid-column-gap: 1rem;
   justify-content: center;
+  white-space: nowrap;
 `;
 
 const InnerSideBar = ({ onClose, t }) => (
@@ -74,16 +76,16 @@ InnerSideBar.propTypes = {
 };
 
 const OpenNavButton = styled(Button)`
-  font-size: calc(var(--layout-base-unit) * 1.5);
+  font-size: calc(${CustomProperty.BASE_UNIT} * 1.5);
 `;
 
 const styles = {
   overlay: {
-    zIndex: 'var(--z-index-side-bar-overlay)',
+    zIndex: CustomProperty.Z_INDEX_SIDE_BAR_OVERLAY,
   },
   sidebar: {
     position: 'fixed',
-    zIndex: 'var(--z-index-side-bar)',
+    zIndex: CustomProperty.Z_INDEX_SIDE_BAR,
   },
 };
 

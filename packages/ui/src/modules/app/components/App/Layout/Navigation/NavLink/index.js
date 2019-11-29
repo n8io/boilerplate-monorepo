@@ -6,6 +6,7 @@ import { EllipsiedText } from 'shared/EllipsiedText';
 import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
 import { defaultBreakpoints, pxToRem } from 'styled-media-query';
+import { CustomProperty } from 'types/customProperties';
 import { Route } from 'types/route';
 import { variables as themeVariables } from './theme';
 
@@ -14,30 +15,33 @@ const StyledNavLink = styled(RouterNavLink)`
 
   /* stylelint-disable-next-line order/properties-alphabetical-order */
   align-items: center;
-  border-bottom: 1px var(--border-color) solid;
+  border-bottom: 1px solid ${CustomProperty.CUSTOM_BORDER_COLOR};
+  color: ${CustomProperty.NAV_LINK_COLOR_HOVER};
   display: grid;
+  grid-auto-flow: column;
   grid-column-gap: 0.25rem;
-  grid-template-columns: auto 1fr;
-  height: calc(var(--layout-main-breadcrumb-height) + 1px);
+  height: calc(${CustomProperty.LAYOUT_MAIN_BREADCRUMB_HEIGHT} + 1px);
   justify-content: start;
-  padding: 0 calc(var(--layout-base-unit) * 0.5);
+  padding: 0 calc(${CustomProperty.BASE_UNIT} * 0.5);
   width: 100%;
 
   &:focus:not([aria-current='page']),
   &:hover:not([aria-current='page']) {
-    background-color: var(--nav-link-background-color-hover);
-    color: var(--nav-link-color-hover);
+    background-color: ${CustomProperty.NAV_LINK_BACKGROUND_COLOR_HOVER};
+    color: ${CustomProperty.NAV_LINK_COLOR_HOVER};
   }
 
   &[aria-current='page'] {
-    background-color: var(--nav-link-color);
-    color: var(--nav-link-background-color);
+    background-color: ${CustomProperty.NAV_LINK_COLOR};
+    color: ${CustomProperty.NAV_LINK_BACKGROUND_COLOR};
     cursor: default;
+    pointer-events: none;
 
     &:focus,
     &:hover {
-      background-color: var(--nav-link-color);
-      color: var(--nav-link-background-color);
+      background-color: ${CustomProperty.NAV_LINK_COLOR};
+      color: ${CustomProperty.NAV_LINK_BACKGROUND_COLOR};
+      pointer-events: none;
     }
   }
 `;
