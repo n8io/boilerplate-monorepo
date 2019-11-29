@@ -8,6 +8,7 @@ const sizes = Array.from({ length: 6 }, (_, k) => k + 1); // [1,2,3,...]
 const generateHeaderStyle = size => `
   h${size} {
     font-size: calc(${CustomProperty.BASE_UNIT} * ${decrement(size)});
+    font-weight: bold;
     user-select: none;
   }
 `;
