@@ -11,22 +11,24 @@ import { CustomProperty } from 'types/customProperties';
 import { GridTemplateArea } from 'types/gridTemplateArea';
 import { Avatar } from './Avatar';
 import { Navigation } from './Navigation';
+import { SkipToContentLink } from './SkipToContentLink';
 
 const { Role } = A11y;
 const Container = styled.div`
   align-items: center;
-  box-shadow: 0 1px 0 0 ${CustomProperty.CUSTOM_BORDER_COLOR};
   display: grid;
-  grid-area: ${GridTemplateArea.HEADER};
   grid-auto-flow: column;
   grid-template-areas: '. ${GridTemplateArea.NAV_MOBILE} ${GridTemplateArea.AVATAR}';
   grid-template-columns: 1fr auto auto;
+  height: ${CustomProperty.LAYOUT_HEADER_HEIGHT};
   padding: 0 ${CustomProperty.BASE_UNIT};
 `;
 
-const StyledHeader = styled(EllipsiedText)`
+const StyledHeader = styled.header`
   align-items: center;
+  box-shadow: 0 1px 0 0 ${CustomProperty.CUSTOM_BORDER_COLOR};
   font-size: calc(${CustomProperty.BASE_UNIT} * 2);
+  grid-area: ${GridTemplateArea.HEADER};
   height: ${CustomProperty.LAYOUT_HEADER_HEIGHT};
   justify-content: space-between;
   margin-bottom: 0;
@@ -47,25 +49,26 @@ const Header = () => {
   const email = prop('email', user);
 
   return (
-    <Container>
-      <StyledHeader as="header" role={Role.BANNER} title={Site.name}>
-        {Site.name}
-      </StyledHeader>
-      <GreaterThanMobile>
-        {isAuthenticated ? (
-          <ImageButton
-            context={Context.LINK}
-            label={t('logOut')}
-            onClick={logout}
-          >
-            <Avatar email={email} />
-          </ImageButton>
-        ) : (
-          <Button context={Context.LINK} onClick={login} text={t('logIn')} />
-        )}
-      </GreaterThanMobile>
-      <Navigation />
-    </Container>
+    <StyledHeader role={Role.BANNER} title={Site.name}>
+      <SkipToContentLink />
+      <Container>
+        <EllipsiedText>{Site.name}</EllipsiedText>
+        <Navigation />
+        <GreaterThanMobile>
+          {isAuthenticated ? (
+            <ImageButton
+              context={Context.LINK}
+              label={t('logOut')}
+              onClick={logout}
+            >
+              <Avatar email={email} />
+            </ImageButton>
+          ) : (
+            <Button context={Context.LINK} onClick={login} text={t('logIn')} />
+          )}
+        </GreaterThanMobile>
+      </Container>
+    </StyledHeader>
   );
 };
 

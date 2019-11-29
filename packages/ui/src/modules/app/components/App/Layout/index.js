@@ -9,7 +9,6 @@ import { Header } from './Header';
 import { Main } from './Main';
 import { Meta } from './Meta';
 import { Navigation } from './Navigation';
-import { SkipToContentLink } from './SkipToContentLink';
 import { styles as themeStyles } from './theme';
 
 const Container = styled.div`
@@ -38,7 +37,6 @@ const Layout = () => (
   <Container>
     <Meta />
     <FavIcon />
-    <SkipToContentLink />
     <Header />
     <Navigation />
     <Main />
