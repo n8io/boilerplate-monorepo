@@ -6,7 +6,7 @@ import { CustomProperty } from 'types/customProperties';
 import { GridTemplateArea } from 'types/gridTemplateArea';
 
 const Image = styled.img`
-  border: 1px solid ${CustomProperty.BORDER_COLOR};
+  border: 1px solid ${CustomProperty.CUSTOM_BORDER_COLOR};
   border-radius: 100%;
   grid-area: ${GridTemplateArea.AVATAR};
 `;

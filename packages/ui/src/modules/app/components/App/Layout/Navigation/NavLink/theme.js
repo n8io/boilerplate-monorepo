@@ -16,12 +16,12 @@ export const variables = theme(Theme.PROP_NAME, {
     }
 
     &[aria-current='page'] {
-      background-color: ${CustomProperty.NAV_LINK_BACKGROUND_COLOR};
+      background-color: ${CustomProperty.COLOR_PRIMARY_LIGHT};
       color: ${CustomProperty.NAV_LINK_COLOR};
 
       &:focus,
       &:hover {
-        background-color: ${CustomProperty.NAV_LINK_BACKGROUND_COLOR};
+        background-color: ${CustomProperty.COLOR_PRIMARY_LIGHT};
         color: ${CustomProperty.NAV_LINK_COLOR};
       }
     }
