@@ -23,6 +23,11 @@ const StyledNavLink = styled(RouterNavLink)`
   padding: 0 calc(${CustomProperty.BASE_UNIT} * 0.5);
   user-select: none;
   width: 100%;
+
+  &[aria-current='page'] {
+    cursor: default;
+    pointer-events: none;
+  }
 `;
 
 const NavLink = ({ route, ...props }) => {

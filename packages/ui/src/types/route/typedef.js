@@ -23,6 +23,11 @@ export const Enumeration = {
     name: 'dashboard',
     path: '/',
   },
+  LOGOUT: {
+    icon: AiOutlineFileSearch,
+    name: 'logOut',
+    path: '/',
+  },
   NOT_FOUND: {
     [SORT_PROP_NAME]: config.isDebug ? 100 : undefined,
     icon: AiOutlineFileSearch,

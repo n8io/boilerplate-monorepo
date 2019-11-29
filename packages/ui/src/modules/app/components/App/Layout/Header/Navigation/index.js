@@ -11,6 +11,7 @@ import styled from 'styled-components/macro';
 import { CustomProperty } from 'types/customProperties';
 import { GridTemplateArea } from 'types/gridTemplateArea';
 import { Route } from 'types/route';
+import { AuthButton } from './AuthButton';
 import { NavLink } from './NavLink';
 import { styles as themeStyles } from './theme';
 
@@ -53,6 +54,7 @@ const InnerSideBar = ({ onClose, t }) => (
       {routes.map(route => (
         <NavLink key={route.name} onClick={onClose} route={route} />
       ))}
+      <AuthButton onClick={onClose} />
     </Container>
     <Button
       context={Context.LINK}

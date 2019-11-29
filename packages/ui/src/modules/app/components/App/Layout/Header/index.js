@@ -1,15 +1,16 @@
 import { A11y, Site } from '@boilerplate-monorepo/ui-common';
-import { config } from 'config';
+import { prop } from 'ramda';
 import React from 'react';
 import { GreaterThanMobile } from 'shared/Breakpoints';
+import { Button, Context } from 'shared/Button';
 import { EllipsiedText } from 'shared/EllipsiedText';
+import { useAuth } from 'shared/useAuth';
+import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
 import { CustomProperty } from 'types/customProperties';
 import { GridTemplateArea } from 'types/gridTemplateArea';
 import { Avatar } from './Avatar';
 import { Navigation } from './Navigation';
-
-const { AVATAR_EMAIL } = config;
 
 const { Role } = A11y;
 const Container = styled.div`
@@ -32,16 +33,40 @@ const StyledHeader = styled(EllipsiedText)`
   width: 100%;
 `;
 
-const Header = () => (
-  <Container>
-    <StyledHeader as="header" role={Role.BANNER} title={Site.name}>
-      {Site.name}
-    </StyledHeader>
-    <GreaterThanMobile>
-      {AVATAR_EMAIL && <Avatar email={AVATAR_EMAIL} />}
-    </GreaterThanMobile>
-    <Navigation />
-  </Container>
-);
+const ImageButton = styled(Button)`
+  padding: calc(${CustomProperty.BASE_UNIT} * 0.25);
+`;
+
+const Header = () => {
+  const t = useTranslate({
+    component: 'common',
+    namespace: 'common',
+  });
+
+  const { isAuthenticated, login, logout, user } = useAuth();
+  const email = prop('email', user);
+
+  return (
+    <Container>
+      <StyledHeader as="header" role={Role.BANNER} title={Site.name}>
+        {Site.name}
+      </StyledHeader>
+      <GreaterThanMobile>
+        {isAuthenticated ? (
+          <ImageButton
+            context={Context.LINK}
+            label={t('logOut')}
+            onClick={logout}
+          >
+            <Avatar email={email} />
+          </ImageButton>
+        ) : (
+          <Button context={Context.LINK} onClick={login} text={t('logIn')} />
+        )}
+      </GreaterThanMobile>
+      <Navigation />
+    </Container>
+  );
+};
 
 export { Header };
