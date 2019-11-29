@@ -18,8 +18,8 @@ const StyledNavLink = styled(RouterNavLink)`
   border-bottom: 1px solid ${CustomProperty.CUSTOM_BORDER_COLOR};
   color: ${CustomProperty.NAV_LINK_COLOR_HOVER};
   display: grid;
+  grid-auto-flow: column;
   grid-column-gap: 0.25rem;
-  grid-template-columns: auto 1fr;
   height: calc(${CustomProperty.LAYOUT_MAIN_BREADCRUMB_HEIGHT} + 1px);
   justify-content: start;
   padding: 0 calc(${CustomProperty.BASE_UNIT} * 0.5);
