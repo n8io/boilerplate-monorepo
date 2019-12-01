@@ -24,7 +24,7 @@ const AuthButton = () => {
   const onClickProxy = isAuthenticated ? logout : login;
   const route = isAuthenticated ? Route.LOGOUT : Route.LOGIN;
 
-  return <StyledNavLink data-auth-link onClick={onClickProxy} route={route} />;
+  return <StyledNavLink onClick={onClickProxy} route={route} />;
 };
 
 export { AuthButton };

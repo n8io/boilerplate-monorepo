@@ -14,7 +14,7 @@ const Button = styled(SharedButton)`
   border-bottom: 1px ${CustomProperty.CUSTOM_BORDER_COLOR} solid;
   display: grid;
   font-size: calc(${CustomProperty.BASE_UNIT} * 1.5);
-  grid-column-gap: 0.25rem;
+  grid-column-gap: calc(${CustomProperty.BASE_UNIT} * 0.5);
   grid-template-columns: auto 1fr;
   height: calc(${CustomProperty.LAYOUT_MAIN_BREADCRUMB_HEIGHT} * 2);
   justify-content: start;
