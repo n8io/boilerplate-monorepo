@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://n8io.github.io/boilerplate-monorepo",
   "engines": {
-    "node": "^12.13.1"
+    "node": "^12.13.0"
   },
   "scripts": {
     "build": "craco build",
