@@ -1,10 +1,15 @@
 name: Deploy to GitHub Pages
+
 on:
   push:
     branches:
       - master
+
 jobs:
   build-and-deploy:
+    strategy:
+      matrix:
+        node-version: [13.x]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
