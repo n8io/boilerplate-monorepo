@@ -12,7 +12,7 @@ jobs:
 
       - name: Install Lerna
         run: |
-          npm install -g lerna
+          npm install lerna
 
       - name: Install dependencies
         run: |
