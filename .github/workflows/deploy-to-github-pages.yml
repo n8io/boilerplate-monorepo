@@ -27,7 +27,7 @@ jobs:
 
       - name: Clean up
         run: |
-          tar -czvf build.tar.gz packages/ui/build
+          (cd packages/ui && tar -czvf ../../build.tar.gz ./build)
           rm -v !("build.tar.gz"|".git")
           tar -xzvf build.tar.gz
           rm -f build.tar.gz
@@ -37,4 +37,4 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: packages/ui/build
+          FOLDER: build
