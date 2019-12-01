@@ -28,7 +28,6 @@ jobs:
       - name: Clean up
         run: |
           (cd packages/ui && tar -czvf ../../build.tar.gz ./build)
-          rm -v \!("build.tar.gz"|".git")
           tar -xzvf build.tar.gz
           rm -f build.tar.gz
 
