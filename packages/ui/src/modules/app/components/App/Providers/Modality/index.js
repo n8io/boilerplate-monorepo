@@ -18,7 +18,7 @@ export const styles = css`
   }
 `;
 
-export const Modality = () => {
+const Modality = () => {
   const { update: updateModality } = useModality();
 
   useEffect(() => {
@@ -43,3 +43,5 @@ export const Modality = () => {
 
   return null;
 };
+
+export { Modality };

@@ -1,5 +1,6 @@
 import { Breakpoint } from '@boilerplate-monorepo/ui-common';
 import React from 'react';
+import { GreaterThanMobile } from 'shared/Breakpoints';
 import styled from 'styled-components/macro';
 import media from 'styled-media-query';
 import { GridTemplateArea } from 'types/gridTemplateArea';
@@ -9,7 +10,6 @@ import { Header } from './Header';
 import { Main } from './Main';
 import { Meta } from './Meta';
 import { Navigation } from './Navigation';
-import { SkipToContentLink } from './SkipToContentLink';
 import { styles as themeStyles } from './theme';
 
 const Container = styled.div`
@@ -38,9 +38,10 @@ const Layout = () => (
   <Container>
     <Meta />
     <FavIcon />
-    <SkipToContentLink />
     <Header />
-    <Navigation />
+    <GreaterThanMobile>
+      <Navigation />
+    </GreaterThanMobile>
     <Main />
     <Footer />
   </Container>
