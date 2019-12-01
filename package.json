@@ -11,7 +11,7 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "clean": "yarn run -s dcd && yarn run -s dc down --remove-orphans",
-    "dc": "docker-compose",
+    "dc": "docker-compose --project-directory . --file ./docker/docker-compose.yml",
     "dcd": "yarn run -s dc kill",
     "dclf": "yarn run -s dc logs -f",
     "dcu": "yarn run -s dc up --force-recreate",
