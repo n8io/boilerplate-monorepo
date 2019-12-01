@@ -3,6 +3,8 @@ import React from 'react';
 import styled from 'styled-components/macro';
 import { CustomProperty } from 'types/customProperties';
 
+const domId = 'content-body';
+
 const Container = styled.section`
   display: flex;
   flex-direction: column;
@@ -22,6 +24,7 @@ const Body = ({
     className={className}
     data-testid={dataTestId}
     hasBreadcrumbs={hasBreadcrumbs}
+    id={domId}
     tabIndex={0}
   >
     {children}
@@ -40,4 +43,4 @@ Body.propTypes = {
   hasBreadcrumbs: bool,
 };
 
-export { Body };
+export { Body, domId };
