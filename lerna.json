@@ -1,6 +1,13 @@
 {
+  "command": {
+    "version": {
+      "allowBranch": "master"
+    }
+  },
   "npmClient": "yarn",
-  "packages": ["packages/*"],
+  "packages": [
+    "packages/*"
+  ],
   "useWorkspaces": true,
-  "version": "1.0.0"
+  "version": "1.0.1-alpha.0"
 }

@@ -14,8 +14,9 @@ const reactVars = pipe(
   filter(key => key.toString().startsWith(REACT_APP_PREFIX)),
   map(key => [key.replace(REACT_APP_PREFIX, ''), envVars[key]]),
   fromPairs,
-  ({ SENTRY_ENV, ...rest }) => ({
+  ({ PUBLIC_URL, SENTRY_ENV, ...rest }) => ({
     ...rest,
+    PUBLIC_URL: defaultTo('/', PUBLIC_URL),
     SENTRY_ENV: defaultTo(NODE_ENV, SENTRY_ENV),
   })
 )(envVars);

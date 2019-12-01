@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import { ErrorPage } from '../ErrorPage';
 
-const { SENTRY_DSN, SENTRY_ENV, RELEASE_HASH } = config;
+const { SENTRY_DSN, SENTRY_ENV, RELEASE } = config;
 
 class ErrorBoundary extends Component {
   static defaultProps = {
@@ -44,7 +44,7 @@ class ErrorBoundary extends Component {
     Sentry.init({
       dsn: SENTRY_DSN,
       environment: SENTRY_ENV,
-      release: RELEASE_HASH,
+      release: RELEASE,
     });
   }
 

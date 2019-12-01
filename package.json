@@ -2,7 +2,7 @@
   "name": "boilerplate-monorepo",
   "private": true,
   "engines": {
-    "node": "^13.1.0"
+    "node": "^12.13.0"
   },
   "license": "MIT",
   "workspaces": [
@@ -10,6 +10,7 @@
   ],
   "scripts": {
     "bootstrap": "lerna bootstrap",
+    "bump": "lerna version prepatch --no-commit-hooks --yes",
     "clean": "yarn run -s dcd && yarn run -s dc down --remove-orphans",
     "dc": "docker-compose --project-directory . --file ./docker/docker-compose.yml",
     "dcd": "yarn run -s dc kill",
