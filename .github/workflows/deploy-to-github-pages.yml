@@ -10,14 +10,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
-      - name: Install Lerna
-        run: |
-          npm install lerna
-
       - name: Install dependencies
         run: |
           cd packages/ui
-          lerna bootstrap
+          npx lerna bootstrap
 
       - name: Build bundle
         run: |
