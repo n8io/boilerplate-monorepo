@@ -17,13 +17,12 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd packages/ui
           npx lerna bootstrap
 
       - name: Build bundle
         run: |
           cd packages/ui
-          npm build
+          npm run-script build
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
