@@ -22,7 +22,15 @@ jobs:
       - name: Build bundle
         run: |
           cd packages/ui
+          rm -f lefthook.yml
           npm run-script build
+
+      - name: Clean up
+        run: |
+          tar -czvf build.tar.gz packages/ui/build
+          rm -v !("build.tar.gz"|".git")
+          tar -xzvf build.tar.gz
+          rm -f build.tar.gz
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
