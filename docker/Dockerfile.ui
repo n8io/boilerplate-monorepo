@@ -1,4 +1,4 @@
-FROM node:13.1.0-alpine
+FROM node:12.13.0-alpine
 LABEL \
   maintainer.name="Nate Clark" \
   maintainer.email="n8@n8io.com" \

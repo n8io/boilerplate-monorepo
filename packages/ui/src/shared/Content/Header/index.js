@@ -1,3 +1,4 @@
+import { Utils } from '@boilerplate-monorepo/common';
 import { SkipToDestination } from '@boilerplate-monorepo/ui-common';
 import { node, string } from 'prop-types';
 import React, { useLayoutEffect, useState, useCallback } from 'react';
@@ -51,7 +52,9 @@ const Container = styled.div`
 
 const H1 = styled(EllipsiedText)`
   margin-bottom: 0;
+  transition: font-size 0.5s ${CustomProperty.TRANSITION_TIMING_FUNCTION};
 
+  /* stylelint-disable-next-line order/properties-alphabetical-order */
   ${({ isScrolled }) =>
     isScrolled &&
     css`
@@ -63,13 +66,15 @@ const Header = ({ children, title }) => {
   const { isEnabled: isModalityEnabled } = useModality();
   const [isScrolled, beScrolled] = useState(false);
 
-  const onScroll = useCallback(() => {
-    const isTop = !document.getElementById(bodyDomId).scrollTop;
+  const onScroll = useCallback(
+    Utils.debounce(() => {
+      const isTop = !document.getElementById(bodyDomId).scrollTop;
 
-    if (isTop === isScrolled) {
-      beScrolled(!isScrolled);
-    }
-  });
+      if (isTop === isScrolled) {
+        beScrolled(!isScrolled);
+      }
+    })
+  );
 
   useLayoutEffect(() => {
     document.getElementById(bodyDomId).addEventListener('scroll', onScroll);
