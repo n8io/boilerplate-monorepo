@@ -9,7 +9,7 @@ jobs:
   build-and-deploy:
     strategy:
       matrix:
-        node-version: [13.x]
+        node-version: [12.x]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
