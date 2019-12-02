@@ -30,4 +30,5 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
+          CLEAN: true
           FOLDER: packages/ui/build

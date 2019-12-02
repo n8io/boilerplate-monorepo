@@ -11,10 +11,12 @@ import { GridTemplateArea } from 'types/gridTemplateArea';
 import { PageTitle } from '../../PageTitle';
 import { domId as bodyDomId } from '../Body';
 import { SkipToNavLink } from './SkipToNavLink';
+import { styles as themeStyles } from './theme';
 
 const Container = styled.div`
   align-items: center;
-  border-bottom: 2px solid ${CustomProperty.CUSTOM_BORDER_COLOR};
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
   display: grid;
   grid-auto-flow: column;
   grid-template-areas: '. . ${GridTemplateArea.NAV_MOBILE}';
@@ -22,12 +24,7 @@ const Container = styled.div`
   height: ${CustomProperty.LAYOUT_MAIN_HEADER_HEIGHT};
   margin: calc(${CustomProperty.BASE_UNIT} * 0.5) ${CustomProperty.BASE_UNIT} 0;
   padding: 0;
-  transition: border-width 0.5s ${
-    CustomProperty.TRANSITION_TIMING_FUNCTION
-  }, height 0.5s ${CustomProperty.TRANSITION_TIMING_FUNCTION}, margin 0.5s ${
-  CustomProperty.TRANSITION_TIMING_FUNCTION
-}, padding 0.5s ${CustomProperty.TRANSITION_TIMING_FUNCTION};
-
+  transition: all 0.5s ${CustomProperty.TRANSITION_TIMING_FUNCTION};
   
   &::before {
     opacity: 0;
@@ -35,6 +32,7 @@ const Container = styled.div`
   }
 
   /* stylelint-disable-next-line order/properties-alphabetical-order */
+  ${themeStyles}
   ${Fade.top}
   ${({ isScrolled }) =>
     isScrolled &&
