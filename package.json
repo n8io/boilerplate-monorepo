@@ -1,6 +1,7 @@
 {
   "name": "boilerplate-monorepo",
   "private": true,
+  "homepage": "http://n8io.github.io/boilerplate-monorepo",
   "engines": {
     "node": "^12.13.0"
   },
