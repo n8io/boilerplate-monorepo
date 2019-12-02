@@ -26,19 +26,9 @@ jobs:
           rm -rf build
           npm run-script build
 
-      - name: Clean up
-        run: |
-          (cd packages/ui && tar -czvf ../../build.tar.gz ./build)
-          tar -xzvf build.tar.gz
-          rm -rf build.tar.gz node_modules packages
-          echo "node_modules/" > .gitignore
-          echo "packages/" >> .gitignore
-          ls -lFa
-          git status
-
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: build
+          FOLDER: packages/ui/build

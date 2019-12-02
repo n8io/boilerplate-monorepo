@@ -2,7 +2,7 @@
   "name": "@boilerplate-monorepo/ui",
   "version": "1.0.0",
   "private": true,
-  "homepage": "http://n8io.github.io/boilerplate-monorepo",
+  "homepage": "https://n8io.github.io/boilerplate-monorepo",
   "engines": {
     "node": "^12.13.0"
   },
