@@ -13,6 +13,8 @@ import { domId as bodyDomId } from '../Body';
 import { SkipToNavLink } from './SkipToNavLink';
 import { styles as themeStyles } from './theme';
 
+const DELAY = '0.5s';
+
 const Container = styled.div`
   align-items: center;
   border-bottom-style: solid;
@@ -24,11 +26,16 @@ const Container = styled.div`
   height: ${CustomProperty.LAYOUT_MAIN_HEADER_HEIGHT};
   margin: calc(${CustomProperty.BASE_UNIT} * 0.5) ${CustomProperty.BASE_UNIT} 0;
   padding: 0;
-  transition: all 0.5s ${CustomProperty.TRANSITION_TIMING_FUNCTION};
+  transition: 
+    border ${DELAY} ${CustomProperty.TRANSITION_TIMING_FUNCTION},
+    height ${DELAY} ${CustomProperty.TRANSITION_TIMING_FUNCTION},
+    margin ${DELAY} ${CustomProperty.TRANSITION_TIMING_FUNCTION},
+    padding ${DELAY} ${CustomProperty.TRANSITION_TIMING_FUNCTION}
+    ;
   
   &::before {
     opacity: 0;
-    transition: opacity 0.5s ${CustomProperty.TRANSITION_TIMING_FUNCTION};
+    transition: opacity ${DELAY} ${CustomProperty.TRANSITION_TIMING_FUNCTION};
   }
 
   /* stylelint-disable-next-line order/properties-alphabetical-order */
