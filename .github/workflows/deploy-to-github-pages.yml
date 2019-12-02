@@ -30,6 +30,10 @@ jobs:
           (cd packages/ui && tar -czvf ../../build.tar.gz ./build)
           tar -xzvf build.tar.gz
           rm -rf build.tar.gz node_modules packages
+          echo "node_modules/" > .gitignore
+          echo "packages/" >> .gitignore
+          ls -lFa
+          git status
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
