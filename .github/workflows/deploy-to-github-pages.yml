@@ -17,8 +17,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd packages/ui
-          npm install --production
+          npx lerna bootstrap
 
       - name: Build bundle
         run: |
