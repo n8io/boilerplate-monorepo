@@ -23,17 +23,9 @@ jobs:
         run: |
           cd packages/ui
           rm -rf build
-          npm run-script build
+          yarn run -s build:gh
 
-      - name: Clean up
+      - name: Deploy to GitHub pages
         run: |
-          rm -rf lefthook.yml
-
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@3.0.4
-        with:
-          BASE_BRANCH: master
-          BRANCH: gh-pages
-          CLEAN: true
-          FOLDER: packages/ui/build
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          cd packages/ui
+          yarn run -s deploy:gh

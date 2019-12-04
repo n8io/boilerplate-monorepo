@@ -13,7 +13,7 @@ import { domId as bodyDomId } from '../Body';
 import { SkipToNavLink } from './SkipToNavLink';
 import { styles as themeStyles } from './theme';
 
-const DELAY = '0.5s';
+const DELAY = '0.3s';
 
 const Container = styled.div`
   align-items: center;
