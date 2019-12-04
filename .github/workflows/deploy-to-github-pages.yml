@@ -25,7 +25,7 @@ jobs:
           rm -rf build
           yarn run -s build:gh
 
-      - name: GitHub Pages Deploy
+      - name: Deploy
         uses: maxheld83/ghpages@v0.2.1
         with:
           BUILD_DIR: packages/ui/build

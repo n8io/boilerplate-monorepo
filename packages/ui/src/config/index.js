@@ -29,6 +29,4 @@ const config = {
   isProduction: NODE_ENV.startsWith(PRODUCTION_PREFIX),
 };
 
-console.log(config);
-
 export { config };
