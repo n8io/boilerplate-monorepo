@@ -1,3 +1,4 @@
+import { config } from 'config';
 import { node } from 'prop-types';
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -10,6 +11,8 @@ import { Modality } from './Modality';
 import { Theme } from './Theme';
 import { TranslationSync } from './TranslationSync';
 
+const { PUBLIC_URL: basename } = config;
+
 const Providers = ({ children }) => (
   <Suspense>
     <Logging />
@@ -20,7 +23,7 @@ const Providers = ({ children }) => (
         <Modality />
         <TranslationSync />
         <Auth>
-          <Router>{children}</Router>
+          <Router basename={basename}>{children}</Router>
         </Auth>
       </>
     </Theme>
