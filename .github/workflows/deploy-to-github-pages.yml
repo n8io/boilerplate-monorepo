@@ -15,12 +15,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
-      - name: Setup Git config
-        run: |
-          git init
-          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-          git config --global user.name "${GITHUB_ACTOR}"
-
       - name: Install dependencies
         run: |
           npx lerna bootstrap
@@ -31,7 +25,7 @@ jobs:
           rm -rf build
           yarn run -s build:gh
 
-      - name: Deploy to GitHub pages
-        run: |
-          cd packages/ui
-          yarn run -s deploy:gh
+      - name: GitHub Pages Deploy
+        uses: maxheld83/ghpages@v0.2.1
+        with:
+          BUILD_DIR: packages/ui/build
