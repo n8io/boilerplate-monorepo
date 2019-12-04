@@ -9,7 +9,7 @@
     "packages/*"
   ],
   "scripts": {
-    "bump": "lerna version patch --no-commit-hooks --yes",
+    "bump": "lerna version prepatch --no-commit-hooks --yes",
     "bootstrap": "lerna bootstrap",
     "clean": "yarn run -s dcd && yarn run -s dc down --remove-orphans",
     "dc": "docker-compose --project-directory . --file ./docker/docker-compose.yml",

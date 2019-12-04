@@ -32,3 +32,9 @@ jobs:
           BRANCH: gh-pages
           CLEAN: true
           FOLDER: packages/ui/build
+
+      - name: Version bump
+        run: |
+          git checkout .
+          git clean -fd
+          yarn run -s bump
