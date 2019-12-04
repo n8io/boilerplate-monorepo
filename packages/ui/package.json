@@ -13,7 +13,8 @@
     "deploy:gh": "REACT_APP_PUBLIC_URL=/boilerplate-monorepo yarn -s deploy",
     "prebuild": "node .prebuild",
     "start": "craco start",
-    "test": "craco test"
+    "test": "craco test",
+    "version": "node .prebuild"
   },
   "eslintConfig": {
     "extends": "react-app"

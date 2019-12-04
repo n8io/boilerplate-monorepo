@@ -1,6 +1,7 @@
 {
   "name": "@boilerplate-monorepo/ui-common",
   "version": "1.0.0",
+  "private": true,
   "module": "index.js",
   "author": "Nate Clark <n8@n8io.com>",
   "license": "MIT",
