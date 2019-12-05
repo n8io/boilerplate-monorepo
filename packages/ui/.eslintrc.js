@@ -17,6 +17,9 @@ module.exports = {
     'prettier',
     'prettier/react',
   ],
+  globals: {
+    td: true,
+  },
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
