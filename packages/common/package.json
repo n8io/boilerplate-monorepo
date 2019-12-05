@@ -5,8 +5,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "test": "jest",
-    "test:watch": "yarn -s test --watch"
+    "test": "jest"
   },
   "dependencies": {
     "ramda": "^0.26.1"
