@@ -1,6 +1,7 @@
 import { Time } from '@boilerplate-monorepo/common';
 import * as Sentry from '@sentry/browser';
 import { LogLevel } from '@sentry/types';
+import { config } from 'config';
 import LogRocket from 'logrocket';
 import { prop } from 'ramda';
 import React, { useEffect, useState } from 'react';
@@ -11,9 +12,12 @@ import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
 import { Route } from 'types/route';
 
+const { isTelemetryEnabled } = config;
 const SECONDS_TO_REDIRECT = 15;
 
 const logNotFound = () => {
+  if (!isTelemetryEnabled) return;
+
   Sentry.withScope(scope => {
     scope.setExtra('sessionUrl', LogRocket.sessionURL);
     scope.setExtra('pathname', prop('pathname', window.location));
