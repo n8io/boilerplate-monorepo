@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Loader/> renders children 1`] = `
+<div
+  class="Loader__Container-sc-16qesyr-0 gAhqLO"
+>
+  <div
+    class="Loader__Ring-sc-16qesyr-1 cfkhGk"
+    size="24"
+  >
+    <div />
+    <div />
+    <div />
+    <div />
+  </div>
+  <div
+    aria-live="polite"
+    class="ScreenReaderNotification__Container-jzwqtd-0 huOtLM"
+  >
+    t(loadingScreenReader)
+  </div>
+</div>
+`;
