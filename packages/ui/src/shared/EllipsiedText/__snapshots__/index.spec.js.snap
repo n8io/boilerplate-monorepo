@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EllipsiedText/> renders children 1`] = `
+<div
+  class="EllipsiedText-o83sq0-0 bVGnli"
+>
+  CHILDREN
+</div>
+`;
