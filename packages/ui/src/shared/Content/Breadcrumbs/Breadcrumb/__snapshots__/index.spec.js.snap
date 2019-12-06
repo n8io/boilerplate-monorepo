@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Breadcrumb/> renders children 1`] = `
+<li
+  class="Breadcrumb__StyledListItem-sc-1flrm6b-0 jSCten"
+>
+  <a
+    class="Breadcrumb__StyledNavLink-sc-1flrm6b-1 cdgvdI"
+    href="/TO"
+  >
+    TEXT
+  </a>
+</li>
+`;

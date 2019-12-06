@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Breadcrumbs/> renders properly 1`] = `
+<ul
+  class="Breadcrumbs__Container-sc-10mj4cz-0 liBMwT"
+>
+  <x-breadcrumb
+    exact="true"
+    text="t(home)"
+    to="/"
+  />
+  <x-child>
+    TEXT
+  </x-child>
+</ul>
+`;

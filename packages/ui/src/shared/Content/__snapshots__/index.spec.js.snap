@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Content/> renders children 1`] = `
+<div
+  class="Content__Container-sc-1oenkpn-0 hrIdWm"
+>
+  CHILDREN
+</div>
+`;
