@@ -1,4 +1,3 @@
-import { Utils } from '@boilerplate-monorepo/common';
 import { useEffect, useRef } from 'react';
 
 export const useTimeout = (callback, delay) => {
@@ -17,6 +16,6 @@ export const useTimeout = (callback, delay) => {
       return () => clearTimeout(id);
     }
 
-    return Utils.noop;
+    return () => null;
   }, [delay]);
 };
