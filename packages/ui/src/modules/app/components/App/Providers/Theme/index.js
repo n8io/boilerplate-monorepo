@@ -6,13 +6,10 @@ import {
 import { node } from 'prop-types';
 import { defaultTo } from 'ramda';
 import React, { useCallback, useState } from 'react';
-import { useModality } from 'shared/useModality';
-import { useTheme } from 'shared/useTheme';
 import { ThemeProvider } from 'styled-components/macro';
+import { Provider } from 'types/provider';
 
 const Theme = ({ children }) => {
-  const { provider: ThemeSwitcherProvider } = useTheme();
-  const { provider: ModalityProvider } = useModality();
   const defaultTheme = defaultTo(
     {
       [ThemeType.PROP_NAME]: ThemeType.initial,
@@ -55,11 +52,11 @@ const Theme = ({ children }) => {
   };
 
   return (
-    <ModalityProvider value={modalityContext}>
-      <ThemeSwitcherProvider value={themeContext}>
+    <Provider.MODALITY value={modalityContext}>
+      <Provider.THEME_SWITCHER value={themeContext}>
         <ThemeProvider theme={theme}>{children}</ThemeProvider>
-      </ThemeSwitcherProvider>
-    </ModalityProvider>
+      </Provider.THEME_SWITCHER>
+    </Provider.MODALITY>
   );
 };
 

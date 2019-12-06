@@ -1,10 +1,6 @@
-import { createContext, useContext } from 'react';
+import { useContext } from 'react';
+import { Context } from 'types/context';
 
-const ThemeSwitcherContext = createContext();
-
-const useTheme = () => ({
-  provider: ThemeSwitcherContext.Provider,
-  ...useContext(ThemeSwitcherContext),
-});
+const useTheme = () => useContext(Context.THEME_SWITCHER);
 
 export { useTheme };

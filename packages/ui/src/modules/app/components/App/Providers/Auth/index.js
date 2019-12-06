@@ -1,12 +1,11 @@
 import { config } from 'config';
 import { node } from 'prop-types';
 import React, { useState, useCallback } from 'react';
-import { useAuth } from 'shared/useAuth';
+import { Provider } from 'types/provider';
 
 const { AVATAR_EMAIL } = config;
 
 const Auth = ({ children }) => {
-  const { provider: AuthProvider } = useAuth();
   const [user, setUser] = useState(null);
 
   const login = useCallback(() =>
@@ -24,7 +23,7 @@ const Auth = ({ children }) => {
     user,
   };
 
-  return <AuthProvider value={authContext}>{children}</AuthProvider>;
+  return <Provider.AUTH value={authContext}>{children}</Provider.AUTH>;
 };
 
 Auth.propTypes = {

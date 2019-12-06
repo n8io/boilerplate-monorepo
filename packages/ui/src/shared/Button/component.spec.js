@@ -31,8 +31,8 @@ describe('<Button/>', () => {
     const button = getByRole(Type.BUTTON);
 
     expect(button).toHaveClass(className);
-    expect(button).toHaveAttribute(otherProp);
-    expect(button).toHaveAttribute(title);
+    expect(button).toHaveAttribute(otherProp, otherProp);
+    expect(button).toHaveAttribute(title, title);
   });
 
   test('has an aria label', () => {
@@ -42,10 +42,11 @@ describe('<Button/>', () => {
   });
 
   test('has aria disabled when disabled', () => {
-    const { getByRole } = renderComponent({ disabled: true });
+    const disabled = true;
+    const { getByRole } = renderComponent({ disabled });
     const button = getByRole(Type.BUTTON);
 
-    expect(button).toHaveAttribute('aria-disabled');
+    expect(button).toHaveAttribute('aria-disabled', disabled.toString());
     expect(button).toBeDisabled();
   });
 });
