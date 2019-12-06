@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SkipLink/> renders children 1`] = `
+<a
+  class="SkipLink__Container-invh0z-0 iEXORv"
+  href="#main"
+>
+  TEXT
+</a>
+`;
