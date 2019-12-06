@@ -40,6 +40,7 @@ module.exports = {
     'max-statements': 'off',
     'no-process-env': 'warn',
     'prefer-named-capture-group': 'warn',
+    'sort-keys': ['warn', 'asc', { natural: true }],
   },
   settings: {
     'import/resolver': {

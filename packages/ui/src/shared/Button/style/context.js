@@ -40,7 +40,7 @@ const styles = variants(Theme.PROP_NAME, Context.PROP_NAME, {
       border-color: transparent;
       color: ${CustomProperty.GRAYSCALE_WHITE};
       display: block;
-      padding: calc(${CustomProperty.BASE_UNIT_0_5};
+      padding: calc(${CustomProperty.BASE_UNIT_0_5});
       width: 100%;
 
       &[tabindex='0'] {

@@ -30,7 +30,7 @@
     "lint:js-prettier": "yarn -s linter:prettier '**/*.js'",
     "linter:eslint": "eslint --max-warnings 0 --report-unused-disable-directives",
     "linter:prettier": "prettier --check",
-    "linter:stylelint": "stylelint --max-warnings=0 --allow-empty-input",
+    "linter:stylelint": "stylelint --max-warnings=0 --allow-empty-input --config packages/ui/.stylelintrc.js",
     "logs": "yarn run -s run-all logs:*",
     "logs:ui": "yarn run -s dclf ui",
     "run-all": "npm-run-all --parallel",
