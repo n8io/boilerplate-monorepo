@@ -35,7 +35,9 @@
     "logs:ui": "yarn run -s dclf ui",
     "run-all": "npm-run-all --parallel",
     "start:ui": "lerna run start --loglevel silent --scope \"@${npm_package_name}/ui\" --stream",
-    "start": "yarn run -s run-all start:*"
+    "start": "yarn run -s run-all start:*",
+    "test": "CI=true lerna run test --stream -- --passWithNoTests --ci",
+    "test:watch": "lerna run test --stream -- --passWithNoTests --color --watch"
   },
   "devDependencies": {
     "@arkweid/lefthook": "^0.6.3",

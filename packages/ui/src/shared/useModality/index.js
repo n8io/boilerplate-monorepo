@@ -1,10 +1,6 @@
-import { createContext, useContext } from 'react';
+import { useContext } from 'react';
+import { Context } from 'types/context';
 
-const ModalityContext = createContext();
-
-const useModality = () => ({
-  provider: ModalityContext.Provider,
-  ...useContext(ModalityContext),
-});
+const useModality = () => useContext(Context.MODALITY);
 
 export { useModality };

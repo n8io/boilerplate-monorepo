@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ScreenReaderNotification/> renders children 1`] = `
+<div
+  aria-live="polite"
+  class="ScreenReaderNotification__Container-jzwqtd-0 huOtLM"
+>
+  CHILDREN
+</div>
+`;

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Body/> renders children 1`] = `
+<section
+  class="Body__Container-sc-434ce0-0 cjTNqA"
+  id="content-body"
+  tabindex="0"
+>
+  CHILDREN
+</section>
+`;

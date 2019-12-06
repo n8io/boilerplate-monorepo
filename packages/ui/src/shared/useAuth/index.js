@@ -1,10 +1,6 @@
-import { createContext, useContext } from 'react';
+import { useContext } from 'react';
+import { Context } from 'types/context';
 
-const AuthContext = createContext();
-
-const useAuth = () => ({
-  provider: AuthContext.Provider,
-  ...useContext(AuthContext),
-});
+const useAuth = () => useContext(Context.AUTH);
 
 export { useAuth };

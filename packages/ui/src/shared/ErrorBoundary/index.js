@@ -71,7 +71,6 @@ ErrorBoundary.propTypes = {
   children: node.isRequired,
   i18n: object.isRequired,
   renderError: func,
-  t: func.isRequired,
 };
 
 const TranslatedErrorBoundary = withTranslation('error')(ErrorBoundary);

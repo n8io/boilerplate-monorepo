@@ -1,6 +1,6 @@
 export const Enumeration = {
-  DESKTOP: 'large',
-  MOBILE: 'small',
-  TABLET: 'medium',
-  XL: 'huge',
+  HUGE: 1440,
+  LARGE: 1170,
+  MEDIUM: 768,
+  SMALL: 450,
 };

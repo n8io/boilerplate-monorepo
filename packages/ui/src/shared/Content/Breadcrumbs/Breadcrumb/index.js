@@ -37,14 +37,10 @@ const StyledNavLink = styled(NavLink)`
   ${themeStyles}
 `;
 
-const StyledEnd = styled.span`
-  color: inherit;
-`;
-
 const Breadcrumb = ({ isEnd, text, ...props }) => (
   <StyledListItem>
     {isEnd ? (
-      <StyledEnd>{text}</StyledEnd>
+      <span>{text}</span>
     ) : (
       <StyledNavLink {...props}>{text}</StyledNavLink>
     )}

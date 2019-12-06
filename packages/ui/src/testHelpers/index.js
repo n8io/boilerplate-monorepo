@@ -1,9 +1,10 @@
-import { Theme } from '@boilerplate-monorepo/ui-common';
+import { Theme, Modality } from '@boilerplate-monorepo/ui-common';
 import { render } from '@testing-library/react';
 import { node } from 'prop-types';
 import React from 'react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components/macro';
+import { Provider } from 'types/provider';
 
 export * from '@testing-library/react';
 
@@ -12,7 +13,9 @@ jest.mock('shared/useTranslate');
 
 const AllTheProviders = ({ children }) => (
   <Router>
-    <ThemeProvider theme={Theme.example()}>{children}</ThemeProvider>
+    <Provider.MODALITY value={Modality.initial}>
+      <ThemeProvider theme={Theme.example()}>{children}</ThemeProvider>
+    </Provider.MODALITY>
   </Router>
 );
 
