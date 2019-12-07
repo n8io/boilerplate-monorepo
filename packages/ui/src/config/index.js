@@ -1,5 +1,14 @@
 import { LocalStorage } from '@boilerplate-monorepo/ui-common';
-import { defaultTo, filter, fromPairs, keys, map, pipe } from 'ramda';
+import {
+  both,
+  defaultTo,
+  filter,
+  fromPairs,
+  keys,
+  map,
+  pipe,
+  prop,
+} from 'ramda';
 
 const DEVELOPMENT_PREFIX = 'dev';
 const PRODUCTION_PREFIX = 'prod';
@@ -27,6 +36,10 @@ const config = {
   isDebug: Boolean(localStorage.getItem(LocalStorage.DEBUG)),
   isDevelopment: NODE_ENV.startsWith(DEVELOPMENT_PREFIX),
   isProduction: NODE_ENV.startsWith(PRODUCTION_PREFIX),
+  isTelemetryEnabled: both(
+    prop('LOGROCKET_APP_ID'),
+    prop('SENTRY_DSN')
+  )(reactVars),
 };
 
 export { config };

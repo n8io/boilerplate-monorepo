@@ -9,6 +9,7 @@
     "packages/*"
   ],
   "scripts": {
+    "🔥": "yarn run -s clean -v",
     "bootstrap": "lerna bootstrap",
     "bump": "lerna version prepatch --no-commit-hooks --yes",
     "clean": "yarn run -s dcd && yarn run -s dc down --remove-orphans",

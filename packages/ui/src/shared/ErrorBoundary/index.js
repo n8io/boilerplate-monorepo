@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import { ErrorPage } from '../ErrorPage';
 
-const { SENTRY_DSN, SENTRY_ENV, RELEASE } = config;
+const { SENTRY_DSN, SENTRY_ENV, RELEASE, isTelemetryEnabled } = config;
 
 class ErrorBoundary extends Component {
   static defaultProps = {
@@ -28,6 +28,8 @@ class ErrorBoundary extends Component {
   componentDidCatch(error, info) {
     this.setState({ error });
 
+    if (!isTelemetryEnabled) return;
+
     LogRocket.getSessionURL(sessionUrl => {
       Sentry.withScope(scope => {
         scope.setExtras(info);
@@ -41,6 +43,8 @@ class ErrorBoundary extends Component {
   }
 
   componentDidMount() {
+    if (!isTelemetryEnabled) return;
+
     Sentry.init({
       dsn: SENTRY_DSN,
       environment: SENTRY_ENV,
@@ -49,6 +53,8 @@ class ErrorBoundary extends Component {
   }
 
   onFeedbackClick() {
+    if (!isTelemetryEnabled) return;
+
     const { eventId } = this.state;
     const { i18n } = this.props;
     const { lang } = i18n;
