@@ -17,6 +17,14 @@ const Container = createGlobalStyle`
   ${modalityStyles}
   ${elementStyles}
   ${typographyStyles}
+ 
+  @media screen and (prefers-reduced-motion: reduce), (update: slow) {
+    * {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
 `;
 
 const GlobalStyle = () => <Container />;
