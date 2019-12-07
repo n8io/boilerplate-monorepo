@@ -66,7 +66,9 @@ const NavLink = ({ route, ...props }) => {
       <Button {...props} context={Context.LINK} label={t(name)}>
         <Container>
           {Icon && <Icon />}
-          <EllipsiedText>{t(name)}</EllipsiedText>
+          <Tablet>
+            <EllipsiedText>{t(name)}</EllipsiedText>
+          </Tablet>
         </Container>
       </Button>
     );

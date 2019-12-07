@@ -12,13 +12,15 @@ import { Meta } from './Meta';
 import { Navigation } from './Navigation';
 import { styles as themeStyles } from './theme';
 
+const maxMobileBreakpoint = Breakpoint.toPixels(Breakpoint.SMALL);
+
 const Container = styled.div`
   border: 0;
   box-sizing: border-box;
   display: grid;
   grid-template-areas: '${GridTemplateArea.HEADER} ${GridTemplateArea.HEADER}'
-      '${GridTemplateArea.MAIN} ${GridTemplateArea.MAIN}'
-      '${GridTemplateArea.FOOTER} ${GridTemplateArea.FOOTER}';
+    '${GridTemplateArea.MAIN} ${GridTemplateArea.MAIN}'
+    '${GridTemplateArea.FOOTER} ${GridTemplateArea.FOOTER}';
   grid-template-columns: auto 1fr;
   grid-template-rows: auto 1fr;
   height: 100%;
@@ -26,7 +28,7 @@ const Container = styled.div`
   padding: 0;
 
   /* stylelint-disable-next-line order/properties-alphabetical-order */
-  ${media.greaterThan(Breakpoint.MOBILE)`
+  ${media.greaterThan(maxMobileBreakpoint)`
     grid-template-areas: '${GridTemplateArea.HEADER} ${GridTemplateArea.HEADER}'
       '${GridTemplateArea.NAV} ${GridTemplateArea.MAIN}'
       '${GridTemplateArea.NAV} ${GridTemplateArea.FOOTER}';
