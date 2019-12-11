@@ -8,6 +8,7 @@ module.exports = {
     'plugin:eslint-comments/recommended',
     'plugin:import/recommended',
     'prettier',
+    'plugin:cypress/recommended',
   ],
   overrides: [
     {

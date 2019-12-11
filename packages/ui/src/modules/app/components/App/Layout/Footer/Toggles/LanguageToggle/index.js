@@ -61,6 +61,7 @@ const LanguageToggle = () => {
       <StyledDisclosure
         {...menu}
         aria-label={t('chooseALanguage')}
+        data-testid="language"
         context={Context.PRIMARY}
         size={Size.SMALL}
       >
@@ -78,6 +79,7 @@ const LanguageToggle = () => {
             aria-label={t('setLanguage', {
               language: LanguageDisplay[language],
             })}
+            data-testid={language}
             key={language}
             onClick={() => onLanguageClick(language)}
           >
