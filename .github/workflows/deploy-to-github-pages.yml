@@ -14,25 +14,26 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-
       - name: Install dependencies
-        run: |
-          npx lerna bootstrap
-
+        run: npx lerna bootstrap
       - name: Run linters
-        run: |
-          npm run lint
-
-      - name: Run tests
-        run: |
-          npm run test
-
+        run: npm run lint
+      - name: Run unit tests
+        run: npm run test
+      - name: Run integration tests
+        uses: cypress-io/github-action@v1
+        with:
+          browser: chrome
+          config-file: cypress/cypress.json
+          install: false
+          start: npm run start:ui
+          wait-on: 'http://localhost:3000'
+          wait-on-timeout: 120
       - name: Build bundle
         run: |
           cd packages/ui
           rm -rf build
           yarn run -s build:gh
-
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@3.0.4
         with:

@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-undef
 const globals = window || global;
 
 export const debounce = fn => {

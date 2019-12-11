@@ -40,6 +40,7 @@ const ThemeToggle = ({ isDarkMode, onToggle }) => {
   return (
     <ToggleButton
       {...longPressProps}
+      data-testid="theme"
       disabled={!isEnabled}
       label={t(i18nkey)}
       onClick={onToggleProxy}
