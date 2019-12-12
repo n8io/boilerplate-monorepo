@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NavLink/> renders properly 1`] = `
+<a
+  aria-current="page"
+  class="NavLink__StyledNavLink-sc-1ydrwhg-0 grfVIJ active"
+  href="/"
+  title="t(dashboard)"
+>
+  <svg
+    fill="currentColor"
+    height="1em"
+    stroke="currentColor"
+    stroke-width="0"
+    viewBox="0 0 24 24"
+    width="1em"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"
+    />
+  </svg>
+  <div
+    class="EllipsiedText-o83sq0-0 bVGnli"
+  >
+    t(dashboard)
+  </div>
+</a>
+`;

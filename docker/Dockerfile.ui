@@ -29,6 +29,4 @@ COPY \
   ./yarn.lock \
   ./
 
-USER node
-
 CMD ["yarn", "run", "-s", "start:ui"]

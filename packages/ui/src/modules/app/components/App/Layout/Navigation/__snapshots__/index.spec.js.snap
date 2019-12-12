@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Navigation/> renders properly 1`] = `
+<nav
+  class="Navigation__Container-hlefot-0 cHtxzR"
+  role="navigation"
+>
+  <div
+    class="Navigation__NavLinks-hlefot-1 jIMFKo"
+  >
+    <x-navlink
+      id="navigation"
+      route="[object Object]"
+    />
+    <x-navlink
+      route="[object Object]"
+    />
+  </div>
+  <x-authbutton />
+</nav>
+`;

@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FavIcon/> renders properly 1`] = `
+<x-helmet>
+  <link
+    href="https://ui-avatars.com/api/?rounded=true&bold=true&size=32&font-size=0.75&background=6d4baa&color=f6f6f6&name=A"
+    rel="shortcut icon"
+  />
+</x-helmet>
+`;

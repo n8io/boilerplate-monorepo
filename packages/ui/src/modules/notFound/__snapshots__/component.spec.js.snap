@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NotFound/> renders about page 1`] = `
+<x-page>
+  <x-content>
+    <x-breadcrumbs>
+      <x-breadcrumb
+        isend="true"
+        text="t(title)"
+        to="/404"
+      />
+    </x-breadcrumbs>
+    <x-header
+      title="t(title)"
+    />
+    <x-body>
+      <p>
+        t(resourceNotFound)
+        :
+        <span
+          class="component__Italicize-sc-1i8m538-0 cnPSsU"
+        >
+          /
+        </span>
+      </p>
+      <p>
+        t(returning, {"seconds":15})
+      </p>
+    </x-body>
+  </x-content>
+</x-page>
+`;

@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Main/> renders properly 1`] = `
+<main
+  class="Main__Container-sc-1i0e5od-0 ceqnPA"
+  role="main"
+>
+  <x-router />
+</main>
+`;
