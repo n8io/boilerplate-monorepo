@@ -1,6 +1,7 @@
 import { url } from 'gravatar';
 import { string } from 'prop-types';
 import React from 'react';
+import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
 import { CustomProperty } from 'types/customProperties';
 import { GridTemplateArea } from 'types/gridTemplateArea';
@@ -12,9 +13,13 @@ const Image = styled.img`
 `;
 
 const Avatar = ({ email }) => {
+  const t = useTranslate({
+    component: 'avatar',
+    namespace: 'app',
+  });
   const hash = url(email, { r: 'G', s: 30 });
 
-  return <Image alt={email} src={hash} />;
+  return <Image alt={t('avatarForEmail', { email })} src={hash} />;
 };
 
 Avatar.propTypes = {

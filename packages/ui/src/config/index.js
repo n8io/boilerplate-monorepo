@@ -12,6 +12,7 @@ import {
 
 const DEVELOPMENT_PREFIX = 'dev';
 const PRODUCTION_PREFIX = 'prod';
+const TEST_PREFIX = 'test';
 
 // eslint-disable-next-line no-process-env
 const { NODE_ENV = PRODUCTION_PREFIX, ...envVars } = process.env;
@@ -33,6 +34,7 @@ const reactVars = pipe(
 const config = {
   ...reactVars,
   NODE_ENV,
+  copyrightYear: 2019,
   isDebug: Boolean(localStorage.getItem(LocalStorage.DEBUG)),
   isDevelopment: NODE_ENV.startsWith(DEVELOPMENT_PREFIX),
   isProduction: NODE_ENV.startsWith(PRODUCTION_PREFIX),
@@ -40,6 +42,7 @@ const config = {
     prop('LOGROCKET_APP_ID'),
     prop('SENTRY_DSN')
   )(reactVars),
+  isTest: NODE_ENV.startsWith(TEST_PREFIX),
 };
 
 export { config };

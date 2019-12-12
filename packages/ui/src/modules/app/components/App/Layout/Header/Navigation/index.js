@@ -4,7 +4,6 @@ import React, { useCallback, useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { MdClose } from 'react-icons/md';
 import SideBar from 'react-sidebar';
-import { Mobile } from 'shared/Breakpoints';
 import { Button, Context, Size } from 'shared/Button';
 import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
@@ -99,7 +98,7 @@ const Navigation = () => {
   const onClose = () => onSetOpen(false);
 
   return (
-    <Mobile>
+    <>
       <OpenNavButton
         context={LINK}
         label={t('openNavigation')}
@@ -119,7 +118,7 @@ const Navigation = () => {
           <></>
         </SideBar>
       </div>
-    </Mobile>
+    </>
   );
 };
 

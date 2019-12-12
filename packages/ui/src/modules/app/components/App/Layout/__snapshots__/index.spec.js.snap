@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Layout/> when on larger than mobile renders properly 1`] = `
+<div
+  class="Layout__Container-e3nv7w-0 jLGuRX"
+>
+  <x-meta />
+  <x-favicon />
+  <x-header />
+  <x-greaterthanmobile>
+    <x-navigation />
+  </x-greaterthanmobile>
+  <x-main />
+  <x-footer />
+</div>
+`;
+
+exports[`<Layout/> when on mobile renders properly 1`] = `
+<div
+  class="Layout__Container-e3nv7w-0 jLGuRX"
+>
+  <x-meta />
+  <x-favicon />
+  <x-header />
+  <x-main />
+  <x-footer />
+</div>
+`;

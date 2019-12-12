@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PageTitle/> renders children 1`] = `
+<x-helmet>
+  <title>
+    Acme Inc
+     :: 
+    TITLE
+  </title>
+</x-helmet>
+`;

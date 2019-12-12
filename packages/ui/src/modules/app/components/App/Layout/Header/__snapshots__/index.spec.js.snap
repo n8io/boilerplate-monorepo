@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header/> when authenticated when on larger than mobile renders properly 1`] = `
+<header
+  class="Header__StyledHeader-sc-4wz997-1 cPWXaN"
+  role="banner"
+  title="Acme Inc"
+>
+  <x-skiptocontentlink />
+  <div
+    class="Header__Container-sc-4wz997-0 kkfqiI"
+  >
+    <div
+      class="EllipsiedText-o83sq0-0 bVGnli"
+    >
+      Acme Inc
+    </div>
+    <x-greaterthanmobile>
+      <button
+        aria-disabled="false"
+        aria-label="t(logOut)"
+        class="Button__Container-sc-1v65cga-0 ggxdnx Header__ImageButton-sc-4wz997-2 eSaMoc"
+        role="button"
+        type="button"
+      >
+        <x-avatar />
+      </button>
+    </x-greaterthanmobile>
+  </div>
+</header>
+`;
+
+exports[`<Header/> when authenticated when on mobile renders properly 1`] = `
+<header
+  class="Header__StyledHeader-sc-4wz997-1 cPWXaN"
+  role="banner"
+  title="Acme Inc"
+>
+  <x-skiptocontentlink />
+  <div
+    class="Header__Container-sc-4wz997-0 kkfqiI"
+  >
+    <div
+      class="EllipsiedText-o83sq0-0 bVGnli"
+    >
+      Acme Inc
+    </div>
+    <x-mobile>
+      <x-navigation />
+    </x-mobile>
+  </div>
+</header>
+`;
+
+exports[`<Header/> when not authenticated when on larger than mobile renders properly 1`] = `
+<header
+  class="Header__StyledHeader-sc-4wz997-1 cPWXaN"
+  role="banner"
+  title="Acme Inc"
+>
+  <x-skiptocontentlink />
+  <div
+    class="Header__Container-sc-4wz997-0 kkfqiI"
+  >
+    <div
+      class="EllipsiedText-o83sq0-0 bVGnli"
+    >
+      Acme Inc
+    </div>
+    <x-greaterthanmobile>
+      <button
+        aria-disabled="false"
+        aria-label="t(logOut)"
+        class="Button__Container-sc-1v65cga-0 ggxdnx Header__ImageButton-sc-4wz997-2 eSaMoc"
+        role="button"
+        type="button"
+      >
+        <x-avatar />
+      </button>
+    </x-greaterthanmobile>
+  </div>
+</header>
+`;
+
+exports[`<Header/> when not authenticated when on mobile renders properly 1`] = `
+<header
+  class="Header__StyledHeader-sc-4wz997-1 cPWXaN"
+  role="banner"
+  title="Acme Inc"
+>
+  <x-skiptocontentlink />
+  <div
+    class="Header__Container-sc-4wz997-0 kkfqiI"
+  >
+    <div
+      class="EllipsiedText-o83sq0-0 bVGnli"
+    >
+      Acme Inc
+    </div>
+    <x-mobile>
+      <x-navigation />
+    </x-mobile>
+  </div>
+</header>
+`;

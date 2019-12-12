@@ -15,6 +15,6 @@ describe('<PageTitle/>', () => {
   test('renders children', () => {
     const { container } = renderComponent();
 
-    expect(container).toBeEmpty();
+    expect(container.firstChild).toMatchSnapshot();
   });
 });

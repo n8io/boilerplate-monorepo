@@ -1,6 +1,7 @@
 import { Site } from '@boilerplate-monorepo/ui-common';
 
 export const app = {
+  avatar: { avatarForEmail: 'Avatar for {{email}}' },
   nav: {
     closeNavigation: 'Close navigation',
     links: {

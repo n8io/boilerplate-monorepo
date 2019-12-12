@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Meta/> renders properly 1`] = `
+<x-helmet>
+  <meta
+    content="#6d4baaff"
+    name="theme-color"
+  />
+  <meta
+    content="RELEASE_VERSION"
+    name="version"
+  />
+  <meta
+    content="RELEASE_HASH"
+    name="hash"
+  />
+</x-helmet>
+`;

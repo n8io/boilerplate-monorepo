@@ -1,7 +1,7 @@
 import { A11y, Site } from '@boilerplate-monorepo/ui-common';
 import { prop } from 'ramda';
 import React from 'react';
-import { GreaterThanMobile } from 'shared/Breakpoints';
+import { GreaterThanMobile, Mobile } from 'shared/Breakpoints';
 import { Button, Context } from 'shared/Button';
 import { EllipsiedText } from 'shared/EllipsiedText';
 import { useAuth } from 'shared/useAuth';
@@ -53,7 +53,9 @@ const Header = () => {
       <SkipToContentLink />
       <Container>
         <EllipsiedText>{Site.name}</EllipsiedText>
-        <Navigation />
+        <Mobile>
+          <Navigation />
+        </Mobile>
         <GreaterThanMobile>
           {isAuthenticated && (
             <ImageButton

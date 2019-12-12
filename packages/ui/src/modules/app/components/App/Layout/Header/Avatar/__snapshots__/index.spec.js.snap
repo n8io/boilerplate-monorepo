@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Avatar/> renders properly 1`] = `
+<img
+  alt="t(avatarForEmail, {\\"email\\":\\"test@example.com\\"})"
+  class="Avatar__Image-sc-10i53mv-0 PDzVZ"
+  src="//www.gravatar.com/avatar/55502f40dc8b7c769880b10874abc9d0?r=G&s=30"
+/>
+`;

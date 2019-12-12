@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Toggles/> renders properly 1`] = `
+<section
+  class="Toggles__Container-sc-7hnzqr-0 dJXdaC"
+>
+  <x-languagetoggle />
+  <x-themetoggle
+    isdarkmode="false"
+  />
+</section>
+`;

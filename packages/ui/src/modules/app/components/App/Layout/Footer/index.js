@@ -12,7 +12,7 @@ import { GridTemplateArea } from 'types/gridTemplateArea';
 import { Toggles } from './Toggles';
 
 const { Role } = A11y;
-const { RELEASE_VERSION } = config;
+const { RELEASE_VERSION, copyrightYear } = config;
 
 const Container = styled.footer`
   align-items: center;
@@ -38,7 +38,7 @@ const Footer = ({ children }) => {
   return (
     <Container role={Role.FOOTER}>
       <EllipsiedText>
-        {t('footer', { fullYear: new Date().getFullYear(), name: Site.name })}
+        {t('footer', { copyrightYear, name: Site.name })}
       </EllipsiedText>
       <div>{children}</div>
       <StyledMuted>v{RELEASE_VERSION}</StyledMuted>
