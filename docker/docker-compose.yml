@@ -2,6 +2,7 @@ version: '3.7'
 
 services:
   ui:
+    container_name: ui
     build:
       context: .
       dockerfile: ./docker/Dockerfile.ui
