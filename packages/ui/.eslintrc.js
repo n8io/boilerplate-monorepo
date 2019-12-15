@@ -1,48 +1,28 @@
 const path = require('path');
+const baseConfig = require('../../.eslintrc');
 
 module.exports = {
+  ...baseConfig,
   env: {
+    ...baseConfig.env,
     browser: true,
-    jest: true,
   },
   extends: [
-    'eslint:recommended',
-    'plugin:eslint-comments/recommended',
-    'plugin:import/recommended',
-    'plugin:jest/recommended',
-    'plugin:jest/style',
+    ...baseConfig.extends,
     'plugin:jsx-a11y/recommended',
-    'plugin:ramda/recommended',
     'plugin:react/recommended',
-    'prettier',
     'prettier/react',
   ],
-  globals: {
-    td: true,
-  },
   parserOptions: {
+    ...baseConfig.parserOptions,
     ecmaFeatures: {
       jsx: true,
     },
   },
-  plugins: [
-    'eslint-comments',
-    'import',
-    'jest',
-    'import-helpers',
-    'jsx-a11y',
-    'ramda',
-    'react',
-    'react-hooks',
-  ],
+  plugins: [...baseConfig.plugins, 'jsx-a11y', 'react', 'react-hooks'],
   root: false,
-  rules: {
-    'max-statements': 'off',
-    'no-process-env': 'warn',
-    'prefer-named-capture-group': 'warn',
-    'sort-keys': ['warn', 'asc', { natural: true }],
-  },
   settings: {
+    ...baseConfig.settings,
     'import/resolver': {
       'eslint-import-resolver-lerna': {
         packages: path.resolve(__dirname, '../../packages'),

@@ -1,19 +1,26 @@
 module.exports = {
   env: {
     es6: true,
+    jest: true,
     node: true,
   },
   extends: [
     'eslint:recommended',
     'plugin:eslint-comments/recommended',
     'plugin:import/recommended',
+    'plugin:jest/recommended',
+    'plugin:jest/style',
+    'plugin:ramda/recommended',
     'prettier',
     'plugin:cypress/recommended',
   ],
+  globals: {
+    td: true,
+  },
   overrides: [
     {
       env: { jest: true },
-      files: ['src/**/__tests__/**/*.js', 'src/**/?(*.)(spec|test).js'],
+      files: ['src/**/?(*.)(spec|test).js'],
       rules: {
         'func-names': 'off',
         'jest/consistent-test-it': 'warn',
@@ -43,7 +50,7 @@ module.exports = {
     ecmaVersion: 2019,
     sourceType: 'module',
   },
-  plugins: ['eslint-comments', 'import', 'import-helpers'],
+  plugins: ['eslint-comments', 'import', 'import-helpers', 'jest', 'ramda'],
   root: true,
   rules: {
     'accessor-pairs': 'warn',
