@@ -18,11 +18,11 @@ RUN \
 
 WORKDIR /app
 
-COPY ./entrypoint.sh ./
+COPY ./docker/entrypoint.sh ./
 
 RUN chmod +x ./entrypoint.sh
 
-ENTRYPOINT [ "./entrypoint.sh" ]
+ENTRYPOINT [ "./docker/entrypoint.sh" ]
 
 COPY \
   ./package.json \
