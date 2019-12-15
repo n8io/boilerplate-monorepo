@@ -9,7 +9,8 @@ describe('footer', () => {
       cy.get('button[data-testid="language"]').click();
       cy.get('button[data-testid="en"]').click();
 
-      cy.window()
+      return cy
+        .window()
         .then(window => window.localStorage.getItem('language'))
         .then(language => expect(language).to.eq('en'));
     });
@@ -18,7 +19,8 @@ describe('footer', () => {
       cy.get('button[data-testid="language"]').click();
       cy.get('button[data-testid="dev"]').click();
 
-      cy.window()
+      return cy
+        .window()
         .then(window => window.localStorage.getItem('language'))
         .then(language => expect(language).to.eq('dev'));
     });
@@ -28,7 +30,8 @@ describe('footer', () => {
     it('toggles to dark mode when light', () => {
       cy.get('button[data-testid="theme"]').click();
 
-      cy.window()
+      return cy
+        .window()
         .then(window => window.localStorage.getItem('theme'))
         .then(json => {
           const { displayMode } = JSON.parse(json);
@@ -45,7 +48,9 @@ describe('footer', () => {
 
       cy.visit('/');
       cy.get('button[data-testid="theme"]').click();
-      cy.window()
+
+      return cy
+        .window()
         .then(window => window.localStorage.getItem('theme'))
         .then(json => {
           const { displayMode } = JSON.parse(json);
