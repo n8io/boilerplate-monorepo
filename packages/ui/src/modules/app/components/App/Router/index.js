@@ -1,15 +1,15 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
 import { NotFound } from 'modules/notFound';
-import { routes } from '../routes';
-import { Route as CustomRoute } from './Route';
+import { routes } from '../../../routes';
+import { Route } from './Route';
 
 const Router = () => (
   <Switch>
     {routes.map(route => (
-      <CustomRoute key={route.name} {...route} />
+      <Route key={route.name} {...route} />
     ))}
-    <CustomRoute component={NotFound} />
+    <Route component={NotFound} />
   </Switch>
 );
 

@@ -19,6 +19,6 @@ const addComponent = route => {
   return mergeRight(route, { component });
 };
 
-const routes = pipe(Route.navigation, map(addComponent))(Route.values);
+const routes = pipe(Route.filterToNavigation, map(addComponent))(Route.values);
 
 export { routes };

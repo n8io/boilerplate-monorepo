@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components/macro';
 import { CustomProperty } from 'types/customProperties';
 import { GridTemplateArea } from 'types/gridTemplateArea';
-import { routes } from '../../routes';
+import { routes } from '../../../../routes';
 import { AuthButton } from './AuthButton';
 import { NavLink } from './NavLink';
 
