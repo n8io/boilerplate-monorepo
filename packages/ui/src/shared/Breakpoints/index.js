@@ -1,4 +1,3 @@
-export { Default } from './Default';
 export { Desktop } from './Desktop';
 export { GreaterThanMobile } from './GreaterThanMobile';
 export { Huge } from './Huge';

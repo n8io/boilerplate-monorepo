@@ -6,12 +6,17 @@ import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import { ErrorPage } from '../ErrorPage';
 
-const { SENTRY_DSN, SENTRY_ENV, RELEASE, isTelemetryEnabled } = config;
+const { SENTRY_DSN, SENTRY_ENV, RELEASE, isDebug, isTelemetryEnabled } = config;
 
 class ErrorBoundary extends Component {
   static defaultProps = {
     renderError: (error, onFeedbackClick) => (
-      <ErrorPage onFeedbackClick={onFeedbackClick} message={error.message} />
+      <ErrorPage
+        isDebug={isDebug}
+        isTelemetryEnabled={isTelemetryEnabled}
+        onFeedbackClick={onFeedbackClick}
+        message={error.message}
+      />
     ),
   };
 

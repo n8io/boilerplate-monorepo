@@ -16,9 +16,18 @@ const Container = styled.pre`
   }
 `;
 
-const DebugError = ({ message }) => <Container>{message}</Container>;
+const DebugError = ({ className, message, ...props }) => (
+  <Container {...props} className={className}>
+    {message}
+  </Container>
+);
+
+DebugError.defaultProps = {
+  className: undefined,
+};
 
 DebugError.propTypes = {
+  className: string,
   message: string.isRequired,
 };
 

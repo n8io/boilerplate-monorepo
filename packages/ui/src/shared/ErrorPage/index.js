@@ -1,6 +1,5 @@
 import officePanda from 'assets/images/officePanda.gif';
-import { config } from 'config';
-import { func, string } from 'prop-types';
+import { bool, func, string } from 'prop-types';
 import React from 'react';
 import styled from 'styled-components/macro';
 import { CustomProperty } from 'types/customProperties';
@@ -8,8 +7,6 @@ import { Button as SharedButton, Context } from '../Button';
 import { Body as ContentBody, Content, Header } from '../Content';
 import { DebugError } from '../DebugError';
 import { useTranslate } from '../useTranslate';
-
-const { isDebug } = config;
 
 const Body = styled(ContentBody)`
   display: grid;
@@ -40,7 +37,16 @@ const Container = styled.div`
   max-width: calc(${CustomProperty.BASE_UNIT} * 40);
 `;
 
-const ErrorPage = ({ message, onFeedbackClick }) => {
+const DataTestId = {
+  DEBUG: 'debug-info',
+};
+
+const ErrorPage = ({
+  isDebug,
+  isTelemetryEnabled,
+  message,
+  onFeedbackClick,
+}) => {
   const t = useTranslate({
     component: 'error',
     namespace: 'error',
@@ -51,18 +57,22 @@ const ErrorPage = ({ message, onFeedbackClick }) => {
       <Header title={t('title')} />
       <Body hasBreadcrumbs={false}>
         <Container>
-          {isDebug && <DebugError message={message} />}
+          {isDebug && (
+            <DebugError data-testid={DataTestId.DEBUG} message={message} />
+          )}
           <ImageContainer>
             <img src={officePanda} alt={t('officePanda')} />
           </ImageContainer>
           <p>{t('statement')}</p>
-          <p>
-            <Button
-              context={Context.PRIMARY}
-              onClick={onFeedbackClick}
-              text={t('tellUsMore')}
-            />
-          </p>
+          {isTelemetryEnabled && (
+            <p>
+              <Button
+                context={Context.PRIMARY}
+                onClick={onFeedbackClick}
+                text={t('tellUsMore')}
+              />
+            </p>
+          )}
         </Container>
       </Body>
     </Content>
@@ -70,8 +80,10 @@ const ErrorPage = ({ message, onFeedbackClick }) => {
 };
 
 ErrorPage.propTypes = {
+  isDebug: bool.isRequired,
+  isTelemetryEnabled: bool.isRequired,
   message: string.isRequired,
   onFeedbackClick: func.isRequired,
 };
 
-export { ErrorPage };
+export { DataTestId, ErrorPage };

@@ -1,3 +1,4 @@
+import { User } from '@boilerplate-monorepo/common';
 import { config } from 'config';
 import { node } from 'prop-types';
 import React, { useState, useCallback } from 'react';
@@ -9,12 +10,14 @@ const Auth = ({ children }) => {
   const [user, setUser] = useState(null);
 
   const login = useCallback(() =>
-    setUser({
-      email: AVATAR_EMAIL,
-    })
+    setUser(
+      User.uiExample({
+        email: AVATAR_EMAIL,
+      })
+    )
   );
 
-  const logout = useCallback(() => setUser(null));
+  const logout = useCallback(() => setUser(undefined));
 
   const authContext = {
     isAuthenticated: Boolean(user),
