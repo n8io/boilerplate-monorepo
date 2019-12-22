@@ -15,4 +15,11 @@ describe('<DebugError/>', () => {
 
     expect(container.firstChild).toMatchSnapshot();
   });
+
+  test('passes class name', () => {
+    const className = 'CLASS_NAME';
+    const { container } = renderComponent({ className });
+
+    expect(container.firstChild).toHaveClass(className);
+  });
 });

@@ -46,7 +46,6 @@ describe('<Header/>', () => {
 
     describe('when on mobile', () => {
       test('renders properly', () => {
-        /* eslint-disable max-nested-callbacks */
         td.replace(
           GreaterThanMobileBreakpoint,
           'GreaterThanMobile',
@@ -55,7 +54,6 @@ describe('<Header/>', () => {
         td.replace(MobileBreakpoint, 'Mobile', props => (
           <x-Mobile {...props} />
         ));
-        /* eslint-enable max-nested-callbacks */
 
         const { container } = renderComponent(authContext)();
 
@@ -65,12 +63,10 @@ describe('<Header/>', () => {
 
     describe('when on larger than mobile', () => {
       test('renders properly', () => {
-        /* eslint-disable max-nested-callbacks */
         td.replace(GreaterThanMobileBreakpoint, 'GreaterThanMobile', props => (
           <x-GreaterThanMobile {...props} />
         ));
         td.replace(MobileBreakpoint, 'Mobile', () => null);
-        /* eslint-enable max-nested-callbacks */
 
         const { container } = renderComponent(authContext)();
 
@@ -87,7 +83,6 @@ describe('<Header/>', () => {
 
     describe('when on mobile', () => {
       test('renders properly', () => {
-        /* eslint-disable max-nested-callbacks */
         td.replace(
           GreaterThanMobileBreakpoint,
           'GreaterThanMobile',
@@ -96,7 +91,6 @@ describe('<Header/>', () => {
         td.replace(MobileBreakpoint, 'Mobile', props => (
           <x-Mobile {...props} />
         ));
-        /* eslint-enable max-nested-callbacks */
 
         const { container } = renderComponent(authContext)();
 
@@ -106,12 +100,10 @@ describe('<Header/>', () => {
 
     describe('when on larger than mobile', () => {
       test('renders properly', () => {
-        /* eslint-disable max-nested-callbacks */
         td.replace(GreaterThanMobileBreakpoint, 'GreaterThanMobile', props => (
           <x-GreaterThanMobile {...props} />
         ));
         td.replace(MobileBreakpoint, 'Mobile', () => null);
-        /* eslint-enable max-nested-callbacks */
 
         const { container } = renderComponent(authContext)();
 
