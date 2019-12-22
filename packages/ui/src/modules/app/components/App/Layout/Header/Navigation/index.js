@@ -16,7 +16,7 @@ import { styles as themeStyles } from './theme';
 
 const { Role } = A11y;
 const { LINK } = Context;
-const routes = Route.navigation(Route.values);
+const routes = Route.filterToNavigation(Route.values);
 const TOUCH_HANDLE_DISTANCE = 20;
 
 const StyledNav = styled.nav`
