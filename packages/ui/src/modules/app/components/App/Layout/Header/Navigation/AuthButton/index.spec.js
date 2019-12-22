@@ -1,3 +1,4 @@
+import { User } from '@boilerplate-monorepo/common';
 import React from 'react';
 import { render } from 'testHelpers';
 import { Provider } from 'types/provider';
@@ -11,9 +12,9 @@ describe('<AuthButton/>', () => {
   const baseAuthContext = {
     login: jest.fn().mockName('login'),
     logout: jest.fn().mockName('logout'),
-    user: {
+    user: User.uiExample({
       email: 'EMAIL',
-    },
+    }),
   };
 
   const renderComponent = authContext => overrides => {

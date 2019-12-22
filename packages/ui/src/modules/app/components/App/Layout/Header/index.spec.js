@@ -1,3 +1,4 @@
+import { User } from '@boilerplate-monorepo/common';
 import React from 'react';
 import * as GreaterThanMobileBreakpoint from 'shared/Breakpoints/GreaterThanMobile';
 import * as MobileBreakpoint from 'shared/Breakpoints/Mobile';
@@ -24,9 +25,9 @@ describe('<Header/>', () => {
   const baseAuthContext = {
     login: jest.fn().mockName('login'),
     logout: jest.fn().mockName('logout'),
-    user: {
+    user: User.uiExample({
       email: 'EMAIL',
-    },
+    }),
   };
 
   const renderComponent = authContext => overrides => {

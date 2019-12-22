@@ -1,5 +1,7 @@
 import { seconds } from './seconds';
 
-export const Time = {
+const Time = {
   seconds,
 };
+
+export { Time };
