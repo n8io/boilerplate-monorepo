@@ -103,7 +103,7 @@ module.exports = {
       },
     ],
     'max-depth': 'warn',
-    'max-nested-callbacks': ['warn', 3],
+    'max-nested-callbacks': ['warn', 4],
     'max-params': ['warn', 4],
     'max-statements': 'warn',
     'new-cap': 'warn',

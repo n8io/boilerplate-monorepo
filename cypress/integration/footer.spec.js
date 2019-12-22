@@ -1,4 +1,3 @@
-/* eslint-disable max-nested-callbacks */
 describe('footer', () => {
   beforeEach(() => {
     cy.visit('/');
@@ -60,4 +59,3 @@ describe('footer', () => {
     });
   });
 });
-/* eslint-enable */
