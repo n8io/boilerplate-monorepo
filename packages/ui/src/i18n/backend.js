@@ -1,5 +1,5 @@
 import { always, curry, ifElse, is, map, pipeWith, then, useWith } from 'ramda';
-import { fakeLang, transformFake } from './fake';
+import { LANG_KEY, transformFake } from './fake';
 
 const loadTranslation = (language, namespace) =>
   // eslint-disable-next-line import/dynamic-import-chunkname
@@ -21,7 +21,7 @@ export const backend = {
   async read(language, namespace, callback) {
     try {
       const reader =
-        language === fakeLang ? loadFakeTranslation : loadTranslation;
+        language === LANG_KEY ? loadFakeTranslation : loadTranslation;
       const translation = await reader(language, namespace);
 
       return callback(null, translation);

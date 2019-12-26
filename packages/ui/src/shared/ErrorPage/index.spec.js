@@ -19,15 +19,29 @@ describe('<ErrorPage/>', () => {
     expect(container).toMatchSnapshot();
   });
 
-  test('has debug info when enabled', () => {
-    const { getByTestId } = renderComponent({ isDebug: true });
+  describe('when debug is enabled', () => {
+    const isDebug = true;
 
-    expect(getByTestId(DataTestId.DEBUG)).not.toBeNull();
+    test('shows debug info', () => {
+      const { getByTestId } = renderComponent({ isDebug });
+
+      expect(getByTestId(DataTestId.DEBUG)).not.toBeNull();
+    });
   });
 
-  test('has tell us more button when telemetry is enabled', () => {
-    const { getByText } = renderComponent({ isTelemetryEnabled: true });
+  describe('when telemetry is enabled', () => {
+    const isTelemetryEnabled = true;
 
-    expect(getByText('t(tellUsMore)')).not.toBeNull();
+    test('shows additional information text', () => {
+      const { getByText } = renderComponent({ isTelemetryEnabled });
+
+      expect(getByText('t(provideAdditionalFeedback)')).not.toBeNull();
+    });
+
+    test('shows a tell us more button', () => {
+      const { getByText } = renderComponent({ isTelemetryEnabled });
+
+      expect(getByText('t(tellUsMore)')).not.toBeNull();
+    });
   });
 });

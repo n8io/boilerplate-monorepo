@@ -31,10 +31,10 @@ const ImageContainer = styled.div`
 `;
 
 const Container = styled.div`
-  align-items: flex-start;
+  align-content: start;
   display: grid;
   justify-items: center;
-  max-width: calc(${CustomProperty.BASE_UNIT} * 40);
+  max-width: calc(${CustomProperty.BASE_UNIT} * 35);
 `;
 
 const DataTestId = {
@@ -64,6 +64,7 @@ const ErrorPage = ({
             <img src={officePanda} alt={t('officePanda')} />
           </ImageContainer>
           <p>{t('statement')}</p>
+          {isTelemetryEnabled && <p>{t('provideAdditionalFeedback')}</p>}
           {isTelemetryEnabled && (
             <p>
               <Button

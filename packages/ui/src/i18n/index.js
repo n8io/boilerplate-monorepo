@@ -2,16 +2,16 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { config } from '../config';
 import { backend } from './backend';
-import { fakeLang, transformFake } from './fake';
+import { LANG_KEY, transformFake } from './fake';
 
 export const I18N_DEFAULT_NAMESPACE = 'common';
 
 export const availableLanguages = {
+  [LANG_KEY]: transformFake('Fake'),
   en: 'English',
-  [fakeLang]: transformFake('Fake'),
 };
 
-const defaultLanguage = config.isDevelopment ? fakeLang : 'en';
+const defaultLanguage = config.isDevelopment ? LANG_KEY : 'en';
 
 export const initializeTranslations = () =>
   i18n

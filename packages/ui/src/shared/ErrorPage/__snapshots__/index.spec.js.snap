@@ -30,7 +30,7 @@ exports[`<ErrorPage/> renders properly 1`] = `
       tabindex="0"
     >
       <div
-        class="ErrorPage__Container-sc-35c790-3 imTLzk"
+        class="ErrorPage__Container-sc-35c790-3 IykLa"
       >
         <div
           class="ErrorPage__ImageContainer-sc-35c790-2 gtQYYb"
