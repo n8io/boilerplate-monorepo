@@ -45,4 +45,6 @@ const config = {
   isTest: NODE_ENV.startsWith(TEST_PREFIX),
 };
 
+window.__env = config;
+
 export { config };

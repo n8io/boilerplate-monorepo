@@ -8,14 +8,17 @@ const { isProduction } = config;
 
 initializeTranslations();
 
+const rootEl = document.getElementById('root');
+const root = ReactDOM.createRoot(rootEl);
+
 if (isProduction) {
-  ReactDOM.render(<App />, document.getElementById('root'));
+  root.render(<App />);
 } else {
   import(
     /* webpackChunkName: "devTools" */
     'devTools'
   ).then(async ({ load }) => {
     await load();
-    ReactDOM.render(<App />, document.getElementById('root'));
+    root.render(<App />);
   });
 }

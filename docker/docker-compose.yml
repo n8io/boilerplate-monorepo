@@ -9,7 +9,7 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - .:/app:ro
+      - .:/app
       - node_modules-cache:/app/node_modules
       - node_modules-cache-common:/app/packages/common/node_modules
       - node_modules-cache-ui:/app/packages/ui/node_modules

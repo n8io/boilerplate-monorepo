@@ -122,6 +122,6 @@ const transformTokenized = str => {
   return output;
 };
 
-export const fakeLang = 'dev';
+export const LANG_KEY = 'dev';
 
 export const transformFake = str => `[${transformTokenized(str)}]`;
