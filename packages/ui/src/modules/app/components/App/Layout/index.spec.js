@@ -3,7 +3,6 @@ import * as GreaterThanMobileBreakpoint from 'shared/Breakpoints/GreaterThanMobi
 import { render } from 'testHelpers';
 import { Layout } from '.';
 
-/* eslint-disable react/display-name */
 jest.mock('shared/useAuth');
 jest.mock('./FavIcon', () => ({
   FavIcon: props => <x-FavIcon {...props} />,
@@ -23,7 +22,6 @@ jest.mock('./Meta', () => ({
 jest.mock('./Navigation', () => ({
   Navigation: props => <x-Navigation {...props} />,
 }));
-/* eslint-enable react/display-name */
 
 describe('<Layout/>', () => {
   const defaultProps = {};

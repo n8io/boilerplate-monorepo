@@ -3,7 +3,6 @@ import { render } from 'testHelpers';
 import { Main } from '.';
 
 jest.mock('../../Router', () => ({
-  // eslint-disable-next-line react/display-name
   Router: props => <x-Router {...props} />,
 }));
 

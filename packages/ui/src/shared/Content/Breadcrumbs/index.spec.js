@@ -3,7 +3,6 @@ import { render } from 'testHelpers';
 import { Breadcrumbs } from '.';
 
 jest.mock('./Breadcrumb', () => ({
-  // eslint-disable-next-line react/display-name
   Breadcrumb: props => <x-Breadcrumb {...props} />,
 }));
 
