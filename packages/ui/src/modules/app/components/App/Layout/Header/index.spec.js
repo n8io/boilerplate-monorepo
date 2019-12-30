@@ -6,7 +6,6 @@ import { render } from 'testHelpers';
 import { Provider } from 'types/provider';
 import { Header } from '.';
 
-/* eslint-disable react/display-name */
 jest.mock('shared/useAuth');
 jest.mock('./Avatar', () => ({
   Avatar: props => <x-Avatar {...props} />,
@@ -17,7 +16,6 @@ jest.mock('./Navigation', () => ({
 jest.mock('./SkipToContentLink', () => ({
   SkipToContentLink: props => <x-SkipToContentLink {...props} />,
 }));
-/* eslint-enable react/display-name */
 
 describe('<Header/>', () => {
   const defaultProps = {};

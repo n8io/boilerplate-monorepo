@@ -2,14 +2,12 @@ import React from 'react';
 import { render } from 'testHelpers';
 import { Toggles } from '.';
 
-/* eslint-disable react/display-name */
 jest.mock('./LanguageToggle', () => ({
   LanguageToggle: props => <x-LanguageToggle {...props} />,
 }));
 jest.mock('./ThemeToggle', () => ({
   ThemeToggle: props => <x-ThemeToggle {...props} />,
 }));
-/* eslint-enable react/display-name */
 
 describe('<Toggles/>', () => {
   const defaultProps = {};

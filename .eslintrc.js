@@ -210,6 +210,7 @@ module.exports = {
     'prefer-rest-params': 'warn',
     'prefer-spread': 'warn',
     'prefer-template': 'warn',
+    'react/display-name': 'off',
     'require-atomic-updates': 'warn',
     'require-await': 'warn',
     'require-unicode-regexp': 'warn',

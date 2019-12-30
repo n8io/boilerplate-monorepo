@@ -5,7 +5,6 @@ import * as Document from 'types/document';
 import { Header } from '.';
 
 jest.mock('../../PageTitle', () => ({
-  // eslint-disable-next-line react/display-name
   PageTitle: props => <x-PageTitle {...props} />,
 }));
 

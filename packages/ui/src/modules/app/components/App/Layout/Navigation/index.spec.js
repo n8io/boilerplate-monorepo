@@ -2,7 +2,6 @@ import React from 'react';
 import { render } from 'testHelpers';
 import { Navigation } from '.';
 
-/* eslint-disable react/display-name */
 jest.mock('shared/useAuth');
 jest.mock('./AuthButton', () => ({
   AuthButton: props => <x-AuthButton {...props} />,
@@ -10,7 +9,6 @@ jest.mock('./AuthButton', () => ({
 jest.mock('./NavLink', () => ({
   NavLink: props => <x-NavLink {...props} />,
 }));
-/* eslint-enable react/display-name */
 
 describe('<Navigation/>', () => {
   const defaultProps = {};
