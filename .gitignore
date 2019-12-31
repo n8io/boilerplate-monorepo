@@ -19,3 +19,7 @@ build/
 release.json
 **/package-lock.json
 **/.eslintcache
+
+# env
+.env
+!.env.example
