@@ -1,6 +1,19 @@
 version: '3.7'
 
 services:
+  db:
+    container_name: db
+    image: postgres:alpine
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=boilerplate-monorepo
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+    volumes:
+      - ./.tmp/db/data:/var/lib/postgresql/data
+    restart: unless-stopped
+
   ui:
     container_name: ui
     build:

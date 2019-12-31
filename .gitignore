@@ -6,6 +6,9 @@ coverage/
 cypress/screenshots/
 cypress/videos/
 
+# temp
+.tmp/
+
 # production
 build/
 
