@@ -1,5 +1,4 @@
-import { createConnection } from 'typeorm';
+import { connect } from './connect';
+import { migrate } from './migrate';
 
-const connect = () => createConnection();
-
-export { connect };
+export { connect, migrate };

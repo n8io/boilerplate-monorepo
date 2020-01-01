@@ -1,45 +1,48 @@
 import { compare } from 'bcryptjs';
-import { Arg, Ctx, Field, Mutation, ObjectType, Resolver } from 'type-graphql';
+import { Arg, Ctx, Field, InputType, Mutation, Resolver } from 'type-graphql';
 import { User } from '../../entity/User';
 import { Auth } from '../../types/auth';
 import { Context } from '../../types/context';
 
 const INVALID_LOGIN = 'Invalid login';
+const LOGIN_USER_INPUT_DESCRIPTION = 'The user login input';
 
-@ObjectType()
-class LoginResponse {
-  @Field()
-  accessToken: string;
+@InputType({ description: LOGIN_USER_INPUT_DESCRIPTION })
+class LoginInput {
+  @Field({ description: `The user's username` })
+  username: string;
+
+  @Field({ description: `The user's clear text password` })
+  password: string;
 }
 
 @Resolver()
 export class Login {
-  @Mutation(() => LoginResponse)
+  @Mutation(() => String, { description: 'Login a given user' })
   async login(
-    @Arg('email') email: string,
-    @Arg('password') password: string,
+    @Arg('input', { description: LOGIN_USER_INPUT_DESCRIPTION })
+    loginInput: LoginInput,
     @Ctx() { res }: Context
-  ): Promise<LoginResponse> {
-    const user = await User.findOne({ where: { email } });
+  ): Promise<String> {
+    const { username, password: clearTextPassword } = loginInput;
+    const user = await User.findOne({ where: { username } });
 
     if (!user) {
+      console.error('🛑 User does not exist', { username });
+
       throw new Error(INVALID_LOGIN);
     }
 
-    const isPasswordMatch = await compare(password, user.password);
+    const isPasswordMatch = await compare(clearTextPassword, user.passwordHash);
 
     if (!isPasswordMatch) {
+      console.error('🛑 Provided password does not match', { username });
+
       throw new Error(INVALID_LOGIN);
     }
 
-    res.cookie(
-      Auth.JWT_REFRESH_TOKEN_COOKIE_NAME,
-      Auth.generateRefreshToken(user),
-      { httpOnly: true }
-    );
+    Auth.appendRefreshTokenToResponse(res, Auth.generateRefreshToken(user));
 
-    return {
-      accessToken: Auth.generateAccessToken(user),
-    };
+    return Auth.generateAccessToken(user);
   }
 }

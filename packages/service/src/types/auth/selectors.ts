@@ -1,4 +1,4 @@
-import { sign, verify } from 'jsonwebtoken';
+import { sign, verify, TokenExpiredError } from 'jsonwebtoken';
 import { MiddlewareFn } from 'type-graphql';
 import { User } from '../../entity/User';
 import { Context } from '../context';
@@ -7,17 +7,38 @@ import { Enumeration } from './typedef';
 
 const UNAUTHORIZED = 'Not authorized';
 
-const toToken = ({ email, id }: any) => ({ email, id });
+const toRefreshToken = ({ email, id, tokenVersion, username }: any) => ({
+  email,
+  id,
+  tokenVersion,
+  username,
+});
+
+const toAccessToken = ({ email, id, username }: any) => ({
+  email,
+  id,
+  username,
+});
 
 const generateAccessToken = (user: User) =>
-  sign(toToken(user), process.env[ProcessEnvKeys.ACCESS_TOKEN_SECRET]!, {
+  sign(toAccessToken(user), process.env[ProcessEnvKeys.ACCESS_TOKEN_SECRET]!, {
     expiresIn: process.env[ProcessEnvKeys.ACCESS_TOKEN_EXPIRY],
   });
 
 const generateRefreshToken = (user: User) =>
-  sign(toToken(user), process.env[ProcessEnvKeys.REFRESH_TOKEN_SECRET]!, {
-    expiresIn: process.env[ProcessEnvKeys.REFRESH_TOKEN_EXPIRY],
-  });
+  sign(
+    toRefreshToken(user),
+    process.env[ProcessEnvKeys.REFRESH_TOKEN_SECRET]!,
+    {
+      expiresIn: process.env[ProcessEnvKeys.REFRESH_TOKEN_EXPIRY],
+    }
+  );
+
+const decryptAccessToken = (token: string) =>
+  verify(token, process.env[ProcessEnvKeys.ACCESS_TOKEN_SECRET]!);
+
+const decryptRefreshToken = (token: string) =>
+  verify(token, process.env[ProcessEnvKeys.REFRESH_TOKEN_SECRET]!);
 
 const isAuthenticated: MiddlewareFn<Context> = ({ context }, next) => {
   const bearerToken = context.req.headers[Enumeration.AUTHORIZATION_HEADER];
@@ -26,22 +47,30 @@ const isAuthenticated: MiddlewareFn<Context> = ({ context }, next) => {
     throw new Error(UNAUTHORIZED);
   }
 
+  let payload: any = null;
   try {
     const [, token] = (bearerToken as string).split(' ');
 
-    const payload = verify(
-      token,
-      process.env[ProcessEnvKeys.ACCESS_TOKEN_SECRET]!
-    );
-
-    context.payload = payload as any;
-  } catch (err) {
-    console.error(err);
+    payload = decryptAccessToken(token);
+  } catch (error) {
+    if (error instanceof TokenExpiredError) {
+      console.error('🛑 Access token expired');
+    } else {
+      console.error('🛑', error);
+    }
 
     throw new Error(UNAUTHORIZED);
   }
 
+  context.payload = payload;
+
   return next();
 };
 
-export { generateAccessToken, generateRefreshToken, isAuthenticated };
+export {
+  decryptAccessToken,
+  decryptRefreshToken,
+  generateAccessToken,
+  generateRefreshToken,
+  isAuthenticated,
+};
