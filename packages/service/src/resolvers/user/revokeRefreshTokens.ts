@@ -18,9 +18,19 @@ export class RevokeRefreshTokens {
     id: string
   ) {
     try {
-      await getConnection()
+      const { affected } = await getConnection()
         .getRepository(User)
         .increment({ id }, 'tokenVersion', 1);
+
+      const wasUpdated = Boolean(affected);
+
+      if (!wasUpdated) {
+        console.error(
+          `🛑 Could not revoke refresh tokens for the given user id. User id (${id}) not found.`
+        );
+      }
+
+      return wasUpdated;
     } catch (error) {
       console.error('🛑', error);
 

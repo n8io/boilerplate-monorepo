@@ -4,13 +4,13 @@ LABEL \
   maintainer.email="n8@n8io.com" \
   version=1.0.0
 
-EXPOSE 3000
+EXPOSE 4000
 
 ENV \
   CI= \
   DEBUG= \
   NODE_ENV=development \
-  PORT=3000 \
+  PORT=4000 \
   YARN_CACHE_FOLDER=/yarn
 
 RUN \
@@ -30,4 +30,4 @@ COPY \
   ./yarn.lock \
   ./
 
-CMD ["yarn", "run", "-s", "start:ui"]
+CMD ["yarn", "run", "-s", "start:service"]

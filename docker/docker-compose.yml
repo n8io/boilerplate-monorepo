@@ -23,15 +23,23 @@ services:
       - 3000:3000
     volumes:
       - .:/app
-      - node_modules-cache:/app/node_modules
-      - node_modules-cache-common:/app/packages/common/node_modules
-      - node_modules-cache-ui:/app/packages/ui/node_modules
-      - node_modules-cache-ui-common:/app/packages/ui-common/node_modules
-      - yarn-cache:/yarn
+      - yarn-cache-ui:/yarn
+
+  service:
+    container_name: service
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.service
+    ports:
+      - 4000:4000
+    environment:
+      - TYPEORM_HOST=db
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+      - yarn-cache-service:/yarn
 
 volumes:
-  node_modules-cache:
-  node_modules-cache-common:
-  node_modules-cache-ui:
-  node_modules-cache-ui-common:
-  yarn-cache:
+  yarn-cache-ui:
+  yarn-cache-service:
