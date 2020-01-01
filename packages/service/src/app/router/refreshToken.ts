@@ -1,6 +1,6 @@
+import { User } from 'entity/User';
 import { Request, Response } from 'express';
-import { User } from '../../entity/User';
-import { Auth } from '../../types/auth';
+import { Auth } from 'types/auth';
 
 const FAILED_TO_DECRYPT_REFRESH_TOKEN = '🛑 Refresh token is invalid';
 

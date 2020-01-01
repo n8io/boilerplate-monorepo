@@ -1,7 +1,7 @@
 import { ApolloServer } from 'apollo-server-express';
+import { resolvers } from 'resolvers';
 import { buildSchema } from 'type-graphql';
-import { resolvers } from '../resolvers';
-import { Context } from '../types/context';
+import { Context } from 'types/context';
 
 const makeServer = async (app: any) => {
   const context = ({ req, res }: Context) => ({

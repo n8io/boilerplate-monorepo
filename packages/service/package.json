@@ -9,7 +9,7 @@
     "migration:gen": "typeorm migration:create --name",
     "migration:show": "yarn -s migration:cli migration:show",
     "migration:up": "yarn -s migration:cli migration:run",
-    "start": "nodemon --exec ts-node src/index.ts"
+    "start": "nodemon --exec ts-node -r tsconfig-paths/register src/index.ts"
   },
   "dependencies": {
     "apollo-server-express": "^2.9.15",
@@ -37,6 +37,7 @@
     "@types/ramda": "^0.26.39",
     "nodemon": "^2.0.2",
     "ts-node": "3.3.0",
+    "tsconfig-paths": "^3.9.0",
     "typescript": "3.3.3333"
   }
 }

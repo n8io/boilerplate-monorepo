@@ -1,7 +1,7 @@
+import { User } from 'entity/User';
 import { Arg, Mutation, Resolver } from 'type-graphql';
 import { getConnection } from 'typeorm';
-import { User } from '../../entity/User';
-import { ProcessEnvKeys } from '../../types/processEnv';
+import { ProcessEnvKeys } from 'types/processEnv';
 
 @Resolver()
 export class RevokeRefreshTokens {

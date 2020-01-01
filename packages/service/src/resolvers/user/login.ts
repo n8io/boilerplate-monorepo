@@ -1,8 +1,8 @@
 import { compare } from 'bcryptjs';
+import { User } from 'entity/User';
 import { Arg, Ctx, Field, InputType, Mutation, Resolver } from 'type-graphql';
-import { User } from '../../entity/User';
-import { Auth } from '../../types/auth';
-import { Context } from '../../types/context';
+import { Auth } from 'types/auth';
+import { Context } from 'types/context';
 
 const INVALID_LOGIN = 'Invalid login';
 const LOGIN_USER_INPUT_DESCRIPTION = 'The user login input';

@@ -1,7 +1,7 @@
 import express from 'express';
+import { Route } from 'types/route';
 import { heartbeat } from './heartbeat';
 import { refreshToken } from './refreshToken';
-import { Route } from '../../types/route';
 
 const router = express.Router();
 

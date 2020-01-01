@@ -1,9 +1,9 @@
 import { hash } from 'bcryptjs';
 import cuid from 'cuid';
+import { User } from 'entity/User';
 import { Arg, Field, InputType, Mutation, Resolver } from 'type-graphql';
-import { User } from '../../entity/User';
-import { PasswordSalt } from '../../types/passwordSalt';
-import { Auth } from '../../types/auth';
+import { Auth } from 'types/auth';
+import { PasswordSalt } from 'types/passwordSalt';
 
 const REGISTER_USER_INPUT_DESCRIPTION = 'The register user input';
 

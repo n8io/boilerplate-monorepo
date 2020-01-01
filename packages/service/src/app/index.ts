@@ -1,10 +1,10 @@
-import 'reflect-metadata';
+import { connect, migrate } from 'db';
 import express from 'express';
-import { router } from './router';
-import { makeServer } from '../server';
-import { connect, migrate } from '../db';
+import 'reflect-metadata';
+import { makeServer } from 'server';
+import { ProcessEnvKeys } from 'types/processEnv';
 import { middlewares } from './middleware';
-import { ProcessEnvKeys } from '../types/processEnv';
+import { router } from './router';
 
 const PORT = process.env[ProcessEnvKeys.PORT] || 4000;
 let app = express();
