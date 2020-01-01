@@ -1,10 +1,11 @@
 import { getConnection } from 'typeorm';
+import { log } from 'logger';
 
 const migrate = async () => {
   const hasPendingMigrations = await getConnection().showMigrations();
 
   if (hasPendingMigrations) {
-    console.info('🚚 Running migrations...');
+    log.info('Running migrations...');
 
     await getConnection().runMigrations();
   }

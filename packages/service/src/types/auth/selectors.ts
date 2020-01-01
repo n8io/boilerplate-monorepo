@@ -1,10 +1,11 @@
+import { User } from 'entity/User';
 import { Request, Response } from 'express';
 import { sign, TokenExpiredError, verify } from 'jsonwebtoken';
+import { log } from 'logger';
 import { MiddlewareFn } from 'type-graphql';
 import { AccessToken } from 'types/accessToken';
 import { AuthError, PublicError } from 'types/error';
 import { RefreshToken } from 'types/refreshToken';
-import { User } from '../../entity/User';
 import { Context } from '../context';
 import { ProcessEnvKeys } from '../processEnv';
 import { Enumeration } from './typedef';
@@ -45,7 +46,7 @@ const readAccessToken = (req: Request): AccessToken | null => {
   const bearerToken = req.headers[Enumeration.AUTHORIZATION_HEADER];
 
   if (!bearerToken) {
-    console.error(`🛑 ${AuthError.ACCESS_TOKEN_NOT_PROVIDED}`);
+    log.error(AuthError.ACCESS_TOKEN_NOT_PROVIDED);
 
     return null;
   }
@@ -56,9 +57,9 @@ const readAccessToken = (req: Request): AccessToken | null => {
     return decryptAccessToken(token);
   } catch (error) {
     if (error instanceof TokenExpiredError) {
-      console.error(`🛑 ${AuthError.ACCESS_TOKEN_EXPIRED}`);
+      log.error(AuthError.ACCESS_TOKEN_EXPIRED);
     } else {
-      console.error(`🛑 ${AuthError.GENERIC}`, error);
+      log.error(AuthError.GENERIC, error);
     }
 
     return null;
@@ -69,7 +70,7 @@ const readRefreshToken = (req: Request) => {
   const token = req.cookies[Enumeration.JWT_REFRESH_TOKEN_COOKIE_NAME];
 
   if (!token) {
-    console.error(`🛑 ${AuthError.REFRESH_TOKEN_COOKIE_NOT_FOUND}`);
+    log.error(AuthError.REFRESH_TOKEN_COOKIE_NOT_FOUND);
 
     return null;
   }
@@ -77,7 +78,7 @@ const readRefreshToken = (req: Request) => {
   try {
     return decryptRefreshToken(token);
   } catch (error) {
-    console.error(`🛑 ${AuthError.FAILED_TO_DECRYPT_REFRESH_TOKEN}`);
+    log.error(AuthError.FAILED_TO_DECRYPT_REFRESH_TOKEN);
   }
 
   return null;

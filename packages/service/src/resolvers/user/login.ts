@@ -4,6 +4,7 @@ import { Arg, Ctx, Field, InputType, Mutation, Resolver } from 'type-graphql';
 import { Auth } from 'types/auth';
 import { Context } from 'types/context';
 import { PublicError, AuthError } from 'types/error';
+import { log } from 'logger';
 
 const LOGIN_USER_INPUT_DESCRIPTION = 'The user login input';
 
@@ -28,7 +29,7 @@ export class Login {
     const user = await User.findOne({ where: { username } });
 
     if (!user) {
-      console.error(`🛑 ${AuthError.USER_DOES_NOT_EXIST}`, { username });
+      log.error(AuthError.USER_DOES_NOT_EXIST, { username });
 
       throw new Error(PublicError.INVALID_LOGIN);
     }
@@ -36,7 +37,7 @@ export class Login {
     const isPasswordMatch = await compare(clearTextPassword, user.passwordHash);
 
     if (!isPasswordMatch) {
-      console.error(`🛑 ${AuthError.PASSWORD_MISMATCH}`, { username });
+      log.error(AuthError.PASSWORD_MISMATCH, { username });
 
       throw new Error(PublicError.INVALID_LOGIN);
     }

@@ -1,10 +1,11 @@
 import { hash } from 'bcryptjs';
 import cuid from 'cuid';
 import { User } from 'entity/User';
+import { log } from 'logger';
 import { Arg, Field, InputType, Mutation, Resolver } from 'type-graphql';
 import { Auth } from 'types/auth';
-import { PasswordSalt } from 'types/passwordSalt';
 import { AuthError } from 'types/error';
+import { PasswordSalt } from 'types/passwordSalt';
 
 const REGISTER_USER_INPUT_DESCRIPTION = 'The register user input';
 
@@ -32,7 +33,7 @@ export class Register {
     const user = await User.findOne({ where: [{ email }, { username }] });
 
     if (user) {
-      console.error(`🛑 ${AuthError.FAILED_TO_REGISTER_USER}`, {
+      log.error(AuthError.FAILED_TO_REGISTER_USER, {
         existing: Auth.toSafeLog(user),
         requested: { email, username },
       });
@@ -47,7 +48,7 @@ export class Register {
         username,
       });
     } catch (err) {
-      console.error(`🛑 ${AuthError.FAILED_DB_REQUEST}`, err);
+      log.error(AuthError.FAILED_DB_REQUEST, err);
 
       return false;
     }

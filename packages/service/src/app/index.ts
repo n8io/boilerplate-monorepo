@@ -1,6 +1,5 @@
 import { connect, migrate } from 'db';
 import express from 'express';
-import 'reflect-metadata';
 import { makeServer } from 'server';
 import { ProcessEnvKeys } from 'types/processEnv';
 import { middlewares } from './middleware';

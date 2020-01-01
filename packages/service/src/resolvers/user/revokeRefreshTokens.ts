@@ -1,4 +1,5 @@
 import { User } from 'entity/User';
+import { log } from 'logger';
 import { Arg, Mutation, Resolver } from 'type-graphql';
 import { getConnection } from 'typeorm';
 import { AuthError } from 'types/error';
@@ -26,15 +27,12 @@ export class RevokeRefreshTokens {
       const wasUpdated = Boolean(affected);
 
       if (!wasUpdated) {
-        console.error(
-          `🛑 ${AuthError.FAILED_TO_REVOKE_USER_REFRESH_TOKENS}`,
-          id
-        );
+        log.error(AuthError.FAILED_TO_REVOKE_USER_REFRESH_TOKENS, id);
       }
 
       return wasUpdated;
     } catch (error) {
-      console.error(`🛑 ${AuthError.FAILED_DB_REQUEST}`, error);
+      log.error(AuthError.FAILED_DB_REQUEST, error);
 
       return false;
     }
