@@ -11,6 +11,7 @@ const makeServer = async (app: any) => {
 
   const schema = await buildSchema({
     resolvers,
+    validate: false,
   });
 
   const server = new ApolloServer({

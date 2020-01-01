@@ -18,7 +18,10 @@ const start = async () => {
   await makeServer(app);
 
   app.listen(PORT, () => {
-    console.log(`🚀 GraphQL server started @ http://localhost:${PORT}`);
+    const msg = `🚀 GraphQL server started @ http://localhost:${PORT}/graphql`;
+    const bookend = '='.repeat(msg.length - 1);
+
+    console.log(`${bookend}\n${msg}\n${bookend}`);
   });
 };
 

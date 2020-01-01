@@ -4,6 +4,7 @@ import { User } from 'entity/User';
 import { Arg, Field, InputType, Mutation, Resolver } from 'type-graphql';
 import { Auth } from 'types/auth';
 import { PasswordSalt } from 'types/passwordSalt';
+import { AuthError } from 'types/error';
 
 const REGISTER_USER_INPUT_DESCRIPTION = 'The register user input';
 
@@ -24,20 +25,17 @@ export class Register {
   @Mutation(() => Boolean, { description: `Register a new user` })
   async register(
     @Arg('input', { description: REGISTER_USER_INPUT_DESCRIPTION })
-    registerInput: RegisterInput
+    input: RegisterInput
   ) {
-    const { password: clearTextPassword, email, username } = registerInput;
+    const { password: clearTextPassword, email, username } = input;
     const passwordHash = await hash(clearTextPassword, PasswordSalt);
     const user = await User.findOne({ where: [{ email }, { username }] });
 
     if (user) {
-      console.error(
-        '🛑 Failed to register user. The given username and/or email already exists',
-        {
-          existing: Auth.toSafeLog(user),
-          requested: { email, username },
-        }
-      );
+      console.error(`🛑 ${AuthError.FAILED_TO_REGISTER_USER}`, {
+        existing: Auth.toSafeLog(user),
+        requested: { email, username },
+      });
       return false;
     }
 
@@ -49,7 +47,7 @@ export class Register {
         username,
       });
     } catch (err) {
-      console.error('🛑', err);
+      console.error(`🛑 ${AuthError.FAILED_DB_REQUEST}`, err);
 
       return false;
     }

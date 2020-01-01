@@ -1,6 +1,7 @@
 import { User } from 'entity/User';
 import { Arg, Mutation, Resolver } from 'type-graphql';
 import { getConnection } from 'typeorm';
+import { AuthError } from 'types/error';
 import { ProcessEnvKeys } from 'types/processEnv';
 
 @Resolver()
@@ -26,13 +27,14 @@ export class RevokeRefreshTokens {
 
       if (!wasUpdated) {
         console.error(
-          `🛑 Could not revoke refresh tokens for the given user id. User id (${id}) not found.`
+          `🛑 ${AuthError.FAILED_TO_REVOKE_USER_REFRESH_TOKENS}`,
+          id
         );
       }
 
       return wasUpdated;
     } catch (error) {
-      console.error('🛑', error);
+      console.error(`🛑 ${AuthError.FAILED_DB_REQUEST}`, error);
 
       return false;
     }

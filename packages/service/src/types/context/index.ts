@@ -1,9 +1,10 @@
 import { Request, Response } from 'express';
+import { AccessToken } from 'types/accessToken';
 
 interface Context {
   req: Request;
   res: Response;
-  payload?: { id: string; email: string; username: string };
+  token?: AccessToken;
 }
 
 export { Context };

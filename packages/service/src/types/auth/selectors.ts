@@ -1,31 +1,26 @@
-import { sign, verify, TokenExpiredError } from 'jsonwebtoken';
+import { Request, Response } from 'express';
+import { sign, TokenExpiredError, verify } from 'jsonwebtoken';
 import { MiddlewareFn } from 'type-graphql';
+import { AccessToken } from 'types/accessToken';
+import { AuthError, PublicError } from 'types/error';
+import { RefreshToken } from 'types/refreshToken';
 import { User } from '../../entity/User';
 import { Context } from '../context';
 import { ProcessEnvKeys } from '../processEnv';
 import { Enumeration } from './typedef';
 
-const UNAUTHORIZED = 'Not authorized';
+const toRefreshToken = ({ email, id, tokenVersion, username }: User) =>
+  ({ email, id, tokenVersion, username } as RefreshToken);
 
-const toRefreshToken = ({ email, id, tokenVersion, username }: any) => ({
-  email,
-  id,
-  tokenVersion,
-  username,
-});
+const toAccessToken = ({ email, id, username }: User) =>
+  ({ email, id, username } as AccessToken);
 
-const toAccessToken = ({ email, id, username }: any) => ({
-  email,
-  id,
-  username,
-});
-
-const generateAccessToken = (user: User) =>
+const encryptAccessToken = (user: User) =>
   sign(toAccessToken(user), process.env[ProcessEnvKeys.ACCESS_TOKEN_SECRET]!, {
     expiresIn: process.env[ProcessEnvKeys.ACCESS_TOKEN_EXPIRY],
   });
 
-const generateRefreshToken = (user: User) =>
+const encryptRefreshToken = (user: User) =>
   sign(
     toRefreshToken(user),
     process.env[ProcessEnvKeys.REFRESH_TOKEN_SECRET]!,
@@ -34,43 +29,90 @@ const generateRefreshToken = (user: User) =>
     }
   );
 
-const decryptAccessToken = (token: string) =>
-  verify(token, process.env[ProcessEnvKeys.ACCESS_TOKEN_SECRET]!);
+const decryptAccessToken = (token: string): AccessToken =>
+  verify(
+    token,
+    process.env[ProcessEnvKeys.ACCESS_TOKEN_SECRET]!
+  ) as AccessToken;
 
-const decryptRefreshToken = (token: string) =>
-  verify(token, process.env[ProcessEnvKeys.REFRESH_TOKEN_SECRET]!);
+const decryptRefreshToken = (token: string): RefreshToken =>
+  verify(
+    token,
+    process.env[ProcessEnvKeys.REFRESH_TOKEN_SECRET]!
+  ) as RefreshToken;
 
-const isAuthenticated: MiddlewareFn<Context> = ({ context }, next) => {
-  const bearerToken = context.req.headers[Enumeration.AUTHORIZATION_HEADER];
+const readAccessToken = (req: Request): AccessToken | null => {
+  const bearerToken = req.headers[Enumeration.AUTHORIZATION_HEADER];
 
   if (!bearerToken) {
-    throw new Error(UNAUTHORIZED);
+    console.error(`🛑 ${AuthError.ACCESS_TOKEN_NOT_PROVIDED}`);
+
+    return null;
   }
 
-  let payload: any = null;
   try {
     const [, token] = (bearerToken as string).split(' ');
 
-    payload = decryptAccessToken(token);
+    return decryptAccessToken(token);
   } catch (error) {
     if (error instanceof TokenExpiredError) {
-      console.error('🛑 Access token expired');
+      console.error(`🛑 ${AuthError.ACCESS_TOKEN_EXPIRED}`);
     } else {
-      console.error('🛑', error);
+      console.error(`🛑 ${AuthError.GENERIC}`, error);
     }
 
-    throw new Error(UNAUTHORIZED);
+    return null;
+  }
+};
+
+const readRefreshToken = (req: Request) => {
+  const token = req.cookies[Enumeration.JWT_REFRESH_TOKEN_COOKIE_NAME];
+
+  if (!token) {
+    console.error(`🛑 ${AuthError.REFRESH_TOKEN_COOKIE_NOT_FOUND}`);
+
+    return null;
   }
 
-  context.payload = payload;
+  try {
+    return decryptRefreshToken(token);
+  } catch (error) {
+    console.error(`🛑 ${AuthError.FAILED_TO_DECRYPT_REFRESH_TOKEN}`);
+  }
+
+  return null;
+};
+
+const writeRefreshToken = (res: Response, user: User) => {
+  const token = encryptRefreshToken(user);
+
+  res.cookie(Enumeration.JWT_REFRESH_TOKEN_COOKIE_NAME, token, {
+    httpOnly: true,
+  });
+};
+
+const isAuthenticated: MiddlewareFn<Context> = ({ context }, next) => {
+  const { req } = context;
+
+  try {
+    const token = readAccessToken(req);
+
+    if (token) {
+      context.token = token;
+    } else {
+      throw new Error(PublicError.UNAUTHORIZED);
+    }
+  } catch (error) {
+    throw new Error(PublicError.UNAUTHORIZED);
+  }
 
   return next();
 };
 
 export {
-  decryptAccessToken,
-  decryptRefreshToken,
-  generateAccessToken,
-  generateRefreshToken,
+  encryptAccessToken,
   isAuthenticated,
+  readAccessToken,
+  readRefreshToken,
+  writeRefreshToken,
 };

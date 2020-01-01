@@ -1,22 +1,19 @@
 import {
-  decryptAccessToken,
-  decryptRefreshToken,
-  generateAccessToken,
-  generateRefreshToken,
+  encryptAccessToken,
   isAuthenticated,
+  readAccessToken,
+  readRefreshToken,
+  writeRefreshToken,
 } from './selectors';
-import { appendRefreshTokenToResponse, toSafeLog } from './transforms';
-import { Enumeration } from './typedef';
+import { toSafeLog } from './transforms';
 
 const Auth = {
-  ...Enumeration,
-  appendRefreshTokenToResponse,
-  decryptAccessToken,
-  decryptRefreshToken,
-  generateAccessToken,
-  generateRefreshToken,
+  encryptAccessToken,
   isAuthenticated,
+  readAccessToken,
+  readRefreshToken,
   toSafeLog,
+  writeRefreshToken,
 };
 
 export { Auth };
