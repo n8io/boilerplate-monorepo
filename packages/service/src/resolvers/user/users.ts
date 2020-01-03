@@ -1,4 +1,4 @@
-import { PageInfo } from 'entity/PageInfo';
+import { PageInfo } from 'types/PageInfo';
 import { User } from 'entity/User';
 import {
   Arg,
@@ -18,10 +18,10 @@ const DEFAULT_PAGE_SIZE = 10;
 @InputType({ description: USERS_INPUT_DESCRIPTION })
 class UsersInput {
   @Field({ description: 'The starting cursor', nullable: true })
-  after?: string;
+  after: string;
 
   @Field({ description: 'The page size' })
-  first: number = 10;
+  first: number;
 }
 
 @ObjectType()
@@ -50,7 +50,7 @@ export class Users {
     @Arg('input', { description: USERS_INPUT_DESCRIPTION })
     input: UsersInput
   ) {
-    const ALIAS = 'user';
+    const ALIAS = User.name;
     const { after, first } = input;
     const pageSize = !first || first < 1 ? DEFAULT_PAGE_SIZE : first;
 

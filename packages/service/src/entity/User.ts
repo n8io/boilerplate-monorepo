@@ -1,5 +1,5 @@
-import { BaseEntity, Column, Entity, PrimaryColumn } from 'typeorm';
-import { ObjectType, Field } from 'type-graphql';
+import { Field, ObjectType } from 'type-graphql';
+import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
 
 @ObjectType()
 @Entity('users')
@@ -21,4 +21,7 @@ export class User extends BaseEntity {
 
   @Column('int', { default: 0 })
   tokenVersion: number;
+
+  @CreateDateColumn()
+  createdAt: Date;
 }
