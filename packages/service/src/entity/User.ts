@@ -16,12 +16,12 @@ export class User extends BaseEntity {
   id: string;
 
   @Field({ description: `The user's unique username` })
-  @Index()
+  @Index({ unique: true })
   @Column()
   username: string;
 
   @Field({ description: `The user's unique email` })
-  @Index()
+  @Index({ unique: true })
   @Column()
   email: string;
 
