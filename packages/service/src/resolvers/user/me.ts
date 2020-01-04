@@ -1,14 +1,7 @@
 import { User } from 'entity/User';
-import {
-  Authorized,
-  Ctx,
-  Query,
-  Resolver,
-  ObjectType,
-  Field,
-} from 'type-graphql';
-import { Context } from 'types/context';
 import { log } from 'logger';
+import { Ctx, Field, ObjectType, Query, Resolver } from 'type-graphql';
+import { Context } from 'types/context';
 import { InternalErrorMessage } from 'types/errorMessage';
 import { UserRole } from 'types/userRole';
 
@@ -30,8 +23,9 @@ export class Me {
     description: `Fetch the logged in user's information`,
     nullable: true,
   })
-  @Authorized()
   me(@Ctx() { user }: Context) {
+    if (!user) return null;
+
     try {
       return User.findOne({ id: user!.id });
     } catch (error) {

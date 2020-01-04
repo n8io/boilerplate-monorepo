@@ -10,6 +10,7 @@
     "migration:gen": "typeorm migration:create --name",
     "migration:show": "yarn -s migration:cli migration:show",
     "migration:up": "yarn -s migration:cli migration:run",
+    "publish:service": "apollo service:push --tag local --endpoint=http://localhost:4000/graphql",
     "start": "nodemon --exec ts-node -r tsconfig-paths/register src/index.ts",
     "start:prod": "node -r ts-node/register -r tsconfig-paths/register dist/index.js dist"
   },
@@ -41,6 +42,7 @@
     "@types/node": "^8.0.29",
     "@types/node-fetch": "^2.5.4",
     "@types/ramda": "^0.26.39",
+    "apollo": "^2.21.2",
     "nodemon": "^2.0.2",
     "typescript": "^3.7.4"
   }
