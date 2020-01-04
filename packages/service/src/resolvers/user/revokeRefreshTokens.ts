@@ -44,7 +44,5 @@ export class RevokeRefreshTokens {
 
       return false;
     }
-
-    return true;
   }
 }

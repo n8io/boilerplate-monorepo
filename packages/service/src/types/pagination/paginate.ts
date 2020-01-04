@@ -9,7 +9,8 @@ const MAX_PAGE_SIZE = 100;
 export async function paginate<T, K extends keyof T>(
   ItemType: ClassType<T>,
   input: PaginationInput,
-  cursorProp: K
+  cursorProp: K,
+  paranoid: boolean = true
 ) {
   const ALIAS = ItemType.name;
   const { after, first } = input;
@@ -23,6 +24,11 @@ export async function paginate<T, K extends keyof T>(
     .where(after ? `${ALIAS}.${cursorProp} > :after` : '1 = :after', {
       after: after || '1',
     })
+    .andWhere(
+      paranoid
+        ? `("${ALIAS}".deleted_at IS NULL OR "${ALIAS}".deleted_at > NOW())`
+        : '1=1'
+    )
     .getMany()) as T[];
 
   const hasItems = items.length > 0;
@@ -35,6 +41,11 @@ export async function paginate<T, K extends keyof T>(
       .createQueryBuilder(ALIAS)
       .take(1)
       .where(`${ALIAS}.${cursorProp} > :after`, { after: endCursor })
+      .andWhere(
+        paranoid
+          ? `("${ALIAS}".deleted_at IS NULL OR "${ALIAS}".deleted_at > NOW())`
+          : '1=1'
+      )
       .orderBy(`${ALIAS}.${cursorProp}`)
       .getCount());
   }

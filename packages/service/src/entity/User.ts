@@ -44,4 +44,7 @@ export class User extends BaseEntity {
 
   @CreateDateColumn()
   createdAt: Date;
+
+  @Column({ nullable: true })
+  deletedAt: Date;
 }
