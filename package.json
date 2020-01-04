@@ -11,6 +11,9 @@
   "scripts": {
     "🔥": "yarn run -s clean -v",
     "bootstrap": "lerna bootstrap",
+    "build": "yarn run -s run-all build:*",
+    "build:service": "(cd packages/service && yarn run -s build)",
+    "build:ui": "(cd packages/ui && yarn run -s build)",
     "bump": "lerna version prepatch --no-commit-hooks --yes",
     "clean": "yarn run -s dcd && yarn run -s dc down --remove-orphans",
     "dc": "docker-compose --project-directory . --file ./docker/docker-compose.yml",

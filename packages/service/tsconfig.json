@@ -23,8 +23,9 @@
     "sourceMap": true,
     "strictFunctionTypes": true,
     "strictNullChecks": true,
-    "target": "es6"
+    "target": "es6",
+    "types": []
   },
   "exclude": ["node_modules"],
-  "include": ["./**/*.tsx", "./**/*.ts"]
+  "include": ["./src/**/*.ts"]
 }
