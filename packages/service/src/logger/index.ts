@@ -10,6 +10,9 @@ const prefix = {
   [LogLevel.WARN]: '⚠',
 };
 
+const prefixer = (logLevel: LogLevel) =>
+  `${new Date().toISOString()}: ${prefix[logLevel]}`;
+
 const printMessage = ({
   data,
   logLevel,
@@ -20,10 +23,10 @@ const printMessage = ({
   message: string;
 }) => {
   if (data) {
-    return console[logLevel](`${prefix[logLevel]} ${message}`, data);
+    return console[logLevel](`${prefixer(logLevel)} ${message}`, data);
   }
 
-  return console[logLevel](`${prefix[logLevel]} ${message}`);
+  return console[logLevel](`${prefixer(logLevel)} ${message}`);
 };
 
 const log = {
