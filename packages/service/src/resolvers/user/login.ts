@@ -1,10 +1,11 @@
 import { compare } from 'bcryptjs';
 import { User } from 'entity/User';
+import { log } from 'logger';
 import { Arg, Ctx, Field, InputType, Mutation, Resolver } from 'type-graphql';
 import { Auth } from 'types/auth';
 import { Context } from 'types/context';
-import { PublicError, AuthError } from 'types/error';
-import { log } from 'logger';
+import { InternalErrorMessage, PublicErrorMessage } from 'types/errorMessage';
+import { AuthenticationError } from 'apollo-server-express';
 
 const LOGIN_USER_INPUT_DESCRIPTION = 'The user login input';
 
@@ -26,20 +27,28 @@ export class Login {
     @Ctx() { res }: Context
   ): Promise<String> {
     const { username, password: clearTextPassword } = input;
-    const user = await User.findOne({ where: { username } });
+    let user;
+
+    try {
+      user = await User.findOne({ where: { username } });
+    } catch (error) {
+      log.error(InternalErrorMessage.FAILED_DB_REQUEST, error);
+
+      throw new AuthenticationError(PublicErrorMessage.INVALID_LOGIN);
+    }
 
     if (!user) {
-      log.error(AuthError.USER_DOES_NOT_EXIST, { username });
+      log.error(InternalErrorMessage.USER_NOT_FOUND, { username });
 
-      throw new Error(PublicError.INVALID_LOGIN);
+      throw new AuthenticationError(PublicErrorMessage.INVALID_LOGIN);
     }
 
     const isPasswordMatch = await compare(clearTextPassword, user.passwordHash);
 
     if (!isPasswordMatch) {
-      log.error(AuthError.PASSWORD_MISMATCH, { username });
+      log.error(InternalErrorMessage.PASSWORD_MISMATCH, { username });
 
-      throw new Error(PublicError.INVALID_LOGIN);
+      throw new AuthenticationError(PublicErrorMessage.INVALID_LOGIN);
     }
 
     Auth.writeRefreshToken(res, user);

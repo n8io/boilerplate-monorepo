@@ -1,4 +1,4 @@
-enum AuthError {
+enum InternalErrorMessage {
   ACCESS_TOKEN_EXPIRED = 'Access token expired',
   ACCESS_TOKEN_NOT_PROVIDED = 'Access token not provided',
   GENERIC = 'A general error has occured',
@@ -10,7 +10,7 @@ enum AuthError {
   PASSWORD_MISMATCH = 'Provided password does not match',
   REFRESH_TOKEN_COOKIE_NOT_FOUND = 'Refresh token cookie was not provided',
   REFRESH_TOKEN_VERSION_MISMATCH = 'Refresh token version mismatch',
-  USER_DOES_NOT_EXIST = 'User does not exist',
+  USER_NOT_FOUND = 'User does not exist',
 }
 
-export { AuthError };
+export { InternalErrorMessage };

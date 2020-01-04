@@ -1,10 +1,17 @@
 import { Request, Response } from 'express';
-import { AccessToken } from 'types/accessToken';
+import { UserContext } from 'types/userContext';
+import { readAccessToken } from 'types/auth/selectors';
 
 interface Context {
   req: Request;
   res: Response;
-  token?: AccessToken;
+  user?: UserContext;
 }
 
-export { Context };
+const contextMiddleware = ({ req, res }: { req: Request; res: Response }) => ({
+  req,
+  res,
+  user: readAccessToken(req),
+});
+
+export { Context, contextMiddleware };

@@ -2,19 +2,30 @@ import { User } from 'entity/User';
 import { Request, Response } from 'express';
 import { sign, TokenExpiredError, verify } from 'jsonwebtoken';
 import { log } from 'logger';
-import { MiddlewareFn } from 'type-graphql';
-import { AccessToken } from 'types/accessToken';
-import { AuthError, PublicError } from 'types/error';
+import { AuthChecker } from 'type-graphql';
+import { Context } from 'types/context';
+import { InternalErrorMessage, PublicErrorMessage } from 'types/errorMessage';
+import { ProcessEnvKeys } from 'types/processEnv';
 import { RefreshToken } from 'types/refreshToken';
-import { Context } from '../context';
-import { ProcessEnvKeys } from '../processEnv';
+import { UserContext } from 'types/userContext';
+import { UserRole } from 'types/userRole';
 import { Enumeration } from './typedef';
+import { AuthenticationError } from 'apollo-server-express';
 
-const toRefreshToken = ({ email, id, tokenVersion, username }: User) =>
-  ({ email, id, tokenVersion, username } as RefreshToken);
+const toRefreshToken = ({
+  email,
+  id,
+  role,
+  tokenVersion,
+  username,
+}: User): RefreshToken => ({ email, id, role, tokenVersion, username });
 
-const toAccessToken = ({ email, id, username }: User) =>
-  ({ email, id, username } as AccessToken);
+const toAccessToken = ({ email, id, role, username }: User): UserContext => ({
+  email,
+  id,
+  role,
+  username,
+});
 
 const encryptAccessToken = (user: User) =>
   sign(toAccessToken(user), process.env[ProcessEnvKeys.ACCESS_TOKEN_SECRET]!, {
@@ -30,11 +41,11 @@ const encryptRefreshToken = (user: User) =>
     }
   );
 
-const decryptAccessToken = (token: string): AccessToken =>
+const decryptAccessToken = (token: string): UserContext =>
   verify(
     token,
     process.env[ProcessEnvKeys.ACCESS_TOKEN_SECRET]!
-  ) as AccessToken;
+  ) as UserContext;
 
 const decryptRefreshToken = (token: string): RefreshToken =>
   verify(
@@ -42,12 +53,10 @@ const decryptRefreshToken = (token: string): RefreshToken =>
     process.env[ProcessEnvKeys.REFRESH_TOKEN_SECRET]!
   ) as RefreshToken;
 
-const readAccessToken = (req: Request): AccessToken | null => {
+const readAccessToken = (req: Request): UserContext | null => {
   const bearerToken = req.headers[Enumeration.AUTHORIZATION_HEADER];
 
   if (!bearerToken) {
-    log.error(AuthError.ACCESS_TOKEN_NOT_PROVIDED);
-
     return null;
   }
 
@@ -57,9 +66,9 @@ const readAccessToken = (req: Request): AccessToken | null => {
     return decryptAccessToken(token);
   } catch (error) {
     if (error instanceof TokenExpiredError) {
-      log.error(AuthError.ACCESS_TOKEN_EXPIRED);
+      log.error(InternalErrorMessage.ACCESS_TOKEN_EXPIRED);
     } else {
-      log.error(AuthError.GENERIC, error);
+      log.error(InternalErrorMessage.GENERIC, error);
     }
 
     return null;
@@ -70,7 +79,7 @@ const readRefreshToken = (req: Request) => {
   const token = req.cookies[Enumeration.JWT_REFRESH_TOKEN_COOKIE_NAME];
 
   if (!token) {
-    log.error(AuthError.REFRESH_TOKEN_COOKIE_NOT_FOUND);
+    log.error(InternalErrorMessage.REFRESH_TOKEN_COOKIE_NOT_FOUND);
 
     return null;
   }
@@ -78,7 +87,7 @@ const readRefreshToken = (req: Request) => {
   try {
     return decryptRefreshToken(token);
   } catch (error) {
-    log.error(AuthError.FAILED_TO_DECRYPT_REFRESH_TOKEN);
+    log.error(InternalErrorMessage.FAILED_TO_DECRYPT_REFRESH_TOKEN);
   }
 
   return null;
@@ -92,27 +101,35 @@ const writeRefreshToken = (res: Response, user: User) => {
   });
 };
 
-const isAuthenticated: MiddlewareFn<Context> = ({ context }, next) => {
-  const { req } = context;
+const authChecker: AuthChecker<Context, UserRole> = ({ context }, roles) => {
+  const { user } = context;
 
-  try {
-    const token = readAccessToken(req);
-
-    if (token) {
-      context.token = token;
-    } else {
-      throw new Error(PublicError.UNAUTHORIZED);
+  if (roles && roles.length === 0) {
+    // No roles specified, no user, no access
+    if (!user) {
+      throw new AuthenticationError(PublicErrorMessage.UNAUTHORIZED);
     }
-  } catch (error) {
-    throw new Error(PublicError.UNAUTHORIZED);
+
+    return true;
   }
 
-  return next();
+  if (!user) {
+    // No user present, restrict access
+    throw new AuthenticationError(PublicErrorMessage.UNAUTHORIZED);
+  }
+
+  if (roles!.includes(user.role)) {
+    // Grant access if the roles overlap
+    return true;
+  }
+
+  // No roles matched, restrict access
+  throw new AuthenticationError(PublicErrorMessage.UNAUTHORIZED);
 };
 
 export {
+  authChecker,
   encryptAccessToken,
-  isAuthenticated,
   readAccessToken,
   readRefreshToken,
   writeRefreshToken,

@@ -1,4 +1,4 @@
-import { Field, ObjectType } from 'type-graphql';
+import { Authorized, Field, ObjectType } from 'type-graphql';
 import {
   BaseEntity,
   Column,
@@ -7,6 +7,7 @@ import {
   Index,
   PrimaryColumn,
 } from 'typeorm';
+import { UserRole } from 'types/userRole';
 
 @ObjectType()
 @Entity('users')
@@ -15,14 +16,15 @@ export class User extends BaseEntity {
   @PrimaryColumn()
   id: string;
 
+  @Column()
   @Field({ description: `The user's unique username` })
   @Index({ unique: true })
-  @Column()
   username: string;
 
+  @Authorized([UserRole.ADMIN])
+  @Column()
   @Field({ description: `The user's unique email` })
   @Index({ unique: true })
-  @Column()
   email: string;
 
   @Column()
@@ -30,6 +32,15 @@ export class User extends BaseEntity {
 
   @Column('int', { default: 0 })
   tokenVersion: number;
+
+  @Authorized([UserRole.ADMIN])
+  @Column({
+    type: 'enum',
+    enum: UserRole,
+    default: UserRole.USER,
+  })
+  @Field({ description: `The user's authorization level` })
+  role: UserRole;
 
   @CreateDateColumn()
   createdAt: Date;

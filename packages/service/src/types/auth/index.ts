@@ -1,6 +1,6 @@
 import {
+  authChecker,
   encryptAccessToken,
-  isAuthenticated,
   readAccessToken,
   readRefreshToken,
   writeRefreshToken,
@@ -8,8 +8,8 @@ import {
 import { toSafeLog } from './transforms';
 
 const Auth = {
+  authChecker,
   encryptAccessToken,
-  isAuthenticated,
   readAccessToken,
   readRefreshToken,
   toSafeLog,

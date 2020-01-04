@@ -1,7 +1,7 @@
 import { User } from 'entity/User';
 import { Request, Response } from 'express';
 import { Auth } from 'types/auth';
-import { AuthError } from 'types/error';
+import { InternalErrorMessage } from 'types/errorMessage';
 import { log } from 'logger';
 
 const sendResponse = (res: Response, token: string = '') =>
@@ -22,13 +22,13 @@ const refreshToken = async (req: Request, res: Response) => {
   const user = await User.findOne({ id: refreshToken.id });
 
   if (!user) {
-    log.error(AuthError.USER_DOES_NOT_EXIST, refreshToken.id);
+    log.error(InternalErrorMessage.USER_NOT_FOUND, refreshToken.id);
 
     return sendUnauthorizedResponse(res);
   }
 
   if (user.tokenVersion !== refreshToken.tokenVersion) {
-    log.error(AuthError.REFRESH_TOKEN_VERSION_MISMATCH, {
+    log.error(InternalErrorMessage.REFRESH_TOKEN_VERSION_MISMATCH, {
       id: refreshToken.id,
       tokenVersion: {
         dbUser: user.tokenVersion,

@@ -1,6 +1,6 @@
-enum PublicError {
+enum PublicErrorMessage {
   INVALID_LOGIN = 'Invalid login',
   UNAUTHORIZED = 'Not authorized',
 }
 
-export { PublicError };
+export { PublicErrorMessage };
