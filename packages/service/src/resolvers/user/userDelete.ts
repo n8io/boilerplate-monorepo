@@ -1,11 +1,21 @@
-import { ApolloError } from 'apollo-server-express';
 import { User } from 'entity/User';
-import { log } from 'logger';
+import { log } from 'log';
+import { logFactory } from 'log/logFactory';
 import { Arg, Authorized, Ctx, Mutation, Resolver } from 'type-graphql';
 import { getConnection } from 'typeorm';
 import { Context } from 'types/context';
-import { InternalErrorMessage, PublicErrorMessage } from 'types/errorMessage';
+import {
+  SelfDeleteError,
+  UserDeleteError,
+} from 'types/customError/user/userDelete';
+import { InternalErrorMessage } from 'types/errorMessage';
 import { UserRole } from 'types/userRole';
+import { DatabaseError } from 'types/customError/database';
+
+const debugLog = logFactory({
+  method: 'userDelete',
+  module: 'resolvers/user',
+});
 
 @Resolver()
 export class UserDelete {
@@ -20,37 +30,42 @@ export class UserDelete {
     id: string,
     @Ctx() { user }: Context
   ) {
+    debugLog('👾 User id', id);
+
     if (user!.id === id) {
       log.error(InternalErrorMessage.USER_ATTEMPTED_TO_SELF_DELETE, {
         username: user!.username,
       });
 
-      throw new ApolloError(
-        PublicErrorMessage.CANNOT_DELETE_SELF,
-        'CANNOT_SELF_DELETE',
-        { username: user!.username }
-      );
+      throw new SelfDeleteError({ username: user!.username });
     }
+
+    let wasUpdated = false;
 
     try {
       const { affected } = await getConnection()
         .getRepository(User)
         .update({ id }, { deletedAt: new Date() });
 
-      const wasUpdated = Boolean(affected);
-
-      if (!wasUpdated) {
-        log.error(InternalErrorMessage.FAILED_TO_DELETE_USER, id);
-      }
-
-      return wasUpdated;
+      wasUpdated = Boolean(affected);
     } catch (error) {
-      log.error(InternalErrorMessage.FAILED_DB_REQUEST, {
+      log.error(InternalErrorMessage.FAILED_TO_DELETE_USER, {
+        id,
         error,
         mutation: 'userDelete',
       });
 
-      return false;
+      throw new DatabaseError();
     }
+
+    if (!wasUpdated) {
+      log.error(InternalErrorMessage.FAILED_TO_DELETE_USER, id);
+
+      throw new UserDeleteError({ id });
+    }
+
+    debugLog('✅ Successfully deleted user', id);
+
+    return true;
   }
 }

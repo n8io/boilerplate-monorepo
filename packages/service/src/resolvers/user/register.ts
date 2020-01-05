@@ -1,12 +1,20 @@
 import { hash } from 'bcryptjs';
 import cuid from 'cuid';
 import { User } from 'entity/User';
-import { log } from 'logger';
+import { log } from 'log';
+import { logFactory } from 'log/logFactory';
 import { Arg, Field, InputType, Mutation, Resolver } from 'type-graphql';
 import { Auth } from 'types/auth';
+import { DatabaseError } from 'types/customError/database';
+import { RegisterUserAlreadyExistsError } from 'types/customError/user/register';
 import { InternalErrorMessage } from 'types/errorMessage';
 import { PasswordSalt } from 'types/passwordSalt';
 import { UserRole } from 'types/userRole';
+
+const debugLog = logFactory({
+  method: 'register',
+  module: 'resolvers/user',
+});
 
 const REGISTER_USER_INPUT_DESCRIPTION = 'The register user input';
 
@@ -33,15 +41,23 @@ export class Register {
     input: RegisterInput
   ) {
     const { password: clearTextPassword, email, role, username } = input;
-    const passwordHash = await hash(clearTextPassword, PasswordSalt);
+    const salt = await PasswordSalt.generate();
+    const passwordHash = await hash(clearTextPassword, salt);
     let user;
+
+    debugLog('👾 RegisterInput', {
+      email,
+      password: '*** redacted ***',
+      role,
+      username,
+    });
 
     try {
       user = await User.findOne({ where: [{ email }, { username }] });
     } catch (error) {
-      log.error(InternalErrorMessage.FAILED_DB_REQUEST, error);
+      log.error(InternalErrorMessage.FAILED_TO_REGISTER_USER, { error });
 
-      return false;
+      throw new DatabaseError();
     }
 
     if (user) {
@@ -49,22 +65,31 @@ export class Register {
         existing: Auth.toSafeLog(user),
         requested: { email, username },
       });
-      return false;
+
+      throw new RegisterUserAlreadyExistsError({ email, username });
     }
+
+    const id = cuid();
 
     try {
       await User.insert({
-        id: cuid(),
+        id,
         email,
         passwordHash,
         role,
         username,
       });
     } catch (error) {
-      log.error(InternalErrorMessage.FAILED_DB_REQUEST, error);
+      log.error(InternalErrorMessage.FAILED_TO_REGISTER_USER, {
+        email,
+        error,
+        username,
+      });
 
-      return false;
+      throw new DatabaseError();
     }
+
+    debugLog(`✅ Successfully registered user`, { email, id, username });
 
     return true;
   }

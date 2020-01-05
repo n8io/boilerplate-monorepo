@@ -1,5 +1,5 @@
 import { getConnection } from 'typeorm';
-import { log } from 'logger';
+import { log } from 'log';
 
 const migrate = async () => {
   const hasPendingMigrations = await getConnection().showMigrations();

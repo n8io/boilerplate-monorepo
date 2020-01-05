@@ -2,7 +2,8 @@ import { ApolloServer } from 'apollo-server-express';
 import { resolvers } from 'resolvers';
 import { buildSchema } from 'type-graphql';
 import { Auth } from 'types/auth';
-import { contextMiddleware } from 'types/context';
+import { contextMiddleware as context } from 'types/context';
+import { formatError } from './formatError';
 
 const makeServer = async (app: any) => {
   const schema = await buildSchema({
@@ -12,7 +13,15 @@ const makeServer = async (app: any) => {
   });
 
   const server = new ApolloServer({
-    context: contextMiddleware,
+    context,
+    debug: true,
+    // engine: {
+    //   rewriteError(err) {
+    //     console.log(err);
+    //     return err;
+    //   },
+    // },
+    formatError,
     schema,
   });
 

@@ -11,6 +11,15 @@ import {
 import { paginate } from 'types/pagination/paginate';
 import { UserRole } from 'types/userRole';
 import { Page } from 'types/pagination/page';
+import { logFactory } from 'log/logFactory';
+import { DatabaseError } from 'types/customError/database';
+import { log } from 'log';
+import { InternalErrorMessage } from 'types/errorMessage';
+
+const debugLog = logFactory({
+  method: 'users',
+  module: 'resolvers/user',
+});
 
 @InputType({ description: 'The filters for searching users' })
 class UsersInput {
@@ -36,6 +45,19 @@ export class Users {
     @Arg('input', { description: 'The filters for searching users' })
     input: UsersInput
   ) {
-    return paginate(User, input, 'username');
+    debugLog('👾', input);
+
+    let page = null;
+    try {
+      page = await paginate(User, input, 'username');
+    } catch (error) {
+      log.error(InternalErrorMessage.FAILED_TO_RETRIEVE_USERS, error);
+
+      throw new DatabaseError();
+    }
+
+    debugLog(`💁 Successfully found ${page.edges.length} user(s)`);
+
+    return page;
   }
 }

@@ -2,7 +2,7 @@ import { User } from 'entity/User';
 import { Request, Response } from 'express';
 import { Auth } from 'types/auth';
 import { InternalErrorMessage } from 'types/errorMessage';
-import { log } from 'logger';
+import { log } from 'log';
 
 const sendResponse = (res: Response, token: string = '') =>
   res.send({ ok: Boolean(token), token });

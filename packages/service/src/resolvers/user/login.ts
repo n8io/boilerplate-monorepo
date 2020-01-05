@@ -1,12 +1,18 @@
 import { compare } from 'bcryptjs';
 import { User } from 'entity/User';
-import { log } from 'logger';
+import { log } from 'log';
+import { logFactory } from 'log/logFactory';
 import { Arg, Ctx, Field, InputType, Mutation, Resolver } from 'type-graphql';
 import { Auth } from 'types/auth';
 import { Context } from 'types/context';
-import { InternalErrorMessage, PublicErrorMessage } from 'types/errorMessage';
-import { AuthenticationError } from 'apollo-server-express';
+import {
+  InvalidLoginError,
+  InvalidLoginPasswordMismatchError,
+  InvalidLoginUserNotFoundError,
+} from 'types/customError/user/login';
+import { InternalErrorMessage } from 'types/errorMessage';
 
+const debugLog = logFactory({ method: 'login', module: 'resolvers/user' });
 const LOGIN_USER_INPUT_DESCRIPTION = 'The user login input';
 
 @InputType({ description: LOGIN_USER_INPUT_DESCRIPTION })
@@ -29,28 +35,31 @@ export class Login {
     const { username, password: clearTextPassword } = input;
     let user;
 
+    debugLog('👾 LoginInput', { username });
+
     try {
       user = await User.findOne({ where: { username } });
     } catch (error) {
       log.error(InternalErrorMessage.FAILED_DB_REQUEST, error);
 
-      throw new AuthenticationError(PublicErrorMessage.INVALID_LOGIN);
+      throw new InvalidLoginError();
     }
 
     if (!user) {
-      log.error(InternalErrorMessage.USER_NOT_FOUND, { username });
+      debugLog(`🤷 ${InternalErrorMessage.USER_NOT_FOUND}`, { username });
 
-      throw new AuthenticationError(PublicErrorMessage.INVALID_LOGIN);
+      throw new InvalidLoginUserNotFoundError({ username });
     }
 
     const isPasswordMatch = await compare(clearTextPassword, user.passwordHash);
 
     if (!isPasswordMatch) {
-      log.error(InternalErrorMessage.PASSWORD_MISMATCH, { username });
+      debugLog(`🔏 ${InternalErrorMessage.PASSWORD_MISMATCH}`, { username });
 
-      throw new AuthenticationError(PublicErrorMessage.INVALID_LOGIN);
+      throw new InvalidLoginPasswordMismatchError({ username });
     }
 
+    debugLog(`✅ User logged in successfully`, { username });
     Auth.writeRefreshToken(res, user);
 
     return Auth.encryptAccessToken(user);

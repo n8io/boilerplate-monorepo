@@ -1,13 +1,19 @@
+import 'dotenv/config';
 import { User } from 'entity/User';
-import { log } from 'logger';
+import { log } from 'log';
+import { logFactory } from 'log/logFactory';
 import { Arg, Authorized, Mutation, Resolver } from 'type-graphql';
 import { getConnection } from 'typeorm';
+import { DatabaseError } from 'types/customError/database';
+import { RevokeRefreshTokensError } from 'types/customError/user/revokeRefreshTokens';
 import { InternalErrorMessage } from 'types/errorMessage';
 import { ProcessEnvKeys } from 'types/processEnv';
 import { UserRole } from 'types/userRole';
-import dotenv from 'dotenv';
 
-dotenv.config();
+const debugLog = logFactory({
+  method: 'revokeRefreshTokens',
+  module: 'resolvers/user',
+});
 
 @Resolver()
 export class RevokeRefreshTokens {
@@ -24,25 +30,33 @@ export class RevokeRefreshTokens {
     })
     id: string
   ) {
+    debugLog('👾 User id', id);
+
+    let wasUpdated = false;
+
     try {
       const { affected } = await getConnection()
         .getRepository(User)
         .increment({ id }, 'tokenVersion', 1);
 
-      const wasUpdated = Boolean(affected);
-
-      if (!wasUpdated) {
-        log.error(
-          InternalErrorMessage.FAILED_TO_REVOKE_USER_REFRESH_TOKENS,
-          id
-        );
-      }
-
-      return wasUpdated;
+      wasUpdated = Boolean(affected);
     } catch (error) {
-      log.error(InternalErrorMessage.FAILED_DB_REQUEST, error);
+      log.error(InternalErrorMessage.FAILED_TO_REVOKE_REFRESH_TOKENS, {
+        error,
+        id,
+      });
 
-      return false;
+      throw new DatabaseError();
     }
+
+    if (!wasUpdated) {
+      log.error(InternalErrorMessage.FAILED_TO_REVOKE_REFRESH_TOKENS, id);
+
+      throw new RevokeRefreshTokensError();
+    }
+
+    debugLog('✅ Successfully revoked refresh token for user', { id });
+
+    return true;
   }
 }

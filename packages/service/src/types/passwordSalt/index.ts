@@ -1,1 +1,5 @@
-export const PasswordSalt = 12;
+import { genSalt } from 'bcryptjs';
+
+export const PasswordSalt = {
+  generate: genSalt,
+};

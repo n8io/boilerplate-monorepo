@@ -1,7 +1,8 @@
+import 'dotenv/config';
 import { User } from 'entity/User';
 import { Request, Response } from 'express';
 import { sign, TokenExpiredError, verify } from 'jsonwebtoken';
-import { log } from 'logger';
+import { log } from 'log';
 import { AuthChecker } from 'type-graphql';
 import { Context } from 'types/context';
 import { InternalErrorMessage, PublicErrorMessage } from 'types/errorMessage';
@@ -104,21 +105,17 @@ const writeRefreshToken = (res: Response, user: User) => {
 const authChecker: AuthChecker<Context, UserRole> = ({ context }, roles) => {
   const { user } = context;
 
-  if (roles && roles.length === 0) {
-    // No roles specified, no user, no access
-    if (!user) {
-      throw new AuthenticationError(PublicErrorMessage.UNAUTHORIZED);
-    }
-
-    return true;
-  }
-
   if (!user) {
     // No user present, restrict access
     throw new AuthenticationError(PublicErrorMessage.UNAUTHORIZED);
   }
 
-  if (roles!.includes(user.role)) {
+  if (roles.length === 0) {
+    // Valid user and no role restrictions, grant access
+    return true;
+  }
+
+  if (roles.includes(user.role)) {
     // Grant access if the roles overlap
     return true;
   }

@@ -1,12 +1,10 @@
+import 'dotenv/config';
 import { connect, migrate } from 'db';
 import express from 'express';
 import { makeServer } from 'server';
 import { ProcessEnvKeys } from 'types/processEnv';
 import { middlewares } from './middleware';
 import { router } from './router';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 const PORT = process.env[ProcessEnvKeys.PORT] || 4000;
 let app = express();
