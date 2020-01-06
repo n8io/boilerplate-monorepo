@@ -5,10 +5,9 @@ import { ErrorProperties } from 'types/errorProperties';
 import { ErrorType } from 'types/errorType';
 
 const toSafeError = (error: GraphQLError) => {
-  delete error.extensions!.email;
   delete error.extensions!.username;
 
-  error.message = PublicErrorMessage.FAILED_TO_REGISTER_USER;
+  error.message = PublicErrorMessage.FAILED_TO_RETRIEVE_SELF;
 
   return error;
 };
@@ -18,28 +17,28 @@ const appendSafeError = (props: ErrorProperties | undefined) => ({
   toSafeError,
 });
 
-export class UserRegisterUserError extends ApolloError {
+export class MeError extends ApolloError {
   constructor(properties?: ErrorProperties) {
     super(
-      PublicErrorMessage.FAILED_TO_REGISTER_USER,
-      ErrorType.FAILED_TO_REGISTER_USER,
+      PublicErrorMessage.FAILED_TO_RETRIEVE_SELF,
+      ErrorType.FAILED_TO_RETRIEVE_SELF,
       appendSafeError(properties)
     );
 
-    Object.defineProperty(this, 'name', { value: UserRegisterUserError.name });
+    Object.defineProperty(this, 'name', { value: MeError.name });
   }
 }
 
-export class RegisterUserAlreadyExistsError extends ApolloError {
+export class MeUserNotFoundError extends ApolloError {
   constructor(properties?: ErrorProperties) {
     super(
-      InternalErrorMessage.FAILED_TO_REGISTER_USER_ALREADY_EXISTS,
-      ErrorType.FAILED_TO_REGISTER_USER_ALREADY_EXISTS,
+      InternalErrorMessage.USER_NOT_FOUND,
+      ErrorType.FAILED_TO_RETRIEVE_SELF_USER_NOT_FOUND,
       appendSafeError(properties)
     );
 
     Object.defineProperty(this, 'name', {
-      value: RegisterUserAlreadyExistsError.name,
+      value: MeUserNotFoundError.name,
     });
   }
 }

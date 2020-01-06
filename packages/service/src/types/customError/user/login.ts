@@ -17,7 +17,7 @@ const appendSafeError = (props: ErrorProperties | undefined) => ({
   toSafeError,
 });
 
-export class InvalidLoginError extends ApolloError {
+export class UserInvalidLoginError extends ApolloError {
   constructor(properties?: ErrorProperties) {
     super(
       PublicErrorMessage.INVALID_LOGIN,
@@ -25,11 +25,11 @@ export class InvalidLoginError extends ApolloError {
       appendSafeError(properties)
     );
 
-    Object.defineProperty(this, 'name', { value: InvalidLoginError.name });
+    Object.defineProperty(this, 'name', { value: UserInvalidLoginError.name });
   }
 }
 
-export class InvalidLoginUserNotFoundError extends ApolloError {
+export class UserInvalidLoginUserNotFoundError extends ApolloError {
   constructor(properties?: ErrorProperties) {
     super(
       InternalErrorMessage.USER_NOT_FOUND,
@@ -38,7 +38,7 @@ export class InvalidLoginUserNotFoundError extends ApolloError {
     );
 
     Object.defineProperty(this, 'name', {
-      value: InvalidLoginUserNotFoundError.name,
+      value: UserInvalidLoginUserNotFoundError.name,
     });
   }
 }

@@ -15,7 +15,7 @@ const appendSafeError = (props: ErrorProperties | undefined) => ({
   toSafeError,
 });
 
-export class SelfDeleteError extends ApolloError {
+export class UserSelfDeleteError extends ApolloError {
   constructor(properties?: ErrorProperties) {
     super(
       PublicErrorMessage.CANNOT_DELETE_SELF,
@@ -23,7 +23,7 @@ export class SelfDeleteError extends ApolloError {
       appendSafeError(properties)
     );
 
-    Object.defineProperty(this, 'name', { value: SelfDeleteError.name });
+    Object.defineProperty(this, 'name', { value: UserSelfDeleteError.name });
   }
 }
 

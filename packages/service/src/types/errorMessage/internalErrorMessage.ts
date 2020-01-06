@@ -8,13 +8,15 @@ enum InternalErrorMessage {
   FAILED_TO_REGISTER_USER = 'Failed to register user',
   FAILED_TO_REGISTER_USER_ALREADY_EXISTS = 'The given username and/or email already exists',
   FAILED_TO_RETRIEVE_USERS = 'Failed to retrieve users',
+  FAILED_TO_RETRIEVE_SELF = 'Failed to retrieve logged in user info',
+  FAILED_TO_RETRIEVE_SELF_NO_USER_ON_CONTEXT = 'No user was found on the request context',
   FAILED_TO_REVOKE_REFRESH_TOKENS = 'Could not revoke refresh tokens for the given user id',
   GENERIC = 'A general error has occured',
   PASSWORD_MISMATCH = 'Provided password does not match',
   REFRESH_TOKEN_COOKIE_NOT_FOUND = 'Refresh token cookie was not provided',
   REFRESH_TOKEN_VERSION_MISMATCH = 'Refresh token version mismatch',
   USER_ATTEMPTED_TO_SELF_DELETE = 'User attempted to self delete',
-  USER_NOT_FOUND = 'User does not exist',
+  USER_NOT_FOUND = 'User not found',
 }
 
 export { InternalErrorMessage };

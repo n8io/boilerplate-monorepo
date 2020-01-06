@@ -1,14 +1,10 @@
 import { ApolloError } from 'apollo-server-express';
-import { GraphQLError } from 'graphql';
+import { identity } from 'ramda';
 import { PublicErrorMessage } from 'types/errorMessage';
 import { ErrorProperties } from 'types/errorProperties';
 import { ErrorType } from 'types/errorType';
 
-const toSafeError = (error: GraphQLError) => {
-  delete error.extensions!.id;
-
-  return error;
-};
+const toSafeError = identity;
 
 const appendSafeError = (props: ErrorProperties | undefined) => ({
   ...props,

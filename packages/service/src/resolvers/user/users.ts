@@ -51,7 +51,10 @@ export class Users {
     try {
       page = await paginate(User, input, 'username');
     } catch (error) {
-      log.error(InternalErrorMessage.FAILED_TO_RETRIEVE_USERS, error);
+      log.error(InternalErrorMessage.FAILED_TO_RETRIEVE_USERS, {
+        error,
+        query: this.users.name,
+      });
 
       throw new DatabaseError();
     }

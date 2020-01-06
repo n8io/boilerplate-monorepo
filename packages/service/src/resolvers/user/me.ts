@@ -4,6 +4,7 @@ import { logFactory } from 'log/logFactory';
 import { Ctx, Field, ObjectType, Query, Resolver } from 'type-graphql';
 import { toSafeLog } from 'types/auth/transforms';
 import { Context } from 'types/context';
+import { DatabaseError, MeError, MeUserNotFoundError } from 'types/customError';
 import { InternalErrorMessage } from 'types/errorMessage';
 import { UserRole } from 'types/userRole';
 
@@ -29,31 +30,41 @@ export class Me {
   })
   async me(@Ctx() { user }: Context) {
     if (!user) {
-      debugLog('🤷 No user was found on the request context');
+      log.error(
+        InternalErrorMessage.FAILED_TO_RETRIEVE_SELF_NO_USER_ON_CONTEXT,
+        { query: 'me' }
+      );
 
-      return null;
+      throw new MeError();
     }
+
+    let me;
 
     try {
-      const me = (await User.findOne({ id: user!.id })) as User;
-
-      if (!me) {
-        log.error(InternalErrorMessage.USER_NOT_FOUND, {
-          id: user.id,
-          query: 'me',
-          username: user.username,
-        });
-
-        return null;
-      }
-
-      debugLog('✅ Found me', toSafeLog(me));
-
-      return me;
+      me = await User.findOne({ id: user!.id });
     } catch (error) {
-      log.error(InternalErrorMessage.FAILED_DB_REQUEST, { query: 'me', error });
+      log.error(InternalErrorMessage.FAILED_TO_RETRIEVE_SELF, {
+        query: 'me',
+        error,
+      });
 
-      return null;
+      throw new DatabaseError();
     }
+
+    if (!me) {
+      const errorData = {
+        id: user.id,
+        query: 'me',
+        username: user.username,
+      };
+
+      log.error(InternalErrorMessage.FAILED_TO_RETRIEVE_SELF, errorData);
+
+      throw new MeUserNotFoundError(errorData);
+    }
+
+    debugLog('✅ Found me', toSafeLog(me));
+
+    return me;
   }
 }

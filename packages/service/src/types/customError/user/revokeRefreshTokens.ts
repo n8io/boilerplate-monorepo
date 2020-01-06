@@ -15,7 +15,7 @@ const appendSafeError = (props: ErrorProperties | undefined) => ({
   toSafeError,
 });
 
-export class RevokeRefreshTokensError extends ApolloError {
+export class UserRevokeRefreshTokensError extends ApolloError {
   constructor(properties?: ErrorProperties) {
     super(
       PublicErrorMessage.FAILED_TO_REVOKE_REFRESH_TOKENS,
@@ -24,7 +24,7 @@ export class RevokeRefreshTokensError extends ApolloError {
     );
 
     Object.defineProperty(this, 'name', {
-      value: RevokeRefreshTokensError.name,
+      value: UserRevokeRefreshTokensError.name,
     });
   }
 }

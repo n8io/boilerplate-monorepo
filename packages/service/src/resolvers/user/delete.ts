@@ -5,9 +5,9 @@ import { Arg, Authorized, Ctx, Mutation, Resolver } from 'type-graphql';
 import { getConnection } from 'typeorm';
 import { Context } from 'types/context';
 import {
-  SelfDeleteError,
+  UserSelfDeleteError,
   UserDeleteError,
-} from 'types/customError/user/userDelete';
+} from 'types/customError/user/delete';
 import { InternalErrorMessage } from 'types/errorMessage';
 import { UserRole } from 'types/userRole';
 import { DatabaseError } from 'types/customError/database';
@@ -34,10 +34,11 @@ export class UserDelete {
 
     if (user!.id === id) {
       log.error(InternalErrorMessage.USER_ATTEMPTED_TO_SELF_DELETE, {
+        mutation: this.userDelete.name,
         username: user!.username,
       });
 
-      throw new SelfDeleteError({ username: user!.username });
+      throw new UserSelfDeleteError({ username: user!.username });
     }
 
     let wasUpdated = false;
@@ -52,14 +53,17 @@ export class UserDelete {
       log.error(InternalErrorMessage.FAILED_TO_DELETE_USER, {
         id,
         error,
-        mutation: 'userDelete',
+        mutation: this.userDelete.name,
       });
 
       throw new DatabaseError();
     }
 
     if (!wasUpdated) {
-      log.error(InternalErrorMessage.FAILED_TO_DELETE_USER, id);
+      log.error(InternalErrorMessage.FAILED_TO_DELETE_USER, {
+        id,
+        mutation: this.userDelete.name,
+      });
 
       throw new UserDeleteError({ id });
     }

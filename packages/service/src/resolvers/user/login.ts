@@ -6,17 +6,17 @@ import { Arg, Ctx, Field, InputType, Mutation, Resolver } from 'type-graphql';
 import { Auth } from 'types/auth';
 import { Context } from 'types/context';
 import {
-  InvalidLoginError,
+  UserInvalidLoginError,
   InvalidLoginPasswordMismatchError,
-  InvalidLoginUserNotFoundError,
+  UserInvalidLoginUserNotFoundError,
 } from 'types/customError/user/login';
 import { InternalErrorMessage } from 'types/errorMessage';
 
-const debugLog = logFactory({ method: 'login', module: 'resolvers/user' });
+const debugLog = logFactory({ method: 'userLogin', module: 'resolvers/user' });
 const LOGIN_USER_INPUT_DESCRIPTION = 'The user login input';
 
 @InputType({ description: LOGIN_USER_INPUT_DESCRIPTION })
-class LoginInput {
+class UserLoginInput {
   @Field({ description: `The user's username` })
   username: string;
 
@@ -25,11 +25,11 @@ class LoginInput {
 }
 
 @Resolver()
-export class Login {
+export class UserLogin {
   @Mutation(() => String, { description: 'Login a given user' })
-  async login(
+  async userLogin(
     @Arg('input', { description: LOGIN_USER_INPUT_DESCRIPTION })
-    input: LoginInput,
+    input: UserLoginInput,
     @Ctx() { res }: Context
   ): Promise<String> {
     const { username, password: clearTextPassword } = input;
@@ -40,15 +40,19 @@ export class Login {
     try {
       user = await User.findOne({ where: { username } });
     } catch (error) {
-      log.error(InternalErrorMessage.FAILED_DB_REQUEST, error);
+      log.error(InternalErrorMessage.USER_NOT_FOUND, {
+        error,
+        mutation: this.userLogin.name,
+        username,
+      });
 
-      throw new InvalidLoginError();
+      throw new UserInvalidLoginError();
     }
 
     if (!user) {
       debugLog(`🤷 ${InternalErrorMessage.USER_NOT_FOUND}`, { username });
 
-      throw new InvalidLoginUserNotFoundError({ username });
+      throw new UserInvalidLoginUserNotFoundError({ username });
     }
 
     const isPasswordMatch = await compare(clearTextPassword, user.passwordHash);
