@@ -5,8 +5,10 @@ import { log } from 'log';
 import { logFactory } from 'log/logFactory';
 import { Arg, Field, InputType, Mutation, Resolver } from 'type-graphql';
 import { Auth } from 'types/auth';
-import { DatabaseError } from 'types/customError/database';
-import { RegisterUserAlreadyExistsError } from 'types/customError/user/register';
+import {
+  DatabaseError,
+  RegisterUserAlreadyExistsError,
+} from 'types/customError';
 import { InternalErrorMessage } from 'types/errorMessage';
 import { PasswordSalt } from 'types/passwordSalt';
 import { UserRole } from 'types/userRole';

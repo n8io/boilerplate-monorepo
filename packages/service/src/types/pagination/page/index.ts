@@ -1,6 +1,5 @@
 import { ClassType, Field, ObjectType } from 'type-graphql';
-import { Edge } from 'types/pagination/edge';
-import { PageInfo } from 'types/pagination/pageInfo';
+import { Edge, PageInfo } from 'types/pagination';
 
 interface IPage<T> {
   pageInfo: PageInfo;

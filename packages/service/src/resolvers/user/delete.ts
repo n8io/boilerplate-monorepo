@@ -4,13 +4,13 @@ import { logFactory } from 'log/logFactory';
 import { Arg, Authorized, Ctx, Mutation, Resolver } from 'type-graphql';
 import { getConnection } from 'typeorm';
 import { Context } from 'types/context';
+import { DatabaseError } from 'types/customError';
 import {
-  UserSelfDeleteError,
   UserDeleteError,
+  UserSelfDeleteError,
 } from 'types/customError/user/delete';
 import { InternalErrorMessage } from 'types/errorMessage';
 import { UserRole } from 'types/userRole';
-import { DatabaseError } from 'types/customError/database';
 
 const debugLog = logFactory({
   method: 'userDelete',

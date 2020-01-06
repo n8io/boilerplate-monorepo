@@ -1,20 +1,19 @@
 import { User } from 'entity/User';
+import { log } from 'log';
+import { logFactory } from 'log/logFactory';
 import {
   Arg,
   Authorized,
+  Field,
+  InputType,
+  ObjectType,
   Query,
   Resolver,
-  InputType,
-  Field,
-  ObjectType,
 } from 'type-graphql';
-import { paginate } from 'types/pagination/paginate';
-import { UserRole } from 'types/userRole';
-import { Page } from 'types/pagination/page';
-import { logFactory } from 'log/logFactory';
-import { DatabaseError } from 'types/customError/database';
-import { log } from 'log';
+import { DatabaseError } from 'types/customError';
 import { InternalErrorMessage } from 'types/errorMessage';
+import { Page, paginate } from 'types/pagination';
+import { UserRole } from 'types/userRole';
 
 const debugLog = logFactory({
   method: 'users',

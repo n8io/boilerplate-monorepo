@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import { AuthenticationError } from 'apollo-server-express';
 import { User } from 'entity/User';
 import { Request, Response } from 'express';
 import { sign, TokenExpiredError, verify } from 'jsonwebtoken';
@@ -11,7 +12,6 @@ import { RefreshToken } from 'types/refreshToken';
 import { UserContext } from 'types/userContext';
 import { UserRole } from 'types/userRole';
 import { Enumeration } from './typedef';
-import { AuthenticationError } from 'apollo-server-express';
 
 const toRefreshToken = ({
   email,
