@@ -7,7 +7,8 @@ import { Auth } from 'types/auth';
 import { Context } from 'types/context';
 import {
   UserInvalidLoginError,
-  InvalidLoginPasswordMismatchError,
+  UserInvalidLoginPasswordMismatchError,
+  UserInvalidLoginUserDeletedError,
   UserInvalidLoginUserNotFoundError,
 } from 'types/customError/user/login';
 import { InternalErrorMessage } from 'types/errorMessage';
@@ -55,12 +56,25 @@ export class UserLogin {
       throw new UserInvalidLoginUserNotFoundError({ username });
     }
 
+    if (!Auth.isUserActive(user)) {
+      log.error(InternalErrorMessage.USER_IS_DELETED, {
+        deleted_at: user.deletedAt,
+        query: this.userLogin.name,
+        username: user.username,
+      });
+
+      throw new UserInvalidLoginUserDeletedError({
+        deleted_at: user.deletedAt,
+        username: user.username,
+      });
+    }
+
     const isPasswordMatch = await compare(clearTextPassword, user.passwordHash);
 
     if (!isPasswordMatch) {
       debugLog(`🔏 ${InternalErrorMessage.PASSWORD_MISMATCH}`, { username });
 
-      throw new InvalidLoginPasswordMismatchError({ username });
+      throw new UserInvalidLoginPasswordMismatchError({ username });
     }
 
     debugLog(`✅ User logged in successfully`, { username });

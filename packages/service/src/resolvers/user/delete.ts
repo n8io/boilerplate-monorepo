@@ -46,7 +46,13 @@ export class UserDelete {
     try {
       const { affected } = await getConnection()
         .getRepository(User)
-        .update({ id }, { deletedAt: new Date() });
+        .update(
+          { id },
+          {
+            deletedAt: () => 'NOW()',
+            deletedBy: user!.id,
+          }
+        );
 
       wasUpdated = Boolean(affected);
     } catch (error) {

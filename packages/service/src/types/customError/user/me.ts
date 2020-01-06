@@ -42,3 +42,17 @@ export class MeUserNotFoundError extends ApolloError {
     });
   }
 }
+
+export class MeUserDeletedError extends ApolloError {
+  constructor(properties?: ErrorProperties) {
+    super(
+      InternalErrorMessage.USER_IS_DELETED,
+      ErrorType.USER_DELETED,
+      appendSafeError(properties)
+    );
+
+    Object.defineProperty(this, 'name', {
+      value: MeUserDeletedError.name,
+    });
+  }
+}

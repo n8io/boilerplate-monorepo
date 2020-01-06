@@ -47,4 +47,7 @@ export class User extends BaseEntity {
 
   @Column({ nullable: true })
   deletedAt: Date;
+
+  @Column({ nullable: true })
+  deletedBy: string;
 }

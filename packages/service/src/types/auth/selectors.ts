@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import { AuthenticationError } from 'apollo-server-express';
+import { isAfter } from 'date-fns';
 import { User } from 'entity/User';
 import { Request, Response } from 'express';
 import { sign, TokenExpiredError, verify } from 'jsonwebtoken';
@@ -12,6 +13,8 @@ import { RefreshToken } from 'types/refreshToken';
 import { UserContext } from 'types/userContext';
 import { UserRole } from 'types/userRole';
 import { Enumeration } from './typedef';
+
+const isPast = (date: Date) => isAfter(new Date(), date);
 
 const toRefreshToken = ({
   email,
@@ -124,9 +127,12 @@ const authChecker: AuthChecker<Context, UserRole> = ({ context }, roles) => {
   throw new AuthenticationError(PublicErrorMessage.UNAUTHORIZED);
 };
 
+const isUserActive = (user: User) => !user.deletedAt || !isPast(user.deletedAt);
+
 export {
   authChecker,
   encryptAccessToken,
+  isUserActive,
   readAccessToken,
   readRefreshToken,
   writeRefreshToken,

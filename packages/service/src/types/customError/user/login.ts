@@ -5,6 +5,7 @@ import { ErrorProperties } from 'types/errorProperties';
 import { ErrorType } from 'types/errorType';
 
 const toSafeError = (error: GraphQLError) => {
+  delete error.extensions!.deleted_at;
   delete error.extensions!.username;
 
   error.message = PublicErrorMessage.INVALID_LOGIN;
@@ -43,7 +44,7 @@ export class UserInvalidLoginUserNotFoundError extends ApolloError {
   }
 }
 
-export class InvalidLoginPasswordMismatchError extends ApolloError {
+export class UserInvalidLoginPasswordMismatchError extends ApolloError {
   constructor(properties?: ErrorProperties) {
     super(
       InternalErrorMessage.PASSWORD_MISMATCH,
@@ -52,7 +53,21 @@ export class InvalidLoginPasswordMismatchError extends ApolloError {
     );
 
     Object.defineProperty(this, 'name', {
-      value: InvalidLoginPasswordMismatchError.name,
+      value: UserInvalidLoginPasswordMismatchError.name,
+    });
+  }
+}
+
+export class UserInvalidLoginUserDeletedError extends ApolloError {
+  constructor(properties?: ErrorProperties) {
+    super(
+      InternalErrorMessage.USER_IS_DELETED,
+      ErrorType.FAILED_LOGIN_USER_DELETED,
+      appendSafeError(properties)
+    );
+
+    Object.defineProperty(this, 'name', {
+      value: UserInvalidLoginUserDeletedError.name,
     });
   }
 }

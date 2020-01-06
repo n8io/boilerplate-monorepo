@@ -16,6 +16,7 @@ enum InternalErrorMessage {
   REFRESH_TOKEN_COOKIE_NOT_FOUND = 'Refresh token cookie was not provided',
   REFRESH_TOKEN_VERSION_MISMATCH = 'Refresh token version mismatch',
   USER_ATTEMPTED_TO_SELF_DELETE = 'User attempted to self delete',
+  USER_IS_DELETED = 'User is currently deleted',
   USER_NOT_FOUND = 'User not found',
 }
 

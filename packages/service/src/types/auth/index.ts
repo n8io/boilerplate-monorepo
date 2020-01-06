@@ -1,6 +1,7 @@
 import {
   authChecker,
   encryptAccessToken,
+  isUserActive,
   readAccessToken,
   readRefreshToken,
   writeRefreshToken,
@@ -10,6 +11,7 @@ import { toSafeLog } from './transforms';
 const Auth = {
   authChecker,
   encryptAccessToken,
+  isUserActive,
   readAccessToken,
   readRefreshToken,
   toSafeLog,

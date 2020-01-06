@@ -2,9 +2,15 @@ import { User } from 'entity/User';
 import { log } from 'log';
 import { logFactory } from 'log/logFactory';
 import { Ctx, Field, ObjectType, Query, Resolver } from 'type-graphql';
+import { Auth } from 'types/auth';
 import { toSafeLog } from 'types/auth/transforms';
 import { Context } from 'types/context';
-import { DatabaseError, MeError, MeUserNotFoundError } from 'types/customError';
+import {
+  DatabaseError,
+  MeError,
+  MeUserDeletedError,
+  MeUserNotFoundError,
+} from 'types/customError';
 import { InternalErrorMessage } from 'types/errorMessage';
 import { UserRole } from 'types/userRole';
 
@@ -61,6 +67,19 @@ export class Me {
       log.error(InternalErrorMessage.FAILED_TO_RETRIEVE_SELF, errorData);
 
       throw new MeUserNotFoundError(errorData);
+    }
+
+    if (!Auth.isUserActive(me)) {
+      log.error(InternalErrorMessage.USER_IS_DELETED, {
+        deleted_at: me.deletedAt,
+        query: this.me.name,
+        username: me.username,
+      });
+
+      throw new MeUserDeletedError({
+        deleted_at: me.deletedAt,
+        username: me.username,
+      });
     }
 
     debugLog('✅ Found me', toSafeLog(me));
