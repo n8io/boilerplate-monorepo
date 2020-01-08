@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "migration:cli": "ts-node \"../../node_modules/typeorm/cli.js\"",
+    "migration:cli": "ts-node -r tsconfig-paths/register \"../../node_modules/typeorm/cli.js\"",
     "migration:down": "yarn -s migration:cli migration:revert",
     "migration:gen": "typeorm migration:create --name",
     "migration:show": "yarn -s migration:cli migration:show",

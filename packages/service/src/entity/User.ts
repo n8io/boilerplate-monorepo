@@ -9,8 +9,10 @@ import {
 } from 'typeorm';
 import { UserRole } from 'types/userRole';
 
+const { DB_SCHEMA: schema } = process.env;
+
 @ObjectType()
-@Entity('users')
+@Entity('users', { schema })
 export class User extends BaseEntity {
   @Field({ description: `The user's unique id` })
   @PrimaryColumn()
