@@ -8,6 +8,8 @@ const migrate = async () => {
     log.info('Running migrations...');
 
     await getConnection().runMigrations();
+
+    log.info('Migrations applied ✅');
   }
 };
 

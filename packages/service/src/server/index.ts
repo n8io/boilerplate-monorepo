@@ -26,6 +26,8 @@ const makeServer = async (app: any) => {
   });
 
   server.applyMiddleware({ app });
+
+  return server;
 };
 
 export { makeServer };
