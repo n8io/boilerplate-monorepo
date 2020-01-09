@@ -2,7 +2,8 @@
   "name": "boilerplate-monorepo",
   "private": true,
   "engines": {
-    "node": "^12.13.0"
+    "node": "^12.13.0",
+    "yarn": "^1.19.2"
   },
   "license": "MIT",
   "workspaces": [
@@ -39,9 +40,11 @@
     "logs:service": "yarn run -s dclf service",
     "logs:ui": "yarn run -s dclf ui",
     "run-all": "npm-run-all --parallel",
+    "start:db": "yarn -s dcud db",
     "start:service": "lerna run start --loglevel silent --scope \"@${npm_package_name}/service\" --stream",
     "start:ui": "lerna run start --loglevel silent --scope \"@${npm_package_name}/ui\" --stream",
     "start": "yarn run -s run-all start:*",
+    "stop:db": "yarn -s dcd db",
     "test": "CI=true lerna run test --stream -- --passWithNoTests --ci",
     "test:watch": "lerna run test --stream -- --passWithNoTests --color --watch"
   },

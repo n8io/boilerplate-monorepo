@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "Awesome project developed with TypeORM.",
   "license": "MIT",
+  "engines": {
+    "node": "^12.13.0",
+    "yarn": "^1.19.2"
+  },
   "scripts": {
     "build": "tsc",
     "migration:cli": "ts-node -r tsconfig-paths/register \"../../node_modules/typeorm/cli.js\"",
