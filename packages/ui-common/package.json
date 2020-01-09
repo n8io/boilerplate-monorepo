@@ -5,6 +5,10 @@
   "module": "index.js",
   "author": "Nate Clark <n8@n8io.com>",
   "license": "MIT",
+  "engines": {
+    "node": "^12.13.0",
+    "yarn": "^1.19.2"
+  },
   "scripts": {
     "test": "jest"
   },

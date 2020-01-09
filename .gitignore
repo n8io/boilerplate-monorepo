@@ -6,8 +6,12 @@ coverage/
 cypress/screenshots/
 cypress/videos/
 
+# temp
+.tmp/
+
 # production
 build/
+dist/
 
 # misc
 .DS_Store
@@ -16,3 +20,7 @@ build/
 release.json
 **/package-lock.json
 **/.eslintcache
+
+# env
+.env
+!.env.example

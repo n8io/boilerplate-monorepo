@@ -2,7 +2,8 @@
   "name": "boilerplate-monorepo",
   "private": true,
   "engines": {
-    "node": "^12.13.0"
+    "node": "^12.13.0",
+    "yarn": "^1.19.2"
   },
   "license": "MIT",
   "workspaces": [
@@ -11,6 +12,9 @@
   "scripts": {
     "🔥": "yarn run -s clean -v",
     "bootstrap": "lerna bootstrap",
+    "build": "yarn run -s run-all build:*",
+    "build:service": "(cd packages/service && yarn run -s build)",
+    "build:ui": "(cd packages/ui && yarn run -s build)",
     "bump": "lerna version prepatch --no-commit-hooks --yes",
     "clean": "yarn run -s dcd && yarn run -s dc down --remove-orphans",
     "dc": "docker-compose --project-directory . --file ./docker/docker-compose.yml",
@@ -18,8 +22,7 @@
     "dclf": "yarn run -s dc logs -f",
     "dcu": "yarn run -s dc up --force-recreate",
     "dcud": "yarn run -s dcu -d",
-    "dev:ui": "yarn run -s dcud ui && yarn run -s logs:ui",
-    "dev": "yarn run -s run-all dev:*",
+    "dev": "yarn run -s dcud ui service && yarn run -s run-all logs:*",
     "down": "yarn run -s clean",
     "down:ui": "yarn run -s dcd ui",
     "e2e:dev": "cypress open --config-file ./cypress/cypress.json",
@@ -34,10 +37,14 @@
     "linter:prettier": "prettier --check",
     "linter:stylelint": "stylelint --max-warnings=0 --allow-empty-input --config packages/ui/.stylelintrc.js",
     "logs": "yarn run -s run-all logs:*",
+    "logs:service": "yarn run -s dclf service",
     "logs:ui": "yarn run -s dclf ui",
     "run-all": "npm-run-all --parallel",
+    "start:db": "yarn -s dcud db",
+    "start:service": "lerna run start --loglevel silent --scope \"@${npm_package_name}/service\" --stream",
     "start:ui": "lerna run start --loglevel silent --scope \"@${npm_package_name}/ui\" --stream",
     "start": "yarn run -s run-all start:*",
+    "stop:db": "yarn -s dcd db",
     "test": "CI=true lerna run test --stream -- --passWithNoTests --ci",
     "test:watch": "lerna run test --stream -- --passWithNoTests --color --watch"
   },
@@ -48,6 +55,7 @@
     "babel-plugin-macros": "^2.6.1",
     "babel-plugin-module-resolver": "^3.2.0",
     "cypress": "^3.7.0",
+    "dotenv": "^8.2.0",
     "eslint": "^6.1.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-cypress": "^2.7.0",

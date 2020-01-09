@@ -4,6 +4,10 @@
   "private": true,
   "main": "index.js",
   "license": "MIT",
+  "engines": {
+    "node": "^12.13.0",
+    "yarn": "^1.19.2"
+  },
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch"
