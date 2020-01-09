@@ -14,7 +14,10 @@ const makeNamespace = ({ method, module }: LogFactoryOptions) =>
 const monkeyPatchTimestamp = (logFn: Function) => (
   message: string,
   ...args: any[]
-) => logFn(`${new Date().toISOString()}: ${message}`, ...args);
+) =>
+  args.length
+    ? logFn(`${new Date().toISOString()}: ${message}`, JSON.stringify(args))
+    : logFn(`${new Date().toISOString()}: ${message}`);
 
 const logFactory = (options: LogFactoryOptions) => {
   const namespace = makeNamespace(options);
