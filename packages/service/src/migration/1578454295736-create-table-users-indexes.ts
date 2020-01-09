@@ -1,20 +1,38 @@
-import { MigrationInterface, QueryRunner } from 'typeorm';
+import { MigrationInterface, QueryRunner, TableIndex } from 'typeorm';
+import { toTableName, toIndexName } from 'db/migrate/utils';
 
-const { DB_SCHEMA: schema } = process.env;
+const tableName = 'users';
+const emailColumnName = 'email';
+const usernameColumnName = 'username';
 
-export class createIndexesUsersEmailUsername1578454295736
+const fullyQualifiedTableName = toTableName(tableName);
+const emailIndexName = toIndexName(tableName, emailColumnName);
+const usernameIndexName = toIndexName(tableName, usernameColumnName);
+
+export class createIndexesUsersIndexes1578454295736
   implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<any> {
-    await queryRunner.query(`
-      CREATE UNIQUE INDEX "idx_users_email" ON ${schema}.users USING btree (email);
-      CREATE UNIQUE INDEX "idx_users_username" ON ${schema}.users USING btree (username);
-    `);
+    await queryRunner.createIndex(
+      fullyQualifiedTableName,
+      new TableIndex({
+        columnNames: [emailColumnName],
+        isUnique: true,
+        name: emailIndexName,
+      })
+    );
+
+    await queryRunner.createIndex(
+      fullyQualifiedTableName,
+      new TableIndex({
+        columnNames: [usernameColumnName],
+        isUnique: true,
+        name: usernameIndexName,
+      })
+    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<any> {
-    await queryRunner.query(`
-      DROP INDEX ${schema}."idx_users_username";
-      DROP INDEX ${schema}."idx_users_email";
-    `);
+    await queryRunner.dropIndex(fullyQualifiedTableName, emailIndexName);
+    await queryRunner.dropIndex(fullyQualifiedTableName, usernameIndexName);
   }
 }
