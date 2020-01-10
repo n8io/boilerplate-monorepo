@@ -3,6 +3,7 @@ import { Route } from 'types/route';
 import { About } from 'modules/about';
 import { Dashboard } from 'modules/dashboard';
 import { NotFound } from 'modules/notFound';
+import { SignUp } from 'modules/signUp';
 import { TestPage } from 'modules/testPage';
 
 const componentMap = {
@@ -10,6 +11,7 @@ const componentMap = {
   dashboard: Dashboard,
   notFound: NotFound,
   root: Dashboard,
+  signUp: SignUp,
   testPage: TestPage,
 };
 
@@ -19,6 +21,10 @@ const addComponent = route => {
   return mergeRight(route, { component });
 };
 
-const routes = pipe(Route.filterToNavigation, map(addComponent))(Route.values);
+const navRoutes = pipe(
+  Route.filterToNavigation,
+  map(addComponent)
+)(Route.values);
+const routes = map(addComponent, Route.values);
 
-export { routes };
+export { navRoutes, routes };

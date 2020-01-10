@@ -8,6 +8,7 @@ export const app = {
       about: 'About',
       dashboard: 'Dashboard',
       notFound: 'Not Found',
+      registration: 'Sign Up',
       root: 'Home',
       testPage: 'Test Page',
     },

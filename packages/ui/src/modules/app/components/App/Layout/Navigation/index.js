@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components/macro';
 import { CustomProperty } from 'types/customProperties';
 import { GridTemplateArea } from 'types/gridTemplateArea';
-import { routes } from '../../../../routes';
+import { navRoutes } from '../../../../routes';
 import { AuthButton } from './AuthButton';
 import { NavLink } from './NavLink';
 
@@ -34,7 +34,7 @@ const NavLinks = styled.div`
 
 const Navigation = () => (
   <Container role={Role.NAVIGATION}>
-    <NavLinks>{routes.map(toNavLink)}</NavLinks>
+    <NavLinks>{navRoutes.map(toNavLink)}</NavLinks>
     <AuthButton />
   </Container>
 );

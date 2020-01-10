@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SignUp/> renders about page 1`] = `
+<x-page>
+  <x-content>
+    <x-breadcrumbs>
+      <x-breadcrumb
+        isend="true"
+        text="t(title)"
+        to="/signup"
+      />
+    </x-breadcrumbs>
+    <x-header
+      title="t(title)"
+    />
+    <x-body />
+  </x-content>
+</x-page>
+`;
