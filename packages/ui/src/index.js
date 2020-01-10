@@ -9,16 +9,15 @@ const { isProduction } = config;
 initializeTranslations();
 
 const rootEl = document.getElementById('root');
-const root = ReactDOM.createRoot(rootEl);
 
 if (isProduction) {
-  root.render(<App />);
+  ReactDOM.render(<App />, rootEl);
 } else {
   import(
     /* webpackChunkName: "devTools" */
     'devTools'
   ).then(async ({ load }) => {
     await load();
-    root.render(<App />);
+    ReactDOM.render(<App />, rootEl);
   });
 }
