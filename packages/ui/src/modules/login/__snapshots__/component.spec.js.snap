@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<SignUp/> renders about page 1`] = `
+exports[`<Login/> renders about page 1`] = `
 <x-page>
   <x-content>
     <x-breadcrumbs>
@@ -14,12 +14,12 @@ exports[`<SignUp/> renders about page 1`] = `
       title="t(title)"
     />
     <x-body>
-      &lt;signup&gt; or 
+      &lt;login&gt; or 
       <a
         class="Link__StyledLink-faqv70-0 gfLtRU"
-        href="/login"
+        href="/signup"
       >
-        t(login)
+        t(signup)
       </a>
     </x-body>
   </x-content>

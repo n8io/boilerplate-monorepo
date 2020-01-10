@@ -4,7 +4,7 @@ exports[`<AuthButton/> when authenticated renders properly 1`] = `
 <div>
   <a
     class="AuthButton__Button-zn9hv3-0 dsFMJg"
-    label="t(logOut)"
+    label="t(logout)"
   >
     <svg
       fill="currentColor"
@@ -22,7 +22,7 @@ exports[`<AuthButton/> when authenticated renders properly 1`] = `
     <div
       class="EllipsiedText-o83sq0-0 bVGnli"
     >
-      t(logOut)
+      t(logout)
     </div>
   </a>
 </div>
@@ -32,7 +32,7 @@ exports[`<AuthButton/> when not authenticated renders properly 1`] = `
 <div>
   <a
     class="AuthButton__Button-zn9hv3-0 dsFMJg"
-    label="t(logIn)"
+    label="t(login)"
   >
     <svg
       fill="currentColor"
@@ -50,7 +50,7 @@ exports[`<AuthButton/> when not authenticated renders properly 1`] = `
     <div
       class="EllipsiedText-o83sq0-0 bVGnli"
     >
-      t(logIn)
+      t(login)
     </div>
   </a>
 </div>

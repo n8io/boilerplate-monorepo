@@ -34,7 +34,7 @@ const AuthButton = ({ onClick }) => {
     namespace: 'common',
   });
 
-  const i18nKey = isAuthenticated ? 'logOut' : 'logIn';
+  const i18nKey = isAuthenticated ? 'logout' : 'login';
 
   const onLogIn = () => {
     login();

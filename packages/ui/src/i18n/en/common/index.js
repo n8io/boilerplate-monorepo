@@ -5,7 +5,8 @@ export const common = {
   home: 'Home',
   loading: 'Loading',
   loadingScreenReader: 'Please wait while content is being loaded',
-  logIn: 'Log In',
-  logOut: 'Log Out',
+  login: 'Log In',
+  logout: 'Log Out',
+  signup: 'Sign Up',
   siteName: `{{name}} :: {{title}}`,
 };

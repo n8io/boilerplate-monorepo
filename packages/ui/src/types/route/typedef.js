@@ -25,12 +25,12 @@ export const Enumeration = {
   },
   LOGIN: {
     icon: FaSignInAlt,
-    name: 'logIn',
+    name: 'login',
     path: '/login',
   },
   LOGOUT: {
     icon: FaSignOutAlt,
-    name: 'logOut',
+    name: 'logout',
     path: '/logout',
   },
   NOT_FOUND: {
@@ -44,9 +44,9 @@ export const Enumeration = {
     name: 'root',
     path: '/',
   },
-  SIGN_UP: {
+  SIGNUP: {
     icon: MdPersonAdd,
-    name: 'signUp',
+    name: 'signup',
     path: '/signup',
   },
   TEST_PAGE: {

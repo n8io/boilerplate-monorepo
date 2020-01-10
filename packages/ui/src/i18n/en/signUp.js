@@ -1,5 +1,5 @@
-export const signUp = {
-  signUp: {
+export const signup = {
+  signup: {
     title: 'Sign Up',
   },
 };

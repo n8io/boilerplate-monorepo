@@ -60,7 +60,7 @@ const Header = () => {
           {isAuthenticated && (
             <ImageButton
               context={Context.LINK}
-              label={t('logOut')}
+              label={t('logout')}
               onClick={logout}
             >
               <Avatar email={email} />

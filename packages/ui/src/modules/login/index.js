@@ -3,9 +3,9 @@ import { lazy } from 'react';
 
 const Lazy = lazy(() =>
   import(
-    /* webpackChunkName: "signup" */
+    /* webpackChunkName: "login" */
     './component'
-  ).then(Utils.renameKeys({ SignUp: 'default' }))
+  ).then(Utils.renameKeys({ Login: 'default' }))
 );
 
-export { Lazy as SignUp };
+export { Lazy as Login };
