@@ -5,7 +5,7 @@
   "homepage": "https://n8io.github.io",
   "engines": {
     "node": "^12.13.0",
-    "yarn": "^1.19.2"
+    "yarn": "^1.19.1"
   },
   "scripts": {
     "build": "craco build",

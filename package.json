@@ -3,7 +3,7 @@
   "private": true,
   "engines": {
     "node": "^12.13.0",
-    "yarn": "^1.19.2"
+    "yarn": "^1.19.1"
   },
   "license": "MIT",
   "workspaces": [
