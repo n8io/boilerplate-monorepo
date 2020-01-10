@@ -4,6 +4,10 @@ import { render } from 'testHelpers';
 import { Provider } from 'types/provider';
 import { AuthButton } from '.';
 
+jest.mock('../NavLink', () => ({
+  NavLink: props => <x-NavLink {...props} />,
+}));
+
 describe('<AuthButton/>', () => {
   const defaultProps = {
     onClick: jest.fn().mockName('onClick'),
@@ -26,29 +30,14 @@ describe('<AuthButton/>', () => {
     return render(<AuthButton {...defaultProps} {...overrides} />, { wrapper });
   };
 
-  describe('when authenticated', () => {
-    test('renders properly', () => {
-      const authContext = {
-        ...baseAuthContext,
-        isAuthenticated: true,
-      };
+  test('renders properly', () => {
+    const authContext = {
+      ...baseAuthContext,
+      isAuthenticated: true,
+    };
 
-      const { container } = renderComponent(authContext)();
+    const { container } = renderComponent(authContext)();
 
-      expect(container).toMatchSnapshot();
-    });
-  });
-
-  describe('when not authenticated', () => {
-    test('renders properly', () => {
-      const authContext = {
-        ...baseAuthContext,
-        isAuthenticated: false,
-      };
-
-      const { container } = renderComponent(authContext)();
-
-      expect(container).toMatchSnapshot();
-    });
+    expect(container).toMatchSnapshot();
   });
 });

@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Link/> renders children 1`] = `
+<a
+  class="Link__StyledLink-faqv70-0 gfLtRU"
+  href="/TO"
+>
+  TEXT
+</a>
+`;

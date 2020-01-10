@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavLink as RouterNavLink } from 'react-router-dom';
 import { Tablet } from 'shared/Breakpoints';
-import { Button as SharedButton, Context } from 'shared/Button';
 import { EllipsiedText } from 'shared/EllipsiedText';
 import { useTranslate } from 'shared/useTranslate';
 import styled, { css } from 'styled-components/macro';
@@ -37,21 +36,6 @@ const StyledNavLink = styled(RouterNavLink)`
   }
 `;
 
-const Button = styled(SharedButton)`
-  ${sharedStyles}
-`;
-
-const isRouteAuth = route =>
-  [Route.LOGIN.name, Route.LOGOUT.name].includes(route.name);
-
-const Container = styled.div`
-  align-items: center;
-  display: grid;
-  grid-auto-flow: column;
-  grid-gap: 0.25rem;
-  justify-content: start;
-`;
-
 const NavLink = ({ route, ...props }) => {
   const t = useTranslate({
     component: 'nav.links',
@@ -59,20 +43,6 @@ const NavLink = ({ route, ...props }) => {
   });
 
   const { icon: Icon, name, path } = route;
-  const isButton = isRouteAuth(route);
-
-  if (isButton) {
-    return (
-      <Button {...props} context={Context.LINK} label={t(name)}>
-        <Container>
-          {Icon && <Icon />}
-          <Tablet>
-            <EllipsiedText>{t(name)}</EllipsiedText>
-          </Tablet>
-        </Container>
-      </Button>
-    );
-  }
 
   return (
     <StyledNavLink exact title={t(name)} to={path} {...props}>

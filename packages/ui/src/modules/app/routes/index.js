@@ -2,6 +2,7 @@ import { defaultTo, map, mergeRight, pipe } from 'ramda';
 import { Route } from 'types/route';
 import { About } from 'modules/about';
 import { Dashboard } from 'modules/dashboard';
+import { Login } from 'modules/login';
 import { NotFound } from 'modules/notFound';
 import { SignUp } from 'modules/signUp';
 import { TestPage } from 'modules/testPage';
@@ -9,9 +10,10 @@ import { TestPage } from 'modules/testPage';
 const componentMap = {
   about: About,
   dashboard: Dashboard,
+  login: Login,
   notFound: NotFound,
   root: Dashboard,
-  signUp: SignUp,
+  signup: SignUp,
   testPage: TestPage,
 };
 
@@ -25,6 +27,7 @@ const navRoutes = pipe(
   Route.filterToNavigation,
   map(addComponent)
 )(Route.values);
+
 const routes = map(addComponent, Route.values);
 
 export { navRoutes, routes };

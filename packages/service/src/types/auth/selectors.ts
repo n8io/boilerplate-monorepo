@@ -1,9 +1,9 @@
-import 'dotenv/config';
 import { AuthenticationError } from 'apollo-server-express';
 import { isAfter } from 'date-fns';
+import 'dotenv/config';
 import { User } from 'entity/User';
 import { Request, Response } from 'express';
-import { sign, TokenExpiredError, verify } from 'jsonwebtoken';
+import { JsonWebTokenError, sign, TokenExpiredError, verify } from 'jsonwebtoken';
 import { log } from 'log';
 import { AuthChecker } from 'type-graphql';
 import { Context } from 'types/context';
@@ -71,7 +71,10 @@ const readAccessToken = (req: Request): UserContext | null => {
   } catch (error) {
     if (error instanceof TokenExpiredError) {
       log.error(InternalErrorMessage.ACCESS_TOKEN_EXPIRED);
-    } else {
+    } else if (error instanceof JsonWebTokenError) {
+      log.error(InternalErrorMessage.ACCESS_TOKEN_READ_ISSUE, error.message);
+    }
+    else {
       log.error(InternalErrorMessage.GENERIC, error);
     }
 
@@ -129,11 +132,4 @@ const authChecker: AuthChecker<Context, UserRole> = ({ context }, roles) => {
 
 const isUserActive = (user: User) => !user.deletedAt || !isPast(user.deletedAt);
 
-export {
-  authChecker,
-  encryptAccessToken,
-  isUserActive,
-  readAccessToken,
-  readRefreshToken,
-  writeRefreshToken,
-};
+export { authChecker, encryptAccessToken, isUserActive, readAccessToken, readRefreshToken, writeRefreshToken, };

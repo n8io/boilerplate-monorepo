@@ -19,12 +19,11 @@ const StyledNavLink = styled(NavLink)`
 `;
 
 const AuthButton = () => {
-  const { isAuthenticated, login, logout } = useAuth();
+  const { isAuthenticated } = useAuth();
 
-  const onClickProxy = isAuthenticated ? logout : login;
   const route = isAuthenticated ? Route.LOGOUT : Route.LOGIN;
 
-  return <StyledNavLink onClick={onClickProxy} route={route} />;
+  return <StyledNavLink route={route} />;
 };
 
 export { AuthButton };

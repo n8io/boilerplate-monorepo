@@ -5,10 +5,10 @@ import { Page } from 'shared/Page';
 import { useTranslate } from 'shared/useTranslate';
 import { Route } from 'types/route';
 
-const SignUp = () => {
+const Login = () => {
   const t = useTranslate({
-    component: 'signup',
-    namespace: 'signup',
+    component: 'login',
+    namespace: 'login',
   });
 
   return (
@@ -19,11 +19,11 @@ const SignUp = () => {
         </Breadcrumbs>
         <Header title={t('title')} />
         <Body>
-          &lt;signup&gt; or <Link to={Route.LOGIN.path}>{t('login')}</Link>
+          &lt;login&gt; or <Link to={Route.SIGNUP.path}>{t('signup')}</Link>
         </Body>
       </Content>
     </Page>
   );
 };
 
-export { SignUp };
+export { Login };

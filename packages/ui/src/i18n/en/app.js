@@ -7,6 +7,7 @@ export const app = {
     links: {
       about: 'About',
       dashboard: 'Dashboard',
+      login: 'Log In',
       notFound: 'Not Found',
       registration: 'Sign Up',
       root: 'Home',
