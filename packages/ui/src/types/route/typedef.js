@@ -4,7 +4,7 @@ import { values as ramdaValues } from 'ramda';
 import { AiOutlineFileSearch } from 'react-icons/ai';
 import { FaRegAddressBook, FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
 import { GiFireBowl } from 'react-icons/gi';
-import { MdDashboard } from 'react-icons/md';
+import { MdDashboard, MdPersonAdd } from 'react-icons/md';
 
 export const SORT_PROP_NAME = 'sortOrder';
 
@@ -43,6 +43,11 @@ export const Enumeration = {
     exact: true,
     name: 'root',
     path: '/',
+  },
+  SIGN_UP: {
+    icon: MdPersonAdd,
+    name: 'signUp',
+    path: '/signup',
   },
   TEST_PAGE: {
     [SORT_PROP_NAME]: config.isDebug ? 100 : undefined,
