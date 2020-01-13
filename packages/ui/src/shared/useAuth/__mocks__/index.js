@@ -1,7 +1,8 @@
 const useAuth = () => ({
   isAuthenticated: true,
-  login: jest.fn().mockName('login'),
   logout: jest.fn().mockName('logout'),
+  role: 'ADMIN',
+  updateAccessToken: jest.fn().mockName('updateAccessToken'),
 });
 
 export { useAuth };

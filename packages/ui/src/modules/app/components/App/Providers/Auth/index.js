@@ -1,29 +1,39 @@
-import { User } from '@boilerplate-monorepo/common';
-import { config } from 'config';
+import jwtDecode from 'jwt-decode';
 import { node } from 'prop-types';
-import React, { useState, useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
+import { AccessToken } from 'types/accessToken';
 import { Provider } from 'types/provider';
 
-const { AVATAR_EMAIL } = config;
-
 const Auth = ({ children }) => {
+  const [isAuthenticated, setIsAuthenticated] = useState(AccessToken.read());
   const [user, setUser] = useState(null);
 
-  const login = useCallback(() =>
-    setUser(
-      User.uiExample({
-        email: AVATAR_EMAIL,
-      })
-    )
+  const logout = useCallback(() => {
+    AccessToken.clear();
+    setIsAuthenticated(false);
+    setUser(null);
+  });
+
+  const updateAccessToken = useCallback(
+    token => {
+      try {
+        const payload = jwtDecode(token);
+
+        AccessToken.set(token);
+        setIsAuthenticated(true);
+        setUser(payload);
+      } catch {
+        // Do nothing, bad token
+      }
+    },
+    [setUser]
   );
 
-  const logout = useCallback(() => setUser(undefined));
-
   const authContext = {
-    isAuthenticated: Boolean(user),
-    login,
+    isAuthenticated,
     logout,
-    user,
+    role: user && user.role,
+    updateAccessToken,
   };
 
   return <Provider.AUTH value={authContext}>{children}</Provider.AUTH>;

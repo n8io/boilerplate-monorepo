@@ -7,7 +7,7 @@ import styled, { css } from 'styled-components/macro';
 import { CustomProperty } from 'types/customProperties';
 import { GridTemplateArea } from 'types/gridTemplateArea';
 import { Route } from 'types/route';
-import { styles as themeStyles } from '../AuthButton/theme';
+import { styles as themeStyles } from '../AuthLink/theme';
 
 const sharedStyles = css`
   ${themeStyles}

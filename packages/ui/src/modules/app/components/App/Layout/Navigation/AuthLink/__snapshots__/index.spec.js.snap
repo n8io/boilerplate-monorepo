@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AuthLink/> renders properly 1`] = `
+<div>
+  <x-navlink
+    classname="AuthLink__StyledNavLink-gt2cja-0 kSEZFP"
+    route="[object Object]"
+  />
+</div>
+`;

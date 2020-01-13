@@ -2,14 +2,21 @@ import { AuthenticationError } from 'apollo-server-express';
 import { isAfter } from 'date-fns';
 import 'dotenv/config';
 import { User } from 'entity/User';
-import { Request, Response } from 'express';
-import { JsonWebTokenError, sign, TokenExpiredError, verify } from 'jsonwebtoken';
+import { CookieOptions, Request, Response } from 'express';
+import {
+  JsonWebTokenError,
+  sign,
+  TokenExpiredError,
+  verify,
+} from 'jsonwebtoken';
 import { log } from 'log';
+import ms from 'ms';
 import { AuthChecker } from 'type-graphql';
 import { Context } from 'types/context';
 import { InternalErrorMessage, PublicErrorMessage } from 'types/errorMessage';
 import { ProcessEnvKeys } from 'types/processEnv';
 import { RefreshToken } from 'types/refreshToken';
+import { Route } from 'types/route';
 import { UserContext } from 'types/userContext';
 import { UserRole } from 'types/userRole';
 import { Enumeration } from './typedef';
@@ -73,8 +80,7 @@ const readAccessToken = (req: Request): UserContext | null => {
       log.error(InternalErrorMessage.ACCESS_TOKEN_EXPIRED);
     } else if (error instanceof JsonWebTokenError) {
       log.error(InternalErrorMessage.ACCESS_TOKEN_READ_ISSUE, error.message);
-    }
-    else {
+    } else {
       log.error(InternalErrorMessage.GENERIC, error);
     }
 
@@ -94,18 +100,33 @@ const readRefreshToken = (req: Request) => {
   try {
     return decryptRefreshToken(token);
   } catch (error) {
-    log.error(InternalErrorMessage.FAILED_TO_DECRYPT_REFRESH_TOKEN);
+    log.error(InternalErrorMessage.FAILED_TO_DECRYPT_REFRESH_TOKEN, error);
   }
 
   return null;
 };
 
-const writeRefreshToken = (res: Response, user: User) => {
+const writeRefreshToken = (res: Response, user?: User) => {
+  const maxAge = ms(process.env.REFRESH_TOKEN_EXPIRY as string);
+  const options: CookieOptions = {
+    httpOnly: true,
+    maxAge: maxAge as any,
+    path: Route.REFRESH_TOKEN,
+    secure: process.env.NODE_ENV === 'production',
+  };
+
+  if (!user) {
+    log.info('Blanking refresh token cookie value');
+    res.cookie(Enumeration.JWT_REFRESH_TOKEN_COOKIE_NAME, '', options);
+
+    return res;
+  }
+
   const token = encryptRefreshToken(user);
 
-  res.cookie(Enumeration.JWT_REFRESH_TOKEN_COOKIE_NAME, token, {
-    httpOnly: true,
-  });
+  res.cookie(Enumeration.JWT_REFRESH_TOKEN_COOKIE_NAME, token, options);
+
+  return res;
 };
 
 const authChecker: AuthChecker<Context, UserRole> = ({ context }, roles) => {
@@ -132,4 +153,11 @@ const authChecker: AuthChecker<Context, UserRole> = ({ context }, roles) => {
 
 const isUserActive = (user: User) => !user.deletedAt || !isPast(user.deletedAt);
 
-export { authChecker, encryptAccessToken, isUserActive, readAccessToken, readRefreshToken, writeRefreshToken, };
+export {
+  authChecker,
+  encryptAccessToken,
+  isUserActive,
+  readAccessToken,
+  readRefreshToken,
+  writeRefreshToken,
+};

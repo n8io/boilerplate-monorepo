@@ -2,13 +2,13 @@ import { User } from '@boilerplate-monorepo/common';
 import React from 'react';
 import { render } from 'testHelpers';
 import { Provider } from 'types/provider';
-import { AuthButton } from '.';
+import { AuthLink } from '.';
 
 jest.mock('../NavLink', () => ({
   NavLink: props => <x-NavLink {...props} />,
 }));
 
-describe('<AuthButton/>', () => {
+describe('<AuthLink/>', () => {
   const defaultProps = {
     onClick: jest.fn().mockName('onClick'),
   };
@@ -27,7 +27,7 @@ describe('<AuthButton/>', () => {
       <Provider.AUTH value={authContext}>{children}</Provider.AUTH>
     );
 
-    return render(<AuthButton {...defaultProps} {...overrides} />, { wrapper });
+    return render(<AuthLink {...defaultProps} {...overrides} />, { wrapper });
   };
 
   test('renders properly', () => {

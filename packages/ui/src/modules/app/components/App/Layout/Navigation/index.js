@@ -4,7 +4,7 @@ import styled from 'styled-components/macro';
 import { CustomProperty } from 'types/customProperties';
 import { GridTemplateArea } from 'types/gridTemplateArea';
 import { navRoutes } from '../../../../routes';
-import { AuthButton } from './AuthButton';
+import { AuthLink } from './AuthLink';
 import { NavLink } from './NavLink';
 
 const { Role } = A11y;
@@ -35,7 +35,7 @@ const NavLinks = styled.div`
 const Navigation = () => (
   <Container role={Role.NAVIGATION}>
     <NavLinks>{navRoutes.map(toNavLink)}</NavLinks>
-    <AuthButton />
+    <AuthLink />
   </Container>
 );
 

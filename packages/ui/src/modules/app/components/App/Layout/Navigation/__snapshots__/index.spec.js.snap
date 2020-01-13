@@ -16,6 +16,6 @@ exports[`<Navigation/> renders properly 1`] = `
       route="[object Object]"
     />
   </div>
-  <x-authbutton />
+  <x-authlink />
 </nav>
 `;

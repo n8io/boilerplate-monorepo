@@ -1,5 +1,6 @@
-import cookieParser from 'cookie-parser';
+import { middleware as cors } from './cors';
+import { middleware as cookieParser } from './cookieParser';
 
-const middlewares = [cookieParser()];
+const middlewares = [cors, cookieParser];
 
 export { middlewares };

@@ -8,10 +8,10 @@ interface Context {
   user?: UserContext;
 }
 
-const contextMiddleware = ({ req, res }: { req: Request; res: Response }) => ({
+const middleware = ({ req, res }: { req: Request; res: Response }) => ({
   req,
   res,
   user: readAccessToken(req),
 });
 
-export { Context, contextMiddleware };
+export { Context, middleware };
