@@ -28,8 +28,8 @@ class UserRegisterInput {
   @Field({ description: `The new user's clear text password` })
   password: string;
 
-  @Field({ description: `The new user's authorization level` })
-  role?: UserRole;
+  @Field({ description: `The new user's authorization level`, nullable: true })
+  role?: UserRole = UserRole.USER;
 
   @Field({ description: `The new user's username` })
   username: string;

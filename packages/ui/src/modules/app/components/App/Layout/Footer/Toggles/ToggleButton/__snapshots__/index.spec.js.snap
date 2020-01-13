@@ -4,7 +4,7 @@ exports[`<ToggleButton/> renders properly 1`] = `
 <button
   aria-disabled="false"
   aria-label="TEXT"
-  class="Button__Container-sc-1v65cga-0 EripP"
+  class="Button__Container-sc-1v65cga-0 kfzaKD"
   role="button"
   type="button"
 >

@@ -4,7 +4,7 @@ exports[`<ThemeToggle/> when dark mode renders properly 1`] = `
 <button
   aria-disabled="false"
   aria-label="t(displayMode.light)"
-  class="Button__Container-sc-1v65cga-0 EripP"
+  class="Button__Container-sc-1v65cga-0 kfzaKD"
   data-testid="theme"
   role="button"
   type="button"
@@ -81,7 +81,7 @@ exports[`<ThemeToggle/> when light mode renders properly 1`] = `
 <button
   aria-disabled="false"
   aria-label="t(displayMode.dark)"
-  class="Button__Container-sc-1v65cga-0 EripP"
+  class="Button__Container-sc-1v65cga-0 kfzaKD"
   data-testid="theme"
   role="button"
   type="button"

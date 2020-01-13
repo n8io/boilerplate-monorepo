@@ -51,6 +51,12 @@ const styles = css`
       }
     `}
 
+  ${({ isAutoWidth }) =>
+    isAutoWidth &&
+    css`
+      width: fit-content;
+    `}
+
   /* stylelint-disable-next-line order/properties-alphabetical-order */
   ${({ className }) => className}
 `;
@@ -64,6 +70,7 @@ const Button = ({
   className,
   context,
   disabled,
+  isAutoWidth,
   label,
   onClick,
   text,
@@ -77,6 +84,7 @@ const Button = ({
     className={className}
     context={context}
     disabled={disabled}
+    isAutoWidth={isAutoWidth}
     onClick={onClick}
     role={Role.BUTTON}
     type={type}
@@ -90,6 +98,7 @@ Button.defaultProps = {
   className: undefined,
   context: Context.DEFAULT,
   disabled: false,
+  isAutoWidth: false,
   label: undefined,
   size: Size.DEFAULT,
   type: Type.BUTTON,
@@ -100,6 +109,7 @@ Button.propTypes = {
   className: string,
   context: Context.propTypes,
   disabled: bool,
+  isAutoWidth: bool,
   label: ({ label, text }) => {
     if (text || label) return undefined;
 

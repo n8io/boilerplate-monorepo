@@ -5,7 +5,7 @@ const Lazy = lazy(() =>
   import(
     /* webpackChunkName: "signup" */
     './component'
-  ).then(Utils.renameKeys({ SignUp: 'default' }))
+  ).then(Utils.renameKeys({ Signup: 'default' }))
 );
 
-export { Lazy as SignUp };
+export { Lazy as Signup };

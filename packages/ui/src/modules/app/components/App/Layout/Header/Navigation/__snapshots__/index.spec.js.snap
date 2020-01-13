@@ -4,7 +4,7 @@ exports[`<Navigation/> renders properly 1`] = `
 <button
   aria-disabled="false"
   aria-label="t(openNavigation)"
-  class="Button__Container-sc-1v65cga-0 giHWyF Navigation__OpenNavButton-tbbz22-3 jYZrGE"
+  class="Button__Container-sc-1v65cga-0 hCcPqW Navigation__OpenNavButton-tbbz22-3 jYZrGE"
   role="button"
   type="button"
 >
