@@ -1,7 +1,14 @@
 import { User } from 'entity/User';
 import { log } from 'log';
 import { logFactory } from 'log/logFactory';
-import { Ctx, Field, ObjectType, Query, Resolver } from 'type-graphql';
+import {
+  Ctx,
+  Field,
+  ObjectType,
+  Query,
+  Resolver,
+  Authorized,
+} from 'type-graphql';
 import { Auth } from 'types/auth';
 import { toSafeLog } from 'types/auth/transforms';
 import { Context } from 'types/context';
@@ -34,6 +41,7 @@ export class Me {
     description: `Fetch the logged in user's information`,
     nullable: true,
   })
+  @Authorized()
   async me(@Ctx() { user }: Context) {
     if (!user) {
       log.error(

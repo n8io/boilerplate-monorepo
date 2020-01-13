@@ -18,7 +18,7 @@ const StyledNavLink = styled(NavLink)`
   ${themeStyles}
 `;
 
-const AuthButton = () => {
+const AuthLink = () => {
   const { isAuthenticated } = useAuth();
 
   const route = isAuthenticated ? Route.LOGOUT : Route.LOGIN;
@@ -26,4 +26,4 @@ const AuthButton = () => {
   return <StyledNavLink route={route} />;
 };
 
-export { AuthButton };
+export { AuthLink };

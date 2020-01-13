@@ -6,6 +6,7 @@ import { Suspense } from 'shared/Suspense';
 import { Auth } from './Auth';
 import { FontLoader } from './FontLoader';
 import { GlobalStyle } from './GlobalStyles';
+import { GraphQL } from './GraphQL';
 import { Logging } from './Logging';
 import { Modality } from './Modality';
 import { Theme } from './Theme';
@@ -17,15 +18,15 @@ const Providers = ({ children }) => (
   <Suspense>
     <Logging />
     <Theme>
-      <>
+      <GraphQL>
         <FontLoader />
         <GlobalStyle />
         <Modality />
         <TranslationSync />
-        <Auth>
-          <Router basename={basename}>{children}</Router>
-        </Auth>
-      </>
+        <Router basename={basename}>
+          <Auth>{children}</Auth>
+        </Router>
+      </GraphQL>
     </Theme>
   </Suspense>
 );

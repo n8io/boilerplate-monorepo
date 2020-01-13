@@ -6,7 +6,7 @@ import { NavLink } from '.';
 describe('<NavLink/>', () => {
   const defaultProps = {
     onClick: jest.fn().mockName('onClick'),
-    route: Route.example(),
+    route: Route.LOGIN,
   };
 
   const renderComponent = overrides =>

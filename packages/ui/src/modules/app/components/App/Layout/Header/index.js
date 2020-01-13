@@ -1,6 +1,6 @@
 import { A11y, Site } from '@boilerplate-monorepo/ui-common';
-import { prop } from 'ramda';
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { GreaterThanMobile, Mobile } from 'shared/Breakpoints';
 import { Button, Context } from 'shared/Button';
 import { EllipsiedText } from 'shared/EllipsiedText';
@@ -9,6 +9,7 @@ import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
 import { CustomProperty } from 'types/customProperties';
 import { GridTemplateArea } from 'types/gridTemplateArea';
+import { Route } from 'types/route';
 import { Avatar } from './Avatar';
 import { Navigation } from './Navigation';
 import { SkipToContentLink } from './SkipToContentLink';
@@ -44,9 +45,9 @@ const Header = () => {
     component: 'common',
     namespace: 'common',
   });
-
-  const { isAuthenticated, logout, user } = useAuth();
-  const email = prop('email', user);
+  const history = useHistory();
+  const { isAuthenticated } = useAuth();
+  const onLogout = () => history.push(Route.LOGOUT.path);
 
   return (
     <StyledHeader role={Role.BANNER} title={Site.name}>
@@ -61,9 +62,9 @@ const Header = () => {
             <ImageButton
               context={Context.LINK}
               label={t('logout')}
-              onClick={logout}
+              onClick={onLogout}
             >
-              <Avatar email={email} />
+              <Avatar />
             </ImageButton>
           )}
         </GreaterThanMobile>

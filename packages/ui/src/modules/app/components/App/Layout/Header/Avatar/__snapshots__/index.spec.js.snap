@@ -1,9 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Avatar/> renders properly 1`] = `
-<img
-  alt="t(avatarForEmail, {\\"email\\":\\"test@example.com\\"})"
-  class="Avatar__Image-sc-10i53mv-0 PDzVZ"
-  src="//www.gravatar.com/avatar/55502f40dc8b7c769880b10874abc9d0?r=G&s=30"
-/>
+<div
+  class="Avatar__Container-sc-10i53mv-0 JNtQa"
+>
+  <img
+    alt="t(avatarForEmail, {\\"email\\":\\"EMAIL\\"})"
+    class="Avatar__Image-sc-10i53mv-1 bELZQV"
+    src="//www.gravatar.com/avatar/0c83f57c786a0b4a39efab23731c7ebc?r=G&s=30"
+  />
+</div>
 `;

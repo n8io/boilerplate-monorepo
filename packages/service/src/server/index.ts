@@ -1,11 +1,12 @@
 import { ApolloServer } from 'apollo-server-express';
+import { Express } from 'express';
 import { resolvers } from 'resolvers';
 import { buildSchema } from 'type-graphql';
 import { Auth } from 'types/auth';
-import { contextMiddleware as context } from 'types/context';
+import { middleware as context } from 'types/context';
 import { formatError } from './formatError';
 
-const makeServer = async (app: any) => {
+const makeServer = async (app: Express) => {
   const schema = await buildSchema({
     authChecker: Auth.authChecker,
     resolvers,
@@ -14,6 +15,7 @@ const makeServer = async (app: any) => {
 
   const server = new ApolloServer({
     context,
+    // debug is enabled on purpose to have more verbose logging in Graphql Monitor
     debug: true,
     // engine: {
     //   rewriteError(err) {
@@ -25,7 +27,7 @@ const makeServer = async (app: any) => {
     schema,
   });
 
-  server.applyMiddleware({ app });
+  server.applyMiddleware({ app, cors: false });
 
   return server;
 };

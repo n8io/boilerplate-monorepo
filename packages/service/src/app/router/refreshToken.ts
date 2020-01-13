@@ -7,10 +7,20 @@ import { log } from 'log';
 const sendResponse = (res: Response, token: string = '') =>
   res.send({ ok: Boolean(token), token });
 
-const sendAuthorizedResponse = (res: Response, token: string) =>
-  sendResponse(res, token);
+const sendAuthorizedResponse = (res: Response, user: User) => {
+  const token = Auth.encryptAccessToken(user);
 
-const sendUnauthorizedResponse = (res: Response) => sendResponse(res);
+  Auth.writeRefreshToken(res, user);
+
+  return sendResponse(res, token);
+};
+
+const sendUnauthorizedResponse = (res: Response) => {
+  // Write empty refresh token
+  Auth.writeRefreshToken(res, undefined);
+
+  return sendResponse(res);
+};
 
 const refreshToken = async (req: Request, res: Response) => {
   const refreshToken = Auth.readRefreshToken(req);
@@ -40,9 +50,7 @@ const refreshToken = async (req: Request, res: Response) => {
     return sendUnauthorizedResponse(res);
   }
 
-  Auth.writeRefreshToken(res, user);
-
-  return sendAuthorizedResponse(res, Auth.encryptAccessToken(user));
+  return sendAuthorizedResponse(res, user);
 };
 
 export { refreshToken };

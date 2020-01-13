@@ -40,7 +40,7 @@
     "logs:service": "yarn run -s dclf service",
     "logs:ui": "yarn run -s dclf ui",
     "run-all": "npm-run-all --parallel",
-    "start:db": "yarn -s dcud db",
+    "start:db": "yarn -s dc up -d db",
     "start:service": "lerna run start --loglevel silent --scope \"@${npm_package_name}/service\" --stream",
     "start:ui": "lerna run start --loglevel silent --scope \"@${npm_package_name}/ui\" --stream",
     "start": "yarn run -s run-all start:*",

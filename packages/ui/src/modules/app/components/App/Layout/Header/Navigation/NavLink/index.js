@@ -1,6 +1,6 @@
-import { func } from 'prop-types';
+import { func, string } from 'prop-types';
 import React from 'react';
-import { NavLink as RouterNavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { EllipsiedText } from 'shared/EllipsiedText';
 import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
@@ -8,7 +8,7 @@ import { CustomProperty } from 'types/customProperties';
 import { Route } from 'types/route';
 import { styles as themeStyles } from './theme';
 
-const StyledNavLink = styled(RouterNavLink)`
+const StyledLink = styled(Link)`
   align-items: center;
   border-bottom: 1px ${CustomProperty.CUSTOM_BORDER_COLOR} solid;
   display: grid;
@@ -30,25 +30,31 @@ const StyledNavLink = styled(RouterNavLink)`
   ${themeStyles}
 `;
 
-const NavLink = ({ onClick, route }) => {
+const NavLink = ({ onClick, route, title, ...props }) => {
   const t = useTranslate({
     component: 'nav.links',
     namespace: 'app',
   });
 
   const { icon: Icon, name, path } = route;
+  const text = title || t(name);
 
   return (
-    <StyledNavLink exact onClick={onClick} title={t(name)} to={path}>
+    <StyledLink {...props} onClick={onClick} title={text} to={path}>
       {Icon && <Icon />}
-      <EllipsiedText>{t(name)}</EllipsiedText>
-    </StyledNavLink>
+      <EllipsiedText>{text}</EllipsiedText>
+    </StyledLink>
   );
+};
+
+NavLink.defaultProps = {
+  title: undefined,
 };
 
 NavLink.propTypes = {
   onClick: func.isRequired,
   route: Route.propTypes.isRequired,
+  title: string,
 };
 
 export { NavLink };

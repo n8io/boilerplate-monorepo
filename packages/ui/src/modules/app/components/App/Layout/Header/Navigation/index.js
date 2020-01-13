@@ -5,12 +5,12 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { MdClose } from 'react-icons/md';
 import SideBar from 'react-sidebar';
 import { Button, Context, Size } from 'shared/Button';
+import { useAuth } from 'shared/useAuth';
 import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
 import { CustomProperty } from 'types/customProperties';
 import { GridTemplateArea } from 'types/gridTemplateArea';
 import { Route } from 'types/route';
-import { AuthButton } from './AuthButton';
 import { NavLink } from './NavLink';
 import { styles as themeStyles } from './theme';
 
@@ -47,27 +47,40 @@ const ButtonContainer = styled.div`
   white-space: nowrap;
 `;
 
-const InnerSideBar = ({ onClose, t }) => (
-  <StyledNav aria-label="sidebar" role={Role.NAVIGATION}>
-    <Container>
-      {routes.map(route => (
-        <NavLink key={route.name} onClick={onClose} route={route} />
-      ))}
-      <AuthButton onClick={onClose} />
-    </Container>
-    <Button
-      context={Context.LINK}
-      label={t('tapHereOrSwipeToClose')}
-      onClick={onClose}
-      size={Size.LARGE}
-    >
-      <ButtonContainer>
-        <MdClose />
-        <span>{t('tapHereOrSwipeToClose')}</span>
-      </ButtonContainer>
-    </Button>
-  </StyledNav>
-);
+const InnerSideBar = ({ onClose, t }) => {
+  const commonT = useTranslate({
+    component: 'common',
+    namespace: 'common',
+  });
+  const { isAuthenticated } = useAuth();
+
+  const authDisplayText = isAuthenticated
+    ? commonT('logout')
+    : commonT('login');
+  const authRoute = isAuthenticated ? Route.LOGOUT : Route.LOGIN;
+
+  return (
+    <StyledNav aria-label="sidebar" role={Role.NAVIGATION}>
+      <Container>
+        {routes.map(route => (
+          <NavLink key={route.name} onClick={onClose} route={route} />
+        ))}
+        <NavLink onClick={onClose} route={authRoute} title={authDisplayText} />
+      </Container>
+      <Button
+        context={Context.LINK}
+        label={t('tapHereOrSwipeToClose')}
+        onClick={onClose}
+        size={Size.LARGE}
+      >
+        <ButtonContainer>
+          <MdClose />
+          <span>{t('tapHereOrSwipeToClose')}</span>
+        </ButtonContainer>
+      </Button>
+    </StyledNav>
+  );
+};
 
 InnerSideBar.propTypes = {
   onClose: func.isRequired,
