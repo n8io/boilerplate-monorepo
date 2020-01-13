@@ -5,7 +5,7 @@ import { Dashboard } from 'modules/dashboard';
 import { Login } from 'modules/login';
 import { Logout } from 'modules/logout';
 import { NotFound } from 'modules/notFound';
-import { SignUp } from 'modules/signUp';
+import { Signup } from 'modules/signup';
 import { TestPage } from 'modules/testPage';
 
 const componentMap = {
@@ -15,7 +15,7 @@ const componentMap = {
   logout: Logout,
   notFound: NotFound,
   root: Dashboard,
-  signup: SignUp,
+  signup: Signup,
   testPage: TestPage,
 };
 

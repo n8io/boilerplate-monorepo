@@ -1,32 +1,30 @@
 import * as Hooks from '@apollo/client';
 import React from 'react';
 import { Mutation } from 'shared/graphql/mutation';
-import { Query } from 'shared/graphql/query';
 import { render } from 'testHelpers';
-import { Login } from './component';
+import { Signup } from './component';
 
 jest.mock('shared/Button');
 jest.mock('shared/Content');
 jest.mock('shared/Page');
 jest.mock('shared/useAuth');
 
-describe('<Login/>', () => {
+describe('<Signup/>', () => {
   const defaultProps = {};
 
   const renderComponent = overrides =>
-    render(<Login {...defaultProps} {...overrides} />);
+    render(<Signup {...defaultProps} {...overrides} />);
 
   beforeEach(() => {
     const useMutation = td.replace(Hooks, 'useMutation');
 
-    td.when(
-      useMutation(Mutation.USER_LOGIN, {
-        refetchQueries: [{ query: Query.ME }],
-      })
-    ).thenReturn([jest.fn().mockName('userLogin'), { loading: false }]);
+    td.when(useMutation(Mutation.USER_REGISTER)).thenReturn([
+      jest.fn().mockName('userRegister'),
+      { loading: false },
+    ]);
   });
 
-  test('renders login page', () => {
+  test('renders signup page', () => {
     const { container } = renderComponent();
 
     expect(container.firstChild).toMatchSnapshot();

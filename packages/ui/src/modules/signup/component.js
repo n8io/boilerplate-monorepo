@@ -1,64 +1,48 @@
 import { useMutation } from '@apollo/client';
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Button, Context } from 'shared/Button';
-import { Body, Breadcrumb, Breadcrumbs, Content, Header } from 'shared/Content';
+import { Body, Content, Header, Breadcrumbs, Breadcrumb } from 'shared/Content';
 import { Link } from 'shared/Link';
 import { Page } from 'shared/Page';
 import { Mutation } from 'shared/graphql/mutation';
-import { Query } from 'shared/graphql/query';
 import { useAuth } from 'shared/useAuth';
 import { useTranslate } from 'shared/useTranslate';
 import { Route } from 'types/route';
 
 const { PRIMARY } = Context;
-// eslint-disable-next-line max-statements
-const Login = () => {
+
+const Signup = () => {
   const t = useTranslate({
-    component: 'login',
-    namespace: 'login',
+    component: 'signup',
+    namespace: 'signup',
   });
 
-  const [username, setUsername] = useState('');
+  const history = useHistory();
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { isAuthenticated, logout, updateAccessToken } = useAuth();
+  const [username, setUsername] = useState('');
+  const { isAuthenticated } = useAuth();
+  const [mutate, { loading: isDisabled }] = useMutation(Mutation.USER_REGISTER);
 
-  const [mutate, { loading: isDisabled }] = useMutation(Mutation.USER_LOGIN, {
-    refetchQueries: [{ query: Query.ME }],
-  });
-
-  const onLogin = async () => {
+  const onRegister = async () => {
     const input = {
+      email,
       password,
       username,
     };
 
-    await mutate({
-      update: (_cache, { data }) => {
-        const { userLogin: accessToken } = data;
+    await mutate({ variables: { input } });
 
-        if (!accessToken) {
-          logout();
-
-          return;
-        }
-
-        updateAccessToken(accessToken);
-      },
-      variables: { input },
-    });
+    history.push(Route.LOGIN.path);
   };
 
-  const onUsernameChange = e => {
-    setUsername(e.target.value);
-  };
+  const onChange = setFn => e => {
+    const { target } = e;
+    const { value } = target;
 
-  const onPasswordChange = e => {
-    setPassword(e.target.value);
+    setFn(value);
   };
-
-  const onLogout = logout;
-  const logInOutKey = isAuthenticated ? t('logout') : t('title');
-  const authFn = isAuthenticated ? onLogout : onLogin;
 
   return (
     <Page>
@@ -68,15 +52,13 @@ const Login = () => {
         </Breadcrumbs>
         <Header title={t('title')} />
         <Body>
-          {isAuthenticated ? (
-            <Link to={Route.LOGOUT.path}>{t('logout')}</Link>
-          ) : (
-            <>
+          <>
+            {!isAuthenticated && (
               <form onSubmit={e => e.preventDefault()}>
                 <div>
                   <input
                     name="username"
-                    onChange={onUsernameChange}
+                    onChange={onChange(setUsername)}
                     placeholder="username"
                     type="text"
                     value={username}
@@ -84,8 +66,17 @@ const Login = () => {
                 </div>
                 <div>
                   <input
+                    name="email"
+                    onChange={onChange(setEmail)}
+                    placeholder="email"
+                    type="text"
+                    value={email}
+                  />
+                </div>
+                <div>
+                  <input
                     name="password"
-                    onChange={onPasswordChange}
+                    onChange={onChange(setPassword)}
                     placeholder="password"
                     type="password"
                     value={password}
@@ -95,19 +86,19 @@ const Login = () => {
                   context={PRIMARY}
                   disabled={isDisabled}
                   isAutoWidth
-                  onClick={authFn}
-                  text={logInOutKey}
+                  onClick={onRegister}
+                  text={t('title')}
                   type="submit"
                 />
               </form>
-              <br />
-              or <Link to={Route.SIGNUP.path}>{t('signup')}</Link>
-            </>
-          )}
+            )}
+            <br />
+            or <Link to={Route.LOGIN.path}>{t('login')}</Link>
+          </>
         </Body>
       </Content>
     </Page>
   );
 };
 
-export { Login };
+export { Signup };

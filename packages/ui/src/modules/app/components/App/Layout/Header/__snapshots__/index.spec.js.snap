@@ -19,7 +19,7 @@ exports[`<Header/> when authenticated when on larger than mobile renders properl
       <button
         aria-disabled="false"
         aria-label="t(logout)"
-        class="Button__Container-sc-1v65cga-0 ggxdnx Header__ImageButton-sc-4wz997-2 eSaMoc"
+        class="Button__Container-sc-1v65cga-0 hsIiWn Header__ImageButton-sc-4wz997-2 eSaMoc"
         role="button"
         type="button"
       >
@@ -71,7 +71,7 @@ exports[`<Header/> when not authenticated when on larger than mobile renders pro
       <button
         aria-disabled="false"
         aria-label="t(logout)"
-        class="Button__Container-sc-1v65cga-0 ggxdnx Header__ImageButton-sc-4wz997-2 eSaMoc"
+        class="Button__Container-sc-1v65cga-0 hsIiWn Header__ImageButton-sc-4wz997-2 eSaMoc"
         role="button"
         type="button"
       >
