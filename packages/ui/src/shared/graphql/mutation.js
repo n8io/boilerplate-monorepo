@@ -6,6 +6,12 @@ const USER_LOGIN = gql`
   }
 `;
 
+const USER_LOGOUT = gql`
+  mutation userLogout {
+    userLogout
+  }
+`;
+
 const USER_REGISTER = gql`
   mutation userRegister($input: UserRegisterInput!) {
     userRegister(input: $input)
@@ -14,5 +20,6 @@ const USER_REGISTER = gql`
 
 export const Mutation = {
   USER_LOGIN,
+  USER_LOGOUT,
   USER_REGISTER,
 };

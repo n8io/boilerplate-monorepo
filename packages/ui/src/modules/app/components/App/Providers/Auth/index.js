@@ -1,15 +1,22 @@
+import { useApolloClient, useMutation } from '@apollo/client';
 import jwtDecode from 'jwt-decode';
 import { node } from 'prop-types';
 import React, { useCallback, useState } from 'react';
+import { Mutation } from 'shared/graphql/mutation';
 import { AccessToken } from 'types/accessToken';
 import { Provider } from 'types/provider';
 
 const Auth = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(AccessToken.read());
+  const client = useApolloClient();
   const [user, setUser] = useState(null);
+  const [mutate] = useMutation(Mutation.USER_LOGOUT);
 
-  const logout = useCallback(() => {
+  const logout = useCallback(async () => {
+    await mutate();
+
     AccessToken.clear();
+    client.resetStore();
     setIsAuthenticated(false);
     setUser(null);
   });
