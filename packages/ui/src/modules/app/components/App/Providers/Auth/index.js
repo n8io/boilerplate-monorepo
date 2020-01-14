@@ -1,3 +1,4 @@
+import { useApolloClient } from '@apollo/client';
 import jwtDecode from 'jwt-decode';
 import { node } from 'prop-types';
 import React, { useCallback, useState } from 'react';
@@ -6,12 +7,14 @@ import { Provider } from 'types/provider';
 
 const Auth = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(AccessToken.read());
+  const client = useApolloClient();
   const [user, setUser] = useState(null);
 
   const logout = useCallback(() => {
-    AccessToken.clear();
     setIsAuthenticated(false);
     setUser(null);
+    AccessToken.clear();
+    client.resetStore();
   });
 
   const updateAccessToken = useCallback(
