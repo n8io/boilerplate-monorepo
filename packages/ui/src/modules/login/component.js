@@ -1,5 +1,6 @@
 import { useMutation } from '@apollo/client';
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Button, Context } from 'shared/Button';
 import { Body, Breadcrumb, Breadcrumbs, Content, Header } from 'shared/Content';
 import { Link } from 'shared/Link';
@@ -17,7 +18,7 @@ const Login = () => {
     component: 'login',
     namespace: 'login',
   });
-
+  const history = useHistory();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const { isAuthenticated, logout, updateAccessToken } = useAuth();
@@ -43,6 +44,7 @@ const Login = () => {
         }
 
         updateAccessToken(accessToken);
+        history.push(Route.DASHBOARD.path);
       },
       variables: { input },
     });

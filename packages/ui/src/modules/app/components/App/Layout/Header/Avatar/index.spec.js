@@ -4,6 +4,9 @@ import { Query } from 'shared/graphql/query';
 import { render } from 'testHelpers';
 import { Avatar } from '.';
 
+jest.mock('shared/Muted', () => ({
+  Muted: props => <x-Muted {...props} data-testid="loader" />,
+}));
 jest.mock('shared/Loader', () => ({
   Loader: props => <x-Loader {...props} data-testid="loader" />,
 }));

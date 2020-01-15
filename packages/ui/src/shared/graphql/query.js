@@ -5,6 +5,7 @@ const ME = gql`
     me {
       id
       email
+      username
     }
   }
 `;
