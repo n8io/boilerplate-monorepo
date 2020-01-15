@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components/macro';
 import { styles as themeStyles } from './theme';
 
-const Container = styled.div`
+const Container = styled.span`
   ${themeStyles}
 `;
 

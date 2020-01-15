@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Muted/> renders children 1`] = `
-<div
+<span
   class="Muted__Container-sc-1r87izh-0 giApBU"
 >
   CHILDREN
-</div>
+</span>
 `;

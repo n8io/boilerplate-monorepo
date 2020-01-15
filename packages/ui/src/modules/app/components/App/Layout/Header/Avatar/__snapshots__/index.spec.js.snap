@@ -2,8 +2,11 @@
 
 exports[`<Avatar/> renders properly 1`] = `
 <div
-  class="Avatar__Container-sc-10i53mv-0 JNtQa"
+  class="Avatar__Container-sc-10i53mv-0 bHpUCd"
 >
+  <x-muted
+    data-testid="loader"
+  />
   <img
     alt="t(avatarForEmail, {\\"email\\":\\"EMAIL\\"})"
     class="Avatar__Image-sc-10i53mv-1 bELZQV"
