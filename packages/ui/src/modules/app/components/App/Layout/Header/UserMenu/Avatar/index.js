@@ -2,7 +2,6 @@ import { useQuery } from '@apollo/client';
 import { url } from 'gravatar';
 import { bool, func, object } from 'prop-types';
 import React from 'react';
-import { FaUserAlt } from 'react-icons/fa';
 import { useHistory } from 'react-router-dom';
 import { Menu, MenuDisclosure, MenuItem, useMenuState } from 'reakit/Menu';
 import { Context, Size, styles as buttonStyles } from 'shared/Button';
@@ -95,6 +94,7 @@ MeHandle.propTypes = {
   t: func.isRequired,
 };
 
+// eslint-disable-next-line max-statements
 const Avatar = () => {
   const t = useTranslate({
     component: 'avatar',
@@ -105,10 +105,15 @@ const Avatar = () => {
   const menu = useMenuState({ gutter: 4, placement: 'bottom-end' });
   const { data, error, loading } = useQuery(Query.ME);
 
-  const onLogout = () => {
+  const onLogoutClick = () => {
     logout();
     menu.hide();
     history.push(Route.LOGIN.path);
+  };
+
+  const onProfileClick = () => {
+    menu.hide();
+    history.push(Route.USER_PROFILE.path);
   };
 
   if (error) {
@@ -116,6 +121,7 @@ const Avatar = () => {
   }
 
   const { icon: LogoutIcon } = Route.LOGOUT;
+  const { icon: ProfileIcon } = Route.USER_PROFILE;
 
   return (
     <>
@@ -135,11 +141,19 @@ const Avatar = () => {
         // eslint-disable-next-line jsx-a11y/aria-proptypes
         aria-modal={undefined} // Fixes a11y violation (invalid aria attribute on role="menu")
       >
-        <StyledMenuItem {...menu} aria-label={t('profile')} onClick={onLogout}>
-          <FaUserAlt />
+        <StyledMenuItem
+          {...menu}
+          aria-label={t('profile')}
+          onClick={onProfileClick}
+        >
+          <ProfileIcon />
           <MenuItemLabel>{t('profile')}</MenuItemLabel>
         </StyledMenuItem>
-        <StyledMenuItem {...menu} aria-label={t('logout')} onClick={onLogout}>
+        <StyledMenuItem
+          {...menu}
+          aria-label={t('logout')}
+          onClick={onLogoutClick}
+        >
           <LogoutIcon />
           <MenuItemLabel>{t('logout')}</MenuItemLabel>
         </StyledMenuItem>

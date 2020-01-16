@@ -65,6 +65,13 @@ const InnerSideBar = ({ onClose, t }) => {
         {routes.map(route => (
           <NavLink key={route.name} onClick={onClose} route={route} />
         ))}
+        {isAuthenticated && (
+          <NavLink
+            onClick={onClose}
+            route={Route.USER_PROFILE}
+            title={t('profile')}
+          />
+        )}
         <NavLink onClick={onClose} route={authRoute} title={authDisplayText} />
       </Container>
       <Button

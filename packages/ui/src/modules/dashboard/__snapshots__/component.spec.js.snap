@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Dashboard/> renders about page 1`] = `
+exports[`<Dashboard/> renders dashboard page 1`] = `
 <x-page>
   <x-content>
     <x-header

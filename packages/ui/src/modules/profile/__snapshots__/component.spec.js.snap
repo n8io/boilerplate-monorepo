@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Profile/> renders profile page 1`] = `
+<x-page>
+  <x-content>
+    <x-breadcrumbs>
+      <x-breadcrumb
+        isend="true"
+        text="t(title)"
+        to="/profile"
+      />
+    </x-breadcrumbs>
+    <x-header
+      title="t(title)"
+    />
+    <x-body>
+       
+    </x-body>
+  </x-content>
+</x-page>
+`;
