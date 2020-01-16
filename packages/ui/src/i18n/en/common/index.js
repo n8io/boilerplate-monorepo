@@ -7,6 +7,7 @@ export const common = {
   loadingScreenReader: 'Please wait while content is being loaded',
   login: 'Log In',
   logout: 'Log Out',
+  profile: 'Profile',
   signup: 'Sign Up',
   siteName: `{{name}} :: {{title}}`,
 };

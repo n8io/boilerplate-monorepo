@@ -23,7 +23,11 @@ const UserMenu = () => {
       <Mobile>
         <Navigation />
       </Mobile>
-      <GreaterThanMobile>{isAuthenticated && <Avatar />}</GreaterThanMobile>
+      {isAuthenticated && (
+        <GreaterThanMobile>
+          <Avatar />
+        </GreaterThanMobile>
+      )}
     </Container>
   );
 };

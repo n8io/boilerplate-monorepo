@@ -10,6 +10,7 @@ jest.mock('shared/Muted', () => ({
 jest.mock('shared/Loader', () => ({
   Loader: props => <x-Loader {...props} data-testid="loader" />,
 }));
+jest.mock('shared/useAuth');
 
 describe('<Avatar/>', () => {
   const defaultProps = {};
@@ -26,6 +27,7 @@ describe('<Avatar/>', () => {
   test('renders properly', () => {
     td.when(useQuery(Query.ME)).thenReturn({
       data: { me: { email: 'EMAIL' } },
+      loading: false,
     });
 
     const { container } = renderComponent();
