@@ -7,20 +7,14 @@ import { Query } from 'shared/graphql/query';
 import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
 import { CustomProperty } from 'types/customProperties';
-import { GridTemplateArea } from 'types/gridTemplateArea';
-
-const Container = styled.div`
-  align-items: center;
-  display: grid;
-  gap: 0.5rem;
-  grid-area: ${GridTemplateArea.AVATAR};
-  grid-auto-flow: column;
-  position: relative;
-`;
 
 const Image = styled.img`
   border: 1px solid ${CustomProperty.CUSTOM_BORDER_COLOR};
   border-radius: 100%;
+`;
+
+const StyledMuted = styled(Muted)`
+  font-size: ${CustomProperty.BASE_UNIT};
 `;
 
 const Avatar = () => {
@@ -35,11 +29,7 @@ const Avatar = () => {
   }
 
   if (loading) {
-    return (
-      <Container>
-        <Loader />
-      </Container>
-    );
+    return <Loader />;
   }
 
   const { me } = data;
@@ -47,10 +37,10 @@ const Avatar = () => {
   const hash = url(email, { r: 'G', s: 30 });
 
   return (
-    <Container>
-      <Muted>{username}</Muted>
+    <>
+      <StyledMuted>{username}</StyledMuted>
       <Image alt={t('avatarForEmail', { email })} src={hash} />
-    </Container>
+    </>
   );
 };
 

@@ -7,11 +7,8 @@ import { Provider } from 'types/provider';
 import { Header } from '.';
 
 jest.mock('shared/useAuth');
-jest.mock('./Avatar', () => ({
-  Avatar: props => <x-Avatar {...props} />,
-}));
-jest.mock('./Navigation', () => ({
-  Navigation: props => <x-Navigation {...props} />,
+jest.mock('./UserMenu', () => ({
+  UserMenu: props => <x-UserMenu {...props} />,
 }));
 jest.mock('./SkipToContentLink', () => ({
   SkipToContentLink: props => <x-SkipToContentLink {...props} />,

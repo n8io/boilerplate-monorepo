@@ -2,7 +2,7 @@
 
 exports[`<NavLink/> renders properly 1`] = `
 <a
-  class="NavLink__StyledLink-sc-1ydrwhg-0 iYHmri"
+  class="NavLink__StyledLink-sc-1spka94-0 iqmxTX"
   href="/login"
   title="t(login)"
 >

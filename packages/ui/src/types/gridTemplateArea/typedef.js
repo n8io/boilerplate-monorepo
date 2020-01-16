@@ -1,5 +1,4 @@
 export const Enumeration = {
-  AVATAR: 'avatar',
   FOOTER: 'footer',
   HEADER: 'header',
   MAIN: 'main',
@@ -7,4 +6,5 @@ export const Enumeration = {
   NAV_AUTH: 'nav-auth',
   NAV_LINK: 'nav-link',
   NAV_MOBILE: 'nav-mobile',
+  USER_MENU: 'user-menu',
 };

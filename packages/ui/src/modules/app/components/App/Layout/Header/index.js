@@ -1,25 +1,18 @@
 import { A11y, Site } from '@boilerplate-monorepo/ui-common';
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-import { GreaterThanMobile, Mobile } from 'shared/Breakpoints';
-import { Button, Context } from 'shared/Button';
 import { EllipsiedText } from 'shared/EllipsiedText';
-import { useAuth } from 'shared/useAuth';
-import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
 import { CustomProperty } from 'types/customProperties';
 import { GridTemplateArea } from 'types/gridTemplateArea';
-import { Route } from 'types/route';
-import { Avatar } from './Avatar';
-import { Navigation } from './Navigation';
 import { SkipToContentLink } from './SkipToContentLink';
+import { UserMenu } from './UserMenu';
 
 const { Role } = A11y;
 const Container = styled.div`
   align-items: center;
   display: grid;
   grid-auto-flow: column;
-  grid-template-areas: '. ${GridTemplateArea.NAV_MOBILE} ${GridTemplateArea.AVATAR}';
+  grid-template-areas: '. ${GridTemplateArea.NAV_MOBILE} ${GridTemplateArea.USER_MENU}';
   grid-template-columns: 1fr auto auto;
   height: ${CustomProperty.LAYOUT_HEADER_HEIGHT};
   padding: 0 ${CustomProperty.BASE_UNIT};
@@ -36,41 +29,14 @@ const StyledHeader = styled.header`
   width: 100%;
 `;
 
-const ImageButton = styled(Button)`
-  padding: calc(${CustomProperty.BASE_UNIT} * 0.25);
-`;
-
-const Header = () => {
-  const t = useTranslate({
-    component: 'common',
-    namespace: 'common',
-  });
-  const history = useHistory();
-  const { isAuthenticated } = useAuth();
-  const onLogout = () => history.push(Route.LOGOUT.path);
-
-  return (
-    <StyledHeader role={Role.BANNER} title={Site.name}>
-      <SkipToContentLink />
-      <Container>
-        <EllipsiedText>{Site.name}</EllipsiedText>
-        <Mobile>
-          <Navigation />
-        </Mobile>
-        <GreaterThanMobile>
-          {isAuthenticated && (
-            <ImageButton
-              context={Context.LINK}
-              label={t('logout')}
-              onClick={onLogout}
-            >
-              <Avatar />
-            </ImageButton>
-          )}
-        </GreaterThanMobile>
-      </Container>
-    </StyledHeader>
-  );
-};
+const Header = () => (
+  <StyledHeader role={Role.BANNER} title={Site.name}>
+    <SkipToContentLink />
+    <Container>
+      <EllipsiedText>{Site.name}</EllipsiedText>
+      <UserMenu />
+    </Container>
+  </StyledHeader>
+);
 
 export { Header };

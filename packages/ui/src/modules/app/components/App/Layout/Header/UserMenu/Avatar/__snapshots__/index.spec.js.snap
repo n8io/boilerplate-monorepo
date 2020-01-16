@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Avatar/> renders properly 1`] = `
+<x-muted
+  classname="Avatar__StyledMuted-sc-11puhtb-1 eINffb"
+  data-testid="loader"
+/>
+`;
