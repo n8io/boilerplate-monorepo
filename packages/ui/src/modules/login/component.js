@@ -1,4 +1,3 @@
-import { useMutation } from '@apollo/client';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button, Context } from 'shared/Button';
@@ -7,6 +6,7 @@ import { Link } from 'shared/Link';
 import { Page } from 'shared/Page';
 import { Mutation } from 'shared/graphql/mutation';
 import { Query } from 'shared/graphql/query';
+import { useMutation } from 'shared/graphql/useMutation';
 import { useAuth } from 'shared/useAuth';
 import { useTranslate } from 'shared/useTranslate';
 import { Route } from 'types/route';

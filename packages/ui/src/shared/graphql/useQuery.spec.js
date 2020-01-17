@@ -10,12 +10,6 @@ describe('useQuery', () => {
     useQueryApollo = td.replace(ApolloHooks, 'useQuery');
   });
 
-  test('verify it calls Apollo useQuery', () => {
-    useQuery(Query.ME, options);
-
-    td.verify(useQueryApollo(Query.ME, options));
-  });
-
   test('ensure we are passing back the proper object', () => {
     const data = {};
     const error = {};
