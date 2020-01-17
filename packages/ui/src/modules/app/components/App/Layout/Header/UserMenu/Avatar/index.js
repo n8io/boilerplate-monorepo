@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/client';
 import { url } from 'gravatar';
 import { bool, func, object } from 'prop-types';
 import React from 'react';
@@ -8,6 +7,7 @@ import { Context, Size, styles as buttonStyles } from 'shared/Button';
 import { Loader } from 'shared/Loader';
 import { Muted } from 'shared/Muted';
 import { Query } from 'shared/graphql/query';
+import { useQuery } from 'shared/graphql/useQuery';
 import { useAuth } from 'shared/useAuth';
 import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
@@ -72,8 +72,7 @@ const MenuItemLabel = styled.span`
 const MeHandle = ({ data, loading, t }) => {
   if (loading) return <Loader />;
 
-  const { me } = data;
-  const { email, username } = me;
+  const { email, username } = data;
   const hash = url(email, { d: 'identicon', r: 'G', s: 30 });
 
   return (
