@@ -17,11 +17,7 @@ describe('<Profile/>', () => {
     const useUserSelfUpdate = td.replace(UseMutationHooks, 'useUserSelfUpdate');
     const useUserSelf = td.replace(UseQueryHooks, 'useUserSelf');
 
-    td.when(
-      useUserSelfUpdate({
-        refetchQueries: [{ query: UseQueryHooks.QUERY_USER_SELF }],
-      })
-    ).thenReturn([
+    td.when(useUserSelfUpdate()).thenReturn([
       jest.fn().mockName('userSelfUpdate'),
       { data: true, loading: false },
     ]);

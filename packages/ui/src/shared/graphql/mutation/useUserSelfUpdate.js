@@ -3,7 +3,11 @@ import { useMutation } from '../useMutation';
 
 const USER_SELF_UPDATE = gql`
   mutation userSelfUpdate($input: UserSelfUpdateInput!) {
-    userSelfUpdate(input: $input)
+    userSelfUpdate(input: $input) {
+      id
+      email
+      username
+    }
   }
 `;
 
