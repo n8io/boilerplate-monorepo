@@ -13560,6 +13560,11 @@ react-helmet@^5.2.1:
     react-fast-compare "^2.0.2"
     react-side-effect "^1.1.0"
 
+react-hook-form@^4.5.5:
+  version "4.5.5"
+  resolved "https://registry.npmjs.org/react-hook-form/-/react-hook-form-4.5.5.tgz#7bb61360a98e08ff07b14646ea80c94341b89ad3"
+  integrity sha512-NXz22dG1ej666gzExf3pLH0/gi5WJNzHD0h0Iy4Op5+25Ru/mN24mOfZmbfyr+kFTVUkr/cNMpIL1camon8lMA==
+
 react-i18next@^10.12.0:
   version "10.13.2"
   resolved "https://registry.npmjs.org/react-i18next/-/react-i18next-10.13.2.tgz#2943705fa751d366fc95b3755520ebe6eeed2408"

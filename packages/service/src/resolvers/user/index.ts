@@ -4,6 +4,7 @@ import { UserLogout } from './logout';
 import { Me } from './me';
 import { UserRegister } from './register';
 import { UserRevokeRefreshTokens } from './revokeRefreshTokens';
+import { UserSelfUpdate } from './selfUpdate';
 import { Users } from './users';
 
 const resolvers = [
@@ -13,6 +14,7 @@ const resolvers = [
   UserRegister,
   UserRevokeRefreshTokens,
   UserDelete,
+  UserSelfUpdate,
   Users,
 ];
 

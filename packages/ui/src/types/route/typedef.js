@@ -2,7 +2,12 @@ import { config } from 'config';
 import { shape, string } from 'prop-types';
 import { values as ramdaValues } from 'ramda';
 import { AiOutlineFileSearch } from 'react-icons/ai';
-import { FaRegAddressBook, FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
+import {
+  FaRegAddressBook,
+  FaSignInAlt,
+  FaSignOutAlt,
+  FaUserAlt,
+} from 'react-icons/fa';
 import { GiFireBowl } from 'react-icons/gi';
 import { MdDashboard, MdPersonAdd } from 'react-icons/md';
 
@@ -55,6 +60,11 @@ export const Enumeration = {
     icon: GiFireBowl,
     name: 'testPage',
     path: '/test',
+  },
+  USER_PROFILE: {
+    icon: FaUserAlt,
+    name: 'profile',
+    path: '/profile',
   },
 };
 

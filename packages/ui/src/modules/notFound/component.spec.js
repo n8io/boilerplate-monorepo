@@ -11,7 +11,7 @@ describe('<NotFound/>', () => {
   const renderComponent = overrides =>
     render(<NotFound {...defaultProps} {...overrides} />);
 
-  test('renders about page', () => {
+  test('renders not found page', () => {
     const { container } = renderComponent();
 
     expect(container.firstChild).toMatchSnapshot();

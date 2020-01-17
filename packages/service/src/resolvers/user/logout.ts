@@ -12,9 +12,11 @@ export class UserLogout {
   async userLogout(@Ctx() { res, user }: Context) {
     const { username } = user!;
 
-    debugLog('👾 Logout', { username });
+    debugLog('👾 UserLogout', { username });
 
     Auth.writeRefreshToken(res);
+
+    debugLog(`✅ User logged out successfully`, { username });
 
     return true;
   }

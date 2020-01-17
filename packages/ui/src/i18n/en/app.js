@@ -9,6 +9,7 @@ export const app = {
       dashboard: 'Dashboard',
       login: 'Log In',
       notFound: 'Not Found',
+      profile: 'Profile',
       registration: 'Sign Up',
       root: 'Home',
       testPage: 'Test Page',

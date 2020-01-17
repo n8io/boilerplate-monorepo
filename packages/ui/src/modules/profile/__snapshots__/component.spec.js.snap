@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Profile/> renders profile page 1`] = `
+<x-page>
+  <x-content>
+    <x-breadcrumbs>
+      <x-breadcrumb
+        isend="true"
+        text="t(title)"
+        to="/profile"
+      />
+    </x-breadcrumbs>
+    <x-header
+      title="t(title)"
+    />
+    <x-body>
+      <form>
+        <div>
+          <label
+            for="username"
+          >
+            <div>
+              Username
+            </div>
+            <input
+              id="username"
+              name="username"
+              placeholder="Username"
+              readonly=""
+              type="text"
+              value="USERNAME"
+            />
+          </label>
+        </div>
+        <div>
+          <label
+            for="email"
+          >
+            <div>
+              Email
+            </div>
+            <input
+              id="email"
+              name="email"
+              placeholder="Email"
+              type="email"
+              value="EMAIL@EMAIL.EMAIL"
+            />
+          </label>
+        </div>
+        <div>
+          <button
+            aria-disabled="false"
+            aria-label="t(updateProfile)"
+            class="Button__Container-sc-1v65cga-0 jpjwHS"
+            role="button"
+            type="submit"
+          >
+            t(updateProfile)
+          </button>
+        </div>
+      </form>
+    </x-body>
+  </x-content>
+</x-page>
+`;

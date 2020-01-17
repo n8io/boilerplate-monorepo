@@ -12,6 +12,8 @@ enum InternalErrorMessage {
   FAILED_TO_RETRIEVE_SELF = 'Failed to retrieve logged in user info',
   FAILED_TO_RETRIEVE_SELF_NO_USER_ON_CONTEXT = 'No user was found on the request context',
   FAILED_TO_REVOKE_REFRESH_TOKENS = 'Could not revoke refresh tokens for the given user id',
+  FAILED_TO_UPDATE_SELF = 'Failed to update self',
+  FAILED_TO_UPDATE_SELF_NOT_FOUND = 'Failed to update self. Could not locate user info.',
   GENERIC = 'A general error has occured',
   PASSWORD_MISMATCH = 'Provided password does not match',
   REFRESH_TOKEN_COOKIE_NOT_FOUND = 'Refresh token cookie was not provided',

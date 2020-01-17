@@ -36,7 +36,7 @@ export class UserLogin {
     const { username, password: clearTextPassword } = input;
     let user;
 
-    debugLog('👾 LoginInput', { username });
+    debugLog('👾 UserLogin', { username });
 
     try {
       user = await User.findOne({ where: { username } });
@@ -77,8 +77,9 @@ export class UserLogin {
       throw new UserInvalidLoginPasswordMismatchError({ username });
     }
 
-    debugLog(`✅ User logged in successfully`, { username });
     Auth.writeRefreshToken(res, user);
+
+    debugLog(`✅ User logged in successfully`, { username });
 
     return Auth.encryptAccessToken(user);
   }

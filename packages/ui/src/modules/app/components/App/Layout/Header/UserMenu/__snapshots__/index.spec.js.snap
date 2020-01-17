@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UserMenu/> renders properly 1`] = `
+<div
+  class="UserMenu__Container-mt3xo-0 cSXgHR"
+>
+  <x-mobile>
+    <x-navigation />
+  </x-mobile>
+  <x-greaterthanmobile>
+    <x-avatar />
+  </x-greaterthanmobile>
+</div>
+`;

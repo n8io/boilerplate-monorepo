@@ -11,7 +11,7 @@ describe('<Dashboard/>', () => {
   const renderComponent = overrides =>
     render(<Dashboard {...defaultProps} {...overrides} />);
 
-  test('renders about page', () => {
+  test('renders dashboard page', () => {
     const { container } = renderComponent();
 
     expect(container.firstChild).toMatchSnapshot();
