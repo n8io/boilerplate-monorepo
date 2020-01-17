@@ -6,8 +6,7 @@ import { Menu, MenuDisclosure, MenuItem, useMenuState } from 'reakit/Menu';
 import { Context, Size, styles as buttonStyles } from 'shared/Button';
 import { Loader } from 'shared/Loader';
 import { Muted } from 'shared/Muted';
-import { Query } from 'shared/graphql/query';
-import { useQuery } from 'shared/graphql/useQuery';
+import { useUserSelf } from 'shared/graphql';
 import { useAuth } from 'shared/useAuth';
 import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
@@ -102,7 +101,7 @@ const Avatar = () => {
   const history = useHistory();
   const { logout } = useAuth();
   const menu = useMenuState({ gutter: 4, placement: 'bottom-end' });
-  const { data, error, loading } = useQuery(Query.ME);
+  const { data, error, loading } = useUserSelf();
 
   const onLogoutClick = () => {
     logout();

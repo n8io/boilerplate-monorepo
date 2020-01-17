@@ -14,9 +14,9 @@ import { toSafeLog } from 'types/auth/transforms';
 import { Context } from 'types/context';
 import {
   DatabaseError,
-  MeError,
-  MeUserDeletedError,
-  MeUserNotFoundError,
+  UserSelfError,
+  UserSelfDeletedError,
+  UserSelfNotFoundError,
 } from 'types/customError';
 import { InternalErrorMessage } from 'types/errorMessage';
 import { UserRole } from 'types/userRole';
@@ -24,7 +24,7 @@ import { UserRole } from 'types/userRole';
 const debugLog = logFactory({ method: 'me', module: 'resolvers/user' });
 
 @ObjectType({ description: `The logged in user's information` })
-class MeResponse {
+class SelfResponse {
   @Field({ description: `The logged in user's unique id` })
   id: string;
   @Field({ description: `The logged in user's unique email` })
@@ -36,62 +36,62 @@ class MeResponse {
 }
 
 @Resolver()
-export class Me {
-  @Query(() => MeResponse, {
+export class UserSelf {
+  @Query(() => SelfResponse, {
     description: `Fetch the logged in user's information`,
     nullable: true,
   })
   @Authorized()
-  async me(@Ctx() { user }: Context) {
+  async userSelf(@Ctx() { user }: Context) {
     if (!user) {
       log.error(
         InternalErrorMessage.FAILED_TO_RETRIEVE_SELF_NO_USER_ON_CONTEXT,
-        { query: 'me' }
+        { query: 'userSelf' }
       );
 
-      throw new MeError();
+      throw new UserSelfError();
     }
 
-    let me;
+    let self;
 
     try {
-      me = await User.findOne({ id: user!.id });
+      self = await User.findOne({ id: user!.id });
     } catch (error) {
       log.error(InternalErrorMessage.FAILED_TO_RETRIEVE_SELF, {
-        query: 'me',
+        query: 'userSelf',
         error,
       });
 
       throw new DatabaseError();
     }
 
-    if (!me) {
+    if (!self) {
       const errorData = {
         id: user.id,
-        query: 'me',
+        query: 'userSelf',
         username: user.username,
       };
 
       log.error(InternalErrorMessage.FAILED_TO_RETRIEVE_SELF, errorData);
 
-      throw new MeUserNotFoundError(errorData);
+      throw new UserSelfNotFoundError(errorData);
     }
 
-    if (!Auth.isUserActive(me)) {
+    if (!Auth.isUserActive(self)) {
       log.error(InternalErrorMessage.USER_IS_DELETED, {
-        deleted_at: me.deletedAt,
-        query: this.me.name,
-        username: me.username,
+        deleted_at: self.deletedAt,
+        query: this.userSelf.name,
+        username: self.username,
       });
 
-      throw new MeUserDeletedError({
-        deleted_at: me.deletedAt,
-        username: me.username,
+      throw new UserSelfDeletedError({
+        deleted_at: self.deletedAt,
+        username: self.username,
       });
     }
 
-    debugLog('✅ Found me', toSafeLog(me));
+    debugLog('✅ Found me', toSafeLog(self));
 
-    return me;
+    return self;
   }
 }

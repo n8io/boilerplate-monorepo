@@ -1,14 +1,19 @@
-import * as ApolloHooks from '@apollo/client';
-import { Mutation } from './mutation';
-import { useMutation } from './useMutation';
+import * as ApolloClient from '@apollo/client';
+import { useMutation } from '.';
+
+const { gql } = ApolloClient;
 
 describe('useMutation', () => {
   const options = {};
-  const mutation = Mutation.USER_LOGIN;
+  const mutation = gql`
+    mutation MUTATION {
+      MUTATION
+    }
+  `;
   let useMutationApollo = null;
 
   beforeEach(() => {
-    useMutationApollo = td.replace(ApolloHooks, 'useMutation');
+    useMutationApollo = td.replace(ApolloClient, 'useMutation');
   });
 
   test('ensure we are passing back the proper object', () => {

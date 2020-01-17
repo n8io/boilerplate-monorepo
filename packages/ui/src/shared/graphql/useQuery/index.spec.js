@@ -1,13 +1,19 @@
-import * as ApolloHooks from '@apollo/client';
-import { Query } from './query';
-import { useQuery } from './useQuery';
+import * as ApolloClient from '@apollo/client';
+import { useQuery } from '.';
+
+const { gql } = ApolloClient;
 
 describe('useQuery', () => {
   const options = {};
+  const query = gql`
+    query QUERY {
+      QUERY
+    }
+  `;
   let useQueryApollo = null;
 
   beforeEach(() => {
-    useQueryApollo = td.replace(ApolloHooks, 'useQuery');
+    useQueryApollo = td.replace(ApolloClient, 'useQuery');
   });
 
   test('ensure we are passing back the proper object', () => {
@@ -28,9 +34,9 @@ describe('useQuery', () => {
       loading,
     };
 
-    td.when(useQueryApollo(Query.ME, options)).thenReturn(apolloResult);
+    td.when(useQueryApollo(query, options)).thenReturn(apolloResult);
 
-    const actual = useQuery(Query.ME, options);
+    const actual = useQuery(query, options);
 
     expect(actual).toEqual(expected);
   });
