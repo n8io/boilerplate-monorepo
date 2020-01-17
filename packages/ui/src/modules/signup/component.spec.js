@@ -1,6 +1,5 @@
-import * as Hooks from '@apollo/client';
 import React from 'react';
-import { Mutation } from 'shared/graphql/mutation';
+import * as MutationHooks from 'shared/graphql/mutation/useUserRegister';
 import { render } from 'testHelpers';
 import { Signup } from './component';
 
@@ -16,9 +15,9 @@ describe('<Signup/>', () => {
     render(<Signup {...defaultProps} {...overrides} />);
 
   beforeEach(() => {
-    const useMutation = td.replace(Hooks, 'useMutation');
+    const useUserRegister = td.replace(MutationHooks, 'useUserRegister');
 
-    td.when(useMutation(Mutation.USER_REGISTER)).thenReturn([
+    td.when(useUserRegister()).thenReturn([
       jest.fn().mockName('userRegister'),
       { loading: false },
     ]);

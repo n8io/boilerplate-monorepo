@@ -1,7 +1,6 @@
-import * as Hooks from '@apollo/client';
 import React from 'react';
-import { Mutation } from 'shared/graphql/mutation';
-import { Query } from 'shared/graphql/query';
+import { QUERY_USER_SELF } from 'shared/graphql';
+import * as MutationHooks from 'shared/graphql/mutation/useUserLogin';
 import { render } from 'testHelpers';
 import { Login } from './component';
 
@@ -17,11 +16,11 @@ describe('<Login/>', () => {
     render(<Login {...defaultProps} {...overrides} />);
 
   beforeEach(() => {
-    const useMutation = td.replace(Hooks, 'useMutation');
+    const useUserLogin = td.replace(MutationHooks, 'useUserLogin');
 
     td.when(
-      useMutation(Mutation.USER_LOGIN, {
-        refetchQueries: [{ query: Query.ME }],
+      useUserLogin({
+        refetchQueries: [{ query: QUERY_USER_SELF }],
       })
     ).thenReturn([jest.fn().mockName('userLogin'), { loading: false }]);
   });

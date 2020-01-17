@@ -1,12 +1,11 @@
-import { useMutation } from '@apollo/client';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button, Context } from 'shared/Button';
 import { Body, Breadcrumb, Breadcrumbs, Content, Header } from 'shared/Content';
 import { Link } from 'shared/Link';
 import { Page } from 'shared/Page';
-import { Mutation } from 'shared/graphql/mutation';
-import { Query } from 'shared/graphql/query';
+import { QUERY_USER_SELF } from 'shared/graphql';
+import { useUserLogin } from 'shared/graphql/mutation';
 import { useAuth } from 'shared/useAuth';
 import { useTranslate } from 'shared/useTranslate';
 import { Route } from 'types/route';
@@ -23,8 +22,8 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const { isAuthenticated, logout, updateAccessToken } = useAuth();
 
-  const [mutate, { loading: isDisabled }] = useMutation(Mutation.USER_LOGIN, {
-    refetchQueries: [{ query: Query.ME }],
+  const [mutate, { loading: isDisabled }] = useUserLogin({
+    refetchQueries: [{ query: QUERY_USER_SELF }],
   });
 
   const onLogin = async () => {

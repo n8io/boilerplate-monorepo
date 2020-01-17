@@ -17,7 +17,7 @@ const appendSafeError = (props: ErrorProperties | undefined) => ({
   toSafeError,
 });
 
-export class MeError extends ApolloError {
+export class UserSelfError extends ApolloError {
   constructor(properties?: ErrorProperties) {
     super(
       PublicErrorMessage.FAILED_TO_RETRIEVE_SELF,
@@ -25,11 +25,11 @@ export class MeError extends ApolloError {
       appendSafeError(properties)
     );
 
-    Object.defineProperty(this, 'name', { value: MeError.name });
+    Object.defineProperty(this, 'name', { value: UserSelfError.name });
   }
 }
 
-export class MeUserNotFoundError extends ApolloError {
+export class UserSelfNotFoundError extends ApolloError {
   constructor(properties?: ErrorProperties) {
     super(
       InternalErrorMessage.USER_NOT_FOUND,
@@ -38,12 +38,12 @@ export class MeUserNotFoundError extends ApolloError {
     );
 
     Object.defineProperty(this, 'name', {
-      value: MeUserNotFoundError.name,
+      value: UserSelfNotFoundError.name,
     });
   }
 }
 
-export class MeUserDeletedError extends ApolloError {
+export class UserSelfDeletedError extends ApolloError {
   constructor(properties?: ErrorProperties) {
     super(
       InternalErrorMessage.USER_IS_DELETED,
@@ -52,7 +52,7 @@ export class MeUserDeletedError extends ApolloError {
     );
 
     Object.defineProperty(this, 'name', {
-      value: MeUserDeletedError.name,
+      value: UserSelfDeletedError.name,
     });
   }
 }

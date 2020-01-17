@@ -1,13 +1,15 @@
-import { useQuery, useMutation } from '@apollo/client';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { Button, Context } from 'shared/Button';
-import { Body, Content, Header, Breadcrumbs, Breadcrumb } from 'shared/Content';
+import { Body, Breadcrumb, Breadcrumbs, Content, Header } from 'shared/Content';
 import { Loader } from 'shared/Loader';
 import { Page } from 'shared/Page';
-import { Mutation } from 'shared/graphql/mutation';
-import { Query } from 'shared/graphql/query';
+import {
+  QUERY_USER_SELF,
+  useUserSelf,
+  useUserSelfUpdate,
+} from 'shared/graphql';
 import { useTranslate } from 'shared/useTranslate';
 import { Route } from 'types/route';
 
@@ -20,17 +22,14 @@ const Profile = () => {
     namespace: 'profile',
   });
   const history = useHistory();
-  const { data, error, loading } = useQuery(Query.ME);
-  const [mutate, { loading: isSubmitting }] = useMutation(
-    Mutation.USER_SELF_UPDATE,
-    {
-      refetchQueries: [{ query: Query.ME }],
-    }
-  );
+  const { data, error, loading } = useUserSelf();
+  const [userSelfUpdate, { loading: isSubmitting }] = useUserSelfUpdate({
+    refetchQueries: [{ query: QUERY_USER_SELF }],
+  });
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = async input => {
-    await mutate({ variables: { input } });
+    await userSelfUpdate({ variables: { input } });
 
     history.push(Route.DASHBOARD.path);
   };
@@ -40,8 +39,7 @@ const Profile = () => {
   }
 
   const hasErrors = Object.keys(errors).length > 0;
-  const { me } = data;
-  const { email, username } = me;
+  const { email, username } = data;
 
   return (
     <Page>

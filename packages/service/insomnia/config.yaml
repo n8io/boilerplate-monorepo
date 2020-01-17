@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2020-01-17T13:30:48.144Z
+__export_date: 2020-01-17T21:40:35.391Z
 __export_source: insomnia.desktop.app:v7.0.6
 resources:
   - _id: req_45c96e3cce6845569aaeb3db515b8cc3
@@ -267,7 +267,7 @@ resources:
       type: bearer
     body:
       mimeType: application/graphql
-      text: '{"query":"query Me {\n  me
+      text: '{"query":"query UserSelf {\n  userSelf
         {\n    id\n    email\n    role\n    username\n  }\n}\n"}'
     created: 1577901244900
     description: ""
@@ -278,8 +278,8 @@ resources:
     isPrivate: false
     metaSortKey: -1577800601463.5
     method: POST
-    modified: 1578618828761
-    name: Me
+    modified: 1579297200305
+    name: UserSelf
     parameters: []
     parentId: fld_16d435bc119b4cc2af547a3f4de21aa9
     settingDisableRenderRequestBody: false
@@ -379,17 +379,17 @@ resources:
     cookies:
       - creation: 2020-01-14T00:36:22.738Z
         domain: localhost
-        expires: 2020-01-31T13:15:49.000Z
+        expires: 2020-01-24T21:40:06.000Z
         hostOnly: true
         httpOnly: true
-        id: "8709407355168644"
+        id: "5831742865177689"
         key: jid
-        lastAccessed: 2020-01-17T13:15:49.896Z
-        maxAge: 1209600
+        lastAccessed: 2020-01-17T21:40:06.449Z
+        maxAge: 604800
         path: /refresh_token
-        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmFkbWluIiwiaWQiOiJjazViZmdqbHYwMDAwcG56OGEyZjQxZGdqIiwicm9sZSI6IkFETUlOIiwidG9rZW5WZXJzaW9uIjowLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTc5MjY2OTQ5LCJleHAiOjE1ODA0NzY1NDl9.ZAdeDf4tbraagNFOWg8wtJvnL5Wtm2NGV0r68A7diXU
+        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImlkIjoiY2s1NnM5NnYwMDAwMDJxYWRnemV0Y29udSIsInJvbGUiOiJBRE1JTiIsInRva2VuVmVyc2lvbiI6MCwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTU3OTI5NzIwNiwiZXhwIjoxNTc5OTAyMDA2fQ.ghmVDb-5oil611F14VRBbNyNZvZ96viXV8cDXl_9vmg
     created: 1577800360958
-    modified: 1579266949896
+    modified: 1579297206449
     name: Default Jar
     parentId: wrk_b673aad6c5df416ead4f262eb230cf9c
     _type: cookie_jar

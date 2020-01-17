@@ -1,6 +1,5 @@
-import * as Hooks from '@apollo/client';
 import React from 'react';
-import { Query } from 'shared/graphql/query';
+import * as QueryHooks from 'shared/graphql/query/useUserSelf';
 import { render } from 'testHelpers';
 import { Avatar } from '.';
 
@@ -18,15 +17,15 @@ describe('<Avatar/>', () => {
   const renderComponent = overrides =>
     render(<Avatar {...defaultProps} {...overrides} />);
 
-  let useQuery = null;
+  let useUserSelf = null;
 
   beforeEach(() => {
-    useQuery = td.replace(Hooks, 'useQuery');
+    useUserSelf = td.replace(QueryHooks, 'useUserSelf');
   });
 
   test('renders properly', () => {
-    td.when(useQuery(Query.ME)).thenReturn({
-      data: { me: { email: 'EMAIL' } },
+    td.when(useUserSelf()).thenReturn({
+      data: { email: 'EMAIL' },
       loading: false,
     });
 
@@ -36,7 +35,7 @@ describe('<Avatar/>', () => {
   });
 
   test('renders null on error', () => {
-    td.when(useQuery(Query.ME)).thenReturn({ error: {} });
+    td.when(useUserSelf()).thenReturn({ error: {} });
 
     const { container } = renderComponent();
 
@@ -44,7 +43,7 @@ describe('<Avatar/>', () => {
   });
 
   test('renders loader when loading', () => {
-    td.when(useQuery(Query.ME)).thenReturn({ loading: true });
+    td.when(useUserSelf()).thenReturn({ loading: true });
 
     const { getByTestId } = renderComponent();
 

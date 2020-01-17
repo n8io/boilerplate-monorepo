@@ -1,11 +1,10 @@
-import { useMutation } from '@apollo/client';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button, Context } from 'shared/Button';
-import { Body, Content, Header, Breadcrumbs, Breadcrumb } from 'shared/Content';
+import { Body, Breadcrumb, Breadcrumbs, Content, Header } from 'shared/Content';
 import { Link } from 'shared/Link';
 import { Page } from 'shared/Page';
-import { Mutation } from 'shared/graphql/mutation';
+import { useUserRegister } from 'shared/graphql/mutation';
 import { useAuth } from 'shared/useAuth';
 import { useTranslate } from 'shared/useTranslate';
 import { Route } from 'types/route';
@@ -23,7 +22,7 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const { isAuthenticated } = useAuth();
-  const [mutate, { loading: isDisabled }] = useMutation(Mutation.USER_REGISTER);
+  const [mutate, { loading: isDisabled }] = useUserRegister();
 
   const onRegister = async () => {
     const input = {
