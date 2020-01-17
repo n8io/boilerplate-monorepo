@@ -76,22 +76,30 @@ const Login = () => {
             <>
               <form onSubmit={e => e.preventDefault()}>
                 <div>
-                  <input
-                    name="username"
-                    onChange={onUsernameChange}
-                    placeholder="username"
-                    type="text"
-                    value={username}
-                  />
+                  <label htmlFor="username">
+                    <div>Username</div>
+                    <input
+                      id="username"
+                      name="username"
+                      onChange={onUsernameChange}
+                      placeholder="username"
+                      type="text"
+                      value={username}
+                    />
+                  </label>
                 </div>
                 <div>
-                  <input
-                    name="password"
-                    onChange={onPasswordChange}
-                    placeholder="password"
-                    type="password"
-                    value={password}
-                  />
+                  <label htmlFor="password">
+                    <div>Password</div>
+                    <input
+                      id="password"
+                      name="password"
+                      onChange={onPasswordChange}
+                      placeholder="password"
+                      type="password"
+                      value={password}
+                    />
+                  </label>
                 </div>
                 <Button
                   context={PRIMARY}

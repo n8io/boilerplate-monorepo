@@ -53,22 +53,30 @@ const Profile = () => {
         <Body>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div>
-              <input
-                defaultValue={username}
-                placeholder="Username"
-                name="username"
-                readOnly
-                type="text"
-              />
+              <label htmlFor="username">
+                <div>Username</div>
+                <input
+                  defaultValue={username}
+                  id="username"
+                  placeholder="Username"
+                  name="username"
+                  readOnly
+                  type="text"
+                />
+              </label>
             </div>
             <div>
-              <input
-                defaultValue={email}
-                placeholder="Email"
-                name="email"
-                ref={register({ pattern: /^\S+@\S+$/iu, required: true })}
-                type="email"
-              />
+              <label htmlFor="email">
+                <div>Email</div>
+                <input
+                  defaultValue={email}
+                  id="email"
+                  placeholder="Email"
+                  name="email"
+                  ref={register({ pattern: /^\S+@\S+$/iu, required: true })}
+                  type="email"
+                />
+              </label>
             </div>
             <div>
               <Button
