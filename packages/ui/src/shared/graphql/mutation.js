@@ -18,8 +18,15 @@ const USER_REGISTER = gql`
   }
 `;
 
+const USER_SELF_UPDATE = gql`
+  mutation userSelfUpdate($input: UserSelfUpdateInput!) {
+    userSelfUpdate(input: $input)
+  }
+`;
+
 export const Mutation = {
   USER_LOGIN,
   USER_LOGOUT,
   USER_REGISTER,
+  USER_SELF_UPDATE,
 };

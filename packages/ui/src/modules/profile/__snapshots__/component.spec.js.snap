@@ -14,7 +14,36 @@ exports[`<Profile/> renders profile page 1`] = `
       title="t(title)"
     />
     <x-body>
-       
+      <form>
+        <div>
+          <input
+            name="username"
+            placeholder="Username"
+            readonly=""
+            type="text"
+            value="USERNAME"
+          />
+        </div>
+        <div>
+          <input
+            name="email"
+            placeholder="Email"
+            type="email"
+            value="EMAIL@EMAIL.EMAIL"
+          />
+        </div>
+        <div>
+          <button
+            aria-disabled="false"
+            aria-label="t(updateProfile)"
+            class="Button__Container-sc-1v65cga-0 jpjwHS"
+            role="button"
+            type="submit"
+          >
+            t(updateProfile)
+          </button>
+        </div>
+      </form>
     </x-body>
   </x-content>
 </x-page>
