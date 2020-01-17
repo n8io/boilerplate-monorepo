@@ -24,7 +24,7 @@ import { UserRole } from 'types/userRole';
 const debugLog = logFactory({ method: 'me', module: 'resolvers/user' });
 
 @ObjectType({ description: `The logged in user's information` })
-class SelfResponse {
+export class UserSelfResponse {
   @Field({ description: `The logged in user's unique id` })
   id: string;
   @Field({ description: `The logged in user's unique email` })
@@ -37,7 +37,7 @@ class SelfResponse {
 
 @Resolver()
 export class UserSelf {
-  @Query(() => SelfResponse, {
+  @Query(() => UserSelfResponse, {
     description: `Fetch the logged in user's information`,
     nullable: true,
   })

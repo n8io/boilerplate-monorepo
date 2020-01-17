@@ -5,11 +5,7 @@ import { Button, Context } from 'shared/Button';
 import { Body, Breadcrumb, Breadcrumbs, Content, Header } from 'shared/Content';
 import { Loader } from 'shared/Loader';
 import { Page } from 'shared/Page';
-import {
-  QUERY_USER_SELF,
-  useUserSelf,
-  useUserSelfUpdate,
-} from 'shared/graphql';
+import { useUserSelf, useUserSelfUpdate } from 'shared/graphql';
 import { useTranslate } from 'shared/useTranslate';
 import { Route } from 'types/route';
 
@@ -23,9 +19,7 @@ const Profile = () => {
   });
   const history = useHistory();
   const { data, error, loading } = useUserSelf();
-  const [userSelfUpdate, { loading: isSubmitting }] = useUserSelfUpdate({
-    refetchQueries: [{ query: QUERY_USER_SELF }],
-  });
+  const [userSelfUpdate, { loading: isSubmitting }] = useUserSelfUpdate();
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = async input => {

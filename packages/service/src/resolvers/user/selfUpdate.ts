@@ -14,6 +14,7 @@ import { Context } from 'types/context';
 import { DatabaseError } from 'types/customError';
 import { UserSelfUpdateNotFoundError } from 'types/customError/user/selfUpdate';
 import { InternalErrorMessage } from 'types/errorMessage';
+import { UserSelfResponse } from './self'
 
 const debugLog = logFactory({
   method: 'userRegister',
@@ -30,7 +31,7 @@ class UserSelfUpdateInput {
 
 @Resolver()
 export class UserSelfUpdate {
-  @Mutation(() => Boolean, { description: `Update current user` })
+  @Mutation(() => UserSelfResponse, { description: `Update current user` })
   @Authorized()
   async userSelfUpdate(
     @Arg('input', { description: USER_SELF_UPDATE_INPUT })
@@ -38,20 +39,9 @@ export class UserSelfUpdate {
     @Ctx() { user }: Context
   ) {
     const { email } = input;
-    const { id, username } = user!;
+    const { id } = user!;
 
     debugLog('👾 UserSelfUpdate', { email });
-
-    try {
-      user = await User.findOne({ where: { username } });
-    } catch (error) {
-      log.error(InternalErrorMessage.FAILED_TO_RETRIEVE_SELF, {
-        error,
-        mutation: this.userSelfUpdate.name,
-      });
-
-      throw new DatabaseError();
-    }
 
     let result = null;
     try {
@@ -78,8 +68,19 @@ export class UserSelfUpdate {
       throw new UserSelfUpdateNotFoundError();
     }
 
+    try {
+      user = await User.findOne(id);
+    } catch (error) {
+      log.error(InternalErrorMessage.FAILED_TO_RETRIEVE_SELF, {
+        error,
+        mutation: this.userSelfUpdate.name,
+      });
+
+      throw new DatabaseError();
+    }
+
     debugLog(`✅ Successfully updated user self`, { email, id });
 
-    return true;
+    return user;
   }
 }
