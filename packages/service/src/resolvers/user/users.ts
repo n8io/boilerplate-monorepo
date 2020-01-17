@@ -44,7 +44,7 @@ export class Users {
     @Arg('input', { description: 'The filters for searching users' })
     input: UsersInput
   ) {
-    debugLog('👾', input);
+    debugLog('👾 Users', input);
 
     let page = null;
     try {
@@ -58,7 +58,7 @@ export class Users {
       throw new DatabaseError();
     }
 
-    debugLog(`💁 Successfully found ${page.edges.length} user(s)`);
+    debugLog(`✅ Successfully found ${page.edges.length} user(s)`);
 
     return page;
   }

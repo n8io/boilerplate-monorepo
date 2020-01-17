@@ -47,7 +47,7 @@ export class UserRegister {
     const passwordHash = await hash(clearTextPassword, salt);
     let user;
 
-    debugLog('👾 RegisterInput', {
+    debugLog('👾 UserRegister', {
       email,
       password: '*** redacted ***',
       role,
@@ -96,7 +96,7 @@ export class UserRegister {
       throw new DatabaseError();
     }
 
-    debugLog(`✅ Successfully registered user`, { email, id, username });
+    debugLog(`✅ User registered successfully`, { email, id, username });
 
     return true;
   }

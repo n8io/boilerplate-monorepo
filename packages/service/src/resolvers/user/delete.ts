@@ -30,7 +30,7 @@ export class UserDelete {
     id: string,
     @Ctx() { user }: Context
   ) {
-    debugLog('👾 User id', id);
+    debugLog('👾 UserDelete', id);
 
     if (user!.id === id) {
       log.error(InternalErrorMessage.USER_ATTEMPTED_TO_SELF_DELETE, {
@@ -74,7 +74,7 @@ export class UserDelete {
       throw new UserDeleteError({ id });
     }
 
-    debugLog('✅ Successfully deleted user', id);
+    debugLog('✅ User deleted successfully', id);
 
     return true;
   }

@@ -29,7 +29,7 @@ export class UserRevokeRefreshTokens {
     })
     id: string
   ) {
-    debugLog('👾 User id', id);
+    debugLog('👾 UserRevokeRefreshTokens', id);
 
     let wasUpdated = false;
 
