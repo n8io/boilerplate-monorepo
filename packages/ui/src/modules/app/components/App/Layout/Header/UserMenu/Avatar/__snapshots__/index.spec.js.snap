@@ -17,7 +17,7 @@ exports[`<Avatar/> renders properly 1`] = `
     <img
       alt="t(avatarForEmail, {\\"email\\":\\"EMAIL\\"})"
       class="Avatar__Image-sc-11puhtb-4 hLgQHZ"
-      src="//www.gravatar.com/avatar/0c83f57c786a0b4a39efab23731c7ebc?r=G&s=30"
+      src="//www.gravatar.com/avatar/0c83f57c786a0b4a39efab23731c7ebc?d=identicon&r=G&s=30"
     />
   </div>
 </x-menudisclosure>

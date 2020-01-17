@@ -74,7 +74,7 @@ const MeHandle = ({ data, loading, t }) => {
 
   const { me } = data;
   const { email, username } = me;
-  const hash = url(email, { r: 'G', s: 30 });
+  const hash = url(email, { d: 'identicon', r: 'G', s: 30 });
 
   return (
     <>

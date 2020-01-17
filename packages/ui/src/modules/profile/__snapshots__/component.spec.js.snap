@@ -16,21 +16,37 @@ exports[`<Profile/> renders profile page 1`] = `
     <x-body>
       <form>
         <div>
-          <input
-            name="username"
-            placeholder="Username"
-            readonly=""
-            type="text"
-            value="USERNAME"
-          />
+          <label
+            for="username"
+          >
+            <div>
+              Username
+            </div>
+            <input
+              id="username"
+              name="username"
+              placeholder="Username"
+              readonly=""
+              type="text"
+              value="USERNAME"
+            />
+          </label>
         </div>
         <div>
-          <input
-            name="email"
-            placeholder="Email"
-            type="email"
-            value="EMAIL@EMAIL.EMAIL"
-          />
+          <label
+            for="email"
+          >
+            <div>
+              Email
+            </div>
+            <input
+              id="email"
+              name="email"
+              placeholder="Email"
+              type="email"
+              value="EMAIL@EMAIL.EMAIL"
+            />
+          </label>
         </div>
         <div>
           <button
