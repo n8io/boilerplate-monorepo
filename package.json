@@ -17,6 +17,7 @@
     "build:ui": "(cd packages/ui && yarn run -s build)",
     "bump": "lerna version prepatch --no-commit-hooks --yes",
     "clean": "yarn run -s dcd && yarn run -s dc down --remove-orphans",
+    "codegen": "(cd packages/ui && graphql-codegen --config .codegen/config.yml)",
     "dc": "docker-compose --project-directory . --file ./docker/docker-compose.yml",
     "dcd": "yarn run -s dc kill",
     "dclf": "yarn run -s dc logs -f",
