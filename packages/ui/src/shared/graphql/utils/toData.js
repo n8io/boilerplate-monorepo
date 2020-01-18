@@ -1,17 +1,36 @@
-import { evolve, head, keys, mergeRight, pipe, prop, __ } from 'ramda';
+import {
+  always,
+  both,
+  equals,
+  evolve,
+  head,
+  ifElse,
+  is,
+  isEmpty,
+  last,
+  mergeRight,
+  pipe,
+  toPairs,
+  when,
+} from 'ramda';
 
-const toActualData = data => {
-  if (!data) return data;
+const hasObjectPrototype = pipe(
+  Object.getPrototypeOf,
+  equals(Object.prototype)
+);
 
-  return pipe(keys, head, prop(__, data))(data);
-};
+const isPojo = both(is(Object), hasObjectPrototype);
+
+const extractData = ifElse(
+  isEmpty,
+  always(undefined),
+  pipe(toPairs, head, last)
+);
 
 const toData = pipe(
-  mergeRight({
-    data: null,
-  }),
+  mergeRight({ data: null }),
   evolve({
-    data: toActualData,
+    data: when(isPojo, extractData),
   })
 );
 
