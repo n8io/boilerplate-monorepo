@@ -1,7 +1,9 @@
 overwrite: true
 schema: 'http://localhost:4000/graphql'
-documents: './src/shared/graphql/{mutation,query}/*.js'
 generates:
+  ./.codegen/schema.json:
+    plugins:
+      - 'introspection'
   # ./.codegen/types.ts:
   #   plugins:
   #     - add: /* eslint-disable */
@@ -12,6 +14,3 @@ generates:
   #     withComponent: false
   #     withHOC: false
   #     withHooks: true
-  ./.codegen/schema.json:
-    plugins:
-      - 'introspection'

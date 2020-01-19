@@ -4,8 +4,9 @@ import { useQuery } from '../useQuery';
 export const QUERY_USER_SELF = gql`
   query userSelf {
     userSelf {
-      id
       email
+      id
+      role
       username
     }
   }

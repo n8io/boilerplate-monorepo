@@ -1,16 +1,22 @@
 import { gql } from '@apollo/client';
 import { useMutation } from '../useMutation';
 
-const USER_SELF_UPDATE = gql`
+const MUTATION_USER_SELF_UPDATE = gql`
   mutation userSelfUpdate($input: UserSelfUpdateInput!) {
     userSelfUpdate(input: $input) {
-      id
       email
+      id
+      role
       username
     }
   }
 `;
 
-const useUserSelfUpdate = options => useMutation(USER_SELF_UPDATE, options);
+/**
+ * UserSelfUpdateInput
+ * @param email - String!
+ */
+const useUserSelfUpdate = options =>
+  useMutation(MUTATION_USER_SELF_UPDATE, options);
 
 export { useUserSelfUpdate };
