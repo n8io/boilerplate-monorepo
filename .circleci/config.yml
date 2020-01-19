@@ -46,10 +46,10 @@ jobs:
             - v1-deps
       - run:
           name: Transpiling ui
-          command: (cd packages/ui && yarn -s build)
+          command: cd packages/ui && yarn -s build
       - run:
           name: Transpiling service
-          command: (cd packages/service && yarn -s build)
+          command: cd packages/service && yarn -s build
 
 workflows:
   version: 2
