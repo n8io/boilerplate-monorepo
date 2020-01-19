@@ -1,7 +1,7 @@
 import React from 'react';
 import * as MutationHooks from 'shared/graphql/mutation/useUserRegister';
 import { render } from 'testHelpers';
-import { Signup } from './component';
+import { Signup } from '.';
 
 jest.mock('shared/Button');
 jest.mock('shared/Content');

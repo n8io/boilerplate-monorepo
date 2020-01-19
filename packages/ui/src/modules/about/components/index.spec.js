@@ -1,17 +1,17 @@
 import React from 'react';
 import { render } from 'testHelpers';
-import { Dashboard } from './component';
+import { About } from '.';
 
 jest.mock('shared/Content');
 jest.mock('shared/Page');
 
-describe('<Dashboard/>', () => {
+describe('<About/>', () => {
   const defaultProps = {};
 
   const renderComponent = overrides =>
-    render(<Dashboard {...defaultProps} {...overrides} />);
+    render(<About {...defaultProps} {...overrides} />);
 
-  test('renders dashboard page', () => {
+  test('renders about page', () => {
     const { container } = renderComponent();
 
     expect(container.firstChild).toMatchSnapshot();

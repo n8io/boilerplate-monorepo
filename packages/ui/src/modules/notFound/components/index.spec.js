@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'testHelpers';
-import { NotFound } from './component';
+import { NotFound } from '.';
 
 jest.mock('shared/Content');
 jest.mock('shared/Page');

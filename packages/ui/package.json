@@ -13,7 +13,8 @@
     "deploy": "gh-pages -d build",
     "deploy:gh": "REACT_APP_PUBLIC_URL=/boilerplate-monorepo yarn -s deploy",
     "start": "craco start",
-    "test": "craco test"
+    "test": "craco test",
+    "test:watch": "yarn run -s test"
   },
   "eslintConfig": {
     "extends": "react-app"

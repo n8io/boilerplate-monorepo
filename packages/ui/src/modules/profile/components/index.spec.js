@@ -2,7 +2,7 @@ import React from 'react';
 import * as UseMutationHooks from 'shared/graphql/mutation/useUserSelfUpdate';
 import * as UseQueryHooks from 'shared/graphql/query/useUserSelf';
 import { render } from 'testHelpers';
-import { Profile } from './component';
+import { Profile } from '.';
 
 jest.mock('shared/Content');
 jest.mock('shared/Page');
