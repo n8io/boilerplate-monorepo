@@ -10,6 +10,7 @@
   },
   "scripts": {
     "test": "jest",
+    "test:ci": "JEST_JUNIT_OUTPUT_DIR=../../.tmp/test-results/common yarn -s test --ci --runInBand --reporters=default --reporters=jest-junit",
     "test:watch": "jest --watch"
   },
   "dependencies": {
