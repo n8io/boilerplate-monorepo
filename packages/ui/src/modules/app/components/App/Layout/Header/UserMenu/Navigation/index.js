@@ -94,8 +94,10 @@ InnerSideBar.propTypes = {
   t: func.isRequired,
 };
 
-const OpenNavButton = styled(Button)`
+const HamburgerButton = styled(Button)`
   font-size: calc(${CustomProperty.BASE_UNIT} * 1.5);
+  grid-column: 2;
+  margin-right: calc(${CustomProperty.BASE_UNIT} * -0.5);
 `;
 
 const styles = {
@@ -119,13 +121,13 @@ const Navigation = () => {
 
   return (
     <>
-      <OpenNavButton
+      <HamburgerButton
         context={LINK}
         label={t('openNavigation')}
         onClick={() => onSetOpen(true)}
       >
         <GiHamburgerMenu />
-      </OpenNavButton>
+      </HamburgerButton>
       <div>
         <SideBar
           open={isOpen}

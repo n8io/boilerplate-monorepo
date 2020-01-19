@@ -55,7 +55,7 @@ yarn dev
 yarn down
 ```
 
-### 🍕 Natively Adhoc
+### 🍕 Natively Adhoc (recommended)
 
 ```bash
 # Starting the db instance
@@ -66,6 +66,22 @@ yarn start:server
 
 # Starting the ui
 yarn start:ui
+```
+
+### 🧰 Tooling
+
+#### 🌱 Codegen
+
+There is a handy dandy generator for creating Apollo hooks. Give it a try!
+
+```shell
+cd packages/tool-hook-generator
+
+# Creates a `useUserRegister` mutation hook
+yarn run hook:migration UserRegister
+
+# Creates a `useUserSelf` query hook
+yarn run hook:query UserSelf
 ```
 
 ## License
