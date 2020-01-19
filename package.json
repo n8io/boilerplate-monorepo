@@ -46,6 +46,7 @@
     "start": "yarn run -s run-all start:*",
     "stop:db": "yarn -s dcd db",
     "test": "CI=true lerna run test --stream -- --passWithNoTests --ci",
+    "test:ci": "CI=true lerna run test:ci --stream -- --passWithNoTests --ci",
     "test:watch": "lerna run test --stream -- --passWithNoTests --color --watch"
   },
   "devDependencies": {
@@ -65,6 +66,7 @@
     "eslint-plugin-jest": "^22.15.0",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-ramda": "^2.5.1",
+    "jest-junit": "^10.0.0",
     "lerna": "^3.16.4",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.18.2"
