@@ -10,7 +10,7 @@
     "packages/*"
   ],
   "scripts": {
-    "🔥": "yarn run -s clean -v",
+    "🔥": "rm -rf node_modules && (cd packages/common && rm -rf node_modules) && (cd packages/service && rm -rf node_modules) && (cd packages/ui && rm -rf node_modules) && (cd packages/ui-common && rm -rf node_modules)",
     "bootstrap": "lerna bootstrap",
     "build": "yarn run -s run-all build:*",
     "build:service": "(cd packages/service && yarn run -s build)",
@@ -25,6 +25,8 @@
     "dev": "yarn run -s dcud ui service && yarn run -s run-all logs:*",
     "down": "yarn run -s clean",
     "down:ui": "yarn run -s dcd ui",
+    "e2e:run": "cypress run --config-file ./cypress/cypress.json",
+    "e2e:ci": "start-server-and-test start http://localhost:3000 e2e:run",
     "e2e:dev": "cypress open --config-file ./cypress/cypress.json",
     "format": "yarn -s run run-all format:*",
     "format:js-eslint": "eslint --cache --fix '**/*.js'",
@@ -55,6 +57,7 @@
     "babel-jest": "^24.8.0",
     "babel-plugin-macros": "^2.6.1",
     "babel-plugin-module-resolver": "^3.2.0",
+    "core-js": "^3.6.4",
     "cypress": "^3.7.0",
     "dotenv": "^8.2.0",
     "eslint": "^6.1.0",
@@ -69,6 +72,7 @@
     "jest-junit": "^10.0.0",
     "lerna": "^3.16.4",
     "npm-run-all": "^4.1.5",
-    "prettier": "^1.18.2"
+    "prettier": "^1.18.2",
+    "start-server-and-test": "^1.10.6"
   }
 }

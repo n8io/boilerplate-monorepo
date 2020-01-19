@@ -2,7 +2,6 @@ import { always, curry, ifElse, is, map, pipeWith, then, useWith } from 'ramda';
 import { LANG_KEY, transformFake } from './fake';
 
 const loadTranslation = (language, namespace) =>
-  // eslint-disable-next-line import/dynamic-import-chunkname
   import(
     /* webpackChunkName: "i18n-[request]" */
     `i18n/${language}/${namespace}`

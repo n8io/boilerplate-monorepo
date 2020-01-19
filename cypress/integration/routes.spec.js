@@ -4,8 +4,6 @@ describe('routes', () => {
   });
 
   it('is the default route', () => {
-    return cy.location().should(location => {
-      expect(location.pathname).to.eq('/');
-    });
+    cy.location('pathname').should('eq', '/');
   });
 });
