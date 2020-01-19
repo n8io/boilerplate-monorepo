@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'testHelpers';
-import { Logout } from './component';
+import { Logout } from '.';
 
 jest.mock('shared/useAuth');
 
