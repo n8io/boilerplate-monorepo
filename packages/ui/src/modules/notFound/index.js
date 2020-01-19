@@ -4,7 +4,7 @@ import { lazy } from 'react';
 const Lazy = lazy(() =>
   import(
     /* webpackChunkName: "notFound" */
-    './component'
+    './components'
   ).then(Utils.renameKeys({ NotFound: 'default' }))
 );
 
