@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'testHelpers';
-import { Dashboard } from './component';
+import { Dashboard } from '.';
 
 jest.mock('shared/Content');
 jest.mock('shared/Page');
