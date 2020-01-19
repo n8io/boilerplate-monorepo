@@ -2,7 +2,7 @@ import React from 'react';
 import { QUERY_USER_SELF } from 'shared/graphql';
 import * as MutationHooks from 'shared/graphql/mutation/useUserLogin';
 import { render } from 'testHelpers';
-import { Login } from './component';
+import { Login } from '.';
 
 jest.mock('shared/Button');
 jest.mock('shared/Content');
