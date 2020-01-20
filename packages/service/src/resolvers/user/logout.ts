@@ -1,5 +1,5 @@
 import { logFactory } from 'log/logFactory';
-import { Authorized, Ctx, Mutation, Resolver } from 'type-graphql';
+import { Ctx, Mutation, Resolver } from 'type-graphql';
 import { Auth } from 'types/auth';
 import { Context } from 'types/context';
 
@@ -8,15 +8,16 @@ const debugLog = logFactory({ method: 'userLogout', module: 'resolvers/user' });
 @Resolver()
 export class UserLogout {
   @Mutation(() => Boolean, { description: 'Logout the current user' })
-  @Authorized()
   async userLogout(@Ctx() { res, user }: Context) {
-    const { username } = user!;
-
-    debugLog('👾 UserLogout', { username });
+    if (user) {
+      debugLog('👾 UserLogout', { username: user.username });
+    }
 
     Auth.writeRefreshToken(res);
 
-    debugLog(`✅ User logged out successfully`, { username });
+    if (user) {
+      debugLog(`✅ User logged out successfully`, { username: user.username });
+    }
 
     return true;
   }
