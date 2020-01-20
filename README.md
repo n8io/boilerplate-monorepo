@@ -1,5 +1,7 @@
 # @boilerplate-monorepo
 
+[![CircleCI](https://circleci.com/gh/n8io/boilerplate-monorepo/tree/master.svg?style=svg)](https://circleci.com/gh/n8io/boilerplate-monorepo/tree/master)
+
 A monorepo setup for winning
 
 <img src="screenshot.png"/>
