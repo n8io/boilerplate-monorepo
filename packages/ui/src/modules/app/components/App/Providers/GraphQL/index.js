@@ -4,9 +4,13 @@ import React from 'react';
 import { cache } from './cache';
 import { link } from './link';
 
+const fetchOptions = {
+  credentials: 'include',
+};
+
 const client = new ApolloClient({
   cache,
-  credentials: 'include', // When enabled ('include') we will pass cookies to the server
+  fetchOptions,
   link,
 });
 

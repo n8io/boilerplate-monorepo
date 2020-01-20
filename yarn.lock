@@ -3059,13 +3059,6 @@
   resolved "https://registry.npmjs.org/@types/cuid/-/cuid-1.3.0.tgz#20b0e00ca555df564866bc52d2e251bf90c88db7"
   integrity sha1-ILDgDKVV31ZIZrxS0uJRv5DIjbc=
 
-"@types/date-fns@^2.6.0":
-  version "2.6.0"
-  resolved "https://registry.npmjs.org/@types/date-fns/-/date-fns-2.6.0.tgz#b062ca46562002909be0c63a6467ed173136acc1"
-  integrity sha1-sGLKRlYgApCb4MY6ZGftFzE2rME=
-  dependencies:
-    date-fns "*"
-
 "@types/debounce@1.2.0":
   version "1.2.0"
   resolved "https://registry.npmjs.org/@types/debounce/-/debounce-1.2.0.tgz#9ee99259f41018c640b3929e1bb32c3dcecdb192"
@@ -3124,13 +3117,6 @@
     "@types/koa" "*"
     graphql "^14.5.3"
 
-"@types/graphql@^14.5.0":
-  version "14.5.0"
-  resolved "https://registry.npmjs.org/@types/graphql/-/graphql-14.5.0.tgz#a545fb3bc8013a3547cf2f07f5e13a33642b75d6"
-  integrity sha512-MOkzsEp1Jk5bXuAsHsUi6BVv0zCO+7/2PTiZMXWDSsMXvNU6w/PLMQT2vHn8hy2i0JqojPz1Sz6rsFjHtsU0lA==
-  dependencies:
-    graphql "*"
-
 "@types/http-assert@*":
   version "1.5.1"
   resolved "https://registry.npmjs.org/@types/http-assert/-/http-assert-1.5.1.tgz#d775e93630c2469c2f980fc27e3143240335db3b"
@@ -3177,6 +3163,11 @@
   integrity sha512-v55iKItGvKw5AD1tMn9/W257GbvNQhUskozvaD4EWPyc61qZ7ri2Fgm4/8ra7OR+pq8EEialVPYkyofX1b8alQ==
   dependencies:
     "@types/node" "*"
+
+"@types/jwt-decode@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.npmjs.org/@types/jwt-decode/-/jwt-decode-2.2.1.tgz#afdf5c527fcfccbd4009b5fd02d1e18241f2d2f2"
+  integrity sha512-aWw2YTtAdT7CskFyxEX2K21/zSDStuf/ikI3yBqmwpwJF0pS+/IX5DWv+1UFffZIbruP6cnT9/LAJV1gFwAT1A==
 
 "@types/keygrip@*":
   version "1.0.2"
@@ -4057,7 +4048,7 @@ apollo-link-context@^1.0.9:
     apollo-link "^1.2.13"
     tslib "^1.9.3"
 
-apollo-link-error@^1.1.1:
+apollo-link-error@^1.1.1, apollo-link-error@^1.1.12:
   version "1.1.12"
   resolved "https://registry.npmjs.org/apollo-link-error/-/apollo-link-error-1.1.12.tgz#e24487bb3c30af0654047611cda87038afbacbf9"
   integrity sha512-psNmHyuy3valGikt/XHJfe0pKJnRX19tLLs6P6EHRxg+6q6JMXNVLYPaQBkL0FkwdTCB0cbFJAGRYCBviG8TDA==
@@ -6614,15 +6605,15 @@ data-urls@^1.0.0, data-urls@^1.1.0:
     whatwg-mimetype "^2.2.0"
     whatwg-url "^7.0.0"
 
-date-fns@*, date-fns@^2.8.1:
-  version "2.9.0"
-  resolved "https://registry.npmjs.org/date-fns/-/date-fns-2.9.0.tgz#d0b175a5c37ed5f17b97e2272bbc1fa5aec677d2"
-  integrity sha512-khbFLu/MlzLjEzy9Gh8oY1hNt/Dvxw3J6Rbc28cVoYWQaC1S3YI4xwkF9ZWcjDLscbZlY9hISMr66RFzZagLsA==
-
 date-fns@^1.27.2:
   version "1.30.1"
   resolved "https://registry.npmjs.org/date-fns/-/date-fns-1.30.1.tgz#2e71bf0b119153dbb4cc4e88d9ea5acfb50dc05c"
   integrity sha512-hBSVCvSmWC+QypYObzwGOd9wqdDpOt+0wl0KbU+R+uuZBS1jN8VsD1ss3irQDknRj5NvxiTF6oj/nDRnN/UQNw==
+
+date-fns@^2.8.1:
+  version "2.9.0"
+  resolved "https://registry.npmjs.org/date-fns/-/date-fns-2.9.0.tgz#d0b175a5c37ed5f17b97e2272bbc1fa5aec677d2"
+  integrity sha512-khbFLu/MlzLjEzy9Gh8oY1hNt/Dvxw3J6Rbc28cVoYWQaC1S3YI4xwkF9ZWcjDLscbZlY9hISMr66RFzZagLsA==
 
 dateformat@^3.0.0:
   version "3.0.3"
@@ -8917,7 +8908,7 @@ graphql-upload@^8.0.2:
     http-errors "^1.7.3"
     object-path "^0.11.4"
 
-graphql@*, "graphql@14.0.2 - 14.2.0 || ^14.3.1", graphql@^14.5.3, graphql@^14.5.8:
+"graphql@14.0.2 - 14.2.0 || ^14.3.1", graphql@^14.5.3, graphql@^14.5.8:
   version "14.5.8"
   resolved "https://registry.npmjs.org/graphql/-/graphql-14.5.8.tgz#504f3d3114cb9a0a3f359bbbcf38d9e5bf6a6b3c"
   integrity sha512-MMwmi0zlVLQKLdGiMfWkgQD7dY/TUKt4L+zgJ/aR0Howebod3aNgP5JkgvAULiR2HPVZaP2VEElqtdidHweLkg==
