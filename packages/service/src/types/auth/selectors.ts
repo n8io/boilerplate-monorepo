@@ -20,6 +20,7 @@ import { Route } from 'types/route';
 import { UserContext } from 'types/userContext';
 import { UserRole } from 'types/userRole';
 import { Enumeration } from './typedef';
+import { logFactory } from 'log/logFactory';
 
 const isPast = (date: Date) => isAfter(new Date(), date);
 
@@ -65,6 +66,10 @@ const decryptRefreshToken = (token: string): RefreshToken =>
   ) as RefreshToken;
 
 const readAccessToken = (req: Request): UserContext | null => {
+  const debugLog = logFactory({
+    method: 'readRefreshToken',
+    module: 'auth',
+  });
   const bearerToken = req.headers[Enumeration.AUTHORIZATION_HEADER];
 
   if (!bearerToken) {
@@ -77,7 +82,7 @@ const readAccessToken = (req: Request): UserContext | null => {
     return decryptAccessToken(token);
   } catch (error) {
     if (error instanceof TokenExpiredError) {
-      log.error(InternalErrorMessage.ACCESS_TOKEN_EXPIRED);
+      debugLog('📆 Access token expired');
     } else if (error instanceof JsonWebTokenError) {
       log.error(InternalErrorMessage.ACCESS_TOKEN_READ_ISSUE, error.message);
     } else {
@@ -107,6 +112,10 @@ const readRefreshToken = (req: Request) => {
 };
 
 const writeRefreshToken = (res: Response, user?: User) => {
+  const debugLog = logFactory({
+    method: 'writeRefreshToken',
+    module: 'auth',
+  });
   const maxAge = ms(process.env.REFRESH_TOKEN_EXPIRY as string);
   const options: CookieOptions = {
     httpOnly: true,
@@ -116,7 +125,7 @@ const writeRefreshToken = (res: Response, user?: User) => {
   };
 
   if (!user) {
-    log.info('Blanking refresh token cookie value');
+    debugLog('🔥 Removing refresh token cookie value');
     res.cookie(Enumeration.JWT_REFRESH_TOKEN_COOKIE_NAME, '', options);
 
     return res;
