@@ -45,6 +45,7 @@
     "@sentry/browser": "^5.6.3",
     "@sentry/types": "^5.7.1",
     "apollo-link-error": "^1.1.12",
+    "apollo-link-retry": "^2.2.15",
     "change-case": "^3.1.0",
     "gravatar": "^1.8.0",
     "i18next": "^17.0.11",
