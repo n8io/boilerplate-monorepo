@@ -14,6 +14,24 @@ services:
       - ./.tmp/db/data:/var/lib/postgresql/data
     restart: unless-stopped
 
+  cache:
+    command: ['redis-server', '--appendonly', 'yes']
+    container_name: cache
+    image: redis:5.0.7-alpine
+    ports:
+      - 6379:6379
+    volumes:
+      - ./.tmp/cache/data:/data
+
+  cache-ui:
+    container_name: cache-ui
+    image: rediscommander/redis-commander:latest
+    restart: always
+    environment:
+      - REDIS_HOSTS=local:cache:6379
+    ports:
+      - 8081:8081
+
   ui:
     container_name: ui
     build:
@@ -35,6 +53,7 @@ services:
     environment:
       - TYPEORM_HOST=db
     depends_on:
+      - cache
       - db
     volumes:
       - .:/app
