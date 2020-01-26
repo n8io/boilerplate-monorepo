@@ -1,3 +1,4 @@
+import { FetchPolicy } from '@boilerplate-monorepo/common';
 import React from 'react';
 import * as UseMutationHooks from 'shared/graphql/mutation/useUserSelfUpdate';
 import * as UseQueryHooks from 'shared/graphql/query/useUserSelf';
@@ -22,7 +23,11 @@ describe('<Profile/>', () => {
       { data: true, loading: false },
     ]);
 
-    td.when(useUserSelf()).thenReturn({
+    td.when(
+      useUserSelf({
+        fetchPolicy: FetchPolicy.CACHE_AND_NETWORK,
+      })
+    ).thenReturn({
       data: {
         email: 'EMAIL@EMAIL.EMAIL',
         id: 'ID',

@@ -1,3 +1,4 @@
+import { FetchPolicy } from '@boilerplate-monorepo/common';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
@@ -18,7 +19,9 @@ const Profile = () => {
     namespace: 'profile',
   });
   const history = useHistory();
-  const { data, error, loading } = useUserSelf();
+  const { data, loading } = useUserSelf({
+    fetchPolicy: FetchPolicy.CACHE_AND_NETWORK,
+  });
   const [userSelfUpdate, { loading: isSubmitting }] = useUserSelfUpdate();
   const { register, handleSubmit, errors } = useForm();
 
@@ -28,7 +31,7 @@ const Profile = () => {
     history.push(Route.DASHBOARD.path);
   };
 
-  if (loading || error) {
+  if (loading && !data) {
     return <Loader />;
   }
 
