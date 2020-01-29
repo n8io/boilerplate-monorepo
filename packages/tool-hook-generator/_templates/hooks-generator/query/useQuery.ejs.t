@@ -9,8 +9,8 @@ import { gql } from '@apollo/client';
 import { useQuery } from '../useQuery';
 
 export const <%= constant %> = gql`
-  query <%= camelName %> {
-    <%= camelName %><%= h.toTypeFields(camelName) %>
+  query <%= camelName %><%= h.toArgDeclarations(camelName) %> {
+    <%= camelName %><%= h.toArgs(camelName) %><%= h.toTypeFields(camelName) %>
   }
 `;
 
