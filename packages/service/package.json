@@ -19,6 +19,7 @@
     "start:prod": "node -r ts-node/register -r tsconfig-paths/register dist/index.js dist"
   },
   "dependencies": {
+    "@types/ioredis": "^4.14.6",
     "apollo-server-cache-redis": "^1.1.5",
     "apollo-server-express": "^2.9.15",
     "bcryptjs": "^2.4.3",
