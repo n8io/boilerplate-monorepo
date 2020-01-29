@@ -2,8 +2,8 @@ import { gql } from '@apollo/client';
 import { useQuery } from '../useQuery';
 
 export const QUERY_USERS = gql`
-  query users {
-    users {
+  query users($input: UsersInput!) {
+    users(input: $input) {
       edges
       pageInfo
     }
