@@ -7,7 +7,7 @@ const options = {
   port: toNumber(process.env.REDIS_PORT) || 6379,
 };
 
-let client: RedisCache | null = null;
+let client: RedisCache | undefined = undefined;
 
 const makeCache = () => {
   if (!client) {

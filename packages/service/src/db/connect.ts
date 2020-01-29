@@ -15,11 +15,13 @@ const wait = (numberOfSeconds: number = 1) =>
 
 let attempts: number = 1;
 
-const tryToConnect = async (overrides: any) => {
+const tryToConnect = async (currentConnection: Connection | undefined) => {
+  if (currentConnection && currentConnection.isConnected)
+    return currentConnection;
+
   const connectionOptions = await getConnectionOptions();
   const options: any = {
     ...connectionOptions,
-    ...overrides,
     namingStrategy: new SnakeNamingStrategy(),
   };
 
@@ -34,16 +36,16 @@ const tryToConnect = async (overrides: any) => {
     attempts = attempts + 1;
 
     debugLog(`🔌 Attempt #${attempts} to connect to the database...`);
-    connection = await tryToConnect(overrides);
+    connection = await tryToConnect(currentConnection);
   }
 
   return connection;
 };
 
-const connect = (overrides?: any) => {
+const connect = (currentConnection: Connection | undefined) => {
   debugLog('⏳ Establishing connection to the database...');
 
-  return tryToConnect(overrides);
+  return tryToConnect(currentConnection);
 };
 
 export { connect };
