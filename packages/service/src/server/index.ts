@@ -1,13 +1,15 @@
 import { ApolloServer } from 'apollo-server-express';
 import { Express } from 'express';
 import { middleware as context } from 'types/context';
-import { makeCache } from './cache';
-import { makeSchema } from './schema';
 import { formatError } from './formatError';
+import { GraphQLSchema } from 'graphql';
+import { RedisCache } from 'apollo-server-cache-redis';
 
-const makeServer = async (app: Express) => {
-  const cache = makeCache();
-  const schema = await makeSchema();
+const makeServer = async (
+  app: Express,
+  schema: GraphQLSchema,
+  cache: RedisCache
+) => {
   const server = new ApolloServer({
     cache,
     context,
