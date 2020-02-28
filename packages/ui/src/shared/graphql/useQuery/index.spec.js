@@ -6,8 +6,10 @@ const { gql } = ApolloClient;
 describe('useQuery', () => {
   const options = {};
   const query = gql`
-    query QUERY {
-      QUERY
+    query userSelf {
+      userSelf {
+        id
+      }
     }
   `;
   let useQueryApollo = null;

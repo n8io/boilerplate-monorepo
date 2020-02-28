@@ -6,8 +6,8 @@ const { gql } = ApolloClient;
 describe('useMutation', () => {
   const options = {};
   const mutation = gql`
-    mutation MUTATION {
-      MUTATION
+    mutation userLogin($input: UserLoginInput!) {
+      userLogin(input: $input)
     }
   `;
   let useMutationApollo = null;
