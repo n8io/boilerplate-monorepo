@@ -13,6 +13,11 @@ export const availableLanguages = {
 
 const defaultLanguage = config.isDevelopment ? LANG_KEY : 'en';
 
+const missingKeyHandler = (_, namespace, key) =>
+  config.isDevelopment &&
+  // eslint-disable-next-line no-console
+  console.error(`🌐 Missing translation: ${namespace}.${key}`);
+
 export const initializeTranslations = () =>
   i18n
     .use(backend)
@@ -25,8 +30,10 @@ export const initializeTranslations = () =>
         escapeValue: false,
       },
       lng: defaultLanguage,
+      missingKeyHandler,
       ns: I18N_DEFAULT_NAMESPACE,
       react: {
         wait: true,
       },
+      saveMissing: config.isDevelopment,
     });
