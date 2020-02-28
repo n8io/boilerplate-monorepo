@@ -41,7 +41,7 @@ git clone git@github.com:n8io/boilerplate-monorepo.git
 )
 
 # 3. 🌱 Install dependencies
-yarn boostrap
+yarn bootstrap
 ```
 
 ## 🤓 Development Experience
@@ -54,19 +54,19 @@ This is the recommended path for `*nix` based operating systems.
 
 ```bash
 # Start all the things!
-yarn start # 👍👌👏🤜🤛
+yarn start # 👏🤜🤛🍾🥳
 
 # 👆 The above is the same as...
 # 👇 starting them all individually below
 
 # Start the db instance
-yarn start:db # `yarn stop:db` to stop
+yarn start:dev:db # `yarn stop:db` to stop
 
 # Start the service
-yarn start:server # Cmd/Ctrl + C to stop
+yarn start:dev:server # Cmd/Ctrl+C to stop
 
 # Start the ui
-yarn start:ui # Cmd/Ctrl + C to stop
+yarn start:dev:ui # Cmd/Ctrl+C to stop
 ```
 
 ### 🐳 Dockerized
