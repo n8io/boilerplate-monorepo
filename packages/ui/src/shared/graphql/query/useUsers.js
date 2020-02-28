@@ -4,8 +4,19 @@ import { useQuery } from '../useQuery';
 export const QUERY_USERS = gql`
   query users($input: UsersInput!) {
     users(input: $input) {
-      edges
-      pageInfo
+      edges {
+        cursor
+        node {
+          id
+          email
+          role
+          username
+        }
+      }
+      pageInfo {
+        endCursor
+        hasNextPage
+      }
     }
   }
 `;
