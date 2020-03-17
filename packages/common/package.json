@@ -16,7 +16,8 @@
   "dependencies": {
     "es6-error": "^4.1.1",
     "prop-types": "^15.7.2",
-    "ramda": "^0.26.1"
+    "ramda": "^0.26.1",
+    "yup": "^0.28.3"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",

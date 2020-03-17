@@ -1,6 +1,7 @@
 export const Enumeration = {
   BLACK: '#212121ff',
   ERROR: '#db0000ff',
+  ERROR_DARK: '#f24d4dff',
   ERROR_LIGHT: '#ffe8e8ff',
   INFO: '#4685e5ff',
   PRIMARY: '#6d4baaff',

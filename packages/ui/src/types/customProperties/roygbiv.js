@@ -3,6 +3,7 @@ import { toCustomProperties } from './utils/customProperty';
 
 const colorTypes = {
   COLOR_ERROR: Color.ERROR,
+  COLOR_ERROR_DARK: Color.ERROR_DARK,
   COLOR_ERROR_LIGHT: Color.ERROR_LIGHT,
   COLOR_INFO: Color.INFO,
   COLOR_PRIMARY: Color.PRIMARY,

@@ -3,6 +3,7 @@ export { Breakpoint } from './src/types/breakpoint';
 export { Color } from './src/types/color';
 export { DisplayMode } from './src/types/displayMode';
 export { Font } from './src/types/font';
+export { Input } from './src/types/input';
 export { LocalStorage } from './src/types/localStorage';
 export { Modality } from './src/types/modality';
 export { Site } from './src/types/site';

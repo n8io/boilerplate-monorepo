@@ -29,6 +29,10 @@ export class UserSelfResponse {
   id: string;
   @Field({ description: `The logged in user's unique email` })
   email: string;
+  @Field({ description: `The logged in user's family name` })
+  familyName: string;
+  @Field({ description: `The logged in user's given name` })
+  givenName: string;
   @Field({ description: `The logged in user's authorization level` })
   role: UserRole;
   @Field({ description: `The logged in user's unique username` })
