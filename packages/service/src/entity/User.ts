@@ -23,6 +23,16 @@ export class User extends BaseEntity {
   @Index({ unique: true })
   username: string;
 
+  @Column()
+  @Field({ description: `The user's given name` })
+  @Index({ unique: false })
+  givenName: string;
+
+  @Column()
+  @Field({ description: `The user's family name` })
+  @Index({ unique: false })
+  familyName: string;
+
   @Authorized([UserRole.ADMIN])
   @Column()
   @Field({ description: `The user's unique email` })
@@ -41,6 +51,7 @@ export class User extends BaseEntity {
     enum: UserRole,
     default: UserRole.USER,
   })
+
   @Field({ description: `The user's authorization level` })
   role: UserRole;
 

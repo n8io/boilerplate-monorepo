@@ -1,3 +1,4 @@
+import { Utils } from '@boilerplate-monorepo/common';
 import { A11y } from '@boilerplate-monorepo/ui-common';
 import { bool, func, node, string } from 'prop-types';
 import React from 'react';
@@ -100,6 +101,7 @@ Button.defaultProps = {
   disabled: false,
   isAutoWidth: false,
   label: undefined,
+  onClick: Utils.noop,
   size: Size.DEFAULT,
   type: Type.BUTTON,
 };
@@ -115,7 +117,7 @@ Button.propTypes = {
 
     return new Error('The `label` prop is required when no text is set');
   },
-  onClick: func.isRequired,
+  onClick: func,
   size: Size.propTypes,
   text: ({ children, text }) => {
     if (children || text) return undefined;

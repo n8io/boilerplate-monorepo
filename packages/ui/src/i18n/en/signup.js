@@ -1,5 +1,4 @@
 export const signup = {
-  signup: {
-    title: 'Sign Up',
-  },
+  confirmPassword: 'Confirm password',
+  title: 'Sign Up',
 };

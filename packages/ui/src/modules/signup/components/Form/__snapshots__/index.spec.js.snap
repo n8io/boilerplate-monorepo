@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Form/> renders login page 1`] = `
+<x-formcontext
+  errors="[object Object]"
+  formstate="[object Object]"
+>
+  <form>
+    <x-input
+      label="t(username)"
+      max="50"
+      min="4"
+      name="username"
+      pattern="/^[A-Za-z0-9-_]+$/u"
+      required="true"
+      type="text"
+    />
+    <x-input
+      label="t(emailAddress)"
+      max="250"
+      min="3"
+      name="email"
+      required="true"
+      type="text"
+    />
+    <x-input
+      label="t(givenName)"
+      max="50"
+      min="2"
+      name="givenName"
+      required="true"
+      type="text"
+    />
+    <x-input
+      label="t(familyName)"
+      max="50"
+      min="2"
+      name="familyName"
+      required="true"
+      type="text"
+    />
+    <x-input
+      label="t(password)"
+      min="8"
+      name="password"
+      pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\\d)(?=.*[#$^+=!*()@%&]).{1,}$/u"
+      required="true"
+      type="text"
+    />
+    <x-input
+      label="t(confirmPassword)"
+      min="8"
+      name="confirmPassword"
+      pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\\d)(?=.*[#$^+=!*()@%&]).{1,}$/u"
+      required="true"
+      type="text"
+    />
+    <x-button
+      context="PRIMARY"
+      disabled="false"
+      isautowidth="true"
+      text="t(title)"
+      type="submit"
+    />
+  </form>
+</x-formcontext>
+`;

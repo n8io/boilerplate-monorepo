@@ -5,6 +5,8 @@ export const QUERY_USER_SELF = gql`
   query userSelf {
     userSelf {
       email
+      familyName
+      givenName
       id
       role
       username

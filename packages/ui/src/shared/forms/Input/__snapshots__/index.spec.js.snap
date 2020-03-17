@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Input/> renders properly 1`] = `
+<label
+  class="Input__StyledLabel-sc-99sv4v-0 cuislh"
+  for="NAME"
+>
+  <div
+    class="Input__StyledInputLabel-sc-99sv4v-1 hsohiX"
+  >
+    LABEL
+  </div>
+  <input
+    aria-invalid="false"
+    aria-label="LABEL"
+    class="Input__StyledInput-sc-99sv4v-2 bqnvIx"
+    id="NAME"
+    name="NAME"
+    type="text"
+  />
+  <x-validationerror
+    message="t(undefined, {})"
+  />
+</label>
+`;

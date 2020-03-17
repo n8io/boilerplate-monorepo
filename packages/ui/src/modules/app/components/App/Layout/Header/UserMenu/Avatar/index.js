@@ -71,12 +71,12 @@ const MenuItemLabel = styled.span`
 const MeHandle = ({ data, loading, t }) => {
   if (loading) return <Loader />;
 
-  const { email, username } = data;
+  const { email, givenName } = data;
   const hash = url(email, { d: 'identicon', r: 'G', s: 30 });
 
   return (
     <>
-      <StyledMuted>{username}</StyledMuted>
+      <StyledMuted>{givenName}</StyledMuted>
       <Image alt={t('avatarForEmail', { email })} src={hash} />
     </>
   );

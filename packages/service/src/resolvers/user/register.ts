@@ -22,6 +22,12 @@ const REGISTER_USER_INPUT_DESCRIPTION = 'The register user input';
 
 @InputType({ description: REGISTER_USER_INPUT_DESCRIPTION })
 class UserRegisterInput {
+  @Field({ description: `The new user's given name` })
+  givenName: string;
+
+  @Field({ description: `The new user's family name` })
+  familyName: string;
+
   @Field({ description: `The new user's email` })
   email: string;
 
@@ -42,13 +48,15 @@ export class UserRegister {
     @Arg('input', { description: REGISTER_USER_INPUT_DESCRIPTION })
     input: UserRegisterInput
   ) {
-    const { password: clearTextPassword, email, role, username } = input;
+    const { email, familyName, givenName, password: clearTextPassword, role, username } = input;
     const salt = await PasswordSalt.generate();
     const passwordHash = await hash(clearTextPassword, salt);
     let user;
 
     debugLog('👾 UserRegister', {
       email,
+      familyName,
+      givenName,
       password: '*** redacted ***',
       role,
       username,
@@ -81,6 +89,8 @@ export class UserRegister {
       await User.insert({
         id,
         email,
+        familyName,
+        givenName,
         passwordHash,
         role,
         username,
@@ -89,6 +99,8 @@ export class UserRegister {
       log.error(InternalErrorMessage.FAILED_TO_REGISTER_USER, {
         email,
         error,
+        familyName,
+        givenName,
         mutation: this.userRegister.name,
         username,
       });

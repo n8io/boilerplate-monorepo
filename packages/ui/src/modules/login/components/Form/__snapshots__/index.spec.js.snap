@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Form/> renders login page 1`] = `
+<x-formcontext
+  errors="[object Object]"
+  formstate="[object Object]"
+>
+  <form>
+    <x-input
+      label="t(username)"
+      max="50"
+      min="4"
+      name="username"
+      pattern="/^[A-Za-z0-9-_]+$/u"
+      required="true"
+      type="text"
+    />
+    <x-input
+      label="t(password)"
+      min="8"
+      name="password"
+      pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\\d)(?=.*[#$^+=!*()@%&]).{1,}$/u"
+      required="true"
+      type="text"
+    />
+    <x-button
+      context="PRIMARY"
+      disabled="false"
+      isautowidth="true"
+      text="t(logout)"
+      type="submit"
+    />
+  </form>
+</x-formcontext>
+`;
