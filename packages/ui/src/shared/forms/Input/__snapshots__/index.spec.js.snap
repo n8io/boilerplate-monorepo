@@ -16,6 +16,7 @@ exports[`<Input/> renders properly 1`] = `
     class="Input__StyledInput-sc-99sv4v-2 bqnvIx"
     id="NAME"
     name="NAME"
+    placeholder="LABEL"
     type="text"
   />
   <x-validationerror

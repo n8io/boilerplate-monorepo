@@ -6,13 +6,14 @@ import {
   ErrorKeys as UserErrorKeys,
   REGEX as USERNAME_REGEX,
 } from '../../constants/user';
+import { regexToInputPattern } from '../utils/regexToInputPattern';
 import { Validation } from '../validation';
 
 const { object, ref, string } = Validation;
 
 const password = {
   min: 8,
-  pattern: STRONG_PASSWORD_REGEX,
+  pattern: regexToInputPattern(STRONG_PASSWORD_REGEX),
   required: true,
 };
 
@@ -37,7 +38,7 @@ const Limits = {
   username: {
     max: 50,
     min: 4,
-    pattern: USERNAME_REGEX,
+    pattern: regexToInputPattern(USERNAME_REGEX),
     required: true,
   },
 };

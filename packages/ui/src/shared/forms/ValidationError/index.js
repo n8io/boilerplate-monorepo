@@ -5,6 +5,7 @@ import { CustomProperty } from 'types/customProperties';
 import { styles as themeStyles } from './theme';
 
 const StyledError = styled.div`
+  font-size: calc(0.875 * ${CustomProperty.BASE_UNIT});
   margin-top: calc(0.25 * ${CustomProperty.BASE_UNIT});
 
   ${themeStyles}
