@@ -1,9 +1,9 @@
 import { UserRegisterInput } from '@boilerplate-monorepo/common';
-import { Input as InputType } from '@boilerplate-monorepo/ui-common';
 import React from 'react';
 import { FormContext, useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { Button, Context } from 'shared/Button';
+import { PasswordInput } from 'shared/forms/PasswordInput';
 import { TextInput } from 'shared/forms/TextInput';
 import { useUserRegister } from 'shared/graphql';
 import { useTranslate } from 'shared/useTranslate';
@@ -50,6 +50,7 @@ const Form = () => {
           {...UserRegisterInput.Limits.username}
           label={t('username')}
           name="username"
+          patternDescription={t('DOES_NOT_MEET_USERNAME_REQUIREMENTS')}
         />
         <TextInput
           {...UserRegisterInput.Limits.email}
@@ -66,19 +67,19 @@ const Form = () => {
           label={t('familyName')}
           name="familyName"
         />
-        <TextInput
+        <PasswordInput
           {...UserRegisterInput.Limits.password}
           formatError={t}
           label={t('password')}
           name="password"
-          type={InputType.PASSWORD}
+          patternDescription={t('DOES_NOT_MEET_PASSWORD_REQUIREMENTS')}
         />
-        <TextInput
+        <PasswordInput
           {...UserRegisterInput.Limits.confirmPassword}
           formatError={t}
           label={t('confirmPassword')}
           name="confirmPassword"
-          type={InputType.PASSWORD}
+          patternDescription={t('DOES_NOT_MEET_PASSWORD_REQUIREMENTS')}
         />
         <Button
           context={PRIMARY}

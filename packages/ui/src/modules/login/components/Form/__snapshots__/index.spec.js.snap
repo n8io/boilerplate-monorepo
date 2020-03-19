@@ -11,7 +11,7 @@ exports[`<Form/> renders login page 1`] = `
       max="50"
       min="4"
       name="username"
-      pattern="/^[A-Za-z0-9-_]+$/u"
+      pattern="[A-Za-z0-9-_]{4,}"
       required="true"
       type="text"
     />
@@ -19,9 +19,9 @@ exports[`<Form/> renders login page 1`] = `
       label="t(password)"
       min="8"
       name="password"
-      pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\\d)(?=.*[#$^+=!*()@%&]).{1,}$/u"
+      pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\\d)(?=.*[#$^+=!*()@%&]).{8,}$"
       required="true"
-      type="text"
+      type="password"
     />
     <x-button
       context="PRIMARY"

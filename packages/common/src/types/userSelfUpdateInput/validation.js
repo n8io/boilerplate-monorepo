@@ -1,7 +1,4 @@
-import {
-  ErrorKeys as PasswordErrorKeys,
-  REGEX as STRONG_PASSWORD_REGEX,
-} from '../../constants/password';
+import { ErrorKeys as PasswordErrorKeys } from '../../constants/password';
 import {
   ErrorKeys as UserErrorKeys,
   REGEX as USERNAME_REGEX,
@@ -12,9 +9,9 @@ import { Validation } from '../validation';
 const { object, string } = Validation;
 
 const Limits = {
-  password: {
-    min: 8,
-    pattern: regexToInputPattern(STRONG_PASSWORD_REGEX),
+  email: {
+    max: 250,
+    min: 3,
     required: true,
   },
   username: {
@@ -26,14 +23,10 @@ const Limits = {
 };
 
 const validationSchema = object().shape({
-  password: string()
-    .trim()
+  email: string()
+    .email()
     .required()
-    .limits(Limits.password)
-    .matches(
-      Limits.password.pattern,
-      PasswordErrorKeys.DOES_NOT_MEET_PASSWORD_REQUIREMENTS
-    ),
+    .limits(Limits.email),
   username: string()
     .trim()
     .required()

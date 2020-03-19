@@ -11,7 +11,8 @@ exports[`<Form/> renders login page 1`] = `
       max="50"
       min="4"
       name="username"
-      pattern="/^[A-Za-z0-9-_]+$/u"
+      pattern="[A-Za-z0-9-_]{4,}"
+      patterndescription="t(DOES_NOT_MEET_USERNAME_REQUIREMENTS)"
       required="true"
       type="text"
     />
@@ -43,17 +44,19 @@ exports[`<Form/> renders login page 1`] = `
       label="t(password)"
       min="8"
       name="password"
-      pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\\d)(?=.*[#$^+=!*()@%&]).{1,}$/u"
+      pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\\d)(?=.*[#$^+=!*()@%&]).{8,}$"
+      patterndescription="t(DOES_NOT_MEET_PASSWORD_REQUIREMENTS)"
       required="true"
-      type="text"
+      type="password"
     />
     <x-input
       label="t(confirmPassword)"
       min="8"
       name="confirmPassword"
-      pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\\d)(?=.*[#$^+=!*()@%&]).{1,}$/u"
+      pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\\d)(?=.*[#$^+=!*()@%&]).{8,}$"
+      patterndescription="t(DOES_NOT_MEET_PASSWORD_REQUIREMENTS)"
       required="true"
-      type="text"
+      type="password"
     />
     <x-button
       context="PRIMARY"

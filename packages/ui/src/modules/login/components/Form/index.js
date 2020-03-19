@@ -1,9 +1,9 @@
 import { UserLoginInput } from '@boilerplate-monorepo/common';
-import { Input as InputType } from '@boilerplate-monorepo/ui-common';
 import React from 'react';
 import { FormContext, useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { Button, Context } from 'shared/Button';
+import { PasswordInput } from 'shared/forms/PasswordInput';
 import { TextInput } from 'shared/forms/TextInput';
 import { QUERY_USER_SELF, useUserLogin } from 'shared/graphql';
 import { useAuth } from 'shared/useAuth';
@@ -62,12 +62,11 @@ const Form = () => {
           label={t('username')}
           name="username"
         />
-        <TextInput
+        <PasswordInput
           {...UserLoginInput.Limits.password}
           formatError={t}
           label={t('password')}
           name="password"
-          type={InputType.PASSWORD}
         />
         <Button
           context={PRIMARY}
