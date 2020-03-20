@@ -19,6 +19,20 @@ const { NODE_ENV = PRODUCTION_PREFIX, ...envVars } = process.env;
 
 const REACT_APP_PREFIX = 'REACT_APP_';
 
+const graphqlUri = uri => {
+  if (uri) return uri;
+
+  const { location } = window;
+  const { href, protocol } = location;
+  const url = new URL(href);
+
+  url.pathname = 'graphql';
+  url.protocol = protocol;
+  url.port = 4000;
+
+  return url.href;
+};
+
 const reactVars = pipe(
   keys,
   filter(key => key.toString().startsWith(REACT_APP_PREFIX)),
@@ -33,6 +47,7 @@ const reactVars = pipe(
 
 const config = {
   ...reactVars,
+  GRAPHQL_URI: graphqlUri(reactVars.GRAPHQL_URI),
   NODE_ENV,
   copyrightYear: 2019,
   isDebug: Boolean(localStorage.getItem(LocalStorage.DEBUG)),
