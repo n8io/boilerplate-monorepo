@@ -1,10 +1,11 @@
 import { FetchPolicy, UserSelfUpdateInput } from '@boilerplate-monorepo/common';
 import React from 'react';
-import { FormContext, useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { Button, Context } from 'shared/Button';
 import { EmailInput } from 'shared/forms/EmailInput';
+import { Form as SharedForm } from 'shared/forms/Form';
 import { TextInput } from 'shared/forms/TextInput';
+import { useForm } from 'shared/forms/useForm';
 import {
   QUERY_USER_SELF,
   useUserSelf,
@@ -45,33 +46,30 @@ const Form = () => {
 
   if (loading || !self) return null;
 
-  const { handleSubmit, formState } = formProps;
-  const { dirty: isDirty, isSubmitting, isValid } = formState;
+  const { isSaveable } = formProps;
 
   return (
-    <FormContext {...formProps}>
-      <form onSubmit={handleSubmit(onSelfUpdate)}>
-        <TextInput
-          {...UserSelfUpdateInput.Limits.username}
-          disabled
-          label={t('username')}
-          name="username"
-          patternDescription={t('DOES_NOT_MEET_USERNAME_REQUIREMENTS')}
-        />
-        <EmailInput
-          {...UserSelfUpdateInput.Limits.email}
-          label={t('emailAddress')}
-          name="email"
-        />
-        <Button
-          context={PRIMARY}
-          disabled={isSubmitting || !isValid || !isDirty}
-          isAutoWidth
-          text={t('updateProfile')}
-          type="submit"
-        />
-      </form>
-    </FormContext>
+    <SharedForm {...formProps} onSubmit={onSelfUpdate}>
+      <TextInput
+        {...UserSelfUpdateInput.Limits.username}
+        disabled
+        label={t('username')}
+        name="username"
+        patternDescription={t('DOES_NOT_MEET_USERNAME_REQUIREMENTS')}
+      />
+      <EmailInput
+        {...UserSelfUpdateInput.Limits.email}
+        label={t('emailAddress')}
+        name="email"
+      />
+      <Button
+        context={PRIMARY}
+        disabled={!isSaveable}
+        isAutoWidth
+        text={t('updateProfile')}
+        type="submit"
+      />
+    </SharedForm>
   );
 };
 

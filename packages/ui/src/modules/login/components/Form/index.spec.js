@@ -4,8 +4,9 @@ import * as MutationHooks from 'shared/graphql/mutation/useUserLogin';
 import { render } from 'testHelpers';
 import { Form } from '.';
 
-jest.mock('react-hook-form');
+jest.mock('shared/forms/Form');
 jest.mock('shared/forms/Input');
+jest.mock('shared/forms/useForm');
 jest.mock('shared/Button');
 jest.mock('shared/useAuth');
 

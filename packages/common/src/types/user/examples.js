@@ -12,4 +12,4 @@ const apiExample = makeSafeExample(dbExample());
 
 const uiExample = makeSafeExample(apiExample());
 
-export { uiExample };
+export { apiExample, uiExample };
