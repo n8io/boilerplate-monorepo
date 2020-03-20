@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EmailInput/> renders properly 1`] = `
+<x-input
+  label="LABEL"
+  name="NAME"
+  type="email"
+/>
+`;
