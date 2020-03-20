@@ -1,3 +1,4 @@
+import { isNil } from 'ramda';
 import { string as YupStringSchema } from 'yup';
 import { ErrorKeys } from './errorKeys';
 
@@ -12,13 +13,15 @@ class StringSchema extends YupStringSchema {
 
   // eslint-disable-next-line complexity
   limits({ max, min }, message) {
-    if (typeof max !== 'undefined' && typeof min !== 'undefined') {
+    if (isNil(max) && isNil(min)) return this;
+
+    if (!isNil(max) && !isNil(min)) {
       const newMessage = message || ErrorKeys.RANGE_STRING_LENGTH;
 
       return this.max(max, newMessage).min(min, newMessage);
     }
 
-    if (max !== undefined) {
+    if (!isNil(max)) {
       return this.max(max, message || ErrorKeys.RANGE_STRING_LENGTH_MAX);
     }
 
