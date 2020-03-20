@@ -46,13 +46,13 @@ const Form = () => {
   const logInOutKey = isAuthenticated ? t('logout') : t('title');
 
   const formProps = useForm({
-    defaultValues: { password: '', username: '' },
-    mode: 'onChange',
+    defaultValues: UserLoginInput.initial,
+    mode: 'onBlur',
     validationSchema: UserLoginInput.validationSchema,
   });
 
   const { handleSubmit, formState } = formProps;
-  const { isSubmitting, isValid } = formState;
+  const { isSubmitting, isValid, touched: isTouched } = formState;
 
   return (
     <FormContext {...formProps}>
@@ -70,7 +70,7 @@ const Form = () => {
         />
         <Button
           context={PRIMARY}
-          disabled={isSubmitting || !isValid}
+          disabled={(isSubmitting || !isValid) && !isTouched}
           isAutoWidth
           text={logInOutKey}
           type="submit"

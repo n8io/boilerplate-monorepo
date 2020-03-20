@@ -66,7 +66,7 @@ exports[`<Profile/> renders profile page 1`] = `
               name="email"
               placeholder="t(emailAddress)"
               required=""
-              type="text"
+              type="email"
             />
             <div
               aria-live="polite"

@@ -22,7 +22,7 @@ exports[`<Form/> renders login page 1`] = `
       min="3"
       name="email"
       required="true"
-      type="text"
+      type="email"
     />
     <x-input
       label="t(givenName)"

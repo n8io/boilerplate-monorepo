@@ -14,12 +14,10 @@ const Limits = {
 const validationSchema = object().shape({
   password: string()
     .trim()
-    .required()
-    .limits(Limits.password),
+    .required(),
   username: string()
     .trim()
-    .required()
-    .limits(Limits.username),
+    .required(),
 });
 
 const isValid = validationSchema.isValid.bind(validationSchema);

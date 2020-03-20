@@ -3,6 +3,7 @@ import React from 'react';
 import { FormContext, useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { Button, Context } from 'shared/Button';
+import { EmailInput } from 'shared/forms/EmailInput';
 import { PasswordInput } from 'shared/forms/PasswordInput';
 import { TextInput } from 'shared/forms/TextInput';
 import { useUserRegister } from 'shared/graphql';
@@ -29,19 +30,13 @@ const Form = () => {
   };
 
   const formProps = useForm({
-    defaultValues: {
-      email: '',
-      familyName: '',
-      givenName: '',
-      password: '',
-      username: '',
-    },
-    mode: 'onChange',
+    defaultValues: UserRegisterInput.initial,
+    mode: 'onBlur',
     validationSchema: UserRegisterInput.validationSchema,
   });
 
   const { handleSubmit, formState } = formProps;
-  const { isSubmitting, isValid } = formState;
+  const { isSubmitting, isValid, touched: isTouched } = formState;
 
   return (
     <FormContext {...formProps}>
@@ -52,7 +47,7 @@ const Form = () => {
           name="username"
           patternDescription={t('DOES_NOT_MEET_USERNAME_REQUIREMENTS')}
         />
-        <TextInput
+        <EmailInput
           {...UserRegisterInput.Limits.email}
           label={t('emailAddress')}
           name="email"
@@ -83,7 +78,7 @@ const Form = () => {
         />
         <Button
           context={PRIMARY}
-          disabled={isSubmitting || !isValid}
+          disabled={(isSubmitting || !isValid) && !isTouched}
           isAutoWidth
           text={t('title')}
           type="submit"
