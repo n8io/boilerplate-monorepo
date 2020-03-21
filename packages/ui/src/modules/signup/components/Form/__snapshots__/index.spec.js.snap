@@ -6,6 +6,10 @@ exports[`<Form/> renders login page 1`] = `
   issaveable="true"
   istouched="false"
 >
+  <x-errornotification
+    data-testid="error-notification"
+    messagekey="signupFailed"
+  />
   <x-input
     label="t(username)"
     max="50"

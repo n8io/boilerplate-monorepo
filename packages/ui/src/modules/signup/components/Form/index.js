@@ -2,6 +2,7 @@ import { UserRegisterInput } from '@boilerplate-monorepo/common';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button, Context } from 'shared/Button';
+import { ErrorNotification } from 'shared/ErrorNotification';
 import { EmailInput } from 'shared/forms/EmailInput';
 import { Form as SharedForm } from 'shared/forms/Form';
 import { PasswordInput } from 'shared/forms/PasswordInput';
@@ -20,7 +21,7 @@ const Form = () => {
   });
 
   const history = useHistory();
-  const [mutate] = useUserRegister();
+  const [mutate, { error }] = useUserRegister();
 
   const onRegister = async input => {
     await mutate({
@@ -40,6 +41,7 @@ const Form = () => {
 
   return (
     <SharedForm {...formProps} onSubmit={onRegister}>
+      <ErrorNotification error={error} messageKey="signupFailed" t={t} />
       <TextInput
         {...UserRegisterInput.Limits.username}
         label={t('username')}

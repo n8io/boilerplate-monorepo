@@ -1,29 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Form/> renders login page 1`] = `
-<x-form
-  isdirty="false"
-  issaveable="true"
-  istouched="false"
->
-  <x-input
-    label="t(username)"
-    name="username"
-    required="true"
-    type="text"
-  />
-  <x-input
-    label="t(password)"
-    name="password"
-    required="true"
-    type="password"
-  />
-  <x-button
-    context="PRIMARY"
-    disabled="false"
-    isautowidth="true"
-    text="t(logout)"
-    type="submit"
-  />
-</x-form>
+<x-errornotification
+  data-testid="error-notification"
+  messagekey="loginFailed"
+/>
 `;

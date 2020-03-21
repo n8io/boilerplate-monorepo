@@ -4,7 +4,9 @@ import { isNullOrEmpty } from '@boilerplate-monorepo/common/src/utils/isNullOrEm
 const toExtensionCode = (errors = []) => errors[0]?.extensions?.code;
 const parseError = error => error?.message;
 
-const parseApolloError = ({ graphQLErrors }) => {
+const parseApolloError = ({ graphQLErrors, networkError }) => {
+  if (networkError?.name === 'ServerError') return 'INTERNAL_SERVER_ERROR';
+
   if (!isNullOrEmpty(graphQLErrors)) {
     const code = toExtensionCode(graphQLErrors);
 
