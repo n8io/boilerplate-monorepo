@@ -20,6 +20,10 @@ const ScreenReaderNotification = ({ children, politeness }) => (
   <Container aria-live={politeness}>{children}</Container>
 );
 
+ScreenReaderNotification.defaultProps = {
+  politeness: Politeness.POLITE,
+};
+
 ScreenReaderNotification.propTypes = {
   children: node.isRequired,
   politeness: Politeness.propTypes.isRequired,

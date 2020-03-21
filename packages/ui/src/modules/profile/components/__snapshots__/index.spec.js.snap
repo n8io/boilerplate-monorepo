@@ -18,6 +18,8 @@ exports[`<Profile/> renders profile page 1`] = `
         errors="[object Object]"
         formstate="[object Object]"
         issaveable="true"
+        issubmitting="false"
+        istouched="true"
       >
         <fieldset>
           <form>

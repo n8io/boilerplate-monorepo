@@ -6,6 +6,7 @@ export const common = {
     'Must contain at least one uppercase letter, lowercase letter, number, and special character',
   DOES_NOT_MEET_USERNAME_REQUIREMENTS:
     'Must only contain letters, numbers, dashes, and underscores',
+  GENERIC_NETWORK_ERROR: 'No internet',
   INVALID_EMAIL: 'Must be a valid email address',
   RANGE_DATE: 'Must be between {{min}} and {{max}}',
   RANGE_NUMERIC: 'Must be between {{min}} and {{max}}',

@@ -2,6 +2,7 @@ import { UserLoginInput } from '@boilerplate-monorepo/common';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button, Context } from 'shared/Button';
+import { ErrorNotification } from 'shared/ErrorNotification';
 import { Form as SharedForm } from 'shared/forms/Form';
 import { PasswordInput } from 'shared/forms/PasswordInput';
 import { TextInput } from 'shared/forms/TextInput';
@@ -22,12 +23,18 @@ const Form = () => {
   const history = useHistory();
   const { isAuthenticated, logout, updateAccessToken } = useAuth();
 
-  const [mutate] = useUserLogin({
+  const [mutate, { error }] = useUserLogin({
     refetchQueries: [{ query: QUERY_USER_SELF }],
   });
 
-  const onLogin = async values => {
-    await mutate({
+  const formProps = useForm({
+    defaultValues: UserLoginInput.initial,
+    mode: 'onBlur',
+    validationSchema: UserLoginInput.validationSchema,
+  });
+
+  const onLogin = values =>
+    mutate({
       update: (_cache, { data }) => {
         const { userLogin: accessToken } = data;
 
@@ -42,39 +49,34 @@ const Form = () => {
       },
       variables: { input: values },
     });
-  };
-
-  const logInOutKey = isAuthenticated ? t('logout') : t('title');
-
-  const formProps = useForm({
-    defaultValues: UserLoginInput.initial,
-    mode: 'onBlur',
-    validationSchema: UserLoginInput.validationSchema,
-  });
 
   const { isSaveable } = formProps;
+  const logInOutKey = isAuthenticated ? t('logout') : t('title');
 
   return (
-    <SharedForm {...formProps} onSubmit={onLogin}>
-      <TextInput
-        {...UserLoginInput.Limits.username}
-        label={t('username')}
-        name="username"
-      />
-      <PasswordInput
-        {...UserLoginInput.Limits.password}
-        formatError={t}
-        label={t('password')}
-        name="password"
-      />
-      <Button
-        context={PRIMARY}
-        disabled={!isSaveable}
-        isAutoWidth
-        text={logInOutKey}
-        type="submit"
-      />
-    </SharedForm>
+    <>
+      <ErrorNotification error={error} messageKey="loginFailed" t={t} />
+      <SharedForm {...formProps} onSubmit={onLogin}>
+        <TextInput
+          {...UserLoginInput.Limits.username}
+          label={t('username')}
+          name="username"
+        />
+        <PasswordInput
+          {...UserLoginInput.Limits.password}
+          formatError={t}
+          label={t('password')}
+          name="password"
+        />
+        <Button
+          context={PRIMARY}
+          disabled={!isSaveable}
+          isAutoWidth
+          text={logInOutKey}
+          type="submit"
+        />
+      </SharedForm>
+    </>
   );
 };
 

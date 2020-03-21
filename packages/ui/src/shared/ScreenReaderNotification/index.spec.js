@@ -9,7 +9,6 @@ describe('<ScreenReaderNotification/>', () => {
   const politeness = Politeness.POLITE;
   const defaultProps = {
     children: 'CHILDREN',
-    politeness,
   };
 
   const renderComponent = overrides =>

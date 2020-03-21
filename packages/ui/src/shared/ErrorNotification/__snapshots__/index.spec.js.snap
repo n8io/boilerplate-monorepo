@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ErrorNotification/> renders an error 1`] = `
+<x-notification
+  data-testid="notification"
+  type="ERROR"
+>
+  t(MESSAGE_KEY, {"message":"ERROR"})
+</x-notification>
+`;
