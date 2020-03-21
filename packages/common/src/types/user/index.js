@@ -1,7 +1,8 @@
-import { uiExample } from './examples';
+import { apiExample, uiExample } from './examples';
 import { propTypes } from './typedef';
 
 const User = {
+  apiExample,
   propTypes,
   uiExample,
 };

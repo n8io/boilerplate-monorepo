@@ -1,10 +1,13 @@
 import { UserRegisterInput } from '@boilerplate-monorepo/common';
 import React from 'react';
-import { FormContext, useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { Button, Context } from 'shared/Button';
+import { ErrorNotification } from 'shared/ErrorNotification';
+import { EmailInput } from 'shared/forms/EmailInput';
+import { Form as SharedForm } from 'shared/forms/Form';
 import { PasswordInput } from 'shared/forms/PasswordInput';
 import { TextInput } from 'shared/forms/TextInput';
+import { useForm } from 'shared/forms/useForm';
 import { useUserRegister } from 'shared/graphql';
 import { useTranslate } from 'shared/useTranslate';
 import { Route } from 'types/route';
@@ -18,7 +21,7 @@ const Form = () => {
   });
 
   const history = useHistory();
-  const [mutate] = useUserRegister();
+  const [mutate, { error }] = useUserRegister();
 
   const onRegister = async input => {
     await mutate({
@@ -29,67 +32,59 @@ const Form = () => {
   };
 
   const formProps = useForm({
-    defaultValues: {
-      email: '',
-      familyName: '',
-      givenName: '',
-      password: '',
-      username: '',
-    },
-    mode: 'onChange',
+    defaultValues: UserRegisterInput.initial,
+    mode: 'onBlur',
     validationSchema: UserRegisterInput.validationSchema,
   });
 
-  const { handleSubmit, formState } = formProps;
-  const { isSubmitting, isValid } = formState;
+  const { isSaveable } = formProps;
 
   return (
-    <FormContext {...formProps}>
-      <form onSubmit={handleSubmit(onRegister)}>
-        <TextInput
-          {...UserRegisterInput.Limits.username}
-          label={t('username')}
-          name="username"
-          patternDescription={t('DOES_NOT_MEET_USERNAME_REQUIREMENTS')}
-        />
-        <TextInput
-          {...UserRegisterInput.Limits.email}
-          label={t('emailAddress')}
-          name="email"
-        />
-        <TextInput
-          {...UserRegisterInput.Limits.givenName}
-          label={t('givenName')}
-          name="givenName"
-        />
-        <TextInput
-          {...UserRegisterInput.Limits.familyName}
-          label={t('familyName')}
-          name="familyName"
-        />
-        <PasswordInput
-          {...UserRegisterInput.Limits.password}
-          formatError={t}
-          label={t('password')}
-          name="password"
-          patternDescription={t('DOES_NOT_MEET_PASSWORD_REQUIREMENTS')}
-        />
-        <PasswordInput
-          {...UserRegisterInput.Limits.confirmPassword}
-          formatError={t}
-          label={t('confirmPassword')}
-          name="confirmPassword"
-          patternDescription={t('DOES_NOT_MEET_PASSWORD_REQUIREMENTS')}
-        />
-        <Button
-          context={PRIMARY}
-          disabled={isSubmitting || !isValid}
-          isAutoWidth
-          text={t('title')}
-          type="submit"
-        />
-      </form>
-    </FormContext>
+    <SharedForm {...formProps} onSubmit={onRegister}>
+      <ErrorNotification error={error} messageKey="signupFailed" t={t} />
+      <TextInput
+        {...UserRegisterInput.Limits.username}
+        label={t('username')}
+        name="username"
+        patternDescription={t('DOES_NOT_MEET_USERNAME_REQUIREMENTS')}
+      />
+      <EmailInput
+        {...UserRegisterInput.Limits.email}
+        label={t('emailAddress')}
+        name="email"
+      />
+      <TextInput
+        {...UserRegisterInput.Limits.givenName}
+        label={t('givenName')}
+        name="givenName"
+      />
+      <TextInput
+        {...UserRegisterInput.Limits.familyName}
+        label={t('familyName')}
+        name="familyName"
+      />
+      <PasswordInput
+        {...UserRegisterInput.Limits.password}
+        formatError={t}
+        label={t('password')}
+        name="password"
+        patternDescription={t('DOES_NOT_MEET_PASSWORD_REQUIREMENTS')}
+      />
+      <PasswordInput
+        {...UserRegisterInput.Limits.confirmPassword}
+        formatError={t}
+        label={t('confirmPassword')}
+        name="confirmPassword"
+        patternDescription={t('DOES_NOT_MEET_PASSWORD_REQUIREMENTS')}
+      />
+      <Button
+        context={PRIMARY}
+        disabled={!isSaveable}
+        isAutoWidth
+        text={t('title')}
+        type="submit"
+      />
+    </SharedForm>
   );
 };
 

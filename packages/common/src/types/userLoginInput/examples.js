@@ -1,7 +1,7 @@
 import { makeSafeExample } from '../utils/makeSafeExample';
 
 const apiExample = makeSafeExample({
-  password: 'Str0ngP4$$word',
+  password: 'PASSWORD',
   username: 'USERNAME',
 });
 

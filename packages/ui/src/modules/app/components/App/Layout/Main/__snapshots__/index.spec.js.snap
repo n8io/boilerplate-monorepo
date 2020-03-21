@@ -2,9 +2,12 @@
 
 exports[`<Main/> renders properly 1`] = `
 <main
-  class="Main__Container-sc-1i0e5od-0 ceqnPA"
+  class="Main__Container-sc-1i0e5od-0 kfCejp"
   role="main"
 >
+  <div
+    class="Toastify"
+  />
   <x-router />
 </main>
 `;

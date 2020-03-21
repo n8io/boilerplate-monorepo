@@ -58,6 +58,11 @@ export const styles = css`
     font-weight: bold;
   }
 
+  fieldset[disabled] {
+    filter: grayscale(100%);
+    opacity: 0.7;
+  }
+
   /* stylelint-disable-next-line order/properties-alphabetical-order */
   ${themeStyles}
 `;

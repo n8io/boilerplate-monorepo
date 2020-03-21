@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Form/> renders properly 1`] = `
+<x-formcontext
+  errors="[object Object]"
+>
+  <fieldset>
+    <form>
+      CHILDREN
+    </form>
+  </fieldset>
+</x-formcontext>
+`;

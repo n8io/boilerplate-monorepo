@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SuccessNotification/> renders a success notification 1`] = `
+<x-notification
+  data-testid="notification"
+  type="SUCCESS"
+>
+  MESSAGE
+</x-notification>
+`;

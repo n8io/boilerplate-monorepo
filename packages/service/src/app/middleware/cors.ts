@@ -1,12 +1,23 @@
 import cors, { CorsOptions } from 'cors';
+import { isNil, pipe, reject, split } from 'ramda';
 
 const toUnique = (array: (string | undefined)[]): string[] =>
   [...new Set(array)].filter(x => x) as string[];
 
+const toAllowHosts = pipe(split(','), reject(isNil));
+
+console.log(
+  toUnique([
+    ...toAllowHosts(process.env.UI_HOST_URI || ''),
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+  ])
+);
+
 const corsOptions: CorsOptions = {
   credentials: true, // <-- REQUIRED backend setting
   origin: toUnique([
-    process.env.UI_HOST_URI,
+    ...toAllowHosts(process.env.UI_HOST_URI || ''),
     'http://localhost:3000',
     'http://127.0.0.1:3000',
   ]),

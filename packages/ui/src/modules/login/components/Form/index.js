@@ -1,10 +1,12 @@
 import { UserLoginInput } from '@boilerplate-monorepo/common';
 import React from 'react';
-import { FormContext, useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { Button, Context } from 'shared/Button';
+import { ErrorNotification } from 'shared/ErrorNotification';
+import { Form as SharedForm } from 'shared/forms/Form';
 import { PasswordInput } from 'shared/forms/PasswordInput';
 import { TextInput } from 'shared/forms/TextInput';
+import { useForm } from 'shared/forms/useForm';
 import { QUERY_USER_SELF, useUserLogin } from 'shared/graphql';
 import { useAuth } from 'shared/useAuth';
 import { useTranslate } from 'shared/useTranslate';
@@ -21,12 +23,18 @@ const Form = () => {
   const history = useHistory();
   const { isAuthenticated, logout, updateAccessToken } = useAuth();
 
-  const [mutate] = useUserLogin({
+  const [mutate, { error }] = useUserLogin({
     refetchQueries: [{ query: QUERY_USER_SELF }],
   });
 
-  const onLogin = async values => {
-    await mutate({
+  const formProps = useForm({
+    defaultValues: UserLoginInput.initial,
+    mode: 'onBlur',
+    validationSchema: UserLoginInput.validationSchema,
+  });
+
+  const onLogin = values =>
+    mutate({
       update: (_cache, { data }) => {
         const { userLogin: accessToken } = data;
 
@@ -41,22 +49,14 @@ const Form = () => {
       },
       variables: { input: values },
     });
-  };
 
+  const { isSaveable } = formProps;
   const logInOutKey = isAuthenticated ? t('logout') : t('title');
 
-  const formProps = useForm({
-    defaultValues: { password: '', username: '' },
-    mode: 'onChange',
-    validationSchema: UserLoginInput.validationSchema,
-  });
-
-  const { handleSubmit, formState } = formProps;
-  const { isSubmitting, isValid } = formState;
-
   return (
-    <FormContext {...formProps}>
-      <form onSubmit={handleSubmit(onLogin)}>
+    <>
+      <ErrorNotification error={error} messageKey="loginFailed" t={t} />
+      <SharedForm {...formProps} onSubmit={onLogin}>
         <TextInput
           {...UserLoginInput.Limits.username}
           label={t('username')}
@@ -70,13 +70,13 @@ const Form = () => {
         />
         <Button
           context={PRIMARY}
-          disabled={isSubmitting || !isValid}
+          disabled={!isSaveable}
           isAutoWidth
           text={logInOutKey}
           type="submit"
         />
-      </form>
-    </FormContext>
+      </SharedForm>
+    </>
   );
 };
 

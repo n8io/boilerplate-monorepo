@@ -8,6 +8,7 @@ import { SkipToContentLink } from './SkipToContentLink';
 import { UserMenu } from './UserMenu';
 
 const { Role } = A11y;
+
 const Container = styled.div`
   align-items: center;
   display: grid;

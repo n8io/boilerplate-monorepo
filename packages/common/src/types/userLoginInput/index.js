@@ -1,11 +1,12 @@
+import { initial } from './creation';
 import { apiExample, uiExample } from './examples';
 import { propTypes } from './typedef';
-import { ErrorKeys, Limits, isValid, validationSchema } from './validation';
+import { Limits, isValid, validationSchema } from './validation';
 
 const UserLoginInput = {
-  ErrorKeys,
   Limits,
   apiExample,
+  initial,
   isValid,
   propTypes,
   uiExample,

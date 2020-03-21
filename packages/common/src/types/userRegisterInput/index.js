@@ -1,3 +1,4 @@
+import { initial } from './creation';
 import { apiExample, uiExample } from './examples';
 import { formToInput } from './transforms';
 import { propTypes } from './typedef';
@@ -8,6 +9,7 @@ const UserRegisterInput = {
   Limits,
   apiExample,
   formToInput,
+  initial,
   isValid,
   propTypes,
   uiExample,

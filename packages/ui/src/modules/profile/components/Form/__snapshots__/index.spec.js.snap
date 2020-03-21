@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Form/> renders login page 1`] = `
+<x-form
+  isdirty="false"
+  issaveable="true"
+  istouched="false"
+>
+  <x-input
+    disabled="true"
+    label="t(username)"
+    max="50"
+    min="4"
+    name="username"
+    pattern="[A-Za-z0-9-_]{4,}"
+    patterndescription="t(DOES_NOT_MEET_USERNAME_REQUIREMENTS)"
+    required="true"
+    type="text"
+  />
+  <x-input
+    label="t(emailAddress)"
+    max="250"
+    min="3"
+    name="email"
+    required="true"
+    type="email"
+  />
+  <x-button
+    context="PRIMARY"
+    disabled="false"
+    isautowidth="true"
+    text="t(updateProfile)"
+    type="submit"
+  />
+</x-form>
+`;
