@@ -8,7 +8,7 @@
     "yarn": "^1.19.1"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "yarn && tsc",
     "migration:cli": "ts-node -r tsconfig-paths/register \"../../node_modules/typeorm/cli.js\"",
     "migration:down": "yarn -s migration:cli migration:revert",
     "migration:gen": "typeorm migration:create --name",
