@@ -7,12 +7,22 @@ import styled from 'styled-components/macro';
 import { CustomProperty } from 'types/customProperties';
 import { LogLevelIcon } from './LogLevelIcon';
 
-const StyledIcon = styled.span`
-  margin-right: 0.5rem;
+const Container = styled.div`
+  float: left;
+  font-size: calc(0.9 * ${CustomProperty.BASE_UNIT});
+  margin: 0 calc(0.5 * ${CustomProperty.BASE_UNIT}) 0
+    calc(3.5 * ${CustomProperty.BASE_UNIT});
+  position: relative;
 `;
 
-const Container = styled.div`
-  padding: 0 calc(0.5 * ${CustomProperty.BASE_UNIT});
+const IconBackground = styled.div`
+  font-size: 6rem;
+  left: -2.5rem;
+  margin-left: calc(-3.5 * ${CustomProperty.BASE_UNIT});
+  opacity: 0.3;
+  position: absolute;
+  top: -2.5rem;
+  transform: translate(0, 0);
 `;
 
 const Notification = ({ children, type }) => {
@@ -20,9 +30,9 @@ const Notification = ({ children, type }) => {
 
   const Content = () => (
     <Container>
-      <StyledIcon>
+      <IconBackground>
         <LogLevelIcon type={type} />
-      </StyledIcon>
+      </IconBackground>
       {children}
     </Container>
   );

@@ -1,6 +1,6 @@
 import { LogLevel } from '@boilerplate-monorepo/common';
 import React from 'react';
-import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
+import { FaRegCheckCircle } from 'react-icons/fa';
 import { MdErrorOutline, MdInfoOutline, MdWarning } from 'react-icons/md';
 
 const LogLevelIcon = ({ type }) => {
@@ -10,7 +10,7 @@ const LogLevelIcon = ({ type }) => {
     case LogLevel.INFO:
       return <MdInfoOutline />;
     case LogLevel.SUCCESS:
-      return <IoMdCheckmarkCircleOutline />;
+      return <FaRegCheckCircle />;
     case LogLevel.WARN:
       return <MdWarning />;
     default:
