@@ -1,13 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ToggleButton/> renders properly 1`] = `
-<button
-  aria-disabled="false"
-  aria-label="TEXT"
-  class="Button__Container-sc-1v65cga-0 kfzaKD"
-  role="button"
-  type="button"
->
-  TEXT
-</button>
+<x-button
+  context="PRIMARY"
+  size="SMALL"
+  text="TEXT"
+/>
 `;

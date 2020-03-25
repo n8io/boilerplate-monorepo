@@ -2,24 +2,30 @@
 
 exports[`<Navigation/> renders properly 1`] = `
 <button
-  aria-disabled="false"
   aria-label="t(openNavigation)"
-  class="Button__Container-sc-1v65cga-0 fNxfRg Navigation__HamburgerButton-ya7uk0-3 kHjTzL"
+  class="Button__StyledButton-sc-1v65cga-0 ksYUjs Navigation__HamburgerButton-ya7uk0-3 kHjTzL"
+  height="0"
   role="button"
   type="button"
+  width="0"
 >
-  <svg
-    fill="currentColor"
-    height="1em"
-    stroke="currentColor"
-    stroke-width="0"
-    viewBox="0 0 512 512"
-    width="1em"
-    xmlns="http://www.w3.org/2000/svg"
+  <div
+    class="Button__StyledFancyContent-sc-1v65cga-2 iVakpx"
+    style="opacity: 1;"
   >
-    <path
-      d="M32 96v64h448V96H32zm0 128v64h448v-64H32zm0 128v64h448v-64H32z"
-    />
-  </svg>
+    <svg
+      fill="currentColor"
+      height="1em"
+      stroke="currentColor"
+      stroke-width="0"
+      viewBox="0 0 512 512"
+      width="1em"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M32 96v64h448V96H32zm0 128v64h448v-64H32zm0 128v64h448v-64H32z"
+      />
+    </svg>
+  </div>
 </button>
 `;

@@ -81,13 +81,19 @@ exports[`<Profile/> renders profile page 1`] = `
               </div>
             </label>
             <button
-              aria-disabled="false"
               aria-label="t(updateProfile)"
-              class="Button__Container-sc-1v65cga-0 jpjwHS"
+              class="Button__StyledButton-sc-1v65cga-0 dqrmXf"
+              height="0"
               role="button"
               type="submit"
+              width="0"
             >
-              t(updateProfile)
+              <div
+                class="Button__StyledFancyContent-sc-1v65cga-2 iVakpx"
+                style="opacity: 1;"
+              >
+                t(updateProfile)
+              </div>
             </button>
           </form>
         </fieldset>

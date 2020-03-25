@@ -5,7 +5,7 @@ exports[`<Loader/> renders children 1`] = `
   class="Loader__Container-sc-16qesyr-0 gAhqLO"
 >
   <div
-    class="Loader__Ring-sc-16qesyr-1 cfkhGk"
+    class="Loader__Ring-sc-16qesyr-1 cwrdQy"
     size="24"
   >
     <div />
