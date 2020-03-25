@@ -3,6 +3,8 @@ import { render } from 'testHelpers';
 import { Button } from '.';
 import { Type } from './type';
 
+jest.mock('../Loader');
+
 describe('<Button/>', () => {
   const ariaLabel = 'LABEL';
   const defaultProps = {

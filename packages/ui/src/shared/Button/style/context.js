@@ -57,6 +57,8 @@ const styles = variants(Theme.PROP_NAME, Context.PROP_NAME, {
       color: ${CustomProperty.GRAYSCALE_WHITE};
     `,
     [DisplayMode.LIGHT]: css`
+      --spinner-color-override: ${CustomProperty.GRAYSCALE_WHITE};
+
       background-color: ${CustomProperty.COLOR_PRIMARY};
       border-color: ${CustomProperty.COLOR_PRIMARY};
       color: ${CustomProperty.GRAYSCALE_WHITE};

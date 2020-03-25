@@ -2,6 +2,8 @@ import React from 'react';
 import { render } from 'testHelpers';
 import { ToggleButton } from '.';
 
+jest.mock('shared/Button');
+
 describe('<ToggleButton/>', () => {
   const buttonProps = {
     onClick: jest.fn().mockName('onClick'),

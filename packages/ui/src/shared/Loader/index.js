@@ -17,7 +17,7 @@ const Container = styled.div`
 `;
 
 const Ring = styled.div`
-  display: inline-block;
+  display: block;
   height: ${({ size }) => size}px;
   position: relative;
   width: ${({ size }) => size}px;
