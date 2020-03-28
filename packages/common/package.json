@@ -3,6 +3,7 @@
   "version": "1.0.1",
   "private": true,
   "main": "index.js",
+  "module": "index.js",
   "license": "MIT",
   "engines": {
     "node": "^12.13.0",
@@ -15,6 +16,7 @@
   },
   "dependencies": {
     "es6-error": "^4.1.1",
+    "graphql-tag": "^2.10.3",
     "prop-types": "^15.7.2",
     "ramda": "^0.26.1",
     "yup": "^0.28.3"

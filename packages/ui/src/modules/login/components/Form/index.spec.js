@@ -7,7 +7,8 @@ import { Form } from '.';
 jest.mock('shared/Button');
 jest.mock('shared/ErrorNotification');
 jest.mock('shared/forms/Form');
-jest.mock('shared/forms/Input');
+jest.mock('shared/forms/PasswordInput');
+jest.mock('shared/forms/TextInput');
 jest.mock('shared/forms/useForm');
 jest.mock('shared/useAuth');
 

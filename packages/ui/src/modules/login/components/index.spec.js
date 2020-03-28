@@ -5,7 +5,10 @@ import { Login } from '.';
 jest.mock('shared/Content');
 jest.mock('shared/Page');
 jest.mock('shared/useAuth');
-jest.mock('./Form');
+
+jest.mock('./Form', () => ({
+  Form: props => <x-Form {...props} />,
+}));
 
 describe('<Login/>', () => {
   const defaultProps = {};

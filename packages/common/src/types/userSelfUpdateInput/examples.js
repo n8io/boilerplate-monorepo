@@ -2,7 +2,8 @@ import { makeSafeExample } from '../utils/makeSafeExample';
 
 const apiExample = makeSafeExample({
   email: 'EMAIL@EMAIL.COM',
-  username: 'USERNAME',
+  familyName: 'FAMILY_NAME',
+  givenName: 'GIVEN_NAME',
 });
 
 const uiExample = makeSafeExample(apiExample());
