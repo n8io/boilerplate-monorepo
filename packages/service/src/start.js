@@ -2,8 +2,8 @@ import { make as makeApp } from 'app';
 import { make as makeCache } from 'cache';
 import { makeConnection } from 'db';
 import { once } from 'events';
+import { make as makeGraphqlServer } from 'graphql';
 import { make as makeSchema } from 'graphql/schema';
-import { make as makeApolloServer } from 'server';
 import { addListeners as addServerStopListeners } from 'stop';
 import { ProcessEnvKeys } from 'types/processEnv';
 
@@ -16,7 +16,7 @@ const start = async ({ app, cache, connection, schema }) => {
   const actualSchema = schema || (await makeSchema());
   const actualApp = app || makeApp(cache, schema);
 
-  await makeApolloServer(actualApp, actualCache, actualSchema);
+  await makeGraphqlServer(actualApp, actualCache, actualSchema);
 
   const expressServer = actualApp.listen(PORT, () => {
     const msg = `🚀 GraphQL server started @ http://localhost:${PORT}/graphql`;

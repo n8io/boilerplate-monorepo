@@ -42,6 +42,7 @@
     "logs:service": "yarn run -s dclf service",
     "logs:ui": "yarn run -s dclf ui",
     "run-all": "npm-run-all --parallel",
+    "start:dev:common": "lerna run start --loglevel silent --scope \"@${npm_package_name}/common\" --stream",
     "start:dev:db": "yarn -s dcud cache db",
     "start:dev:service": "lerna run start --loglevel silent --scope \"@${npm_package_name}/service\" --stream",
     "start:dev:ui": "lerna run start --loglevel silent --scope \"@${npm_package_name}/ui\" --stream",

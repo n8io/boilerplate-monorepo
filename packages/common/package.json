@@ -9,7 +9,8 @@
     "yarn": "^1.19.1"
   },
   "scripts": {
-    "build": "yarn && babel src -d dist",
+    "build": "babel src -d dist",
+    "start": "yarn build --watch",
     "test": "jest",
     "test:ci": "JEST_JUNIT_OUTPUT_DIR=../../.tmp/test-results/jest/common  yarn -s test --ci --runInBand --reporters=default --reporters=jest-junit",
     "test:watch": "jest --watch"

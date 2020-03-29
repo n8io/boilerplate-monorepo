@@ -99,7 +99,7 @@ const typeDefs = gql`
   "The root query type"
   type Query {
     "Return the actively logged in user"
-    userSelf: UserSnapshot!
+    userSelf: UserSnapshot! @isAuthenticated
   }
 `;
 

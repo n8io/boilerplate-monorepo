@@ -69,6 +69,8 @@ const typeDefs = gql`
   type Mutation {
     "Deletes a user from the system"
     userDelete(id: ID!): Boolean
+      @hasPermission(permission: "USER_DELETE")
+      @isAuthenticated
   }
 `;
 

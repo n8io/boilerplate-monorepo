@@ -61,7 +61,7 @@ const typeDefs = gql`
   "Mutations"
   type Mutation {
     "The user self update mutation"
-    userSelfUpdate(input: UserSelfUpdateInput!): UserSnapshot
+    userSelfUpdate(input: UserSelfUpdateInput!): UserSnapshot @isAuthenticated
   }
 `;
 
