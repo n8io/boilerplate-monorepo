@@ -6,8 +6,8 @@ const make = (app, cache, schema) => {
   const server = new ApolloServer({
     cache,
     context,
-    // debug is enabled on purpose to have more verbose logging in Apollo Graphql Monitor
-    // DO NOT CHANGE!!!
+    // debug is enabled on purpose to have more verbose logging in Apollo
+    // Graphql Monitor. DO NOT CHANGE!!!
     debug: true,
     formatError,
     ...schema,

@@ -1,38 +1,40 @@
+import { LogLevel } from '@boilerplate-monorepo/common';
+
 const prefix = {
-  error: '🛑',
-  info: 'ℹ️',
-  log: '✅',
-  warn: '⚠',
+  [LogLevel.ERROR]: '🛑',
+  [LogLevel.INFO]: 'ℹ️',
+  [LogLevel.WARN]: '⚠️',
 };
 
 const prependInfo = logLevel =>
   `${new Date().toISOString()}: ${prefix[logLevel]}`;
 
-const printMessage = ({ data, logLevel: tmpLogLevel, message }) => {
-  const logLevel = tmpLogLevel.toLowerCase();
-
+const printMessage = ({ data, logLevel, message }) => {
   /* eslint-disable no-console */
   if (data) {
-    return console[logLevel](`${prependInfo(logLevel)} ${message}`, data);
+    return console[logLevel.toLowerCase()](
+      `${prependInfo(logLevel)} ${message}`,
+      data
+    );
   }
 
-  return console[logLevel](`${prependInfo(logLevel)} ${message}`);
+  return console[logLevel.toLowerCase()](`${prependInfo(logLevel)} ${message}`);
   /* eslint-enable no-console */
 };
 
 const log = {
-  error: (message, data) => {
-    const logLevel = 'error';
+  [LogLevel.ERROR.toLowerCase()]: (message, data) => {
+    const logLevel = LogLevel.ERROR;
 
     return printMessage({ data, logLevel, message });
   },
-  info: (message, data) => {
-    const logLevel = 'info';
+  [LogLevel.INFO.toLowerCase()]: (message, data) => {
+    const logLevel = LogLevel.INFO;
 
     return printMessage({ data, logLevel, message });
   },
-  warn: (message, data) => {
-    const logLevel = 'warn';
+  [LogLevel.WARN.toLowerCase()]: (message, data) => {
+    const logLevel = LogLevel.WARN;
 
     return printMessage({ data, logLevel, message });
   },

@@ -22,6 +22,7 @@
     "watch": "nodemon --delay 1 --signal SIGHUP --exec babel-node -r dotenv/config src"
   },
   "dependencies": {
+    "@boilerplate-monorepo/common": "^1.0.1",
     "apollo-server-cache-redis": "^1.1.5",
     "apollo-server-express": "^2.9.15",
     "bcryptjs": "^2.4.3",
