@@ -18,6 +18,9 @@ jobs:
           name: Installing dependencies
           command: yarn install --frozen-lockfile
       - run:
+          name: Build shared dependencies
+          command: yarn run build:common
+      - run:
           name: Running linters
           command: yarn lint
       - run:

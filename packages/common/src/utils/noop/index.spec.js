@@ -1,8 +1,8 @@
-import { noop } from '.';
+import { Utils } from 'utils';
 
 describe('noop', () => {
   test('returns null', () => {
-    const actual = noop();
+    const actual = Utils.noop();
 
     expect(actual).toBeNull();
   });

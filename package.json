@@ -13,6 +13,7 @@
     "🔥": "rm -rf node_modules && (cd packages/common && rm -rf node_modules) && (cd packages/service && rm -rf node_modules) && (cd packages/ui && rm -rf node_modules) && (cd packages/ui-common && rm -rf node_modules)",
     "bootstrap": "lerna bootstrap",
     "build": "yarn run -s run-all build:*",
+    "build:common": "(cd packages/common && yarn run -s build)",
     "build:service": "(cd packages/service && yarn run -s build)",
     "build:ui": "(cd packages/ui && yarn run -s build)",
     "bump": "lerna version prepatch --no-commit-hooks --yes",

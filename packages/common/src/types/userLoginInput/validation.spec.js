@@ -1,4 +1,4 @@
-import { UserLoginInput } from '.';
+import { UserLoginInput } from 'types/userLoginInput';
 
 const { isValid } = UserLoginInput;
 

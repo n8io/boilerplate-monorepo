@@ -1,4 +1,4 @@
-import { UserRegisterInput } from '.';
+import { UserRegisterInput } from 'types/userRegisterInput';
 
 const { ErrorKeys, isValid } = UserRegisterInput;
 

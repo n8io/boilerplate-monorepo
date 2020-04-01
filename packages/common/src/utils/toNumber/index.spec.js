@@ -1,9 +1,9 @@
-import { toNumber } from '.';
+import { Utils } from 'utils';
 
 describe('toNumber', () => {
   test('converts a number in a string format properly', () => {
     const input = '1';
-    const actual = toNumber(input);
+    const actual = Utils.toNumber(input);
     const expected = 1;
 
     expect(actual).toEqual(expected);
@@ -11,7 +11,7 @@ describe('toNumber', () => {
 
   test('converts undefined to NaN', () => {
     const input = undefined;
-    const actual = toNumber(input);
+    const actual = Utils.toNumber(input);
     const expected = NaN;
 
     expect(actual).toEqual(expected);
@@ -19,7 +19,7 @@ describe('toNumber', () => {
 
   test('converts empty string to NaN', () => {
     const input = '';
-    const actual = toNumber(input);
+    const actual = Utils.toNumber(input);
     const expected = NaN;
 
     expect(actual).toEqual(expected);
@@ -27,7 +27,7 @@ describe('toNumber', () => {
 
   test('converts null to NaN', () => {
     const input = null;
-    const actual = toNumber(input);
+    const actual = Utils.toNumber(input);
     const expected = NaN;
 
     expect(actual).toEqual(expected);

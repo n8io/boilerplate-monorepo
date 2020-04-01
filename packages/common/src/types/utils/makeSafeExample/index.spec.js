@@ -1,4 +1,4 @@
-import { ExampleError, makeSafeExample } from '.';
+import { ExampleError, makeSafeExample } from './index';
 
 describe('safe example function creator', () => {
   const leafExample = makeSafeExample({
