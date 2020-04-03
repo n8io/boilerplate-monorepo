@@ -1,10 +1,10 @@
 import { UserRegisterInput } from '@boilerplate-monorepo/common';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Button, Context } from 'shared/Button';
+import { Button, Context, Type } from 'shared/Button';
 import { ErrorNotification } from 'shared/ErrorNotification';
 import { EmailInput } from 'shared/forms/EmailInput';
-import { Form as SharedForm } from 'shared/forms/Form';
+import { Form as SharedForm, Mode } from 'shared/forms/Form';
 import { PasswordInput } from 'shared/forms/PasswordInput';
 import { TextInput } from 'shared/forms/TextInput';
 import { useForm } from 'shared/forms/useForm';
@@ -33,7 +33,7 @@ const Form = () => {
 
   const formProps = useForm({
     defaultValues: UserRegisterInput.initial,
-    mode: 'onBlur',
+    mode: Mode.ON_BLUR,
     validationSchema: UserRegisterInput.validationSchema,
   });
 
@@ -82,7 +82,7 @@ const Form = () => {
         disabled={!isSaveable}
         isAutoWidth
         text={t('title')}
-        type="submit"
+        type={Type.SUBMIT}
       />
     </SharedForm>
   );

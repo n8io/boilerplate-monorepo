@@ -226,4 +226,4 @@ Button.propTypes = {
   type: Type.propTypes,
 };
 
-export { Button, Context, Size, styles };
+export { Button, Context, Size, Type, styles };

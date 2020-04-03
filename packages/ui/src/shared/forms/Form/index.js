@@ -2,6 +2,11 @@ import { bool, func, node, string } from 'prop-types';
 import React from 'react';
 import { FormContext as ReactHookFormContext } from 'react-hook-form';
 
+const Mode = {
+  ON_BLUR: 'onBlur',
+  ON_CHANGE: 'onChange',
+};
+
 const Form = ({
   children,
   className,
@@ -32,4 +37,4 @@ Form.propTypes = {
   onSubmit: func.isRequired,
 };
 
-export { Form };
+export { Form, Mode };
