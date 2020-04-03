@@ -3,7 +3,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button, Context } from 'shared/Button';
 import { EmailInput } from 'shared/forms/EmailInput';
-import { Form as SharedForm } from 'shared/forms/Form';
+import { Form as SharedForm, Mode } from 'shared/forms/Form';
 import { TextInput } from 'shared/forms/TextInput';
 import { useForm } from 'shared/forms/useForm';
 import {
@@ -40,7 +40,7 @@ const Form = () => {
 
   const formProps = useForm({
     defaultValues: UserSelfUpdateInput.makeInitial(self),
-    mode: 'onBlur',
+    mode: Mode.ON_BLUR,
     validationSchema: UserSelfUpdateInput.validationSchema,
   });
 
