@@ -62,6 +62,16 @@ const Form = () => {
         label={t('emailAddress')}
         name="email"
       />
+      <TextInput
+        {...UserSelfUpdateInput.Limits.givenName}
+        label={t('givenName')}
+        name="givenName"
+      />
+      <TextInput
+        {...UserSelfUpdateInput.Limits.familyName}
+        label={t('familyName')}
+        name="familyName"
+      />
       <Button
         context={PRIMARY}
         disabled={!isSaveable}

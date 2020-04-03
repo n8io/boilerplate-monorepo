@@ -1,9 +1,5 @@
 import { ErrorKeys as PasswordErrorKeys } from '../../constants/password';
-import {
-  ErrorKeys as UserErrorKeys,
-  REGEX as USERNAME_REGEX,
-} from '../../constants/user';
-import { regexToInputPattern } from '../utils/regexToInputPattern';
+import { ErrorKeys as UserErrorKeys } from '../../constants/user';
 import { Validation } from '../validation';
 
 const { object, string } = Validation;
@@ -14,11 +10,13 @@ const Limits = {
     min: 3,
     required: true,
   },
-  username: {
+  familyName: {
     max: 50,
-    min: 4,
-    pattern: regexToInputPattern(USERNAME_REGEX),
-    required: true,
+    min: 2,
+  },
+  givenName: {
+    max: 50,
+    min: 2,
   },
 };
 
@@ -27,14 +25,14 @@ const validationSchema = object().shape({
     .email()
     .required()
     .limits(Limits.email),
-  username: string()
+  familyName: string()
     .trim()
     .required()
-    .limits(Limits.username)
-    .matches(
-      Limits.username.pattern,
-      UserErrorKeys.DOES_NOT_MEET_USERNAME_REQUIREMENTS
-    ),
+    .limits(Limits.familyName),
+  givenName: string()
+    .trim()
+    .required()
+    .limits(Limits.givenName),
 });
 
 const isValid = validationSchema.isValid.bind(validationSchema);

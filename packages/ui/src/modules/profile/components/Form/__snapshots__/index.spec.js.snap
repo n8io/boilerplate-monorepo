@@ -6,24 +6,30 @@ exports[`<Form/> renders login page 1`] = `
   issaveable="true"
   istouched="false"
 >
-  <x-input
+  <x-textinput
     disabled="true"
     label="t(username)"
-    max="50"
-    min="4"
     name="username"
-    pattern="[A-Za-z0-9-_]{4,}"
     patterndescription="t(DOES_NOT_MEET_USERNAME_REQUIREMENTS)"
-    required="true"
-    type="text"
   />
-  <x-input
+  <x-emailinput
     label="t(emailAddress)"
     max="250"
     min="3"
     name="email"
     required="true"
-    type="email"
+  />
+  <x-textinput
+    label="t(givenName)"
+    max="50"
+    min="2"
+    name="givenName"
+  />
+  <x-textinput
+    label="t(familyName)"
+    max="50"
+    min="2"
+    name="familyName"
   />
   <x-button
     context="PRIMARY"

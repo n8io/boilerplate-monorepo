@@ -1,4 +1,4 @@
-import { regexToInputPattern } from '.';
+import { regexToInputPattern } from './index';
 
 describe('regexToInputPattern', () => {
   test('converts a regex to an input pattern', () => {

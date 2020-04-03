@@ -2,24 +2,28 @@
   "name": "@boilerplate-monorepo/common",
   "version": "1.0.1",
   "private": true,
-  "main": "index.js",
+  "main": "dist/index.js",
   "license": "MIT",
   "engines": {
     "node": "^12.13.0",
     "yarn": "^1.19.1"
   },
   "scripts": {
+    "build": "yarn && babel src -d dist --ignore '**/*.spec.js'",
+    "start": "yarn build --watch",
     "test": "jest",
     "test:ci": "JEST_JUNIT_OUTPUT_DIR=../../.tmp/test-results/jest/common  yarn -s test --ci --runInBand --reporters=default --reporters=jest-junit",
     "test:watch": "jest --watch"
   },
   "dependencies": {
     "es6-error": "^4.1.1",
+    "graphql-tag": "^2.10.3",
     "prop-types": "^15.7.2",
     "ramda": "^0.26.1",
     "yup": "^0.28.3"
   },
   "devDependencies": {
+    "@babel/cli": "^7.8.4",
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "babel-jest": "^24.8.0",

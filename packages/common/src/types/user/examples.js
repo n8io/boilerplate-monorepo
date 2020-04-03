@@ -1,3 +1,4 @@
+import { UserRole } from 'types/userRole';
 import { makeSafeExample } from '../utils/makeSafeExample';
 
 const dbExample = makeSafeExample({
@@ -5,6 +6,7 @@ const dbExample = makeSafeExample({
   familyName: 'FAMILY_NAME',
   givenName: 'GIVEN_NAME',
   id: 'ID',
+  role: UserRole.USER,
   username: 'USERNAME',
 });
 

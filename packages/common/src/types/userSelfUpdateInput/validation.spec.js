@@ -23,8 +23,15 @@ describe('user self update input validation', () => {
       expect(actual).toEqual(false);
     });
 
-    test('without a username', async () => {
-      const userInput = UserSelfUpdateInput.apiExample({ username: null });
+    test('without a family name', async () => {
+      const userInput = UserSelfUpdateInput.apiExample({ familyName: null });
+      const actual = await isValid(userInput);
+
+      expect(actual).toEqual(false);
+    });
+
+    test('without a given name', async () => {
+      const userInput = UserSelfUpdateInput.apiExample({ givenName: null });
       const actual = await isValid(userInput);
 
       expect(actual).toEqual(false);

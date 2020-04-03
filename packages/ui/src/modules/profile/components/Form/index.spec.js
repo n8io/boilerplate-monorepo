@@ -5,8 +5,10 @@ import * as QueryHooks from 'shared/graphql/query/useUserSelf';
 import { render } from 'testHelpers';
 import { Form } from '.';
 
+jest.mock('shared/Button');
 jest.mock('shared/forms/Form');
-jest.mock('shared/forms/Input');
+jest.mock('shared/forms/EmailInput');
+jest.mock('shared/forms/TextInput');
 jest.mock('shared/forms/useForm');
 jest.mock('shared/Button');
 jest.mock('shared/useAuth');

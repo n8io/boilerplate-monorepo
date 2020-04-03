@@ -8,6 +8,10 @@ import { Profile } from '.';
 jest.mock('shared/Content');
 jest.mock('shared/Page');
 
+jest.mock('./Form', () => ({
+  Form: props => <x-Form {...props} />,
+}));
+
 describe('<Profile/>', () => {
   const defaultProps = {};
 
