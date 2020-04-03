@@ -1,5 +1,6 @@
+import { Permission } from '@boilerplate-monorepo/common';
 import { gql } from 'apollo-server-express';
-import { userRevokeRefreshTokens } from 'db/user/userRevokeRefreshToken';
+import { userRevokeRefreshTokens } from 'db/user/userRevokeRefreshTokens';
 import { log } from 'log';
 import { logFactory } from 'log/logFactory';
 import { DatabaseError, UserRevokeRefreshTokensError } from 'types/customError';
@@ -48,7 +49,9 @@ const typeDefs = gql`
   "Mutations"
   type Mutation {
     "Revoke all the refresh tokens for a user"
-    userRevokeRefreshTokens(id: ID!): Boolean @isAuthenticated
+    userRevokeRefreshTokens(id: ID!): Boolean
+      @hasPermission(permission: "${Permission.USERS_MANAGE}")
+      @isAuthenticated
   }
 `;
 

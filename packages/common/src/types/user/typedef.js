@@ -15,14 +15,6 @@ const typeDef = gql`
     # The user's unique username
     username: String!
   }
-
-  fragment UserFragment on User {
-    email
-    familyName
-    givenName
-    id
-    username
-  }
 `;
 
 const propTypes = shape({

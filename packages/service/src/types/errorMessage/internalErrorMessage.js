@@ -5,6 +5,7 @@ const InternalErrorMessage = {
   FAILED_DB_REQUEST: 'Failed to make a request to the database',
   FAILED_TO_DECRYPT_REFRESH_TOKEN: 'Refresh token is invalid',
   FAILED_TO_DELETE_USER: 'Failed to delete user',
+  FAILED_TO_FETCH_USERS: 'Failed to fetch users',
   FAILED_TO_REFRESH_ACCESS_TOKEN:
     'Failed to refresh access token. Refresh token invalid',
   FAILED_TO_REGISTER_USER: 'Failed to register user',

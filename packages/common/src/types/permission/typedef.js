@@ -3,7 +3,11 @@ import { UserRole } from 'types/userRole';
 const { ADMIN } = UserRole;
 
 const Enumeration = {
-  USER_DELETE: [ADMIN],
+  USERS_MANAGE: 'USERS_MANAGE',
 };
 
-export { Enumeration };
+const Access = {
+  USERS_MANAGE: [ADMIN],
+};
+
+export { Access, Enumeration };

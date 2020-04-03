@@ -1,5 +1,5 @@
 import { apiToDb, dbToApi } from './transforms';
-import { Schema, Table } from './type';
+import { Schema, Table } from './typedef';
 
 const Db = {
   Schema,

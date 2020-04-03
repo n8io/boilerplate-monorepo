@@ -1,3 +1,4 @@
+import { Permission } from '@boilerplate-monorepo/common';
 import { gql } from 'apollo-server-express';
 import { userSave } from 'db/user/userSave';
 import { log } from 'log';
@@ -69,7 +70,7 @@ const typeDefs = gql`
   type Mutation {
     "Deletes a user from the system"
     userDelete(id: ID!): Boolean
-      @hasPermission(permission: "USER_DELETE")
+      @hasPermission(permission: "${Permission.USERS_MANAGE}")
       @isAuthenticated
   }
 `;

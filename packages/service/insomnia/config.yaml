@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2020-03-17T07:57:01.660Z
+__export_date: 2020-04-03T21:07:00.485Z
 __export_source: insomnia.desktop.app:v7.1.1
 resources:
   - _id: req_45c96e3cce6845569aaeb3db515b8cc3
@@ -19,7 +19,7 @@ resources:
     isPrivate: false
     metaSortKey: -1578263622751
     method: POST
-    modified: 1584431721436
+    modified: 1585948000527
     name: UserLogin
     parameters: []
     parentId: fld_a2d0e0de6c984471bfb0d0cbef41a924
@@ -86,7 +86,7 @@ resources:
     isPrivate: false
     metaSortKey: -1578263622738.5
     method: POST
-    modified: 1584431671404
+    modified: 1585947922404
     name: UserLogout
     parameters: []
     parentId: fld_a2d0e0de6c984471bfb0d0cbef41a924
@@ -104,7 +104,7 @@ resources:
       mimeType: application/graphql
       text: '{"query":"mutation UserRegister($input:
         UserRegisterInput!){\n  userRegister(input:
-        $input)\n}\n","variables":{"input":{"givenName":"Nate","familyName":"Clark","email":"n8@n8io.com","password":"Password!23","role":"ADMIN","username":"n8io"}},"operationName":"UserRegister"}'
+        $input)\n}\n","variables":{"input":{"givenName":"Nate","familyName":"Clark","email":"test@test.com","password":"Password!23","username":"test"}},"operationName":"UserRegister"}'
     created: 1577801562443
     description: ""
     headers:
@@ -114,7 +114,7 @@ resources:
     isPrivate: false
     metaSortKey: -1578263622726
     method: POST
-    modified: 1584431701966
+    modified: 1585933150507
     name: UserRegister
     parameters: []
     parentId: fld_a2d0e0de6c984471bfb0d0cbef41a924
@@ -166,9 +166,9 @@ resources:
       mimeType: application/graphql
       text: '{"query":"mutation UserSelfUpdate($input: UserSelfUpdateInput!)
         {\n  userSelfUpdate(input: $input)
-        {\n    ...userFragment\n  }\n}\n\nfragment userFragment on
-        UserSelfResponse
-        {\n  id\n  email\n  familyName\n  givenName\n  role\n  username\n}","variables":{"input":{"email":"admin@admin.admin"}},"operationName":"UserSelfUpdate"}'
+        {\n    ...userSnapshotFragment\n  }\n}\n\n\nfragment
+        userSnapshotFragment on UserSnapshot
+        {\n  id\n  email\n  familyName\n  givenName\n  role\n  username\n}","variables":{"input":{"email":"n8@n8io.com","givenName":"Nathan"}},"operationName":"UserSelfUpdate"}'
     created: 1579266441078
     description: ""
     headers:
@@ -178,7 +178,7 @@ resources:
     isPrivate: false
     metaSortKey: -1578263622707.25
     method: POST
-    modified: 1584431656970
+    modified: 1585947132620
     name: UserSelfUpdate
     parameters: []
     parentId: fld_a2d0e0de6c984471bfb0d0cbef41a924
@@ -197,8 +197,8 @@ resources:
       type: bearer
     body:
       mimeType: application/graphql
-      text: '{"query":"mutation UserDelete($id: String!) {\n  userDelete(id:
-        $id)\n}\n","variables":{"id":"ck76p00y200005cad74u323nw"}}'
+      text: '{"query":"mutation UserDelete($id: ID!) {\n  userDelete(id:
+        $id)\n}\n","variables":{"id":"ck76p00y200005cad74u323nw"},"operationName":"UserDelete"}'
     created: 1578180146440
     description: ""
     headers:
@@ -208,7 +208,7 @@ resources:
     isPrivate: false
     metaSortKey: -1578263622701
     method: POST
-    modified: 1584431655873
+    modified: 1585702850362
     name: UserDelete
     parameters: []
     parentId: fld_a2d0e0de6c984471bfb0d0cbef41a924
@@ -220,29 +220,30 @@ resources:
     settingStoreCookies: true
     url: "{{ graphqlUri  }}"
     _type: request
-  - _id: req_692a8825c5124411ad5e18b54bbd5ce4
+  - _id: req_357edaad69cf4b61b0799bd9d18310d7
     authentication:
       prefix: "{{ accessTokenPrefix  }}"
       token: "{{ accessToken }}"
       type: bearer
     body:
       mimeType: application/graphql
-      text: '{"query":"query Users($input: UsersInput!) {\n  users(input: $input)
-        {\n    edges {\n      cursor\n      node
-        {\n        ...userFragment\n      }\n    }\n    pageInfo
-        {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment
-        userFragment on User
-        {\n  id\n  email\n  familyName\n  givenName\n  role\n  username\n}\n","variables":{"input":{"after":null,"first":null}}}'
-    created: 1577801637149
+      text: '{"query":"query Users($input: PaginationInput!) {\n  users(input:
+        $input) {\n    edges {\n      cursor\n      node
+        {\n        ...userSnapshotFragment\n      }\n    }\n    pageInfo
+        {\n      ...pageInfoFragment\n    }\n  }\n}\n\nfragment pageInfoFragment
+        on PageInfo {\n  endCursor\n  hasNextPage\n  total\n}\n\nfragment
+        userSnapshotFragment on UserSnapshot
+        {\n  id\n  email\n  familyName\n  givenName\n  role\n  username\n}","variables":{"input":{"after":null,"first":null}},"operationName":"Users"}'
+    created: 1585738532714
     description: ""
     headers:
       - id: pair_da0e8e267c1940c0912468bcba4fcc12
         name: Content-Type
         value: application/json
     isPrivate: false
-    metaSortKey: -1577800601476
+    metaSortKey: -1577800601469.75
     method: POST
-    modified: 1584431727580
+    modified: 1585948003020
     name: Users
     parameters: []
     parentId: fld_16d435bc119b4cc2af547a3f4de21aa9
@@ -272,8 +273,8 @@ resources:
     body:
       mimeType: application/graphql
       text: '{"query":"query UserSelf {\n  userSelf
-        {\n    ...userFragment\n  }\n}\n\nfragment userFragment on
-        UserSelfResponse
+        {\n    ...userSnapshotFragment\n  }\n}\n\nfragment userSnapshotFragment
+        on UserSnapshot
         {\n  id\n  email\n  familyName\n  givenName\n  role\n  username\n}","operationName":"UserSelf"}'
     created: 1577901244900
     description: ""
@@ -284,7 +285,7 @@ resources:
     isPrivate: false
     metaSortKey: -1577800601463.5
     method: POST
-    modified: 1584431725801
+    modified: 1585947989278
     name: UserSelf
     parameters: []
     parentId: fld_16d435bc119b4cc2af547a3f4de21aa9
@@ -353,7 +354,7 @@ resources:
     created: 1577800360941
     data:
       accessToken: "{% response 'body', 'req_2d29ad0fa79b4545b86258fd4216bdad',
-        'b64::JC50b2tlbg==::46b', 'no-history' %}"
+        'b64::JC50b2tlbg==::46b', 'always' %}"
       accessTokenPrefix: bearer
       endpoint: "{{ protocol  }}://{{ host  }}:{{port}}"
       graphqlUri: "{{endpoint}}/graphql"
@@ -377,7 +378,7 @@ resources:
         - restUri
     isPrivate: false
     metaSortKey: 1577800360941
-    modified: 1578962071855
+    modified: 1585947975423
     name: Base Environment
     parentId: wrk_b673aad6c5df416ead4f262eb230cf9c
     _type: environment
@@ -385,17 +386,17 @@ resources:
     cookies:
       - creation: 2020-01-14T00:36:22.738Z
         domain: localhost
-        expires: 2020-03-24T07:55:24.000Z
+        expires: 2020-04-10T21:06:44.000Z
         hostOnly: true
         httpOnly: true
-        id: "6177218955102224"
+        id: "4254780728334904"
         key: jid
-        lastAccessed: 2020-03-17T07:55:24.441Z
+        lastAccessed: 2020-04-03T21:06:44.210Z
         maxAge: 604800
         path: /refresh_token
-        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im44QG44aW8uY29tIiwiaWQiOiJjazd2bHE2NjEwMDAwaXdhZDNlNTdlcXM4Iiwicm9sZSI6IkFETUlOIiwidG9rZW5WZXJzaW9uIjowLCJ1c2VybmFtZSI6Im44aW8iLCJpYXQiOjE1ODQ0MzE3MjQsImV4cCI6MTU4NTAzNjUyNH0.D-qzA0WKvWZoJercct9kYN2ytpMEg1XmwzDH2ETYN3o
+        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im44QG44aW8uY29tIiwiaWQiOiJjazhmNXRkeXQwMDAwajBmazhyZ2Q3amNjIiwicm9sZSI6IkFETUlOIiwidG9rZW5WZXJzaW9uIjowLCJ1c2VybmFtZSI6Im44aW8iLCJpYXQiOjE1ODU5NDgwMDQsImV4cCI6MTU4NjU1MjgwNH0.E6nyKk9shDUZH-gFyPrPOiXfpOHJsfwBitvcOnpsYcs
     created: 1577800360958
-    modified: 1584431724441
+    modified: 1585948004210
     name: Default Jar
     parentId: wrk_b673aad6c5df416ead4f262eb230cf9c
     _type: cookie_jar

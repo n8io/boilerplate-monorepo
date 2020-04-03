@@ -1,8 +1,10 @@
 import { apiExample, uiExample } from './examples';
-import { propTypes, typeDef } from './type';
+import { dbToApi } from './transforms';
+import { propTypes, typeDef } from './typedef';
 
 const User = {
   apiExample,
+  dbToApi,
   propTypes,
   typeDef,
   uiExample,

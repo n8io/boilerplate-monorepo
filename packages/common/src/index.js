@@ -1,5 +1,6 @@
 export { FetchPolicy } from './types/fetchPolicy';
 export { LogLevel } from './types/logLevel';
+export { PaginationInput } from './types/paginationInput';
 export { Permission } from './types/permission';
 export { Time } from './types/time';
 export { User } from './types/user';

@@ -3,6 +3,7 @@ import { log } from 'log';
 import { logFactory } from 'log/logFactory';
 import { parse } from 'pg-connection-string';
 import { multiply } from 'ramda';
+import { Db } from 'types/db';
 import { ProcessEnvKeys } from 'types/processEnv';
 
 const debugLog = logFactory({ method: 'connection', module: 'db' });
@@ -40,7 +41,7 @@ const tryToConnect = async connection => {
     newConnection = await knex(makeOptions());
 
     // Make sure we can connect
-    await newConnection.raw(`SELECT 'OK';`);
+    await newConnection.raw(`SET SESSION SCHEMA '${Db.Schema.MAIN}';`);
 
     if (attempts) {
       log.info('👍 Connected to the database');

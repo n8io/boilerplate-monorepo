@@ -5,8 +5,13 @@ const Schema = {
   MAIN: process.env[ProcessEnvKeys.DB_SCHEMA],
 };
 
+const SortDirection = {
+  ASC: 'ASC',
+  DESC: 'DESC',
+};
+
 const Table = {
   USERS: 'users',
 };
 
-export { Schema, Table };
+export { Schema, SortDirection, Table };
