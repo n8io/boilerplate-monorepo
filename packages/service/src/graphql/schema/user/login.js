@@ -86,6 +86,8 @@ const typeDefs = gql`
   type Mutation {
     "The user login mutation"
     userLogin(input: UserLoginInput!): String!
+      @rateLimitWindow(limit: 50, duration: ${15 * 60 /* 15min */})
+      @rateLimitBurst(limit: 10, duration: 30)
   }
 `;
 

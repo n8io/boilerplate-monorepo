@@ -116,6 +116,8 @@ const typeDefs = gql`
   type Mutation {
     "The user register mutation"
     userRegister(input: UserRegisterInput!): Boolean
+      @rateLimitWindow(limit: 10, duration: ${30 * 60 /* 30min */})
+      @rateLimitBurst(limit: 1, duration: 60)
   }
 `;
 
