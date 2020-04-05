@@ -11,6 +11,7 @@
   },
   "scripts": {
     "build": "babel src -d dist --ignore '**/*.spec.js'",
+    "postinstall": "yarn -s build",
     "start": "yarn -s build --watch",
     "test": "jest",
     "test:ci": "JEST_JUNIT_OUTPUT_DIR=../../.tmp/test-results/jest/ui-common  yarn -s test --ci --runInBand --reporters=default --reporters=jest-junit",

@@ -18,12 +18,6 @@ jobs:
           name: Installing dependencies
           command: yarn install --frozen-lockfile
       - run:
-          name: Build common
-          command: yarn run build:common
-      - run:
-          name: Build ui-common
-          command: yarn run build:ui-common
-      - run:
           name: Running linters
           command: yarn lint
       - run:
@@ -50,12 +44,6 @@ jobs:
             - v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
             - v1-deps-{{ .Branch }}
             - v1-deps
-      - run:
-          name: Transpiling common
-          command: yarn -s build:common
-      - run:
-          name: Transpiling ui-common
-          command: yarn -s build:ui-common
       - run:
           name: Transpiling service
           command: yarn -s build:service
