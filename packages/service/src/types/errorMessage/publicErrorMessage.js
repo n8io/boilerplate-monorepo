@@ -8,6 +8,7 @@ const PublicErrorMessage = {
   FAILED_TO_REVOKE_REFRESH_TOKENS: 'Unable to revoke refresh tokens',
   FAILED_TO_UPDATE_SELF: 'Unable to update self',
   INVALID_LOGIN: 'Invalid login',
+  RATE_LIMIT_EXCEEDED: 'Rate limit exceeded',
   UNAUTHORIZED: 'Not authorized',
 };
 

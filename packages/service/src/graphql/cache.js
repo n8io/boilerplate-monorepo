@@ -17,4 +17,4 @@ const makeCache = () => {
   return client;
 };
 
-export { makeCache };
+export { makeCache, options };

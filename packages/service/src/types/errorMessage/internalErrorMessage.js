@@ -22,6 +22,7 @@ const InternalErrorMessage = {
     'Failed to update self. Could not locate user info.',
   GENERIC: 'A general error has ocurred',
   PASSWORD_MISMATCH: 'Provided password does not match',
+  RATE_LIMIT_EXCEEDED: 'Too many requests in the allowable time frame',
   REFRESH_TOKEN_COOKIE_NOT_FOUND: 'Refresh token cookie was not provided',
   REFRESH_TOKEN_VERSION_MISMATCH: 'Refresh token version mismatch',
   USER_ATTEMPTED_TO_SELF_DELETE: 'User attempted to self delete',
