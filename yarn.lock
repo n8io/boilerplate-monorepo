@@ -5106,13 +5106,6 @@ bookshelf-case-converter-plugin@^1.0.0:
   dependencies:
     lodash "^4.17.15"
 
-bookshelf-cursor-pagination@^1.4.2:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/bookshelf-cursor-pagination/-/bookshelf-cursor-pagination-1.4.2.tgz#7f144a9826d1d8c4f08558196f34530cf46e9ade"
-  integrity sha512-aP0afz5bG9OR6vr7XphLO5Z+BuQ76drWOIV8Br8syYdc9Iv6/mGqQXwoJ45Wm/rIXA5grJBI7prIPZeOnR2KQA==
-  dependencies:
-    lodash "^4.17.4"
-
 bookshelf@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/bookshelf/-/bookshelf-1.1.0.tgz#d456abd70ed4af4c9ae6f3d364424590ea31dcbf"

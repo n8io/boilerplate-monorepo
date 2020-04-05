@@ -8,7 +8,7 @@
     "yarn": "^1.19.1"
   },
   "scripts": {
-    "build": "yarn && craco build",
+    "build": "craco build",
     "build:gh": "yarn -s node .prebuild && REACT_APP_PUBLIC_URL=/boilerplate-monorepo yarn -s build",
     "deploy": "gh-pages -d build",
     "deploy:gh": "REACT_APP_PUBLIC_URL=/boilerplate-monorepo yarn -s deploy",
