@@ -36,7 +36,7 @@ const resolver = async (_parent, { id }, context) => {
 
   try {
     const { deletedAt } = await userSave(
-      { deletedAt: new Date(), id },
+      { deletedAt: new Date(), deletedBy: user.id, id },
       context
     );
 

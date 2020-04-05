@@ -1,7 +1,7 @@
 import initialize from 'bookshelf';
 import caseConverter from 'bookshelf-case-converter-plugin';
-import cursorPagination from 'bookshelf-cursor-pagination';
 import { connection } from '../db';
+import paginator from './paginator';
 
 let bookshelf = null;
 
@@ -10,7 +10,7 @@ const make = () => {
 
   bookshelf = initialize(connection);
   bookshelf.plugin(caseConverter);
-  bookshelf.plugin(cursorPagination);
+  bookshelf.plugin(paginator);
 
   return bookshelf;
 };

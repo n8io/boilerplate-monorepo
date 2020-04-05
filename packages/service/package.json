@@ -8,7 +8,7 @@
     "yarn": "^1.19.1"
   },
   "scripts": {
-    "build": "yarn && babel src -d dist",
+    "build": "babel src -d dist",
     "migrate": "babel-node node_modules/.bin/knex",
     "migration:cli": "node \"../../node_modules/typeorm/cli.js\"",
     "migration:down": "yarn -s migrate migrate:down",
@@ -19,7 +19,7 @@
     "publish:service": "apollo service:push --tag local --endpoint=http://localhost:4000/graphql",
     "start": "yarn -s watch",
     "start:prod": "node -r dotenv/config dist",
-    "watch": "nodemon --delay 1 --signal SIGHUP --exec babel-node -r dotenv/config src"
+    "watch": "nodemon"
   },
   "dependencies": {
     "@boilerplate-monorepo/common": "^1.0.1",
@@ -28,7 +28,6 @@
     "bcryptjs": "^2.4.3",
     "bookshelf": "^1.1.0",
     "bookshelf-case-converter-plugin": "^1.0.0",
-    "bookshelf-cursor-pagination": "^1.4.2",
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
     "cuid": "^2.1.8",
