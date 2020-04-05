@@ -48,11 +48,14 @@ jobs:
             - v1-deps-{{ .Branch }}
             - v1-deps
       - run:
-          name: Transpiling ui
-          command: cd packages/ui && yarn -s build
+          name: Transpiling common
+          command: yarn -s build:common
       - run:
           name: Transpiling service
-          command: cd packages/service && yarn -s build
+          command: yarn -s build:service
+      - run:
+          name: Transpiling ui
+          command: yarn -s build:ui
 
 workflows:
   version: 2
