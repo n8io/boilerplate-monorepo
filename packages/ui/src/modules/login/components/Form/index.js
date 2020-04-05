@@ -1,18 +1,16 @@
 import { UserLoginInput } from '@boilerplate-monorepo/common';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Button, Context, Type } from 'shared/Button';
 import { ErrorNotification } from 'shared/ErrorNotification';
 import { Form as SharedForm, Mode } from 'shared/forms/Form';
 import { PasswordInput } from 'shared/forms/PasswordInput';
+import { SubmitButton } from 'shared/forms/SubmitButton';
 import { TextInput } from 'shared/forms/TextInput';
 import { useForm } from 'shared/forms/useForm';
 import { QUERY_USER_SELF, useUserLogin } from 'shared/graphql';
 import { useAuth } from 'shared/useAuth';
 import { useTranslate } from 'shared/useTranslate';
 import { Route } from 'types/route';
-
-const { PRIMARY } = Context;
 
 const Form = () => {
   const t = useTranslate({
@@ -50,7 +48,6 @@ const Form = () => {
       variables: { input: values },
     });
 
-  const { isSaveable } = formProps;
   const logInOutKey = isAuthenticated ? t('logout') : t('title');
 
   return (
@@ -68,13 +65,7 @@ const Form = () => {
           label={t('password')}
           name="password"
         />
-        <Button
-          context={PRIMARY}
-          disabled={!isSaveable}
-          isAutoWidth
-          text={logInOutKey}
-          type={Type.SUBMIT}
-        />
+        <SubmitButton isAutoWidth text={logInOutKey} />
       </SharedForm>
     </>
   );

@@ -1,18 +1,16 @@
 import { UserRegisterInput } from '@boilerplate-monorepo/common';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Button, Context, Type } from 'shared/Button';
 import { ErrorNotification } from 'shared/ErrorNotification';
 import { EmailInput } from 'shared/forms/EmailInput';
 import { Form as SharedForm, Mode } from 'shared/forms/Form';
 import { PasswordInput } from 'shared/forms/PasswordInput';
+import { SubmitButton } from 'shared/forms/SubmitButton';
 import { TextInput } from 'shared/forms/TextInput';
 import { useForm } from 'shared/forms/useForm';
 import { useUserRegister } from 'shared/graphql';
 import { useTranslate } from 'shared/useTranslate';
 import { Route } from 'types/route';
-
-const { PRIMARY } = Context;
 
 const Form = () => {
   const t = useTranslate({
@@ -36,8 +34,6 @@ const Form = () => {
     mode: Mode.ON_BLUR,
     validationSchema: UserRegisterInput.validationSchema,
   });
-
-  const { isSaveable } = formProps;
 
   return (
     <SharedForm {...formProps} onSubmit={onRegister}>
@@ -77,13 +73,7 @@ const Form = () => {
         name="confirmPassword"
         patternDescription={t('DOES_NOT_MEET_PASSWORD_REQUIREMENTS')}
       />
-      <Button
-        context={PRIMARY}
-        disabled={!isSaveable}
-        isAutoWidth
-        text={t('title')}
-        type={Type.SUBMIT}
-      />
+      <SubmitButton isAutoWidth text={t('title')} />
     </SharedForm>
   );
 };

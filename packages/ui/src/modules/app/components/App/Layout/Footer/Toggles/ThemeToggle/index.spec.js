@@ -2,6 +2,8 @@ import React from 'react';
 import { render } from 'testHelpers';
 import { ThemeToggle } from '.';
 
+jest.mock('../ToggleButton');
+
 describe('<ThemeToggle/>', () => {
   const defaultProps = {
     isDarkMode: false,

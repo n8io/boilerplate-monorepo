@@ -1,42 +1,41 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Form/> renders login page 1`] = `
-<x-form
-  isdirty="false"
-  issaveable="true"
-  istouched="false"
->
-  <x-textinput
-    disabled="true"
-    label="t(username)"
-    name="username"
-    patterndescription="t(DOES_NOT_MEET_USERNAME_REQUIREMENTS)"
-  />
-  <x-emailinput
-    label="t(emailAddress)"
-    max="250"
-    min="3"
-    name="email"
-    required="true"
-  />
-  <x-textinput
-    label="t(givenName)"
-    max="50"
-    min="2"
-    name="givenName"
-  />
-  <x-textinput
-    label="t(familyName)"
-    max="50"
-    min="2"
-    name="familyName"
-  />
-  <x-button
-    context="PRIMARY"
-    disabled="false"
-    isautowidth="true"
-    text="t(updateProfile)"
-    type="submit"
-  />
-</x-form>
+<div>
+  <x-form
+    isdirty="false"
+    issaveable="true"
+    istouched="false"
+  >
+    <x-textinput
+      disabled="true"
+      label="t(username)"
+      name="username"
+      patterndescription="t(DOES_NOT_MEET_USERNAME_REQUIREMENTS)"
+    />
+    <x-emailinput
+      label="t(emailAddress)"
+      max="250"
+      min="3"
+      name="email"
+      required="true"
+    />
+    <x-textinput
+      label="t(givenName)"
+      max="50"
+      min="2"
+      name="givenName"
+    />
+    <x-textinput
+      label="t(familyName)"
+      max="50"
+      min="2"
+      name="familyName"
+    />
+    <x-submitbutton
+      isautowidth="true"
+      text="t(updateProfile)"
+    />
+  </x-form>
+</div>
 `;

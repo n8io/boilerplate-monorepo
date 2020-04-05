@@ -1,31 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Navigation/> renders properly 1`] = `
-<button
-  aria-label="t(openNavigation)"
-  class="Button__StyledButton-sc-1v65cga-0 ksYUjs Navigation__HamburgerButton-ya7uk0-3 kHjTzL"
-  height="0"
-  role="button"
-  type="button"
-  width="0"
+<x-button
+  classname="Navigation__HamburgerButton-ya7uk0-3 kHjTzL"
+  context="LINK"
+  label="t(openNavigation)"
 >
-  <div
-    class="Button__StyledFancyContent-sc-1v65cga-2 iVakpx"
-    style="opacity: 1;"
+  <svg
+    fill="currentColor"
+    height="1em"
+    stroke="currentColor"
+    stroke-width="0"
+    viewBox="0 0 512 512"
+    width="1em"
+    xmlns="http://www.w3.org/2000/svg"
   >
-    <svg
-      fill="currentColor"
-      height="1em"
-      stroke="currentColor"
-      stroke-width="0"
-      viewBox="0 0 512 512"
-      width="1em"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M32 96v64h448V96H32zm0 128v64h448v-64H32zm0 128v64h448v-64H32z"
-      />
-    </svg>
-  </div>
-</button>
+    <path
+      d="M32 96v64h448V96H32zm0 128v64h448v-64H32zm0 128v64h448v-64H32z"
+    />
+  </svg>
+</x-button>
 `;

@@ -1,9 +1,9 @@
 import { FetchPolicy, UserSelfUpdateInput } from '@boilerplate-monorepo/common';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Button, Context } from 'shared/Button';
 import { EmailInput } from 'shared/forms/EmailInput';
 import { Form as SharedForm, Mode } from 'shared/forms/Form';
+import { SubmitButton } from 'shared/forms/SubmitButton';
 import { TextInput } from 'shared/forms/TextInput';
 import { useForm } from 'shared/forms/useForm';
 import {
@@ -13,8 +13,6 @@ import {
 } from 'shared/graphql';
 import { useTranslate } from 'shared/useTranslate';
 import { Route } from 'types/route';
-
-const { PRIMARY } = Context;
 
 const Form = () => {
   const t = useTranslate({
@@ -46,8 +44,6 @@ const Form = () => {
 
   if (loading || !self) return null;
 
-  const { isSaveable } = formProps;
-
   return (
     <SharedForm {...formProps} onSubmit={onSelfUpdate}>
       <TextInput
@@ -72,13 +68,7 @@ const Form = () => {
         label={t('familyName')}
         name="familyName"
       />
-      <Button
-        context={PRIMARY}
-        disabled={!isSaveable}
-        isAutoWidth
-        text={t('updateProfile')}
-        type="submit"
-      />
+      <SubmitButton isAutoWidth text={t('updateProfile')} />
     </SharedForm>
   );
 };
