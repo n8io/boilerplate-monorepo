@@ -21,6 +21,9 @@ jobs:
           name: Running linters
           command: yarn lint
       - run:
+          name: Build common dependencies
+          command: yarn -s build:common && yarn -s build:ui-common
+      - run:
           name: Running unit tests
           command: yarn test:ci
       - save_cache:
@@ -45,11 +48,8 @@ jobs:
             - v1-deps-{{ .Branch }}
             - v1-deps
       - run:
-          name: Transpiling service
-          command: yarn -s build:service
-      - run:
-          name: Transpiling ui
-          command: yarn -s build:ui
+          name: Build all the things
+          command: yarn -s build
 
 workflows:
   version: 2
