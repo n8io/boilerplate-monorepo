@@ -2,7 +2,9 @@ import React from 'react';
 import { render } from 'testHelpers';
 import { Navigation } from '.';
 
+jest.mock('shared/Button');
 jest.mock('shared/useAuth');
+
 jest.mock('./NavLink', () => ({
   NavLink: props => <x-NavLink {...props} />,
 }));

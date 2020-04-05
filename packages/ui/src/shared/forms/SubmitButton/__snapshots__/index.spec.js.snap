@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SubmitButton/> renders a submit button 1`] = `
+<x-formcontext
+  errors="[object Object]"
+  formstate="[object Object]"
+>
+  <x-button
+    context="PRIMARY"
+    disabled="false"
+    text="LABEL"
+    type="submit"
+  />
+</x-formcontext>
+`;

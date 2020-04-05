@@ -33,7 +33,7 @@ const ThemeToggle = ({ isDarkMode, onToggle }) => {
 
   const onToggleProxy = isLongPressing ? Utils.noop : onToggle;
 
-  const i18nkey = `${Theme.PROP_NAME}.${
+  const i18nKey = `${Theme.PROP_NAME}.${
     isDarkMode ? DisplayMode.LIGHT : DisplayMode.DARK
   }`;
 
@@ -42,7 +42,7 @@ const ThemeToggle = ({ isDarkMode, onToggle }) => {
       {...longPressProps}
       data-testid="theme"
       disabled={!isEnabled}
-      label={t(i18nkey)}
+      label={t(i18nKey)}
       onClick={onToggleProxy}
     >
       {isDarkMode ? <FiSun /> : <FiMoon />}

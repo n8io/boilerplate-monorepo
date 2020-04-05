@@ -8,6 +8,7 @@ import { Form } from '.';
 jest.mock('shared/Button');
 jest.mock('shared/forms/Form');
 jest.mock('shared/forms/EmailInput');
+jest.mock('shared/forms/SubmitButton');
 jest.mock('shared/forms/TextInput');
 jest.mock('shared/forms/useForm');
 jest.mock('shared/Button');
@@ -41,6 +42,6 @@ describe('<Form/>', () => {
   test('renders login page', () => {
     const { container } = renderComponent();
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container).toMatchSnapshot();
   });
 });

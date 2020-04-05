@@ -11,10 +11,7 @@ export const useForm = () => ({
   watch: jest.fn().mockName('watch'),
 });
 
-export const useFormContext = () => ({
-  errors: {},
-  register: jest.fn().mockName('register'),
-});
+export const useFormContext = useForm;
 
 export const FormContext = props => {
   const formProps = useFormContext();
