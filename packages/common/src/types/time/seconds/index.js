@@ -1,3 +1,7 @@
 import { multiply } from 'ramda';
 
-export const seconds = multiply(1000);
+const seconds = multiply(1000);
+
+const minutesToSeconds = multiply(60);
+
+export { seconds, minutesToSeconds };
