@@ -2,7 +2,14 @@ import { initial } from './creation';
 import { apiExample, uiExample } from './examples';
 import { formToInput } from './transforms';
 import { propTypes } from './typedef';
-import { ErrorKeys, Limits, isValid, validationSchema } from './validation';
+import {
+  ErrorKeys,
+  Limits,
+  isValid,
+  validationSchema,
+  validationSchemaPassword,
+  validationSchemaSettings,
+} from './validation';
 
 const UserRegisterInput = {
   ErrorKeys,
@@ -14,6 +21,8 @@ const UserRegisterInput = {
   propTypes,
   uiExample,
   validationSchema,
+  validationSchemaPassword,
+  validationSchemaSettings,
 };
 
 export { UserRegisterInput };

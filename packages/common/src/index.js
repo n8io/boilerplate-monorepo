@@ -6,6 +6,7 @@ export { Time } from './types/time';
 export { User } from './types/user';
 export { UserLoginInput } from './types/userLoginInput';
 export { UserRegisterInput } from './types/userRegisterInput';
+export { UserSelfSecurityUpdateInput } from './types/userSelfSecurityUpdateInput';
 export { UserRole } from './types/userRole';
 export { UserSelfUpdateInput } from './types/userSelfUpdateInput';
 export {

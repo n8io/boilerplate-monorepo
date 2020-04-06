@@ -61,10 +61,20 @@ export const Enumeration = {
     name: 'testPage',
     path: '/test',
   },
-  USER_PROFILE: {
+  USER_ACCOUNT: {
     icon: FaUserAlt,
-    name: 'profile',
-    path: '/profile',
+    name: 'account',
+    path: '/account',
+  },
+  USER_ACCOUNT_SECURITY: {
+    icon: FaUserAlt,
+    name: 'accountSecurity',
+    path: '/account/security',
+  },
+  USER_ACCOUNT_SETTINGS: {
+    icon: FaUserAlt,
+    name: 'accountSettings',
+    path: '/account/settings',
   },
 };
 

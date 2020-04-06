@@ -1,5 +1,4 @@
 import { gql } from 'apollo-server-express';
-import { compare } from 'bcryptjs';
 import { userReadRaw } from 'db/user/userReadRaw';
 import { log } from 'log';
 import { logFactory } from 'log/logFactory';
@@ -11,6 +10,7 @@ import {
   UserInvalidLoginUserNotFoundError,
 } from 'types/customError/user/login';
 import { InternalErrorMessage } from 'types/errorMessage';
+import { Password } from 'types/password';
 import { RateLimit } from 'types/rateLimit';
 
 const MUTATION_NAME = 'userLogin';
@@ -59,7 +59,10 @@ const resolver = async (_parent, { input }, context) => {
     });
   }
 
-  const isPasswordMatch = await compare(clearTextPassword, user.passwordHash);
+  const isPasswordMatch = await Password.compare(
+    clearTextPassword,
+    user.passwordHash
+  );
 
   if (!isPasswordMatch) {
     debugLog(`🔏 ${InternalErrorMessage.PASSWORD_MISMATCH}`, { username });

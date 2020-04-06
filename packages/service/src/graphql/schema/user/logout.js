@@ -28,7 +28,7 @@ const typeDefs = gql`
   "Mutations"
   type Mutation {
     "Logs the active user out (kills refresh 🍪)"
-    userLogout: Boolean
+    userLogout: Boolean!
       @rateLimitBurst(limit: ${Limits.limit}, duration: ${Limits.duration})
   }
 `;

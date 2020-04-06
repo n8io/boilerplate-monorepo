@@ -14,12 +14,12 @@ exports[`<Login/> renders login page 1`] = `
       title="t(title)"
     />
     <x-body>
-      <a
-        class="Link__StyledLink-faqv70-0 gfLtRU"
-        href="/logout"
+      <x-link
+        data-testid="link"
+        to="/logout"
       >
         t(logout)
-      </a>
+      </x-link>
     </x-body>
   </x-content>
 </x-page>

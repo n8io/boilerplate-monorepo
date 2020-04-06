@@ -109,9 +109,9 @@ const Avatar = () => {
     history.push(Route.LOGIN.path);
   };
 
-  const onProfileClick = () => {
+  const onSettingsClick = () => {
     menu.hide();
-    history.push(Route.USER_PROFILE.path);
+    history.push(Route.USER_ACCOUNT.path);
   };
 
   if (error) {
@@ -119,7 +119,7 @@ const Avatar = () => {
   }
 
   const { icon: LogoutIcon } = Route.LOGOUT;
-  const { icon: ProfileIcon } = Route.USER_PROFILE;
+  const { icon: ProfileIcon } = Route.USER_ACCOUNT;
 
   return (
     <>
@@ -141,11 +141,11 @@ const Avatar = () => {
       >
         <StyledMenuItem
           {...menu}
-          aria-label={t('profile')}
-          onClick={onProfileClick}
+          aria-label={t('settings')}
+          onClick={onSettingsClick}
         >
           <ProfileIcon />
-          <MenuItemLabel>{t('profile')}</MenuItemLabel>
+          <MenuItemLabel>{t('settings')}</MenuItemLabel>
         </StyledMenuItem>
         <StyledMenuItem
           {...menu}

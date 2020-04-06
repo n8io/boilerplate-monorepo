@@ -1,5 +1,8 @@
-import { pick } from 'ramda';
+import { isNil, pick, unless } from 'ramda';
 
-const makeInitial = pick(['email', 'familyName', 'givenName', 'username']);
+const makeInitial = unless(
+  isNil,
+  pick(['email', 'familyName', 'givenName', 'username'])
+);
 
 export { makeInitial };

@@ -8,9 +8,9 @@ const { PRIMARY } = Context;
 const SubmitButton = props => {
   const { formState } = useFormContext();
 
-  const { isSubmitting, isValid, touched } = formState;
+  const { dirty: isDirty, isSubmitting, isValid, touched } = formState;
   const isTouched = !isEmpty(touched);
-  const isSaveable = (isValid || !isTouched) && !isSubmitting;
+  const isSaveable = (isValid || !isTouched) && !isSubmitting && isDirty;
 
   return (
     <Button

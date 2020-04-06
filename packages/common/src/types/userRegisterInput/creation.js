@@ -2,7 +2,7 @@ const initial = {
   email: '',
   familyName: '',
   givenName: '',
-  password: '',
+  passwordNew: '',
   username: '',
 };
 

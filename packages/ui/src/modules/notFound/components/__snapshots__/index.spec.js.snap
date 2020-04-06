@@ -20,7 +20,7 @@ exports[`<NotFound/> renders not found page 1`] = `
         <span
           class="components__Italicize-sc-12mujor-0 dAjHmm"
         >
-          /
+          PATHNAME
         </span>
       </p>
       <p>

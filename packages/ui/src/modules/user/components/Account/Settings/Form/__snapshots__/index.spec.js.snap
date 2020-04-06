@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Form/> renders login page 1`] = `
+exports[`<Form/> renders properly 1`] = `
 <div>
   <x-form
     isdirty="false"
@@ -34,7 +34,7 @@ exports[`<Form/> renders login page 1`] = `
     />
     <x-submitbutton
       isautowidth="true"
-      text="t(updateProfile)"
+      text="t(updateSettings)"
     />
   </x-form>
 </div>

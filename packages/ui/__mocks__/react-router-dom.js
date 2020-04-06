@@ -5,5 +5,12 @@ const history = {
 };
 
 const useHistory = () => history;
+const useLocation = () => ({
+  host: 'HOST',
+  href: 'HREF',
+  pathname: 'PATHNAME',
+  port: 'PORT',
+  protocol: 'PROTOCOL',
+});
 
-export { useHistory };
+export { useHistory, useLocation };

@@ -1,5 +1,5 @@
 import { FetchPolicy, UserSelfUpdateInput } from '@boilerplate-monorepo/common';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { EmailInput } from 'shared/forms/EmailInput';
 import { Form as SharedForm, Mode } from 'shared/forms/Form';
@@ -16,8 +16,8 @@ import { Route } from 'types/route';
 
 const Form = () => {
   const t = useTranslate({
-    component: 'profile',
-    namespace: 'profile',
+    component: 'user',
+    namespace: 'user',
   });
 
   const history = useHistory();
@@ -37,10 +37,15 @@ const Form = () => {
   };
 
   const formProps = useForm({
-    defaultValues: UserSelfUpdateInput.makeInitial(self),
     mode: Mode.ON_BLUR,
     validationSchema: UserSelfUpdateInput.validationSchema,
   });
+
+  const { reset } = formProps;
+
+  useEffect(() => {
+    reset(UserSelfUpdateInput.makeInitial(self));
+  }, [self, reset]);
 
   if (loading || !self) return null;
 
@@ -68,7 +73,7 @@ const Form = () => {
         label={t('familyName')}
         name="familyName"
       />
-      <SubmitButton isAutoWidth text={t('updateProfile')} />
+      <SubmitButton isAutoWidth text={t('updateSettings')} />
     </SharedForm>
   );
 };

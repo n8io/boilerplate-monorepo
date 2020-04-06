@@ -39,7 +39,7 @@ describe('<Form/>', () => {
     ]);
   });
 
-  test('renders login page', () => {
+  test('renders properly', () => {
     const { container } = renderComponent();
 
     expect(container).toMatchSnapshot();

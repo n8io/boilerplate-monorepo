@@ -20,6 +20,7 @@ const InternalErrorMessage = {
   FAILED_TO_UPDATE_SELF: 'Failed to update self',
   FAILED_TO_UPDATE_SELF_NOT_FOUND:
     'Failed to update self. Could not locate user info.',
+  FAILED_TO_UPDATE_SELF_SECURITY: 'Failed to update self security',
   GENERIC: 'A general error has ocurred',
   PASSWORD_MISMATCH: 'Provided password does not match',
   RATE_LIMIT_EXCEEDED: 'Too many requests in the allowable time frame',

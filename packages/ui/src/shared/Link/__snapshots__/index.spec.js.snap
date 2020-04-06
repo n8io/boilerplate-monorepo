@@ -2,7 +2,7 @@
 
 exports[`<Link/> renders children 1`] = `
 <a
-  class="Link__StyledLink-faqv70-0 gfLtRU"
+  class="Link__StyledLink-gqOyzJ fYeHS"
   href="/TO"
 >
   TEXT

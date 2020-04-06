@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Security/> renders properly 1`] = `
+<div>
+  <x-breadcrumbs>
+    <x-breadcrumb
+      text="t(account)"
+      to="/account"
+    />
+    <x-breadcrumb
+      isend="true"
+      text="t(security)"
+      to="/account/security"
+    />
+  </x-breadcrumbs>
+  <x-header
+    title="t(security)"
+  />
+  <x-body>
+    <x-form />
+  </x-body>
+</div>
+`;

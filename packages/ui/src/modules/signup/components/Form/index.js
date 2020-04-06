@@ -60,17 +60,17 @@ const Form = () => {
         name="familyName"
       />
       <PasswordInput
-        {...UserRegisterInput.Limits.password}
+        {...UserRegisterInput.Limits.passwordNew}
         formatError={t}
         label={t('password')}
-        name="password"
+        name="passwordNew"
         patternDescription={t('DOES_NOT_MEET_PASSWORD_REQUIREMENTS')}
       />
       <PasswordInput
-        {...UserRegisterInput.Limits.confirmPassword}
+        {...UserRegisterInput.Limits.passwordConfirm}
         formatError={t}
         label={t('confirmPassword')}
-        name="confirmPassword"
+        name="passwordConfirm"
         patternDescription={t('DOES_NOT_MEET_PASSWORD_REQUIREMENTS')}
       />
       <SubmitButton isAutoWidth text={t('title')} />

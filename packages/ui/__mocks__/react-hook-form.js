@@ -8,6 +8,7 @@ export const useForm = () => ({
   },
   handleSubmit: () => jest.fn().mockName('handleSubmit(fn)'),
   register: jest.fn().mockName('register'),
+  reset: jest.fn().mockName('reset'),
   watch: jest.fn().mockName('watch'),
 });
 

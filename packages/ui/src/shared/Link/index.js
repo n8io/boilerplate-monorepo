@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 import { styles as themeStyles } from './theme';
 
 const StyledLink = styled(RouterLink)`
-  display: contents;
   user-select: none;
+  width: fit-content;
 
   &:focus,
   &:hover {

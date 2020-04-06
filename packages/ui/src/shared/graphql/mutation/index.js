@@ -4,3 +4,4 @@ export * from './useUserLogout';
 export * from './useUserRegister';
 export * from './useUserRevokeRefreshTokens';
 export * from './useUserSelfUpdate';
+export * from './useUserSelfSecurityUpdate';

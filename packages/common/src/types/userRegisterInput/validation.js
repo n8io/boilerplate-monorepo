@@ -11,14 +11,13 @@ import { Validation } from '../validation';
 
 const { object, ref, string } = Validation;
 
-const password = {
+const passwordNew = {
   min: 8,
   pattern: regexToInputPattern(STRONG_PASSWORD_REGEX),
   required: true,
 };
 
 const Limits = {
-  confirmPassword: password,
   email: {
     max: 250,
     min: 3,
@@ -34,7 +33,8 @@ const Limits = {
     min: 2,
     required: true,
   },
-  password,
+  passwordConfirm: passwordNew,
+  passwordNew,
   username: {
     max: 50,
     min: 4,
@@ -43,14 +43,25 @@ const Limits = {
   },
 };
 
-const validationSchema = object().shape({
-  confirmPassword: string()
+const validationSchemaPassword = object().shape({
+  passwordConfirm: string()
     .trim()
     .required()
     .oneOf(
-      [ref('password'), null],
+      [ref('passwordNew'), null],
       PasswordErrorKeys.CONFIRM_PASSWORD_MISMATCH
     ),
+  passwordNew: string()
+    .trim()
+    .required()
+    .limits(Limits.passwordNew)
+    .matches(
+      Limits.passwordNew.pattern,
+      PasswordErrorKeys.DOES_NOT_MEET_PASSWORD_REQUIREMENTS
+    ),
+});
+
+const validationSchemaSettings = object().shape({
   email: string()
     .email()
     .required()
@@ -63,23 +74,22 @@ const validationSchema = object().shape({
     .trim()
     .required()
     .limits(Limits.givenName),
-  password: string()
-    .trim()
-    .required()
-    .limits(Limits.password)
-    .matches(
-      Limits.password.pattern,
-      PasswordErrorKeys.DOES_NOT_MEET_PASSWORD_REQUIREMENTS
-    ),
-  username: string()
-    .trim()
-    .required()
-    .limits(Limits.username)
-    .matches(
-      Limits.username.pattern,
-      UserErrorKeys.DOES_NOT_MEET_USERNAME_REQUIREMENTS
-    ),
 });
+
+const validationSchema = validationSchemaPassword
+  .concat(validationSchemaSettings)
+  .concat(
+    object().shape({
+      username: string()
+        .trim()
+        .required()
+        .limits(Limits.username)
+        .matches(
+          Limits.username.pattern,
+          UserErrorKeys.DOES_NOT_MEET_USERNAME_REQUIREMENTS
+        ),
+    })
+  );
 
 const isValid = validationSchema.isValid.bind(validationSchema);
 
@@ -88,4 +98,11 @@ const ErrorKeys = {
   ...UserErrorKeys,
 };
 
-export { ErrorKeys, Limits, isValid, validationSchema };
+export {
+  ErrorKeys,
+  Limits,
+  isValid,
+  validationSchema,
+  validationSchemaPassword,
+  validationSchemaSettings,
+};

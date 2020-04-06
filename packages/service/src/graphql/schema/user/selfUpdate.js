@@ -48,7 +48,7 @@ const resolver = async (_parent, { input }, context) => {
 };
 
 const typeDefs = gql`
-  "The user register input"
+  "The user's self update input"
   input UserSelfUpdateInput {
     "The user provided email address"
     email: String!
@@ -61,7 +61,7 @@ const typeDefs = gql`
   "Mutations"
   type Mutation {
     "The user self update mutation"
-    userSelfUpdate(input: UserSelfUpdateInput!): UserSnapshot @isAuthenticated
+    userSelfUpdate(input: UserSelfUpdateInput!): UserSnapshot! @isAuthenticated
   }
 `;
 
