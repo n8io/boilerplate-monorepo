@@ -12,6 +12,7 @@ import {
 } from 'types/customError';
 import { InternalErrorMessage } from 'types/errorMessage';
 import { PasswordSalt } from 'types/passwordSalt';
+import { RateLimit } from 'types/rateLimit';
 import { UserRole } from 'types/userRole';
 
 const MUTATION_NAME = 'userRegister';
@@ -97,6 +98,9 @@ const resolver = async (_parent, { input }, context) => {
   return true;
 };
 
+const { USER_REGISTER } = RateLimit.Map;
+const { burst: Burst, window: Window } = USER_REGISTER;
+
 const typeDefs = gql`
   "The user register input"
   input UserRegisterInput {
@@ -116,8 +120,8 @@ const typeDefs = gql`
   type Mutation {
     "The user register mutation"
     userRegister(input: UserRegisterInput!): Boolean
-      @rateLimitWindow(limit: 10, duration: ${30 * 60 /* 30min */})
-      @rateLimitBurst(limit: 1, duration: 60)
+      @rateLimitWindow(limit: ${Window.limit}, duration: ${Window.duration})
+      @rateLimitBurst(limit: ${Burst.limit}, duration: ${Burst.duration})
   }
 `;
 

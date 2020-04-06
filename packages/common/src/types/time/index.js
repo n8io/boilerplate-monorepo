@@ -1,6 +1,7 @@
-import { seconds } from './seconds';
+import { minutesToSeconds, seconds } from './seconds';
 
 const Time = {
+  minutesToSeconds,
   seconds,
 };
 

@@ -11,6 +11,7 @@ import {
   UserInvalidLoginUserNotFoundError,
 } from 'types/customError/user/login';
 import { InternalErrorMessage } from 'types/errorMessage';
+import { RateLimit } from 'types/rateLimit';
 
 const MUTATION_NAME = 'userLogin';
 const debugLog = logFactory({ method: 'userLogin', module: 'resolvers/user' });
@@ -73,6 +74,9 @@ const resolver = async (_parent, { input }, context) => {
   return Auth.encryptAccessToken(user);
 };
 
+const { USER_LOGIN } = RateLimit.Map;
+const { burst: Burst, window: Window } = USER_LOGIN;
+
 const typeDefs = gql`
   "The user login input"
   input UserLoginInput {
@@ -86,8 +90,8 @@ const typeDefs = gql`
   type Mutation {
     "The user login mutation"
     userLogin(input: UserLoginInput!): String!
-      @rateLimitWindow(limit: 50, duration: ${15 * 60 /* 15min */})
-      @rateLimitBurst(limit: 10, duration: 30)
+      @rateLimitWindow(limit: ${Window.limit}, duration: ${Window.duration})
+      @rateLimitBurst(limit: ${Burst.limit}, duration: ${Burst.duration})
   }
 `;
 
