@@ -14,6 +14,8 @@ export const common = {
   RANGE_STRING_LENGTH: 'Must be between {{min}} and {{max}} characters',
   RANGE_STRING_LENGTH_MAX: 'Must be less than or equal to {{max}} characters',
   RANGE_STRING_LENGTH_MIN: 'Must be at least {{min}} characters',
+  RATE_LIMIT_EXCEEDED:
+    'Too many attempts were made in a short period of time. Please wait a minute and try again.',
   REQUIRED: 'Required',
   about: 'About',
   dashboard: 'Dashboard',
