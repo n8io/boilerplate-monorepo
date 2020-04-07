@@ -33,6 +33,7 @@ export const common = {
   logout: 'Log Out',
   newPassword: 'New Password',
   password: 'Password',
+  profile: 'Profile',
   settings: 'Settings',
   signup: 'Sign Up',
   siteName: `{{name}} :: {{title}}`,

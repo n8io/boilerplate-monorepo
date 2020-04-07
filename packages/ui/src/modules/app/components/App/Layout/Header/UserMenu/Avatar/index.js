@@ -141,11 +141,11 @@ const Avatar = () => {
       >
         <StyledMenuItem
           {...menu}
-          aria-label={t('settings')}
+          aria-label={t('account')}
           onClick={onSettingsClick}
         >
           <ProfileIcon />
-          <MenuItemLabel>{t('settings')}</MenuItemLabel>
+          <MenuItemLabel>{t('account')}</MenuItemLabel>
         </StyledMenuItem>
         <StyledMenuItem
           {...menu}

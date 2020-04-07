@@ -16,9 +16,9 @@ exports[`<Main/> renders properly 1`] = `
     <p>
       <x-link
         data-testid="link"
-        to="/account/settings"
+        to="/account/profile"
       >
-        t(settings)
+        t(profile)
       </x-link>
     </p>
     <p>

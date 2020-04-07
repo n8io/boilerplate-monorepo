@@ -7,6 +7,10 @@ exports[`<Form/> renders properly 1`] = `
     issaveable="true"
     istouched="false"
   >
+    <x-errornotification
+      data-testid="error-notification"
+      messagekey="securityUpdateError"
+    />
     <x-passwordinput
       label="t(currentPassword)"
       min="8"

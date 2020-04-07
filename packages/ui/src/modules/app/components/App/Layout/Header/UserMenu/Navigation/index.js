@@ -69,7 +69,7 @@ const InnerSideBar = ({ onClose, t }) => {
           <NavLink
             onClick={onClose}
             route={Route.USER_ACCOUNT}
-            title={t('settings')}
+            title={t('account')}
           />
         )}
         <NavLink onClick={onClose} route={authRoute} title={authDisplayText} />

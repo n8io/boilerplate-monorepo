@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Settings/> renders properly 1`] = `
+exports[`<Profile/> renders properly 1`] = `
 <div>
   <x-breadcrumbs>
     <x-breadcrumb
@@ -9,12 +9,12 @@ exports[`<Settings/> renders properly 1`] = `
     />
     <x-breadcrumb
       isend="true"
-      text="t(settings)"
-      to="/account/settings"
+      text="t(profile)"
+      to="/account/profile"
     />
   </x-breadcrumbs>
   <x-header
-    title="t(settings)"
+    title="t(profile)"
   />
   <x-body>
     <x-form />

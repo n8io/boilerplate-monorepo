@@ -3,7 +3,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { ErrorNotification } from 'shared/ErrorNotification';
 import { EmailInput } from 'shared/forms/EmailInput';
-import { Form as SharedForm, Mode } from 'shared/forms/Form';
+import { Form as SharedForm } from 'shared/forms/Form';
 import { PasswordInput } from 'shared/forms/PasswordInput';
 import { SubmitButton } from 'shared/forms/SubmitButton';
 import { TextInput } from 'shared/forms/TextInput';
@@ -31,7 +31,6 @@ const Form = () => {
 
   const formProps = useForm({
     defaultValues: UserRegisterInput.initial,
-    mode: Mode.ON_BLUR,
     validationSchema: UserRegisterInput.validationSchema,
   });
 

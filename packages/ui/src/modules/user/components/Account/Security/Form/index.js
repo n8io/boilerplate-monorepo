@@ -2,7 +2,7 @@ import { UserSelfSecurityUpdateInput } from '@boilerplate-monorepo/common';
 import React, { useState } from 'react';
 import { ErrorNotification } from 'shared/ErrorNotification';
 import { SuccessNotification } from 'shared/SuccessNotification';
-import { Form as SharedForm, Mode } from 'shared/forms/Form';
+import { Form as SharedForm } from 'shared/forms/Form';
 import { PasswordInput } from 'shared/forms/PasswordInput';
 import { SubmitButton } from 'shared/forms/SubmitButton';
 import { useForm } from 'shared/forms/useForm';
@@ -20,7 +20,6 @@ const Form = () => {
 
   const formProps = useForm({
     defaultValues: UserSelfSecurityUpdateInput.initial,
-    mode: Mode.ON_BLUR,
     validationSchema: UserSelfSecurityUpdateInput.validationSchema,
   });
 
@@ -34,7 +33,6 @@ const Form = () => {
     });
 
     setIsSuccessful(true);
-
     reset(UserSelfSecurityUpdateInput.initial);
   };
 

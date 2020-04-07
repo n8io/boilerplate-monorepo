@@ -18,7 +18,7 @@ const Main = () => {
       <Header title={t('account')} />
       <Body>
         <p>
-          <Link to={Route.USER_ACCOUNT_SETTINGS.path}>{t('settings')}</Link>
+          <Link to={Route.USER_ACCOUNT_PROFILE.path}>{t('profile')}</Link>
         </p>
         <p>
           <Link to={Route.USER_ACCOUNT_SECURITY.path}>{t('security')}</Link>

@@ -4,6 +4,8 @@ import { render } from 'testHelpers';
 import { Form } from '.';
 
 jest.mock('shared/Button');
+jest.mock('shared/ErrorNotification');
+jest.mock('shared/SuccessNotification');
 jest.mock('shared/forms/Form');
 jest.mock('shared/forms/PasswordInput');
 jest.mock('shared/forms/SubmitButton');

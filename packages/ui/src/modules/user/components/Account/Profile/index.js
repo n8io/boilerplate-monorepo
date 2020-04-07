@@ -6,7 +6,7 @@ import { useTranslate } from 'shared/useTranslate';
 import { Route } from 'types/route';
 import { Form } from './Form';
 
-const Settings = () => {
+const Profile = () => {
   const t = useTranslate({
     component: 'user',
     namespace: 'user',
@@ -25,11 +25,11 @@ const Settings = () => {
         />
         <Breadcrumb
           isEnd
-          text={t('settings')}
-          to={Route.USER_ACCOUNT_SETTINGS.path}
+          text={t('profile')}
+          to={Route.USER_ACCOUNT_PROFILE.path}
         />
       </Breadcrumbs>
-      <Header title={t('settings')} />
+      <Header title={t('profile')} />
       <Body>
         <Form />
       </Body>
@@ -37,4 +37,4 @@ const Settings = () => {
   );
 };
 
-export { Settings };
+export { Profile };
