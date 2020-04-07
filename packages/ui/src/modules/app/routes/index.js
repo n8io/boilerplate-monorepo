@@ -5,17 +5,17 @@ import { Dashboard } from 'modules/dashboard';
 import { Login } from 'modules/login';
 import { Logout } from 'modules/logout';
 import { NotFound } from 'modules/notFound';
-import { Profile } from 'modules/profile';
 import { Signup } from 'modules/signup';
 import { TestPage } from 'modules/testPage';
+import { User } from 'modules/user';
 
 const componentMap = {
   about: About,
+  account: User,
   dashboard: Dashboard,
   login: Login,
   logout: Logout,
   notFound: NotFound,
-  profile: Profile,
   root: Dashboard,
   signup: Signup,
   testPage: TestPage,

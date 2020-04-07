@@ -68,8 +68,8 @@ const InnerSideBar = ({ onClose, t }) => {
         {isAuthenticated && (
           <NavLink
             onClick={onClose}
-            route={Route.USER_PROFILE}
-            title={t('profile')}
+            route={Route.USER_ACCOUNT}
+            title={t('account')}
           />
         )}
         <NavLink onClick={onClose} route={authRoute} title={authDisplayText} />

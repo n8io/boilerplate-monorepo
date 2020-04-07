@@ -1,5 +1,5 @@
 import { omit } from 'ramda';
 
-const formToInput = omit(['confirmPassword']);
+const formToInput = omit(['passwordConfirm']);
 
 export { formToInput };

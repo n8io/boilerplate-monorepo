@@ -7,6 +7,7 @@ const PublicErrorMessage = {
   FAILED_TO_RETRIEVE_SELF: 'Unable to find self info',
   FAILED_TO_REVOKE_REFRESH_TOKENS: 'Unable to revoke refresh tokens',
   FAILED_TO_UPDATE_SELF: 'Unable to update self',
+  FAILED_TO_UPDATE_SELF_SECURITY: 'Unable to update self security',
   INVALID_LOGIN: 'Invalid login',
   RATE_LIMIT_EXCEEDED: 'Rate limit exceeded',
   UNAUTHORIZED: 'Not authorized',

@@ -44,7 +44,7 @@ exports[`<Form/> renders login page 1`] = `
     <x-passwordinput
       label="t(password)"
       min="8"
-      name="password"
+      name="passwordNew"
       pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\\d)(?=.*[#$^+=!*()@%&]).{8,}$"
       patterndescription="t(DOES_NOT_MEET_PASSWORD_REQUIREMENTS)"
       required="true"
@@ -52,7 +52,7 @@ exports[`<Form/> renders login page 1`] = `
     <x-passwordinput
       label="t(confirmPassword)"
       min="8"
-      name="confirmPassword"
+      name="passwordConfirm"
       pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\\d)(?=.*[#$^+=!*()@%&]).{8,}$"
       patterndescription="t(DOES_NOT_MEET_PASSWORD_REQUIREMENTS)"
       required="true"

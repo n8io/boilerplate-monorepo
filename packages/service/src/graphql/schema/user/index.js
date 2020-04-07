@@ -4,6 +4,7 @@ import * as UserLogout from './logout';
 import * as UserRegister from './register';
 import * as UserRevokeRefreshTokens from './revokeRefreshTokens';
 import * as UserSelf from './self';
+import * as UserSelfSecurityUpdate from './selfSecurityUpdate';
 import * as UserSelfUpdate from './selfUpdate';
 import * as Users from './users';
 
@@ -14,6 +15,7 @@ const resolver = {
     userLogout: UserLogout.resolver,
     userRegister: UserRegister.resolver,
     userRevokeRefreshTokens: UserRevokeRefreshTokens.resolver,
+    userSelfSecurityUpdate: UserSelfSecurityUpdate.resolver,
     userSelfUpdate: UserSelfUpdate.resolver,
   },
   Query: {
@@ -29,6 +31,7 @@ const typeDefs = [
   UserRegister.typeDefs,
   UserRevokeRefreshTokens.typeDefs,
   UserSelf.typeDefs,
+  UserSelfSecurityUpdate.typeDefs,
   UserSelfUpdate.typeDefs,
   Users.typeDefs,
 ];

@@ -13,17 +13,19 @@ import { MdDashboard, MdPersonAdd } from 'react-icons/md';
 
 export const SORT_PROP_NAME = 'sortOrder';
 
+const exact = true;
+
 export const Enumeration = {
   ABOUT: {
     [SORT_PROP_NAME]: 10,
-    exact: true,
+    exact,
     icon: FaRegAddressBook,
     name: 'about',
     path: '/about',
   },
   DASHBOARD: {
     [SORT_PROP_NAME]: 1,
-    exact: true,
+    exact,
     icon: MdDashboard,
     name: 'dashboard',
     path: '/',
@@ -45,7 +47,7 @@ export const Enumeration = {
     path: '/404',
   },
   ROOT: {
-    exact: true,
+    exact,
     name: 'root',
     path: '/',
   },
@@ -56,15 +58,25 @@ export const Enumeration = {
   },
   TEST_PAGE: {
     [SORT_PROP_NAME]: config.isDebug ? 100 : undefined,
-    exact: true,
+    exact,
     icon: GiFireBowl,
     name: 'testPage',
     path: '/test',
   },
-  USER_PROFILE: {
+  USER_ACCOUNT: {
     icon: FaUserAlt,
-    name: 'profile',
-    path: '/profile',
+    name: 'account',
+    path: '/account',
+  },
+  USER_ACCOUNT_PROFILE: {
+    icon: FaUserAlt,
+    name: 'accountProfile',
+    path: '/account/profile',
+  },
+  USER_ACCOUNT_SECURITY: {
+    icon: FaUserAlt,
+    name: 'accountSecurity',
+    path: '/account/security',
   },
 };
 

@@ -1,4 +1,4 @@
-import { Enumeration, propTypes } from './typedefs';
+import { Enumeration, propTypes } from './typedef';
 
 export const SkipToDestination = {
   ...Enumeration,

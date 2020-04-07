@@ -1,5 +1,4 @@
 import { gql } from 'apollo-server-express';
-import { hash } from 'bcryptjs';
 import cuid from 'cuid';
 import { userRead } from 'db/user/userRead';
 import { userRegister } from 'db/user/userRegister';
@@ -11,7 +10,7 @@ import {
   RegisterUserAlreadyExistsError,
 } from 'types/customError';
 import { InternalErrorMessage } from 'types/errorMessage';
-import { PasswordSalt } from 'types/passwordSalt';
+import { Password } from 'types/password';
 import { RateLimit } from 'types/rateLimit';
 import { UserRole } from 'types/userRole';
 
@@ -28,20 +27,19 @@ const resolver = async (_parent, { input }, context) => {
     email,
     familyName,
     givenName,
-    password: clearTextPassword,
+    passwordNew: clearTextPassword,
     role = UserRole.USER,
     username,
   } = input;
 
-  const salt = await PasswordSalt.generate();
-  const passwordHash = await hash(clearTextPassword, salt);
+  const passwordHash = await Password.hash(clearTextPassword);
   let user = null;
 
   debugLog('👾 UserRegister', {
     email,
     familyName,
     givenName,
-    password: '*** redacted ***',
+    passwordNew: '*** redacted ***',
     role,
     username,
   });
@@ -111,7 +109,7 @@ const typeDefs = gql`
     "The user provided first name"
     givenName: String!
     "The user provided clear text password"
-    password: String!
+    passwordNew: String!
     "The user provided username"
     username: String!
   }
@@ -119,7 +117,7 @@ const typeDefs = gql`
   "Mutations"
   type Mutation {
     "The user register mutation"
-    userRegister(input: UserRegisterInput!): Boolean
+    userRegister(input: UserRegisterInput!): Boolean!
       @rateLimitWindow(limit: ${Window.limit}, duration: ${Window.duration})
       @rateLimitBurst(limit: ${Burst.limit}, duration: ${Burst.duration})
   }

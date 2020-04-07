@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Main/> renders properly 1`] = `
+<div>
+  <x-breadcrumbs>
+    <x-breadcrumb
+      isend="true"
+      text="t(account)"
+      to="/account"
+    />
+  </x-breadcrumbs>
+  <x-header
+    title="t(account)"
+  />
+  <x-body>
+    <p>
+      <x-link
+        data-testid="link"
+        to="/account/profile"
+      >
+        t(profile)
+      </x-link>
+    </p>
+    <p>
+      <x-link
+        data-testid="link"
+        to="/account/security"
+      >
+        t(security)
+      </x-link>
+    </p>
+  </x-body>
+</div>
+`;

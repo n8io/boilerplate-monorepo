@@ -3,9 +3,9 @@ import { lazy } from 'react';
 
 const Lazy = lazy(() =>
   import(
-    /* webpackChunkName: "profile" */
+    /* webpackChunkName: "user" */
     './components'
-  ).then(Utils.renameKeys({ Profile: 'default' }))
+  ).then(Utils.renameKeys({ User: 'default' }))
 );
 
-export { Lazy as Profile };
+export { Lazy as User };

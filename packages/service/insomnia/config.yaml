@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2020-04-03T21:07:00.485Z
+__export_date: 2020-04-07T17:25:38.628Z
 __export_source: insomnia.desktop.app:v7.1.1
 resources:
   - _id: req_45c96e3cce6845569aaeb3db515b8cc3
@@ -19,7 +19,7 @@ resources:
     isPrivate: false
     metaSortKey: -1578263622751
     method: POST
-    modified: 1585948000527
+    modified: 1586208597191
     name: UserLogin
     parameters: []
     parentId: fld_a2d0e0de6c984471bfb0d0cbef41a924
@@ -104,7 +104,7 @@ resources:
       mimeType: application/graphql
       text: '{"query":"mutation UserRegister($input:
         UserRegisterInput!){\n  userRegister(input:
-        $input)\n}\n","variables":{"input":{"givenName":"Nate","familyName":"Clark","email":"test@test.com","password":"Password!23","username":"test"}},"operationName":"UserRegister"}'
+        $input)\n}\n","variables":{"input":{"givenName":"Jason","familyName":"Pero","email":"test@test2.com","password":"Password!23","username":"jpero"}},"operationName":"UserRegister"}'
     created: 1577801562443
     description: ""
     headers:
@@ -114,7 +114,7 @@ resources:
     isPrivate: false
     metaSortKey: -1578263622726
     method: POST
-    modified: 1585933150507
+    modified: 1586117588694
     name: UserRegister
     parameters: []
     parentId: fld_a2d0e0de6c984471bfb0d0cbef41a924
@@ -157,6 +157,37 @@ resources:
     settingStoreCookies: true
     url: "{{ graphqlUri  }}"
     _type: request
+  - _id: req_0e4e2585af734dabaf3b4b05d9f2471e
+    authentication:
+      prefix: "{{ accessTokenPrefix  }}"
+      token: "{{accessToken}}"
+      type: bearer
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation UserSelfSecurityUpdate($input:
+        UserSelfSecurityUpdateInput!) {\n  userSelfSecurityUpdate(input:
+        $input)\n}\n","variables":{"input":{"passwordCurrent":"Nathan","passwordNew":"Password!23"}},"operationName":"UserSelfSecurityUpdate"}'
+    created: 1586208533522
+    description: ""
+    headers:
+      - id: pair_da0e8e267c1940c0912468bcba4fcc12
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1578263622710.375
+    method: POST
+    modified: 1586209438407
+    name: UserSelfSecurityUpdate
+    parameters: []
+    parentId: fld_a2d0e0de6c984471bfb0d0cbef41a924
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ graphqlUri  }}"
+    _type: request
   - _id: req_af25446c00a04c87a0e652ffd78dc470
     authentication:
       prefix: "{{ accessTokenPrefix  }}"
@@ -178,7 +209,7 @@ resources:
     isPrivate: false
     metaSortKey: -1578263622707.25
     method: POST
-    modified: 1585947132620
+    modified: 1586208525634
     name: UserSelfUpdate
     parameters: []
     parentId: fld_a2d0e0de6c984471bfb0d0cbef41a924
@@ -198,7 +229,7 @@ resources:
     body:
       mimeType: application/graphql
       text: '{"query":"mutation UserDelete($id: ID!) {\n  userDelete(id:
-        $id)\n}\n","variables":{"id":"ck76p00y200005cad74u323nw"},"operationName":"UserDelete"}'
+        $id)\n}\n","variables":{"id":"ck8kfnf9c000019fk4c6sd67k"},"operationName":"UserDelete"}'
     created: 1578180146440
     description: ""
     headers:
@@ -208,7 +239,7 @@ resources:
     isPrivate: false
     metaSortKey: -1578263622701
     method: POST
-    modified: 1585702850362
+    modified: 1586097479069
     name: UserDelete
     parameters: []
     parentId: fld_a2d0e0de6c984471bfb0d0cbef41a924
@@ -243,7 +274,7 @@ resources:
     isPrivate: false
     metaSortKey: -1577800601469.75
     method: POST
-    modified: 1585948003020
+    modified: 1586117468958
     name: Users
     parameters: []
     parentId: fld_16d435bc119b4cc2af547a3f4de21aa9
@@ -285,7 +316,7 @@ resources:
     isPrivate: false
     metaSortKey: -1577800601463.5
     method: POST
-    modified: 1585947989278
+    modified: 1586119148922
     name: UserSelf
     parameters: []
     parentId: fld_16d435bc119b4cc2af547a3f4de21aa9
@@ -386,17 +417,17 @@ resources:
     cookies:
       - creation: 2020-01-14T00:36:22.738Z
         domain: localhost
-        expires: 2020-04-10T21:06:44.000Z
+        expires: 2020-04-13T21:43:59.000Z
         hostOnly: true
         httpOnly: true
-        id: "4254780728334904"
+        id: "9585112017117978"
         key: jid
-        lastAccessed: 2020-04-03T21:06:44.210Z
+        lastAccessed: 2020-04-06T21:43:59.038Z
         maxAge: 604800
         path: /refresh_token
-        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im44QG44aW8uY29tIiwiaWQiOiJjazhmNXRkeXQwMDAwajBmazhyZ2Q3amNjIiwicm9sZSI6IkFETUlOIiwidG9rZW5WZXJzaW9uIjowLCJ1c2VybmFtZSI6Im44aW8iLCJpYXQiOjE1ODU5NDgwMDQsImV4cCI6MTU4NjU1MjgwNH0.E6nyKk9shDUZH-gFyPrPOiXfpOHJsfwBitvcOnpsYcs
+        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im44QG44aW8uY29tIiwiaWQiOiJjazhmNXRkeXQwMDAwajBmazhyZ2Q3amNjIiwicm9sZSI6IkFETUlOIiwidG9rZW5WZXJzaW9uIjowLCJ1c2VybmFtZSI6Im44aW8iLCJpYXQiOjE1ODYyMDk0MzksImV4cCI6MTU4NjgxNDIzOX0.NUEDctLLQdlW-3jIMS8NyZcPIPTSGSPYHCVANApOIVQ
     created: 1577800360958
-    modified: 1585948004210
+    modified: 1586209439038
     name: Default Jar
     parentId: wrk_b673aad6c5df416ead4f262eb230cf9c
     _type: cookie_jar

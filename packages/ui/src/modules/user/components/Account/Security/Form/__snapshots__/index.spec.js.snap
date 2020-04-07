@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Form/> renders properly 1`] = `
+<div>
+  <x-form
+    isdirty="false"
+    issaveable="true"
+    istouched="false"
+  >
+    <x-errornotification
+      data-testid="error-notification"
+      messagekey="securityUpdateError"
+    />
+    <x-passwordinput
+      label="t(currentPassword)"
+      min="8"
+      name="passwordCurrent"
+      patterndescription="t(DOES_NOT_MEET_PASSWORD_REQUIREMENTS)"
+      required="true"
+    />
+    <x-passwordinput
+      label="t(newPassword)"
+      min="8"
+      name="passwordNew"
+      pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\\d)(?=.*[#$^+=!*()@%&]).{8,}$"
+      patterndescription="t(DOES_NOT_MEET_PASSWORD_REQUIREMENTS)"
+      required="true"
+    />
+    <x-passwordinput
+      label="t(confirmPassword)"
+      min="8"
+      name="passwordConfirm"
+      pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\\d)(?=.*[#$^+=!*()@%&]).{8,}$"
+      patterndescription="t(DOES_NOT_MEET_PASSWORD_REQUIREMENTS)"
+      required="true"
+    />
+    <x-submitbutton
+      isautowidth="true"
+      text="t(updatePassword)"
+    />
+  </x-form>
+</div>
+`;

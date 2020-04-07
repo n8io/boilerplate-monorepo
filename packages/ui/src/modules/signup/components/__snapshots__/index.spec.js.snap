@@ -16,12 +16,12 @@ exports[`<Signup/> renders signup page 1`] = `
     <x-body>
       <br />
       or 
-      <a
-        class="Link__StyledLink-faqv70-0 gfLtRU"
-        href="/login"
+      <x-link
+        data-testid="link"
+        to="/login"
       >
         t(login)
-      </a>
+      </x-link>
     </x-body>
   </x-content>
 </x-page>

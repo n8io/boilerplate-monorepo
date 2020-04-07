@@ -1,8 +1,9 @@
 import { FetchPolicy, UserSelfUpdateInput } from '@boilerplate-monorepo/common';
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { ErrorNotification } from 'shared/ErrorNotification';
+import { SuccessNotification } from 'shared/SuccessNotification';
 import { EmailInput } from 'shared/forms/EmailInput';
-import { Form as SharedForm, Mode } from 'shared/forms/Form';
+import { Form as SharedForm } from 'shared/forms/Form';
 import { SubmitButton } from 'shared/forms/SubmitButton';
 import { TextInput } from 'shared/forms/TextInput';
 import { useForm } from 'shared/forms/useForm';
@@ -12,40 +13,49 @@ import {
   useUserSelfUpdate,
 } from 'shared/graphql';
 import { useTranslate } from 'shared/useTranslate';
-import { Route } from 'types/route';
 
 const Form = () => {
   const t = useTranslate({
-    component: 'profile',
-    namespace: 'profile',
+    component: 'user',
+    namespace: 'user',
   });
 
-  const history = useHistory();
-  const [mutate] = useUserSelfUpdate();
+  const [isSuccessful, setIsSuccessful] = useState(false);
+  const [mutate, { error }] = useUserSelfUpdate();
 
   const { data: self, loading } = useUserSelf({
     fetchPolicy: FetchPolicy.CACHE_AND_NETWORK,
   });
 
+  const formProps = useForm({
+    validationSchema: UserSelfUpdateInput.validationSchema,
+  });
+
+  const { reset } = formProps;
+
   const onSelfUpdate = async input => {
+    setIsSuccessful(false);
+
     await mutate({
       refetchQueries: [{ query: QUERY_USER_SELF }],
       variables: { input: UserSelfUpdateInput.formToInput(input) },
     });
 
-    history.push(Route.DASHBOARD.path);
+    setIsSuccessful(true);
   };
 
-  const formProps = useForm({
-    defaultValues: UserSelfUpdateInput.makeInitial(self),
-    mode: Mode.ON_BLUR,
-    validationSchema: UserSelfUpdateInput.validationSchema,
-  });
+  useEffect(() => {
+    reset(UserSelfUpdateInput.makeInitial(self));
+  }, [self, reset]);
 
   if (loading || !self) return null;
 
   return (
     <SharedForm {...formProps} onSubmit={onSelfUpdate}>
+      <ErrorNotification error={error} messageKey="securityUpdateError" t={t} />
+      {isSuccessful && (
+        <SuccessNotification message={t('profileUpdateSuccess')} />
+      )}
       <TextInput
         {...UserSelfUpdateInput.Limits.username}
         disabled

@@ -1,4 +1,4 @@
-import { UserRegisterInput } from 'types/userRegisterInput';
+import { UserRegisterInput } from '.';
 
 const { ErrorKeys, isValid } = UserRegisterInput;
 
@@ -47,7 +47,7 @@ describe('user input validation', () => {
     describe('because password', () => {
       test(`does not match confirm password`, async () => {
         const userInput = UserRegisterInput.apiExample({
-          confirmPassword: 'DOES_NOT_MATCH',
+          passwordConfirm: 'DOES_NOT_MATCH',
         });
 
         const actual = await isValid(userInput);
@@ -56,12 +56,12 @@ describe('user input validation', () => {
       });
 
       test('is too short', async () => {
-        const tooSmallLength = UserRegisterInput.Limits.password.min - 1;
-        const password = 'Aa1!'.padEnd(tooSmallLength, 'a');
+        const tooSmallLength = UserRegisterInput.Limits.passwordNew.min - 1;
+        const passwordNew = 'Aa1!'.padEnd(tooSmallLength, 'a');
 
         const userInput = UserRegisterInput.apiExample({
-          confirmPassword: password,
-          password,
+          passwordConfirm: passwordNew,
+          passwordNew,
         });
 
         const actual = await isValid(userInput);
@@ -70,14 +70,14 @@ describe('user input validation', () => {
       });
 
       test('is missing an uppercase letter', async () => {
-        const password = 'a1!'.padEnd(
-          UserRegisterInput.Limits.password.min,
+        const passwordNew = 'a1!'.padEnd(
+          UserRegisterInput.Limits.passwordNew.min,
           'a'
         );
 
         const userInput = UserRegisterInput.apiExample({
-          confirmPassword: password,
-          password,
+          passwordConfirm: passwordNew,
+          passwordNew,
         });
 
         const actual = await isValid(userInput);
@@ -86,14 +86,14 @@ describe('user input validation', () => {
       });
 
       test('is missing a lower letter', async () => {
-        const password = 'A1!'.padEnd(
-          UserRegisterInput.Limits.password.min,
+        const passwordNew = 'A1!'.padEnd(
+          UserRegisterInput.Limits.passwordNew.min,
           'A'
         );
 
         const userInput = UserRegisterInput.apiExample({
-          confirmPassword: password,
-          password,
+          passwordConfirm: passwordNew,
+          passwordNew,
         });
 
         const actual = await isValid(userInput);
@@ -102,14 +102,14 @@ describe('user input validation', () => {
       });
 
       test('is missing a number', async () => {
-        const password = 'Aa!'.padEnd(
-          UserRegisterInput.Limits.password.min,
+        const passwordNew = 'Aa!'.padEnd(
+          UserRegisterInput.Limits.passwordNew.min,
           'A'
         );
 
         const userInput = UserRegisterInput.apiExample({
-          confirmPassword: password,
-          password,
+          passwordConfirm: passwordNew,
+          passwordNew,
         });
 
         const actual = await isValid(userInput);
@@ -118,14 +118,14 @@ describe('user input validation', () => {
       });
 
       test('is missing a special character', async () => {
-        const password = 'Aa1'.padEnd(
-          UserRegisterInput.Limits.password.min,
+        const passwordNew = 'Aa1'.padEnd(
+          UserRegisterInput.Limits.passwordNew.min,
           'A'
         );
 
         const userInput = UserRegisterInput.apiExample({
-          confirmPassword: password,
-          password,
+          passwordConfirm: passwordNew,
+          passwordNew,
         });
 
         const actual = await isValid(userInput);
@@ -140,8 +140,8 @@ describe('user input validation', () => {
       const weakPassword = 'WEAK_PASSWORD';
 
       const userInput = UserRegisterInput.apiExample({
-        confirmPassword: weakPassword,
-        password: weakPassword,
+        passwordConfirm: weakPassword,
+        passwordNew: weakPassword,
       });
 
       await expect(
@@ -150,12 +150,12 @@ describe('user input validation', () => {
     });
 
     test('when the confirm password does not match', async () => {
-      const confirmPassword = 'PASSWORD_THAT_DOES_NOT_MATCH';
-      const password = 'PASSWORD';
+      const passwordConfirm = 'PASSWORD_THAT_DOES_NOT_MATCH';
+      const passwordNew = 'PASSWORD';
 
       const userInput = UserRegisterInput.apiExample({
-        confirmPassword,
-        password,
+        passwordConfirm,
+        passwordNew,
       });
 
       await expect(

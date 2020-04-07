@@ -3,7 +3,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { ErrorNotification } from 'shared/ErrorNotification';
 import { EmailInput } from 'shared/forms/EmailInput';
-import { Form as SharedForm, Mode } from 'shared/forms/Form';
+import { Form as SharedForm } from 'shared/forms/Form';
 import { PasswordInput } from 'shared/forms/PasswordInput';
 import { SubmitButton } from 'shared/forms/SubmitButton';
 import { TextInput } from 'shared/forms/TextInput';
@@ -31,7 +31,6 @@ const Form = () => {
 
   const formProps = useForm({
     defaultValues: UserRegisterInput.initial,
-    mode: Mode.ON_BLUR,
     validationSchema: UserRegisterInput.validationSchema,
   });
 
@@ -60,17 +59,17 @@ const Form = () => {
         name="familyName"
       />
       <PasswordInput
-        {...UserRegisterInput.Limits.password}
+        {...UserRegisterInput.Limits.passwordNew}
         formatError={t}
         label={t('password')}
-        name="password"
+        name="passwordNew"
         patternDescription={t('DOES_NOT_MEET_PASSWORD_REQUIREMENTS')}
       />
       <PasswordInput
-        {...UserRegisterInput.Limits.confirmPassword}
+        {...UserRegisterInput.Limits.passwordConfirm}
         formatError={t}
         label={t('confirmPassword')}
-        name="confirmPassword"
+        name="passwordConfirm"
         patternDescription={t('DOES_NOT_MEET_PASSWORD_REQUIREMENTS')}
       />
       <SubmitButton isAutoWidth text={t('title')} />

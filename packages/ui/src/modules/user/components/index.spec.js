@@ -3,20 +3,20 @@ import React from 'react';
 import * as UseMutationHooks from 'shared/graphql/mutation/useUserSelfUpdate';
 import * as UseQueryHooks from 'shared/graphql/query/useUserSelf';
 import { render } from 'testHelpers';
-import { Profile } from '.';
+import { User } from '.';
 
 jest.mock('shared/Content');
 jest.mock('shared/Page');
 
-jest.mock('./Form', () => ({
-  Form: props => <x-Form {...props} />,
+jest.mock('./Account', () => ({
+  Account: props => <x-Account {...props} data-testid="routing" />,
 }));
 
-describe('<Profile/>', () => {
+describe('<User/>', () => {
   const defaultProps = {};
 
   const renderComponent = overrides =>
-    render(<Profile {...defaultProps} {...overrides} />);
+    render(<User {...defaultProps} {...overrides} />);
 
   beforeEach(() => {
     const useUserSelfUpdate = td.replace(UseMutationHooks, 'useUserSelfUpdate');
@@ -41,7 +41,7 @@ describe('<Profile/>', () => {
     });
   });
 
-  test('renders profile page', () => {
+  test('renders properly', () => {
     const { container } = renderComponent();
 
     expect(container.firstChild).toMatchSnapshot();

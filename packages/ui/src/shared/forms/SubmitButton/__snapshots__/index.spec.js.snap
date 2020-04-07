@@ -7,7 +7,7 @@ exports[`<SubmitButton/> renders a submit button 1`] = `
 >
   <x-button
     context="PRIMARY"
-    disabled="false"
+    disabled="true"
     text="LABEL"
     type="submit"
   />
