@@ -57,10 +57,7 @@ exports[`<Form/> renders login page 1`] = `
       patterndescription="t(DOES_NOT_MEET_PASSWORD_REQUIREMENTS)"
       required="true"
     />
-    <x-submitbutton
-      isautowidth="true"
-      text="t(title)"
-    />
+    <x-actions />
   </x-form>
 </div>
 `;

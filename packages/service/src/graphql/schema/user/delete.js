@@ -21,7 +21,7 @@ const debugLog = logFactory({
 const resolver = async (_parent, { id }, context) => {
   const { user } = context;
 
-  debugLog('👾 UserDelete', id);
+  debugLog(`👾 ${MUTATION_NAME}`, id);
 
   if (user.id === id) {
     log.error(InternalErrorMessage.USER_ATTEMPTED_TO_SELF_DELETE, {
@@ -69,7 +69,7 @@ const typeDefs = gql`
   "Mutations"
   type Mutation {
     "Deletes a user from the system"
-    userDelete(id: ID!): Boolean!
+    ${MUTATION_NAME}(id: ID!): Boolean!
       @hasPermission(permission: "${Permission.USERS_MANAGE}")
       @isAuthenticated
   }

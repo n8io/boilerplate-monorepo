@@ -14,7 +14,7 @@ import { Password } from 'types/password';
 const MUTATION_NAME = 'userSelfSecurityUpdate';
 
 const debugLog = logFactory({
-  method: 'userSelfSecurityUpdate',
+  method: MUTATION_NAME,
   module: 'resolvers/user',
 });
 
@@ -27,7 +27,7 @@ const resolver = async (_parent, { input }, context) => {
     passwordNew: clearTextPasswordNew,
   } = input;
 
-  debugLog('👾 UserSelfSecurityUpdate', input);
+  debugLog(`👾 ${MUTATION_NAME}`, input);
 
   let userSelf = null;
 
@@ -101,7 +101,7 @@ const typeDefs = gql`
   "Mutations"
   type Mutation {
     "The user self security update mutation"
-    userSelfSecurityUpdate(input: UserSelfSecurityUpdateInput!): Boolean!
+    ${MUTATION_NAME}(input: UserSelfSecurityUpdateInput!): Boolean!
       @isAuthenticated
   }
 `;

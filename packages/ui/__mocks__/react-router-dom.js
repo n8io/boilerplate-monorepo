@@ -1,3 +1,5 @@
+import React from 'react';
+
 export * from 'react-router-dom';
 
 const history = {
@@ -5,6 +7,7 @@ const history = {
 };
 
 const useHistory = () => history;
+
 const useLocation = () => ({
   host: 'HOST',
   href: 'HREF',
@@ -13,4 +16,7 @@ const useLocation = () => ({
   protocol: 'PROTOCOL',
 });
 
-export { useHistory, useLocation };
+const Route = props => <x-Route {...props} />;
+const Switch = props => <x-Switch {...props} />;
+
+export { Route, Switch, useHistory, useLocation };

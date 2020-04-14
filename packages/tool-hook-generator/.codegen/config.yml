@@ -4,13 +4,3 @@ generates:
   ./.codegen/schema.json:
     plugins:
       - 'introspection'
-  # ./.codegen/types.ts:
-  #   plugins:
-  #     - add: /* eslint-disable */
-  #     - 'typescript'
-  #     - 'typescript-operations'
-  #     - 'typescript-react-apollo'
-  #   config:
-  #     withComponent: false
-  #     withHOC: false
-  #     withHooks: true

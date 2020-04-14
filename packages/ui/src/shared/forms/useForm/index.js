@@ -10,10 +10,7 @@ const useForm = options => {
 
   return {
     ...formProps,
-    isDirty,
     isSaveable: (isValid || !isTouched) && !isSubmitting && isDirty,
-    isSubmitting,
-    isTouched,
   };
 };
 

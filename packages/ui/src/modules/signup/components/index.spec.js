@@ -5,9 +5,7 @@ import { Signup } from '.';
 
 jest.mock('shared/Button');
 jest.mock('shared/Content');
-jest.mock('shared/Link');
 jest.mock('shared/Page');
-jest.mock('shared/useAuth');
 
 jest.mock('./Form', () => ({
   Form: props => <x-Form {...props} />,

@@ -21,9 +21,8 @@ exports[`<Form/> renders login page 1`] = `
       name="password"
       required="true"
     />
-    <x-submitbutton
-      isautowidth="true"
-      text="t(logout)"
+    <x-actions
+      isauthenticated="true"
     />
   </x-form>
 </div>

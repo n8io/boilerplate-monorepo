@@ -3,7 +3,6 @@ import { userRead } from 'db/user/userRead';
 import { log } from 'log';
 import { logFactory } from 'log/logFactory';
 import { Auth } from 'types/auth';
-import { toSafeLog } from 'types/auth/transforms';
 import {
   DatabaseError,
   UserSelfDeletedError,
@@ -14,7 +13,7 @@ import { InternalErrorMessage } from 'types/errorMessage';
 
 const QUERY_NAME = 'userSelf';
 
-const debugLog = logFactory({ method: 'me', module: 'resolvers/user' });
+const debugLog = logFactory({ method: QUERY_NAME, module: 'resolvers/user' });
 
 // eslint-disable-next-line max-statements
 const resolver = async (_parent, _args, context) => {
@@ -66,7 +65,7 @@ const resolver = async (_parent, _args, context) => {
     });
   }
 
-  debugLog('✅ Found me', toSafeLog(userSelf));
+  debugLog('✅ Found me self', userSelf);
 
   return userSelf;
 };
@@ -83,7 +82,7 @@ const typeDefs = gql`
   "The user type"
   type UserSnapshot {
     "The user's email"
-    email: String!
+    email: EmailAddress!
     "The user's last name"
     familyName: String!
     "The user's first name"
@@ -96,10 +95,9 @@ const typeDefs = gql`
     username: String!
   }
 
-  "The root query type"
   type Query {
     "Return the actively logged in user"
-    userSelf: UserSnapshot! @isAuthenticated
+    ${QUERY_NAME}: UserSnapshot! @isAuthenticated
   }
 `;
 

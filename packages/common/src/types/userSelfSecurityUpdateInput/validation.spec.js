@@ -2,11 +2,11 @@ import { UserSelfSecurityUpdateInput } from '.';
 
 const { isValid } = UserSelfSecurityUpdateInput;
 
-describe('user self update input validation', () => {
+describe('user self security update input validation', () => {
   describe('is valid', () => {
-    test('with a valid user self update input', async () => {
-      const userInput = UserSelfSecurityUpdateInput.apiExample();
-      const actual = await isValid(userInput);
+    test('with a valid input', async () => {
+      const input = UserSelfSecurityUpdateInput.apiExample();
+      const actual = await isValid(input);
 
       expect(actual).toEqual(true);
     });
@@ -14,11 +14,11 @@ describe('user self update input validation', () => {
 
   describe('is not valid', () => {
     test('without a confirmation password', async () => {
-      const userInput = UserSelfSecurityUpdateInput.apiExample({
+      const input = UserSelfSecurityUpdateInput.apiExample({
         passwordConfirm: null,
       });
 
-      const actual = await isValid(userInput);
+      const actual = await isValid(input);
 
       expect(actual).toEqual(false);
     });

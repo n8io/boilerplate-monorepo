@@ -1,0 +1,5 @@
+const ErrorKeys = {
+  DOES_NOT_MEET_ACCOUNT_REQUIREMENTS: 'DOES_NOT_MEET_ACCOUNT_REQUIREMENTS',
+};
+
+export { ErrorKeys };

@@ -1,4 +1,4 @@
-import { PaginationInput } from 'types/paginationInput';
+import { PaginationInput } from '.';
 
 const { isValid } = PaginationInput;
 

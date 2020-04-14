@@ -2,7 +2,13 @@ import { initial } from './creation';
 import { apiExample, uiExample } from './examples';
 import { formToInput } from './transforms';
 import { propTypes } from './typedef';
-import { ErrorKeys, isValid, Limits, validationSchema } from './validation';
+import {
+  ErrorKeys,
+  isValid,
+  Limits,
+  validationSchema,
+  validationSchemaServer,
+} from './validation';
 
 const UserSelfSecurityUpdateInput = {
   ErrorKeys,
@@ -14,6 +20,7 @@ const UserSelfSecurityUpdateInput = {
   propTypes,
   uiExample,
   validationSchema,
+  validationSchemaServer,
 };
 
 export { UserSelfSecurityUpdateInput };

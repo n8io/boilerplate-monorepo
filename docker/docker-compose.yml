@@ -32,6 +32,19 @@ services:
     ports:
       - 8081:8081
 
+  email:
+    container_name: email
+    image: mailhog/mailhog
+    restart: always
+    environment:
+      MH_MAILDIR_PATH: /tmp
+      MH_STORAGE: maildir
+    ports:
+      - 1025:1025
+      - 8025:8025
+    volumes:
+      - email-dir:/tmp
+
   ui:
     container_name: ui
     build:
@@ -50,8 +63,6 @@ services:
       dockerfile: ./docker/Dockerfile.service
     ports:
       - 4000:4000
-    environment:
-      - TYPEORM_HOST=db
     depends_on:
       - cache
       - db
@@ -60,5 +71,6 @@ services:
       - yarn-cache-service:/yarn
 
 volumes:
+  email-dir:
   yarn-cache-ui:
   yarn-cache-service:

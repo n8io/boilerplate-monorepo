@@ -73,6 +73,41 @@ export const Enumeration = {
     name: 'accountProfile',
     path: '/account/profile',
   },
+  USER_ACCOUNT_RECOVERY: {
+    icon: FaUserAlt,
+    name: 'accountRecovery',
+    path: '/account/recovery',
+  },
+  USER_ACCOUNT_RECOVERY_FIND: {
+    icon: FaUserAlt,
+    name: 'accountFind',
+    path: '/account/recovery/find',
+  },
+  USER_ACCOUNT_RECOVERY_NOTIFY: {
+    icon: FaUserAlt,
+    name: 'accountNotify',
+    path: '/account/recovery/notify',
+  },
+  USER_ACCOUNT_RECOVERY_ONE_TIME_PASSWORD: {
+    icon: FaUserAlt,
+    name: 'accountOTP',
+    path: '/account/recovery/otp',
+  },
+  USER_ACCOUNT_RECOVERY_PASSWORD_RESET: {
+    icon: FaUserAlt,
+    name: 'accountPasswordReset',
+    path: '/account/recovery/reset',
+  },
+  USER_ACCOUNT_RECOVERY_PASSWORD_RESET_LANDING: {
+    icon: FaUserAlt,
+    name: 'accountPasswordResetLanding',
+    path: '/account/recovery/reset/:token',
+  },
+  USER_ACCOUNT_RECOVERY_PASSWORD_RESET_VALIDATE: {
+    icon: FaUserAlt,
+    name: 'accountPasswordResetValidate',
+    path: '/account/recovery/reset/validate',
+  },
   USER_ACCOUNT_SECURITY: {
     icon: FaUserAlt,
     name: 'accountSecurity',

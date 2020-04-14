@@ -14,7 +14,11 @@ import { Password } from 'types/password';
 import { RateLimit } from 'types/rateLimit';
 
 const MUTATION_NAME = 'userLogin';
-const debugLog = logFactory({ method: 'userLogin', module: 'resolvers/user' });
+
+const debugLog = logFactory({
+  method: MUTATION_NAME,
+  module: 'resolvers/user',
+});
 
 // eslint-disable-next-line complexity,max-statements
 const resolver = async (_parent, { input }, context) => {
@@ -26,7 +30,7 @@ const resolver = async (_parent, { input }, context) => {
 
   let user = null;
 
-  debugLog('👾 UserLogin', { username });
+  debugLog(`👾 ${MUTATION_NAME}`, { username });
 
   try {
     user = await userReadRaw(criteria, context);
@@ -92,7 +96,7 @@ const typeDefs = gql`
   "Mutations"
   type Mutation {
     "The user login mutation"
-    userLogin(input: UserLoginInput!): String!
+    ${MUTATION_NAME}(input: UserLoginInput!): String!
       @rateLimitWindow(limit: ${Window.limit}, duration: ${Window.duration})
       @rateLimitBurst(limit: ${Burst.limit}, duration: ${Burst.duration})
   }

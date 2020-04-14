@@ -4,13 +4,13 @@ import { useHistory } from 'react-router-dom';
 import { ErrorNotification } from 'shared/ErrorNotification';
 import { Form as SharedForm } from 'shared/forms/Form';
 import { PasswordInput } from 'shared/forms/PasswordInput';
-import { SubmitButton } from 'shared/forms/SubmitButton';
 import { TextInput } from 'shared/forms/TextInput';
 import { useForm } from 'shared/forms/useForm';
 import { QUERY_USER_SELF, useUserLogin } from 'shared/graphql';
 import { useAuth } from 'shared/useAuth';
 import { useTranslate } from 'shared/useTranslate';
 import { Route } from 'types/route';
+import { Actions } from './Actions';
 
 const Form = () => {
   const t = useTranslate({
@@ -47,8 +47,6 @@ const Form = () => {
       variables: { input: values },
     });
 
-  const logInOutKey = isAuthenticated ? t('logout') : t('title');
-
   return (
     <>
       <ErrorNotification error={error} messageKey="loginFailed" t={t} />
@@ -64,7 +62,7 @@ const Form = () => {
           label={t('password')}
           name="password"
         />
-        <SubmitButton isAutoWidth text={logInOutKey} />
+        <Actions isAuthenticated={isAuthenticated} />
       </SharedForm>
     </>
   );

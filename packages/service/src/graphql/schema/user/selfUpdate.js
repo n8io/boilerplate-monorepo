@@ -9,7 +9,7 @@ import { InternalErrorMessage } from 'types/errorMessage';
 const MUTATION_NAME = 'userSelfUpdate';
 
 const debugLog = logFactory({
-  method: 'userSelfUpdate',
+  method: MUTATION_NAME,
   module: 'resolvers/user',
 });
 
@@ -18,7 +18,7 @@ const resolver = async (_parent, { input }, context) => {
   const { user } = context;
   const { id } = user;
 
-  debugLog('👾 UserSelfUpdate', input);
+  debugLog(`👾 ${MUTATION_NAME}`, input);
 
   let userSelf = null;
 
@@ -51,7 +51,7 @@ const typeDefs = gql`
   "The user's self update input"
   input UserSelfUpdateInput {
     "The user provided email address"
-    email: String!
+    email: EmailAddress!
     "The user provided last name"
     familyName: String
     "The user provided first name"
@@ -61,7 +61,7 @@ const typeDefs = gql`
   "Mutations"
   type Mutation {
     "The user self update mutation"
-    userSelfUpdate(input: UserSelfUpdateInput!): UserSnapshot! @isAuthenticated
+    ${MUTATION_NAME}(input: UserSelfUpdateInput!): UserSnapshot! @isAuthenticated
   }
 `;
 

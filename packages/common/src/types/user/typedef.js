@@ -5,7 +5,7 @@ const typeDef = gql`
   # The user type
   type User {
     # The user's email
-    email: String!
+    email: EmailAddress!
     # The user's last name
     familyName: String!
     # The user's first name
