@@ -7,7 +7,10 @@ import { AccessToken } from 'types/accessToken';
 import { Provider } from 'types/provider';
 
 const Auth = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(AccessToken.read());
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    Boolean(AccessToken.read())
+  );
+
   const client = useApolloClient();
   const [user, setUser] = useState(null);
   const [mutate] = useUserLogout();

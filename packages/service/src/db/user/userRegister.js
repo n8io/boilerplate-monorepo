@@ -1,10 +1,10 @@
-import { Db } from 'types/db';
+import { User } from '@boilerplate-monorepo/common';
 
 const userRegister = async (user, context) => {
-  const { User } = context.Models;
-  const { id, ...rest } = Db.apiToDb(user);
+  const { User: UserModel } = context.Models;
+  const { id, ...rest } = User.apiToDb(user);
 
-  await new User({ id }).save(rest, { method: 'insert' });
+  await new UserModel({ id }).save(rest, { method: 'insert' });
 
   return true;
 };

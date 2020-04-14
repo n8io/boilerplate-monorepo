@@ -1,4 +1,5 @@
 import debug from 'debug';
+import { toSafeLog } from './toSafeLog';
 
 // eslint-disable-next-line no-process-env
 const { npm_package_name: PACKAGE_NAME } = process.env;
@@ -9,7 +10,7 @@ const makeNamespace = ({ method, module }) =>
 
 const monkeyPatchTimestamp = logFn => (message, ...args) =>
   args.length
-    ? logFn(`${new Date().toISOString()}: ${message}`, JSON.stringify(args))
+    ? logFn(`${new Date().toISOString()}: ${message}`, toSafeLog(...args))
     : logFn(`${new Date().toISOString()}: ${message}`);
 
 const logFactory = options => {

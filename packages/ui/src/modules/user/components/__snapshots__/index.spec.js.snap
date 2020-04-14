@@ -3,7 +3,7 @@
 exports[`<User/> renders properly 1`] = `
 <x-page>
   <x-content>
-    <x-account
+    <x-routing
       data-testid="routing"
     />
   </x-content>

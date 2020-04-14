@@ -1,15 +1,15 @@
-import { Db } from 'types/db';
+import { User } from '@boilerplate-monorepo/common';
 
 const userSave = async (user, context) => {
-  const { User } = context.Models;
-  const dbUser = Db.apiToDb(user);
+  const { User: UserModel } = context.Models;
+  const dbUser = User.apiToDb(user);
   const { id, ...rest } = dbUser;
 
-  const result = await new User({ id })
+  const result = await new UserModel({ id })
     .save(rest, { method: 'update', patch: true, required: false })
     .then(model => model.toJSON());
 
-  return Db.dbToApi(result);
+  return User.dbToApi(result);
 };
 
 export { userSave };

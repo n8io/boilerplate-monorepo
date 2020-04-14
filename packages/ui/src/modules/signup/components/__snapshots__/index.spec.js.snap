@@ -14,14 +14,7 @@ exports[`<Signup/> renders signup page 1`] = `
       title="t(title)"
     />
     <x-body>
-      <br />
-      or 
-      <x-link
-        data-testid="link"
-        to="/login"
-      >
-        t(login)
-      </x-link>
+      <x-form />
     </x-body>
   </x-content>
 </x-page>

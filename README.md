@@ -41,7 +41,7 @@ git clone git@github.com:n8io/boilerplate-monorepo.git
 )
 
 # 3. 🌱 Install dependencies
-yarn bootstrap
+yarn
 ```
 
 ## 🤓 Development Experience
@@ -110,13 +110,21 @@ yarn e2e:dev
 
 ### 🗂 Database Migrations
 
-By default, on each server start up migrations are checked/ran to keep the db up to date.
+** NOTE ** Database migrations are ran adhoc. You must manually run them before using the app.
 
-Existing migration files can be found in [`packages/service/src/migration`](packages/service/src/migrations).
+To run existing migrations:
 
-#### Migration Helpers
+```shell
+yarn db:migrate
+```
+
+Existing migration files can be found in [`packages/service/src/migrations`](packages/service/src/migrations).
+
+#### Migrations
 
 There are a handful of useful `yarn` scripts to make migrations a breeze 🌬️.
+
+** NOTE ** You will need to `cd packages/service` before running these scripts.
 
 ```json
 {

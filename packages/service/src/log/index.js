@@ -1,4 +1,5 @@
 import { LogLevel } from '@boilerplate-monorepo/common';
+import { toSafeLog } from './toSafeLog';
 
 const prefix = {
   [LogLevel.ERROR]: '🛑',
@@ -14,7 +15,7 @@ const printMessage = ({ data, logLevel, message }) => {
   if (data) {
     return console[logLevel.toLowerCase()](
       `${prependInfo(logLevel)} ${message}`,
-      data
+      toSafeLog(data)
     );
   }
 

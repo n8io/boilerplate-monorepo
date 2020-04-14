@@ -30,16 +30,4 @@ class RegisterUserAlreadyExistsError extends ApolloError {
   }
 }
 
-class UserRegisterUserError extends ApolloError {
-  constructor(properties) {
-    super(
-      PublicErrorMessage.FAILED_TO_REGISTER_USER,
-      ErrorType.FAILED_TO_REGISTER_USER,
-      appendSafeError(properties)
-    );
-
-    Object.defineProperty(this, 'name', { value: UserRegisterUserError.name });
-  }
-}
-
-export { RegisterUserAlreadyExistsError, UserRegisterUserError };
+export { RegisterUserAlreadyExistsError };

@@ -7,7 +7,9 @@ import {
   Limits,
   isValid,
   validationSchema,
+  validationSchemaConfirmPassword,
   validationSchemaPassword,
+  validationSchemaServer,
   validationSchemaSettings,
 } from './validation';
 
@@ -21,7 +23,9 @@ const UserRegisterInput = {
   propTypes,
   uiExample,
   validationSchema,
+  validationSchemaConfirmPassword,
   validationSchemaPassword,
+  validationSchemaServer,
   validationSchemaSettings,
 };
 

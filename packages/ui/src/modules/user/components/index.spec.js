@@ -8,8 +8,8 @@ import { User } from '.';
 jest.mock('shared/Content');
 jest.mock('shared/Page');
 
-jest.mock('./Account', () => ({
-  Account: props => <x-Account {...props} data-testid="routing" />,
+jest.mock('./Routing', () => ({
+  Routing: props => <x-Routing {...props} data-testid="routing" />,
 }));
 
 describe('<User/>', () => {

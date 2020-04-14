@@ -5,7 +5,7 @@ const bookshelf = makeBookshelf();
 
 const User = bookshelf.model('User', {
   hasTimestamps: true,
-  tableName: `${Db.Schema.MAIN}.users`,
+  tableName: `${Db.Schema.MAIN}.${Db.Table.USERS}`,
 });
 
 export { User };

@@ -4,8 +4,9 @@ import {
   toTableName,
   toUniqueIndexName,
 } from 'db/migrate/utils';
+import { Db } from 'types/db';
 
-const tableName = 'users';
+const tableName = Db.Table.USERS;
 
 const ColumnName = {
   deletedAt: 'deleted_at',

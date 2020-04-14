@@ -11,7 +11,7 @@ import { Pagination } from 'types/pagination';
 const MUTATION_NAME = 'users';
 
 const debugLog = logFactory({
-  method: 'users',
+  method: MUTATION_NAME,
   module: 'resolvers/user',
 });
 
@@ -25,7 +25,7 @@ const toUserCursor = unless(
 );
 
 const resolver = async (_parent, { input }, context) => {
-  debugLog('👾 Users', input);
+  debugLog(`👾 ${MUTATION_NAME}`, input);
 
   let users = [];
   let pagination = null;
@@ -76,7 +76,7 @@ const typeDefs = gql`
 
   type Query {
     "Fetch a page of users"
-    users(input: PaginationInput!): UsersPage!
+    ${MUTATION_NAME}(input: PaginationInput!): UsersPage!
       @hasPermission(permission: "${Permission.USERS_MANAGE}")
       @isAuthenticated
   }

@@ -4,9 +4,9 @@ const { ErrorKeys, isValid } = UserRegisterInput;
 
 describe('user input validation', () => {
   describe('is valid', () => {
-    test('with a valid user input', async () => {
-      const userInput = UserRegisterInput.apiExample();
-      const actual = await isValid(userInput);
+    test('with a valid input', async () => {
+      const input = UserRegisterInput.apiExample();
+      const actual = await isValid(input);
 
       expect(actual).toEqual(true);
     });
@@ -14,43 +14,43 @@ describe('user input validation', () => {
 
   describe('is not valid', () => {
     test('without a family name', async () => {
-      const userInput = UserRegisterInput.apiExample({ familyName: null });
-      const actual = await isValid(userInput);
+      const input = UserRegisterInput.apiExample({ familyName: null });
+      const actual = await isValid(input);
 
       expect(actual).toEqual(false);
     });
 
     test('without a given name', async () => {
-      const userInput = UserRegisterInput.apiExample({ givenName: null });
-      const actual = await isValid(userInput);
+      const input = UserRegisterInput.apiExample({ givenName: null });
+      const actual = await isValid(input);
 
       expect(actual).toEqual(false);
     });
 
     test('without a valid email', async () => {
-      const userInput = UserRegisterInput.apiExample({
+      const input = UserRegisterInput.apiExample({
         email: 'NOT_A_VALID_EMAIL',
       });
 
-      const actual = await isValid(userInput);
+      const actual = await isValid(input);
 
       expect(actual).toEqual(false);
     });
 
     test('without a username', async () => {
-      const userInput = UserRegisterInput.apiExample({ username: null });
-      const actual = await isValid(userInput);
+      const input = UserRegisterInput.apiExample({ username: null });
+      const actual = await isValid(input);
 
       expect(actual).toEqual(false);
     });
 
     describe('because password', () => {
       test(`does not match confirm password`, async () => {
-        const userInput = UserRegisterInput.apiExample({
+        const input = UserRegisterInput.apiExample({
           passwordConfirm: 'DOES_NOT_MATCH',
         });
 
-        const actual = await isValid(userInput);
+        const actual = await isValid(input);
 
         expect(actual).toEqual(false);
       });
@@ -59,12 +59,12 @@ describe('user input validation', () => {
         const tooSmallLength = UserRegisterInput.Limits.passwordNew.min - 1;
         const passwordNew = 'Aa1!'.padEnd(tooSmallLength, 'a');
 
-        const userInput = UserRegisterInput.apiExample({
+        const input = UserRegisterInput.apiExample({
           passwordConfirm: passwordNew,
           passwordNew,
         });
 
-        const actual = await isValid(userInput);
+        const actual = await isValid(input);
 
         expect(actual).toEqual(false);
       });
@@ -75,12 +75,12 @@ describe('user input validation', () => {
           'a'
         );
 
-        const userInput = UserRegisterInput.apiExample({
+        const input = UserRegisterInput.apiExample({
           passwordConfirm: passwordNew,
           passwordNew,
         });
 
-        const actual = await isValid(userInput);
+        const actual = await isValid(input);
 
         expect(actual).toEqual(false);
       });
@@ -91,12 +91,12 @@ describe('user input validation', () => {
           'A'
         );
 
-        const userInput = UserRegisterInput.apiExample({
+        const input = UserRegisterInput.apiExample({
           passwordConfirm: passwordNew,
           passwordNew,
         });
 
-        const actual = await isValid(userInput);
+        const actual = await isValid(input);
 
         expect(actual).toEqual(false);
       });
@@ -107,12 +107,12 @@ describe('user input validation', () => {
           'A'
         );
 
-        const userInput = UserRegisterInput.apiExample({
+        const input = UserRegisterInput.apiExample({
           passwordConfirm: passwordNew,
           passwordNew,
         });
 
-        const actual = await isValid(userInput);
+        const actual = await isValid(input);
 
         expect(actual).toEqual(false);
       });
@@ -123,12 +123,12 @@ describe('user input validation', () => {
           'A'
         );
 
-        const userInput = UserRegisterInput.apiExample({
+        const input = UserRegisterInput.apiExample({
           passwordConfirm: passwordNew,
           passwordNew,
         });
 
-        const actual = await isValid(userInput);
+        const actual = await isValid(input);
 
         expect(actual).toEqual(false);
       });
@@ -139,13 +139,13 @@ describe('user input validation', () => {
     test('when a password that does not meet the password requirements', async () => {
       const weakPassword = 'WEAK_PASSWORD';
 
-      const userInput = UserRegisterInput.apiExample({
+      const input = UserRegisterInput.apiExample({
         passwordConfirm: weakPassword,
         passwordNew: weakPassword,
       });
 
       await expect(
-        UserRegisterInput.validationSchema.validate(userInput)
+        UserRegisterInput.validationSchema.validate(input)
       ).rejects.toThrow(ErrorKeys.DOES_NOT_MEET_PASSWORD_REQUIREMENTS);
     });
 
@@ -153,13 +153,13 @@ describe('user input validation', () => {
       const passwordConfirm = 'PASSWORD_THAT_DOES_NOT_MATCH';
       const passwordNew = 'PASSWORD';
 
-      const userInput = UserRegisterInput.apiExample({
+      const input = UserRegisterInput.apiExample({
         passwordConfirm,
         passwordNew,
       });
 
       await expect(
-        UserRegisterInput.validationSchema.validate(userInput)
+        UserRegisterInput.validationSchema.validate(input)
       ).rejects.toThrow(ErrorKeys.CONFIRM_PASSWORD_MISMATCH);
     });
   });

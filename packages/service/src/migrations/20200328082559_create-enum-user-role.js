@@ -1,6 +1,7 @@
 import { toEnumName } from 'db/migrate/utils';
+import { Db } from 'types/db';
 
-const tableName = 'users';
+const tableName = Db.Table.USERS;
 const enumName = 'role';
 const fullyQualifiedEnumName = toEnumName(tableName, enumName);
 

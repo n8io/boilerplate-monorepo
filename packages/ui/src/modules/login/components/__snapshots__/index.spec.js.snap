@@ -14,12 +14,7 @@ exports[`<Login/> renders login page 1`] = `
       title="t(title)"
     />
     <x-body>
-      <x-link
-        data-testid="link"
-        to="/logout"
-      >
-        t(logout)
-      </x-link>
+      <x-form />
     </x-body>
   </x-content>
 </x-page>

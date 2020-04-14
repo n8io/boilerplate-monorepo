@@ -1,9 +1,9 @@
 import { ApolloError } from 'apollo-server-express';
-import { identity } from 'ramda';
+import { toSafeLog } from 'log/toSafeLog';
 import { PublicErrorMessage } from 'types/errorMessage';
 import { ErrorType } from 'types/errorType';
 
-const toSafeError = identity;
+const toSafeError = toSafeLog;
 
 const appendSafeError = props => ({
   ...props,

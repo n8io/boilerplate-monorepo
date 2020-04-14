@@ -1,4 +1,4 @@
-import { Time } from 'types/time';
+import { Time } from '..';
 
 describe('seconds utilities', () => {
   describe('seconds', () => {

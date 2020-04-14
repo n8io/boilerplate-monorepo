@@ -1,5 +1,6 @@
 export const login = {
   FAILED_LOGIN: 'Invalid credentials',
+  forgotPassword: 'Forgot password?',
   login: {
     title: 'Log In',
   },

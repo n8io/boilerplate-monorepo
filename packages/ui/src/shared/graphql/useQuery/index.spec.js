@@ -22,10 +22,9 @@ describe('useQuery', () => {
     const data = {};
     const error = {};
     const loading = false;
+
     const apolloResult = {
-      data: {
-        me: data,
-      },
+      data: { userSelf: data },
       error: {},
       loading: false,
     };

@@ -3,13 +3,14 @@ import { logFactory } from 'log/logFactory';
 import { Auth } from 'types/auth';
 import { RateLimit } from 'types/rateLimit';
 
-const debugLog = logFactory({ method: 'userLogout', module: 'resolvers/user' });
+const QUERY_NAME = 'userLogout';
+const debugLog = logFactory({ method: QUERY_NAME, module: 'resolvers/user' });
 
 const resolver = (_parent, _args, context) => {
   const { res, user } = context;
 
   if (user) {
-    debugLog('👾 UserLogout', { username: user.username });
+    debugLog(`👾 ${QUERY_NAME}`, { username: user.username });
   }
 
   Auth.writeRefreshToken(res);
@@ -28,7 +29,7 @@ const typeDefs = gql`
   "Mutations"
   type Mutation {
     "Logs the active user out (kills refresh 🍪)"
-    userLogout: Boolean!
+    ${QUERY_NAME}: Boolean!
       @rateLimitBurst(limit: ${Limits.limit}, duration: ${Limits.duration})
   }
 `;

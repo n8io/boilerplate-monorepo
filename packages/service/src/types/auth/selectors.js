@@ -1,4 +1,4 @@
-import { AuthenticationError } from 'apollo-server-express';
+import cuid from 'cuid';
 import { isAfter } from 'date-fns';
 import {
   JsonWebTokenError,
@@ -9,7 +9,8 @@ import {
 import { log } from 'log';
 import { logFactory } from 'log/logFactory';
 import ms from 'ms';
-import { InternalErrorMessage, PublicErrorMessage } from 'types/errorMessage';
+import { pick, tail } from 'ramda';
+import { InternalErrorMessage } from 'types/errorMessage';
 import { ProcessEnvKeys } from 'types/processEnv';
 import { Route } from 'types/route';
 import { Enumeration } from './typedef';
@@ -25,25 +26,22 @@ const {
   // eslint-disable-next-line no-process-env
 } = process.env;
 
-const toRefreshToken = ({ email, id, role, tokenVersion, username }) => ({
-  email,
-  id,
-  role,
-  tokenVersion,
-  username,
-});
+const toRefreshToken = pick([
+  'email',
+  'id',
+  'role',
+  'tokenVersion',
+  'username',
+]);
 
-const toAccessToken = ({ email, id, role, username }) => ({
-  email,
-  id,
-  role,
-  username,
-});
+const toAccessToken = pick(['email', 'id', 'role', 'username']);
 
 const encryptAccessToken = user =>
   sign(toAccessToken(user), ACCESS_TOKEN_SECRET, {
     expiresIn: ACCESS_TOKEN_EXPIRY,
   });
+
+const generateResetToken = () => tail(cuid());
 
 const encryptRefreshToken = user =>
   sign(toRefreshToken(user), REFRESH_TOKEN_SECRET, {
@@ -136,33 +134,11 @@ const writeRefreshToken = (res, user) => {
   return res;
 };
 
-const authChecker = ({ context }, roles) => {
-  const { user } = context;
-
-  if (!user) {
-    // No user present, restrict access
-    throw new AuthenticationError(PublicErrorMessage.UNAUTHORIZED);
-  }
-
-  if (roles.length === 0) {
-    // Valid user and no role restrictions, grant access
-    return true;
-  }
-
-  if (roles.includes(user.role)) {
-    // Grant access if the roles overlap
-    return true;
-  }
-
-  // No roles matched, restrict access
-  throw new AuthenticationError(PublicErrorMessage.UNAUTHORIZED);
-};
-
 const isUserActive = user => !user.deletedAt || !isPast(user.deletedAt);
 
 export {
-  authChecker,
   encryptAccessToken,
+  generateResetToken,
   isUserActive,
   readAccessToken,
   readRefreshToken,

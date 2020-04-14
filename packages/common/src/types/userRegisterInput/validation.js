@@ -1,3 +1,4 @@
+import { Email } from 'types/email';
 import {
   ErrorKeys as PasswordErrorKeys,
   REGEX as STRONG_PASSWORD_REGEX,
@@ -18,11 +19,7 @@ const passwordNew = {
 };
 
 const Limits = {
-  email: {
-    max: 250,
-    min: 3,
-    required: true,
-  },
+  email: Email.Limits,
   familyName: {
     max: 50,
     min: 2,
@@ -43,7 +40,7 @@ const Limits = {
   },
 };
 
-const validationSchemaPassword = object().shape({
+const validationSchemaConfirmPassword = object().shape({
   passwordConfirm: string()
     .trim()
     .required()
@@ -51,6 +48,9 @@ const validationSchemaPassword = object().shape({
       [ref('passwordNew'), null],
       PasswordErrorKeys.CONFIRM_PASSWORD_MISMATCH
     ),
+});
+
+const validationSchemaPassword = object().shape({
   passwordNew: string()
     .trim()
     .required()
@@ -62,10 +62,7 @@ const validationSchemaPassword = object().shape({
 });
 
 const validationSchemaSettings = object().shape({
-  email: string()
-    .email()
-    .required()
-    .limits(Limits.email),
+  email: Email.validationSchema,
   familyName: string()
     .trim()
     .required()
@@ -76,7 +73,7 @@ const validationSchemaSettings = object().shape({
     .limits(Limits.givenName),
 });
 
-const validationSchema = validationSchemaPassword
+const validationSchemaServer = validationSchemaPassword
   .concat(validationSchemaSettings)
   .concat(
     object().shape({
@@ -91,6 +88,10 @@ const validationSchema = validationSchemaPassword
     })
   );
 
+const validationSchema = validationSchemaServer.concat(
+  validationSchemaConfirmPassword
+);
+
 const isValid = validationSchema.isValid.bind(validationSchema);
 
 const ErrorKeys = {
@@ -103,6 +104,8 @@ export {
   Limits,
   isValid,
   validationSchema,
+  validationSchemaConfirmPassword,
   validationSchemaPassword,
+  validationSchemaServer,
   validationSchemaSettings,
 };

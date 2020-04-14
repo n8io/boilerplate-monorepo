@@ -9,13 +9,13 @@ import { InternalErrorMessage } from 'types/errorMessage';
 const MUTATION_NAME = 'userRevokeRefreshTokens';
 
 const debugLog = logFactory({
-  method: 'revokeRefreshTokens',
+  method: MUTATION_NAME,
   module: 'resolvers/user',
 });
 
 // eslint-disable-next-line max-statements
 const resolver = async (_parent, { id }, context) => {
-  debugLog('👾 UserRevokeRefreshTokens', id);
+  debugLog(`👾 ${MUTATION_NAME}`, id);
 
   let wasUpdated = false;
 
@@ -49,7 +49,7 @@ const typeDefs = gql`
   "Mutations"
   type Mutation {
     "Revoke all the refresh tokens for a user"
-    userRevokeRefreshTokens(id: ID!): Boolean!
+    ${MUTATION_NAME}(id: ID!): Boolean!
       @hasPermission(permission: "${Permission.USERS_MANAGE}")
       @isAuthenticated
   }

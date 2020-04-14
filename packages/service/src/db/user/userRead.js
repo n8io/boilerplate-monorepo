@@ -1,12 +1,13 @@
-import { isNil, omit, unless } from 'ramda';
+import { User } from '@boilerplate-monorepo/common';
 import { userReadRaw } from './userReadRaw';
 
-const toSafeUser = unless(isNil, omit(['passwordHash']));
+const userRead = async ({ email, id, includeDeleted, username }, context) => {
+  const user = await userReadRaw(
+    { email, id, includeDeleted, username },
+    context
+  );
 
-const userRead = async (input, context) => {
-  const user = await userReadRaw(input, context);
-
-  return toSafeUser(user);
+  return User.dbToApi(user);
 };
 
 export { userRead };

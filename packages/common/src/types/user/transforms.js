@@ -1,5 +1,34 @@
-import { isNil, omit, unless } from 'ramda';
+import { both, evolve, omit, pipe, prop, toLower, unless, when } from 'ramda';
+import { Utils } from 'utils';
 
-const dbToApi = unless(isNil, omit(['passwordHash']));
+const appendName = when(both(prop('familyName'), prop('givenName')), props => ({
+  ...props,
+  name: `${props.familyName},${props.givenName}`,
+}));
 
-export { dbToApi };
+const apiToDb = unless(
+  Utils.isNullOrEmpty,
+  pipe(
+    appendName,
+    evolve({
+      email: toLower,
+      name: toLower,
+      username: toLower,
+    })
+  )
+);
+
+const toSafeProps = omit([
+  'password',
+  'passwordConfirm',
+  'passwordCurrent',
+  'passwordHash',
+  'passwordNew',
+  'recoveryCode',
+  'recoveryCodeExpiration',
+  'recoveryCodeSecret',
+]);
+
+const dbToApi = unless(Utils.isNullOrEmpty, toSafeProps);
+
+export { apiToDb, dbToApi };

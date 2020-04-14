@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client';
+import { FetchPolicy } from '@boilerplate-monorepo/common';
 import { useQuery } from '../useQuery';
 
 export const QUERY_USERS = gql`
@@ -21,6 +22,10 @@ export const QUERY_USERS = gql`
   }
 `;
 
-const useUsers = options => useQuery(QUERY_USERS, options);
+const useUsers = options =>
+  useQuery(QUERY_USERS, {
+    fetchPolicy: FetchPolicy.NO_CACHE,
+    ...options,
+  });
 
 export { useUsers };

@@ -17,7 +17,7 @@ const Limits = pipe(
   })
 )(UserRegisterInput.Limits);
 
-const validationSchema = UserRegisterInput.validationSchemaPassword.concat(
+const validationSchemaServer = UserRegisterInput.validationSchemaPassword.concat(
   object().shape({
     passwordCurrent: string()
       .trim()
@@ -26,8 +26,19 @@ const validationSchema = UserRegisterInput.validationSchemaPassword.concat(
   })
 );
 
+const validationSchema = validationSchemaServer
+  .concat(UserRegisterInput.validationSchemaConfirmPassword)
+  .concat(
+    object().shape({
+      passwordCurrent: string()
+        .trim()
+        .required()
+        .limits(Limits.passwordNew),
+    })
+  );
+
 const isValid = validationSchema.isValid.bind(validationSchema);
 
 const ErrorKeys = PasswordErrorKeys;
 
-export { ErrorKeys, Limits, isValid, validationSchema };
+export { ErrorKeys, Limits, isValid, validationSchema, validationSchemaServer };

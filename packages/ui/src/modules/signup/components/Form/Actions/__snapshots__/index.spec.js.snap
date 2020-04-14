@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Actions/> renders properly 1`] = `
+<div>
+  <div
+    class="Actions__Container-jCrrLB hwjhEZ"
+  >
+    <x-submitbutton
+      isautowidth="true"
+      text="t(signup)"
+    />
+    <div />
+    <x-link
+      data-testid="link"
+      to="/login"
+    >
+      t(login)
+    </x-link>
+  </div>
+</div>
+`;

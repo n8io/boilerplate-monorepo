@@ -1,12 +1,12 @@
 import React from 'react';
 import { Content } from 'shared/Content';
 import { Page } from 'shared/Page';
-import { Account } from './Account';
+import { Routing } from './Routing';
 
 const User = () => (
   <Page>
     <Content>
-      <Account />
+      <Routing />
     </Content>
   </Page>
 );
