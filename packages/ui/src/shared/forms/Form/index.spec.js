@@ -2,8 +2,6 @@ import React from 'react';
 import { render } from 'testHelpers';
 import { Form } from '.';
 
-jest.mock('shared/forms/useForm');
-
 describe('<Form/>', () => {
   const defaultProps = {
     children: 'CHILDREN',

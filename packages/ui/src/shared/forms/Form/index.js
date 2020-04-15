@@ -2,10 +2,12 @@ import { bool, func, node, oneOf, string } from 'prop-types';
 import { values } from 'ramda';
 import React from 'react';
 import { FormContext as ReactHookFormContext } from 'react-hook-form';
+import { FormDevTool } from './FormDevTool';
 
 const Mode = {
   ON_BLUR: 'onBlur',
   ON_CHANGE: 'onChange',
+  ON_SUBMIT: 'onSubmit',
 };
 
 const Form = ({
@@ -23,6 +25,7 @@ const Form = ({
         {children}
       </form>
     </fieldset>
+    <FormDevTool />
   </ReactHookFormContext>
 );
 

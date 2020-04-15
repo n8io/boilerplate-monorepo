@@ -17,7 +17,7 @@ exports[`<Footer/> renders properly 1`] = `
     class="Muted__Container-sc-1r87izh-0 giApBU Footer__StyledMuted-sc-1tc55w2-1 doAUGd"
   >
     v
-    
+    1.0.1
   </span>
   <x-toggles />
 </footer>
