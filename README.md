@@ -50,7 +50,7 @@ We've got two choices for local development. With Docker or natively. Each have 
 
 ### 🍕 Natively Adhoc
 
-This is the recommended path for `*nix` based operating systems.
+**NOTE** This is the recommended path for `*nix` based operating systems.
 
 ```bash
 # Start all the things!
@@ -110,32 +110,27 @@ yarn e2e:dev
 
 ### 🗂 Database Migrations
 
-** NOTE ** Database migrations are ran adhoc. You must manually run them before using the app.
+**NOTE** Database migrations are ran adhoc. You must manually run them before using the app.
 
-To run existing migrations:
+#### Run existing migrations
 
 ```shell
 yarn db:migrate
 ```
 
-Existing migration files can be found in [`packages/service/src/migrations`](packages/service/src/migrations).
+#### Rollback a single migration
 
-#### Migrations
-
-There are a handful of useful `yarn` scripts to make migrations a breeze 🌬️.
-
-** NOTE ** You will need to `cd packages/service` before running these scripts.
-
-```json
-{
-  ...
-  "migration:down": "Reverts the last migration that ran successfully",
-  "migration:gen": "Generates a new migration file: E.g. `yarn migration:gen create-table-foo`",
-  "migration:show": "Show migrations and whether or not they have been ran",
-  "migration:up": "Execute any migrations that haven't been ran",
-  ...
-}
+```shell
+yarn db:migrate:down
 ```
+
+#### Generate a new migration
+
+```shell
+yarn db:migrate:gen create-table-foo # the name is up to you
+```
+
+Existing migration files can be found in [`packages/service/src/migrations`](packages/service/src/migrations).
 
 ### 🧰 Tooling
 
