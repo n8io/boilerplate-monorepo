@@ -1,4 +1,5 @@
-import { bool, func, node, string } from 'prop-types';
+import { bool, func, node, oneOf, string } from 'prop-types';
+import { values } from 'ramda';
 import React from 'react';
 import { FormContext as ReactHookFormContext } from 'react-hook-form';
 
@@ -12,10 +13,11 @@ const Form = ({
   className,
   handleSubmit,
   isDisabled,
+  mode,
   onSubmit,
   ...props
 }) => (
-  <ReactHookFormContext {...props}>
+  <ReactHookFormContext mode={mode} {...props}>
     <fieldset disabled={isDisabled}>
       <form className={className} onSubmit={handleSubmit(onSubmit)}>
         {children}
@@ -27,6 +29,7 @@ const Form = ({
 Form.defaultProps = {
   className: undefined,
   isDisabled: false,
+  mode: Mode.ON_BLUR,
 };
 
 Form.propTypes = {
@@ -34,6 +37,7 @@ Form.propTypes = {
   className: string,
   handleSubmit: func.isRequired,
   isDisabled: bool,
+  mode: oneOf(values(Mode)),
   onSubmit: func.isRequired,
 };
 
