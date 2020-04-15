@@ -4,6 +4,7 @@ exports[`<Form/> renders properly 1`] = `
 <x-formcontext
   errors="[object Object]"
   formstate="[object Object]"
+  mode="onBlur"
 >
   <fieldset>
     <form>
