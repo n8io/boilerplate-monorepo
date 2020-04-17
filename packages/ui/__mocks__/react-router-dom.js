@@ -2,11 +2,9 @@ import React from 'react';
 
 export * from 'react-router-dom';
 
-const history = {
+const useHistory = () => ({
   push: jest.fn().mockName('history.push'),
-};
-
-const useHistory = () => history;
+});
 
 const useLocation = () => ({
   host: 'HOST',
@@ -14,6 +12,9 @@ const useLocation = () => ({
   pathname: 'PATHNAME',
   port: 'PORT',
   protocol: 'PROTOCOL',
+  state: {
+    user: {},
+  },
 });
 
 const Route = props => <x-Route {...props} />;

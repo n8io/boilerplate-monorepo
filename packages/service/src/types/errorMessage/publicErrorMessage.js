@@ -1,5 +1,6 @@
 const PublicErrorMessage = {
   CANNOT_DELETE_SELF: 'Cannot delete self',
+  CAPTCHA_ERROR: 'Unable to verify captcha',
   DATABASE_ERROR_OCCURRED: 'A database error occurred',
   FAILED_TO_DELETE_USER: 'Unable to delete user',
   FAILED_TO_FETCH_USERS: 'Unable to fetch users',

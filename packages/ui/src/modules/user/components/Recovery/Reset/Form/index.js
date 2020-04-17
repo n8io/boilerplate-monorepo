@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom';
 import { ErrorNotification } from 'shared/ErrorNotification';
 import { SuccessNotification } from 'shared/SuccessNotification';
 import { Form as SharedForm, Mode } from 'shared/forms/Form';
+import { HiddenInput } from 'shared/forms/HiddenInput';
 import { PasswordInput } from 'shared/forms/PasswordInput';
 import { SubmitButton } from 'shared/forms/SubmitButton';
 import { useForm } from 'shared/forms/useForm';
@@ -61,7 +62,7 @@ const Form = ({ id, token }) => {
         <SuccessNotification message={t('passwordResetSuccess')} />
       )}
       <p>{t('passwordResetDetails')}</p>
-      <input type="hidden" ref={formProps.register} name="id" value={id} />
+      <HiddenInput name="id" value={id} />
       <input
         type="hidden"
         ref={formProps.register}

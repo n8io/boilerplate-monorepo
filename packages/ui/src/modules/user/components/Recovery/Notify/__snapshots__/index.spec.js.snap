@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Notify/> renders properly 1`] = `
+<div>
+  <x-header
+    title="t(recoverAccount)"
+  />
+  <x-body
+    hasbreadcrumbs="false"
+  >
+    <x-form
+      user="[object Object]"
+    />
+  </x-body>
+</div>
+`;

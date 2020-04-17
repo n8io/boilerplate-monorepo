@@ -63,6 +63,10 @@ export const styles = css`
     opacity: 0.7;
   }
 
+  div[id^='hcaptcha-'] {
+    margin-bottom: 0;
+  }
+
   /* stylelint-disable-next-line order/properties-alphabetical-order */
   ${themeStyles}
 `;

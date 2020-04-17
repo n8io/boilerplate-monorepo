@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<HiddenInput/> renders properly 1`] = `
+<input
+  id="NAME"
+  name="NAME"
+  type="hidden"
+  value=""
+/>
+`;

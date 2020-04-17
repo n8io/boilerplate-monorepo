@@ -2,6 +2,7 @@ import { Utils } from '@boilerplate-monorepo/common';
 import { map, pipe, unless } from 'ramda';
 
 const unsafeProps = [
+  'captchaToken',
   'clearTextPassword',
   'password_confirm',
   'password_current',

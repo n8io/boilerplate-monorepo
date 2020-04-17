@@ -5,8 +5,9 @@ import { userRead } from 'db/user/userRead';
 import { userRegister } from 'db/user/userRegister';
 import { log } from 'log';
 import { logFactory } from 'log/logFactory';
-import { assoc, omit, pipe } from 'ramda';
+import { Captcha } from 'types/captcha';
 import {
+  CaptchaError,
   DatabaseError,
   RegisterUserAlreadyExistsError,
 } from 'types/customError';
@@ -21,21 +22,43 @@ const debugLog = logFactory({
   module: 'resolvers/user',
 });
 
-// eslint-disable-next-line max-statements
+// eslint-disable-next-line complexity,max-statements
 const resolver = async (_parent, { input }, context) => {
   await UserRegisterInput.validationSchemaServer.validate(input);
 
-  const { email, passwordNew: clearTextPassword, username } = input;
+  debugLog(`👾 ${MUTATION_NAME}`, input);
+
+  const {
+    captchaToken,
+    email,
+    passwordNew: clearTextPassword,
+    username,
+  } = input;
+
+  try {
+    const {
+      'error-codes': errorCodes,
+      success: isTokenValid,
+    } = await Captcha.isTokenValid(captchaToken);
+
+    if (!isTokenValid) throw new Error(errorCodes.join(','));
+  } catch (error) {
+    log.error(InternalErrorMessage.CAPTCHA_ERROR, {
+      captchaToken,
+      email,
+      mutation: MUTATION_NAME,
+      username,
+    });
+
+    throw new CaptchaError({ email, username });
+  }
 
   let user = null;
-
-  debugLog(`👾 ${MUTATION_NAME}`, input);
 
   try {
     user = await userRead({ email, includeDeleted: true, username }, context);
   } catch (error) {
     log.error(InternalErrorMessage.FAILED_TO_REGISTER_USER, {
-      error,
       mutation: MUTATION_NAME,
     });
 
@@ -54,12 +77,7 @@ const resolver = async (_parent, { input }, context) => {
 
   const id = cuid();
   const passwordHash = await Password.hash(clearTextPassword);
-
-  const newUser = pipe(
-    omit(['passwordNew']),
-    assoc('id', id),
-    assoc('passwordHash', passwordHash)
-  )(input);
+  const newUser = UserRegisterInput.inputToDb(id, passwordHash, input);
 
   try {
     await userRegister(newUser, context);
@@ -84,6 +102,8 @@ const { burst: Burst, window: Window } = USER_REGISTER;
 const typeDefs = gql`
   "The user register input"
   input UserRegisterInput {
+    "The captcha token"
+    captchaToken: String!
     "The user provided email address"
     email: EmailAddress!
     "The user provided last name"

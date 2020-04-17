@@ -5,6 +5,7 @@ import { Form } from '.';
 
 jest.mock('shared/Button');
 jest.mock('shared/ErrorNotification');
+jest.mock('shared/forms/Captcha');
 jest.mock('shared/forms/Form');
 jest.mock('shared/forms/EmailInput');
 jest.mock('shared/forms/SubmitButton');

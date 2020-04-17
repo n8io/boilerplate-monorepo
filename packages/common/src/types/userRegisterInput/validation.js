@@ -88,9 +88,15 @@ const validationSchemaServer = validationSchemaPassword
     })
   );
 
-const validationSchema = validationSchemaServer.concat(
-  validationSchemaConfirmPassword
-);
+const validationSchema = validationSchemaServer
+  .concat(validationSchemaConfirmPassword)
+  .concat(
+    object().shape({
+      captchaToken: string()
+        .trim()
+        .required(),
+    })
+  );
 
 const isValid = validationSchema.isValid.bind(validationSchema);
 
