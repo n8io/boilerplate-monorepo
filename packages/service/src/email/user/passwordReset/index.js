@@ -1,6 +1,7 @@
 import { logFactory } from 'log/logFactory';
 import { Password } from 'types/password';
 import { ProcessEnvKeys } from 'types/processEnv';
+import { mailer } from '../../mailer';
 import { userToFormattedEmailAddress } from '../../selectors';
 
 const {
@@ -15,8 +16,7 @@ const debugLog = logFactory({
   module: 'email/user/passwordReset',
 });
 
-const passwordReset = async ({ passwordResetToken, user }, context) => {
-  const { mailer } = context;
+const passwordReset = async ({ passwordResetToken, user }) => {
   const from = `${PASSWORD_RESET_EMAIL_FROM_NAME} <${PASSWORD_RESET_EMAIL_FROM_ADDRESS}>`;
   const to = userToFormattedEmailAddress(user);
   const resetLink = `${UI_HOST_URI}/account/recovery/reset/${passwordResetToken}`;

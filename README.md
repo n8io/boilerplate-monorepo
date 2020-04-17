@@ -42,6 +42,9 @@ git clone git@github.com:n8io/boilerplate-monorepo.git
 
 # 3. 🌱 Install dependencies
 yarn
+
+# 4. ↩️ Add hosts file entry (if needed)
+yarn hosts
 ```
 
 ## 🤓 Development Experience

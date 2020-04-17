@@ -19,6 +19,7 @@ const apiToDb = unless(
 );
 
 const toSafeProps = omit([
+  'captchaToken',
   'password',
   'passwordConfirm',
   'passwordCurrent',

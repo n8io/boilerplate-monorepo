@@ -5,7 +5,7 @@ const usersReadRaw = async (
   { after: tempAfter, includeDeleted = true, first },
   context
 ) => {
-  const { User: Model } = context.Models;
+  const { User } = context.Models;
   const after = Pagination.cursorToAfter(tempAfter);
 
   const limit = pipe(
@@ -18,7 +18,7 @@ const usersReadRaw = async (
     : // eslint-disable-next-line camelcase
       qb => qb.where({ deleted_at: null }).orWhere('deleted_at', '>', 'NOW()');
 
-  const { models, pagination } = await Model.collection()
+  const { models, pagination } = await User.collection()
     .query(whereClause)
     .orderBy('family_name')
     .orderBy('given_name')
