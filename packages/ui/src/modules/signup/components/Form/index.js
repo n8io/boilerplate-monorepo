@@ -2,6 +2,7 @@ import { UserRegisterInput } from '@boilerplate-monorepo/common';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { ErrorNotification } from 'shared/ErrorNotification';
+import { Captcha } from 'shared/forms/Captcha';
 import { EmailInput } from 'shared/forms/EmailInput';
 import { Form as SharedForm } from 'shared/forms/Form';
 import { PasswordInput } from 'shared/forms/PasswordInput';
@@ -73,6 +74,7 @@ const Form = () => {
           name="passwordConfirm"
           patternDescription={t('DOES_NOT_MEET_PASSWORD_REQUIREMENTS')}
         />
+        <Captcha />
         <Actions />
       </SharedForm>
     </>

@@ -2131,6 +2131,11 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
+"@hcaptcha/react-hcaptcha@^0.1.7":
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/@hcaptcha/react-hcaptcha/-/react-hcaptcha-0.1.7.tgz#1a09c6f972b13ccee13e542dd81933d97e5b0a31"
+  integrity sha512-DEDJQeTn5UMyfbfgLvvM0KLcKlHeSU4Wu0E8DeJgnP2ObWbG69ZJwmAmo/8neMM2oyr2KGR/EBOwhuwt+I09NQ==
+
 "@jest/console@^24.7.1", "@jest/console@^24.9.0":
   version "24.9.0"
   resolved "https://registry.npmjs.org/@jest/console/-/console-24.9.0.tgz#79b1bc06fb74a8cfb01cbdedf945584b1b9707f0"

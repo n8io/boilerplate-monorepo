@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Find/> renders properly 1`] = `
+<div>
+  <x-header
+    title="t(forgotPassword)"
+  />
+  <x-body
+    hasbreadcrumbs="false"
+  >
+    <x-form />
+  </x-body>
+</div>
+`;

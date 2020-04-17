@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Captcha/> renders properly 1`] = `
+<div>
+  <label
+    class="Captcha__Container-gAyBQg eNwiNN"
+  >
+    <div
+      class="Captcha__StyledInputLabel-jBkVZu fooTlD"
+    >
+      t(proveYouAreNotARobot)
+    </div>
+    <x-hcaptcha
+      sitekey="CAPTCHA_SITE_KEY"
+    />
+    <x-hiddeninput
+      name="captchaToken"
+    />
+  </label>
+</div>
+`;

@@ -1,4 +1,5 @@
 export const common = {
+  CAPTCHA_ERROR: 'We could not verify your humanity',
   CONFIRM_PASSWORD_MISMATCH: 'Confirm password does not match',
   DATE_FUTURE: 'Must be in the future',
   DATE_PAST: 'Must be in the past',
@@ -34,6 +35,7 @@ export const common = {
   newPassword: 'New Password',
   password: 'Password',
   profile: 'Profile',
+  proveYouAreNotARobot: "Prove You're Not a Robot",
   settings: 'Settings',
   signup: 'Sign Up',
   siteName: `{{name}} :: {{title}}`,

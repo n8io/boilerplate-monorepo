@@ -1,4 +1,5 @@
 const initial = {
+  captchaToken: '',
   email: '',
   familyName: '',
   givenName: '',

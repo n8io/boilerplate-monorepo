@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { Body, Header } from 'shared/Content';
 import { useTranslate } from 'shared/useTranslate';
 import { Route } from 'types/route';
@@ -11,6 +11,7 @@ const Notify = () => {
     namespace: 'user',
   });
 
+  const history = useHistory();
   const { state } = useLocation();
   const { user } = state;
 

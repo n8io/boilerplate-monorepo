@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom';
 import { ErrorNotification } from 'shared/ErrorNotification';
 import { SuccessNotification } from 'shared/SuccessNotification';
 import { Form as SharedForm } from 'shared/forms/Form';
+import { HiddenInput } from 'shared/forms/HiddenInput';
 import { RadioInput } from 'shared/forms/RadioInput';
 import { SubmitButton } from 'shared/forms/SubmitButton';
 import { useForm } from 'shared/forms/useForm';
@@ -65,7 +66,7 @@ const Form = ({ user }) => {
         <SuccessNotification message={t('accountNotifySuccess')} />
       )}
       <p>{t('whereToNotifyDetails')}</p>
-      <input type="hidden" ref={formProps.register} name="id" value={user.id} />
+      <HiddenInput name="id" value={user.id} />
       <StyledRadioInput
         label={t('chooseARecoveryMethod')}
         name="notificationMethod"

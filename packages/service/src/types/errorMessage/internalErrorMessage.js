@@ -2,6 +2,7 @@ const InternalErrorMessage = {
   ACCESS_TOKEN_EXPIRED: 'Access token expired',
   ACCESS_TOKEN_NOT_PROVIDED: 'Access token not provided',
   ACCESS_TOKEN_READ_ISSUE: 'There was an issue reading the access token',
+  CAPTCHA_ERROR: 'Captcha token is invalid',
   FAILED_DB_REQUEST: 'Failed to make a request to the database',
   FAILED_TO_DECRYPT_REFRESH_TOKEN: 'Refresh token is invalid',
   FAILED_TO_DELETE_USER: 'Failed to delete user',

@@ -4,6 +4,7 @@ import { makeSafeExample } from '../utils/makeSafeExample';
 const STRONG_PASSWORD = 'Str0ngP4$$word';
 
 const apiExample = makeSafeExample({
+  captchaToken: 'CAPTCHA_TOKEN',
   email: Email.apiExample(),
   familyName: 'FAMILY_NAME',
   givenName: 'GIVEN_NAME',

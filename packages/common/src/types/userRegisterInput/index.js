@@ -1,6 +1,6 @@
 import { initial } from './creation';
 import { apiExample, uiExample } from './examples';
-import { formToInput } from './transforms';
+import { formToInput, inputToDb } from './transforms';
 import { propTypes } from './typedef';
 import {
   ErrorKeys,
@@ -19,6 +19,7 @@ const UserRegisterInput = {
   apiExample,
   formToInput,
   initial,
+  inputToDb,
   isValid,
   propTypes,
   uiExample,
