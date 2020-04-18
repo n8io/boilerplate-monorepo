@@ -15,9 +15,10 @@ exports[`<Form/> renders login page 1`] = `
     </p>
     <x-textinput
       label="t(emailOrUsername)"
+      max="250"
       min="3"
       name="account"
-      pattern="[A-Za-z0-9-_@.]{3,}"
+      pattern="[A-Za-z0-9-_@.]{1,}"
       required="true"
     />
     <x-submitbutton

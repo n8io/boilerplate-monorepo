@@ -1,5 +1,5 @@
-import { RateLimit } from 'types/rateLimit';
+import { RateLimitDirective } from 'types/rateLimitDirective';
 
-const { directive, typeDefs } = RateLimit.make('rateLimitBurst');
+const { directive, typeDefs } = RateLimitDirective.make('rateLimitBurst');
 
 export { directive, typeDefs };

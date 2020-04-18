@@ -13,10 +13,10 @@ exports[`<Form/> renders login page 1`] = `
     />
     <x-textinput
       label="t(username)"
-      max="50"
+      max="128"
       min="4"
       name="username"
-      pattern="[A-Za-z0-9-_]{4,}"
+      pattern="[A-Za-z0-9-_]{1,}"
       patterndescription="t(DOES_NOT_MEET_USERNAME_REQUIREMENTS)"
       required="true"
     />
@@ -43,17 +43,19 @@ exports[`<Form/> renders login page 1`] = `
     />
     <x-passwordinput
       label="t(password)"
+      max="64"
       min="8"
       name="passwordNew"
-      pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\\d)(?=.*[#$^+=!*()@%&]).{8,}$"
+      pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\\d)(?=.*[#$^+=!*()@%&]).{1,}$"
       patterndescription="t(DOES_NOT_MEET_PASSWORD_REQUIREMENTS)"
       required="true"
     />
     <x-passwordinput
       label="t(confirmPassword)"
+      max="64"
       min="8"
       name="passwordConfirm"
-      pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\\d)(?=.*[#$^+=!*()@%&]).{8,}$"
+      pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\\d)(?=.*[#$^+=!*()@%&]).{1,}$"
       patterndescription="t(DOES_NOT_MEET_PASSWORD_REQUIREMENTS)"
       required="true"
     />

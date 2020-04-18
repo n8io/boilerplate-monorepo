@@ -69,6 +69,20 @@ describe('user input validation', () => {
         expect(actual).toEqual(false);
       });
 
+      test('is too long', async () => {
+        const tooLongLength = UserRegisterInput.Limits.passwordNew.max + 1;
+        const passwordNew = 'Aa1!'.padEnd(tooLongLength, 'a');
+
+        const input = UserRegisterInput.apiExample({
+          passwordConfirm: passwordNew,
+          passwordNew,
+        });
+
+        const actual = await isValid(input);
+
+        expect(actual).toEqual(false);
+      });
+
       test('is missing an uppercase letter', async () => {
         const passwordNew = 'a1!'.padEnd(
           UserRegisterInput.Limits.passwordNew.min,

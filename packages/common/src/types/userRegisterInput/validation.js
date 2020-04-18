@@ -13,6 +13,7 @@ import { Validation } from '../validation';
 const { object, ref, string } = Validation;
 
 const passwordNew = {
+  max: 64,
   min: 8,
   pattern: regexToInputPattern(STRONG_PASSWORD_REGEX),
   required: true,
@@ -33,7 +34,7 @@ const Limits = {
   passwordConfirm: passwordNew,
   passwordNew,
   username: {
-    max: 50,
+    max: 128,
     min: 4,
     pattern: regexToInputPattern(USERNAME_REGEX),
     required: true,

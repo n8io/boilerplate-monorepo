@@ -1,6 +1,5 @@
-import { make } from './creation';
-import { Map } from './typedef';
+import { Enumeration } from './typedef';
 
-const RateLimit = { Map, make };
+const RateLimit = { ...Enumeration };
 
 export { RateLimit };

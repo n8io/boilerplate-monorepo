@@ -20,17 +20,19 @@ exports[`<Form/> renders properly 1`] = `
     />
     <x-passwordinput
       label="t(newPassword)"
+      max="64"
       min="8"
       name="passwordNew"
-      pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\\d)(?=.*[#$^+=!*()@%&]).{8,}$"
+      pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\\d)(?=.*[#$^+=!*()@%&]).{1,}$"
       patterndescription="t(DOES_NOT_MEET_PASSWORD_REQUIREMENTS)"
       required="true"
     />
     <x-passwordinput
       label="t(confirmPassword)"
+      max="64"
       min="8"
       name="passwordConfirm"
-      pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\\d)(?=.*[#$^+=!*()@%&]).{8,}$"
+      pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\\d)(?=.*[#$^+=!*()@%&]).{1,}$"
       patterndescription="t(DOES_NOT_MEET_PASSWORD_REQUIREMENTS)"
       required="true"
     />

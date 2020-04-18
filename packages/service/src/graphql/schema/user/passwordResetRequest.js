@@ -87,8 +87,7 @@ const resolver = async (_parent, { input }, context) => {
   return true;
 };
 
-const { USER_ACCOUNT_RECOVERY_NOTIFY } = RateLimit.Map;
-const { burst: Burst, window: Window } = USER_ACCOUNT_RECOVERY_NOTIFY;
+const { burst: Burst, window: Window } = RateLimit.USER_ACCOUNT_RECOVERY_NOTIFY;
 
 const typeDefs = gql`
   "The user recovery notification method enumeration"

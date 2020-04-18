@@ -5,13 +5,14 @@ import {
 import { options } from 'graphql/cache';
 import { RateLimiterRedis } from 'rate-limiter-flexible';
 import redis from 'redis';
-import { ipKeyGenerator, onLimit } from './selectors';
+import { RateLimiterKeyGenerator } from 'types/rateLimiterKeyGenerator';
+import { onLimit } from './selectors';
 
 const storeClient = redis.createClient(options);
 
-const make = name => {
+const make = (name, keyGenerator = RateLimiterKeyGenerator.IP) => {
   const directive = createRateLimitDirective({
-    keyGenerator: ipKeyGenerator,
+    keyGenerator,
     limiterClass: RateLimiterRedis,
     limiterOptions: { storeClient },
     onLimit,

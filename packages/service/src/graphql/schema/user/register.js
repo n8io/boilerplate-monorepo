@@ -96,8 +96,7 @@ const resolver = async (_parent, { input }, context) => {
   return true;
 };
 
-const { USER_REGISTER } = RateLimit.Map;
-const { burst: Burst, window: Window } = USER_REGISTER;
+const { burst: Burst, window: Window } = RateLimit.USER_REGISTER;
 
 const typeDefs = gql`
   "The user register input"
