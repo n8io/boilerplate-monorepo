@@ -44,14 +44,14 @@ const tryToConnect = async connection => {
     await newConnection.raw(`SET SESSION SCHEMA '${Db.Schema.MAIN}';`);
 
     if (attempts) {
-      log.info('👍 Connected to the database');
+      log.info('Connected to the database');
     }
   } catch (err) {
     await wait(Math.pow(1.5, attempts));
     // eslint-disable-next-line require-atomic-updates
     attempts += 1;
 
-    log.warn(`🔌 Attempt #${attempts} to connect to the database...`);
+    log.warn(`Attempt #${attempts} to connect to the database...`);
 
     newConnection = await tryToConnect(connection);
   }

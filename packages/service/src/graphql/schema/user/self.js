@@ -65,7 +65,7 @@ const resolver = async (_parent, _args, context) => {
     });
   }
 
-  debugLog('✅ Found me self', userSelf);
+  debugLog('✅ Found self', userSelf);
 
   return userSelf;
 };

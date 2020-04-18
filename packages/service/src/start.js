@@ -16,14 +16,18 @@ const start = async ({ app, cache, connection, schema }) => {
   const actualSchema = schema || (await makeSchema());
   const actualApp = app || makeApp(cache, schema);
 
-  await makeGraphqlServer(actualApp, actualCache, actualSchema);
+  const graphqlServer = await makeGraphqlServer(
+    actualApp,
+    actualCache,
+    actualSchema
+  );
 
-  const expressServer = actualApp.listen(PORT, () => {
+  const expressServer = graphqlServer.listen({ port: PORT }, () => {
     const msg = `🚀 GraphQL server started @ http://localhost:${PORT}/graphql`;
     const bookend = '='.repeat(msg.length - 1);
 
     // eslint-disable-next-line no-console
-    console.log(`${bookend}\n${msg}\n${bookend}`);
+    console.log([bookend, msg, bookend].join('\n'));
   });
 
   await once(expressServer, 'listening');
