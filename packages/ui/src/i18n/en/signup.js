@@ -1,5 +1,5 @@
 export const signup = {
-  FAILED_TO_REGISTER_USER: 'Username or email may already be in use.',
+  USER_REGISTER_FAILED: 'Username or email may already be in use.',
   signupFailed: 'Unable to sign up: {{message}}',
   title: 'Sign Up',
 };

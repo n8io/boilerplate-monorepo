@@ -32,7 +32,7 @@ const resolver = async (_parent, { input }, context) => {
   try {
     user = await userReadRaw({ id }, context);
   } catch (error) {
-    log.error(InternalErrorMessage.FAILED_TO_FETCH_USER, {
+    log.error(InternalErrorMessage.USER_FETCH_FAILED, {
       error,
       mutation: MUTATION_NAME,
     });
@@ -46,7 +46,7 @@ const resolver = async (_parent, { input }, context) => {
       mutation: MUTATION_NAME,
     };
 
-    log.error(InternalErrorMessage.FAILED_TO_FETCH_USER, errorData);
+    log.error(InternalErrorMessage.USER_FETCH_FAILED, errorData);
 
     return true;
   }
@@ -64,7 +64,7 @@ const resolver = async (_parent, { input }, context) => {
       context
     );
   } catch (error) {
-    log.error(InternalErrorMessage.FAILED_TO_UPDATE_SELF, {
+    log.error(InternalErrorMessage.USER_SELF_UPDATE_FAILED, {
       error,
       query: MUTATION_NAME,
     });
@@ -75,7 +75,7 @@ const resolver = async (_parent, { input }, context) => {
   try {
     await passwordReset({ passwordResetToken, user }, context);
   } catch (error) {
-    log.error(InternalErrorMessage.FAILED_TO_EMAIL_PASSWORD_RESET, {
+    log.error(InternalErrorMessage.EMAIL_PASSWORD_RESET_SEND_FAILED, {
       error,
       query: MUTATION_NAME,
       username: user.username,

@@ -39,7 +39,7 @@ const refreshToken = async (req, res) => {
   }
 
   if (user.tokenVersion !== actualToken.tokenVersion) {
-    log.error(InternalErrorMessage.REFRESH_TOKEN_VERSION_MISMATCH, {
+    log.error(InternalErrorMessage.AUTH_REFRESH_TOKEN_VERSION_MISMATCH, {
       id: actualToken.id,
       tokenVersion: {
         dbUser: user.tokenVersion,

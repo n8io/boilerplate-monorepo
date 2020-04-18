@@ -16,8 +16,8 @@ const appendSafeError = props => ({
 class UserDeleteError extends ApolloError {
   constructor(properties) {
     super(
-      PublicErrorMessage.FAILED_TO_DELETE_USER,
-      ErrorType.FAILED_TO_DELETE_USER,
+      PublicErrorMessage.USER_DELETE_FAILED,
+      ErrorType.USER_DELETE_FAILED,
       appendSafeError(properties)
     );
 

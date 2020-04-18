@@ -34,7 +34,7 @@ const resolver = async (_parent, { input }, context) => {
   try {
     userSelf = await userReadRaw({ id }, context);
   } catch (error) {
-    log.error(InternalErrorMessage.FAILED_TO_RETRIEVE_SELF, {
+    log.error(InternalErrorMessage.USER_SELF_FETCH_FAILED, {
       error,
       query: MUTATION_NAME,
     });
@@ -49,7 +49,7 @@ const resolver = async (_parent, { input }, context) => {
       username: user.username,
     };
 
-    log.error(InternalErrorMessage.FAILED_TO_RETRIEVE_SELF, errorData);
+    log.error(InternalErrorMessage.USER_SELF_FETCH_FAILED, errorData);
 
     throw new UserSelfNotFoundError(errorData);
   }
@@ -78,7 +78,7 @@ const resolver = async (_parent, { input }, context) => {
   try {
     await userSave({ id, passwordHash: newHashedPassword }, context);
   } catch (error) {
-    log.error(InternalErrorMessage.FAILED_TO_UPDATE_SELF, {
+    log.error(InternalErrorMessage.USER_SELF_UPDATE_FAILED, {
       error,
       query: MUTATION_NAME,
     });

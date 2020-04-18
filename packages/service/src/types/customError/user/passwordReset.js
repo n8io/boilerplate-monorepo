@@ -1,9 +1,9 @@
 import { ApolloError } from 'apollo-server-express';
-import { toSafeLog } from 'log/toSafeLog';
+import { identity } from 'ramda';
 import { InternalErrorMessage, PublicErrorMessage } from 'types/errorMessage';
 import { ErrorType } from 'types/errorType';
 
-const toSafeError = toSafeLog;
+const toSafeError = identity;
 
 const appendSafeError = props => ({
   ...props,
@@ -13,8 +13,8 @@ const appendSafeError = props => ({
 class UserPasswordResetTokenMismatchError extends ApolloError {
   constructor(properties) {
     super(
-      InternalErrorMessage.FAILED_TO_RESET_PASSWORD_TOKEN_MISMATCH,
-      ErrorType.FAILED_TO_RESET_PASSWORD_TOKEN_MISMATCH,
+      InternalErrorMessage.USER_PASSWORD_RESET_FAILED_TOKEN_MISMATCH,
+      ErrorType.USER_PASSWORD_RESET_FAILED_TOKEN_MISMATCH,
       appendSafeError(properties)
     );
 
@@ -27,8 +27,8 @@ class UserPasswordResetTokenMismatchError extends ApolloError {
 class UserPasswordResetTokenExpiredError extends ApolloError {
   constructor(properties) {
     super(
-      PublicErrorMessage.FAILED_TO_RESET_PASSWORD,
-      ErrorType.FAILED_TO_RESET_PASSWORD_TOKEN_EXPIRED,
+      PublicErrorMessage.USER_PASSWORD_RESET_FAILED,
+      ErrorType.USER_PASSWORD_RESET_FAILED_TOKEN_EXPIRED,
       appendSafeError(properties)
     );
 

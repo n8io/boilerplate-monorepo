@@ -29,7 +29,7 @@ const resolver = async (_parent, input, context) => {
       context
     );
   } catch (error) {
-    log.error(InternalErrorMessage.FAILED_TO_FETCH_USER, {
+    log.error(InternalErrorMessage.USER_FETCH_FAILED, {
       error,
       query: QUERY_NAME,
     });
@@ -43,7 +43,7 @@ const resolver = async (_parent, input, context) => {
       query: QUERY_NAME,
     };
 
-    log.warn(InternalErrorMessage.FAILED_TO_FETCH_USER, errorData);
+    log.warn(InternalErrorMessage.USER_FETCH_FAILED, errorData);
 
     return null;
   }

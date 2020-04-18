@@ -22,7 +22,7 @@ const resolver = async (_parent, { id }, context) => {
   try {
     wasUpdated = await userRevokeRefreshTokens(id, context);
   } catch (error) {
-    log.error(InternalErrorMessage.FAILED_TO_REVOKE_REFRESH_TOKENS, {
+    log.error(InternalErrorMessage.USER_REVOKE_REFRESH_TOKENS_FAILED, {
       error,
       id,
       mutation: MUTATION_NAME,
@@ -32,7 +32,7 @@ const resolver = async (_parent, { id }, context) => {
   }
 
   if (!wasUpdated) {
-    log.error(InternalErrorMessage.FAILED_TO_REVOKE_REFRESH_TOKENS, {
+    log.error(InternalErrorMessage.USER_REVOKE_REFRESH_TOKENS_FAILED, {
       id,
       mutation: MUTATION_NAME,
     });

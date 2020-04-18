@@ -34,7 +34,7 @@ const resolver = async (_parent, { input }, context) => {
   try {
     user = await userReadRaw({ id }, context);
   } catch (error) {
-    log.error(InternalErrorMessage.FAILED_TO_FETCH_USER, {
+    log.error(InternalErrorMessage.USER_FETCH_FAILED, {
       error,
       mutation: MUTATION_NAME,
     });
@@ -48,7 +48,7 @@ const resolver = async (_parent, { input }, context) => {
       mutation: MUTATION_NAME,
     };
 
-    log.error(InternalErrorMessage.FAILED_TO_FETCH_USER, errorData);
+    log.error(InternalErrorMessage.USER_FETCH_FAILED, errorData);
 
     return true;
   }
@@ -56,7 +56,7 @@ const resolver = async (_parent, { input }, context) => {
   const { passwordResetToken, passwordResetTokenExpiration } = user;
 
   if (passwordResetToken !== token) {
-    log.error(InternalErrorMessage.FAILED_TO_RESET_PASSWORD_TOKEN_MISMATCH, {
+    log.error(InternalErrorMessage.USER_PASSWORD_RESET_FAILED_TOKEN_MISMATCH, {
       query: MUTATION_NAME,
       username: user.username,
     });
@@ -68,7 +68,7 @@ const resolver = async (_parent, { input }, context) => {
   const isResetTokenExpired = isAfter(passwordResetTokenExpiration, now);
 
   if (isResetTokenExpired) {
-    log.error(InternalErrorMessage.FAILED_TO_RESET_PASSWORD_TOKEN_MISMATCH, {
+    log.error(InternalErrorMessage.USER_PASSWORD_RESET_FAILED_TOKEN_MISMATCH, {
       query: MUTATION_NAME,
       username: user.username,
     });
@@ -89,7 +89,7 @@ const resolver = async (_parent, { input }, context) => {
       context
     );
   } catch (error) {
-    log.error(InternalErrorMessage.FAILED_TO_UPDATE_SELF, {
+    log.error(InternalErrorMessage.USER_SELF_UPDATE_FAILED, {
       error,
       query: MUTATION_NAME,
     });

@@ -6,7 +6,7 @@ const toSafeError = error => {
   delete error.extensions.deleted_at;
   delete error.extensions.username;
 
-  error.message = PublicErrorMessage.INVALID_LOGIN;
+  error.message = PublicErrorMessage.LOGIN_FAILED;
 
   return error;
 };
@@ -19,7 +19,7 @@ const appendSafeError = props => ({
 class UserInvalidLoginError extends ApolloError {
   constructor(properties) {
     super(
-      PublicErrorMessage.INVALID_LOGIN,
+      PublicErrorMessage.LOGIN_FAILED,
       ErrorType.FAILED_LOGIN,
       appendSafeError(properties)
     );

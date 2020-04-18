@@ -20,7 +20,7 @@ const resolver = async (_parent, _args, context) => {
   const { user } = context;
 
   if (!user) {
-    log.error(InternalErrorMessage.FAILED_TO_RETRIEVE_SELF_NO_USER_ON_CONTEXT, {
+    log.error(InternalErrorMessage.USER_SELF_FETCH_FAILED_NO_USER_ON_CONTEXT, {
       query: QUERY_NAME,
     });
 
@@ -32,7 +32,7 @@ const resolver = async (_parent, _args, context) => {
   try {
     userSelf = await userRead({ id: user.id }, context);
   } catch (error) {
-    log.error(InternalErrorMessage.FAILED_TO_RETRIEVE_SELF, {
+    log.error(InternalErrorMessage.USER_SELF_FETCH_FAILED, {
       error,
       query: QUERY_NAME,
     });
@@ -47,7 +47,7 @@ const resolver = async (_parent, _args, context) => {
       username: user.username,
     };
 
-    log.error(InternalErrorMessage.FAILED_TO_RETRIEVE_SELF, errorData);
+    log.error(InternalErrorMessage.USER_SELF_FETCH_FAILED, errorData);
 
     throw new UserSelfNotFoundError(errorData);
   }

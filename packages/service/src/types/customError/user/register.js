@@ -6,7 +6,7 @@ const toSafeError = error => {
   delete error.extensions.email;
   delete error.extensions.username;
 
-  error.message = PublicErrorMessage.FAILED_TO_REGISTER_USER;
+  error.message = PublicErrorMessage.USER_REGISTER_FAILED;
 
   return error;
 };
@@ -19,8 +19,8 @@ const appendSafeError = props => ({
 class RegisterUserAlreadyExistsError extends ApolloError {
   constructor(properties) {
     super(
-      InternalErrorMessage.FAILED_TO_REGISTER_USER_ALREADY_EXISTS,
-      ErrorType.FAILED_TO_REGISTER_USER_ALREADY_EXISTS,
+      InternalErrorMessage.USER_REGISTER_FAILED_ALREADY_EXISTS,
+      ErrorType.USER_REGISTER_FAILED_ALREADY_EXISTS,
       appendSafeError(properties)
     );
 

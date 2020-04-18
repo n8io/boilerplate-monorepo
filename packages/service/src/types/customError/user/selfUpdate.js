@@ -6,7 +6,7 @@ const toSafeError = error => {
   delete error.extensions.email;
   delete error.extensions.username;
 
-  error.message = PublicErrorMessage.FAILED_TO_UPDATE_SELF;
+  error.message = PublicErrorMessage.USER_SELF_UPDATE_FAILED;
 
   return error;
 };
@@ -19,8 +19,8 @@ const appendSafeError = props => ({
 class UserSelfUpdateNotFoundError extends ApolloError {
   constructor(properties) {
     super(
-      InternalErrorMessage.FAILED_TO_UPDATE_SELF_NOT_FOUND,
-      ErrorType.FAILED_TO_UPDATE_SELF,
+      InternalErrorMessage.USER_SELF_UPDATE_FAILED_NOT_FOUND,
+      ErrorType.USER_SELF_UPDATE_FAILED,
       appendSafeError(properties)
     );
 
