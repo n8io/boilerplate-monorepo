@@ -16,7 +16,7 @@ const appendSafeError = props => ({
 class UserRevokeRefreshTokensError extends ApolloError {
   constructor(properties) {
     super(
-      PublicErrorMessage.FAILED_TO_REVOKE_REFRESH_TOKENS,
+      PublicErrorMessage.USER_REVOKE_REFRESH_TOKENS_FAILED,
       ErrorType.FAILED_TO_REVOKE_USER_REFRESH_TOKENS,
       appendSafeError(properties)
     );

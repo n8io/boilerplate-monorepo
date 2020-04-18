@@ -25,7 +25,7 @@ const resolver = async (_parent, { input }, context) => {
   try {
     user = await userReadRaw({ passwordResetToken }, context);
   } catch (error) {
-    log.error(InternalErrorMessage.FAILED_TO_FETCH_USER, {
+    log.error(InternalErrorMessage.USER_FETCH_FAILED, {
       error,
       query: QUERY_NAME,
     });
@@ -39,7 +39,7 @@ const resolver = async (_parent, { input }, context) => {
       query: QUERY_NAME,
     };
 
-    log.error(InternalErrorMessage.FAILED_TO_FETCH_USER, errorData);
+    log.error(InternalErrorMessage.USER_FETCH_FAILED, errorData);
 
     return null;
   }
@@ -49,7 +49,7 @@ const resolver = async (_parent, { input }, context) => {
   const isResetTokenExpired = isAfter(passwordResetTokenExpiration, now);
 
   if (isResetTokenExpired) {
-    log.error(InternalErrorMessage.PASSWORD_RESET_TOKEN_EXPIRED, {
+    log.error(InternalErrorMessage.AUTH_PASSWORD_RESET_TOKEN_EXPIRED, {
       token: passwordResetToken,
       when: formatDistance(passwordResetTokenExpiration, now),
     });

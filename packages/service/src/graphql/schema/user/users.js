@@ -33,7 +33,7 @@ const resolver = async (_parent, { input }, context) => {
   try {
     ({ pagination, users } = await usersRead(input, context));
   } catch (error) {
-    log.error(InternalErrorMessage.FAILED_TO_FETCH_USERS, {
+    log.error(InternalErrorMessage.USERS_FETCH_FAILED, {
       error,
       input,
       mutation: MUTATION_NAME,

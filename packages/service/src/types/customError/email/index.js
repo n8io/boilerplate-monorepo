@@ -1,9 +1,12 @@
 import { ApolloError } from 'apollo-server-express';
-import { toSafeLog } from 'log/toSafeLog';
 import { PublicErrorMessage } from 'types/errorMessage';
 import { ErrorType } from 'types/errorType';
 
-const toSafeError = toSafeLog;
+const toSafeError = error => {
+  error.message = PublicErrorMessage.EMAIL_PASSWORD_RESET_SEND_FAILED;
+
+  return error;
+};
 
 const appendSafeError = props => ({
   ...props,
@@ -13,8 +16,8 @@ const appendSafeError = props => ({
 class EmailError extends ApolloError {
   constructor(properties) {
     super(
-      PublicErrorMessage.FAILED_TO_SEND_OTP_EMAIL,
-      ErrorType.FAILED_TO_SEND_OTP_EMAIL,
+      PublicErrorMessage.EMAIL_PASSWORD_RESET_SEND_FAILED,
+      ErrorType.EMAIL_PASSWORD_RESET_SEND_FAILED,
       appendSafeError(properties)
     );
 

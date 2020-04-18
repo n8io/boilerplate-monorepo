@@ -24,7 +24,7 @@ const resolver = async (_parent, { id }, context) => {
   debugLog(`👾 ${MUTATION_NAME}`, id);
 
   if (user.id === id) {
-    log.error(InternalErrorMessage.USER_ATTEMPTED_TO_SELF_DELETE, {
+    log.error(InternalErrorMessage.USER_SELF_DELETE_ATTEMPTED, {
       mutation: MUTATION_NAME,
       username: user.username,
     });
@@ -42,7 +42,7 @@ const resolver = async (_parent, { id }, context) => {
 
     wasUpdated = Boolean(deletedAt);
   } catch (error) {
-    log.error(InternalErrorMessage.FAILED_TO_DELETE_USER, {
+    log.error(InternalErrorMessage.USER_DELETE_FAILED, {
       error,
       id,
       mutation: MUTATION_NAME,
@@ -52,7 +52,7 @@ const resolver = async (_parent, { id }, context) => {
   }
 
   if (!wasUpdated) {
-    log.error(InternalErrorMessage.FAILED_TO_DELETE_USER, {
+    log.error(InternalErrorMessage.USER_DELETE_FAILED, {
       id,
       mutation: MUTATION_NAME,
     });

@@ -25,7 +25,7 @@ const resolver = async (_parent, { input }, context) => {
   try {
     userSelf = await userSave({ ...input, id }, context);
   } catch (error) {
-    log.error(InternalErrorMessage.FAILED_DB_REQUEST, {
+    log.error(InternalErrorMessage.DATABASE_REQUEST_FAILED, {
       error,
       id,
       input,
@@ -36,7 +36,7 @@ const resolver = async (_parent, { input }, context) => {
   }
 
   if (!userSelf) {
-    log.error(InternalErrorMessage.FAILED_TO_UPDATE_SELF_NOT_FOUND, {
+    log.error(InternalErrorMessage.USER_SELF_UPDATE_FAILED_NOT_FOUND, {
       id,
       input,
     });

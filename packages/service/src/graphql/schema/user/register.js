@@ -58,7 +58,7 @@ const resolver = async (_parent, { input }, context) => {
   try {
     user = await userRead({ email, includeDeleted: true, username }, context);
   } catch (error) {
-    log.error(InternalErrorMessage.FAILED_TO_REGISTER_USER, {
+    log.error(InternalErrorMessage.USER_REGISTER_FAILED, {
       mutation: MUTATION_NAME,
     });
 
@@ -66,7 +66,7 @@ const resolver = async (_parent, { input }, context) => {
   }
 
   if (user) {
-    log.error(InternalErrorMessage.FAILED_TO_REGISTER_USER, {
+    log.error(InternalErrorMessage.USER_REGISTER_FAILED, {
       existing: user,
       mutation: MUTATION_NAME,
       requested: input,
@@ -82,7 +82,7 @@ const resolver = async (_parent, { input }, context) => {
   try {
     await userRegister(newUser, context);
   } catch (error) {
-    log.error(InternalErrorMessage.FAILED_TO_REGISTER_USER, {
+    log.error(InternalErrorMessage.USER_REGISTER_FAILED, {
       error,
       input,
       mutation: MUTATION_NAME,

@@ -99,7 +99,7 @@ const readRefreshToken = req => {
   try {
     return decryptRefreshToken(token);
   } catch (error) {
-    log.error(InternalErrorMessage.FAILED_TO_DECRYPT_REFRESH_TOKEN, error);
+    log.error(InternalErrorMessage.AUTH_REFRESH_TOKEN_DECRYPT_FAILED, error);
   }
 
   return null;

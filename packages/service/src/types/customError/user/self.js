@@ -5,7 +5,7 @@ import { ErrorType } from 'types/errorType';
 const toSafeError = error => {
   delete error.extensions.username;
 
-  error.message = PublicErrorMessage.FAILED_TO_RETRIEVE_SELF;
+  error.message = PublicErrorMessage.USER_SELF_FETCH_FAILED;
 
   return error;
 };
@@ -32,8 +32,8 @@ class UserSelfDeletedError extends ApolloError {
 class UserSelfError extends ApolloError {
   constructor(properties) {
     super(
-      PublicErrorMessage.FAILED_TO_RETRIEVE_SELF,
-      ErrorType.FAILED_TO_RETRIEVE_SELF,
+      PublicErrorMessage.USER_SELF_FETCH_FAILED,
+      ErrorType.USER_SELF_FETCH_FAILED,
       appendSafeError(properties)
     );
 
@@ -45,7 +45,7 @@ class UserSelfNotFoundError extends ApolloError {
   constructor(properties) {
     super(
       InternalErrorMessage.USER_NOT_FOUND,
-      ErrorType.FAILED_TO_RETRIEVE_SELF_USER_NOT_FOUND,
+      ErrorType.USER_SELF_FETCH_FAILED_USER_NOT_FOUND,
       appendSafeError(properties)
     );
 

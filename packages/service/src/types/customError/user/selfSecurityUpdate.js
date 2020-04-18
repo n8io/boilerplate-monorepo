@@ -6,7 +6,7 @@ const toSafeError = error => {
   delete error.extensions.email;
   delete error.extensions.username;
 
-  error.message = PublicErrorMessage.FAILED_TO_UPDATE_SELF;
+  error.message = PublicErrorMessage.USER_SELF_UPDATE_FAILED;
 
   return error;
 };
