@@ -45,32 +45,6 @@ services:
     volumes:
       - email-dir:/tmp
 
-  ui:
-    container_name: ui
-    build:
-      context: .
-      dockerfile: ./docker/Dockerfile.ui
-    ports:
-      - 3000:3000
-    volumes:
-      - .:/app
-      - yarn-cache-ui:/yarn
-
-  service:
-    container_name: service
-    build:
-      context: .
-      dockerfile: ./docker/Dockerfile.service
-    ports:
-      - 4000:4000
-    depends_on:
-      - cache
-      - db
-    volumes:
-      - .:/app
-      - yarn-cache-service:/yarn
-
 volumes:
   email-dir:
-  yarn-cache-ui:
   yarn-cache-service:

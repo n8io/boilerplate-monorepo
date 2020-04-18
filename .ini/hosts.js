@@ -26,10 +26,22 @@ const readHosts = () =>
     ([host, alias]) => host === HOST && alias.toLowerCase() === ALIAS
   );
 
-  if (hasMatch) return console.log(chalk.cyan('👍 Hosts file looks good!'));
+  if (hasMatch) return;
 
   if (!isSudo) {
-    return console.log(chalk.red('🤓 Please run again as sudo/admin'));
+    console.log(
+      chalk.yellow(`😬 Your hosts file is missing an entry for ${ALIAS}`)
+    );
+  }
+
+  if (!isSudo) {
+    console.log(
+      chalk.red(
+        '🤓 Please run the following command as sudo (or admin) to add:\n\n  yarn hosts\n'
+      )
+    );
+
+    process.exit(1);
   }
 
   hostile.set(HOST, ALIAS, err => {

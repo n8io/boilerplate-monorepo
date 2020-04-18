@@ -9,7 +9,7 @@ const userSave = async (user, context) => {
     .save(rest, { method: 'update', patch: true, required: false })
     .then(model => model.toJSON());
 
-  return User.dbToApi(result);
+  return UserType.dbToApi(result);
 };
 
 export { userSave };

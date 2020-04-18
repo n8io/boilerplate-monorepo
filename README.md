@@ -49,38 +49,11 @@ yarn hosts
 
 ## 🤓 Development Experience
 
-We've got two choices for local development. With Docker or natively. Each have their own pros and cons depending on whatever flavor suits you. Try them both out. You do you boo.
-
-### 🍕 Natively Adhoc
-
-**NOTE** This is the recommended path for `*nix` based operating systems.
-
 ```bash
 # Start all the things!
 yarn start # 👏🤜🤛🍾🥳
 
-# 👆 The above is the same as...
-# 👇 starting them all individually below
-
-# Start the db instance
-yarn start:dev:db # `yarn stop:db` to stop
-
-# Start the service
-yarn start:dev:server # Cmd/Ctrl+C to stop
-
-# Start the ui
-yarn start:dev:ui # Cmd/Ctrl+C to stop
-```
-
-### 🐳 Dockerized
-
-When you are running into dependency issues across your environments or maybe you want everything running in the background, this path for you. 🍷 Works well with Windows.
-
-```bash
-# Start db, service, and UI
-yarn dev
-
-# Stop db, service, and UI
+# When you're done dev'ing, spin down the Docker containers
 yarn down
 ```
 
@@ -91,15 +64,6 @@ yarn down
 ```shell
 # Run all the tests
 yarn test
-
-# 👆 The above is the same as...
-# 👇 starting them all individually below
-
-# Run & watch `common` tests
-(cd packages/common && yarn test:watch)
-
-# Run & watch `ui` tests
-(cd packages/ui && yarn test:watch)
 ```
 
 #### 🌲 End-to-End Tests
