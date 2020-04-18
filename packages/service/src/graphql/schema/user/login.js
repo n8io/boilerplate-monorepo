@@ -81,8 +81,8 @@ const resolver = async (_parent, { input }, context) => {
   return Auth.encryptAccessToken(user);
 };
 
-const { USER_LOGIN } = RateLimit.Map;
-const { burst: Burst, window: Window } = USER_LOGIN;
+const { burst: Burst, window: Window } = RateLimit.USER_LOGIN;
+const { duration, limit } = RateLimit.USER_LOGIN_USERNAME;
 
 const typeDefs = gql`
   "The user login input"
@@ -99,6 +99,7 @@ const typeDefs = gql`
     ${MUTATION_NAME}(input: UserLoginInput!): String!
       @rateLimitWindow(limit: ${Window.limit}, duration: ${Window.duration})
       @rateLimitBurst(limit: ${Burst.limit}, duration: ${Burst.duration})
+      @rateLimitUsername(limit: ${limit}, duration: ${duration})
   }
 `;
 

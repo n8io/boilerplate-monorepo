@@ -51,8 +51,7 @@ const resolver = async (_parent, input, context) => {
   return user;
 };
 
-const { USER_ACCOUNT_RECOVERY_FIND } = RateLimit.Map;
-const { burst: Burst, window: Window } = USER_ACCOUNT_RECOVERY_FIND;
+const { burst: Burst, window: Window } = RateLimit.USER_ACCOUNT_RECOVERY_FIND;
 
 const typeDefs = gql`
   "The user recovery type"

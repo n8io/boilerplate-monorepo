@@ -1,5 +1,5 @@
 import { Time } from '@boilerplate-monorepo/common';
-import { always, identity, map } from 'ramda';
+import { always, identity, map, evolve } from 'ramda';
 import { ProcessEnvKeys } from 'types/processEnv';
 
 const thirtySeconds = 30;
@@ -14,12 +14,19 @@ const isDebug = process.env[ProcessEnvKeys.DEBUG];
 const noLimit = { duration: 1, limit: 999 };
 const unlimited = { burst: noLimit, window: noLimit };
 
-const applyDebugLimits = isDebug ? always(unlimited) : identity;
+const toUnlimited = evolve({
+  burst: always(unlimited.burst),
+  duration: always(noLimit.duration),
+  limit: always(noLimit.limit),
+  window: always(unlimited.window),
+});
+
+const applyDebugLimits = isDebug ? toUnlimited : identity;
 
 const rateLimits = {
   USER_ACCOUNT_RECOVERY_CODE_VERIFY: {
-    burst: { duration: thirtySeconds, limit: 1 },
-    window: { duration: fiveMinutes, limit: 2 },
+    burst: { duration: thirtySeconds, limit: 3 },
+    window: { duration: fiveMinutes, limit: 10 },
   },
   USER_ACCOUNT_RECOVERY_FIND: {
     burst: { duration: thirtySeconds, limit: 10 },
@@ -32,6 +39,10 @@ const rateLimits = {
   USER_LOGIN: {
     burst: { duration: thirtySeconds, limit: 10 },
     window: { duration: fifteenMinutes, limit: 50 },
+  },
+  USER_LOGIN_USERNAME: {
+    duration: thirtySeconds,
+    limit: 5,
   },
   USER_LOGOUT: {
     burst: { duration: fiveMinutes, limit: 100 },
@@ -50,6 +61,6 @@ const rateLimits = {
   },
 };
 
-const Map = map(applyDebugLimits, rateLimits);
+const Enumeration = map(applyDebugLimits, rateLimits);
 
-export { Map };
+export { Enumeration };

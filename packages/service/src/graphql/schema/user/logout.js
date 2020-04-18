@@ -22,15 +22,14 @@ const resolver = (_parent, _args, context) => {
   return true;
 };
 
-const { USER_LOGOUT } = RateLimit.Map;
-const { burst: Limits } = USER_LOGOUT;
+const { burst: Burst } = RateLimit.USER_LOGOUT;
 
 const typeDefs = gql`
   "Mutations"
   type Mutation {
     "Logs the active user out (kills refresh 🍪)"
     ${QUERY_NAME}: Boolean!
-      @rateLimitBurst(limit: ${Limits.limit}, duration: ${Limits.duration})
+      @rateLimitBurst(limit: ${Burst.limit}, duration: ${Burst.duration})
   }
 `;
 

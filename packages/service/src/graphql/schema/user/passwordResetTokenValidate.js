@@ -64,8 +64,7 @@ const resolver = async (_parent, { input }, context) => {
   return user.id;
 };
 
-const { USER_PASSWORD_RESET_VALIDATE } = RateLimit.Map;
-const { burst: Burst, window: Window } = USER_PASSWORD_RESET_VALIDATE;
+const { burst: Burst, window: Window } = RateLimit.USER_PASSWORD_RESET_VALIDATE;
 
 const typeDefs = gql`
   "The user password reset token validate input"
