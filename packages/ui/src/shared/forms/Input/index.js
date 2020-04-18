@@ -63,6 +63,8 @@ const Input = ({
     'aria-label': ariaLabel || label,
     ...props,
     id: name,
+    max,
+    min,
     name,
     ...(pattern ? { pattern } : {}),
     ...(patternDescription ? { title: patternDescription || title } : {}),
