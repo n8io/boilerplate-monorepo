@@ -1,16 +1,15 @@
 import { Time } from '@boilerplate-monorepo/common';
-import { always, identity, map, evolve } from 'ramda';
-import { ProcessEnvKeys } from 'types/processEnv';
+import { config } from 'config';
+import { always, evolve, identity, map } from 'ramda';
+
+const { DEBUG } = config;
 
 const thirtySeconds = 30;
 const oneMinute = 60;
 const fiveMinutes = Time.minutesToSeconds(5);
 const fifteenMinutes = Time.minutesToSeconds(15);
 const thirtyMinutes = Time.minutesToSeconds(30);
-
-// eslint-disable-next-line no-process-env
-const isDebug = process.env[ProcessEnvKeys.DEBUG];
-
+const isDebug = Boolean(DEBUG);
 const noLimit = { duration: 1, limit: 999 };
 const unlimited = { burst: noLimit, window: noLimit };
 

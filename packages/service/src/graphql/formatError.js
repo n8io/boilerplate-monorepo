@@ -1,3 +1,5 @@
+import { config } from 'config';
+
 const toSafeError = error => {
   const { extensions } = error;
 
@@ -7,8 +9,9 @@ const toSafeError = error => {
     error.extensions.code = errorCode;
   }
 
-  // eslint-disable-next-line no-process-env
-  if (process.env.NODE_ENV !== 'development') {
+  const { NODE_ENV } = config;
+
+  if (NODE_ENV !== 'development') {
     delete error.extensions?.exception;
   }
 

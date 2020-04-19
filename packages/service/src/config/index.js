@@ -15,6 +15,7 @@ const ACCESS_TOKEN_EXPIRY = '5m';
 const CAPTCHA_SECRET = '0x0000000000000000000000000000000000000000';
 const DATABASE_URL = `postgres://postgres:postgres@localhost:5432/${rootPackageName}`;
 const DB_MIGRATION_SCHEMA = 'public';
+const DB_MIGRATION_TABLE_NAME = 'migrations';
 const DB_SCHEMA = 'main';
 const DEBUG = `${raw.npm_package_name}*`;
 const ENGINE_API_KEY = '';
@@ -37,6 +38,7 @@ const config = evolve(
     CAPTCHA_SECRET: defaultTo(CAPTCHA_SECRET),
     DATABASE_URL: defaultTo(DATABASE_URL),
     DB_MIGRATION_SCHEMA: defaultTo(DB_MIGRATION_SCHEMA),
+    DB_MIGRATION_TABLE_NAME: defaultTo(DB_MIGRATION_TABLE_NAME),
     DB_SCHEMA: defaultTo(DB_SCHEMA),
     DEBUG: defaultTo(DEBUG),
     ENGINE_API_KEY: defaultTo(ENGINE_API_KEY),

@@ -76,13 +76,13 @@ workflows:
             branches:
               only:
                 - master
-      - hold:
+      - approve-deployment:
           type: approval
           requires:
             - build
       - deploy:
           requires:
-            - hold
+            - approve-deployment
           filters:
             branches:
               only:

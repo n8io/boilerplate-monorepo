@@ -1,1 +1,2 @@
+release: yarn -s db:migrate
 web: yarn -s start:prod:service
