@@ -1,1 +1,1 @@
-web: yarn -s build && yarn -s start:prod
+web: yarn -s start:prod:ui
