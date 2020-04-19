@@ -1,7 +1,7 @@
 version: 2.1
 
 jobs:
-  pre-build:
+  test:
     docker:
       - image: circleci/node:12.13.0
     environment:
@@ -54,14 +54,35 @@ jobs:
           name: Build all the things
           command: yarn -s build
 
+  deploy:
+    docker:
+      - image: circleci/node:12.13.0
+    steps:
+      - checkout
+      - run:
+          name: Deploy to Heroku
+          command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+
 workflows:
   version: 2
   features:
     jobs:
-      - pre-build
+      - test
       - build:
           requires:
-            - pre-build
+            - test
+          filters:
+            branches:
+              only:
+                - master
+      - hold:
+          type: approval
+          requires:
+            - build
+      - deploy:
+          requires:
+            - hold
           filters:
             branches:
               only:

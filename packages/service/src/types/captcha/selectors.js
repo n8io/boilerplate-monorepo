@@ -1,15 +1,14 @@
+import { config } from 'config';
 import https from 'https';
 import querystring from 'querystring';
-import { ProcessEnvKeys } from 'types/processEnv';
 
-// eslint-disable-next-line no-process-env
-const { [ProcessEnvKeys.CAPTCHA_SECRET]: secret } = process.env;
+const { CAPTCHA_SECRET } = config;
 
 const isTokenValid = token =>
   new Promise((resolve, reject) => {
     const data = querystring.stringify({
       response: token,
-      secret,
+      secret: CAPTCHA_SECRET,
     });
 
     const options = {

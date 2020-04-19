@@ -1,12 +1,10 @@
 import { RedisCache } from 'apollo-server-cache-redis';
+import { config } from 'config';
 
-const options = {
-  /* eslint-disable no-process-env */
-  host: process.env.REDIS_HOST || 'localhost',
-  port: parseInt(process.env.REDIS_PORT, 10) || 6379,
-  /* eslint-enable no-process-env */
-};
+const { REDIS_URL } = config;
 
-const make = () => new RedisCache(options);
+const make = () => new RedisCache(REDIS_URL);
 
-export { make };
+const options = { url: REDIS_URL };
+
+export { make, options };

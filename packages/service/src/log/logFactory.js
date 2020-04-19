@@ -1,8 +1,8 @@
+import { config } from 'config';
 import debug from 'debug';
 import { toSafeLog } from './toSafeLog';
 
-// eslint-disable-next-line no-process-env
-const { npm_package_name: PACKAGE_NAME } = process.env;
+const { npm_package_name: PACKAGE_NAME } = config;
 const logs = {};
 
 const makeNamespace = ({ method, module }) =>

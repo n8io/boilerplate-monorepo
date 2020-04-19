@@ -1,7 +1,6 @@
-import { ProcessEnvKeys } from 'types/processEnv';
+import { config } from 'config';
 
-// eslint-disable-next-line no-process-env
-const { [ProcessEnvKeys.DB_SCHEMA]: schema } = process.env;
+const { DB_SCHEMA } = config;
 
 const Prefix = {
   ENUM: 'enum',
@@ -10,7 +9,7 @@ const Prefix = {
   UNIQUE: 'udx',
 };
 
-const toSchemaPrefixed = name => `${schema}.${name}`;
+const toSchemaPrefixed = name => `${DB_SCHEMA}.${name}`;
 
 const toEnumName = (schemalessTableName, schemalessEnumName) =>
   toSchemaPrefixed(
