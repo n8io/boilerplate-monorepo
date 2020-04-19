@@ -1,3 +1,4 @@
+import { config } from 'config';
 import cuid from 'cuid';
 import { isAfter } from 'date-fns';
 import {
@@ -11,20 +12,18 @@ import { logFactory } from 'log/logFactory';
 import ms from 'ms';
 import { pick, tail } from 'ramda';
 import { InternalErrorMessage } from 'types/errorMessage';
-import { ProcessEnvKeys } from 'types/processEnv';
 import { Route } from 'types/route';
 import { Enumeration } from './typedef';
 
 const isPast = date => isAfter(new Date(), date);
 
 const {
-  [ProcessEnvKeys.ACCESS_TOKEN_EXPIRY]: ACCESS_TOKEN_EXPIRY,
-  [ProcessEnvKeys.ACCESS_TOKEN_SECRET]: ACCESS_TOKEN_SECRET,
+  ACCESS_TOKEN_EXPIRY,
+  ACCESS_TOKEN_SECRET,
   NODE_ENV,
-  [ProcessEnvKeys.REFRESH_TOKEN_EXPIRY]: REFRESH_TOKEN_EXPIRY,
-  [ProcessEnvKeys.REFRESH_TOKEN_SECRET]: REFRESH_TOKEN_SECRET,
-  // eslint-disable-next-line no-process-env
-} = process.env;
+  REFRESH_TOKEN_EXPIRY,
+  REFRESH_TOKEN_SECRET,
+} = config;
 
 const toRefreshToken = pick([
   'email',

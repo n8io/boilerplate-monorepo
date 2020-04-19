@@ -54,15 +54,25 @@ jobs:
           name: Build all the things
           command: yarn -s build
 
-  deploy:
+  deploy-service:
     docker:
       - image: circleci/node:12.13.0
     steps:
       - checkout
       - run:
-          name: Deploy to Heroku
+          name: Deploy service to Heroku
           command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+            git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME_SERVICE.git master
+
+  deploy-ui:
+    docker:
+      - image: circleci/node:12.13.0
+    steps:
+      - checkout
+      - run:
+          name: Deploy ui to Heroku
+          command: |
+            git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME_UI.git master
 
 workflows:
   version: 2
@@ -76,13 +86,20 @@ workflows:
             branches:
               only:
                 - master
-      - hold:
+      - approve-deployment:
           type: approval
           requires:
             - build
-      - deploy:
+      - deploy-service:
           requires:
-            - hold
+            - approve-deployment
+          filters:
+            branches:
+              only:
+                - master
+      - deploy-ui:
+          requires:
+            - approve-deployment
           filters:
             branches:
               only:

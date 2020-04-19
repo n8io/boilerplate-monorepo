@@ -59,6 +59,7 @@ const resolver = async (_parent, { input }, context) => {
     user = await userRead({ email, includeDeleted: true, username }, context);
   } catch (error) {
     log.error(InternalErrorMessage.USER_REGISTER_FAILED, {
+      error,
       mutation: MUTATION_NAME,
     });
 

@@ -1,1 +1,1 @@
-web: yarn -s start:prod:ui
+web: yarn run -s start:prod:ui:heroku

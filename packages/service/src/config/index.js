@@ -1,60 +1,103 @@
+import { Utils } from '@boilerplate-monorepo/common';
 import 'dotenv/config';
-import { defaultTo, evolve, pick } from 'ramda';
+import {
+  always,
+  both,
+  complement,
+  defaultTo,
+  either,
+  evolve,
+  isEmpty,
+  mergeLeft,
+  pick,
+  pipe,
+  prop,
+  startsWith,
+  mergeRight,
+} from 'ramda';
 import { ProcessEnvKeys } from 'types/processEnv';
 
 // eslint-disable-next-line no-process-env
 const raw = pick(ProcessEnvKeys.values, process.env);
 
-const [rootPackageName] = raw.npm_package_name
-  .split('/')
-  .map(part => part.replace('@', ''))
-  .filter(Boolean);
+const defaults = {
+  ACCESS_TOKEN_EXPIRY: '5m',
+  ACCESS_TOKEN_SECRET: 'auth-token-secret',
+  CAPTCHA_SECRET: '0x0000000000000000000000000000000000000000',
+  DATABASE_URL: '',
+  DB_MIGRATION_SCHEMA: 'public',
+  DB_MIGRATION_TABLE_NAME: 'migrations',
+  DB_SCHEMA: 'main',
+  DEBUG: `${raw.npm_package_name}*`,
+  EMAIL_FROM_ADDRESS: `noreply@example.com`,
+  EMAIL_FROM_NAME: 'No Reply',
+  ENGINE_API_KEY: '',
+  ENGINE_SCHEMA_TAG: 'local',
+  HTTPS: true,
+  NODE_ENV: 'development',
+  PORT: 4000,
+  REDIS_URL: '',
+  REFRESH_TOKEN_EXPIRY: '7d',
+  REFRESH_TOKEN_SECRET: 'refresh-token-secret',
+  SHOW_CONFIG: false,
+  SMTP_CONNECTION: '',
+  UI_HOST_URI: '',
+};
 
-const ACCESS_TOKEN_SECRET = 'auth-token-secret';
-const ACCESS_TOKEN_EXPIRY = '5m';
-const CAPTCHA_SECRET = '0x0000000000000000000000000000000000000000';
-const DATABASE_URL = `postgres://postgres:postgres@localhost:5432/${rootPackageName}`;
-const DB_MIGRATION_SCHEMA = 'public';
-const DB_SCHEMA = 'main';
-const DEBUG = `${raw.npm_package_name}*`;
-const ENGINE_API_KEY = '';
-const ENGINE_SCHEMA_TAG = 'local';
-const HTTPS = true;
-const PASSWORD_RESET_EMAIL_FROM_ADDRESS = `noreply@example.com`;
-const PASSWORD_RESET_EMAIL_FROM_NAME = 'No Reply';
-const PORT = 4000;
-const REDIS_URL = '';
-const REFRESH_TOKEN_SECRET = 'refresh-token-secret';
-const REFRESH_TOKEN_EXPIRY = '7d';
-const SMTP_CONNECTION = 'smtp://user:password@localhost:1025';
-const UI_HOST_URI = 'https://local.host:3000';
-const NODE_ENV = 'development';
+const config = mergeRight(defaults, raw);
 
-const config = evolve(
-  {
-    ACCESS_TOKEN_EXPIRY: defaultTo(ACCESS_TOKEN_EXPIRY),
-    ACCESS_TOKEN_SECRET: defaultTo(ACCESS_TOKEN_SECRET),
-    CAPTCHA_SECRET: defaultTo(CAPTCHA_SECRET),
-    DATABASE_URL: defaultTo(DATABASE_URL),
-    DB_MIGRATION_SCHEMA: defaultTo(DB_MIGRATION_SCHEMA),
-    DB_SCHEMA: defaultTo(DB_SCHEMA),
-    DEBUG: defaultTo(DEBUG),
-    ENGINE_API_KEY: defaultTo(ENGINE_API_KEY),
-    ENGINE_SCHEMA_TAG: defaultTo(ENGINE_SCHEMA_TAG),
-    HTTPS: defaultTo(HTTPS),
-    NODE_ENV: defaultTo(NODE_ENV),
-    PASSWORD_RESET_EMAIL_FROM_ADDRESS: defaultTo(
-      PASSWORD_RESET_EMAIL_FROM_ADDRESS
-    ),
-    PASSWORD_RESET_EMAIL_FROM_NAME: defaultTo(PASSWORD_RESET_EMAIL_FROM_NAME),
-    PORT: defaultTo(PORT),
-    REDIS_URL: defaultTo(REDIS_URL),
-    REFRESH_TOKEN_EXPIRY: defaultTo(REFRESH_TOKEN_EXPIRY),
-    REFRESH_TOKEN_SECRET: defaultTo(REFRESH_TOKEN_SECRET),
-    SMTP_CONNECTION: defaultTo(SMTP_CONNECTION),
-    UI_HOST_URI: defaultTo(UI_HOST_URI),
-  },
-  raw
+const isDev = always(
+  pipe(prop('NODE_ENV'), defaultTo(''), startsWith('dev'))(config)
 );
+
+const isProd = always(
+  pipe(prop('NODE_ENV'), defaultTo(''), startsWith('prod'))(config)
+);
+
+const isUndefined = value => typeof value === 'undefined';
+const isUndefinedOrEmpty = either(isUndefined, isEmpty);
+const isNotDevAndEmpty = both(complement(isDev), isUndefinedOrEmpty);
+
+const requiredEnvVars = [
+  {
+    failureTest: isUndefinedOrEmpty,
+    name: 'DATABASE_URL',
+  },
+  {
+    failureTest: isNotDevAndEmpty,
+    name: 'REDIS_URL',
+  },
+];
+
+const missingEnvVars = requiredEnvVars.filter(({ name, failureTest }) =>
+  failureTest(config[name])
+);
+
+if (missingEnvVars.length) {
+  const messages = missingEnvVars.map(
+    ({ name }) => `${name} was not set. It is required to run the application`
+  );
+
+  // eslint-disable-next-line no-console
+  console.error(messages.join('\n'));
+
+  // eslint-disable-next-line no-process-exit
+  process.exit(1);
+}
+
+const merged = pipe(
+  evolve({
+    HTTPS: Utils.toBool,
+    PORT: Utils.toNumber,
+    SHOW_CONFIG: Utils.toBool,
+  }),
+  mergeLeft({
+    isDev: isDev(),
+    isProd: isProd(),
+  })
+)(config);
+
+// eslint-disable-next-line no-console
+merged.SHOW_CONFIG && console.log(JSON.stringify(merged, null, 2));
 
 export { config };

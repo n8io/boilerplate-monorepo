@@ -1,8 +1,9 @@
-import { ProcessEnvKeys } from '../processEnv';
+import { config } from 'config';
+
+const { DB_SCHEMA } = config;
 
 const Schema = {
-  // eslint-disable-next-line no-process-env
-  MAIN: process.env[ProcessEnvKeys.DB_SCHEMA],
+  MAIN: DB_SCHEMA,
 };
 
 const SortDirection = {

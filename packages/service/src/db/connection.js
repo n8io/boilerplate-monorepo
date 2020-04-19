@@ -6,7 +6,7 @@ import { parse } from 'pg-connection-string';
 import { multiply } from 'ramda';
 import { Db } from 'types/db';
 
-const { DATABASE_URL } = config;
+const { DATABASE_URL, DEBUG } = config;
 
 const debugLog = logFactory({ method: 'connection', module: 'db' });
 
@@ -25,10 +25,15 @@ const makeOptions = () => {
   return {
     client: DB_TYPE,
     connection,
+    debug: (DEBUG || '').indexOf('sql') > -1,
   };
 };
 
 let attempts = 0;
+
+const logError = (error, obj) => {
+  log.error('Unexpected database error thrown', { error, obj });
+};
 
 // eslint-disable-next-line max-statements
 const tryToConnect = async connection => {
@@ -37,7 +42,7 @@ const tryToConnect = async connection => {
   let newConnection = null;
 
   try {
-    newConnection = await knex(makeOptions());
+    newConnection = await knex(makeOptions()).on('query-error', logError);
 
     // Make sure we can connect
     await newConnection.raw(`SET SESSION SCHEMA '${Db.Schema.MAIN}';`);

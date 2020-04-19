@@ -2,7 +2,13 @@
 
 [![CircleCI](https://circleci.com/gh/n8io/boilerplate-monorepo/tree/master.svg?style=svg)](https://circleci.com/gh/n8io/boilerplate-monorepo/tree/master)
 
-A monorepo setup for winning
+A monorepo setup for winning.
+
+## 😎 Show Me Already
+
+[View the demo here](https://n8io-boilerplate-monorepo-ui.herokuapp.com)
+
+😴 We're big fans of siestas so we let our app take nap too. ⏳ Please be patient while it spins up.
 
 <img src="screenshot.png"/>
 

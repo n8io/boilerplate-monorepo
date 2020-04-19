@@ -1,16 +1,14 @@
 import { Time } from '@boilerplate-monorepo/common';
-import { always, identity, map, evolve } from 'ramda';
-import { ProcessEnvKeys } from 'types/processEnv';
+import { config } from 'config';
+import { always, evolve, identity, map } from 'ramda';
+
+const { isDev } = config;
 
 const thirtySeconds = 30;
 const oneMinute = 60;
 const fiveMinutes = Time.minutesToSeconds(5);
 const fifteenMinutes = Time.minutesToSeconds(15);
 const thirtyMinutes = Time.minutesToSeconds(30);
-
-// eslint-disable-next-line no-process-env
-const isDebug = process.env[ProcessEnvKeys.DEBUG];
-
 const noLimit = { duration: 1, limit: 999 };
 const unlimited = { burst: noLimit, window: noLimit };
 
@@ -21,7 +19,7 @@ const toUnlimited = evolve({
   window: always(unlimited.window),
 });
 
-const applyDebugLimits = isDebug ? toUnlimited : identity;
+const applyDebugLimits = isDev ? toUnlimited : identity;
 
 const rateLimits = {
   USER_ACCOUNT_RECOVERY_CODE_VERIFY: {

@@ -1,15 +1,10 @@
+import { config } from 'config';
 import { logFactory } from 'log/logFactory';
 import { Password } from 'types/password';
-import { ProcessEnvKeys } from 'types/processEnv';
 import { mailer } from '../../mailer';
 import { userToFormattedEmailAddress } from '../../selectors';
 
-const {
-  [ProcessEnvKeys.PASSWORD_RESET_EMAIL_FROM_ADDRESS]: PASSWORD_RESET_EMAIL_FROM_ADDRESS,
-  [ProcessEnvKeys.PASSWORD_RESET_EMAIL_FROM_NAME]: PASSWORD_RESET_EMAIL_FROM_NAME,
-  [ProcessEnvKeys.UI_HOST_URI]: UI_HOST_URI,
-  // eslint-disable-next-line no-process-env
-} = process.env;
+const { EMAIL_FROM_ADDRESS, EMAIL_FROM_NAME, UI_HOST_URI } = config;
 
 const debugLog = logFactory({
   method: 'passwordReset',
@@ -17,7 +12,7 @@ const debugLog = logFactory({
 });
 
 const passwordReset = async ({ passwordResetToken, user }) => {
-  const from = `${PASSWORD_RESET_EMAIL_FROM_NAME} <${PASSWORD_RESET_EMAIL_FROM_ADDRESS}>`;
+  const from = `${EMAIL_FROM_NAME} <${EMAIL_FROM_ADDRESS}>`;
   const to = userToFormattedEmailAddress(user);
   const resetLink = `${UI_HOST_URI}/account/recovery/reset/${passwordResetToken}`;
 
