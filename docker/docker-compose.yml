@@ -11,7 +11,7 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_USER=postgres
     volumes:
-      - ./.tmp/db/data:/var/lib/postgresql/data
+      - data-db:/var/lib/postgresql/data
     restart: unless-stopped
 
   cache:
@@ -21,11 +21,11 @@ services:
     ports:
       - 6379:6379
     volumes:
-      - ./.tmp/cache/data:/data
+      - data-cache:/data
 
   cache-ui:
     container_name: cache-ui
-    image: rediscommander/redis-commander:latest
+    image: rediscommander/redis-commander
     restart: always
     environment:
       - REDIS_HOSTS=local:cache:6379
@@ -43,8 +43,10 @@ services:
       - 1025:1025
       - 8025:8025
     volumes:
-      - email-dir:/tmp
+      - data-email:/tmp
 
 volumes:
-  email-dir:
+  data-cache:
+  data-db:
+  data-email:
   yarn-cache-service:
