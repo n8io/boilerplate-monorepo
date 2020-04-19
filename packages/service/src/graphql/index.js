@@ -1,15 +1,14 @@
 import { Utils } from '@boilerplate-monorepo/common';
 import { ApolloServer } from 'apollo-server-express';
+import { config } from 'config';
 import http from 'http';
 import https from 'https';
 import { join } from 'path';
 import { FileSystem } from 'types/file';
-import { ProcessEnvKeys } from 'types/processEnv';
 import { context } from './context';
 import { formatError } from './formatError';
 
-// eslint-disable-next-line no-process-env
-const { [ProcessEnvKeys.HTTPS]: HTTPS } = process.env;
+const { HTTPS } = config;
 
 const makeOptions = async () => {
   const certDir = join(__dirname, '../../../../.ini/certs');

@@ -1,10 +1,12 @@
+import { config } from 'config';
 import knex from 'knex';
 import { log } from 'log';
 import { logFactory } from 'log/logFactory';
 import { parse } from 'pg-connection-string';
 import { multiply } from 'ramda';
 import { Db } from 'types/db';
-import { ProcessEnvKeys } from 'types/processEnv';
+
+const { DATABASE_URL } = config;
 
 const debugLog = logFactory({ method: 'connection', module: 'db' });
 
@@ -18,10 +20,7 @@ const DB_TYPE = 'pg';
 let cachedConnection = null;
 
 const makeOptions = () => {
-  const connection = parse(
-    // eslint-disable-next-line no-process-env
-    process.env[ProcessEnvKeys.DB_CONNECTION]
-  );
+  const connection = parse(DATABASE_URL);
 
   return {
     client: DB_TYPE,

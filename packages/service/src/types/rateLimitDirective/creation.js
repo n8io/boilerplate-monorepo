@@ -1,8 +1,8 @@
+import { options } from 'cache';
 import {
   createRateLimitDirective,
   createRateLimitTypeDef,
 } from 'graphql-rate-limit-directive';
-import { options } from 'graphql/cache';
 import { RateLimiterRedis } from 'rate-limiter-flexible';
 import redis from 'redis';
 import { RateLimiterKeyGenerator } from 'types/rateLimiterKeyGenerator';

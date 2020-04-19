@@ -4,7 +4,7 @@ require('dotenv/config');
 const path = require('path');
 
 const {
-  DB_CONNECTION,
+  DATABASE_URL,
   DB_MIGRATION_SCHEMA,
   DB_MIGRATION_TABLE_NAME,
   // eslint-disable-next-line no-process-env
@@ -12,7 +12,7 @@ const {
 
 const defaults = {
   client: 'pg',
-  connection: DB_CONNECTION,
+  connection: DATABASE_URL,
   migrations: {
     directory: path.join(__dirname, 'src/migrations'),
     schema: DB_MIGRATION_SCHEMA || 'public',
