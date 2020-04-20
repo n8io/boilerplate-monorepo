@@ -22,7 +22,7 @@ jobs:
           command: yarn lint
       - run:
           name: Build common dependencies
-          command: yarn -s build:common && yarn -s build:ui-common
+          command: yarn -s build:common
       - run:
           name: Running unit tests
           command: yarn test:ci
@@ -34,7 +34,7 @@ jobs:
       - store_test_results:
           path: .tmp/test-results
 
-  build:
+  build-service:
     docker:
       - image: circleci/node:12.13.0
     environment:
@@ -48,17 +48,40 @@ jobs:
             - v1-deps-{{ .Branch }}
             - v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
       - run:
-          name: Installing dependencies
-          command: yarn install --frozen-lockfile
+          name: Check the service needs built
+          command: ./.circleci/exit-untouched.sh packages/common packages/service
+      - run:
+          name: Build service
+          command: yarn -s build:service
+
+  build-ui:
+    docker:
+      - image: circleci/node:12.13.0
+    environment:
+      TERM: xterm
+    working_directory: ~/app
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-deps
+            - v1-deps-{{ .Branch }}
+            - v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
+      - run:
+          name: Check the ui needs built
+          command: ./.circleci/exit-untouched.sh packages/common packages/ui-common packages/ui
       - run:
           name: Build all the things
-          command: yarn -s build
+          command: yarn -s build:ui
 
   deploy-service:
     docker:
       - image: circleci/node:12.13.0
     steps:
       - checkout
+      - run:
+          name: Check the service needs pushed
+          command: ./.circleci/exit-untouched.sh packages/common packages/service
       - run:
           name: Deploy service to Heroku
           command: |
@@ -70,6 +93,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Check the ui needs built
+          command: ./.circleci/exit-untouched.sh packages/common packages/ui-common packages/ui
+      - run:
           name: Deploy ui to Heroku
           command: |
             git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME_UI.git master
@@ -79,27 +105,38 @@ workflows:
   features:
     jobs:
       - test
-      - build:
+      - build-service:
           requires:
             - test
           filters:
             branches:
               only:
                 - master
-      - approve-deployment:
-          type: approval
+      - build-ui:
           requires:
-            - build
+            - test
+          filters:
+            branches:
+              only:
+                - master
+      # - approve-deployment-service:
+      #     type: approval
+      #     requires:
+      #       - build-service
+      # - approve-deployment-ui:
+      #     type: approval
+      #     requires:
+      #       - build-ui
       - deploy-service:
-          requires:
-            - approve-deployment
+          # requires:
+          #   - approve-deployment-service
           filters:
             branches:
               only:
                 - master
       - deploy-ui:
-          requires:
-            - approve-deployment
+          # requires:
+          #   - approve-deployment-ui
           filters:
             branches:
               only:
