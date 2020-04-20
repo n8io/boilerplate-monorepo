@@ -1,6 +1,7 @@
 export const common = {
   CAPTCHA_ERROR: 'We could not verify your humanity',
   CONFIRM_PASSWORD_MISMATCH: 'Confirm password does not match',
+  DATABASE_ERROR_OCCURRED: 'An unexpected data error has occurred',
   DATE_FUTURE: 'Must be in the future',
   DATE_PAST: 'Must be in the past',
   DOES_NOT_MEET_PASSWORD_REQUIREMENTS:
