@@ -1,6 +1,7 @@
 import { FetchPolicy, UserSelfUpdateInput } from '@boilerplate-monorepo/common';
 import React, { useEffect, useState } from 'react';
 import { ErrorNotification } from 'shared/ErrorNotification';
+import { Loader } from 'shared/Loader';
 import { SuccessNotification } from 'shared/SuccessNotification';
 import { EmailInput } from 'shared/forms/EmailInput';
 import { Form as SharedForm } from 'shared/forms/Form';
@@ -21,9 +22,9 @@ const Form = () => {
   });
 
   const [isSuccessful, setIsSuccessful] = useState(false);
-  const [mutate, { error }] = useUserSelfUpdate();
+  const [mutate, { error: userSelfUpdateError }] = useUserSelfUpdate();
 
-  const { data: self, loading } = useUserSelf({
+  const { data: self, error: userSelfError, loading } = useUserSelf({
     fetchPolicy: FetchPolicy.CACHE_AND_NETWORK,
   });
 
@@ -48,11 +49,15 @@ const Form = () => {
     reset(UserSelfUpdateInput.makeInitial(self));
   }, [self, reset]);
 
-  if (loading || !self) return null;
+  if (loading || !self) return <Loader />;
 
   return (
     <SharedForm {...formProps} onSubmit={onSelfUpdate}>
-      <ErrorNotification error={error} messageKey="securityUpdateError" t={t} />
+      <ErrorNotification
+        error={userSelfError || userSelfUpdateError}
+        messageKey="securityUpdateError"
+        t={t}
+      />
       {isSuccessful && (
         <SuccessNotification message={t('profileUpdateSuccess')} />
       )}
