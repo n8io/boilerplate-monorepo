@@ -128,15 +128,15 @@ workflows:
       #     requires:
       #       - build-ui
       - deploy-service:
-          # requires:
-          #   - approve-deployment-service
+          requires:
+            - build-service
           filters:
             branches:
               only:
                 - master
       - deploy-ui:
-          # requires:
-          #   - approve-deployment-ui
+          requires:
+            - build-ui
           filters:
             branches:
               only:
