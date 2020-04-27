@@ -1,6 +1,7 @@
 import { config } from 'config';
 import cuid from 'cuid';
-import { isAfter } from 'date-fns';
+import { isAfter, isDate, parseISO } from 'date-fns';
+import { addMinutes } from 'date-fns/fp';
 import {
   JsonWebTokenError,
   sign,
@@ -10,12 +11,13 @@ import {
 import { log } from 'log';
 import { logFactory } from 'log/logFactory';
 import ms from 'ms';
-import { pick, tail } from 'ramda';
+import { pick, tail, unless } from 'ramda';
 import { InternalErrorMessage } from 'types/errorMessage';
+import { Password } from 'types/password';
 import { Route } from 'types/route';
 import { Enumeration } from './typedef';
 
-const isPast = date => isAfter(new Date(), date);
+const isPast = date => isAfter(new Date(), unless(isDate, parseISO)(date));
 
 const {
   ACCESS_TOKEN_EXPIRY,
@@ -41,6 +43,9 @@ const encryptAccessToken = user =>
   });
 
 const generateResetToken = () => tail(cuid());
+
+const generateResetTokenExpiration = () =>
+  addMinutes(Password.RESET_TOKEN_EXPIRATION_IN_MINUTES, new Date());
 
 const encryptRefreshToken = user =>
   sign(toRefreshToken(user), REFRESH_TOKEN_SECRET, {
@@ -133,11 +138,25 @@ const writeRefreshToken = (res, user) => {
   return res;
 };
 
-const isUserActive = user => !user.deletedAt || !isPast(user.deletedAt);
+const isUserActive = user => {
+  if (!user) return false;
+
+  /* eslint-disable camelcase */
+  const { deleted_at, deletedAt } = user;
+
+  const deletedDate = deleted_at || deletedAt;
+
+  return !deletedDate || !isPast(deletedDate);
+  /* eslint-enable camelcase */
+};
 
 export {
+  decryptAccessToken,
+  decryptRefreshToken,
   encryptAccessToken,
+  encryptRefreshToken,
   generateResetToken,
+  generateResetTokenExpiration,
   isUserActive,
   readAccessToken,
   readRefreshToken,

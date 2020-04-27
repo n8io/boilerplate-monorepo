@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": "src",
-    "experimentalDecorators": true
+    "baseUrl": "src"
   }
 }

@@ -67,9 +67,9 @@
     "start:prod:ui": "lerna run start:prod --loglevel silent --scope \"@${npm_package_name}/ui\" --stream",
     "start:prod:ui:heroku": "lerna run start:prod:heroku --loglevel silent --scope \"@${npm_package_name}/ui\" --stream",
     "stop:db": "yarn -s dcd db",
-    "test": "CI=true lerna run test --stream -- --passWithNoTests --ci",
-    "test:ci": "CI=true lerna run test:ci --stream -- --passWithNoTests --ci",
-    "test:watch": "lerna run test --stream -- --passWithNoTests --color --watch"
+    "test": "CI=true lerna run test --stream -- --passWithNoTests --ci --color",
+    "test:ci": "CI=true lerna run test:ci --stream -- --passWithNoTests --ci --color",
+    "test:watch": "lerna run test:watch --parallel"
   },
   "devDependencies": {
     "@arkweid/lefthook": "^0.6.3",

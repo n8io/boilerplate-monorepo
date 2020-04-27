@@ -1,13 +1,13 @@
-import { makeSafeExample } from '../utils/makeSafeExample';
+import { Utils } from 'utils';
 
 const passwordNew = 'NEW_Pa$$w0rD';
 
-const apiExample = makeSafeExample({
+const apiExample = Utils.makeSafeExample({
   passwordConfirm: passwordNew,
   passwordCurrent: 'CURRENT_Pa$$w0rD',
   passwordNew,
 });
 
-const uiExample = makeSafeExample(apiExample());
+const uiExample = Utils.makeSafeExample(apiExample());
 
 export { apiExample, uiExample };

@@ -1,11 +1,11 @@
-import { makeSafeExample } from '../utils/makeSafeExample';
+import { Utils } from 'utils';
 
-const apiExample = makeSafeExample({
+const apiExample = Utils.makeSafeExample({
   email: 'EMAIL@EMAIL.COM',
   familyName: 'FAMILY_NAME',
   givenName: 'GIVEN_NAME',
 });
 
-const uiExample = makeSafeExample(apiExample());
+const uiExample = Utils.makeSafeExample(apiExample());
 
 export { apiExample, uiExample };

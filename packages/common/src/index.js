@@ -6,6 +6,7 @@ export { Permission } from './types/permission';
 export { Phone } from './types/phone';
 export { Time } from './types/time';
 export { User } from './types/user';
+export { UnsafeProps } from './types/unsafeProps';
 export { UserLoginInput } from './types/userLoginInput';
 export { UserPasswordResetInput } from './types/userPasswordResetInput';
 export { UserPasswordResetRequestInput } from './types/userPasswordResetRequestInput';

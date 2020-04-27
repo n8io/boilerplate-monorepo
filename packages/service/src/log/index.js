@@ -1,5 +1,8 @@
 import { LogLevel } from '@boilerplate-monorepo/common';
+import { config } from 'config';
 import { toSafeLog } from './toSafeLog';
+
+const { isTest } = config;
 
 const prefix = {
   [LogLevel.ERROR]: '🛑',
@@ -11,6 +14,8 @@ const prependInfo = logLevel =>
   `${new Date().toISOString()}: ${prefix[logLevel]}`;
 
 const printMessage = ({ data, logLevel, message }) => {
+  if (isTest) return undefined;
+
   /* eslint-disable no-console */
   if (data) {
     return console[logLevel.toLowerCase()](

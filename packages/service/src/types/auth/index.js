@@ -1,6 +1,8 @@
 import {
+  decryptAccessToken,
   encryptAccessToken,
   generateResetToken,
+  generateResetTokenExpiration,
   isUserActive,
   readAccessToken,
   readRefreshToken,
@@ -8,8 +10,10 @@ import {
 } from './selectors';
 
 const Auth = {
+  decryptAccessToken,
   encryptAccessToken,
   generateResetToken,
+  generateResetTokenExpiration,
   isUserActive,
   readAccessToken,
   readRefreshToken,

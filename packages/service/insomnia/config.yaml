@@ -1,28 +1,30 @@
 _type: export
 __export_format: 4
-__export_date: 2020-04-17T19:05:15.806Z
+__export_date: 2020-05-04T19:27:22.366Z
 __export_source: insomnia.desktop.app:v7.1.1
 resources:
-  - _id: req_45c96e3cce6845569aaeb3db515b8cc3
-    authentication: {}
+  - _id: req_b14b77bd223c4a4389bfc01c92af31e3
+    authentication:
+      prefix: "{{ accessTokenPrefix  }}"
+      token: "{{ accessToken }}"
+      type: bearer
     body:
       mimeType: application/graphql
-      text: '{"query":"mutation UserLogin($input: UserLoginInput!)
-        {\n  userLogin(input:
-        $input)\n}\n","variables":{"input":{"username":"nclark","password":"Password!23"}}}'
-    created: 1577800601451
+      text: '{"query":"query SystemTime
+        {\n  systemTime\n}","operationName":"SystemTime"}'
+    created: 1586689198209
     description: ""
     headers:
       - id: pair_da0e8e267c1940c0912468bcba4fcc12
         name: Content-Type
         value: application/json
     isPrivate: false
-    metaSortKey: -1578263622751
+    metaSortKey: -1588620135560
     method: POST
-    modified: 1586915550459
-    name: UserLogin
+    modified: 1588620402523
+    name: SystemTime
     parameters: []
-    parentId: fld_a2d0e0de6c984471bfb0d0cbef41a924
+    parentId: fld_5df4cbbd451e474cb5419d8a2f94e90c
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
     settingFollowRedirects: global
@@ -31,24 +33,24 @@ resources:
     settingStoreCookies: true
     url: "{{ graphqlUri  }}"
     _type: request
-  - _id: fld_a2d0e0de6c984471bfb0d0cbef41a924
-    created: 1577823938455
+  - _id: fld_5df4cbbd451e474cb5419d8a2f94e90c
+    created: 1588620234229
     description: ""
     environment: {}
     environmentPropertyOrder: null
-    metaSortKey: -1577823938455
-    modified: 1577823938455
-    name: Mutations
-    parentId: fld_9671057628d34a3bb9e7551fc59663c7
+    metaSortKey: -1588620234229
+    modified: 1588620234229
+    name: Queries
+    parentId: fld_36a82370ca124601a87bc7e1e1efc6ef
     _type: request_group
-  - _id: fld_9671057628d34a3bb9e7551fc59663c7
-    created: 1577801584588
+  - _id: fld_36a82370ca124601a87bc7e1e1efc6ef
+    created: 1588620157651
     description: ""
     environment: {}
     environmentPropertyOrder: null
-    metaSortKey: -1577801584588
-    modified: 1577801584588
-    name: User
+    metaSortKey: -1577801584688
+    modified: 1588620228760
+    name: System
     parentId: fld_4cbdf86a24044058bb7c82a348286bb7
     _type: request_group
   - _id: fld_4cbdf86a24044058bb7c82a348286bb7
@@ -68,6 +70,84 @@ resources:
     name: "@boilerplate-monorepo"
     parentId: null
     _type: workspace
+  - _id: req_417eb9126d6e4f48b4bf90a81023e82c
+    authentication:
+      prefix: "{{ accessTokenPrefix  }}"
+      token: "{{accessToken}}"
+      type: bearer
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation UserDelete($id: ID!) {\n  userDelete(id:
+        $id)\n}\n","variables":{"id":"ck9mslx9b00001kfk14x9bbrc"},"operationName":"UserDelete"}'
+    created: 1578180146440
+    description: ""
+    headers:
+      - id: pair_da0e8e267c1940c0912468bcba4fcc12
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1578263622701
+    method: POST
+    modified: 1588620080630
+    name: UserDelete
+    parameters: []
+    parentId: fld_69697a7d22fa4ca1ab05fff2c344cef1
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ graphqlUri  }}"
+    _type: request
+  - _id: fld_69697a7d22fa4ca1ab05fff2c344cef1
+    created: 1588620062863
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1577801584622.375
+    modified: 1588620332641
+    name: Mutatons
+    parentId: fld_9671057628d34a3bb9e7551fc59663c7
+    _type: request_group
+  - _id: fld_9671057628d34a3bb9e7551fc59663c7
+    created: 1577801584588
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1577801584663
+    modified: 1588620396416
+    name: User
+    parentId: fld_4cbdf86a24044058bb7c82a348286bb7
+    _type: request_group
+  - _id: req_45c96e3cce6845569aaeb3db515b8cc3
+    authentication: {}
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation UserLogin($input: UserLoginInput!)
+        {\n  userLogin(input:
+        $input)\n}\n","variables":{"input":{"username":"n8io","password":"Password!23"}},"operationName":"UserLogin"}'
+    created: 1577800601451
+    description: ""
+    headers:
+      - id: pair_da0e8e267c1940c0912468bcba4fcc12
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1578263622676
+    method: POST
+    modified: 1588620088932
+    name: UserLogin
+    parameters: []
+    parentId: fld_69697a7d22fa4ca1ab05fff2c344cef1
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ graphqlUri  }}"
+    _type: request
   - _id: req_cea84b50cb754a67bdc1c4cc0d72a250
     authentication:
       prefix: "{{ accessTokenPrefix  }}"
@@ -84,40 +164,12 @@ resources:
         name: Content-Type
         value: application/json
     isPrivate: false
-    metaSortKey: -1578263622738.5
+    metaSortKey: -1578263622663.5
     method: POST
-    modified: 1586915536661
+    modified: 1588620091159
     name: UserLogout
     parameters: []
-    parentId: fld_a2d0e0de6c984471bfb0d0cbef41a924
-    settingDisableRenderRequestBody: false
-    settingEncodeUrl: true
-    settingFollowRedirects: global
-    settingRebuildPath: true
-    settingSendCookies: true
-    settingStoreCookies: true
-    url: "{{ graphqlUri  }}"
-    _type: request
-  - _id: req_24cc628cbee24f02adca311ed17f5c03
-    authentication: {}
-    body:
-      mimeType: application/graphql
-      text: '{"query":"mutation UserRegister($input:
-        UserRegisterInput!){\n  userRegister(input:
-        $input)\n}\n","variables":{"input":{"captchaToken":"CAPTCHA_TOKEN","givenName":"Nate","familyName":"Clark","email":"n8@n8io.com","passwordNew":"Password!23","username":"n8io"}},"operationName":"UserRegister"}'
-    created: 1577801562443
-    description: ""
-    headers:
-      - id: pair_da0e8e267c1940c0912468bcba4fcc12
-        name: Content-Type
-        value: application/json
-    isPrivate: false
-    metaSortKey: -1578263622726
-    method: POST
-    modified: 1587150298896
-    name: UserRegister
-    parameters: []
-    parentId: fld_a2d0e0de6c984471bfb0d0cbef41a924
+    parentId: fld_69697a7d22fa4ca1ab05fff2c344cef1
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
     settingFollowRedirects: global
@@ -143,12 +195,12 @@ resources:
         name: Content-Type
         value: application/json
     isPrivate: false
-    metaSortKey: -1578263622725.2188
+    metaSortKey: -1578263622657.25
     method: POST
-    modified: 1586915724319
+    modified: 1588620092756
     name: UserPasswordReset
     parameters: []
-    parentId: fld_a2d0e0de6c984471bfb0d0cbef41a924
+    parentId: fld_69697a7d22fa4ca1ab05fff2c344cef1
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
     settingFollowRedirects: global
@@ -171,12 +223,40 @@ resources:
         name: Content-Type
         value: application/json
     isPrivate: false
-    metaSortKey: -1578263622724.4375
+    metaSortKey: -1578263622654.125
     method: POST
-    modified: 1586915628047
+    modified: 1588620094404
     name: UserPasswordResetRequest
     parameters: []
-    parentId: fld_a2d0e0de6c984471bfb0d0cbef41a924
+    parentId: fld_69697a7d22fa4ca1ab05fff2c344cef1
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ graphqlUri  }}"
+    _type: request
+  - _id: req_24cc628cbee24f02adca311ed17f5c03
+    authentication: {}
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation UserRegister($input:
+        UserRegisterInput!){\n  userRegister(input:
+        $input)\n}\n","variables":{"input":{"captchaToken":"CAPTCHA_TOKEN","givenName":"Test","familyName":"Guy","email":"test@test.com","passwordNew":"Password!23","username":"test"}},"operationName":"UserRegister"}'
+    created: 1577801562443
+    description: ""
+    headers:
+      - id: pair_da0e8e267c1940c0912468bcba4fcc12
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1578263622652.5625
+    method: POST
+    modified: 1588620096706
+    name: UserRegister
+    parameters: []
+    parentId: fld_69697a7d22fa4ca1ab05fff2c344cef1
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
     settingFollowRedirects: global
@@ -194,7 +274,7 @@ resources:
       mimeType: application/graphql
       text: '{"query":"mutation UserRevokeRefreshTokens($id: ID!)
         {\n  userRevokeRefreshTokens(id:
-        $id)\n}\n","variables":{"id":"ck8u9e30w0000lgfk95ayhq60"},"operationName":"UserRevokeRefreshTokens"}'
+        $id)\n}\n","variables":{"id":"ck967oo8q00000ofk47d37eww"},"operationName":"UserRevokeRefreshTokens"}'
     created: 1577823874931
     description: ""
     headers:
@@ -202,12 +282,12 @@ resources:
         name: Content-Type
         value: application/json
     isPrivate: false
-    metaSortKey: -1578263622713.5
+    metaSortKey: -1578263622651.7812
     method: POST
-    modified: 1586915764073
+    modified: 1588620098350
     name: UserRevokeRefreshTokens
     parameters: []
-    parentId: fld_a2d0e0de6c984471bfb0d0cbef41a924
+    parentId: fld_69697a7d22fa4ca1ab05fff2c344cef1
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
     settingFollowRedirects: global
@@ -233,12 +313,12 @@ resources:
         name: Content-Type
         value: application/json
     isPrivate: false
-    metaSortKey: -1578263622710.375
+    metaSortKey: -1578263622651.3906
     method: POST
-    modified: 1586915763160
+    modified: 1588620100649
     name: UserSelfSecurityUpdate
     parameters: []
-    parentId: fld_a2d0e0de6c984471bfb0d0cbef41a924
+    parentId: fld_69697a7d22fa4ca1ab05fff2c344cef1
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
     settingFollowRedirects: global
@@ -258,7 +338,7 @@ resources:
         {\n  userSelfUpdate(input: $input)
         {\n    ...userSnapshotFragment\n  }\n}\n\n\nfragment
         userSnapshotFragment on UserSnapshot
-        {\n  id\n  email\n  familyName\n  givenName\n  role\n  username\n}","variables":{"input":{"email":"n8@n8io.com","givenName":"Nathan"}},"operationName":"UserSelfUpdate"}'
+        {\n  id\n  email\n  familyName\n  givenName\n  role\n  username\n}","variables":{"input":{"email":"n8@n8io.com","givenName":"Nate"}},"operationName":"UserSelfUpdate"}'
     created: 1579266441078
     description: ""
     headers:
@@ -266,12 +346,12 @@ resources:
         name: Content-Type
         value: application/json
     isPrivate: false
-    metaSortKey: -1578263622707.25
+    metaSortKey: -1578263622651
     method: POST
-    modified: 1586688925857
+    modified: 1588620085499
     name: UserSelfUpdate
     parameters: []
-    parentId: fld_a2d0e0de6c984471bfb0d0cbef41a924
+    parentId: fld_69697a7d22fa4ca1ab05fff2c344cef1
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
     settingFollowRedirects: global
@@ -280,76 +360,6 @@ resources:
     settingStoreCookies: true
     url: "{{ graphqlUri  }}"
     _type: request
-  - _id: req_417eb9126d6e4f48b4bf90a81023e82c
-    authentication:
-      prefix: "{{ accessTokenPrefix  }}"
-      token: "{{accessToken}}"
-      type: bearer
-    body:
-      mimeType: application/graphql
-      text: '{"query":"mutation UserDelete($id: ID!) {\n  userDelete(id:
-        $id)\n}\n","variables":{"id":"ck8kfnf9c000019fk4c6sd67k"},"operationName":"UserDelete"}'
-    created: 1578180146440
-    description: ""
-    headers:
-      - id: pair_da0e8e267c1940c0912468bcba4fcc12
-        name: Content-Type
-        value: application/json
-    isPrivate: false
-    metaSortKey: -1578263622701
-    method: POST
-    modified: 1586915761667
-    name: UserDelete
-    parameters: []
-    parentId: fld_a2d0e0de6c984471bfb0d0cbef41a924
-    settingDisableRenderRequestBody: false
-    settingEncodeUrl: true
-    settingFollowRedirects: global
-    settingRebuildPath: true
-    settingSendCookies: true
-    settingStoreCookies: true
-    url: "{{ graphqlUri  }}"
-    _type: request
-  - _id: req_b14b77bd223c4a4389bfc01c92af31e3
-    authentication:
-      prefix: "{{ accessTokenPrefix  }}"
-      token: "{{ accessToken }}"
-      type: bearer
-    body:
-      mimeType: application/graphql
-      text: '{"query":"query SystemTime
-        {\n  systemTime\n}","operationName":"SystemTime"}'
-    created: 1586689198209
-    description: ""
-    headers:
-      - id: pair_da0e8e267c1940c0912468bcba4fcc12
-        name: Content-Type
-        value: application/json
-    isPrivate: false
-    metaSortKey: -1577800601569.75
-    method: POST
-    modified: 1586915767254
-    name: SystemTime
-    parameters: []
-    parentId: fld_16d435bc119b4cc2af547a3f4de21aa9
-    settingDisableRenderRequestBody: false
-    settingEncodeUrl: true
-    settingFollowRedirects: global
-    settingRebuildPath: true
-    settingSendCookies: true
-    settingStoreCookies: true
-    url: "{{ graphqlUri  }}"
-    _type: request
-  - _id: fld_16d435bc119b4cc2af547a3f4de21aa9
-    created: 1577823926119
-    description: ""
-    environment: {}
-    environmentPropertyOrder: null
-    metaSortKey: -1577823926119
-    modified: 1577823926119
-    name: Queries
-    parentId: fld_9671057628d34a3bb9e7551fc59663c7
-    _type: request_group
   - _id: req_cb754ee6e48a4a44a88808f20e01933b
     authentication: {}
     body:
@@ -357,7 +367,7 @@ resources:
       text: '{"query":"query UserPasswordResetTokenValidate($input:
         UserPasswordResetTokenValidateInput!)
         {\n  userPasswordResetTokenValidate(input:
-        $input)\n}\n","variables":{"input":{"token":"k90olgza0004pyfk7c0kg3bp"}},"operationName":"UserPasswordResetTokenValidate"}'
+        $input)\n}\n","variables":{"input":{"token":"k9str21u0000udfkgcuza6e3"}},"operationName":"UserPasswordResetTokenValidate"}'
     created: 1586777712125
     description: ""
     headers:
@@ -367,10 +377,10 @@ resources:
     isPrivate: false
     metaSortKey: -1577800601544.75
     method: POST
-    modified: 1586915695454
+    modified: 1588620142927
     name: UserPasswordResetTokenValidate
     parameters: []
-    parentId: fld_16d435bc119b4cc2af547a3f4de21aa9
+    parentId: fld_6ad104f3579b4e2f836774614050d743
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
     settingFollowRedirects: global
@@ -379,6 +389,16 @@ resources:
     settingStoreCookies: true
     url: "{{ graphqlUri  }}"
     _type: request
+  - _id: fld_6ad104f3579b4e2f836774614050d743
+    created: 1588620135510
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1577801584572.375
+    modified: 1588620299028
+    name: Queries
+    parentId: fld_9671057628d34a3bb9e7551fc59663c7
+    _type: request_group
   - _id: req_4a8fa47b9ee243ae9049bc4f574a51cd
     authentication: {}
     body:
@@ -387,7 +407,7 @@ resources:
         String!){\n  userRecoveryFind(account: $account)
         {\n    ...userRecoveryFragment\n  }\n}\n\nfragment userRecoveryFragment
         on UserRecovery
-        {\n  id\n  email\n}","variables":{"account":"n8@N8io.com"},"operationName":"UserRecoveryFind"}'
+        {\n  email\n  id\n}","variables":{"account":"n8@N8io.com"},"operationName":"UserRecoveryFind"}'
     created: 1586530625217
     description: ""
     headers:
@@ -395,12 +415,44 @@ resources:
         name: Content-Type
         value: application/json
     isPrivate: false
-    metaSortKey: -1577800601519.75
+    metaSortKey: -1577800601494.75
     method: POST
-    modified: 1586915586352
+    modified: 1588620144522
     name: UserRecoveryFind
     parameters: []
-    parentId: fld_16d435bc119b4cc2af547a3f4de21aa9
+    parentId: fld_6ad104f3579b4e2f836774614050d743
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ graphqlUri  }}"
+    _type: request
+  - _id: req_a9caaa314320467f95ab9791d928d190
+    authentication:
+      prefix: "{{ accessTokenPrefix  }}"
+      token: "{{ accessToken }}"
+      type: bearer
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query UserSelf {\n  userSelf
+        {\n    ...userSnapshotFragment\n  }\n}\n\nfragment userSnapshotFragment
+        on UserSnapshot
+        {\n  id\n  email\n  familyName\n  givenName\n  role\n  username\n}","operationName":"UserSelf"}'
+    created: 1577901244900
+    description: ""
+    headers:
+      - id: pair_da0e8e267c1940c0912468bcba4fcc12
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1577800601444.75
+    method: POST
+    modified: 1588620150432
+    name: UserSelf
+    parameters: []
+    parentId: fld_6ad104f3579b4e2f836774614050d743
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
     settingFollowRedirects: global
@@ -430,12 +482,12 @@ resources:
         name: Content-Type
         value: application/json
     isPrivate: false
-    metaSortKey: -1577800601469.75
+    metaSortKey: -1583210967154.6875
     method: POST
-    modified: 1586915834452
+    modified: 1588620355841
     name: Users
     parameters: []
-    parentId: fld_16d435bc119b4cc2af547a3f4de21aa9
+    parentId: fld_c9fd611688d04793b31ee6c305076933
     settingDisableRenderRequestBody: false
     settingEncodeUrl: true
     settingFollowRedirects: global
@@ -444,38 +496,26 @@ resources:
     settingStoreCookies: true
     url: "{{ graphqlUri  }}"
     _type: request
-  - _id: req_a9caaa314320467f95ab9791d928d190
-    authentication:
-      prefix: "{{ accessTokenPrefix  }}"
-      token: "{{ accessToken }}"
-      type: bearer
-    body:
-      mimeType: application/graphql
-      text: '{"query":"query UserSelf {\n  userSelf
-        {\n    ...userSnapshotFragment\n  }\n}\n\nfragment userSnapshotFragment
-        on UserSnapshot
-        {\n  id\n  email\n  familyName\n  givenName\n  role\n  username\n}","operationName":"UserSelf"}'
-    created: 1577901244900
+  - _id: fld_c9fd611688d04793b31ee6c305076933
+    created: 1588620349687
     description: ""
-    headers:
-      - id: pair_da0e8e267c1940c0912468bcba4fcc12
-        name: Content-Type
-        value: application/json
-    isPrivate: false
-    metaSortKey: -1577800601463.5
-    method: POST
-    modified: 1586976235030
-    name: UserSelf
-    parameters: []
-    parentId: fld_16d435bc119b4cc2af547a3f4de21aa9
-    settingDisableRenderRequestBody: false
-    settingEncodeUrl: true
-    settingFollowRedirects: global
-    settingRebuildPath: true
-    settingSendCookies: true
-    settingStoreCookies: true
-    url: "{{ graphqlUri  }}"
-    _type: request
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1588620349687
+    modified: 1588620391391
+    name: Queries
+    parentId: fld_ef6289bdda784a6d84cd6333d9c53b43
+    _type: request_group
+  - _id: fld_ef6289bdda784a6d84cd6333d9c53b43
+    created: 1588620383198
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1577801584638
+    modified: 1588620394358
+    name: Users
+    parentId: fld_4cbdf86a24044058bb7c82a348286bb7
+    _type: request_group
   - _id: req_a3da66349248459a870b5b6d10fc6d57
     authentication: {}
     body: {}
@@ -539,7 +579,7 @@ resources:
       graphqlUri: "{{endpoint}}/graphql"
       host: localhost
       port: 4000
-      protocol: http
+      protocol: https
       refreshToken: "{% request 'cookie', 'jid', 0 %}"
       refreshTokenUri: "{{ endpoint  }}/refresh_token"
       restUri: "{{endpoint}}"
@@ -557,7 +597,7 @@ resources:
         - restUri
     isPrivate: false
     metaSortKey: 1577800360941
-    modified: 1585947975423
+    modified: 1588344901106
     name: Base Environment
     parentId: wrk_b673aad6c5df416ead4f262eb230cf9c
     _type: environment
@@ -565,17 +605,44 @@ resources:
     cookies:
       - creation: 2020-01-14T00:36:22.738Z
         domain: localhost
-        expires: 2020-04-24T17:58:57.000Z
+        expires: 2020-05-11T18:38:53.000Z
         hostOnly: true
         httpOnly: true
-        id: "8869459014581189"
+        id: "23780963420665335"
         key: jid
-        lastAccessed: 2020-04-17T17:58:57.445Z
+        lastAccessed: 2020-05-04T18:38:53.722Z
         maxAge: 604800
         path: /refresh_token
-        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5jbGFya0BiZWNrbWFuLmNvbSIsImlkIjoiY2s5MDZueWo5MDAwMDA1bHRlNXp0MHBqdSIsInJvbGUiOiJVU0VSIiwidG9rZW5WZXJzaW9uIjowLCJ1c2VybmFtZSI6Im5jbGFyayIsImlhdCI6MTU4NzE0NjMzNywiZXhwIjoxNTg3NzUxMTM3fQ.56qhPDp_sdRTdvfEZiLgBlzreI9MJ1Uby6CjjNkkCoQ
+        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im44QG44aW8uY29tIiwiaWQiOiJjazk2N29vOHEwMDAwMG9mazQ3ZDM3ZXd3Iiwicm9sZSI6IkFETUlOIiwidG9rZW5WZXJzaW9uIjoyLCJ1c2VybmFtZSI6Im44aW8iLCJpYXQiOjE1ODg2MTc1MzMsImV4cCI6MTU4OTIyMjMzM30.mAPnonFk0H1cquF57APVmGiRsPLsDTa20bn8QKyfupU
+      - creation: 2020-04-19T18:13:37.101Z
+        domain: n8io-boilerplate-monorepo.herokuapp.com
+        expires: 2020-05-04T15:07:49.000Z
+        hostOnly: true
+        httpOnly: true
+        id: "32874720131044355"
+        key: jid
+        lastAccessed: 2020-04-27T15:07:49.140Z
+        maxAge: 604800
+        path: /refresh_token
+        secure: true
     created: 1577800360958
-    modified: 1587146337445
+    modified: 1588617533722
     name: Default Jar
     parentId: wrk_b673aad6c5df416ead4f262eb230cf9c
     _type: cookie_jar
+  - _id: env_d85c143d3e764afea6450cf9911f3f4f
+    color: "#c723cb"
+    created: 1587318042298
+    data:
+      host: n8io-boilerplate-monorepo.herokuapp.com
+      port: 443
+    dataPropertyOrder:
+      "&":
+        - host
+        - port
+    isPrivate: true
+    metaSortKey: 1587318042298
+    modified: 1587318131446
+    name: Heroku
+    parentId: env_3777c4c8f5c471b0057e66df7c6ad8e43c72a852
+    _type: environment

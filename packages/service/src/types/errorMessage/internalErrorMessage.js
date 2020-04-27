@@ -5,6 +5,7 @@ const InternalErrorMessage = {
   AUTH_ACCESS_TOKEN_REFRESH_FAILURE:
     'Failed to refresh access token. Refresh token invalid',
   AUTH_PASSWORD_RESET_TOKEN_EXPIRED: 'Password reset token expired',
+  AUTH_PASSWORD_RESET_TOKEN_NOT_FOUND: 'Password reset token not found',
   AUTH_REFRESH_TOKEN_COOKIE_NOT_FOUND: 'Refresh token cookie was not provided',
   AUTH_REFRESH_TOKEN_DECRYPT_FAILED: 'Refresh token is invalid',
   AUTH_REFRESH_TOKEN_VERSION_MISMATCH: 'Refresh token version mismatch',

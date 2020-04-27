@@ -5,7 +5,7 @@ const { ErrorKeys, isValid } = UserRegisterInput;
 describe('user input validation', () => {
   describe('is valid', () => {
     test('with a valid input', async () => {
-      const input = UserRegisterInput.apiExample();
+      const input = UserRegisterInput.uiExample();
       const actual = await isValid(input);
 
       expect(actual).toEqual(true);
@@ -14,21 +14,21 @@ describe('user input validation', () => {
 
   describe('is not valid', () => {
     test('without a family name', async () => {
-      const input = UserRegisterInput.apiExample({ familyName: null });
+      const input = UserRegisterInput.uiExample({ familyName: null });
       const actual = await isValid(input);
 
       expect(actual).toEqual(false);
     });
 
     test('without a given name', async () => {
-      const input = UserRegisterInput.apiExample({ givenName: null });
+      const input = UserRegisterInput.uiExample({ givenName: null });
       const actual = await isValid(input);
 
       expect(actual).toEqual(false);
     });
 
     test('without a valid email', async () => {
-      const input = UserRegisterInput.apiExample({
+      const input = UserRegisterInput.uiExample({
         email: 'NOT_A_VALID_EMAIL',
       });
 
@@ -38,7 +38,7 @@ describe('user input validation', () => {
     });
 
     test('without a username', async () => {
-      const input = UserRegisterInput.apiExample({ username: null });
+      const input = UserRegisterInput.uiExample({ username: null });
       const actual = await isValid(input);
 
       expect(actual).toEqual(false);
@@ -46,7 +46,7 @@ describe('user input validation', () => {
 
     describe('because password', () => {
       test(`does not match confirm password`, async () => {
-        const input = UserRegisterInput.apiExample({
+        const input = UserRegisterInput.uiExample({
           passwordConfirm: 'DOES_NOT_MATCH',
         });
 
@@ -59,7 +59,7 @@ describe('user input validation', () => {
         const tooSmallLength = UserRegisterInput.Limits.passwordNew.min - 1;
         const passwordNew = 'Aa1!'.padEnd(tooSmallLength, 'a');
 
-        const input = UserRegisterInput.apiExample({
+        const input = UserRegisterInput.uiExample({
           passwordConfirm: passwordNew,
           passwordNew,
         });
@@ -73,7 +73,7 @@ describe('user input validation', () => {
         const tooLongLength = UserRegisterInput.Limits.passwordNew.max + 1;
         const passwordNew = 'Aa1!'.padEnd(tooLongLength, 'a');
 
-        const input = UserRegisterInput.apiExample({
+        const input = UserRegisterInput.uiExample({
           passwordConfirm: passwordNew,
           passwordNew,
         });
@@ -89,7 +89,7 @@ describe('user input validation', () => {
           'a'
         );
 
-        const input = UserRegisterInput.apiExample({
+        const input = UserRegisterInput.uiExample({
           passwordConfirm: passwordNew,
           passwordNew,
         });
@@ -105,7 +105,7 @@ describe('user input validation', () => {
           'A'
         );
 
-        const input = UserRegisterInput.apiExample({
+        const input = UserRegisterInput.uiExample({
           passwordConfirm: passwordNew,
           passwordNew,
         });
@@ -121,7 +121,7 @@ describe('user input validation', () => {
           'A'
         );
 
-        const input = UserRegisterInput.apiExample({
+        const input = UserRegisterInput.uiExample({
           passwordConfirm: passwordNew,
           passwordNew,
         });
@@ -137,7 +137,7 @@ describe('user input validation', () => {
           'A'
         );
 
-        const input = UserRegisterInput.apiExample({
+        const input = UserRegisterInput.uiExample({
           passwordConfirm: passwordNew,
           passwordNew,
         });
@@ -153,7 +153,7 @@ describe('user input validation', () => {
     test('when a password that does not meet the password requirements', async () => {
       const weakPassword = 'WEAK_PASSWORD';
 
-      const input = UserRegisterInput.apiExample({
+      const input = UserRegisterInput.uiExample({
         passwordConfirm: weakPassword,
         passwordNew: weakPassword,
       });
@@ -167,7 +167,7 @@ describe('user input validation', () => {
       const passwordConfirm = 'PASSWORD_THAT_DOES_NOT_MATCH';
       const passwordNew = 'PASSWORD';
 
-      const input = UserRegisterInput.apiExample({
+      const input = UserRegisterInput.uiExample({
         passwordConfirm,
         passwordNew,
       });

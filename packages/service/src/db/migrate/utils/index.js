@@ -25,13 +25,12 @@ const toIndexName = (schemalessTableName, columnName) =>
 const toUniqueIndexName = (schemalessTableName, columnName) =>
   `${Prefix.UNIQUE}_${schemalessTableName}_${columnName}`;
 
-const toTableName = toSchemaPrefixed;
-
 export {
+  Prefix,
   toEnumName,
   toIndexName,
   toPrimaryIndexName,
   toSchemaPrefixed,
-  toTableName,
+  toSchemaPrefixed as toTableName,
   toUniqueIndexName,
 };

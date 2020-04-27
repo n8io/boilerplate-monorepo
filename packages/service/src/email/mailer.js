@@ -3,14 +3,25 @@ import { log } from 'log';
 import nodemailer from 'nodemailer';
 import url from 'url';
 
-const { SMTP_CONNECTION } = config;
+const { SMTP_CONNECTION, isTest } = config;
 
+// eslint-disable-next-line complexity,max-statements
 const make = () => {
   if (!SMTP_CONNECTION) {
     return {
       sendMail: props =>
         log.warn(
           'SMTP_CONNECTION was not set so emails will not be sent',
+          props
+        ),
+    };
+  }
+
+  if (isTest) {
+    return {
+      sendMail: props =>
+        log.warn(
+          'Currently running in a test environment. Emails will not be sent',
           props
         ),
     };

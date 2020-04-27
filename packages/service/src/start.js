@@ -3,26 +3,23 @@ import { make as makeCache } from 'cache';
 import { config } from 'config';
 import { makeConnection } from 'db';
 import { once } from 'events';
-import { make as makeGraphqlServer } from 'graphql';
-import { make as makeSchema } from 'graphql/schema';
+import { make as makeGraphqlServer } from 'server';
 import { addListeners as addServerStopListeners } from 'stop';
 
 const { PORT } = config;
 
-const start = async ({ app, cache, connection, schema }) => {
+const start = async ({ app, cache, connection }) => {
   const actualConnection = connection || (await makeConnection(connection));
   const actualCache = cache || makeCache();
-  const actualSchema = schema || (await makeSchema());
-  const actualApp = app || makeApp(cache, schema);
+  const actualApp = app || makeApp();
 
-  const graphqlServer = await makeGraphqlServer(
-    actualApp,
-    actualCache,
-    actualSchema
-  );
+  const graphqlServer = await makeGraphqlServer({
+    app: actualApp,
+    cache: actualCache,
+  });
 
   const expressServer = graphqlServer.listen({ port: PORT }, () => {
-    const msg = `🚀 GraphQL server started @ http://localhost:${PORT}/graphql`;
+    const msg = `🚀 GraphQL server started @ https://local.host:${PORT}/graphql`;
     const bookend = '='.repeat(msg.length - 1);
 
     // eslint-disable-next-line no-console
@@ -40,7 +37,6 @@ const start = async ({ app, cache, connection, schema }) => {
     app: actualApp,
     cache: actualCache,
     connection: actualConnection,
-    schema: actualSchema,
   };
 };
 

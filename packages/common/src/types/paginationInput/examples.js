@@ -1,10 +1,10 @@
-import { makeSafeExample } from '../utils/makeSafeExample';
+import { Utils } from 'utils';
 
-const apiExample = makeSafeExample({
+const apiExample = Utils.makeSafeExample({
   after: null,
   first: 10,
 });
 
-const uiExample = makeSafeExample(apiExample());
+const uiExample = Utils.makeSafeExample(apiExample());
 
 export { apiExample, uiExample };
