@@ -47,6 +47,7 @@
     "graphql-rate-limit": "^2.0.1",
     "graphql-rate-limit-directive": "^1.2.1",
     "graphql-scalars": "^1.1.0",
+    "helmet": "^3.22.0",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.20.13",
     "merge-graphql-schemas": "^1.7.6",

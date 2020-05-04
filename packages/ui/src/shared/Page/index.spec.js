@@ -2,8 +2,6 @@ import React from 'react';
 import { render } from 'testHelpers';
 import { Page } from '.';
 
-jest.mock('react-focus-lock', () => props => <x-FocusLock {...props} />);
-
 describe('<Page/>', () => {
   const defaultProps = {
     children: <x-child />,
