@@ -1,4 +1,4 @@
-import { userRead } from 'db/user/userRead';
+import { client as db } from 'db';
 import { log } from 'log';
 import { Models } from 'models';
 import { Auth } from 'types/auth';
@@ -30,7 +30,7 @@ const refreshToken = async (req, res) => {
     return sendUnauthorizedResponse(res);
   }
 
-  const user = await userRead({ id: actualToken.id }, { Models });
+  const user = await db.user.read({ id: actualToken.id }, { Models });
 
   if (!user) {
     log.error(InternalErrorMessage.USER_NOT_FOUND, actualToken.id);

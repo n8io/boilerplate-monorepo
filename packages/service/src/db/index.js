@@ -1,4 +1,4 @@
-import { connection, make as makeConnection } from './connection';
-import { migrate } from './migrate';
+import { client } from './client';
+import { make as makeConnection } from './connection';
 
-export { connection, makeConnection, migrate };
+export { client, makeConnection };

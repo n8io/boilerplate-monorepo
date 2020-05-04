@@ -5,7 +5,7 @@ const { isValid } = UserPasswordResetInput;
 describe('user reset password input validation', () => {
   describe('is valid', () => {
     test('with a valid input', async () => {
-      const input = UserPasswordResetInput.apiExample();
+      const input = UserPasswordResetInput.uiExample();
       const actual = await isValid(input);
 
       expect(actual).toEqual(true);
@@ -28,9 +28,10 @@ describe('user reset password input validation', () => {
     });
 
     test('without a new password', async () => {
-      const input = UserPasswordResetInput.apiExample({
+      const input = UserPasswordResetInput.uiExample({
         passwordNew: null,
       });
+
       const actual = await isValid(input);
 
       expect(actual).toEqual(false);

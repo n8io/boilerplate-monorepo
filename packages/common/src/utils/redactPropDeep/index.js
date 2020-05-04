@@ -1,11 +1,13 @@
 import { assoc, equals, is, keys, map, reduce } from 'ramda';
 
+const REDACTION_STRING = '**********';
+
 const isArray = is(Array);
 const isObject = is(Object);
 
 const redactPropDeep = propName => {
   const isPropNameEq = equals(propName);
-  const redactProp = assoc(propName, '**********');
+  const redactProp = assoc(propName, REDACTION_STRING);
 
   const stripDeep = obj =>
     reduce(

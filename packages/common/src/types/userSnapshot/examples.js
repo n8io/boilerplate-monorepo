@@ -1,7 +1,7 @@
 import { UserRole } from 'types/userRole';
-import { makeSafeExample } from '../utils/makeSafeExample';
+import { Utils } from 'utils';
 
-const dbExample = makeSafeExample({
+const dbExample = Utils.makeSafeExample({
   email: 'EMAIL',
   familyName: 'FAMILY_NAME',
   givenName: 'GIVEN_NAME',
@@ -10,8 +10,8 @@ const dbExample = makeSafeExample({
   username: 'USERNAME',
 });
 
-const apiExample = makeSafeExample(dbExample());
+const apiExample = Utils.makeSafeExample(dbExample());
 
-const uiExample = makeSafeExample(apiExample());
+const uiExample = Utils.makeSafeExample(apiExample());
 
 export { apiExample, dbExample, uiExample };

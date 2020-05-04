@@ -12,9 +12,9 @@
     "build": "babel src -d dist --ignore '**/*.spec.js'",
     "postinstall": "yarn -s build",
     "start": "yarn -s build --watch",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "test:ci": "JEST_JUNIT_OUTPUT_DIR=../../.tmp/test-results/jest/common  yarn -s test --ci --runInBand --reporters=default --reporters=jest-junit",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --passWithNoTests --color --watch"
   },
   "dependencies": {
     "es6-error": "^4.1.1",
@@ -37,6 +37,7 @@
     "eslint-plugin-import-helpers": "^1.0.2",
     "eslint-plugin-jest": "^22.15.0",
     "eslint-plugin-prettier": "^3.1.0",
-    "eslint-plugin-ramda": "^2.5.1"
+    "eslint-plugin-ramda": "^2.5.1",
+    "jest-watch-typeahead": "^0.5.0"
   }
 }

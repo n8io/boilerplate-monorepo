@@ -2,11 +2,12 @@ import { config } from 'config';
 import knex from 'knex';
 import { log } from 'log';
 import { logFactory } from 'log/logFactory';
-import { parse } from 'pg-connection-string';
+import knexMock from 'mock-knex';
+import { parse as pgConnectionStringParser } from 'pg-connection-string';
 import { multiply } from 'ramda';
 import { Db } from 'types/db';
 
-const { DATABASE_URL, DEBUG } = config;
+const { DATABASE_URL, isSqlDebug, isTest } = config;
 
 const debugLog = logFactory({ method: 'connection', module: 'db' });
 
@@ -15,18 +16,34 @@ const seconds = multiply(1000);
 const wait = numberOfSeconds =>
   new Promise(res => setTimeout(res, seconds(numberOfSeconds)));
 
-const DB_TYPE = 'pg';
+const DbType = { PG: 'pg', SQLITE_3: 'sqlite3' };
 
 let cachedConnection = null;
 
-const makeOptions = () => {
-  const connection = parse(DATABASE_URL);
-
-  return {
-    client: DB_TYPE,
-    connection,
-    debug: (DEBUG || '').indexOf('sql') > -1,
+const makeConnection = () => {
+  let options = {
+    client: DbType.SQLITE_3,
+    connection: {
+      filename: ':memory:',
+    },
+    useNullAsDefault: true,
   };
+
+  if (!isTest) {
+    options = {
+      client: DbType.PG,
+      connection: pgConnectionStringParser(DATABASE_URL),
+      debug: isSqlDebug,
+    };
+  }
+
+  const instance = knex(options);
+
+  if (isTest) {
+    knexMock.mock(instance);
+  }
+
+  return instance;
 };
 
 let attempts = 0;
@@ -42,7 +59,7 @@ const tryToConnect = async connection => {
   let newConnection = null;
 
   try {
-    newConnection = await knex(makeOptions()).on('query-error', logError);
+    newConnection = await makeConnection().on('query-error', logError);
 
     // Make sure we can connect
     await newConnection.raw(`SET SESSION SCHEMA '${Db.Schema.MAIN}';`);
@@ -74,6 +91,6 @@ const make = connection => {
   return tryToConnect(connection);
 };
 
-const connection = knex(makeOptions());
+const connection = makeConnection();
 
 export { connection, make };

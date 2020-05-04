@@ -1,6 +1,6 @@
-import { makeSafeExample } from 'types/utils/makeSafeExample';
+import { Utils } from 'utils';
 
-const uiExample = makeSafeExample({
+const uiExample = Utils.makeSafeExample({
   id: 'ID',
 });
 

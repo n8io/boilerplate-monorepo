@@ -2,7 +2,7 @@ import { config } from 'config';
 import debug from 'debug';
 import { toSafeLog } from './toSafeLog';
 
-const { npm_package_name: PACKAGE_NAME } = config;
+const { isTest, npm_package_name: PACKAGE_NAME } = config;
 const logs = {};
 
 const makeNamespace = ({ method, module }) =>
@@ -15,6 +15,8 @@ const monkeyPatchTimestamp = logFn => (message, ...args) =>
 
 const logFactory = options => {
   const namespace = makeNamespace(options);
+
+  if (isTest) return () => null;
 
   if (logs[namespace]) {
     return logs[namespace];

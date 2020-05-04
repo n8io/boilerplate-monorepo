@@ -1,7 +1,7 @@
-import { makeSafeExample } from '../utils/makeSafeExample';
+import { Utils } from 'utils';
 import { Enumeration } from './typedef';
 
-const apiExample = makeSafeExample({
+const apiExample = Utils.makeSafeExample({
   id: 'ID',
   notificationMethod: Enumeration.EMAIL,
 });

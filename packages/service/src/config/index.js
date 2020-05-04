@@ -7,13 +7,16 @@ import {
   defaultTo,
   either,
   evolve,
+  includes,
   isEmpty,
-  mergeLeft,
+  mergeRight,
   pick,
   pipe,
   prop,
+  propOr,
   startsWith,
-  mergeRight,
+  toLower,
+  __,
 } from 'ramda';
 import { ProcessEnvKeys } from 'types/processEnv';
 
@@ -24,6 +27,7 @@ const defaults = {
   ACCESS_TOKEN_EXPIRY: '5m',
   ACCESS_TOKEN_SECRET: 'auth-token-secret',
   CAPTCHA_SECRET: '0x0000000000000000000000000000000000000000',
+  CI: false,
   DATABASE_URL: '',
   DB_MIGRATION_SCHEMA: 'public',
   DB_MIGRATION_TABLE_NAME: 'migrations',
@@ -46,14 +50,16 @@ const defaults = {
 
 const config = mergeRight(defaults, raw);
 
-const isDev = always(
-  pipe(prop('NODE_ENV'), defaultTo(''), startsWith('dev'))(config)
+const normalize = pipe(prop('NODE_ENV'), defaultTo(''), toLower);
+
+const isTest = always(
+  pipe(normalize, includes(__, ['ci', 'jest', 'test']))(config) ||
+    typeof test !== 'undefined'
 );
 
-const isProd = always(
-  pipe(prop('NODE_ENV'), defaultTo(''), startsWith('prod'))(config)
-);
-
+const isDev = always(pipe(normalize, startsWith('dev'))(config));
+const isProd = always(pipe(normalize, startsWith('prod'))(config));
+const isSqlDebug = always(pipe(propOr('', 'DEBUG'), includes('sql')))(config);
 const isUndefined = value => typeof value === 'undefined';
 const isUndefinedOrEmpty = either(isUndefined, isEmpty);
 const isNotDevAndEmpty = both(complement(isDev), isUndefinedOrEmpty);
@@ -73,9 +79,10 @@ const missingEnvVars = requiredEnvVars.filter(({ name, failureTest }) =>
   failureTest(config[name])
 );
 
-if (missingEnvVars.length) {
+if (isProd() && missingEnvVars.length) {
   const messages = missingEnvVars.map(
-    ({ name }) => `${name} was not set. It is required to run the application`
+    ({ name }) =>
+      `${name} was not set. The application will not function correctly without it.`
   );
 
   // eslint-disable-next-line no-console
@@ -91,13 +98,15 @@ const merged = pipe(
     PORT: Utils.toNumber,
     SHOW_CONFIG: Utils.toBool,
   }),
-  mergeLeft({
+  mergeRight({
     isDev: isDev(),
     isProd: isProd(),
+    isSqlDebug: isSqlDebug(),
+    isTest: isTest(),
   })
 )(config);
 
 // eslint-disable-next-line no-console
 merged.SHOW_CONFIG && console.log(JSON.stringify(merged, null, 2));
 
-export { config };
+export { merged as config };

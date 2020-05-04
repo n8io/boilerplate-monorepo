@@ -7,7 +7,7 @@ const Encoding = {
   BASE64: 'base64',
 };
 
-const defaultToUndefined = defaultTo(null);
+const defaultToNull = defaultTo(null);
 
 const base64Encode = unless(Utils.isNullOrEmpty, clearText =>
   Buffer.from(clearText).toString(Encoding.BASE64)
@@ -18,7 +18,7 @@ const base64Decode = unless(Utils.isNullOrEmpty, encodedText =>
 );
 
 const cursorToAfter = pipe(
-  defaultToUndefined,
+  defaultToNull,
   base64Decode,
   unless(Utils.isNullOrEmpty, split(Enumeration.DELIMITER))
 );
@@ -26,7 +26,7 @@ const cursorToAfter = pipe(
 const nodesToPaginatedResults = (nodes, pagination, nodeToCursor) => {
   const { hasMore: hasNextPage, rowCount: total } = pagination;
   const lastNode = last(nodes);
-  const transformCursor = pipe(defaultToUndefined, nodeToCursor, base64Encode);
+  const transformCursor = pipe(defaultToNull, nodeToCursor, base64Encode);
 
   const edges = map(
     node => ({

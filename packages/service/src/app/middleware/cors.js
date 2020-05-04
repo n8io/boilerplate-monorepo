@@ -14,6 +14,7 @@ const corsOptions = {
     ...toAllowHosts(UI_HOST_URI),
     'http://localhost:3000',
     'http://127.0.0.1:3000',
+    'https://local.host:3000',
   ]),
 };
 

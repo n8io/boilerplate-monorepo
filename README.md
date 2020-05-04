@@ -70,6 +70,9 @@ yarn down
 ```shell
 # Run all the tests
 yarn test
+
+# Watch all the tests
+yarn test:watch
 ```
 
 #### 🌲 End-to-End Tests

@@ -5,6 +5,7 @@ node_modules/
 coverage/
 cypress/screenshots/
 cypress/videos/
+junit.xml
 
 # temp
 .tmp/
