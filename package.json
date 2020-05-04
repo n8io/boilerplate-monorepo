@@ -41,7 +41,7 @@
     "format": "yarn -s run run-all format:*",
     "format:js-eslint": "eslint --cache --fix '**/*.js'",
     "format:js-prettier": "prettier --write '**/*.js'",
-    "heroku-postbuild": "yarn run -s run-all-s build:common build:ui-common build:${DEPLOYMENT:-service}",
+    "heroku-postbuild": "yarn run -s run-all-s build:common build:${DEPLOYMENT:-service}",
     "hosts": "node ./.ini/hosts.js",
     "lint": "yarn -s run run-all lint:*",
     "lint:css": "yarn -s linter:stylelint 'packages/ui/**/*.js'",
