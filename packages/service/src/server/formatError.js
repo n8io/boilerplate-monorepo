@@ -1,18 +1,19 @@
 import { config } from 'config';
+import { path } from 'ramda';
 
 const toSafeError = error => {
-  const { extensions } = error;
+  const code = path(['extensions', 'code'], error);
 
-  if (extensions && extensions.code.match(/[:]/giu)) {
-    const [errorCode] = extensions.code.split(':');
+  if (code && code.match(/[:]/giu)) {
+    const [errorCode] = code.split(':');
 
     error.extensions.code = errorCode;
   }
 
-  const { NODE_ENV } = config;
+  const { isDev } = config;
 
-  if (NODE_ENV !== 'development') {
-    delete error.extensions?.exception;
+  if (!isDev) {
+    error.extensions && delete error.extensions.exception;
   }
 
   return error;
@@ -23,7 +24,7 @@ const formatError = error => {
   const { extensions } = error;
 
   if (extensions?.toSafeError) {
-    newError = extensions?.toSafeError(error);
+    newError = extensions.toSafeError(error);
   }
 
   return toSafeError(newError);

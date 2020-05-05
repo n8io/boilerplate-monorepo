@@ -43,6 +43,8 @@ const makeGraphqlClient = context => {
 const graphqlClient = makeGraphqlClient(makeContext());
 
 const responseToData = response => {
+  // eslint-disable-next-line no-console
+  response.errors && console.error(response.errors);
   expect(response.errors).toBeUndefined();
   expect(response.data).not.toBeNull();
 

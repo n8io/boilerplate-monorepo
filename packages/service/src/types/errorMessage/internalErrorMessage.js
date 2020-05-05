@@ -12,6 +12,8 @@ const InternalErrorMessage = {
   CAPTCHA_ERROR: 'Captcha token is invalid',
   DATABASE_REQUEST_FAILED: 'Failed to make a request to the database',
   EMAIL_PASSWORD_RESET_SEND_FAILED: 'Failed to send password reset email',
+  EMAIL_PASSWORD_RESET_SUCCESSFUL_SEND_FAILED:
+    'Failed to send password reset success email',
   GENERIC: 'An unexpected error has ocurred',
   PASSWORD_MISMATCH: 'Provided password does not match',
   RATE_LIMIT_EXCEEDED: 'Too many requests in the allowable time frame',
