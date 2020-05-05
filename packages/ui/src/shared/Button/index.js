@@ -28,6 +28,8 @@ const styles = css`
   text-align: center;
   transition: opacity ${CustomProperty.TRANSITION_DELAY} ${
   CustomProperty.TRANSITION_TIMING_FUNCTION
+},filter ${CustomProperty.TRANSITION_DELAY} ${
+  CustomProperty.TRANSITION_TIMING_FUNCTION
 };
   vertical-align: middle;
   width: 100%;
@@ -57,6 +59,13 @@ const styles = css`
         opacity: 0.7;
         pointer-events: none;
       }
+    `}
+
+  ${({ disabled, isLoaderVisible }) =>
+    disabled &&
+    !isLoaderVisible &&
+    css`
+      filter: grayscale(1);
     `}
 
   ${({ isAutoWidth }) =>
@@ -174,6 +183,7 @@ const Button = ({
       disabled={isDisabled}
       height={height}
       isAutoWidth={isAutoWidth}
+      isLoaderVisible={isLoaderVisible}
       onClick={onClick}
       ref={ref}
       role={Role.BUTTON}

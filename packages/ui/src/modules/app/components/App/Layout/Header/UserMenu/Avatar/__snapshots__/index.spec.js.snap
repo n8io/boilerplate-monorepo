@@ -3,7 +3,7 @@
 exports[`<Avatar/> renders properly 1`] = `
 <x-menudisclosure
   aria-label="user menu"
-  classname="Avatar__StyledDisclosure-sc-11puhtb-1 cHPAkB"
+  classname="Avatar__StyledDisclosure-sc-11puhtb-1 hhBpUh"
   context="LINK"
   size="SMALL"
 >
