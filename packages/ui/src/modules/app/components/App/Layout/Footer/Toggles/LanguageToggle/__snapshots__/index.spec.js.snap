@@ -3,7 +3,7 @@
 exports[`<LanguageToggle/> renders properly 1`] = `
 <div>
   <x-menudisclosure
-    classname="LanguageToggle__StyledDisclosure-sc-1xtjogu-0 xEyPX"
+    classname="LanguageToggle__StyledDisclosure-sc-1xtjogu-0 fWPcoK"
     context="PRIMARY"
     data-testid="language"
     size="SMALL"
