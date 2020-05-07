@@ -168,12 +168,12 @@ describe('user password reset request mutation', () => {
           td.when(passwordReset({ passwordResetToken, user })).thenReject();
         });
 
-        test(`returns a ${ErrorType.EMAIL_PASSWORD_RESET_SEND_FAILED} error`, async () => {
+        test(`returns a ${ErrorType.EMAIL_SEND_ERROR} error`, async () => {
           const variables = { input };
           const response = await execMutation({ mutation, variables });
           const errorCode = responseToErrorCode(response);
 
-          expect(errorCode).toEqual(ErrorType.EMAIL_PASSWORD_RESET_SEND_FAILED);
+          expect(errorCode).toEqual(ErrorType.EMAIL_SEND_ERROR);
         });
       });
 

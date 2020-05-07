@@ -1,6 +1,7 @@
 import { UserPasswordResetInput } from '@boilerplate-monorepo/common';
 import { gql } from 'apollo-server-express';
 import { isAfter, parseISO } from 'date-fns/fp';
+import { passwordResetSuccess } from 'email/user/passwordResetSuccess';
 import { log } from 'log';
 import { logFactory } from 'log/logFactory';
 import { Auth } from 'types/auth';
@@ -105,6 +106,19 @@ const resolver = async (_parent, { input }, context) => {
     });
 
     throw new DatabaseError();
+  }
+
+  try {
+    await passwordResetSuccess({ user });
+  } catch (error) {
+    log.error(
+      InternalErrorMessage.EMAIL_PASSWORD_RESET_SUCCESSFUL_SEND_FAILED,
+      {
+        error,
+        query: MUTATION_NAME,
+        username: user.username,
+      }
+    );
   }
 
   return true;

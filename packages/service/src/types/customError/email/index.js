@@ -3,7 +3,7 @@ import { PublicErrorMessage } from 'types/errorMessage';
 import { ErrorType } from 'types/errorType';
 
 const toSafeError = error => {
-  error.message = PublicErrorMessage.EMAIL_PASSWORD_RESET_SEND_FAILED;
+  error.message = PublicErrorMessage.EMAIL_SEND_FAILED;
 
   return error;
 };
@@ -13,16 +13,16 @@ const appendSafeError = props => ({
   toSafeError,
 });
 
-class EmailError extends ApolloError {
+class EmailSendError extends ApolloError {
   constructor(properties) {
     super(
-      PublicErrorMessage.EMAIL_PASSWORD_RESET_SEND_FAILED,
-      ErrorType.EMAIL_PASSWORD_RESET_SEND_FAILED,
+      PublicErrorMessage.EMAIL_SEND_FAILED,
+      ErrorType.EMAIL_SEND_ERROR,
       appendSafeError(properties)
     );
 
-    Object.defineProperty(this, 'name', { value: EmailError.name });
+    Object.defineProperty(this, 'name', { value: EmailSendError.name });
   }
 }
 
-export { EmailError };
+export { EmailSendError };

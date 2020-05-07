@@ -4,7 +4,7 @@ import { passwordReset } from 'email/user/passwordReset';
 import { log } from 'log';
 import { logFactory } from 'log/logFactory';
 import { Auth } from 'types/auth';
-import { DatabaseError, EmailError } from 'types/customError';
+import { DatabaseError, EmailSendError } from 'types/customError';
 import { InternalErrorMessage } from 'types/errorMessage';
 import { RateLimit } from 'types/rateLimit';
 
@@ -75,7 +75,7 @@ const resolver = async (_parent, { input }, context) => {
       username: user.username,
     });
 
-    throw new EmailError();
+    throw new EmailSendError();
   }
 
   return true;

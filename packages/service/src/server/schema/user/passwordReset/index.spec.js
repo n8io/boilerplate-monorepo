@@ -1,6 +1,8 @@
+/* eslint-disable max-nested-callbacks */
 import { User, UserPasswordResetInput } from '@boilerplate-monorepo/common';
 import { gql } from 'apollo-server-express';
 import { addMinutes, formatISO, subMinutes } from 'date-fns/fp';
+import * as Email from 'email/user/passwordResetSuccess';
 import {
   makeContext,
   makeGraphqlClient,
@@ -105,7 +107,6 @@ describe('user password reset mutation', () => {
 
         let execMutation = null;
 
-        // eslint-disable-next-line max-nested-callbacks
         beforeEach(() => {
           const user = {
             ...User.apiExample(),
@@ -122,7 +123,6 @@ describe('user password reset mutation', () => {
           ({ execMutation } = makeGraphqlClient(makeContext({ db })));
         });
 
-        // eslint-disable-next-line max-nested-callbacks
         test(`returns a ${ErrorType.USER_PASSWORD_RESET_FAILED} error`, async () => {
           const variables = { input };
           const response = await execMutation({ mutation, variables });
@@ -138,7 +138,6 @@ describe('user password reset mutation', () => {
 
         let execMutation = null;
 
-        // eslint-disable-next-line max-nested-callbacks
         beforeEach(() => {
           const user = {
             ...User.apiExample(),
@@ -156,7 +155,6 @@ describe('user password reset mutation', () => {
           ({ execMutation } = makeGraphqlClient(makeContext({ db })));
         });
 
-        // eslint-disable-next-line max-nested-callbacks
         test(`returns a ${ErrorType.USER_PASSWORD_RESET_FAILED} error`, async () => {
           const variables = { input };
           const response = await execMutation({ mutation, variables });
@@ -166,6 +164,7 @@ describe('user password reset mutation', () => {
         });
       });
 
+      // eslint-disable-next-line max-statements
       describe('and is a valid password reset', () => {
         const inTheFuture = addMinutes(1, new Date());
         const passwordResetTokenExpiration = formatISO(inTheFuture);
@@ -178,9 +177,9 @@ describe('user password reset mutation', () => {
 
         let execMutation = null;
         let hash = null;
+        let passwordResetSuccess = null;
         let save = null;
 
-        // eslint-disable-next-line max-nested-callbacks
         beforeEach(() => {
           const readRaw = jest
             .fn()
@@ -195,7 +194,6 @@ describe('user password reset mutation', () => {
           ({ execMutation } = makeGraphqlClient(makeContext({ db })));
         });
 
-        // eslint-disable-next-line max-nested-callbacks
         test('saves the new password', async () => {
           const newPasswordHash = 'NEW_PASSWORD_HASH';
 
@@ -213,27 +211,51 @@ describe('user password reset mutation', () => {
           });
         });
 
-        // eslint-disable-next-line max-nested-callbacks
-        test('returns true', async () => {
-          const newPasswordHash = 'NEW_PASSWORD_HASH';
+        describe('and password reset email send fails', () => {
+          beforeEach(() => {
+            const newPasswordHash = 'NEW_PASSWORD_HASH';
 
-          td.when(hash(passwordNew)).thenResolve(newPasswordHash);
+            td.when(hash(passwordNew)).thenResolve(newPasswordHash);
 
-          const variables = { input };
-          const response = await execMutation({ mutation, variables });
-          const actual = responseToData(response);
+            passwordResetSuccess = td.replace(Email, 'passwordResetSuccess');
 
-          expect(actual).toEqual(true);
+            td.when(passwordResetSuccess({ user })).thenReject();
+          });
+
+          test('returns true', async () => {
+            const variables = { input };
+            const response = await execMutation({ mutation, variables });
+            const actual = responseToData(response);
+
+            expect(actual).toEqual(true);
+          });
         });
 
-        // eslint-disable-next-line max-nested-callbacks
+        describe('and password reset email send succeeds', () => {
+          beforeEach(() => {
+            const newPasswordHash = 'NEW_PASSWORD_HASH';
+
+            td.when(hash(passwordNew)).thenResolve(newPasswordHash);
+
+            passwordResetSuccess = td.replace(Email, 'passwordResetSuccess');
+
+            td.when(passwordResetSuccess({ user })).thenResolve();
+          });
+
+          test('returns true', async () => {
+            const variables = { input };
+            const response = await execMutation({ mutation, variables });
+            const actual = responseToData(response);
+
+            expect(actual).toEqual(true);
+          });
+        });
+
         describe('when database save fails', () => {
-          // eslint-disable-next-line max-nested-callbacks
           beforeEach(() => {
             const readRaw = jest
               .fn()
               .mockName('readRaw')
-              // eslint-disable-next-line max-nested-callbacks
               .mockImplementation(() => {
                 throw new Error('db go boom');
               });
@@ -246,7 +268,6 @@ describe('user password reset mutation', () => {
             ({ execMutation } = makeGraphqlClient(makeContext({ db })));
           });
 
-          // eslint-disable-next-line max-nested-callbacks
           test(`returns a ${ErrorType.DATABASE_ERROR_OCCURRED} error`, async () => {
             const variables = { input };
             const response = await execMutation({ mutation, variables });
@@ -259,3 +280,5 @@ describe('user password reset mutation', () => {
     });
   });
 });
+
+/* eslint-enable max-nested-callbacks */

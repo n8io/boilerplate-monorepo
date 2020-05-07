@@ -2,6 +2,7 @@ const PublicErrorMessage = {
   CANNOT_DELETE_SELF: 'Cannot delete self',
   CAPTCHA_ERROR: 'Unable to verify captcha',
   DATABASE_ERROR_OCCURRED: 'A database error occurred',
+  EMAIL_SEND_FAILED: 'Unable to send email',
   LOGIN_FAILED: 'Invalid login',
   RATE_LIMIT_EXCEEDED: 'Rate limit exceeded',
   UNAUTHORIZED: 'Not authorized',
