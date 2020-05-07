@@ -3,7 +3,6 @@ import knex from 'knex';
 import { log } from 'log';
 import { logFactory } from 'log/logFactory';
 import knexMock from 'mock-knex';
-import { parse as pgConnectionStringParser } from 'pg-connection-string';
 import { multiply } from 'ramda';
 import { Db } from 'types/db';
 
@@ -32,7 +31,7 @@ const makeConnection = () => {
   if (!isTest) {
     options = {
       client: DbType.PG,
-      connection: pgConnectionStringParser(DATABASE_URL),
+      connection: DATABASE_URL,
       debug: isSqlDebug,
     };
   }
@@ -62,15 +61,15 @@ const tryToConnect = async connection => {
     newConnection = await makeConnection().on('query-error', logError);
 
     // Make sure we can connect
-    await newConnection.raw(`SET SESSION SCHEMA '${Db.Schema.MAIN}';`);
+    await newConnection.raw(`SET SESSION SCHEMA '${Db.Schema.MAIN}'`);
 
     if (attempts) {
       log.info('Connected to the database');
     }
   } catch (err) {
-    await wait(Math.pow(1.5, attempts));
-    // eslint-disable-next-line require-atomic-updates
     attempts += 1;
+
+    await wait(Math.pow(1.5, attempts));
 
     log.warn(`Attempt #${attempts} to connect to the database...`);
 

@@ -6,7 +6,7 @@
   "author": "Nate Clark <n8@n8io.com>",
   "license": "MIT",
   "engines": {
-    "node": "^12.13.0",
+    "node": "^14.2.0",
     "yarn": "^1.19.1"
   },
   "scripts": {

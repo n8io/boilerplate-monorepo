@@ -2,7 +2,7 @@
   "name": "boilerplate-monorepo",
   "private": true,
   "engines": {
-    "node": "^12.13.0",
+    "node": "^14.2.0",
     "yarn": "^1.19.1"
   },
   "license": "MIT",
@@ -10,7 +10,7 @@
     "packages/*"
   ],
   "scripts": {
-    "🔥": "rm -rf node_modules && (cd packages/common && rm -rf {dist,node_modules}) && (cd packages/service && rm -rf {dist,node_modules}) && (cd packages/ui && rm -rf {build,node_modules}) && (cd packages/ui-common && rm -rf {dist,node_modules})",
+    "🔥": "rm -rf {coverage,node_modules} && (cd packages/common && rm -rf {coverage,dist,node_modules}) && (cd packages/service && rm -rf {coverage,dist,node_modules}) && (cd packages/ui && rm -rf {build,coverage,node_modules}) && (cd packages/ui-common && rm -rf {coverage,dist,node_modules})",
     "🚀": "yarn -s hosts && yarn run -s run-all start:dev:*",
     "bootstrap": "lerna bootstrap",
     "build": "yarn -s build:adhoc && yarn -s run-all-p build:adhoc:service build:ui",
