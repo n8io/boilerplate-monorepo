@@ -1,6 +1,5 @@
 export { A11y } from './types/a11y';
 export { Breakpoint } from './types/breakpoint';
-export { Color } from './types/color';
 export { DisplayMode } from './types/displayMode';
 export { Font } from './types/font';
 export { Input } from './types/input';

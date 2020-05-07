@@ -1,4 +1,4 @@
-import { Color } from '@boilerplate-monorepo/ui-common';
+import { Color } from '@boilerplate-monorepo/common';
 import { toCustomProperties } from './utils/customProperty';
 
 const colors = {

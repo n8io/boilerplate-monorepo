@@ -45,7 +45,7 @@ const defaults = {
   REFRESH_TOKEN_SECRET: 'refresh-token-secret',
   SHOW_CONFIG: false,
   SMTP_CONNECTION: '',
-  UI_HOST_URI: '',
+  UI_HOST_URI: 'https://local.host:3000',
 };
 
 const config = mergeRight(defaults, raw);
