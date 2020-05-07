@@ -2,27 +2,29 @@
 # ./exit-untouched.sh path/with/changes/needed/to/continue/1 path/with/changes/needed/to/continue/2
 
 # 1. Get all the arguments passed to the script
-ARRAY_PATHS_TO_SEARCH="$*"
+ARRAY_PATHS_TO_SEARCH=( "$@" )
 
 LATEST_COMMIT_HEAD=$(git rev-parse --short HEAD)
 
-LATEST_COMMIT_MASTER=$(git rev-parse --short master)
+if [[ "$(git rev-parse --abbrev-ref HEAD)" = "master" ]]; then
+  echo "On master branch, let's grab the previous commit...\n"
+  LATEST_COMMIT_HEAD=$(git rev-parse --short HEAD~1)
+fi
 
+LATEST_COMMIT_MASTER=$(git rev-parse --short origin/master)
 COMMIT_RANGE="${LATEST_COMMIT_HEAD}..${LATEST_COMMIT_MASTER}"
+
+echo "Commit Range: ${COMMIT_RANGE}"
+echo ""
+
 ARRAY_CHANGED_PATHS=( $(git diff --format="" --name-only $COMMIT_RANGE | cut -d"/" -f1-5 | sort -u) )
 
 HAS_CHANGES=0
+RELEVANT_CHANGES=()
 for CHANGED_PATH in "${ARRAY_CHANGED_PATHS[@]}"; do
-  if [[ $HAS_CHANGES -eq 1 ]]; then
-    continue
-  fi
-
   for SEARCH_PATH in "${ARRAY_PATHS_TO_SEARCH[@]}"; do
-    if [[ $HAS_CHANGES -eq 1 ]]; then
-      continue
-    fi
-
     if [[ $CHANGED_PATH = $SEARCH_PATH* ]]; then
+      RELEVANT_CHANGES+=("${CHANGED_PATH}")
       HAS_CHANGES=1
     fi
   done
@@ -38,9 +40,14 @@ for path in "${ARRAY_CHANGED_PATHS[@]}"; do
   echo "  $path"
 done
 echo ""
+echo "Relevent changed paths:"
+for path in "${RELEVANT_CHANGES[@]}"; do
+  echo "  $path"
+done
+echo ""
 
 if [ $HAS_CHANGES -eq 0 ]; then
-  echo "🛑 No relevant changes were found. Exiting..."
+  echo "🛑 No relevant changes were found: job halted."
   circleci step halt
 else
   echo "✨ Some relevant code changes were found. Continuing..."

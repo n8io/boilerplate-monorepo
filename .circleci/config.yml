@@ -1,7 +1,7 @@
 version: 2.1
 
 jobs:
-  test:
+  install:
     docker:
       - image: circleci/node:14.2.0
     environment:
@@ -12,25 +12,44 @@ jobs:
       - restore_cache:
           keys:
             - v1-deps
-            - v1-deps-{{ .Branch }}
-            - v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
+            - v1-deps-{{ .Branch }}-{{ checksum "yarn.lock" }}
       - run:
           name: Installing dependencies
           command: yarn install --frozen-lockfile
       - run:
           name: Running linters
           command: yarn lint
+      - save_cache:
+          key: v1-deps-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+            - packages/common/node_modules
+            - packages/service/node_modules
+            - packages/ui/node_modules
+            - packages/ui-common/node_modules
+            - ~/.cache/yarn
+
+  test:
+    docker:
+      - image: circleci/node:14.2.0
+    environment:
+      TERM: xterm
+    working_directory: ~/app
+    parallelism: 4
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-deps
+            - v1-deps-{{ .Branch }}-{{ checksum "yarn.lock" }}
       - run:
-          name: Build common dependencies
+          name: Build [common] dependencies
           command: yarn -s build:common
       - run:
           name: Running unit tests
-          command: yarn test:ci
-      - save_cache:
-          key: v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
-          paths:
-            - node_modules
-            - ~/.cache
+          command: |
+            TEST_PATHS=$(circleci tests glob "packages/*/**/*.spec.js" | circleci tests split --split-by=timings)
+            yarn test:ci ${TEST_PATHS}
       - store_test_results:
           path: .tmp/test-results
 
@@ -42,16 +61,15 @@ jobs:
     working_directory: ~/app
     steps:
       - checkout
+      - run:
+          name: Check if the [service] needs built
+          command: ./.circleci/exit-untouched.sh packages/common packages/service
       - restore_cache:
           keys:
             - v1-deps
-            - v1-deps-{{ .Branch }}
-            - v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
+            - v1-deps-{{ .Branch }}-{{ checksum "yarn.lock" }}
       - run:
-          name: Check the service needs built
-          command: ./.circleci/exit-untouched.sh packages/common packages/service
-      - run:
-          name: Build service
+          name: Build the [service]
           command: yarn -s build:service
 
   build-ui:
@@ -62,16 +80,15 @@ jobs:
     working_directory: ~/app
     steps:
       - checkout
+      - run:
+          name: Check if the [ui] needs built
+          command: ./.circleci/exit-untouched.sh packages/common packages/ui-common packages/ui
       - restore_cache:
           keys:
             - v1-deps
-            - v1-deps-{{ .Branch }}
-            - v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
+            - v1-deps-{{ .Branch }}-{{ checksum "yarn.lock" }}
       - run:
-          name: Check the ui needs built
-          command: ./.circleci/exit-untouched.sh packages/common packages/ui-common packages/ui
-      - run:
-          name: Build all the things
+          name: Build the [ui]
           command: yarn -s build:ui
 
   deploy-service:
@@ -80,10 +97,10 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Check the service needs pushed
+          name: Check the [service] needs pushed
           command: ./.circleci/exit-untouched.sh packages/common packages/service
       - run:
-          name: Deploy service to Heroku
+          name: Deploy [service] to Heroku
           command: |
             git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME_SERVICE.git master
 
@@ -93,10 +110,10 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Check the ui needs built
+          name: Check the [ui] needs pushed
           command: ./.circleci/exit-untouched.sh packages/common packages/ui-common packages/ui
       - run:
-          name: Deploy ui to Heroku
+          name: Deploy [ui] to Heroku
           command: |
             git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME_UI.git master
 
@@ -104,7 +121,10 @@ workflows:
   version: 2
   features:
     jobs:
-      - test
+      - install
+      - test:
+          requires:
+            - install
       - build-service:
           requires:
             - test
