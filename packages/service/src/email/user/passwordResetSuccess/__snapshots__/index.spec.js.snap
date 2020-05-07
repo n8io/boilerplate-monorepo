@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`passwordResetSuccess email body should match snapshot 1`] = `
+"
+    <div style=\\"
+    border-spacing: 0;
+    font-family: Arial,Helvetica,sans-serif;
+    margin: 0 auto;
+    max-width: 600px;
+    text-align: center;
+    width: 100%;
+  \\">
+      <h1>
+        Hey there GIVEN_NAME, your password has been reset.
+      </h1>
+      <p>
+        As a security measure we thought it would be a good idea to let you know that your password was reset a few seconds ago.
+      </p>
+      <p>
+        <i>
+          If you didn’t ask to reset your password, please <a href=\\"https://local.host:3000/support\\">contact us</a> immediately.
+        </i>
+      </p>
+    </div>
+  "
+`;

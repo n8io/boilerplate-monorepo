@@ -1,4 +1,5 @@
-import { Color, DisplayMode, Theme } from '@boilerplate-monorepo/ui-common';
+import { Color } from '@boilerplate-monorepo/common';
+import { DisplayMode, Theme } from '@boilerplate-monorepo/ui-common';
 import { css } from 'styled-components/macro';
 import theme from 'styled-theming';
 import { CustomProperty } from 'types/customProperties';
