@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   test:
     docker:
-      - image: circleci/node:12.13.0
+      - image: circleci/node:14.2.0
     environment:
       TERM: xterm
     working_directory: ~/app
@@ -36,7 +36,7 @@ jobs:
 
   build-service:
     docker:
-      - image: circleci/node:12.13.0
+      - image: circleci/node:14.2.0
     environment:
       TERM: xterm
     working_directory: ~/app
@@ -56,7 +56,7 @@ jobs:
 
   build-ui:
     docker:
-      - image: circleci/node:12.13.0
+      - image: circleci/node:14.2.0
     environment:
       TERM: xterm
     working_directory: ~/app
@@ -76,7 +76,7 @@ jobs:
 
   deploy-service:
     docker:
-      - image: circleci/node:12.13.0
+      - image: circleci/node:14.2.0
     steps:
       - checkout
       - run:
@@ -89,7 +89,7 @@ jobs:
 
   deploy-ui:
     docker:
-      - image: circleci/node:12.13.0
+      - image: circleci/node:14.2.0
     steps:
       - checkout
       - run:
