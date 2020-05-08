@@ -7,7 +7,7 @@ ARRAY_PATHS_TO_SEARCH=( "$@" )
 LATEST_COMMIT_HEAD=$(git rev-parse --short HEAD)
 
 if [[ "$(git rev-parse --abbrev-ref HEAD)" = "master" ]]; then
-  echo "On master branch, let's grab the previous commit...\n"
+  echo "On master branch, let's grab the previous commit..."
   LATEST_COMMIT_HEAD=$(git rev-parse --short HEAD~1)
 fi
 

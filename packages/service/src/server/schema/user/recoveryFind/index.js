@@ -64,13 +64,18 @@ const { burst: Burst, window: Window } = RateLimit.USER_ACCOUNT_RECOVERY_FIND;
 const typeDefs = gql`
   "The user recovery type"
   type UserRecovery {
+    "The user's masked email"
     email: String!
+    "The user's id"
     id: ID!
   }
 
   type Query {
     "Find a given user to recover their account"
-    ${QUERY_NAME}(account: String!): UserRecovery
+    ${QUERY_NAME}(
+      "The user's email address or username"
+      account: String!
+    ): UserRecovery
       @rateLimitWindow(limit: ${Window.limit}, duration: ${Window.duration})
       @rateLimitBurst(limit: ${Burst.limit}, duration: ${Burst.duration})
   }

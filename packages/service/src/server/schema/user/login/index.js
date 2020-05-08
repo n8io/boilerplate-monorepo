@@ -95,7 +95,10 @@ const typeDefs = gql`
   "Mutations"
   type Mutation {
     "The user login mutation"
-    ${MUTATION_NAME}(input: UserLoginInput!): String!
+    ${MUTATION_NAME}(
+      "The input for the user login mutation"
+      input: UserLoginInput!
+    ): String!
       @rateLimitWindow(limit: ${Window.limit}, duration: ${Window.duration})
       @rateLimitBurst(limit: ${Burst.limit}, duration: ${Burst.duration})
       @rateLimitUsername(limit: ${limit}, duration: ${duration})

@@ -4,6 +4,9 @@ pre-commit:
     lint-css:
       glob: 'packages/ui/**/*.js'
       run: yarn -s linter:stylelint {staged_files}
+    lint-graphql:
+      glob: '.graphql/schema.graphql'
+      run: yarn -s linter:graphql
     lint-js-eslint:
       glob: '*.js'
       run: yarn -s linter:eslint {staged_files}

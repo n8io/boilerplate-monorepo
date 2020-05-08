@@ -28,7 +28,7 @@ const passwordResetSuccess = async ({ user }) => {
   const body = `
     <div style="${bodyStyle}">
       <h1>
-        Hey there ${user.givenName}, your password has been reset.
+        Hey there ${user.givenName}, your password has been reset successfully.
       </h1>
       <p>
         As a security measure we thought it would be a good idea to let you know that your password was reset a few seconds ago.

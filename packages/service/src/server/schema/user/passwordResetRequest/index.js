@@ -103,7 +103,10 @@ const typeDefs = gql`
   "Mutations"
   type Mutation {
     "The user password reset request mutation that initiates a password reset"
-    ${MUTATION_NAME}(input: UserPasswordResetRequestInput!): Boolean!
+    ${MUTATION_NAME}(
+      "The input for the user password reset request mutation"
+      input: UserPasswordResetRequestInput!
+    ): Boolean!
       @rateLimitWindow(limit: ${Window.limit}, duration: ${Window.duration})
       @rateLimitBurst(limit: ${Burst.limit}, duration: ${Burst.duration})
   }

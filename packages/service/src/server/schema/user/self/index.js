@@ -87,6 +87,7 @@ const typeDefs = gql`
     username: String!
   }
 
+  "The root query"
   type Query {
     "Return the actively logged in user"
     ${QUERY_NAME}: UserSnapshot! @isAuthenticated

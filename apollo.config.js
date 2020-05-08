@@ -2,15 +2,14 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-// eslint-disable-next-line no-process-env
-const { HOST = 'local.host', PORT = 4000, PROTOCOL = 'https' } = process.env;
-
 module.exports = {
   client: {
-    includes: ['./packages/{service,ui}/src/**/*.js'],
-    service: {
-      name: 'local',
-      url: `${PROTOCOL}://${HOST}:${PORT}/graphql`,
-    },
+    excludes: ['build/**', 'dist/**', '**/*.spec.js'],
+    includes: [`${__dirname}/packages/ui/src/shared/graphql/**/*.js`],
+  },
+  service: {
+    name: 'local.host',
+    skipSSLVerification: true,
+    url: 'https://local.host:4000/graphql',
   },
 };

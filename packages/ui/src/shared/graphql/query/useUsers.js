@@ -3,7 +3,7 @@ import { FetchPolicy } from '@boilerplate-monorepo/common';
 import { useQuery } from '../useQuery';
 
 export const QUERY_USERS = gql`
-  query users($input: UsersInput!) {
+  query users($input: PaginationInput!) {
     users(input: $input) {
       edges {
         cursor

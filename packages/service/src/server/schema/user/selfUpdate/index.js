@@ -63,7 +63,10 @@ const typeDefs = gql`
   "Mutations"
   type Mutation {
     "The user self update mutation"
-    ${MUTATION_NAME}(input: UserSelfUpdateInput!): UserSnapshot! @isAuthenticated
+    ${MUTATION_NAME}(
+      "The input for the user self update mutation"
+      input: UserSelfUpdateInput!
+    ): UserSnapshot! @isAuthenticated
   }
 `;
 

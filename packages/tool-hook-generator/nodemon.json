@@ -1,0 +1,10 @@
+{
+  "colors": true,
+  "delay": 5000,
+  "exec": "yarn -s codegen >/dev/null 2>&1 && echo \"🔄 Refreshed GraphQL schema\"",
+  "ext": "js",
+  "ignore": ["**/*.spec.js"],
+  "signal": "SIGHUP",
+  "quiet": true,
+  "watch": ["../service/src/server/schema"]
+}

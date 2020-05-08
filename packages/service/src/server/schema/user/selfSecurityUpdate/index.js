@@ -105,7 +105,10 @@ const typeDefs = gql`
   "Mutations"
   type Mutation {
     "The user self security update mutation"
-    ${MUTATION_NAME}(input: UserSelfSecurityUpdateInput!): Boolean! @isAuthenticated
+    ${MUTATION_NAME}(
+      "The input for the user self security update mutation"
+      input: UserSelfSecurityUpdateInput!
+    ): Boolean! @isAuthenticated
   }
 `;
 

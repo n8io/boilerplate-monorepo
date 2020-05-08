@@ -50,7 +50,10 @@ const typeDefs = gql`
   "Mutations"
   type Mutation {
     "Revoke all the refresh tokens for a user"
-    ${MUTATION_NAME}(id: ID!): Boolean!
+    ${MUTATION_NAME}(
+      "The id of the user to revoke refresh tokens for"
+      id: ID!
+    ): Boolean!
       @hasPermission(permission: "${Permission.USERS_MANAGE}")
       @isAuthenticated
   }
