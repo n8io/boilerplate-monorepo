@@ -64,7 +64,7 @@ const { burst: Burst, window: Window } = RateLimit.USER_ACCOUNT_RECOVERY_FIND;
 const typeDefs = gql`
   "The user recovery type"
   type UserRecovery {
-    "The user's masked email"
+    "The user's masked email. E.g. n***@****l.com"
     email: String!
     "The user's id"
     id: ID!

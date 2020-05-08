@@ -203,7 +203,7 @@ input UserPasswordResetTokenValidateInput {
 
 """The user recovery type"""
 type UserRecovery {
-  """The user's masked email"""
+  """The user's masked email. E.g. n***@****l.com"""
   email: String!
 
   """The user's id"""
