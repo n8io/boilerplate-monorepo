@@ -9,134 +9,6 @@
     "subscriptionType": null,
     "types": [
       {
-        "kind": "OBJECT",
-        "name": "Query",
-        "description": "",
-        "fields": [
-          {
-            "name": "systemTime",
-            "description": "",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "DateTime",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "userPasswordResetTokenValidate",
-            "description": "",
-            "args": [
-              {
-                "name": "input",
-                "description": "",
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "UserPasswordResetTokenValidateInput",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null
-              }
-            ],
-            "type": {
-              "kind": "SCALAR",
-              "name": "ID",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "userRecoveryFind",
-            "description": "",
-            "args": [
-              {
-                "name": "account",
-                "description": "",
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null
-              }
-            ],
-            "type": {
-              "kind": "OBJECT",
-              "name": "UserRecovery",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "userSelf",
-            "description": "",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "UserSnapshot",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "users",
-            "description": "",
-            "args": [
-              {
-                "name": "input",
-                "description": "",
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "PaginationInput",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null
-              }
-            ],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "UsersPage",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
         "kind": "SCALAR",
         "name": "DateTime",
         "description": "Use JavaScript Date object for date/time fields.",
@@ -149,12 +21,12 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "UserPasswordResetTokenValidateInput",
-        "description": "",
+        "description": "The user password reset token validate input",
         "fields": null,
         "inputFields": [
           {
             "name": "token",
-            "description": "",
+            "description": "The user's password reset token",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -194,11 +66,11 @@
       {
         "kind": "OBJECT",
         "name": "UserRecovery",
-        "description": "",
+        "description": "The user recovery type",
         "fields": [
           {
             "name": "email",
-            "description": "",
+            "description": "The user's masked email",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -214,7 +86,7 @@
           },
           {
             "name": "id",
-            "description": "",
+            "description": "The user's id",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -237,11 +109,11 @@
       {
         "kind": "OBJECT",
         "name": "UserSnapshot",
-        "description": "",
+        "description": "The user type",
         "fields": [
           {
             "name": "email",
-            "description": "",
+            "description": "The user's email",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -257,7 +129,7 @@
           },
           {
             "name": "familyName",
-            "description": "",
+            "description": "The user's last name",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -273,7 +145,7 @@
           },
           {
             "name": "givenName",
-            "description": "",
+            "description": "The user's first name",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -289,7 +161,7 @@
           },
           {
             "name": "id",
-            "description": "",
+            "description": "The user's unique id",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -305,7 +177,7 @@
           },
           {
             "name": "role",
-            "description": "",
+            "description": "The user's role",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -321,7 +193,7 @@
           },
           {
             "name": "username",
-            "description": "",
+            "description": "The user's unique username",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -354,20 +226,20 @@
       {
         "kind": "ENUM",
         "name": "UserRole",
-        "description": "",
+        "description": "The user role enumeration",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
         "enumValues": [
           {
             "name": "ADMIN",
-            "description": "",
+            "description": "The admin user role",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "USER",
-            "description": "",
+            "description": "The default user role",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -377,12 +249,12 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "PaginationInput",
-        "description": "",
+        "description": "The input type for paged results",
         "fields": null,
         "inputFields": [
           {
             "name": "after",
-            "description": "",
+            "description": "The cursor the results should start (inclusive)",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -392,7 +264,7 @@
           },
           {
             "name": "first",
-            "description": "",
+            "description": "The number of results per page",
             "type": {
               "kind": "SCALAR",
               "name": "Int",
@@ -418,11 +290,11 @@
       {
         "kind": "OBJECT",
         "name": "UsersPage",
-        "description": "",
+        "description": "A page of users",
         "fields": [
           {
             "name": "edges",
-            "description": "",
+            "description": "The list of user edges",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -446,7 +318,7 @@
           },
           {
             "name": "pageInfo",
-            "description": "",
+            "description": "The pagination summary info",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -469,11 +341,11 @@
       {
         "kind": "OBJECT",
         "name": "UserEdge",
-        "description": "",
+        "description": "A User edge",
         "fields": [
           {
             "name": "cursor",
-            "description": "",
+            "description": "The user's cursor id",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -489,7 +361,7 @@
           },
           {
             "name": "node",
-            "description": "",
+            "description": "The user's snapshot",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -512,11 +384,11 @@
       {
         "kind": "OBJECT",
         "name": "PageInfo",
-        "description": "",
+        "description": "A page info",
         "fields": [
           {
             "name": "endCursor",
-            "description": "",
+            "description": "The last returned node's cursor",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -528,7 +400,7 @@
           },
           {
             "name": "hasNextPage",
-            "description": "",
+            "description": "Whether or not there is another page of results",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -544,7 +416,7 @@
           },
           {
             "name": "hasPreviousPage",
-            "description": "",
+            "description": "Whether or not there is a previous page of results",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -560,7 +432,7 @@
           },
           {
             "name": "total",
-            "description": "",
+            "description": "The total number of results returned",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -593,15 +465,15 @@
       {
         "kind": "OBJECT",
         "name": "Mutation",
-        "description": "",
+        "description": "Mutations",
         "fields": [
           {
             "name": "userDelete",
-            "description": "",
+            "description": "Deletes a user from the system",
             "args": [
               {
                 "name": "id",
-                "description": "",
+                "description": "The id of the user to be deleted",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -628,11 +500,11 @@
           },
           {
             "name": "userLogin",
-            "description": "",
+            "description": "The user login mutation",
             "args": [
               {
                 "name": "input",
-                "description": "",
+                "description": "The input for the user login mutation",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -659,7 +531,7 @@
           },
           {
             "name": "userLogout",
-            "description": "",
+            "description": "Logs the active user out (kills refresh 🍪)",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -675,11 +547,11 @@
           },
           {
             "name": "userPasswordReset",
-            "description": "",
+            "description": "The user password reset mutation to update the user's password",
             "args": [
               {
                 "name": "input",
-                "description": "",
+                "description": "The input for the user password reset mutation",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -706,11 +578,11 @@
           },
           {
             "name": "userPasswordResetRequest",
-            "description": "",
+            "description": "The user password reset request mutation that initiates a password reset",
             "args": [
               {
                 "name": "input",
-                "description": "",
+                "description": "The input for the user password reset request mutation",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -737,11 +609,11 @@
           },
           {
             "name": "userRegister",
-            "description": "",
+            "description": "The user register mutation",
             "args": [
               {
                 "name": "input",
-                "description": "",
+                "description": "The input for the user register mutation",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -768,11 +640,11 @@
           },
           {
             "name": "userRevokeRefreshTokens",
-            "description": "",
+            "description": "Revoke all the refresh tokens for a user",
             "args": [
               {
                 "name": "id",
-                "description": "",
+                "description": "The id of the user to revoke refresh tokens for",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -799,11 +671,11 @@
           },
           {
             "name": "userSelfSecurityUpdate",
-            "description": "",
+            "description": "The user self security update mutation",
             "args": [
               {
                 "name": "input",
-                "description": "",
+                "description": "The input for the user self security update mutation",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -830,11 +702,11 @@
           },
           {
             "name": "userSelfUpdate",
-            "description": "",
+            "description": "The user self update mutation",
             "args": [
               {
                 "name": "input",
-                "description": "",
+                "description": "The input for the user self update mutation",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -868,12 +740,12 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "UserLoginInput",
-        "description": "",
+        "description": "The user login input",
         "fields": null,
         "inputFields": [
           {
             "name": "password",
-            "description": "",
+            "description": "The user provided clear text password",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -887,7 +759,7 @@
           },
           {
             "name": "username",
-            "description": "",
+            "description": "The user provided username",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -907,12 +779,12 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "UserPasswordResetInput",
-        "description": "",
+        "description": "The user password reset input",
         "fields": null,
         "inputFields": [
           {
             "name": "id",
-            "description": "",
+            "description": "The user's unique identifier",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -926,7 +798,7 @@
           },
           {
             "name": "passwordNew",
-            "description": "",
+            "description": "The user's new password",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -940,7 +812,7 @@
           },
           {
             "name": "token",
-            "description": "",
+            "description": "The user's reset password token",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -960,12 +832,12 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "UserPasswordResetRequestInput",
-        "description": "",
+        "description": "The user recovery notify input",
         "fields": null,
         "inputFields": [
           {
             "name": "id",
-            "description": "",
+            "description": "The user's unique identifier",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -979,7 +851,7 @@
           },
           {
             "name": "notificationMethod",
-            "description": "",
+            "description": "The notification method the user has chosen",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -999,20 +871,20 @@
       {
         "kind": "ENUM",
         "name": "UserRecoveryNotificationMethod",
-        "description": "",
+        "description": "The user recovery notification method enumeration",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
         "enumValues": [
           {
             "name": "EMAIL",
-            "description": "",
+            "description": "Email",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "SMS",
-            "description": "",
+            "description": "Text message",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -1022,12 +894,26 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "UserRegisterInput",
-        "description": "",
+        "description": "The user register input",
         "fields": null,
         "inputFields": [
           {
+            "name": "captchaToken",
+            "description": "The captcha token",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
             "name": "email",
-            "description": "",
+            "description": "The user provided email address",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -1041,7 +927,7 @@
           },
           {
             "name": "familyName",
-            "description": "",
+            "description": "The user provided last name",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -1055,7 +941,7 @@
           },
           {
             "name": "givenName",
-            "description": "",
+            "description": "The user provided first name",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -1069,7 +955,7 @@
           },
           {
             "name": "passwordNew",
-            "description": "",
+            "description": "The user provided clear text password",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -1083,7 +969,7 @@
           },
           {
             "name": "username",
-            "description": "",
+            "description": "The user provided username",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -1103,12 +989,12 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "UserSelfSecurityUpdateInput",
-        "description": "",
+        "description": "The user's self security update input",
         "fields": null,
         "inputFields": [
           {
             "name": "passwordCurrent",
-            "description": "",
+            "description": "The user's current password",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -1122,7 +1008,7 @@
           },
           {
             "name": "passwordNew",
-            "description": "",
+            "description": "The user's new password",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -1142,12 +1028,12 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "UserSelfUpdateInput",
-        "description": "",
+        "description": "The user's self update input",
         "fields": null,
         "inputFields": [
           {
             "name": "email",
-            "description": "",
+            "description": "The user provided email address",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -1161,7 +1047,7 @@
           },
           {
             "name": "familyName",
-            "description": "",
+            "description": "The user provided last name",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -1171,7 +1057,7 @@
           },
           {
             "name": "givenName",
-            "description": "",
+            "description": "The user provided first name",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -1983,20 +1869,20 @@
       {
         "kind": "ENUM",
         "name": "CacheControlScope",
-        "description": "",
+        "description": "The cache control scope enumeration",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
         "enumValues": [
           {
-            "name": "PUBLIC",
-            "description": "",
+            "name": "PRIVATE",
+            "description": "The private cache control scope",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "PRIVATE",
-            "description": "",
+            "name": "PUBLIC",
+            "description": "The public cache control scope",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -2004,12 +1890,130 @@
         "possibleTypes": null
       },
       {
-        "kind": "SCALAR",
-        "name": "Upload",
-        "description": "The `Upload` scalar type represents a file upload.",
-        "fields": null,
+        "kind": "OBJECT",
+        "name": "Query",
+        "description": "The root query",
+        "fields": [
+          {
+            "name": "systemTime",
+            "description": "Returns the current system time",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "userPasswordResetTokenValidate",
+            "description": "The user password reset token validate mutation",
+            "args": [
+              {
+                "name": "input",
+                "description": "The input for the user password reset token validation mutation",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "UserPasswordResetTokenValidateInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "userRecoveryFind",
+            "description": "Find a given user to recover their account",
+            "args": [
+              {
+                "name": "account",
+                "description": "The user's email address or username",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "UserRecovery",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "userSelf",
+            "description": "Return the actively logged in user",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "UserSnapshot",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "users",
+            "description": "Fetch a page of users",
+            "args": [
+              {
+                "name": "input",
+                "description": "The pagination input for the users query",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "PaginationInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "UsersPage",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
         "inputFields": null,
-        "interfaces": null,
+        "interfaces": [],
         "enumValues": null,
         "possibleTypes": null
       }
@@ -2049,7 +2053,7 @@
       },
       {
         "name": "rateLimitBurst",
-        "description": "",
+        "description": "Controls the rate of traffic.",
         "locations": [
           "OBJECT",
           "FIELD_DEFINITION"
@@ -2057,7 +2061,7 @@
         "args": [
           {
             "name": "limit",
-            "description": "",
+            "description": "Number of occurrences allowed over duration.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -2071,7 +2075,45 @@
           },
           {
             "name": "duration",
-            "description": "",
+            "description": "Number of seconds before limit is reset.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "defaultValue": "60"
+          }
+        ]
+      },
+      {
+        "name": "rateLimitUsername",
+        "description": "Controls the rate of traffic.",
+        "locations": [
+          "OBJECT",
+          "FIELD_DEFINITION"
+        ],
+        "args": [
+          {
+            "name": "limit",
+            "description": "Number of occurrences allowed over duration.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "defaultValue": "60"
+          },
+          {
+            "name": "duration",
+            "description": "Number of seconds before limit is reset.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -2087,7 +2129,7 @@
       },
       {
         "name": "rateLimitWindow",
-        "description": "",
+        "description": "Controls the rate of traffic.",
         "locations": [
           "OBJECT",
           "FIELD_DEFINITION"
@@ -2095,7 +2137,7 @@
         "args": [
           {
             "name": "limit",
-            "description": "",
+            "description": "Number of occurrences allowed over duration.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -2109,7 +2151,7 @@
           },
           {
             "name": "duration",
-            "description": "",
+            "description": "Number of seconds before limit is reset.",
             "type": {
               "kind": "NON_NULL",
               "name": null,

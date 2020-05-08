@@ -86,7 +86,10 @@ const typeDefs = gql`
 
   type Query {
     "The user password reset token validate mutation"
-    ${QUERY_NAME}(input: UserPasswordResetTokenValidateInput!): ID
+    ${QUERY_NAME}(
+      "The input for the user password reset token validation mutation"
+      input: UserPasswordResetTokenValidateInput!
+    ): ID
       @rateLimitWindow(limit: ${Window.limit}, duration: ${Window.duration})
       @rateLimitBurst(limit: ${Burst.limit}, duration: ${Burst.duration})
   }

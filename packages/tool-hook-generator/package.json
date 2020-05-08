@@ -10,9 +10,15 @@
     "yarn": "^1.19.1"
   },
   "scripts": {
-    "codegen": "graphql-codegen --config .codegen/config.yml",
+    "codegen": "yarn -s codegen:introspection && yarn -s codegen:gql",
+    "codegen:gql": "yarn -s codegen:gql:fetch",
+    "codegen:gql:fetch": "graphql-introspection-json-to-sdl ../../.graphql/schema.json > ../../.graphql/schema.graphql",
+    "codegen:introspection": "yarn -s codegen:introspection:fetch && yarn -s codegen:introspection:format",
+    "codegen:introspection:fetch": "apollo service:download --endpoint=\"https://local.host:4000/graphql\" --skipSSLValidation ../../.graphql/schema.json",
+    "codegen:introspection:format": "node ./format.js",
     "hook:mutation": "hygen hooks-generator mutation --outputDir ../ui/src/shared/graphql/mutation",
-    "hook:query": "hygen hooks-generator query --outputDir ../ui/src/shared/graphql/query"
+    "hook:query": "hygen hooks-generator query --outputDir ../ui/src/shared/graphql/query",
+    "start": "nodemon"
   },
   "dependencies": {
     "hygen": "^5.0.3",
@@ -21,12 +27,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
-    "@graphql-codegen/add": "^1.11.2",
-    "@graphql-codegen/cli": "^1.11.2",
-    "@graphql-codegen/introspection": "^1.11.2",
-    "@graphql-codegen/typescript": "^1.11.2",
-    "@graphql-codegen/typescript-operations": "^1.11.2",
-    "@graphql-codegen/typescript-react-apollo": "^1.11.2",
+    "apollo": "^2.27.4",
     "babel-jest": "^24.8.0",
     "babel-plugin-macros": "^2.6.1",
     "babel-plugin-module-resolver": "^3.2.0",
@@ -38,6 +39,8 @@
     "eslint-plugin-jest": "^22.15.0",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-ramda": "^2.5.1",
-    "jest": "^24.9.0"
+    "graphql-introspection-json-to-sdl": "^1.0.3",
+    "jest": "^24.9.0",
+    "nodemon": "^2.0.3"
   }
 }

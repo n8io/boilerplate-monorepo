@@ -1,0 +1,302 @@
+directive @hasPermission(permission: String!) on FIELD_DEFINITION | FIELD
+
+directive @isAuthenticated on FIELD_DEFINITION
+
+"""Controls the rate of traffic."""
+directive @rateLimitBurst(
+  """Number of occurrences allowed over duration."""
+  limit: Int! = 60
+
+  """Number of seconds before limit is reset."""
+  duration: Int! = 60
+) on OBJECT | FIELD_DEFINITION
+
+"""Controls the rate of traffic."""
+directive @rateLimitUsername(
+  """Number of occurrences allowed over duration."""
+  limit: Int! = 60
+
+  """Number of seconds before limit is reset."""
+  duration: Int! = 60
+) on OBJECT | FIELD_DEFINITION
+
+"""Controls the rate of traffic."""
+directive @rateLimitWindow(
+  """Number of occurrences allowed over duration."""
+  limit: Int! = 60
+
+  """Number of seconds before limit is reset."""
+  duration: Int! = 60
+) on OBJECT | FIELD_DEFINITION
+
+directive @cacheControl(maxAge: Int, scope: CacheControlScope) on FIELD_DEFINITION | OBJECT | INTERFACE
+
+"""The cache control scope enumeration"""
+enum CacheControlScope {
+  """The private cache control scope"""
+  PRIVATE
+
+  """The public cache control scope"""
+  PUBLIC
+}
+
+"""Use JavaScript Date object for date/time fields."""
+scalar DateTime
+
+"""
+A field whose value conforms to the standard internet email address format as
+specified in RFC822: https://www.w3.org/Protocols/rfc822/.
+"""
+scalar EmailAddress
+
+"""Mutations"""
+type Mutation {
+  """Deletes a user from the system"""
+  userDelete(
+    """The id of the user to be deleted"""
+    id: ID!
+  ): Boolean!
+
+  """The user login mutation"""
+  userLogin(
+    """The input for the user login mutation"""
+    input: UserLoginInput!
+  ): String!
+
+  """Logs the active user out (kills refresh 🍪)"""
+  userLogout: Boolean!
+
+  """The user password reset mutation to update the user's password"""
+  userPasswordReset(
+    """The input for the user password reset mutation"""
+    input: UserPasswordResetInput!
+  ): Boolean!
+
+  """
+  The user password reset request mutation that initiates a password reset
+  """
+  userPasswordResetRequest(
+    """The input for the user password reset request mutation"""
+    input: UserPasswordResetRequestInput!
+  ): Boolean!
+
+  """The user register mutation"""
+  userRegister(
+    """The input for the user register mutation"""
+    input: UserRegisterInput!
+  ): Boolean!
+
+  """Revoke all the refresh tokens for a user"""
+  userRevokeRefreshTokens(
+    """The id of the user to revoke refresh tokens for"""
+    id: ID!
+  ): Boolean!
+
+  """The user self security update mutation"""
+  userSelfSecurityUpdate(
+    """The input for the user self security update mutation"""
+    input: UserSelfSecurityUpdateInput!
+  ): Boolean!
+
+  """The user self update mutation"""
+  userSelfUpdate(
+    """The input for the user self update mutation"""
+    input: UserSelfUpdateInput!
+  ): UserSnapshot!
+}
+
+"""A page info"""
+type PageInfo {
+  """The last returned node's cursor"""
+  endCursor: String
+
+  """Whether or not there is another page of results"""
+  hasNextPage: Boolean!
+
+  """Whether or not there is a previous page of results"""
+  hasPreviousPage: Boolean!
+
+  """The total number of results returned"""
+  total: Int!
+}
+
+"""The input type for paged results"""
+input PaginationInput {
+  """The cursor the results should start (inclusive)"""
+  after: String
+
+  """The number of results per page"""
+  first: Int
+}
+
+"""The root query"""
+type Query {
+  """Returns the current system time"""
+  systemTime: DateTime!
+
+  """The user password reset token validate mutation"""
+  userPasswordResetTokenValidate(
+    """The input for the user password reset token validation mutation"""
+    input: UserPasswordResetTokenValidateInput!
+  ): ID
+
+  """Find a given user to recover their account"""
+  userRecoveryFind(
+    """The user's email address or username"""
+    account: String!
+  ): UserRecovery
+
+  """Return the actively logged in user"""
+  userSelf: UserSnapshot!
+
+  """Fetch a page of users"""
+  users(
+    """The pagination input for the users query"""
+    input: PaginationInput!
+  ): UsersPage!
+}
+
+"""A User edge"""
+type UserEdge {
+  """The user's cursor id"""
+  cursor: String!
+
+  """The user's snapshot"""
+  node: UserSnapshot!
+}
+
+"""The user login input"""
+input UserLoginInput {
+  """The user provided clear text password"""
+  password: String!
+
+  """The user provided username"""
+  username: String!
+}
+
+"""The user password reset input"""
+input UserPasswordResetInput {
+  """The user's unique identifier"""
+  id: ID!
+
+  """The user's new password"""
+  passwordNew: String!
+
+  """The user's reset password token"""
+  token: String!
+}
+
+"""The user recovery notify input"""
+input UserPasswordResetRequestInput {
+  """The user's unique identifier"""
+  id: ID!
+
+  """The notification method the user has chosen"""
+  notificationMethod: UserRecoveryNotificationMethod!
+}
+
+"""The user password reset token validate input"""
+input UserPasswordResetTokenValidateInput {
+  """The user's password reset token"""
+  token: String!
+}
+
+"""The user recovery type"""
+type UserRecovery {
+  """The user's masked email"""
+  email: String!
+
+  """The user's id"""
+  id: ID!
+}
+
+"""The user recovery notification method enumeration"""
+enum UserRecoveryNotificationMethod {
+  """Email"""
+  EMAIL
+
+  """Text message"""
+  SMS
+}
+
+"""The user register input"""
+input UserRegisterInput {
+  """The captcha token"""
+  captchaToken: String!
+
+  """The user provided email address"""
+  email: EmailAddress!
+
+  """The user provided last name"""
+  familyName: String!
+
+  """The user provided first name"""
+  givenName: String!
+
+  """The user provided clear text password"""
+  passwordNew: String!
+
+  """The user provided username"""
+  username: String!
+}
+
+"""The user role enumeration"""
+enum UserRole {
+  """The admin user role"""
+  ADMIN
+
+  """The default user role"""
+  USER
+}
+
+"""The user's self security update input"""
+input UserSelfSecurityUpdateInput {
+  """The user's current password"""
+  passwordCurrent: String!
+
+  """The user's new password"""
+  passwordNew: String!
+}
+
+"""The user's self update input"""
+input UserSelfUpdateInput {
+  """The user provided email address"""
+  email: EmailAddress!
+
+  """The user provided last name"""
+  familyName: String
+
+  """The user provided first name"""
+  givenName: String
+}
+
+"""The user type"""
+type UserSnapshot {
+  """The user's email"""
+  email: EmailAddress!
+
+  """The user's last name"""
+  familyName: String!
+
+  """The user's first name"""
+  givenName: String!
+
+  """The user's unique id"""
+  id: String!
+
+  """The user's role"""
+  role: UserRole!
+
+  """The user's unique username"""
+  username: String!
+}
+
+"""A page of users"""
+type UsersPage {
+  """The list of user edges"""
+  edges: [UserEdge!]!
+
+  """The pagination summary info"""
+  pageInfo: PageInfo!
+}
+

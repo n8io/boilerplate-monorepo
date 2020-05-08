@@ -3,7 +3,6 @@ export * from './useUserLogin';
 export * from './useUserLogout';
 export * from './useUserPasswordReset';
 export * from './useUserPasswordResetRequest';
-export * from './useUserRecoveryNotify';
 export * from './useUserRegister';
 export * from './useUserRevokeRefreshTokens';
 export * from './useUserSelfUpdate';

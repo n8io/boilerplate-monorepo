@@ -1,5 +1,5 @@
 const R = require('ramda');
-const schema = require('../.codegen/schema.json');
+const schema = require('../../../.graphql/schema.json');
 const findMutation = require('./findMutation');
 const findQuery = require('./findQuery');
 const tabs = require('./tabs');

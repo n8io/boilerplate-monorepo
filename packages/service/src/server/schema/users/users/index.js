@@ -55,33 +55,46 @@ const resolver = async (_parent, { input }, context) => {
 const typeDefs = gql`
   "A User edge"
   type UserEdge {
+    "The user's cursor id"
     cursor: String!
+    "The user's snapshot"
     node: UserSnapshot!
   }
 
   "A page info"
   type PageInfo {
+    "The last returned node's cursor"
     endCursor: String
+    "Whether or not there is another page of results"
     hasNextPage: Boolean!
+    "Whether or not there is a previous page of results"
     hasPreviousPage: Boolean!
+    "The total number of results returned"
     total: Int!
   }
 
   "A page of users"
   type UsersPage {
+    "The list of user edges"
     edges: [UserEdge!]!
+    "The pagination summary info"
     pageInfo: PageInfo!
   }
 
   "The input type for paged results"
   input PaginationInput {
+    "The cursor the results should start (inclusive)"
     after: String
+    "The number of results per page"
     first: Int
   }
 
   type Query {
     "Fetch a page of users"
-    ${QUERY_NAME}(input: PaginationInput!): UsersPage!
+    ${QUERY_NAME}(
+      "The pagination input for the users query"
+      input: PaginationInput!
+    ): UsersPage!
       @hasPermission(permission: "${Permission.USERS_MANAGE}")
       @isAuthenticated
   }
