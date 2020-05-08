@@ -70,7 +70,7 @@
         "fields": [
           {
             "name": "email",
-            "description": "The user's masked email",
+            "description": "The user's masked email. E.g. n***@****l.com",
             "args": [],
             "type": {
               "kind": "NON_NULL",
