@@ -1,6 +1,7 @@
 # @boilerplate-monorepo
 
 [![CircleCI](https://circleci.com/gh/n8io/boilerplate-monorepo/tree/master.svg?style=svg)](https://circleci.com/gh/n8io/boilerplate-monorepo/tree/master)
+[![codecov](https://codecov.io/gh/n8io/boilerplate-monorepo/branch/master/graph/badge.svg)](https://codecov.io/gh/n8io/boilerplate-monorepo)
 
 A monorepo setup for winning.
 
