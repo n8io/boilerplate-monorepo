@@ -52,6 +52,10 @@ jobs:
             yarn test:ci ${TEST_PATHS}
       - store_test_results:
           path: .tmp/test-results
+      - run:
+          name: Upload code coverage
+          command: |
+            bash <(curl -s https://codecov.io/bash)
 
   build-service:
     docker:
