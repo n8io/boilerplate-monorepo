@@ -64,7 +64,7 @@
     "logrocket-react": "^3.0.1",
     "polished": "^3.4.1",
     "prop-types": "^15.7.2",
-    "ramda": "^0.26.1",
+    "ramda": "^0.27.0",
     "react": "^0.0.0-experimental-33c3af284",
     "react-dom": "^0.0.0-experimental-33c3af284",
     "react-focus-lock": "^2.0.5",
