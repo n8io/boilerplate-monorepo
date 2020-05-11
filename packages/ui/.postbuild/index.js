@@ -27,8 +27,8 @@ const uploadSentrySourcemaps = async () => {
     const jsFilesRegex = /(\.js(.map)?)$/;
 
     const files = Object.keys(filePaths)
-      .filter(f => jsFilesRegex.test(f))
-      .map(f => ({
+      .filter((f) => jsFilesRegex.test(f))
+      .map((f) => ({
         name: `~${filePaths[f]}`,
         path: path.join(__dirname, '../build', filePaths[f]),
       }));
@@ -47,9 +47,9 @@ const uploadSentrySourcemaps = async () => {
   return (
     upload(options)
       // eslint-disable-next-line no-console
-      .then(data => console.log('----- SUCCESS ----\n', data))
+      .then((data) => console.log('----- SUCCESS ----\n', data))
       // eslint-disable-next-line no-console
-      .catch(error => console.log('---- ERROR ----\n', error))
+      .catch((error) => console.log('---- ERROR ----\n', error))
   );
 };
 
