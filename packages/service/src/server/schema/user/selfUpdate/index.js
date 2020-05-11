@@ -5,6 +5,7 @@ import { logFactory } from 'log/logFactory';
 import { DatabaseError } from 'types/customError';
 import { UserSelfUpdateNotFoundError } from 'types/customError/user/selfUpdate';
 import { InternalErrorMessage } from 'types/errorMessage';
+import { Telemetry } from 'types/telemetry';
 
 const MUTATION_NAME = 'userSelfUpdate';
 
@@ -21,6 +22,16 @@ const resolver = async (_parent, { input }, context) => {
 
   debugLog(`👾 ${MUTATION_NAME}`, input);
 
+  const telemetry = {
+    input,
+    query: MUTATION_NAME,
+    ...Telemetry.contextToLog(context),
+    tags: {
+      [Telemetry.Tag.COMPONENT]: Telemetry.Component.USER_SELF_UPDATE,
+      [Telemetry.Tag.MODULE]: Telemetry.Module.RESOLVER,
+    },
+  };
+
   let userSelf = null;
 
   try {
@@ -29,9 +40,7 @@ const resolver = async (_parent, { input }, context) => {
   } catch (error) {
     log.error(InternalErrorMessage.DATABASE_REQUEST_FAILED, {
       error,
-      id,
-      input,
-      mutation: MUTATION_NAME,
+      ...telemetry,
     });
 
     throw new DatabaseError();
@@ -40,7 +49,7 @@ const resolver = async (_parent, { input }, context) => {
   if (!userSelf) {
     log.error(InternalErrorMessage.USER_SELF_UPDATE_FAILED_NOT_FOUND, {
       id,
-      input,
+      ...telemetry,
     });
 
     throw new UserSelfUpdateNotFoundError();

@@ -11,7 +11,7 @@ const link = new RetryLink({
   delay: {
     initial: Time.seconds(1),
     jitter: true,
-    max: Time.seconds(10),
+    max: Time.seconds(5),
   },
 });
 

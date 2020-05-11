@@ -22,7 +22,7 @@ describe('register', () => {
       switch (step) {
         case 1:
           expect(query.sql).toEqual(
-            `insert into \`${Db.Schema.MAIN}\`.\`${Db.Table.USERS}\` (\`created_at\`, \`email\`, \`family_name\`, \`given_name\`, \`id\`, \`name\`, \`role\`, \`token_version\`, \`updated_at\`, \`username\`) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+            `insert into \`${Db.Schema.MAIN}\`.\`${Db.Table.USERS}\` (\`created_at\`, \`email\`, \`family_name\`, \`given_name\`, \`id\`, \`name\`, \`role\`, \`updated_at\`, \`username\`) values (?, ?, ?, ?, ?, ?, ?, ?, ?)`
           );
           query.response(User.dbExample());
           break;

@@ -6,6 +6,7 @@ import {
 } from 'apollo-server-express';
 import { defaultFieldResolver } from 'graphql';
 import { log } from 'log';
+import { Telemetry } from 'types/telemetry';
 
 class isAuthenticated extends SchemaDirectiveVisitor {
   visitFieldDefinition(field) {
@@ -16,10 +17,15 @@ class isAuthenticated extends SchemaDirectiveVisitor {
       const { user } = context;
 
       if (!user) {
-        log.error(
-          `An unauthenticated request was made: ${fieldName}`,
-          Utils.isNullOrEmpty(input) ? undefined : { input }
-        );
+        log.error(`An unauthenticated request was made: ${fieldName}`, {
+          input: Utils.isNullOrEmpty(input) ? undefined : { input },
+          query: fieldName,
+          ...Telemetry.contextToLog(context),
+          tags: {
+            [Telemetry.Tag.COMPONENT]: Telemetry.Component.IS_AUTHENTICATED,
+            [Telemetry.Tag.MODULE]: Telemetry.Module.DIRECTIVE,
+          },
+        });
 
         throw new ForbiddenError(
           'You must be authenticated for this resource.'

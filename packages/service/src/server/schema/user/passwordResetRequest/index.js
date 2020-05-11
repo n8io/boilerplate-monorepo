@@ -7,6 +7,7 @@ import { Auth } from 'types/auth';
 import { DatabaseError, EmailSendError } from 'types/customError';
 import { InternalErrorMessage } from 'types/errorMessage';
 import { RateLimit } from 'types/rateLimit';
+import { Telemetry } from 'types/telemetry';
 
 const MUTATION_NAME = 'userPasswordResetRequest';
 
@@ -24,6 +25,17 @@ const resolver = async (_parent, { input }, context) => {
   const { id } = input;
   const { db } = context;
 
+  const telemetry = {
+    input,
+    query: MUTATION_NAME,
+    ...Telemetry.contextToLog(context),
+    tags: {
+      [Telemetry.Tag.COMPONENT]:
+        Telemetry.Component.USER_PASSWORD_RESET_REQUESt,
+      [Telemetry.Tag.MODULE]: Telemetry.Module.RESOLVER,
+    },
+  };
+
   let user = null;
 
   try {
@@ -31,19 +43,14 @@ const resolver = async (_parent, { input }, context) => {
   } catch (error) {
     log.error(InternalErrorMessage.USER_FETCH_FAILED, {
       error,
-      mutation: MUTATION_NAME,
+      ...telemetry,
     });
 
     throw new DatabaseError();
   }
 
   if (!user) {
-    const errorData = {
-      input,
-      mutation: MUTATION_NAME,
-    };
-
-    log.error(InternalErrorMessage.USER_FETCH_FAILED, errorData);
+    log.error(InternalErrorMessage.USER_FETCH_FAILED, telemetry);
 
     return true;
   }
@@ -60,7 +67,7 @@ const resolver = async (_parent, { input }, context) => {
   } catch (error) {
     log.error(InternalErrorMessage.USER_SELF_UPDATE_FAILED, {
       error,
-      query: MUTATION_NAME,
+      ...telemetry,
     });
 
     throw new DatabaseError();
@@ -71,8 +78,7 @@ const resolver = async (_parent, { input }, context) => {
   } catch (error) {
     log.error(InternalErrorMessage.EMAIL_PASSWORD_RESET_SEND_FAILED, {
       error,
-      query: MUTATION_NAME,
-      username: user.username,
+      ...telemetry,
     });
 
     throw new EmailSendError();

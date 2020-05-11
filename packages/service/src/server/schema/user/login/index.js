@@ -11,6 +11,7 @@ import {
 import { InternalErrorMessage } from 'types/errorMessage';
 import { Password } from 'types/password';
 import { RateLimit } from 'types/rateLimit';
+import { Telemetry } from 'types/telemetry';
 
 const MUTATION_NAME = 'userLogin';
 
@@ -24,6 +25,14 @@ const resolver = async (_parent, { input }, context) => {
   const { password: clearTextPassword, username } = input;
   const { db, res } = context;
 
+  const telemetry = {
+    ...Telemetry.contextToLog(context),
+    tags: {
+      [Telemetry.Tag.COMPONENT]: Telemetry.Component.USER_LOGIN,
+      [Telemetry.Tag.MODULE]: Telemetry.Module.RESOLVER,
+    },
+  };
+
   const criteria =
     username.indexOf('@') > -1 ? { email: username } : { username };
 
@@ -36,8 +45,9 @@ const resolver = async (_parent, { input }, context) => {
   } catch (error) {
     log.error(InternalErrorMessage.USER_NOT_FOUND, {
       error,
+      input,
       mutation: MUTATION_NAME,
-      username,
+      ...telemetry,
     });
 
     throw new UserInvalidLoginError();
@@ -52,8 +62,9 @@ const resolver = async (_parent, { input }, context) => {
   if (!Auth.isUserActive(user)) {
     log.error(InternalErrorMessage.USER_IS_DELETED, {
       deletedAt: user.deletedAt,
+      input,
       query: MUTATION_NAME,
-      username: user.username,
+      ...telemetry,
     });
 
     throw new UserInvalidLoginUserDeletedError({

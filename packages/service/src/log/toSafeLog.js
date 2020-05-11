@@ -1,9 +1,8 @@
 import { UnsafeProps, Utils } from '@boilerplate-monorepo/common';
 import { map, pipe, unless } from 'ramda';
 
-const toSafeLog = unless(
-  Utils.isNullOrEmpty,
-  pipe(...map(Utils.redactPropDeep, UnsafeProps), JSON.stringify)
-);
+const redactionFns = map(Utils.redactPropDeep, UnsafeProps);
+const toSafeData = unless(Utils.isNullOrEmpty, pipe(...redactionFns));
+const toSafeLog = pipe(...redactionFns, JSON.stringify);
 
-export { toSafeLog };
+export { toSafeData, toSafeLog };

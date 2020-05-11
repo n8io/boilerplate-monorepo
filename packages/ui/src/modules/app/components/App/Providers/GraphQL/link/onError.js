@@ -84,6 +84,8 @@ const link = onError(
               `[${code}]: Failed request for '${path}'. ${message}`,
               error
             );
+
+            return undefined;
           }
         }
       }
@@ -92,6 +94,8 @@ const link = onError(
     if (networkError) {
       // eslint-disable-next-line no-console
       console.error(`[NETWORK_ERROR]: ${networkError}`, networkError);
+
+      return undefined;
     }
 
     return undefined;

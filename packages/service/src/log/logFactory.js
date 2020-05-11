@@ -1,3 +1,9 @@
+/**
+ * This log utility is used to conditionally log debug messages based upon the
+ * `DEBUG` environment variable. If you want to add "always-on" logging please
+ * use the `./log`.
+ */
+
 import { config } from 'config';
 import debug from 'debug';
 import { toSafeLog } from './toSafeLog';

@@ -25,7 +25,7 @@ describe('save', () => {
       switch (step) {
         case 1:
           expect(query.sql).toEqual(
-            `update \`${Db.Schema.MAIN}\`.\`${Db.Table.USERS}\` set \`email\` = ?, \`family_name\` = ?, \`given_name\` = ?, \`role\` = ?, \`token_version\` = ?, \`username\` = ?, \`name\` = ?, \`updated_at\` = ? where \`id\` = ?`
+            `update \`${Db.Schema.MAIN}\`.\`${Db.Table.USERS}\` set \`email\` = ?, \`family_name\` = ?, \`given_name\` = ?, \`role\` = ?, \`username\` = ?, \`name\` = ?, \`updated_at\` = ? where \`id\` = ?`
           );
 
           query.response(dbUser);

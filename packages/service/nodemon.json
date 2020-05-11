@@ -1,6 +1,6 @@
 {
   "colors": true,
-  "delay": 1000,
+  "delay": 500,
   "exec": "babel-node -r dotenv/config src",
   "ext": "js,json",
   "ignore": ["**/*.spec.js"],

@@ -6,6 +6,7 @@ import {
 } from 'apollo-server-express';
 import { defaultFieldResolver } from 'graphql';
 import { log } from 'log';
+import { Telemetry } from 'types/telemetry';
 
 class hasPermission extends SchemaDirectiveVisitor {
   visitFieldDefinition(field) {
@@ -22,9 +23,13 @@ class hasPermission extends SchemaDirectiveVisitor {
         log.error(
           `You do not have permission for this resource: ${fieldName}.`,
           {
-            id: user.id,
-            role,
-            username: user.username,
+            permission,
+            query: fieldName,
+            ...Telemetry.contextToLog(context),
+            tags: {
+              [Telemetry.Tag.COMPONENT]: Telemetry.Component.HAS_PERMISSION,
+              [Telemetry.Tag.MODULE]: Telemetry.Module.DIRECTIVE,
+            },
           }
         );
 

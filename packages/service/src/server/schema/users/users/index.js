@@ -6,6 +6,7 @@ import { join, pick, pipe, take, unless, values } from 'ramda';
 import { DatabaseError } from 'types/customError';
 import { InternalErrorMessage } from 'types/errorMessage';
 import { Pagination } from 'types/pagination';
+import { Telemetry } from 'types/telemetry';
 
 const QUERY_NAME = 'users';
 
@@ -23,8 +24,19 @@ const toUserCursor = unless(
   )
 );
 
+// eslint-disable-next-line max-statements
 const resolver = async (_parent, { input }, context) => {
   debugLog(`👾 ${QUERY_NAME}`, input);
+
+  const telemetry = {
+    input,
+    query: QUERY_NAME,
+    ...Telemetry.contextToLog(context),
+    tags: {
+      [Telemetry.Tag.COMPONENT]: Telemetry.Component.USERS,
+      [Telemetry.Tag.MODULE]: Telemetry.Module.RESOLVER,
+    },
+  };
 
   const { db } = context;
 
@@ -36,8 +48,7 @@ const resolver = async (_parent, { input }, context) => {
   } catch (error) {
     log.error(InternalErrorMessage.USERS_FETCH_FAILED, {
       error,
-      input,
-      query: QUERY_NAME,
+      ...telemetry,
     });
 
     throw new DatabaseError();

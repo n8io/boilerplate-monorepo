@@ -19,6 +19,8 @@ const props = [
   'recoveryCodeExpiration',
   'recoveryCodeSecret',
   'token',
+  'tokenVersion',
+  'token_version',
 ];
 
 export { props };

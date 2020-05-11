@@ -13,6 +13,7 @@ import {
 import { InternalErrorMessage } from 'types/errorMessage';
 import { Password } from 'types/password';
 import { RateLimit } from 'types/rateLimit';
+import { Telemetry } from 'types/telemetry';
 
 const MUTATION_NAME = 'userPasswordReset';
 
@@ -27,6 +28,16 @@ const resolver = async (_parent, { input }, context) => {
 
   const { db } = context;
 
+  const telemetry = {
+    input,
+    query: MUTATION_NAME,
+    ...Telemetry.contextToLog(context),
+    tags: {
+      [Telemetry.Tag.COMPONENT]: Telemetry.Component.USER_PASSWORD_RESET,
+      [Telemetry.Tag.MODULE]: Telemetry.Module.RESOLVER,
+    },
+  };
+
   await UserPasswordResetInput.validationSchemaServer.validate(input);
 
   const { id, passwordNew: clearTextPassword, token } = input;
@@ -38,19 +49,14 @@ const resolver = async (_parent, { input }, context) => {
   } catch (error) {
     log.error(InternalErrorMessage.USER_FETCH_FAILED, {
       error,
-      mutation: MUTATION_NAME,
+      ...telemetry,
     });
 
     throw new DatabaseError();
   }
 
   if (!user) {
-    const errorData = {
-      input,
-      mutation: MUTATION_NAME,
-    };
-
-    log.error(InternalErrorMessage.USER_FETCH_FAILED, errorData);
+    log.error(InternalErrorMessage.USER_FETCH_FAILED, telemetry);
 
     return true;
   }
@@ -58,8 +64,7 @@ const resolver = async (_parent, { input }, context) => {
   if (!Auth.isUserActive(user)) {
     log.error(InternalErrorMessage.USER_IS_DELETED, {
       deletedAt: user.deletedAt,
-      query: MUTATION_NAME,
-      username: user.username,
+      ...telemetry,
     });
 
     return true;
@@ -68,10 +73,10 @@ const resolver = async (_parent, { input }, context) => {
   const { passwordResetToken, passwordResetTokenExpiration } = user;
 
   if (passwordResetToken !== token) {
-    log.error(InternalErrorMessage.USER_PASSWORD_RESET_FAILED_TOKEN_MISMATCH, {
-      query: MUTATION_NAME,
-      username: user.username,
-    });
+    log.error(
+      InternalErrorMessage.USER_PASSWORD_RESET_FAILED_TOKEN_MISMATCH,
+      telemetry
+    );
 
     throw new UserPasswordResetTokenMismatchError();
   }
@@ -82,10 +87,10 @@ const resolver = async (_parent, { input }, context) => {
     isAfter(parseISO(passwordResetTokenExpiration), now);
 
   if (isResetTokenExpired) {
-    log.error(InternalErrorMessage.USER_PASSWORD_RESET_FAILED_TOKEN_MISMATCH, {
-      query: MUTATION_NAME,
-      username: user.username,
-    });
+    log.error(
+      InternalErrorMessage.USER_PASSWORD_RESET_FAILED_TOKEN_MISMATCH,
+      telemetry
+    );
 
     throw new UserPasswordResetTokenExpiredError();
   }
@@ -102,7 +107,7 @@ const resolver = async (_parent, { input }, context) => {
   } catch (error) {
     log.error(InternalErrorMessage.USER_SELF_UPDATE_FAILED, {
       error,
-      query: MUTATION_NAME,
+      ...telemetry,
     });
 
     throw new DatabaseError();
@@ -115,8 +120,7 @@ const resolver = async (_parent, { input }, context) => {
       InternalErrorMessage.EMAIL_PASSWORD_RESET_SUCCESSFUL_SEND_FAILED,
       {
         error,
-        query: MUTATION_NAME,
-        username: user.username,
+        ...telemetry,
       }
     );
   }
