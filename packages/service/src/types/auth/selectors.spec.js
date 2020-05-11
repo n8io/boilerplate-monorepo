@@ -33,7 +33,6 @@ describe('auth selectors', () => {
       verify = td.replace(JsonWebToken, 'verify');
     });
 
-    // eslint-disable-next-line jest/expect-expect
     test('makes expected call to verify method', () => {
       decryptAccessToken(token);
 
@@ -51,7 +50,6 @@ describe('auth selectors', () => {
       verify = td.replace(JsonWebToken, 'verify');
     });
 
-    // eslint-disable-next-line jest/expect-expect
     test('makes expected call to verify method', () => {
       decryptRefreshToken(token);
 
@@ -68,7 +66,6 @@ describe('auth selectors', () => {
       sign = td.replace(JsonWebToken, 'sign');
     });
 
-    // eslint-disable-next-line jest/expect-expect
     test('makes expected call to sign method', () => {
       Auth.encryptAccessToken(user);
 
@@ -97,7 +94,6 @@ describe('auth selectors', () => {
       sign = td.replace(JsonWebToken, 'sign');
     });
 
-    // eslint-disable-next-line jest/expect-expect
     test('makes expected call to sign method', () => {
       encryptRefreshToken(user);
 
