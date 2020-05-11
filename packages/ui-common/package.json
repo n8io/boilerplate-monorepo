@@ -22,7 +22,6 @@
     "ramda": "^0.26.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.5.5",
     "@babel/preset-react": "^7.7.4",
     "babel-jest": "^24.8.0",
     "babel-plugin-macros": "^2.6.1",

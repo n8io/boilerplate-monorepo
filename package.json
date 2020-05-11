@@ -75,7 +75,9 @@
     "test:watch": "lerna run test:watch --parallel"
   },
   "devDependencies": {
-    "@arkweid/lefthook": "^0.6.3",
+    "@arkweid/lefthook": "^0.7.1",
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
     "babel-eslint": "^10.0.2",
     "babel-jest": "^24.8.0",
     "babel-plugin-macros": "^2.6.1",
