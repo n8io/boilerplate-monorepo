@@ -18,7 +18,7 @@ exports[`<Form/> renders login page 1`] = `
       value="ID"
     />
     <x-radioinput
-      classname="Form__StyledRadioInput-dNUHSO iXScHH"
+      classname="Form__StyledRadioInput-iioPUU kpooWw"
       label="t(chooseARecoveryMethod)"
       name="notificationMethod"
       options="[object Object]"

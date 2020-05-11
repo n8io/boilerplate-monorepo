@@ -3,10 +3,10 @@
 exports[`<ErrorPage/> renders properly 1`] = `
 <div>
   <div
-    class="Content__Container-sc-1oenkpn-0 hrIdWm"
+    class="Content__Container-sc-1oenkpn-0 bRuPii"
   >
     <div
-      class="Header__Container-k56l1p-0 ctTvPC"
+      class="Header__Container-k56l1p-0 ebBLYu"
     >
       <x-helmet>
         <title>
@@ -16,7 +16,7 @@ exports[`<ErrorPage/> renders properly 1`] = `
         </title>
       </x-helmet>
       <h1
-        class="EllipsiedText-o83sq0-0 Header__H1-k56l1p-1 dDZJPk"
+        class="EllipsiedText-o83sq0-0 Header__H1-k56l1p-1 NbplC"
         id="main"
         tabindex="0"
       >
@@ -25,15 +25,15 @@ exports[`<ErrorPage/> renders properly 1`] = `
       <div />
     </div>
     <section
-      class="Body__Container-sc-434ce0-0 cjTNqA ErrorPage__Body-sc-35c790-0 eWSHCA"
+      class="Body__Container-sc-434ce0-0 cwCmkG ErrorPage__Body-sc-35c790-0 kLuFlg"
       id="content-body"
       tabindex="0"
     >
       <div
-        class="ErrorPage__Container-sc-35c790-3 IykLa"
+        class="ErrorPage__Container-sc-35c790-3 eNdykN"
       >
         <div
-          class="ErrorPage__ImageContainer-sc-35c790-2 gtQYYb"
+          class="ErrorPage__ImageContainer-sc-35c790-2 bEbKJp"
         >
           <img
             alt="t(officePanda)"

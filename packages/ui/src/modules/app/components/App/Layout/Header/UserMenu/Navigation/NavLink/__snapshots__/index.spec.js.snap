@@ -2,7 +2,7 @@
 
 exports[`<NavLink/> renders properly 1`] = `
 <a
-  class="NavLink__StyledLink-sc-1spka94-0 inCxUc"
+  class="NavLink__StyledLink-sc-1spka94-0 jKrfBt"
   href="/login"
   title="t(login)"
 >
@@ -20,7 +20,7 @@ exports[`<NavLink/> renders properly 1`] = `
     />
   </svg>
   <div
-    class="EllipsiedText-o83sq0-0 bVGnli"
+    class="EllipsiedText-o83sq0-0 SmucZ"
   >
     t(login)
   </div>

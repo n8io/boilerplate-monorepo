@@ -2,16 +2,16 @@
 
 exports[`<Header/> when authenticated when on larger than mobile renders properly 1`] = `
 <header
-  class="Header__StyledHeader-sc-4wz997-1 cPWXaN"
+  class="Header__StyledHeader-sc-4wz997-1 hudAjA"
   role="banner"
   title="Acme Inc"
 >
   <x-skiptocontentlink />
   <div
-    class="Header__Container-sc-4wz997-0 llxgQo"
+    class="Header__Container-sc-4wz997-0 fUkHpu"
   >
     <div
-      class="EllipsiedText-o83sq0-0 bVGnli"
+      class="EllipsiedText-o83sq0-0 SmucZ"
     >
       Acme Inc
     </div>
@@ -22,16 +22,16 @@ exports[`<Header/> when authenticated when on larger than mobile renders properl
 
 exports[`<Header/> when authenticated when on mobile renders properly 1`] = `
 <header
-  class="Header__StyledHeader-sc-4wz997-1 cPWXaN"
+  class="Header__StyledHeader-sc-4wz997-1 hudAjA"
   role="banner"
   title="Acme Inc"
 >
   <x-skiptocontentlink />
   <div
-    class="Header__Container-sc-4wz997-0 llxgQo"
+    class="Header__Container-sc-4wz997-0 fUkHpu"
   >
     <div
-      class="EllipsiedText-o83sq0-0 bVGnli"
+      class="EllipsiedText-o83sq0-0 SmucZ"
     >
       Acme Inc
     </div>
@@ -42,16 +42,16 @@ exports[`<Header/> when authenticated when on mobile renders properly 1`] = `
 
 exports[`<Header/> when not authenticated when on larger than mobile renders properly 1`] = `
 <header
-  class="Header__StyledHeader-sc-4wz997-1 cPWXaN"
+  class="Header__StyledHeader-sc-4wz997-1 hudAjA"
   role="banner"
   title="Acme Inc"
 >
   <x-skiptocontentlink />
   <div
-    class="Header__Container-sc-4wz997-0 llxgQo"
+    class="Header__Container-sc-4wz997-0 fUkHpu"
   >
     <div
-      class="EllipsiedText-o83sq0-0 bVGnli"
+      class="EllipsiedText-o83sq0-0 SmucZ"
     >
       Acme Inc
     </div>
@@ -62,16 +62,16 @@ exports[`<Header/> when not authenticated when on larger than mobile renders pro
 
 exports[`<Header/> when not authenticated when on mobile renders properly 1`] = `
 <header
-  class="Header__StyledHeader-sc-4wz997-1 cPWXaN"
+  class="Header__StyledHeader-sc-4wz997-1 hudAjA"
   role="banner"
   title="Acme Inc"
 >
   <x-skiptocontentlink />
   <div
-    class="Header__Container-sc-4wz997-0 llxgQo"
+    class="Header__Container-sc-4wz997-0 fUkHpu"
   >
     <div
-      class="EllipsiedText-o83sq0-0 bVGnli"
+      class="EllipsiedText-o83sq0-0 SmucZ"
     >
       Acme Inc
     </div>

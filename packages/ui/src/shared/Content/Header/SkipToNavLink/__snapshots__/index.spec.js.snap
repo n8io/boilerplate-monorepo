@@ -2,7 +2,7 @@
 
 exports[`<SkipToNavLink/> renders children 1`] = `
 <a
-  class="SkipLink__Container-invh0z-0 iEXORv"
+  class="SkipLink__Container-invh0z-0 bgNsTY"
   href="#navigation"
 >
   t(skipToNavigationLink)

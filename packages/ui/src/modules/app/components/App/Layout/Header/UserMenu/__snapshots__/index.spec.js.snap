@@ -2,7 +2,7 @@
 
 exports[`<UserMenu/> renders properly 1`] = `
 <div
-  class="UserMenu__Container-mt3xo-0 cSXgHR"
+  class="UserMenu__Container-mt3xo-0 ArEuv"
 >
   <x-mobile>
     <x-navigation />

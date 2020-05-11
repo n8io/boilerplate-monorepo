@@ -2,13 +2,13 @@
 
 exports[`<Header/> renders children 1`] = `
 <div
-  class="Header__Container-k56l1p-0 ctTvPC"
+  class="Header__Container-k56l1p-0 ebBLYu"
 >
   <x-pagetitle
     title="TITLE"
   />
   <h1
-    class="EllipsiedText-o83sq0-0 Header__H1-k56l1p-1 dDZJPk"
+    class="EllipsiedText-o83sq0-0 Header__H1-k56l1p-1 NbplC"
     id="main"
     tabindex="0"
   >

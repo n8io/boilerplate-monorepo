@@ -3,7 +3,7 @@
 exports[`<Actions/> renders properly 1`] = `
 <div>
   <div
-    class="Actions__Container-jCrrLB hwjhEZ"
+    class="Actions__Container-jMNvUw jkElA"
   >
     <x-submitbutton
       isautowidth="true"

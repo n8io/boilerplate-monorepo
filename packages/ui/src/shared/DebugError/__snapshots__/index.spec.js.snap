@@ -2,7 +2,7 @@
 
 exports[`<DebugError/> renders children 1`] = `
 <pre
-  class="DebugError__Container-zh2bel-0 ciTnnT"
+  class="DebugError__Container-zh2bel-0 fOjoWF"
 >
   MESSAGE
 </pre>

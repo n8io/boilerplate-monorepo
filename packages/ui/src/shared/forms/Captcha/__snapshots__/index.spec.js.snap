@@ -3,10 +3,10 @@
 exports[`<Captcha/> renders properly 1`] = `
 <div>
   <label
-    class="Captcha__Container-gAyBQg eNwiNN"
+    class="Captcha__Container-ePlvRt frrmIv"
   >
     <div
-      class="Captcha__StyledInputLabel-jBkVZu fooTlD"
+      class="Captcha__StyledInputLabel-fcOUQt jLVTxd"
     >
       t(proveYouAreNotARobot)
     </div>

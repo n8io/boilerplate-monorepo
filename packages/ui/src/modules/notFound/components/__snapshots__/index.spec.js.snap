@@ -18,7 +18,7 @@ exports[`<NotFound/> renders not found page 1`] = `
         t(resourceNotFound)
         :
         <span
-          class="components__Italicize-sc-12mujor-0 dAjHmm"
+          class="components__Italicize-sc-12mujor-0 dMUsvy"
         >
           PATHNAME
         </span>
