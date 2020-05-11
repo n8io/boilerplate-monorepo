@@ -1,4 +1,4 @@
-import changeCase from 'change-case';
+import { constantCase, paramCase } from 'change-case';
 import { join, keys, map, pipe, reduce, toPairs } from 'ramda';
 import { css } from 'styled-components/macro';
 
@@ -10,9 +10,7 @@ const toCustomPropertyReference = key => `var(${toName(key)})`;
 const toEnum = pipe(
   keys,
   map(key => ({
-    [changeCase.constantCase(key)]: toCustomPropertyReference(
-      changeCase.paramCase(key)
-    ),
+    [constantCase(key)]: toCustomPropertyReference(paramCase(key)),
   })),
   reduce(
     (acc, item) => ({
@@ -25,9 +23,7 @@ const toEnum = pipe(
 
 const toCustomPropertyDefinitions = pipe(
   toPairs,
-  map(([key, value]) =>
-    toCustomPropertyDefinition(changeCase.hyphenCase(key), value)
-  ),
+  map(([key, value]) => toCustomPropertyDefinition(paramCase(key), value)),
   join('\n')
 );
 

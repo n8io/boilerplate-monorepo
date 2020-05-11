@@ -53,7 +53,7 @@
     "apollo-link-error": "^1.1.12",
     "apollo-link-persisted-queries": "^0.2.2",
     "apollo-link-retry": "^2.2.15",
-    "change-case": "^3.1.0",
+    "change-case": "^4.1.1",
     "cuid": "^2.1.8",
     "date-fns": "^2.12.0",
     "debug": "^4.1.1",
