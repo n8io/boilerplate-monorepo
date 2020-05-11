@@ -24,6 +24,7 @@ describe('<GreaterThanMobile/>', () => {
     useMediaQuery = td.replace(UseMediaQuery, 'useMediaQuery');
   });
 
+  // eslint-disable-next-line jest/expect-expect
   test('is using the proper media query', () => {
     renderComponent();
 

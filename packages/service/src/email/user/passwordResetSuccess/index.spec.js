@@ -19,6 +19,7 @@ describe('passwordResetSuccess', () => {
     sendMail = td.replace(Mailer, 'sendMail');
   });
 
+  // eslint-disable-next-line jest/expect-expect
   test('should send email', async () => {
     const body = await passwordResetSuccess(input);
 

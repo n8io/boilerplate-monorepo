@@ -1,8 +1,8 @@
-import { Desktop } from '../Desktop/__mocks__';
-import { GreaterThanMobile } from '../GreaterThanMobile/__mocks__';
-import { Huge } from '../Huge/__mocks__';
-import { Mobile } from '../Mobile/__mocks__';
-import { Tablet } from '../Tablet/__mocks__';
+import { Desktop } from '../Desktop';
+import { GreaterThanMobile } from '../GreaterThanMobile';
+import { Huge } from '../Huge';
+import { Mobile } from '../Mobile';
+import { Tablet } from '../Tablet';
 
 const Breakpoints = {
   Desktop,

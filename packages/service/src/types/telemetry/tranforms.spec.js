@@ -7,16 +7,19 @@ describe('transforms', () => {
     const requestId = 'REQUEST_ID';
     const user = User.apiExample();
     const context = { ip, requestId, user };
-    const actual = Telemetry.contextToLog(context);
 
-    const expected = {
-      // eslint-disable-next-line camelcase
-      ip_address: ip,
-      requestId,
-      user: Telemetry.userToLog(user),
-    };
+    test('converts context to log format', () => {
+      const actual = Telemetry.contextToLog(context);
 
-    expect(actual).toEqual(expected);
+      const expected = {
+        // eslint-disable-next-line camelcase
+        ip_address: ip,
+        requestId,
+        user: Telemetry.userToLog(user),
+      };
+
+      expect(actual).toEqual(expected);
+    });
   });
 
   describe('userToLog', () => {

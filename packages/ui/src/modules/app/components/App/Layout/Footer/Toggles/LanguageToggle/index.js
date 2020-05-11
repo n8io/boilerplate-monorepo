@@ -70,7 +70,6 @@ const LanguageToggle = () => {
       <StyledMenu
         {...menu}
         aria-label={t('chooseALanguage')}
-        // eslint-disable-next-line jsx-a11y/aria-proptypes
         aria-modal={undefined} // Fixes a11y violation (invalid aria attribute on role="menu")
       >
         {Language.values.map(language => (

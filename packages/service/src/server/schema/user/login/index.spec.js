@@ -159,7 +159,7 @@ describe('user login mutation', () => {
           writeRefreshToken = td.replace(Auth, 'writeRefreshToken');
         });
 
-        // eslint-disable-next-line max-nested-callbacks
+        // eslint-disable-next-line max-nested-callbacks,jest/expect-expect
         test(`writes the refresh token`, async () => {
           const input = { password, username };
           const variables = { input };

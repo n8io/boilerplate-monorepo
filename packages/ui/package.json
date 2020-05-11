@@ -94,7 +94,7 @@
     "babel-plugin-macros": "^2.6.1",
     "babel-plugin-styled-components": "^1.10.6",
     "dotenv": "^8.1.0",
-    "eslint": "^6.1.0",
+    "eslint": "^7.0.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-import-resolver-lerna": "^1.1.0",
     "eslint-plugin-cypress": "^2.6.1",
