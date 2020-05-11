@@ -26,7 +26,7 @@ module.exports = {
         'jest/consistent-test-it': 'warn',
         'jest/expect-expect': [
           'warn',
-          { assertFunctionNames: ['expect', 'it', 'td.verify'] },
+          { assertFunctionNames: ['cy.*', 'expect', 'td.verify'] },
         ],
         'jest/lowercase-name': ['warn', { ignore: ['describe'] }],
         'jest/no-empty-title': 'error',
@@ -95,6 +95,10 @@ module.exports = {
       },
     ],
     'init-declarations': 'warn',
+    'jest/expect-expect': [
+      'warn',
+      { assertFunctionNames: ['cy.*', 'expect', 'td.verify'] },
+    ],
     'lines-between-class-members': [
       'warn',
       'always',

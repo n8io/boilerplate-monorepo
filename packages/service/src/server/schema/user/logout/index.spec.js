@@ -23,7 +23,6 @@ describe('user logout mutation', () => {
       writeRefreshToken = td.replace(Auth, 'writeRefreshToken');
     });
 
-    // eslint-disable-next-line jest/expect-expect
     test('writes the refresh token', async () => {
       await execMutation({ mutation });
 
@@ -51,7 +50,6 @@ describe('user logout mutation', () => {
       writeRefreshToken = td.replace(Auth, 'writeRefreshToken');
     });
 
-    // eslint-disable-next-line jest/expect-expect
     test('writes the refresh token', async () => {
       await execMutation({ mutation });
 

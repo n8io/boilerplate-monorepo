@@ -1,3 +1,4 @@
+/* eslint-disable max-nested-callbacks */
 import { User } from '@boilerplate-monorepo/common';
 import { gql } from 'apollo-server-express';
 import {
@@ -101,7 +102,6 @@ describe('user login mutation', () => {
       describe('and the password is not correct', () => {
         let execMutation = null;
 
-        // eslint-disable-next-line max-nested-callbacks
         beforeEach(async () => {
           const passwordHash = await Password.hash(`${password}_INVALID`);
           const user = { ...User.apiExample(), passwordHash };
@@ -115,7 +115,6 @@ describe('user login mutation', () => {
           ));
         });
 
-        // eslint-disable-next-line max-nested-callbacks
         test(`returns a ${ErrorType.FAILED_LOGIN} error`, async () => {
           const input = { password, username };
           const variables = { input };
@@ -133,7 +132,6 @@ describe('user login mutation', () => {
         let user = null;
         let writeRefreshToken = null;
 
-        // eslint-disable-next-line max-nested-callbacks
         beforeEach(async () => {
           const passwordHash = await Password.hash(password);
 
@@ -150,7 +148,6 @@ describe('user login mutation', () => {
           writeRefreshToken = td.replace(Auth, 'writeRefreshToken');
         });
 
-        // eslint-disable-next-line max-nested-callbacks,jest/expect-expect
         test(`writes the refresh token`, async () => {
           const input = { password, username };
           const variables = { input };
@@ -160,7 +157,6 @@ describe('user login mutation', () => {
           td.verify(writeRefreshToken(res, user));
         });
 
-        // eslint-disable-next-line max-nested-callbacks
         test(`returns an access token`, async () => {
           const input = { password, username };
           const variables = { input };
@@ -171,7 +167,6 @@ describe('user login mutation', () => {
           expect(actual).toEqual(expected);
         });
 
-        // eslint-disable-next-line max-nested-callbacks
         test(`returns the proper access token object`, async () => {
           const input = { password, username };
           const variables = { input };
@@ -190,3 +185,4 @@ describe('user login mutation', () => {
     });
   });
 });
+/* eslint-enable max-nested-callbacks */
