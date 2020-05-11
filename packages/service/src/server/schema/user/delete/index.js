@@ -8,6 +8,7 @@ import {
   UserSelfDeleteError,
 } from 'types/customError/user/delete';
 import { InternalErrorMessage } from 'types/errorMessage';
+import { Telemetry } from 'types/telemetry';
 
 const MUTATION_NAME = 'userDelete';
 
@@ -17,15 +18,24 @@ const debugLog = logFactory({
 });
 
 // eslint-disable-next-line max-statements
-const resolver = async (_parent, { id }, context) => {
+const resolver = async (_parent, input, context) => {
+  const { id } = input;
   const { db, user } = context;
 
   debugLog(`👾 ${MUTATION_NAME}`, id);
 
+  const telemetry = {
+    ...Telemetry.contextToLog(context),
+    tags: {
+      [Telemetry.Tag.COMPONENT]: Telemetry.Component.USER_DELETE,
+      [Telemetry.Tag.MODULE]: Telemetry.Module.RESOLVER,
+    },
+  };
+
   if (user.id === id) {
     log.error(InternalErrorMessage.USER_SELF_DELETE_ATTEMPTED, {
-      mutation: MUTATION_NAME,
-      username: user.username,
+      query: MUTATION_NAME,
+      ...telemetry,
     });
 
     throw new UserSelfDeleteError({ username: user.username });
@@ -44,8 +54,9 @@ const resolver = async (_parent, { id }, context) => {
   } catch (error) {
     log.error(InternalErrorMessage.USER_DELETE_FAILED, {
       error,
-      id,
-      mutation: MUTATION_NAME,
+      input,
+      query: MUTATION_NAME,
+      telemetry,
     });
 
     throw new DatabaseError();
@@ -53,8 +64,9 @@ const resolver = async (_parent, { id }, context) => {
 
   if (!wasUpdated) {
     log.error(InternalErrorMessage.USER_DELETE_FAILED, {
-      id,
-      mutation: MUTATION_NAME,
+      input,
+      query: MUTATION_NAME,
+      ...telemetry,
     });
 
     throw new UserDeleteError({ id });

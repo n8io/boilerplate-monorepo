@@ -4,6 +4,7 @@ import {
   always,
   both,
   complement,
+  cond,
   defaultTo,
   either,
   evolve,
@@ -15,10 +16,10 @@ import {
   prop,
   propOr,
   startsWith,
+  T,
   toLower,
-  __,
 } from 'ramda';
-import { ProcessEnvKeys } from 'types/processEnv';
+import { ProcessEnvKeys } from 'types/processEnvKeys';
 
 // eslint-disable-next-line no-process-env
 const raw = pick(ProcessEnvKeys.values, process.env);
@@ -43,6 +44,7 @@ const defaults = {
   REDIS_URL: '',
   REFRESH_TOKEN_EXPIRY: '7d',
   REFRESH_TOKEN_SECRET: 'refresh-token-secret',
+  SENTRY_DSN: null,
   SHOW_CONFIG: false,
   SMTP_CONNECTION: '',
   UI_HOST_URI: 'https://local.host:3000',
@@ -50,36 +52,49 @@ const defaults = {
 
 const config = mergeRight(defaults, raw);
 
-const normalize = pipe(prop('NODE_ENV'), defaultTo(''), toLower);
+const normalize = pipe(prop('NODE_ENV'), defaultTo('development'), toLower);
 
-const isTest = always(
-  pipe(normalize, includes(__, ['ci', 'jest', 'test']))(config) ||
-    typeof test !== 'undefined'
+const isTest = env =>
+  includes(env, ['ci', 'jest', 'test']) ||
+  (typeof describe !== 'undefined' && typeof test !== 'undefined');
+
+const isDev = pipe(normalize, either(startsWith('dev'), startsWith('local')));
+const isProd = pipe(normalize, either(startsWith('prod'), startsWith('prd')));
+const isStaging = pipe(normalize, either(startsWith('sta'), startsWith('stg')));
+
+const toEnvironment = pipe(
+  normalize,
+  cond([
+    [isTest, always('test')],
+    [isProd, always('production')],
+    [isStaging, always('staging')],
+    [T, always('development')],
+  ])
 );
 
-const isDev = always(pipe(normalize, startsWith('dev'))(config));
-const isProd = always(pipe(normalize, startsWith('prod'))(config));
-const isSqlDebug = always(pipe(propOr('', 'DEBUG'), includes('sql')))(config);
+const isSqlDebug = always(
+  pipe(propOr('', ProcessEnvKeys.DEBUG), includes('sql'))
+)(config);
+
 const isUndefined = value => typeof value === 'undefined';
 const isUndefinedOrEmpty = either(isUndefined, isEmpty);
 const isNotDevAndEmpty = both(complement(isDev), isUndefinedOrEmpty);
 
+const isTelemetryEnabled = pipe(
+  propOr(false, ProcessEnvKeys.SENTRY_DSN),
+  Boolean
+);
+
 const requiredEnvVars = [
-  {
-    failureTest: isUndefinedOrEmpty,
-    name: 'DATABASE_URL',
-  },
-  {
-    failureTest: isNotDevAndEmpty,
-    name: 'REDIS_URL',
-  },
+  { failureTest: isUndefinedOrEmpty, name: ProcessEnvKeys.DATABASE_URL },
+  { failureTest: isNotDevAndEmpty, name: ProcessEnvKeys.REDIS_URL },
 ];
 
 const missingEnvVars = requiredEnvVars.filter(({ name, failureTest }) =>
   failureTest(config[name])
 );
 
-if (isProd() && missingEnvVars.length) {
+if (isProd(config) && missingEnvVars.length) {
   const messages = missingEnvVars.map(
     ({ name }) =>
       `${name} was not set. The application will not function correctly without it.`
@@ -98,11 +113,18 @@ const merged = pipe(
     PORT: Utils.toNumber,
     SHOW_CONFIG: Utils.toBool,
   }),
+  Utils.renameKeys({
+    [ProcessEnvKeys.npm_package_name]: 'name',
+    [ProcessEnvKeys.npm_package_version]: 'version',
+  }),
   mergeRight({
-    isDev: isDev(),
-    isProd: isProd(),
+    environment: toEnvironment(config),
+    isDev: isDev(config),
+    isProd: isProd(config),
     isSqlDebug: isSqlDebug(),
-    isTest: isTest(),
+    isStaging: isStaging(config),
+    isTelemetryEnabled: isTelemetryEnabled(config),
+    isTest: isTest(config),
   })
 )(config);
 

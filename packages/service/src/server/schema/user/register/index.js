@@ -12,6 +12,7 @@ import {
 import { InternalErrorMessage } from 'types/errorMessage';
 import { Password } from 'types/password';
 import { RateLimit } from 'types/rateLimit';
+import { Telemetry } from 'types/telemetry';
 
 const MUTATION_NAME = 'userRegister';
 
@@ -25,6 +26,16 @@ const resolver = async (_parent, { input }, context) => {
   await UserRegisterInput.validationSchemaServer.validate(input);
 
   debugLog(`👾 ${MUTATION_NAME}`, input);
+
+  const telemetry = {
+    input,
+    query: MUTATION_NAME,
+    ...Telemetry.contextToLog(context),
+    tags: {
+      [Telemetry.Tag.COMPONENT]: Telemetry.Component.USER_REGISTER,
+      [Telemetry.Tag.MODULE]: Telemetry.Module.RESOLVER,
+    },
+  };
 
   const {
     captchaToken,
@@ -41,12 +52,7 @@ const resolver = async (_parent, { input }, context) => {
 
     if (!isTokenValid) throw new Error(errorCodes.join(','));
   } catch (error) {
-    log.error(InternalErrorMessage.CAPTCHA_ERROR, {
-      captchaToken,
-      email,
-      mutation: MUTATION_NAME,
-      username,
-    });
+    log.error(InternalErrorMessage.CAPTCHA_ERROR, telemetry);
 
     throw new CaptchaError({ email, username });
   }
@@ -60,7 +66,7 @@ const resolver = async (_parent, { input }, context) => {
   } catch (error) {
     log.error(InternalErrorMessage.USER_REGISTER_FAILED, {
       error,
-      mutation: MUTATION_NAME,
+      ...telemetry,
     });
 
     throw new DatabaseError();
@@ -69,8 +75,7 @@ const resolver = async (_parent, { input }, context) => {
   if (user) {
     log.error(InternalErrorMessage.USER_REGISTER_FAILED, {
       existing: user,
-      mutation: MUTATION_NAME,
-      requested: input,
+      ...telemetry,
     });
 
     throw new RegisterUserAlreadyExistsError({ email, username });
@@ -85,8 +90,7 @@ const resolver = async (_parent, { input }, context) => {
   } catch (error) {
     log.error(InternalErrorMessage.USER_REGISTER_FAILED, {
       error,
-      input,
-      mutation: MUTATION_NAME,
+      ...telemetry,
     });
 
     throw new DatabaseError();

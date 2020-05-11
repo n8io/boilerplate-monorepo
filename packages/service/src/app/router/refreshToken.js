@@ -1,8 +1,9 @@
+import { UserSnapshot } from '@boilerplate-monorepo/common';
 import { client as db } from 'db';
 import { log } from 'log';
-import { Models } from 'models';
 import { Auth } from 'types/auth';
 import { InternalErrorMessage } from 'types/errorMessage';
+import { Telemetry } from 'types/telemetry';
 
 const sendResponse = (res, token = '') =>
   res.send({ ok: Boolean(token), token });
@@ -30,22 +31,31 @@ const refreshToken = async (req, res) => {
     return sendUnauthorizedResponse(res);
   }
 
-  const user = await db.user.read({ id: actualToken.id }, { Models });
+  const user = await db.user.readRaw({ id: actualToken.id });
 
   if (!user) {
-    log.error(InternalErrorMessage.USER_NOT_FOUND, actualToken.id);
+    log.error(InternalErrorMessage.USER_NOT_FOUND, {
+      tags: {
+        [Telemetry.Tag.COMPONENT]: Telemetry.Component.REFRESH_TOKEN,
+        [Telemetry.Tag.MODULE]: Telemetry.Module.AUTH,
+      },
+      token: { id: actualToken.id },
+    });
 
     return sendUnauthorizedResponse(res);
   }
 
   if (user.tokenVersion !== actualToken.tokenVersion) {
     log.error(InternalErrorMessage.AUTH_REFRESH_TOKEN_VERSION_MISMATCH, {
-      id: actualToken.id,
-      tokenVersion: {
-        dbUser: user.tokenVersion,
-        refreshToken: actualToken.tokenVersion,
+      mismatch: {
+        client: actualToken.tokenVersion,
+        db: user.tokenVersion,
       },
-      username: actualToken.username,
+      tags: {
+        [Telemetry.Tag.COMPONENT]: Telemetry.Component.REFRESH_TOKEN,
+        [Telemetry.Tag.MODULE]: Telemetry.Module.AUTH,
+      },
+      user: UserSnapshot.make(user),
     });
 
     return sendUnauthorizedResponse(res);

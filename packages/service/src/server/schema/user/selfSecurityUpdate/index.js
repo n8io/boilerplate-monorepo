@@ -9,6 +9,7 @@ import {
 } from 'types/customError';
 import { InternalErrorMessage } from 'types/errorMessage';
 import { Password } from 'types/password';
+import { Telemetry } from 'types/telemetry';
 
 const MUTATION_NAME = 'userSelfSecurityUpdate';
 
@@ -32,6 +33,16 @@ const resolver = async (_parent, { input }, context) => {
 
   debugLog(`👾 ${MUTATION_NAME}`, input);
 
+  const telemetry = {
+    input,
+    query: MUTATION_NAME,
+    ...Telemetry.contextToLog(context),
+    tags: {
+      [Telemetry.Tag.COMPONENT]: Telemetry.Component.USER_SELF_SECURITY_UPDATE,
+      [Telemetry.Tag.MODULE]: Telemetry.Module.RESOLVER,
+    },
+  };
+
   let userSelf = null;
 
   try {
@@ -39,22 +50,16 @@ const resolver = async (_parent, { input }, context) => {
   } catch (error) {
     log.error(InternalErrorMessage.USER_SELF_FETCH_FAILED, {
       error,
-      query: MUTATION_NAME,
+      ...telemetry,
     });
 
     throw new DatabaseError();
   }
 
   if (!userSelf) {
-    const errorData = {
-      id: user.id,
-      query: MUTATION_NAME,
-      username: user.username,
-    };
+    log.error(InternalErrorMessage.USER_SELF_FETCH_FAILED, telemetry);
 
-    log.error(InternalErrorMessage.USER_SELF_FETCH_FAILED, errorData);
-
-    throw new UserSelfNotFoundError(errorData);
+    throw new UserSelfNotFoundError(telemetry);
   }
 
   const { passwordHash } = userSelf;
@@ -65,15 +70,9 @@ const resolver = async (_parent, { input }, context) => {
   );
 
   if (!isCurrentPasswordMatch) {
-    const errorData = {
-      id: user.id,
-      query: MUTATION_NAME,
-      username: user.username,
-    };
+    log.error(InternalErrorMessage.PASSWORD_MISMATCH, telemetry);
 
-    log.error(InternalErrorMessage.PASSWORD_MISMATCH, errorData);
-
-    throw new UserSelfSecurityUpdateMismatchError(errorData);
+    throw new UserSelfSecurityUpdateMismatchError(telemetry);
   }
 
   const newHashedPassword = await Password.hash(clearTextPasswordNew);
@@ -84,7 +83,7 @@ const resolver = async (_parent, { input }, context) => {
   } catch (error) {
     log.error(InternalErrorMessage.USER_SELF_UPDATE_FAILED, {
       error,
-      query: MUTATION_NAME,
+      ...telemetry,
     });
 
     throw new DatabaseError();

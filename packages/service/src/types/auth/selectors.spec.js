@@ -84,7 +84,8 @@ describe('auth selectors', () => {
   });
 
   describe('encryptRefreshToken', () => {
-    const user = User.apiExample();
+    const tokenVersion = 1;
+    const user = { ...User.apiExample(), tokenVersion };
 
     let sign = null;
 
@@ -99,7 +100,7 @@ describe('auth selectors', () => {
         email: user.email,
         id: user.id,
         role: user.role,
-        tokenVersion: user.tokenVersion,
+        tokenVersion,
         username: user.username,
       };
 

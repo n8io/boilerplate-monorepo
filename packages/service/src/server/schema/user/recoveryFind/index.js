@@ -8,6 +8,7 @@ import { logFactory } from 'log/logFactory';
 import { pick, pipe } from 'ramda';
 import { InternalErrorMessage } from 'types/errorMessage';
 import { RateLimit } from 'types/rateLimit';
+import { Telemetry } from 'types/telemetry';
 
 const QUERY_NAME = 'userRecoveryFind';
 
@@ -23,6 +24,16 @@ const resolver = async (_parent, input, context) => {
 
   debugLog(`👾 ${QUERY_NAME}`, account);
 
+  const telemetry = {
+    input,
+    query: QUERY_NAME,
+    ...Telemetry.contextToLog(context),
+    tags: {
+      [Telemetry.Tag.COMPONENT]: Telemetry.Component.USER_RECOVERY_FIND,
+      [Telemetry.Tag.MODULE]: Telemetry.Module.RESOLVER,
+    },
+  };
+
   await UserRecoveryFindInput.validationSchema.validate(input);
 
   let user = null;
@@ -36,7 +47,7 @@ const resolver = async (_parent, input, context) => {
   } catch (error) {
     log.error(InternalErrorMessage.USER_FETCH_FAILED, {
       error,
-      query: QUERY_NAME,
+      ...telemetry,
     });
 
     return null;
@@ -45,7 +56,7 @@ const resolver = async (_parent, input, context) => {
   if (!user) {
     const errorData = {
       account,
-      query: QUERY_NAME,
+      ...telemetry,
     };
 
     log.warn(InternalErrorMessage.USER_FETCH_FAILED, errorData);

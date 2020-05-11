@@ -41,6 +41,7 @@ const removeDbOnlyProps = omit([
   'deleted_at',
   'deleted_by',
   'name',
+  'tokenVersion',
   'updated_at',
 ]);
 

@@ -6,6 +6,7 @@ import { DatabaseError } from 'types/customError';
 import { DateTime } from 'types/dateTime';
 import { InternalErrorMessage } from 'types/errorMessage';
 import { RateLimit } from 'types/rateLimit';
+import { Telemetry } from 'types/telemetry';
 
 const QUERY_NAME = 'userPasswordResetTokenValidate';
 
@@ -21,6 +22,17 @@ const resolver = async (_parent, { input }, context) => {
 
   debugLog(`👾 ${QUERY_NAME}`, { passwordResetToken });
 
+  const telemetry = {
+    input,
+    query: QUERY_NAME,
+    ...Telemetry.contextToLog(context),
+    tags: {
+      [Telemetry.Tag.COMPONENT]:
+        Telemetry.Component.USER_PASSWORD_RESET_TOKEN_VALIDATE,
+      [Telemetry.Tag.MODULE]: Telemetry.Module.RESOLVER,
+    },
+  };
+
   let user = null;
 
   try {
@@ -28,19 +40,14 @@ const resolver = async (_parent, { input }, context) => {
   } catch (error) {
     log.error(InternalErrorMessage.USER_FETCH_FAILED, {
       error,
-      query: QUERY_NAME,
+      ...telemetry,
     });
 
     throw new DatabaseError();
   }
 
   if (!user) {
-    const errorData = {
-      input,
-      query: QUERY_NAME,
-    };
-
-    log.error(InternalErrorMessage.USER_FETCH_FAILED, errorData);
+    log.error(InternalErrorMessage.USER_FETCH_FAILED, telemetry);
 
     return null;
   }
@@ -51,6 +58,7 @@ const resolver = async (_parent, { input }, context) => {
   if (!passwordResetTokenExpiration) {
     log.error(InternalErrorMessage.AUTH_PASSWORD_RESET_TOKEN_NOT_FOUND, {
       token: passwordResetToken,
+      ...telemetry,
     });
 
     return null;
@@ -63,6 +71,7 @@ const resolver = async (_parent, { input }, context) => {
     log.error(InternalErrorMessage.AUTH_PASSWORD_RESET_TOKEN_EXPIRED, {
       token: passwordResetToken,
       when: formatDistance(expiration, now),
+      ...telemetry,
     });
 
     return null;

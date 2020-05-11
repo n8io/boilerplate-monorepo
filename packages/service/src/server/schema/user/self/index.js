@@ -9,6 +9,7 @@ import {
   UserSelfNotFoundError,
 } from 'types/customError';
 import { InternalErrorMessage } from 'types/errorMessage';
+import { Telemetry } from 'types/telemetry';
 
 const QUERY_NAME = 'userSelf';
 
@@ -19,6 +20,17 @@ const resolver = async (_parent, _args, context) => {
   const { loaders, user } = context;
   const { user: userLoader } = loaders;
 
+  debugLog(`👾 ${QUERY_NAME}`);
+
+  const telemetry = {
+    query: QUERY_NAME,
+    ...Telemetry.contextToLog(context),
+    tags: {
+      [Telemetry.Tag.COMPONENT]: Telemetry.Component.USER_SELF,
+      [Telemetry.Tag.MODULE]: Telemetry.Module.RESOLVER,
+    },
+  };
+
   let userSelf = null;
 
   try {
@@ -26,29 +38,22 @@ const resolver = async (_parent, _args, context) => {
   } catch (error) {
     log.error(InternalErrorMessage.USER_SELF_FETCH_FAILED, {
       error,
-      query: QUERY_NAME,
+      ...telemetry,
     });
 
     throw new DatabaseError();
   }
 
   if (!userSelf) {
-    const errorData = {
-      id: user.id,
-      query: QUERY_NAME,
-      username: user.username,
-    };
+    log.error(InternalErrorMessage.USER_SELF_FETCH_FAILED, telemetry);
 
-    log.error(InternalErrorMessage.USER_SELF_FETCH_FAILED, errorData);
-
-    throw new UserSelfNotFoundError(errorData);
+    throw new UserSelfNotFoundError(telemetry);
   }
 
   if (!Auth.isUserActive(userSelf)) {
     log.error(InternalErrorMessage.USER_IS_DELETED, {
       deletedAt: userSelf.deletedAt,
-      query: QUERY_NAME,
-      username: userSelf.username,
+      ...telemetry,
     });
 
     throw new UserSelfDeletedError({

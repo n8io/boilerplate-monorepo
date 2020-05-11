@@ -1,6 +1,7 @@
-import { values } from './typedef';
+import { Enumeration, values } from './typedef';
 
 const ProcessEnvKeys = {
+  ...Enumeration,
   values,
 };
 

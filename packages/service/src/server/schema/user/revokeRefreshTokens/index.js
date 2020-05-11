@@ -4,6 +4,7 @@ import { log } from 'log';
 import { logFactory } from 'log/logFactory';
 import { DatabaseError, UserRevokeRefreshTokensError } from 'types/customError';
 import { InternalErrorMessage } from 'types/errorMessage';
+import { Telemetry } from 'types/telemetry';
 
 const MUTATION_NAME = 'userRevokeRefreshTokens';
 
@@ -13,10 +14,22 @@ const debugLog = logFactory({
 });
 
 // eslint-disable-next-line max-statements
-const resolver = async (_parent, { id }, context) => {
+const resolver = async (_parent, input, context) => {
+  const { id } = input;
+
   debugLog(`👾 ${MUTATION_NAME}`, id);
 
   const { db } = context;
+
+  const telemetry = {
+    input,
+    query: MUTATION_NAME,
+    ...Telemetry.contextToLog(context),
+    tags: {
+      [Telemetry.Tag.COMPONENT]: Telemetry.Component.USER_REVOKE_REFRESH_TOKENS,
+      [Telemetry.Tag.MODULE]: Telemetry.Module.RESOLVER,
+    },
+  };
 
   let wasUpdated = false;
 
@@ -25,18 +38,17 @@ const resolver = async (_parent, { id }, context) => {
   } catch (error) {
     log.error(InternalErrorMessage.USER_REVOKE_REFRESH_TOKENS_FAILED, {
       error,
-      id,
-      mutation: MUTATION_NAME,
+      ...telemetry,
     });
 
     throw new DatabaseError();
   }
 
   if (!wasUpdated) {
-    log.error(InternalErrorMessage.USER_REVOKE_REFRESH_TOKENS_FAILED, {
-      id,
-      mutation: MUTATION_NAME,
-    });
+    log.error(
+      InternalErrorMessage.USER_REVOKE_REFRESH_TOKENS_FAILED,
+      telemetry
+    );
 
     throw new UserRevokeRefreshTokensError();
   }
