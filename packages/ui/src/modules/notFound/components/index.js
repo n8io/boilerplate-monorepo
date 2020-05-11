@@ -18,7 +18,7 @@ const SECONDS_TO_REDIRECT = 15;
 const logNotFound = () => {
   if (!isTelemetryEnabled) return;
 
-  Sentry.withScope(scope => {
+  Sentry.withScope((scope) => {
     scope.setExtra('sessionUrl', LogRocket.sessionURL);
     scope.setExtra('pathname', prop('pathname', window.location));
     scope.setTag('search', prop('search', window.location));
@@ -28,6 +28,11 @@ const logNotFound = () => {
     );
   });
 };
+
+const Italicize = styled.span`
+  font-style: italic;
+  margin-left: 0.25rem;
+`;
 
 const NotFound = () => {
   const t = useTranslate({
@@ -59,11 +64,6 @@ const NotFound = () => {
   }, [history, location, tics, setTics]);
 
   const { pathname } = location;
-
-  const Italicize = styled.span`
-    font-style: italic;
-    margin-left: 0.25rem;
-  `;
 
   return (
     <Page>
