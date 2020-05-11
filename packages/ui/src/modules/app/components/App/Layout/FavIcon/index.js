@@ -1,13 +1,14 @@
 import { Color } from '@boilerplate-monorepo/common';
 import { DisplayMode, Site, Theme } from '@boilerplate-monorepo/ui-common';
 import React from 'react';
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import { useTheme } from 'shared/useTheme';
 
 const baseUrl =
   'https://ui-avatars.com/api/?rounded=true&bold=true&size=32&font-size=0.75';
-const hexColorToParam = hexColor => hexColor.replace('#', '').substring(0, 6);
-const themeToIconUrl = displayMode => {
+
+const hexColorToParam = (hexColor) => hexColor.replace('#', '').substring(0, 6);
+const themeToIconUrl = (displayMode) => {
   const url = new URL(baseUrl);
   const [firstInitial] = Site.name.split('');
 

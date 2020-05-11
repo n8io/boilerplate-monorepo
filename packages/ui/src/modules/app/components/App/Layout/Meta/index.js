@@ -1,7 +1,7 @@
 import { Color } from '@boilerplate-monorepo/common';
 import { config } from 'config';
 import React from 'react';
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 
 const Meta = () => {
   const { RELEASE_HASH, RELEASE_VERSION } = config;
