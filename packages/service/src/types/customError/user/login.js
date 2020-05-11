@@ -2,7 +2,7 @@ import { ApolloError } from 'apollo-server-express';
 import { InternalErrorMessage, PublicErrorMessage } from 'types/errorMessage';
 import { ErrorType } from 'types/errorType';
 
-const toSafeError = error => {
+const toSafeError = (error) => {
   delete error.extensions.deleted_at;
   delete error.extensions.username;
 
@@ -11,7 +11,7 @@ const toSafeError = error => {
   return error;
 };
 
-const appendSafeError = props => ({
+const appendSafeError = (props) => ({
   ...props,
   toSafeError,
 });

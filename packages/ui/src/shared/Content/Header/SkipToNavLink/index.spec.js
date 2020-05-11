@@ -8,7 +8,7 @@ describe('<SkipToNavLink/>', () => {
     children: text,
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<SkipToNavLink {...defaultProps} {...overrides} />);
 
   test('renders children', () => {

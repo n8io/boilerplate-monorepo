@@ -64,14 +64,8 @@ const validationSchemaPassword = object().shape({
 
 const validationSchemaSettings = object().shape({
   email: Email.validationSchema,
-  familyName: string()
-    .trim()
-    .required()
-    .limits(Limits.familyName),
-  givenName: string()
-    .trim()
-    .required()
-    .limits(Limits.givenName),
+  familyName: string().trim().required().limits(Limits.familyName),
+  givenName: string().trim().required().limits(Limits.givenName),
 });
 
 const validationSchemaServer = validationSchemaPassword
@@ -93,9 +87,7 @@ const validationSchema = validationSchemaServer
   .concat(validationSchemaConfirmPassword)
   .concat(
     object().shape({
-      captchaToken: string()
-        .trim()
-        .required(),
+      captchaToken: string().trim().required(),
     })
   );
 

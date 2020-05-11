@@ -2,10 +2,10 @@
 
 exports[`<Loader/> renders children 1`] = `
 <div
-  class="Loader__Container-sc-16qesyr-0 gAhqLO"
+  class="Loader__Container-sc-16qesyr-0 cvHXlq"
 >
   <div
-    class="Loader__Ring-sc-16qesyr-1 cwrdQy"
+    class="Loader__Ring-sc-16qesyr-1 hivRDy"
     size="24"
   >
     <div />
@@ -15,7 +15,7 @@ exports[`<Loader/> renders children 1`] = `
   </div>
   <div
     aria-live="polite"
-    class="ScreenReaderNotification__Container-jzwqtd-0 huOtLM"
+    class="ScreenReaderNotification__Container-jzwqtd-0 eudjnp"
   >
     t(loadingScreenReader)
   </div>

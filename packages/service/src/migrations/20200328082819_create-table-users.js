@@ -6,7 +6,7 @@ const fullyQualifiedEnumName = toEnumName(tableName, 'role');
 const fullyQualifiedTableName = toTableName(tableName);
 const primaryKeyName = toPrimaryIndexName(tableName, 'id');
 
-const up = knex =>
+const up = (knex) =>
   knex.raw(`
     CREATE TABLE ${fullyQualifiedTableName} (
       id varchar NOT NULL,
@@ -28,6 +28,6 @@ const up = knex =>
   );
 `);
 
-const down = knex => knex.raw(`DROP TABLE ${fullyQualifiedTableName};`);
+const down = (knex) => knex.raw(`DROP TABLE ${fullyQualifiedTableName};`);
 
 export { down, up };

@@ -78,10 +78,7 @@ describe('user self query', () => {
     });
 
     describe('and user not found', () => {
-      const load = jest
-        .fn()
-        .mockName('loader.user')
-        .mockResolvedValue(null);
+      const load = jest.fn().mockName('loader.user').mockResolvedValue(null);
 
       const userLoader = { load };
       const loaders = { user: userLoader };

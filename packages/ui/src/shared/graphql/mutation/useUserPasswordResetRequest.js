@@ -12,7 +12,7 @@ const MUTATION_USER_PASSWORD_RESET_REQUEST = gql`
  * @param id - ID!
  * @param notificationMethod - UserRecoveryNotificationMethod!
  */
-const useUserPasswordResetRequest = options =>
+const useUserPasswordResetRequest = (options) =>
   useMutation(MUTATION_USER_PASSWORD_RESET_REQUEST, options);
 
 export { useUserPasswordResetRequest };

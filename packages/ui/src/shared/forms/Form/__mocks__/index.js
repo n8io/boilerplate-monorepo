@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Form = props => <x-Form {...props} />;
+const Form = (props) => <x-Form {...props} />;
 
 const Mode = {
   ON_BLUR: 'onBlur',

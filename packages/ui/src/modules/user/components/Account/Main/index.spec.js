@@ -8,7 +8,7 @@ jest.mock('shared/Link');
 describe('<Main/>', () => {
   const defaultProps = {};
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<Main {...defaultProps} {...overrides} />);
 
   test('renders properly', () => {

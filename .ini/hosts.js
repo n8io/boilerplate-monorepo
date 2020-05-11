@@ -44,7 +44,7 @@ const readHosts = () =>
     process.exit(1);
   }
 
-  hostile.set(HOST, ALIAS, err => {
+  hostile.set(HOST, ALIAS, (err) => {
     if (err) {
       return console.log(chalk.red('🛑 Failed to update your hosts file', err));
     }

@@ -25,7 +25,7 @@ const Form = () => {
 
   const { reset } = formProps;
 
-  const onSubmit = async input => {
+  const onSubmit = async (input) => {
     setIsSuccessful(false);
 
     await mutate({

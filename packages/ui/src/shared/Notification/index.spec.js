@@ -20,7 +20,7 @@ describe('<Notification/>', () => {
     type: LogLevel.INFO,
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<Notification {...defaultProps} {...overrides} />);
 
   test('renders an error', () => {

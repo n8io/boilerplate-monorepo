@@ -14,6 +14,6 @@ export const QUERY_USER_SELF = gql`
   }
 `;
 
-const useUserSelf = options => useQuery(QUERY_USER_SELF, options);
+const useUserSelf = (options) => useQuery(QUERY_USER_SELF, options);
 
 export { useUserSelf };

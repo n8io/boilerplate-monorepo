@@ -6,7 +6,7 @@ const UNAUTHORIZED = 'UNAUTHORIZED';
 const link = new RetryLink({
   attempts: {
     max: 3,
-    retryIf: error => Boolean(error) && error.statusCode !== UNAUTHORIZED,
+    retryIf: (error) => Boolean(error) && error.statusCode !== UNAUTHORIZED,
   },
   delay: {
     initial: Time.seconds(1),

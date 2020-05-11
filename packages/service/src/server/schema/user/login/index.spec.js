@@ -47,10 +47,7 @@ describe('user login mutation', () => {
   });
 
   describe('when user not found', () => {
-    const readRaw = jest
-      .fn()
-      .mockName('readRaw')
-      .mockResolvedValue(null);
+    const readRaw = jest.fn().mockName('readRaw').mockResolvedValue(null);
 
     const db = { user: { readRaw } };
 
@@ -109,10 +106,7 @@ describe('user login mutation', () => {
           const passwordHash = await Password.hash(`${password}_INVALID`);
           const user = { ...User.apiExample(), passwordHash };
 
-          const readRaw = jest
-            .fn()
-            .mockName('readRaw')
-            .mockResolvedValue(user);
+          const readRaw = jest.fn().mockName('readRaw').mockResolvedValue(user);
 
           const db = { user: { readRaw } };
 
@@ -145,10 +139,7 @@ describe('user login mutation', () => {
 
           user = { ...User.apiExample(), passwordHash };
 
-          const readRaw = jest
-            .fn()
-            .mockName('readRaw')
-            .mockResolvedValue(user);
+          const readRaw = jest.fn().mockName('readRaw').mockResolvedValue(user);
 
           const db = { user: { readRaw } };
 
@@ -159,7 +150,7 @@ describe('user login mutation', () => {
           writeRefreshToken = td.replace(Auth, 'writeRefreshToken');
         });
 
-        // eslint-disable-next-line max-nested-callbacks
+        // eslint-disable-next-line max-nested-callbacks,jest/expect-expect
         test(`writes the refresh token`, async () => {
           const input = { password, username };
           const variables = { input };

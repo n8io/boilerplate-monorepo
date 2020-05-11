@@ -16,6 +16,7 @@ const MUTATION_USER_REGISTER = gql`
  * @param role - String [Defaults to &#34;USER&#34;]
  * @param username - String!
  */
-const useUserRegister = options => useMutation(MUTATION_USER_REGISTER, options);
+const useUserRegister = (options) =>
+  useMutation(MUTATION_USER_REGISTER, options);
 
 export { useUserRegister };

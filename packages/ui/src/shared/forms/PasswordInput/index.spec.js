@@ -10,7 +10,7 @@ describe('<PasswordInput/>', () => {
     name: 'NAME',
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<PasswordInput {...defaultProps} {...overrides} />);
 
   test('renders properly', () => {

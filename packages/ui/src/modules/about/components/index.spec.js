@@ -8,7 +8,7 @@ jest.mock('shared/Page');
 describe('<About/>', () => {
   const defaultProps = {};
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<About {...defaultProps} {...overrides} />);
 
   test('renders about page', () => {

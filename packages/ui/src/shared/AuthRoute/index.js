@@ -3,7 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 import { useAuth } from 'shared/useAuth';
 import { Route as RouteType } from 'types/route';
 
-const AuthRoute = props => {
+const AuthRoute = (props) => {
   const { isAuthenticated } = useAuth();
 
   if (!isAuthenticated) {

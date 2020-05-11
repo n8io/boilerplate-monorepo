@@ -2,18 +2,18 @@
 
 exports[`<Input/> renders properly 1`] = `
 <label
-  class="Input__StyledLabel-sc-99sv4v-0 cuislh"
+  class="Input__StyledLabel-sc-99sv4v-0 hBPZlp"
   for="NAME"
 >
   <div
-    class="Input__StyledInputLabel-sc-99sv4v-1 hsohiX"
+    class="Input__StyledInputLabel-sc-99sv4v-1 kSRxZn"
   >
     LABEL
   </div>
   <input
     aria-invalid="false"
     aria-label="LABEL"
-    class="Input__StyledInput-sc-99sv4v-2 bqnvIx"
+    class="Input__StyledInput-sc-99sv4v-2 gkMNzu"
     id="NAME"
     name="NAME"
     placeholder="LABEL"

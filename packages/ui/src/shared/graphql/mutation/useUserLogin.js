@@ -12,6 +12,6 @@ const MUTATION_USER_LOGIN = gql`
  * @param username - String!
  * @param password - String!
  */
-const useUserLogin = options => useMutation(MUTATION_USER_LOGIN, options);
+const useUserLogin = (options) => useMutation(MUTATION_USER_LOGIN, options);
 
 export { useUserLogin };

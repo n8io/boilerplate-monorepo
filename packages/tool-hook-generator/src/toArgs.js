@@ -5,7 +5,7 @@ const tabs = require('./tabs');
 
 const toArg = ({ name }) => `${name}: $${name}`;
 
-const toFormattedArgs = args => {
+const toFormattedArgs = (args) => {
   if (R.isEmpty(args)) return '';
 
   const inputLines = R.map(toArg, args);
@@ -16,7 +16,7 @@ const toFormattedArgs = args => {
   }
 
   const parameters = R.pipe(
-    R.map(arg => `${tabs(3)}${arg}`),
+    R.map((arg) => `${tabs(3)}${arg}`),
     R.join(`,\n`)
   )(inputLines);
 
@@ -25,7 +25,7 @@ const toFormattedArgs = args => {
   return R.join('\n', lines);
 };
 
-const toArgs = name => {
+const toArgs = (name) => {
   const query = findQuery(name) || findMutation(name);
 
   return toFormattedArgs(query.args);

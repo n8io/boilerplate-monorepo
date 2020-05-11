@@ -1,1 +1,1 @@
-export const toPixels = breakpoint => `${breakpoint}px`;
+export const toPixels = (breakpoint) => `${breakpoint}px`;

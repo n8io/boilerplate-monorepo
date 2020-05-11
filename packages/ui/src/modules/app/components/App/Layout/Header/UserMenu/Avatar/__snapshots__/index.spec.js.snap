@@ -3,20 +3,20 @@
 exports[`<Avatar/> renders properly 1`] = `
 <x-menudisclosure
   aria-label="user menu"
-  classname="Avatar__StyledDisclosure-sc-11puhtb-1 hhBpUh"
+  classname="Avatar__StyledDisclosure-sc-11puhtb-1 icsQwQ"
   context="LINK"
   size="SMALL"
 >
   <div
-    class="Avatar__Container-sc-11puhtb-0 kPLMSj"
+    class="Avatar__Container-sc-11puhtb-0 cksqSQ"
   >
     <x-muted
-      classname="Avatar__StyledMuted-sc-11puhtb-5 bIRaWd"
+      classname="Avatar__StyledMuted-sc-11puhtb-5 koBcvM"
       data-testid="loader"
     />
     <img
       alt="t(avatarForEmail, {\\"email\\":\\"EMAIL\\"})"
-      class="Avatar__Image-sc-11puhtb-4 hLgQHZ"
+      class="Avatar__Image-sc-11puhtb-4 bdPfOH"
       src="//www.gravatar.com/avatar/0c83f57c786a0b4a39efab23731c7ebc?d=identicon&r=G&s=30"
     />
   </div>

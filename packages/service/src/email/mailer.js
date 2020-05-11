@@ -9,7 +9,7 @@ const { SMTP_CONNECTION, isTest } = config;
 const make = () => {
   if (!SMTP_CONNECTION) {
     return {
-      sendMail: props =>
+      sendMail: (props) =>
         log.warn(
           'SMTP_CONNECTION was not set so emails will not be sent',
           props
@@ -19,7 +19,7 @@ const make = () => {
 
   if (isTest) {
     return {
-      sendMail: props =>
+      sendMail: (props) =>
         log.warn(
           'Currently running in a test environment. Emails will not be sent',
           props

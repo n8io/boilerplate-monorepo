@@ -10,7 +10,7 @@ describe('<ThemeToggle/>', () => {
     onToggle: jest.fn().mockName('onToggle'),
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<ThemeToggle {...defaultProps} {...overrides} />);
 
   describe('when light mode', () => {

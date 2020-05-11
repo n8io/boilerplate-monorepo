@@ -13,7 +13,7 @@ const MUTATION_USER_PASSWORD_RESET = gql`
  * @param passwordNew - String!
  * @param token - String!
  */
-const useUserPasswordReset = options =>
+const useUserPasswordReset = (options) =>
   useMutation(MUTATION_USER_PASSWORD_RESET, options);
 
 export { useUserPasswordReset };

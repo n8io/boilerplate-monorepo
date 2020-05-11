@@ -5,7 +5,7 @@ import { Provider } from 'types/provider';
 import { AuthLink } from '.';
 
 jest.mock('../NavLink', () => ({
-  NavLink: props => <x-NavLink {...props} />,
+  NavLink: (props) => <x-NavLink {...props} />,
 }));
 
 describe('<AuthLink/>', () => {
@@ -21,7 +21,7 @@ describe('<AuthLink/>', () => {
     }),
   };
 
-  const renderComponent = authContext => overrides => {
+  const renderComponent = (authContext) => (overrides) => {
     // eslint-disable-next-line react/prop-types
     const wrapper = ({ children }) => (
       <Provider.AUTH value={authContext}>{children}</Provider.AUTH>

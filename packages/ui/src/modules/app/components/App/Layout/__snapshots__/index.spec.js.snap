@@ -2,7 +2,7 @@
 
 exports[`<Layout/> when on larger than mobile renders properly 1`] = `
 <div
-  class="Layout__Container-e3nv7w-0 jLGuRX"
+  class="Layout__Container-e3nv7w-0 jhXflx"
 >
   <x-meta />
   <x-favicon />
@@ -17,7 +17,7 @@ exports[`<Layout/> when on larger than mobile renders properly 1`] = `
 
 exports[`<Layout/> when on mobile renders properly 1`] = `
 <div
-  class="Layout__Container-e3nv7w-0 jLGuRX"
+  class="Layout__Container-e3nv7w-0 jhXflx"
 >
   <x-meta />
   <x-favicon />

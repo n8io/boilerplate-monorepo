@@ -2,7 +2,7 @@
 
 exports[`<Content/> renders children 1`] = `
 <div
-  class="Content__Container-sc-1oenkpn-0 hrIdWm"
+  class="Content__Container-sc-1oenkpn-0 bRuPii"
 >
   CHILDREN
 </div>

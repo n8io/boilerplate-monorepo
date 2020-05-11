@@ -3,7 +3,7 @@
 exports[`<NavLink/> renders properly 1`] = `
 <a
   aria-current="page"
-  class="NavLink__StyledNavLink-sc-1oywt1c-0 jlceAj active"
+  class="NavLink__StyledNavLink-sc-1oywt1c-0 iPgyhJ active"
   href="/"
   title="t(dashboard)"
 >

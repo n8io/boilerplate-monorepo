@@ -10,7 +10,7 @@ describe('<TextInput/>', () => {
     name: 'NAME',
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<TextInput {...defaultProps} {...overrides} />);
 
   test('renders properly', () => {

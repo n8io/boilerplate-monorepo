@@ -9,7 +9,7 @@ describe('<SkipLink/>', () => {
     text: 'TEXT',
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<SkipLink {...defaultProps} {...overrides} />);
 
   test('renders children', () => {

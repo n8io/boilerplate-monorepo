@@ -1,6 +1,7 @@
 {
   "baseUrl": "https://local.host:3000",
   "pluginsFile": false,
+  "nodeVersion": "system",
   "supportFile": false,
   "video": false
 }

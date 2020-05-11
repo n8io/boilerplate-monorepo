@@ -2,11 +2,11 @@
 
 exports[`<Footer/> renders properly 1`] = `
 <footer
-  class="Footer__Container-sc-1tc55w2-0 hxLVSh"
+  class="Footer__Container-sc-1tc55w2-0 cuuZqz"
   role="contentinfo"
 >
   <div
-    class="EllipsiedText-o83sq0-0 bVGnli"
+    class="EllipsiedText-o83sq0-0 SmucZ"
   >
     t(footer, {"copyrightYear":2019,"name":"Acme Inc"})
   </div>
@@ -14,7 +14,7 @@ exports[`<Footer/> renders properly 1`] = `
     <x-child />
   </div>
   <span
-    class="Muted__Container-sc-1r87izh-0 giApBU Footer__StyledMuted-sc-1tc55w2-1 doAUGd"
+    class="Muted__Container-sc-1r87izh-0 kSHSWL Footer__StyledMuted-sc-1tc55w2-1 gyNezc"
   >
     v
     1.0.1

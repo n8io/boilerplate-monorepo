@@ -3,7 +3,7 @@ import { render } from 'testHelpers';
 import { Breadcrumbs } from '.';
 
 jest.mock('./Breadcrumb', () => ({
-  Breadcrumb: props => <x-Breadcrumb {...props} />,
+  Breadcrumb: (props) => <x-Breadcrumb {...props} />,
 }));
 
 describe('<Breadcrumbs/>', () => {
@@ -12,7 +12,7 @@ describe('<Breadcrumbs/>', () => {
     children: <x-child>{text}</x-child>,
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<Breadcrumbs {...defaultProps} {...overrides} />);
 
   test('renders properly', () => {

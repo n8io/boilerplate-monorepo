@@ -65,7 +65,7 @@ describe('user transforms', () => {
 
       const actual = User.dbToApi(db);
 
-      UnsafeProps.forEach(unsafeProp => {
+      UnsafeProps.forEach((unsafeProp) => {
         expect(actual).not.toHaveProperty(unsafeProp);
       });
     });

@@ -5,7 +5,7 @@ import { SkipToContentLink } from '.';
 describe('<SkipToContentLink/>', () => {
   const defaultProps = {};
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<SkipToContentLink {...defaultProps} {...overrides} />);
 
   test('renders properly', () => {

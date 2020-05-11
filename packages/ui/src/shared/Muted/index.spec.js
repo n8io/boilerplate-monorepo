@@ -7,7 +7,7 @@ describe('<Muted/>', () => {
     children: 'CHILDREN',
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<Muted {...defaultProps} {...overrides} />);
 
   test('renders children', () => {

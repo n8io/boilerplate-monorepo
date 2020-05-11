@@ -2,7 +2,7 @@
 
 exports[`<Breadcrumbs/> renders properly 1`] = `
 <ul
-  class="Breadcrumbs__Container-sc-10mj4cz-0 liBMwT"
+  class="Breadcrumbs__Container-sc-10mj4cz-0 fcPwJS"
 >
   <x-breadcrumb
     exact="true"

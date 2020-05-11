@@ -17,7 +17,7 @@ const useLocation = () => ({
   },
 });
 
-const Route = props => <x-Route {...props} />;
-const Switch = props => <x-Switch {...props} />;
+const Route = (props) => <x-Route {...props} />;
+const Switch = (props) => <x-Switch {...props} />;
 
 export { Route, Switch, useHistory, useLocation };

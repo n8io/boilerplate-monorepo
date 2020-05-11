@@ -3,7 +3,7 @@ const schema = require('../../../.graphql/schema.json');
 const findMutation = require('./findMutation');
 const findQuery = require('./findQuery');
 
-const toSimpleObject = typename => {
+const toSimpleObject = (typename) => {
   const type = R.pipe(
     R.path(['__schema', 'types']),
     R.find(R.propEq('name', typename))
@@ -38,7 +38,7 @@ const toSimpleObject = typename => {
   return [` * ${typename}`, ...fields].join('\n');
 };
 
-const toFormattedInputInfo = args => {
+const toFormattedInputInfo = (args) => {
   if (R.isEmpty(args)) return '';
 
   const isInputObject = R.pathEq(['type', 'ofType', 'kind'], 'INPUT_OBJECT');
@@ -58,7 +58,7 @@ const toFormattedInputInfo = args => {
   return ['\n/**', typeInfos, ' */'].join('\n');
 };
 
-const toInputInfo = name => {
+const toInputInfo = (name) => {
   const query = findQuery(name) || findMutation(name);
 
   return toFormattedInputInfo(query.args);

@@ -2,7 +2,7 @@
 
 exports[`<Navigation/> renders properly 1`] = `
 <x-button
-  classname="Navigation__HamburgerButton-ya7uk0-3 kHjTzL"
+  classname="Navigation__HamburgerButton-ya7uk0-3 knhjBo"
   context="LINK"
   label="t(openNavigation)"
 >

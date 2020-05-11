@@ -14,7 +14,7 @@ describe('<Form/>', () => {
     user: UserRecovery.uiExample(),
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<Form {...defaultProps} {...overrides} />);
 
   beforeEach(() => {

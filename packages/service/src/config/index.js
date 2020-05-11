@@ -54,7 +54,7 @@ const config = mergeRight(defaults, raw);
 
 const normalize = pipe(prop('NODE_ENV'), defaultTo('development'), toLower);
 
-const isTest = env =>
+const isTest = (env) =>
   includes(env, ['ci', 'jest', 'test']) ||
   (typeof describe !== 'undefined' && typeof test !== 'undefined');
 
@@ -76,7 +76,7 @@ const isSqlDebug = always(
   pipe(propOr('', ProcessEnvKeys.DEBUG), includes('sql'))
 )(config);
 
-const isUndefined = value => typeof value === 'undefined';
+const isUndefined = (value) => typeof value === 'undefined';
 const isUndefinedOrEmpty = either(isUndefined, isEmpty);
 const isNotDevAndEmpty = both(complement(isDev), isUndefinedOrEmpty);
 

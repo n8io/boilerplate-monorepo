@@ -8,13 +8,13 @@ jest.mock('shared/Page');
 jest.mock('shared/useAuth');
 
 jest.mock('./Form', () => ({
-  Form: props => <x-Form {...props} />,
+  Form: (props) => <x-Form {...props} />,
 }));
 
 describe('<Security/>', () => {
   const defaultProps = {};
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<Security {...defaultProps} {...overrides} />);
 
   beforeEach(() => {

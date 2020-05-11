@@ -95,7 +95,7 @@ const StyledFancyLoader = animated(styled.div`
   position: relative;
 `);
 
-const FancyLoader = fadeStyles => (
+const FancyLoader = (fadeStyles) => (
   <StyledFancyLoader style={fadeStyles}>
     <Loader />
   </StyledFancyLoader>

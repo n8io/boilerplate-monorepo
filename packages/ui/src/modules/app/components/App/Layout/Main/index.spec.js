@@ -3,13 +3,13 @@ import { render } from 'testHelpers';
 import { Main } from '.';
 
 jest.mock('../../Router', () => ({
-  Router: props => <x-Router {...props} />,
+  Router: (props) => <x-Router {...props} />,
 }));
 
 describe('<Main/>', () => {
   const defaultProps = {};
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<Main {...defaultProps} {...overrides} />);
 
   test('renders properly', () => {

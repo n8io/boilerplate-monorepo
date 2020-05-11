@@ -3,7 +3,7 @@
 exports[`<AuthLink/> renders properly 1`] = `
 <div>
   <x-navlink
-    classname="AuthLink__StyledNavLink-gt2cja-0 kSEZFP"
+    classname="AuthLink__StyledNavLink-gt2cja-0 VDgZX"
     route="[object Object]"
   />
 </div>

@@ -10,7 +10,7 @@ describe('<EmailInput/>', () => {
     name: 'NAME',
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<EmailInput {...defaultProps} {...overrides} />);
 
   test('renders properly', () => {

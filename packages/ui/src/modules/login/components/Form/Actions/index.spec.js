@@ -12,7 +12,7 @@ describe('<Actions/>', () => {
     isAuthenticated: false,
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<Actions {...defaultProps} {...overrides} />);
 
   beforeEach(() => {

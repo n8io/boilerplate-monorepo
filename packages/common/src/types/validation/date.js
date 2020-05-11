@@ -1,7 +1,7 @@
 import { date as YupDateSchema } from 'yup';
 import { ErrorKeys } from './errorKeys';
 
-export const transform = value => Date.parse(value) && new Date(value);
+export const transform = (value) => Date.parse(value) && new Date(value);
 
 class DateSchema extends YupDateSchema {
   _typeCheck(date) {

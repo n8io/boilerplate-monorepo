@@ -48,10 +48,7 @@ describe('user password reset mutation', () => {
   });
 
   describe('when user not found', () => {
-    const readRaw = jest
-      .fn()
-      .mockName('readRaw')
-      .mockResolvedValue(null);
+    const readRaw = jest.fn().mockName('readRaw').mockResolvedValue(null);
 
     const db = { user: { readRaw } };
 
@@ -113,10 +110,7 @@ describe('user password reset mutation', () => {
             passwordResetToken: passwordResetTokenInvalid,
           };
 
-          const readRaw = jest
-            .fn()
-            .mockName('readRaw')
-            .mockResolvedValue(user);
+          const readRaw = jest.fn().mockName('readRaw').mockResolvedValue(user);
 
           const db = { user: { readRaw } };
 
@@ -145,10 +139,7 @@ describe('user password reset mutation', () => {
             passwordResetTokenExpiration,
           };
 
-          const readRaw = jest
-            .fn()
-            .mockName('readRaw')
-            .mockResolvedValue(user);
+          const readRaw = jest.fn().mockName('readRaw').mockResolvedValue(user);
 
           const db = { user: { readRaw } };
 
@@ -181,10 +172,7 @@ describe('user password reset mutation', () => {
         let save = null;
 
         beforeEach(() => {
-          const readRaw = jest
-            .fn()
-            .mockName('readRaw')
-            .mockResolvedValue(user);
+          const readRaw = jest.fn().mockName('readRaw').mockResolvedValue(user);
 
           hash = td.replace(Password, 'hash');
           save = jest.fn().mockName('save');

@@ -12,12 +12,8 @@ const Limits = {
 };
 
 const validationSchema = object().shape({
-  password: string()
-    .trim()
-    .required(),
-  username: string()
-    .trim()
-    .required(),
+  password: string().trim().required(),
+  username: string().trim().required(),
 });
 
 const isValid = validationSchema.isValid.bind(validationSchema);

@@ -7,18 +7,18 @@ jest.mock('config', () => ({
 }));
 
 jest.mock('../HiddenInput', () => ({
-  HiddenInput: props => <x-HiddenInput {...props} />,
+  HiddenInput: (props) => <x-HiddenInput {...props} />,
 }));
 
 jest.mock('@hcaptcha/react-hcaptcha', () => ({
   __esModule: true,
-  default: props => <x-HCaptcha {...props} />,
+  default: (props) => <x-HCaptcha {...props} />,
 }));
 
 describe('<Captcha/>', () => {
   const defaultProps = {};
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<Captcha {...defaultProps} {...overrides} />);
 
   test('renders properly', () => {

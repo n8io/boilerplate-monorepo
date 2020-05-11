@@ -10,7 +10,7 @@ jest.mock('shared/forms/SubmitButton');
 describe('<Actions/>', () => {
   const defaultProps = {};
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<Actions {...defaultProps} {...overrides} />);
 
   beforeEach(() => {

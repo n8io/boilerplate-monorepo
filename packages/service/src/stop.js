@@ -7,8 +7,8 @@ const debugLog = logFactory({
 
 let isShuttingDown = false;
 
-const shutdownCache = cache =>
-  new Promise(resolve => {
+const shutdownCache = (cache) =>
+  new Promise((resolve) => {
     debugLog(`🔌 Cache connection closing...`);
     cache && cache.client && cache.client.quit();
 
@@ -19,7 +19,7 @@ const shutdownCache = cache =>
     // We don't care if it bombs out
   });
 
-const shutdownDatabase = connection => {
+const shutdownDatabase = (connection) => {
   if (!connection) return;
 
   debugLog(`🔌 Database connection closing...`);
@@ -50,7 +50,7 @@ const stop = async ({ cache, connection }) => {
 const addListeners = ({ cache, connection }) => {
   const stopSignals = ['SIGHUP', 'SIGINT', 'SIGTERM'];
 
-  stopSignals.map(signal =>
+  stopSignals.map((signal) =>
     process.on(signal, () => stop({ cache, connection }))
   );
 };

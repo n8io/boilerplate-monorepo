@@ -7,7 +7,7 @@ class ArraySchema extends YupArraySchema {
   }
 
   requiredAllowEmpty(message = ErrorKeys.REQUIRED) {
-    return this.test('field is required', message, value =>
+    return this.test('field is required', message, (value) =>
       Array.isArray(value)
     );
   }

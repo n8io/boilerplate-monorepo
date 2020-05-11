@@ -7,6 +7,6 @@ const MUTATION_USER_LOGOUT = gql`
   }
 `;
 
-const useUserLogout = options => useMutation(MUTATION_USER_LOGOUT, options);
+const useUserLogout = (options) => useMutation(MUTATION_USER_LOGOUT, options);
 
 export { useUserLogout };

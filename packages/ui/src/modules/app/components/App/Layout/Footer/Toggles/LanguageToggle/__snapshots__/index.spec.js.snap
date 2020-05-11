@@ -3,7 +3,7 @@
 exports[`<LanguageToggle/> renders properly 1`] = `
 <div>
   <x-menudisclosure
-    classname="LanguageToggle__StyledDisclosure-sc-1xtjogu-0 fWPcoK"
+    classname="LanguageToggle__StyledDisclosure-sc-1xtjogu-0 jYuXFh"
     context="PRIMARY"
     data-testid="language"
     size="SMALL"
@@ -23,16 +23,16 @@ exports[`<LanguageToggle/> renders properly 1`] = `
     </svg>
   </x-menudisclosure>
   <x-menu
-    classname="LanguageToggle__StyledMenu-sc-1xtjogu-1 eeceLF"
+    classname="LanguageToggle__StyledMenu-sc-1xtjogu-1 fJMFWJ"
   >
     <x-menuitem
-      classname="LanguageToggle__StyledMenuItem-sc-1xtjogu-2 bcbJOt"
+      classname="LanguageToggle__StyledMenuItem-sc-1xtjogu-2 cPBaHn"
       data-testid="en"
     >
       English
     </x-menuitem>
     <x-menuitem
-      classname="LanguageToggle__StyledMenuItem-sc-1xtjogu-2 bcbJOt"
+      classname="LanguageToggle__StyledMenuItem-sc-1xtjogu-2 cPBaHn"
       data-testid="dev"
     >
       𝐹åḱë

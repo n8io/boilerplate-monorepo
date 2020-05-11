@@ -7,7 +7,7 @@ describe('<EllipsiedText/>', () => {
     children: 'CHILDREN',
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<EllipsiedText {...defaultProps} {...overrides} />);
 
   test('renders children', () => {

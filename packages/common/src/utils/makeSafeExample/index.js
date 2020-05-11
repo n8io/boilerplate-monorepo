@@ -24,7 +24,7 @@ const validateKeys = (defaults, overrides) => {
 
 const unmergeableTypes = [Array, Date, Function];
 
-const isMergeable = obj => none(type => is(type, obj), unmergeableTypes);
+const isMergeable = (obj) => none((type) => is(type, obj), unmergeableTypes);
 
 const isPlainObject = both(is(Object), isMergeable);
 
@@ -37,7 +37,7 @@ const safeMerge = (defaults, overrides) => {
   return overrides;
 };
 
-const makeSafeExample = defaults => (overrides = {}) =>
+const makeSafeExample = (defaults) => (overrides = {}) =>
   safeMerge(is(Function, defaults) ? defaults(overrides) : defaults, overrides);
 
 export { ExampleError, makeSafeExample };

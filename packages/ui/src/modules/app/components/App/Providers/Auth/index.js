@@ -25,7 +25,7 @@ const Auth = ({ children }) => {
   });
 
   const updateAccessToken = useCallback(
-    token => {
+    (token) => {
       try {
         const payload = jwtDecode(token);
 

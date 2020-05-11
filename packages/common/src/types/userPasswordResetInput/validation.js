@@ -12,12 +12,8 @@ const Limits = {
 
 const validationSchemaServer = UserRegisterInput.validationSchemaPassword.concat(
   object().shape({
-    id: string()
-      .trim()
-      .required(),
-    token: string()
-      .trim()
-      .required(),
+    id: string().trim().required(),
+    token: string().trim().required(),
   })
 );
 

@@ -3,10 +3,13 @@ import { UnsafeProps } from 'types/unsafeProps';
 import { Utils } from 'utils';
 import { renameKeys } from 'utils/renameKeys';
 
-const appendName = when(both(prop('familyName'), prop('givenName')), props => ({
-  ...props,
-  name: `${props.familyName},${props.givenName}`,
-}));
+const appendName = when(
+  both(prop('familyName'), prop('givenName')),
+  (props) => ({
+    ...props,
+    name: `${props.familyName},${props.givenName}`,
+  })
+);
 
 const apiToDb = unless(
   Utils.isNullOrEmpty,

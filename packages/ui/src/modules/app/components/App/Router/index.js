@@ -6,7 +6,7 @@ import { Route } from './Route';
 
 const Router = () => (
   <Switch>
-    {routes.map(route => (
+    {routes.map((route) => (
       <Route key={route.name} {...route} />
     ))}
     <Route component={NotFound} />

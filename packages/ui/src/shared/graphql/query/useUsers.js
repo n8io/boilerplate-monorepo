@@ -22,7 +22,7 @@ export const QUERY_USERS = gql`
   }
 `;
 
-const useUsers = options =>
+const useUsers = (options) =>
   useQuery(QUERY_USERS, {
     fetchPolicy: FetchPolicy.NO_CACHE,
     ...options,

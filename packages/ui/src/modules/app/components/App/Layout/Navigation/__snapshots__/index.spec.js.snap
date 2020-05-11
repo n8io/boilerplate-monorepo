@@ -2,11 +2,11 @@
 
 exports[`<Navigation/> renders properly 1`] = `
 <nav
-  class="Navigation__Container-hlefot-0 cHtxzR"
+  class="Navigation__Container-hlefot-0 bFaFYF"
   role="navigation"
 >
   <div
-    class="Navigation__NavLinks-hlefot-1 jIMFKo"
+    class="Navigation__NavLinks-hlefot-1 blIUvd"
   >
     <x-navlink
       id="navigation"

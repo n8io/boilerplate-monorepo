@@ -5,11 +5,11 @@ const REDACTION_STRING = '**********';
 const isArray = is(Array);
 const isObject = is(Object);
 
-const redactPropDeep = propName => {
+const redactPropDeep = (propName) => {
   const isPropNameEq = equals(propName);
   const redactProp = assoc(propName, REDACTION_STRING);
 
-  const stripDeep = obj =>
+  const stripDeep = (obj) =>
     reduce(
       (acc, key) => {
         if (isPropNameEq(key)) {

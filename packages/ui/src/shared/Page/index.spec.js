@@ -7,7 +7,7 @@ describe('<Page/>', () => {
     children: <x-child />,
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<Page {...defaultProps} {...overrides} />);
 
   test('renders children', () => {

@@ -7,6 +7,6 @@ const MUTATION_USER_DELETE = gql`
   }
 `;
 
-const useUserDelete = options => useMutation(MUTATION_USER_DELETE, options);
+const useUserDelete = (options) => useMutation(MUTATION_USER_DELETE, options);
 
 export { useUserDelete };

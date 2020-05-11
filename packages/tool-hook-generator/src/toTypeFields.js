@@ -7,7 +7,7 @@ const tabs = require('./tabs');
 const alphasort = R.sort((a, b) => a.localeCompare(b));
 
 const toFormatted = (fields, level) => {
-  const lines = R.map(field => `${tabs(level * 3)}${field}`, fields);
+  const lines = R.map((field) => `${tabs(level * 3)}${field}`, fields);
 
   return ` {\n${R.join('\n', lines)}\n${tabs(level * 3 - 1)}}`;
 };

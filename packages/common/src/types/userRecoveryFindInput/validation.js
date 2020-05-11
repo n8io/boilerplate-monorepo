@@ -21,10 +21,7 @@ const Limits = {
 };
 
 const validationSchema = object().shape({
-  account: string()
-    .trim()
-    .limits(Limits.account)
-    .required(),
+  account: string().trim().limits(Limits.account).required(),
 });
 
 const isValid = validationSchema.isValid.bind(validationSchema);

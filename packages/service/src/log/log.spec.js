@@ -17,12 +17,12 @@ describe('log', () => {
   const fns = [LogLevel.ERROR, LogLevel.INFO, LogLevel.WARN].map(toLower);
 
   beforeEach(() => {
-    fns.forEach(name => {
+    fns.forEach((name) => {
       realFns[name] = console[name];
       mockFns[name] = jest.fn().mockName(`console.${name}`);
     });
 
-    fns.forEach(name => {
+    fns.forEach((name) => {
       console[name] = mockFns[name];
     });
 
@@ -30,7 +30,7 @@ describe('log', () => {
   });
 
   afterEach(() => {
-    fns.forEach(name => {
+    fns.forEach((name) => {
       console[name] = realFns[name];
     });
   });
@@ -120,7 +120,7 @@ describe('log', () => {
         const withScope = jest
           .fn()
           .mockName('withScope')
-          .mockImplementation(fn => fn(scope));
+          .mockImplementation((fn) => fn(scope));
 
         const Sentry = { captureException, captureMessage, withScope };
 
@@ -238,7 +238,7 @@ describe('log', () => {
         const withScope = jest
           .fn()
           .mockName('withScope')
-          .mockImplementation(fn => fn(scope));
+          .mockImplementation((fn) => fn(scope));
 
         const Sentry = { captureException, captureMessage, withScope };
 
@@ -286,7 +286,7 @@ describe('log', () => {
         const withScope = jest
           .fn()
           .mockName('withScope')
-          .mockImplementation(fn => fn(scope));
+          .mockImplementation((fn) => fn(scope));
 
         const Sentry = { captureException, captureMessage, withScope };
 

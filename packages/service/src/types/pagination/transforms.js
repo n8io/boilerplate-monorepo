@@ -9,11 +9,11 @@ const Encoding = {
 
 const defaultToNull = defaultTo(null);
 
-const base64Encode = unless(Utils.isNullOrEmpty, clearText =>
+const base64Encode = unless(Utils.isNullOrEmpty, (clearText) =>
   Buffer.from(clearText).toString(Encoding.BASE64)
 );
 
-const base64Decode = unless(Utils.isNullOrEmpty, encodedText =>
+const base64Decode = unless(Utils.isNullOrEmpty, (encodedText) =>
   Buffer.from(encodedText, Encoding.BASE64).toString(Encoding.ASCII)
 );
 
@@ -29,7 +29,7 @@ const nodesToPaginatedResults = (nodes, pagination, nodeToCursor) => {
   const transformCursor = pipe(defaultToNull, nodeToCursor, base64Encode);
 
   const edges = map(
-    node => ({
+    (node) => ({
       cursor: transformCursor(node),
       node,
     }),

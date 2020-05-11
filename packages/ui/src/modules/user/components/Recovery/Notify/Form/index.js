@@ -53,7 +53,7 @@ const Form = ({ user }) => {
     },
   ];
 
-  const onSubmit = async input => {
+  const onSubmit = async (input) => {
     setIsSuccessful(false);
     await mutate({ variables: { input } });
     setIsSuccessful(true);

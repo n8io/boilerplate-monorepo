@@ -136,7 +136,6 @@ const Avatar = () => {
       <StyledMenu
         {...menu}
         aria-label="user menu"
-        // eslint-disable-next-line jsx-a11y/aria-proptypes
         aria-modal={undefined} // Fixes a11y violation (invalid aria attribute on role="menu")
       >
         <StyledMenuItem

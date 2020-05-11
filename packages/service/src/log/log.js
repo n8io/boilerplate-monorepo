@@ -15,7 +15,7 @@ const prefix = {
   [LogLevel.WARN]: '⚠️',
 };
 
-const prependInfo = logLevel =>
+const prependInfo = (logLevel) =>
   `${new Date().toISOString()}: ${prefix[logLevel]}`;
 
 const printMessage = ({ data, logLevel, message }) => {
@@ -30,7 +30,7 @@ const printMessage = ({ data, logLevel, message }) => {
     const { user, ...rest } = safeData;
 
     isTelemetryEnabled &&
-      Telemetry.Sentry.withScope(scope => {
+      Telemetry.Sentry.withScope((scope) => {
         scope.setLevel(logLevel);
 
         tags && scope.setTags(tags);
@@ -50,7 +50,7 @@ const printMessage = ({ data, logLevel, message }) => {
   }
 
   isTelemetryEnabled &&
-    Telemetry.Sentry.withScope(scope => {
+    Telemetry.Sentry.withScope((scope) => {
       scope.setLevel(logLevel);
       scope.setTag(Telemetry.Tag.MODULE, Telemetry.Module.UNCATEGORIZED);
 

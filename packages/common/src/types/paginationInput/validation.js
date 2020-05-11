@@ -14,12 +14,8 @@ const Limits = {
 };
 
 const validationSchema = object().shape({
-  after: string()
-    .trim()
-    .nullable(),
-  first: number()
-    .limits(Limits.first)
-    .nullable(),
+  after: string().trim().nullable(),
+  first: number().limits(Limits.first).nullable(),
 });
 
 const isValid = validationSchema.isValid.bind(validationSchema);

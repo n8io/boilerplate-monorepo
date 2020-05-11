@@ -20,7 +20,7 @@ describe('users read', () => {
   });
 
   test('queries users', async () => {
-    tracker.on('query', query => {
+    tracker.on('query', (query) => {
       expect(query.sql).toEqual(
         `select \`${Db.Schema.MAIN}\`.\`${Db.Table.USERS}\`.* from \`${Db.Schema.MAIN}\`.\`${Db.Table.USERS}\` where \`id\` in (?, ?) and \`deleted_at\` is null or \`deleted_at\` > ?`
       );

@@ -34,13 +34,13 @@ const fetchAccessToken = () => {
     credentials: 'include',
     method: 'POST',
   })
-    .then(response => response.json())
+    .then((response) => response.json())
     .then(updateToken);
 };
 
-const promiseToObservable = promise => {
-  return new Observable(subscriber => {
-    promise.then(value => {
+const promiseToObservable = (promise) => {
+  return new Observable((subscriber) => {
+    promise.then((value) => {
       if (subscriber.closed) return;
 
       if (value) {

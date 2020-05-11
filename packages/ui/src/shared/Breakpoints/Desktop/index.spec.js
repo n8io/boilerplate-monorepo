@@ -13,7 +13,7 @@ describe('<Desktop/>', () => {
     children: text,
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<Desktop {...defaultProps} {...overrides}></Desktop>);
 
   let useMediaQuery = null;
@@ -22,6 +22,7 @@ describe('<Desktop/>', () => {
     useMediaQuery = td.replace(UseMediaQuery, 'useMediaQuery');
   });
 
+  // eslint-disable-next-line jest/expect-expect
   test('is using the proper media query', () => {
     renderComponent();
 

@@ -36,7 +36,7 @@ const count = (origQuery, Model, tableName, idAttribute, limit) => {
   const counter = Model.forge();
 
   return counter
-    .query(qb => {
+    .query((qb) => {
       Object.assign(qb, origQuery);
 
       // Remove grouping and ordering. Ordering is unnecessary
@@ -44,7 +44,7 @@ const count = (origQuery, Model, tableName, idAttribute, limit) => {
       // What we want instead is to use `DISTINCT`
       remove(
         qb._statements,
-        statement =>
+        (statement) =>
           notNeededQueries.indexOf(statement.type) > -1 ||
           statement.grouping === 'columns'
       );
@@ -52,7 +52,7 @@ const count = (origQuery, Model, tableName, idAttribute, limit) => {
       qb.countDistinct([`${tableName}.${idAttribute}`]);
     })
     .fetchAll()
-    .then(result => {
+    .then((result) => {
       const metadata = { limit };
 
       if (result && result.length === 1) {
@@ -77,24 +77,24 @@ const count = (origQuery, Model, tableName, idAttribute, limit) => {
     });
 };
 
-const isDesc = str => typeof str === 'string' && str.toLowerCase() === 'desc';
+const isDesc = (str) => typeof str === 'string' && str.toLowerCase() === 'desc';
 
-const reverseDirection = d => (isDesc(d) ? 'ASC' : 'DESC');
+const reverseDirection = (d) => (isDesc(d) ? 'ASC' : 'DESC');
 
-const reverseOrderBy = qb => {
+const reverseOrderBy = (qb) => {
   qb._statements
-    .filter(s => s.type === 'orderByBasic')
-    .forEach(s => {
+    .filter((s) => s.type === 'orderByBasic')
+    .forEach((s) => {
       s.direction = reverseDirection(s.direction);
     });
 };
 
-const reverseSign = sign => ({ '<': '>', '>': '<' }[sign]);
+const reverseSign = (sign) => ({ '<': '>', '>': '<' }[sign]);
 
 // eslint-disable-next-line max-statements
 const applyCursor = (qb, cursor, mainTableName, idAttribute) => {
   const isNotSorted =
-    qb._statements.filter(s => s.type === 'orderByBasic').length === 0;
+    qb._statements.filter((s) => s.type === 'orderByBasic').length === 0;
 
   // We implicitly sort by ID asc
   if (isNotSorted) {
@@ -102,7 +102,7 @@ const applyCursor = (qb, cursor, mainTableName, idAttribute) => {
   }
 
   const sortedColumns = qb._statements
-    .filter(s => s.type === 'orderByBasic')
+    .filter((s) => s.type === 'orderByBasic')
     // eslint-disable-next-line max-statements
     .map(({ direction: _direction, value }) => {
       const direction = isDesc(_direction) ? 'desc' : 'asc';
@@ -141,7 +141,7 @@ const applyCursor = (qb, cursor, mainTableName, idAttribute) => {
     if (cursorType === 'before') {
       sign = reverseSign(sign);
     }
-    const colRef = col => `${col.tableName}.${col.name}`;
+    const colRef = (col) => `${col.tableName}.${col.name}`;
 
     chain.orWhere(function orWhere() {
       this.andWhere(function andWhere() {
@@ -191,14 +191,14 @@ const applyCursor = (qb, cursor, mainTableName, idAttribute) => {
   }
 
   // This will only work if column name === attribute name
-  const model2cursor = model => {
+  const model2cursor = (model) => {
     if (typeof model.toCursorValue === 'function') {
-      return sortedColumns.map(c => model.toCursorValue(c));
+      return sortedColumns.map((c) => model.toCursorValue(c));
     }
     return sortedColumns.map(({ name }) => model.get(name));
   };
 
-  const extractCursors = coll => {
+  const extractCursors = (coll) => {
     if (!coll.length) return {};
     const before = model2cursor(coll.models[0]);
     const after = model2cursor(coll.models[coll.length - 1]);
@@ -210,13 +210,13 @@ const applyCursor = (qb, cursor, mainTableName, idAttribute) => {
     return { after, before };
   };
 
-  return coll => ({
+  return (coll) => ({
     cursors: extractCursors(coll),
     orderedBy: sortedColumns,
   });
 };
 
-const ensureArray = val => {
+const ensureArray = (val) => {
   if (!Array.isArray(val)) {
     throw new Error(`${val} is not an array`);
   }
@@ -243,7 +243,7 @@ const ensureArray = val => {
  *
  * See methods below for details.
  */
-export default bookshelf => {
+export default (bookshelf) => {
   /**
    * @method Model#fetchCursorPage
    * @belongsTo Model
@@ -328,7 +328,7 @@ export default bookshelf => {
       let extractCursorMetadata = null;
 
       return pager
-        .query(qb => {
+        .query((qb) => {
           Object.assign(qb, origQuery.clone());
 
           extractCursorMetadata = applyCursor(
@@ -341,7 +341,7 @@ export default bookshelf => {
           qb.limit(_limit);
         })
         .fetch(fetchOptions)
-        .then(coll => ({ coll, ...extractCursorMetadata(coll) }));
+        .then((coll) => ({ coll, ...extractCursorMetadata(coll) }));
     };
 
     const promises = [

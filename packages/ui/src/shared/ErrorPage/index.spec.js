@@ -10,7 +10,7 @@ describe('<ErrorPage/>', () => {
     onFeedbackClick: jest.fn().mockName('onFeedbackClick'),
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<ErrorPage {...defaultProps} {...overrides} />);
 
   test('renders properly', () => {

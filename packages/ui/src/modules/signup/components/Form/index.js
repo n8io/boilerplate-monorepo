@@ -22,7 +22,7 @@ const Form = () => {
   const history = useHistory();
   const [mutate, { error }] = useUserRegister();
 
-  const onRegister = async input => {
+  const onRegister = async (input) => {
     await mutate({
       variables: { input: UserRegisterInput.formToInput(input) },
     });

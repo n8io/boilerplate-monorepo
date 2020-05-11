@@ -76,10 +76,10 @@ mattis nulla. Morbi sit amet interdum turpis. Phasellus consequat egestas enim, 
   .replace(/[^a-z ]/gu, '')
   .split(' ');
 
-const transformStringToFake = str =>
-  str.replace(/./gu, c => characterMap[c] || c);
+const transformStringToFake = (str) =>
+  str.replace(/./gu, (c) => characterMap[c] || c);
 
-const bumpLength = str => {
+const bumpLength = (str) => {
   const extendedLength = str.length * 1.4;
   let output = `${str}`;
   let index = 0;
@@ -93,7 +93,7 @@ const bumpLength = str => {
 };
 
 // eslint-disable-next-line max-statements
-const transformTokenized = str => {
+const transformTokenized = (str) => {
   // eslint-disable-next-line prefer-named-capture-group
   const regex = /\{\{[-]?\s*\w+([.]\w+)*\s*\}\}/gu;
   const subst = '~~token~~';
@@ -124,4 +124,4 @@ const transformTokenized = str => {
 
 export const LANG_KEY = 'dev';
 
-export const transformFake = str => `[${transformTokenized(str)}]`;
+export const transformFake = (str) => `[${transformTokenized(str)}]`;

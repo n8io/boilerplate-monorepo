@@ -12,7 +12,7 @@ describe('<Button/>', () => {
     text: ariaLabel,
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<Button {...defaultProps} {...overrides} />);
 
   test('renders a button', () => {

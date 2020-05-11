@@ -19,7 +19,7 @@ const { NODE_ENV = PRODUCTION_PREFIX, ...envVars } = process.env;
 
 const REACT_APP_PREFIX = 'REACT_APP_';
 
-const graphqlUri = uri => {
+const graphqlUri = (uri) => {
   if (uri) return uri;
 
   const { location } = window;
@@ -35,8 +35,8 @@ const graphqlUri = uri => {
 
 const reactVars = pipe(
   keys,
-  filter(key => key.toString().startsWith(REACT_APP_PREFIX)),
-  map(key => [key.replace(REACT_APP_PREFIX, ''), envVars[key]]),
+  filter((key) => key.toString().startsWith(REACT_APP_PREFIX)),
+  map((key) => [key.replace(REACT_APP_PREFIX, ''), envVars[key]]),
   fromPairs,
   ({ PUBLIC_URL, SENTRY_ENV, ...rest }) => ({
     ...rest,

@@ -22,7 +22,7 @@ const useClipboard = () => {
     }
   };
 
-  const write = async content => {
+  const write = async (content) => {
     if (isGrantedWriteAccess === false) return false; // Don't keep trying to access the clipboard
 
     try {

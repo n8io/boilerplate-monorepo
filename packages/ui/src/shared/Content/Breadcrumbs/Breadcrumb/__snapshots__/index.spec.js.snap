@@ -2,10 +2,10 @@
 
 exports[`<Breadcrumb/> renders children 1`] = `
 <li
-  class="Breadcrumb__StyledListItem-sc-1flrm6b-0 jSCten"
+  class="Breadcrumb__StyledListItem-sc-1flrm6b-0 kTjBlu"
 >
   <a
-    class="Breadcrumb__StyledNavLink-sc-1flrm6b-1 cdgvdI"
+    class="Breadcrumb__StyledNavLink-sc-1flrm6b-1 fOPPdU"
     href="/TO"
   >
     TEXT

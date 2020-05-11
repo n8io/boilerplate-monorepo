@@ -7,13 +7,13 @@ jest.mock('shared/Button');
 jest.mock('shared/Content');
 
 jest.mock('./Form', () => ({
-  Form: props => <x-Form {...props} />,
+  Form: (props) => <x-Form {...props} />,
 }));
 
 describe('<Notify/>', () => {
   const defaultProps = {};
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<Notify {...defaultProps} {...overrides} />);
 
   beforeEach(() => {

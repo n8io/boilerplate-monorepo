@@ -8,7 +8,7 @@ jest.mock('shared/Page');
 describe('<NotFound/>', () => {
   const defaultProps = {};
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<NotFound {...defaultProps} {...overrides} />);
 
   test('renders not found page', () => {

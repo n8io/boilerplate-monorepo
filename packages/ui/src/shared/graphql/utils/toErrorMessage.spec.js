@@ -2,12 +2,12 @@ import { ApolloError } from '@apollo/client';
 import { toErrorMessage } from './toErrorMessage';
 
 describe('toErrorMessage', () => {
-  const t = message => `t(${message})`;
+  const t = (message) => `t(${message})`;
 
   describe('with an Apollo error', () => {
     const code = 'CODE';
 
-    const makeApolloError = overrides =>
+    const makeApolloError = (overrides) =>
       new ApolloError({
         graphQLErrors: [{ extensions: { code } }],
         networkError: { message: 'Network no worky' },

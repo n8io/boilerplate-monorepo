@@ -24,16 +24,16 @@ const IndexName = {
 
 const fullyQualifiedTableName = toTableName(tableName);
 
-const up = knex =>
-  knex.schema.alterTable(fullyQualifiedTableName, table => {
+const up = (knex) =>
+  knex.schema.alterTable(fullyQualifiedTableName, (table) => {
     table.unique([ColumnName.email], IndexName.email);
     table.index([ColumnName.name], IndexName.name);
     table.unique([ColumnName.username], IndexName.username);
     table.index([ColumnName.deletedAt], IndexName.deletedAt);
   });
 
-const down = knex =>
-  knex.schema.alterTable(fullyQualifiedTableName, table => {
+const down = (knex) =>
+  knex.schema.alterTable(fullyQualifiedTableName, (table) => {
     table.dropIndex([], toSchemaPrefixed(IndexName.deletedAt));
     table.dropUnique([], IndexName.email);
     table.dropIndex([], toSchemaPrefixed(IndexName.name));

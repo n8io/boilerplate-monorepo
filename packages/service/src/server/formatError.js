@@ -1,7 +1,7 @@
 import { config } from 'config';
 import { path } from 'ramda';
 
-const toSafeError = error => {
+const toSafeError = (error) => {
   const code = path(['extensions', 'code'], error);
 
   if (code && code.match(/[:]/giu)) {
@@ -19,7 +19,7 @@ const toSafeError = error => {
   return error;
 };
 
-const formatError = error => {
+const formatError = (error) => {
   let newError = error;
   const { extensions } = error;
 

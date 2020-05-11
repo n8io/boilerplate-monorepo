@@ -10,7 +10,7 @@ describe('<ErrorNotification/>', () => {
     messageKey: 'MESSAGE_KEY',
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<ErrorNotification {...defaultProps} {...overrides} />);
 
   test('renders an error', () => {

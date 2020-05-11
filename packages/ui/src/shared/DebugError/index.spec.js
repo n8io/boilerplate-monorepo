@@ -7,7 +7,7 @@ describe('<DebugError/>', () => {
     message: 'MESSAGE',
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<DebugError {...defaultProps} {...overrides} />);
 
   test('renders children', () => {

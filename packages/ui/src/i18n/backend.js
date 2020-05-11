@@ -1,17 +1,26 @@
-import { always, curry, ifElse, is, map, pipeWith, then, useWith } from 'ramda';
+import {
+  always,
+  curry,
+  ifElse,
+  is,
+  map,
+  pipeWith,
+  andThen,
+  useWith,
+} from 'ramda';
 import { LANG_KEY, transformFake } from './fake';
 
 const loadTranslation = (language, namespace) =>
   import(
     /* webpackChunkName: "i18n-[request]" */
     `i18n/${language}/${namespace}`
-  ).then(module => module[namespace]);
+  ).then((module) => module[namespace]);
 
 const recursiveMap = curry((fn, obj) =>
   ifElse(is(Object), map(recursiveMap(fn)), fn)(obj)
 );
 
-const loadFakeTranslation = pipeWith(then, [
+const loadFakeTranslation = pipeWith(andThen, [
   useWith(loadTranslation, [always('en')]),
   recursiveMap(transformFake),
 ]);
