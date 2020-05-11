@@ -6,7 +6,7 @@ const isArray = is(Array);
 const isObject = is(Object);
 const omitTypename = omit([KEY]);
 
-const stripTypenames = obj =>
+const stripTypenames = (obj) =>
   reduce(
     (acc, key) => {
       if (isTypename(key)) {

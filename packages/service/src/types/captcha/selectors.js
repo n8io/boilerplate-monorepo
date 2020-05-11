@@ -4,7 +4,7 @@ import querystring from 'querystring';
 
 const { CAPTCHA_SECRET } = config;
 
-const isTokenValid = token =>
+const isTokenValid = (token) =>
   new Promise((resolve, reject) => {
     const data = querystring.stringify({
       response: token,
@@ -21,14 +21,14 @@ const isTokenValid = token =>
       path: '/siteverify',
     };
 
-    const request = https.request(options, response => {
+    const request = https.request(options, (response) => {
       response.setEncoding('utf8');
 
       let buffer = '';
 
       response
         .on('error', reject)
-        .on('data', chunk => (buffer += chunk))
+        .on('data', (chunk) => (buffer += chunk))
         .on('end', () => resolve(JSON.parse(buffer)));
     });
 

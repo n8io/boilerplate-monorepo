@@ -7,7 +7,7 @@ jest.mock('shared/useAuth');
 describe('<Logout/>', () => {
   const defaultProps = {};
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<Logout {...defaultProps} {...overrides} />);
 
   test('renders nothing', () => {

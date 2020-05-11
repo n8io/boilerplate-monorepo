@@ -13,7 +13,7 @@ describe('<Huge/>', () => {
     children: text,
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<Huge {...defaultProps} {...overrides} />);
 
   let useMediaQuery = null;

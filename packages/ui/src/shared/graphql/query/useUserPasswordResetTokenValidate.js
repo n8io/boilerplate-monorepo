@@ -9,7 +9,7 @@ export const QUERY_USER_PASSWORD_RESET_TOKEN_VALIDATE = gql`
   }
 `;
 
-const useUserPasswordResetTokenValidate = options =>
+const useUserPasswordResetTokenValidate = (options) =>
   useQuery(QUERY_USER_PASSWORD_RESET_TOKEN_VALIDATE, options);
 
 export { useUserPasswordResetTokenValidate };

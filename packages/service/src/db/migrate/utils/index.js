@@ -9,7 +9,7 @@ const Prefix = {
   UNIQUE: 'udx',
 };
 
-const toSchemaPrefixed = name => `${DB_SCHEMA}.${name}`;
+const toSchemaPrefixed = (name) => `${DB_SCHEMA}.${name}`;
 
 const toEnumName = (schemalessTableName, schemalessEnumName) =>
   toSchemaPrefixed(

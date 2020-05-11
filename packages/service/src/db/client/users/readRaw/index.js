@@ -16,7 +16,7 @@ const readRaw = async ({
 
   const whereClause = includeDeleted
     ? identity
-    : qb => qb.where('deleted_at', null).orWhere('deleted_at', '>', 'NOW()');
+    : (qb) => qb.where('deleted_at', null).orWhere('deleted_at', '>', 'NOW()');
 
   const { models, pagination } = await Models.User.collection()
     .query(whereClause)
@@ -25,7 +25,7 @@ const readRaw = async ({
     .orderBy('id')
     .fetchCursorPage({ after, limit });
 
-  const users = map(m => m.toJSON(), models);
+  const users = map((m) => m.toJSON(), models);
 
   return { pagination, users };
 };

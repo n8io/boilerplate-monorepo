@@ -3,7 +3,7 @@ import { Utils } from 'utils';
 
 const uiToApi = unless(isNil, pipe(toLower, trim));
 
-const toApiMasked = api => {
+const toApiMasked = (api) => {
   const parts = api.split('@');
   const [user, domain] = parts;
   const [firstOne] = user;

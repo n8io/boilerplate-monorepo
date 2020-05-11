@@ -30,7 +30,7 @@ const Form = () => {
     validationSchema: UserLoginInput.validationSchema,
   });
 
-  const onLogin = values =>
+  const onLogin = (values) =>
     mutate({
       update: (_cache, { data }) => {
         const { userLogin: accessToken } = data;

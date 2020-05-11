@@ -14,7 +14,7 @@ const resolver = reduce(
 );
 
 const typeDefs = map(
-  scalar => gql`
+  (scalar) => gql`
   "The ${scalar} scalar type"
   scalar ${scalar}
 `,

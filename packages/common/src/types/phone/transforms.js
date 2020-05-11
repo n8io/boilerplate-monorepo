@@ -2,7 +2,7 @@ import { unless, pipe } from 'ramda';
 import { Utils } from 'utils';
 
 // eslint-disable-next-line complexity,max-statements
-const uiToApi = raw => {
+const uiToApi = (raw) => {
   if (!raw) return raw;
 
   const stringNumber = raw.toString() || '';
@@ -32,7 +32,7 @@ const uiToApi = raw => {
   return undefined;
 };
 
-const toApiMasked = api => {
+const toApiMasked = (api) => {
   const number = api.replace(/[^0-9]/gu, '');
 
   const [, firstOne] = number;

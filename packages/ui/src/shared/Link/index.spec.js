@@ -12,7 +12,7 @@ describe('<Link/>', () => {
     children,
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<Link {...defaultProps} {...overrides} />);
 
   test('renders children', () => {

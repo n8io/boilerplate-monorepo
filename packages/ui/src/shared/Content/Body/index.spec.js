@@ -8,7 +8,7 @@ describe('<Body/>', () => {
     children: text,
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<Body {...defaultProps} {...overrides}></Body>);
 
   test('renders children', () => {

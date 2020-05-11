@@ -1,6 +1,6 @@
 import { User, Utils } from '@boilerplate-monorepo/common';
 
-const stubLoader = name => ({
+const stubLoader = (name) => ({
   clear: td.func(`${name}.clear`),
   load: td.func(`${name}.load`),
 });

@@ -16,7 +16,7 @@ const sendAuthorizedResponse = (res, user) => {
   return sendResponse(res, token);
 };
 
-const sendUnauthorizedResponse = res => {
+const sendUnauthorizedResponse = (res) => {
   // Write empty refresh token
   Auth.writeRefreshToken(res, undefined);
 

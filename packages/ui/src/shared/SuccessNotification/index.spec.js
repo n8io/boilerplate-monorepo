@@ -9,7 +9,7 @@ describe('<SuccessNotification/>', () => {
     message: 'MESSAGE',
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<SuccessNotification {...defaultProps} {...overrides} />);
 
   test('renders a success notification', () => {

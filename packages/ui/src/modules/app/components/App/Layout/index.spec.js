@@ -5,28 +5,28 @@ import { Layout } from '.';
 
 jest.mock('shared/useAuth');
 jest.mock('./FavIcon', () => ({
-  FavIcon: props => <x-FavIcon {...props} />,
+  FavIcon: (props) => <x-FavIcon {...props} />,
 }));
 jest.mock('./Footer', () => ({
-  Footer: props => <x-Footer {...props} />,
+  Footer: (props) => <x-Footer {...props} />,
 }));
 jest.mock('./Header', () => ({
-  Header: props => <x-Header {...props} />,
+  Header: (props) => <x-Header {...props} />,
 }));
 jest.mock('./Main', () => ({
-  Main: props => <x-Main {...props} />,
+  Main: (props) => <x-Main {...props} />,
 }));
 jest.mock('./Meta', () => ({
-  Meta: props => <x-Meta {...props} />,
+  Meta: (props) => <x-Meta {...props} />,
 }));
 jest.mock('./Navigation', () => ({
-  Navigation: props => <x-Navigation {...props} />,
+  Navigation: (props) => <x-Navigation {...props} />,
 }));
 
 describe('<Layout/>', () => {
   const defaultProps = {};
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<Layout {...defaultProps} {...overrides} />);
 
   describe('when on mobile', () => {
@@ -41,7 +41,7 @@ describe('<Layout/>', () => {
 
   describe('when on larger than mobile', () => {
     test('renders properly', () => {
-      td.replace(GreaterThanMobileBreakpoint, 'GreaterThanMobile', props => (
+      td.replace(GreaterThanMobileBreakpoint, 'GreaterThanMobile', (props) => (
         <x-GreaterThanMobile {...props} />
       ));
 

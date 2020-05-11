@@ -12,7 +12,7 @@ describe('<Breadcrumb/>', () => {
     text,
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<Breadcrumb {...defaultProps} {...overrides} />);
 
   test('renders children', () => {

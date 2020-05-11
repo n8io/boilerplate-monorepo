@@ -21,7 +21,7 @@ const componentMap = {
   testPage: TestPage,
 };
 
-const addComponent = route => {
+const addComponent = (route) => {
   const component = defaultTo(Dashboard, componentMap[route.name]);
 
   return mergeRight(route, { component });

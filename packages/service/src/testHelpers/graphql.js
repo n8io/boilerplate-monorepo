@@ -5,7 +5,7 @@ import { has, head, keys, path, pipe, prop, __ } from 'ramda';
 import { make as makeServer } from '../server/server';
 import { make as makeContext } from './context';
 
-const makeGraphqlClient = context => {
+const makeGraphqlClient = (context) => {
   const server = makeServer({ context });
   const { query, mutate } = createTestClient(server);
 
@@ -42,7 +42,7 @@ const makeGraphqlClient = context => {
 
 const graphqlClient = makeGraphqlClient(makeContext());
 
-const responseToData = response => {
+const responseToData = (response) => {
   // eslint-disable-next-line no-console
   response.errors && console.error(response.errors);
   expect(response.errors).toBeUndefined();

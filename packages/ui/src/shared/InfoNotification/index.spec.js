@@ -7,7 +7,7 @@ jest.mock('../Notification');
 describe('<InfoNotification/>', () => {
   const defaultProps = { message: 'MESSAGE' };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<InfoNotification {...defaultProps} {...overrides} />);
 
   test('renders an info notification', () => {

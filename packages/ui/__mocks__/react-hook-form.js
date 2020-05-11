@@ -14,7 +14,7 @@ export const useForm = () => ({
 
 export const useFormContext = useForm;
 
-export const FormContext = props => {
+export const FormContext = (props) => {
   const formProps = useFormContext();
 
   return <x-FormContext {...props} {...formProps} />;

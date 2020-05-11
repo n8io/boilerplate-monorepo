@@ -17,7 +17,7 @@ const load = () =>
 
         return resolve();
       })
-      .catch(e => {
+      .catch((e) => {
         // eslint-disable-next-line no-console
         console.error('Failed to lazy load react-axe', e);
 

@@ -10,7 +10,7 @@ export const QUERY_SYSTEM_TIME = gql`
   }
 `;
 
-const useSystemTime = options => {
+const useSystemTime = (options) => {
   const results = useQuery(QUERY_SYSTEM_TIME, {
     fetchPolicy: FetchPolicy.NO_CACHE,
     ...options,

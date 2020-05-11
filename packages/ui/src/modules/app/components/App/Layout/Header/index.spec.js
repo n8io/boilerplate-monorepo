@@ -8,10 +8,10 @@ import { Header } from '.';
 
 jest.mock('shared/useAuth');
 jest.mock('./UserMenu', () => ({
-  UserMenu: props => <x-UserMenu {...props} />,
+  UserMenu: (props) => <x-UserMenu {...props} />,
 }));
 jest.mock('./SkipToContentLink', () => ({
-  SkipToContentLink: props => <x-SkipToContentLink {...props} />,
+  SkipToContentLink: (props) => <x-SkipToContentLink {...props} />,
 }));
 
 describe('<Header/>', () => {
@@ -25,7 +25,7 @@ describe('<Header/>', () => {
     }),
   };
 
-  const renderComponent = authContext => overrides => {
+  const renderComponent = (authContext) => (overrides) => {
     // eslint-disable-next-line react/prop-types
     const wrapper = ({ children }) => (
       <Provider.AUTH value={authContext}>{children}</Provider.AUTH>
@@ -47,7 +47,7 @@ describe('<Header/>', () => {
           'GreaterThanMobile',
           () => null
         );
-        td.replace(MobileBreakpoint, 'Mobile', props => (
+        td.replace(MobileBreakpoint, 'Mobile', (props) => (
           <x-Mobile {...props} />
         ));
 
@@ -59,9 +59,11 @@ describe('<Header/>', () => {
 
     describe('when on larger than mobile', () => {
       test('renders properly', () => {
-        td.replace(GreaterThanMobileBreakpoint, 'GreaterThanMobile', props => (
-          <x-GreaterThanMobile {...props} />
-        ));
+        td.replace(
+          GreaterThanMobileBreakpoint,
+          'GreaterThanMobile',
+          (props) => <x-GreaterThanMobile {...props} />
+        );
         td.replace(MobileBreakpoint, 'Mobile', () => null);
 
         const { container } = renderComponent(authContext)();
@@ -84,7 +86,7 @@ describe('<Header/>', () => {
           'GreaterThanMobile',
           () => null
         );
-        td.replace(MobileBreakpoint, 'Mobile', props => (
+        td.replace(MobileBreakpoint, 'Mobile', (props) => (
           <x-Mobile {...props} />
         ));
 
@@ -96,9 +98,11 @@ describe('<Header/>', () => {
 
     describe('when on larger than mobile', () => {
       test('renders properly', () => {
-        td.replace(GreaterThanMobileBreakpoint, 'GreaterThanMobile', props => (
-          <x-GreaterThanMobile {...props} />
-        ));
+        td.replace(
+          GreaterThanMobileBreakpoint,
+          'GreaterThanMobile',
+          (props) => <x-GreaterThanMobile {...props} />
+        );
         td.replace(MobileBreakpoint, 'Mobile', () => null);
 
         const { container } = renderComponent(authContext)();

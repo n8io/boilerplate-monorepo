@@ -6,7 +6,7 @@ import { Meta } from '.';
 describe('<Meta/>', () => {
   const defaultProps = {};
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<Meta {...defaultProps} {...overrides} />);
 
   test('renders properly', () => {

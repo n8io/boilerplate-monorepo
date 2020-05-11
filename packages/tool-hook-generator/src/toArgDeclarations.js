@@ -11,7 +11,7 @@ const toArgDeclaration = ({ name, type }) => {
   return `$${name}: ${typename}${isNullable ? '' : '!'}`;
 };
 
-const toFormattedArgs = args => {
+const toFormattedArgs = (args) => {
   if (R.isEmpty(args)) return '';
 
   const inputLines = R.map(toArgDeclaration, args);
@@ -22,7 +22,7 @@ const toFormattedArgs = args => {
   }
 
   const declarations = R.pipe(
-    R.map(arg => `${tabs(2)}${arg}`),
+    R.map((arg) => `${tabs(2)}${arg}`),
     R.join(`,\n`)
   )(inputLines);
 
@@ -31,7 +31,7 @@ const toFormattedArgs = args => {
   return R.join('\n', lines);
 };
 
-const toArgDeclarations = name => {
+const toArgDeclarations = (name) => {
   const query = findQuery(name) || findMutation(name);
 
   return toFormattedArgs(query.args);

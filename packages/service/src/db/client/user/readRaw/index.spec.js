@@ -28,7 +28,7 @@ describe('readRaw', () => {
     const includeDeleted = true;
 
     test('queries deleted users', async () => {
-      tracker.on('query', query => {
+      tracker.on('query', (query) => {
         expect(query.sql).toEqual(
           `select \`${Db.Schema.MAIN}\`.\`${Db.Table.USERS}\`.* from \`${Db.Schema.MAIN}\`.\`${Db.Table.USERS}\` where \`id\` = ?`
         );
@@ -44,7 +44,7 @@ describe('readRaw', () => {
     const includeDeleted = false;
 
     test('does not query deleted users', async () => {
-      tracker.on('query', query => {
+      tracker.on('query', (query) => {
         expect(query.sql).toEqual(
           `select \`${Db.Schema.MAIN}\`.\`${Db.Table.USERS}\`.* from \`${Db.Schema.MAIN}\`.\`${Db.Table.USERS}\` where (\`deleted_at\` is null or \`deleted_at\` > ?) and \`id\` = ?`
         );
@@ -58,7 +58,7 @@ describe('readRaw', () => {
 
   describe('when providing an id with other keys', () => {
     test('queries by id only', async () => {
-      tracker.on('query', query => {
+      tracker.on('query', (query) => {
         expect(query.sql).toEqual(
           `select \`${Db.Schema.MAIN}\`.\`${Db.Table.USERS}\`.* from \`${Db.Schema.MAIN}\`.\`${Db.Table.USERS}\` where (\`deleted_at\` is null or \`deleted_at\` > ?) and \`id\` = ?`
         );
@@ -72,7 +72,7 @@ describe('readRaw', () => {
 
   describe('when providing an email only', () => {
     test('queries by email only', async () => {
-      tracker.on('query', query => {
+      tracker.on('query', (query) => {
         expect(query.sql).toEqual(
           `select \`${Db.Schema.MAIN}\`.\`${Db.Table.USERS}\`.* from \`${Db.Schema.MAIN}\`.\`${Db.Table.USERS}\` where (\`deleted_at\` is null or \`deleted_at\` > ?) and \`email\` = ?`
         );
@@ -86,7 +86,7 @@ describe('readRaw', () => {
 
   describe('when providing username only', () => {
     test('queries by username only', async () => {
-      tracker.on('query', query => {
+      tracker.on('query', (query) => {
         expect(query.sql).toEqual(
           `select \`${Db.Schema.MAIN}\`.\`${Db.Table.USERS}\`.* from \`${Db.Schema.MAIN}\`.\`${Db.Table.USERS}\` where (\`deleted_at\` is null or \`deleted_at\` > ?) and \`username\` = ?`
         );
@@ -100,7 +100,7 @@ describe('readRaw', () => {
 
   describe('when providing passwordResetToken only', () => {
     test('queries by passwordResetToken only', async () => {
-      tracker.on('query', query => {
+      tracker.on('query', (query) => {
         expect(query.sql).toEqual(
           `select \`${Db.Schema.MAIN}\`.\`${Db.Table.USERS}\`.* from \`${Db.Schema.MAIN}\`.\`${Db.Table.USERS}\` where (\`deleted_at\` is null or \`deleted_at\` > ?) and \`password_reset_token\` = ?`
         );
@@ -114,7 +114,7 @@ describe('readRaw', () => {
 
   describe('when providing both email and username', () => {
     test('queries by either email or username', async () => {
-      tracker.on('query', query => {
+      tracker.on('query', (query) => {
         expect(query.sql).toEqual(
           `select \`${Db.Schema.MAIN}\`.\`${Db.Table.USERS}\`.* from \`${Db.Schema.MAIN}\`.\`${Db.Table.USERS}\` where (\`deleted_at\` is null or \`deleted_at\` > ?) and (\`email\` = ? or (\`username\` = ?))`
         );

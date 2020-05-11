@@ -5,7 +5,7 @@ import { ErrorType } from 'types/errorType';
 
 const toSafeError = identity;
 
-const appendSafeError = props => ({
+const appendSafeError = (props) => ({
   ...props,
   toSafeError,
 });

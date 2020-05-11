@@ -67,10 +67,7 @@ describe('user self security update mutation', () => {
     });
 
     describe('and user is not found', () => {
-      const readRaw = jest
-        .fn()
-        .mockName('readRaw')
-        .mockResolvedValue(null);
+      const readRaw = jest.fn().mockName('readRaw').mockResolvedValue(null);
 
       const db = { user: { readRaw } };
 

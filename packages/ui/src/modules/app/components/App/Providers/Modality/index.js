@@ -22,7 +22,7 @@ const Modality = () => {
   const { update: updateModality } = useModality();
 
   useEffect(() => {
-    const onKeyDown = Utils.debounce(e => {
+    const onKeyDown = Utils.debounce((e) => {
       if (e.keyCode !== TAB_KEY_CODE) return;
 
       updateModality(ModalityType.KEYBOARD);

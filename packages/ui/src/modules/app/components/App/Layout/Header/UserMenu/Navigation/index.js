@@ -62,7 +62,7 @@ const InnerSideBar = ({ onClose, t }) => {
   return (
     <StyledNav aria-label="sidebar" role={Role.NAVIGATION}>
       <Container>
-        {routes.map(route => (
+        {routes.map((route) => (
           <NavLink key={route.name} onClick={onClose} route={route} />
         ))}
         {isAuthenticated && (

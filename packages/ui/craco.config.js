@@ -9,14 +9,14 @@ module.exports = {
     ],
   },
   eslint: {
-    loaderOptions: eslintOptions => ({
+    loaderOptions: (eslintOptions) => ({
       ...eslintOptions,
       eslintPath: require.resolve('eslint'),
     }),
     mode: ESLINT_MODES.file,
   },
   webpack: {
-    configure: webpackConfig => ({
+    configure: (webpackConfig) => ({
       ...webpackConfig,
       optimization: {
         splitChunks: {

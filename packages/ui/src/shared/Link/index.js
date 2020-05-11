@@ -25,6 +25,6 @@ const StyledLink = styled(RouterLink)`
   ${themeStyles}
 `;
 
-const Link = props => <StyledLink {...props} />;
+const Link = (props) => <StyledLink {...props} />;
 
 export { Link };

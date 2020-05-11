@@ -15,7 +15,7 @@ describe('<SubmitButton/>', () => {
   // eslint-disable-next-line react/prop-types
   const wrapper = ({ children }) => <FormContext>{children}</FormContext>;
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<SubmitButton {...defaultProps} {...overrides} />, { wrapper });
 
   test('renders a submit button', () => {

@@ -11,7 +11,7 @@ describe('<ScreenReaderNotification/>', () => {
     children: 'CHILDREN',
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<ScreenReaderNotification {...defaultProps} {...overrides} />);
 
   test('renders children', () => {

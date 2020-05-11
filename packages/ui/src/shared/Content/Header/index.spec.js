@@ -5,7 +5,7 @@ import * as Document from 'types/document';
 import { Header } from '.';
 
 jest.mock('../../PageTitle', () => ({
-  PageTitle: props => <x-PageTitle {...props} />,
+  PageTitle: (props) => <x-PageTitle {...props} />,
 }));
 
 describe('<Header/>', () => {
@@ -15,7 +15,7 @@ describe('<Header/>', () => {
     title: 'TITLE',
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<Header {...defaultProps} {...overrides} />);
 
   const getElementById = jest

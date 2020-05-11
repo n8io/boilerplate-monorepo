@@ -5,7 +5,7 @@ import { FavIcon } from '.';
 describe('<FavIcon/>', () => {
   const defaultProps = {};
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<FavIcon {...defaultProps} {...overrides} />);
 
   test('renders properly', () => {

@@ -24,7 +24,7 @@ const Theme = ({ children }) => {
   );
 
   const updateThemeProxy = useCallback(
-    nextTheme => {
+    (nextTheme) => {
       localStorage.setItem(LocalStorage.THEME, JSON.stringify(nextTheme));
       updateTheme(nextTheme);
     },
@@ -32,7 +32,7 @@ const Theme = ({ children }) => {
   );
 
   const updateModalityProxy = useCallback(
-    nextModality => {
+    (nextModality) => {
       document.body.setAttribute(Modality.DOM_ATTRIBUTE, nextModality);
       updateModality(nextModality);
     },

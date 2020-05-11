@@ -34,7 +34,7 @@ const Form = () => {
 
   const { reset } = formProps;
 
-  const onSelfUpdate = async input => {
+  const onSelfUpdate = async (input) => {
     setIsSuccessful(false);
 
     await mutate({

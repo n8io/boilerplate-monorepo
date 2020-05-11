@@ -1,7 +1,7 @@
 import { toData } from './toData';
 
 describe('toData', () => {
-  const makeData = data => ({ data });
+  const makeData = (data) => ({ data });
 
   test('returns undefined for an empty object', () => {
     expect(toData(makeData({}))).toEqual({ data: undefined });

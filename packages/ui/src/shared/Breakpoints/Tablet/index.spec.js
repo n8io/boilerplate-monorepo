@@ -13,7 +13,7 @@ describe('<Tablet/>', () => {
     children: text,
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<Tablet {...defaultProps} {...overrides} />);
 
   let useMediaQuery = null;

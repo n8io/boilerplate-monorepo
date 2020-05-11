@@ -43,7 +43,7 @@ const Form = ({ id, token }) => {
     isSuccessful && history.push(Route.LOGIN.path);
   }, [isSuccessful]);
 
-  const onSubmit = async input => {
+  const onSubmit = async (input) => {
     setIsSuccessful(false);
 
     await mutate({

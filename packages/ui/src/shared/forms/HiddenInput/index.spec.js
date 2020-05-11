@@ -7,7 +7,7 @@ describe('<HiddenInput/>', () => {
     name: 'NAME',
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<HiddenInput {...defaultProps} {...overrides} />);
 
   test('renders properly', () => {

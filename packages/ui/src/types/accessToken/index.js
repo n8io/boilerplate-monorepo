@@ -7,7 +7,7 @@ const clear = () => {
 const read = () => {
   return token;
 };
-const set = newToken => {
+const set = (newToken) => {
   token = newToken;
 };
 

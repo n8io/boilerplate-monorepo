@@ -9,7 +9,7 @@ describe('<Form/>', () => {
     onSubmit: jest.fn().mockName('onSubmit'),
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<Form {...defaultProps} {...overrides} />);
 
   test('renders properly', () => {

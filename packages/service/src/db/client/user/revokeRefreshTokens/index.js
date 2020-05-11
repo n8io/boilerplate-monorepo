@@ -1,9 +1,9 @@
 import { Models } from 'models';
 
-const revokeRefreshTokens = id =>
+const revokeRefreshTokens = (id) =>
   Models.User.forge({ id })
     .fetch()
-    .then(model => {
+    .then((model) => {
       const currentTokenVersion = model.get('tokenVersion');
       const tokenVersion = (currentTokenVersion || 0) + 1;
 

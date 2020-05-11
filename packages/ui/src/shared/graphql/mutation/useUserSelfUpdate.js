@@ -16,7 +16,7 @@ const MUTATION_USER_SELF_UPDATE = gql`
  * UserSelfUpdateInput
  * @param email - String!
  */
-const useUserSelfUpdate = options =>
+const useUserSelfUpdate = (options) =>
   useMutation(MUTATION_USER_SELF_UPDATE, options);
 
 export { useUserSelfUpdate };

@@ -2,7 +2,7 @@ import { isEmpty } from 'ramda';
 import { useForm as useReactHookForm } from 'react-hook-form';
 import { Mode } from '../Form';
 
-const useForm = options => {
+const useForm = (options) => {
   const formProps = useReactHookForm({
     mode: Mode.ON_BLUR,
     ...options,

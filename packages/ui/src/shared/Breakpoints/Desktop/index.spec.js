@@ -13,7 +13,7 @@ describe('<Desktop/>', () => {
     children: text,
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<Desktop {...defaultProps} {...overrides}></Desktop>);
 
   let useMediaQuery = null;

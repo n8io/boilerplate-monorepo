@@ -9,7 +9,7 @@ describe('<PageTitle/>', () => {
     title: 'TITLE',
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<PageTitle {...defaultProps} {...overrides} />);
 
   test('renders children', () => {

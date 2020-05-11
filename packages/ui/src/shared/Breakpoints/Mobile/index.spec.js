@@ -13,7 +13,7 @@ describe('<Mobile/>', () => {
     children: text,
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<Mobile {...defaultProps} {...overrides} />);
 
   let useMediaQuery = null;

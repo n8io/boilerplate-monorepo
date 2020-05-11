@@ -9,13 +9,13 @@ jest.mock('shared/Content');
 jest.mock('shared/Page');
 
 jest.mock('./Routing', () => ({
-  Routing: props => <x-Routing {...props} data-testid="routing" />,
+  Routing: (props) => <x-Routing {...props} data-testid="routing" />,
 }));
 
 describe('<User/>', () => {
   const defaultProps = {};
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<User {...defaultProps} {...overrides} />);
 
   beforeEach(() => {

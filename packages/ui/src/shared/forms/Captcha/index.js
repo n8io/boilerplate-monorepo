@@ -41,7 +41,7 @@ const Captcha = ({ name }) => {
   const displayMode = Theme.displayMode(theme);
   const error = errors[name]?.message;
 
-  const onVerify = token => {
+  const onVerify = (token) => {
     setValue(name, token);
     setCaptchaToken(token);
   };

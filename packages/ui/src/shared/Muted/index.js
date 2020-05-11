@@ -7,7 +7,7 @@ const Container = styled.span`
   ${themeStyles}
 `;
 
-const Muted = props => <Container {...props} />;
+const Muted = (props) => <Container {...props} />;
 
 Muted.propTypes = {
   children: node.isRequired,

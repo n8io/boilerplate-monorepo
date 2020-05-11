@@ -8,7 +8,7 @@ describe('<LogLevelIcon/>', () => {
     type: LogLevel.INFO,
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<LogLevelIcon {...defaultProps} {...overrides} />);
 
   test('renders properly', () => {

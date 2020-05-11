@@ -55,7 +55,7 @@ const Form = () => {
     return <Loader />;
   }
 
-  const onSubmit = input =>
+  const onSubmit = (input) =>
     userRecoveryFind({
       variables: input,
     });

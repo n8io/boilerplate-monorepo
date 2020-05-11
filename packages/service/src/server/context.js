@@ -3,7 +3,7 @@ import { client } from 'db';
 import { Auth } from 'types/auth';
 import { loaders } from './loaders';
 
-const make = overrides => ({ req, res }) => ({
+const make = (overrides) => ({ req, res }) => ({
   db: client,
   ip: req.ip,
   loaders,

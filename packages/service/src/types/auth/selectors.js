@@ -17,7 +17,7 @@ import { Password } from 'types/password';
 import { Route } from 'types/route';
 import { Enumeration } from './typedef';
 
-const isPast = date => isAfter(new Date(), unless(isDate, parseISO)(date));
+const isPast = (date) => isAfter(new Date(), unless(isDate, parseISO)(date));
 
 const {
   ACCESS_TOKEN_EXPIRY,
@@ -37,7 +37,7 @@ const toRefreshToken = pick([
 
 const toAccessToken = pick(['email', 'id', 'role', 'username']);
 
-const encryptAccessToken = user =>
+const encryptAccessToken = (user) =>
   sign(toAccessToken(user), ACCESS_TOKEN_SECRET, {
     expiresIn: ACCESS_TOKEN_EXPIRY,
   });
@@ -47,17 +47,17 @@ const generateResetToken = () => tail(cuid());
 const generateResetTokenExpiration = () =>
   addMinutes(Password.RESET_TOKEN_EXPIRATION_IN_MINUTES, new Date());
 
-const encryptRefreshToken = user =>
+const encryptRefreshToken = (user) =>
   sign(toRefreshToken(user), REFRESH_TOKEN_SECRET, {
     expiresIn: REFRESH_TOKEN_EXPIRY,
   });
 
-const decryptAccessToken = token => verify(token, ACCESS_TOKEN_SECRET);
+const decryptAccessToken = (token) => verify(token, ACCESS_TOKEN_SECRET);
 
-const decryptRefreshToken = token => verify(token, REFRESH_TOKEN_SECRET);
+const decryptRefreshToken = (token) => verify(token, REFRESH_TOKEN_SECRET);
 
 // eslint-disable-next-line max-statements
-const readAccessToken = req => {
+const readAccessToken = (req) => {
   const debugLog = logFactory({
     method: 'readAccessToken',
     module: 'auth',
@@ -86,7 +86,7 @@ const readAccessToken = req => {
   }
 };
 
-const readRefreshToken = req => {
+const readRefreshToken = (req) => {
   const debugLog = logFactory({
     method: 'readRefreshToken',
     module: 'auth',
@@ -138,7 +138,7 @@ const writeRefreshToken = (res, user) => {
   return res;
 };
 
-const isUserActive = user => {
+const isUserActive = (user) => {
   if (!user) return false;
 
   /* eslint-disable camelcase */

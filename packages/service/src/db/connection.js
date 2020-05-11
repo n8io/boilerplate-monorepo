@@ -12,8 +12,8 @@ const debugLog = logFactory({ method: 'connection', module: 'db' });
 
 const seconds = multiply(1000);
 
-const wait = numberOfSeconds =>
-  new Promise(res => setTimeout(res, seconds(numberOfSeconds)));
+const wait = (numberOfSeconds) =>
+  new Promise((res) => setTimeout(res, seconds(numberOfSeconds)));
 
 const DbType = { PG: 'pg', SQLITE_3: 'sqlite3' };
 
@@ -52,7 +52,7 @@ const logError = (error, obj) => {
 };
 
 // eslint-disable-next-line max-statements
-const tryToConnect = async connection => {
+const tryToConnect = async (connection) => {
   if (cachedConnection) return cachedConnection;
 
   let newConnection = null;
@@ -82,7 +82,7 @@ const tryToConnect = async connection => {
   return newConnection;
 };
 
-const make = connection => {
+const make = (connection) => {
   if (cachedConnection) return cachedConnection;
 
   debugLog('⏳ Establishing connection to the database...');

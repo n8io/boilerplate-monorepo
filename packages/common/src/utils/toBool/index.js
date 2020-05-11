@@ -1,6 +1,6 @@
 import { includes, is, pipe, toLower, toString, unless, __ } from 'ramda';
 
-const toBool = value =>
+const toBool = (value) =>
   value
     ? pipe(
         unless(is(String), toString),

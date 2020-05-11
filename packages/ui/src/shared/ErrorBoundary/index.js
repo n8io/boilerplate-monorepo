@@ -35,8 +35,8 @@ class ErrorBoundary extends Component {
 
     if (!isTelemetryEnabled) return;
 
-    LogRocket.getSessionURL(sessionUrl => {
-      Sentry.withScope(scope => {
+    LogRocket.getSessionURL((sessionUrl) => {
+      Sentry.withScope((scope) => {
         scope.setExtras(info);
         scope.setExtra('sessionUrl', sessionUrl);
 

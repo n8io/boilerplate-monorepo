@@ -9,7 +9,7 @@ describe('<NavLink/>', () => {
     route: Route.example(),
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<NavLink {...defaultProps} {...overrides} />);
 
   test('renders properly', () => {

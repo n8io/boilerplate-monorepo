@@ -1,3 +1,3 @@
-const toNumber = value => parseInt(value || '', 10);
+const toNumber = (value) => parseInt(value || '', 10);
 
 export { toNumber };

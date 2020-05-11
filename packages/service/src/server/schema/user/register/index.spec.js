@@ -81,10 +81,7 @@ describe('user register mutation', () => {
       let execMutation = null;
 
       beforeEach(() => {
-        const read = jest
-          .fn()
-          .mockName('read')
-          .mockResolvedValue(user);
+        const read = jest.fn().mockName('read').mockResolvedValue(user);
 
         const db = { user: { read } };
 
@@ -103,10 +100,7 @@ describe('user register mutation', () => {
       const passwordHash = 'PASSWORD_HASH';
       const user = null;
 
-      const read = jest
-        .fn()
-        .mockName('read')
-        .mockResolvedValue(user);
+      const read = jest.fn().mockName('read').mockResolvedValue(user);
 
       describe('and user is saved', () => {
         const register = jest.fn().mockName('register');

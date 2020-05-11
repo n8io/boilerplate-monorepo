@@ -37,7 +37,7 @@ describe('transforms', () => {
       },
     ];
 
-    tests.forEach(t => {
+    tests.forEach((t) => {
       test(t.description, () => {
         expect(DateTime.toSafeDate(t.input)).toEqual(t.expected);
       });

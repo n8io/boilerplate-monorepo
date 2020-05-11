@@ -4,7 +4,7 @@ import { Button, Context, Type } from '../../Button';
 
 const { PRIMARY } = Context;
 
-const SubmitButton = props => {
+const SubmitButton = (props) => {
   const { formState } = useFormContext();
 
   const { dirty: isDirty, isSubmitting } = formState;

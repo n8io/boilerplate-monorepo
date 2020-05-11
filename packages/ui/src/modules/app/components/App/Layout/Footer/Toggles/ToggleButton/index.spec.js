@@ -14,7 +14,7 @@ describe('<ToggleButton/>', () => {
     ...buttonProps,
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<ToggleButton {...defaultProps} {...overrides} />);
 
   test('renders properly', () => {

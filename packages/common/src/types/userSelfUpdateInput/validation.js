@@ -21,18 +21,9 @@ const Limits = {
 };
 
 const validationSchema = object().shape({
-  email: string()
-    .email()
-    .required()
-    .limits(Limits.email),
-  familyName: string()
-    .trim()
-    .required()
-    .limits(Limits.familyName),
-  givenName: string()
-    .trim()
-    .required()
-    .limits(Limits.givenName),
+  email: string().email().required().limits(Limits.email),
+  familyName: string().trim().required().limits(Limits.familyName),
+  givenName: string().trim().required().limits(Limits.givenName),
 });
 
 const isValid = validationSchema.isValid.bind(validationSchema);

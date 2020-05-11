@@ -3,7 +3,7 @@ const fs = require('fs');
 const mkdirp = require('mkdirp');
 const path = require('path');
 
-const touch = filepath => {
+const touch = (filepath) => {
   const time = new Date();
 
   mkdirp.sync(path.dirname(filepath));

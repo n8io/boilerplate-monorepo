@@ -5,7 +5,7 @@ import { FormDevTool } from '.';
 describe('<FormDevTool/>', () => {
   const defaultProps = {};
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<FormDevTool {...defaultProps} {...overrides} />);
 
   test('renders properly', () => {

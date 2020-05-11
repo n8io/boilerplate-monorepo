@@ -4,7 +4,7 @@ import { defaultTo, isNil, pipe, reject, split } from 'ramda';
 
 const { UI_HOST_URI } = config;
 
-const toUnique = array => [...new Set(array)].filter(x => x);
+const toUnique = (array) => [...new Set(array)].filter((x) => x);
 
 const toAllowHosts = pipe(defaultTo(''), split(','), reject(isNil));
 

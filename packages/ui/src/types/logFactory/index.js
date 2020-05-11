@@ -7,7 +7,7 @@ const logs = {};
 const makeNamespace = ({ method, module }) =>
   `${PACKAGE_NAME}/${module}.${method}`;
 
-const logFactory = options => {
+const logFactory = (options) => {
   const namespace = makeNamespace(options);
 
   if (logs[namespace]) {

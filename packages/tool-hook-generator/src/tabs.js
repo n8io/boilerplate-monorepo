@@ -1,3 +1,3 @@
-const tabs = numberOfTabs => '  '.repeat(numberOfTabs);
+const tabs = (numberOfTabs) => '  '.repeat(numberOfTabs);
 
 module.exports = tabs;

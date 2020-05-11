@@ -12,7 +12,7 @@ const MUTATION_USER_SELF_SECURITY_UPDATE = gql`
  * @param passwordCurrent - String!
  * @param passwordNew - String!
  */
-const useUserSelfSecurityUpdate = options =>
+const useUserSelfSecurityUpdate = (options) =>
   useMutation(MUTATION_USER_SELF_SECURITY_UPDATE, options);
 
 export { useUserSelfSecurityUpdate };

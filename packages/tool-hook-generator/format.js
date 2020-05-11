@@ -12,7 +12,7 @@ const updateCacheControlScope = R.evolve({
   description: R.always('The cache control scope enumeration'),
   enumValues: R.pipe(
     R.sort(R.ascend(R.prop('name'))),
-    R.map(val => ({
+    R.map((val) => ({
       ...val,
       description: `The ${val.name.toLowerCase()} cache control scope`,
     }))
@@ -25,7 +25,7 @@ const updateRootQuery = R.evolve({
 
 const removeUnusedUpload = R.reject(R.propEq('name', 'Upload'));
 
-const applyFixes = (name, updater) => types => {
+const applyFixes = (name, updater) => (types) => {
   const selector = R.propEq('name', name);
   const type = R.find(selector, types);
   const newTypes = R.reject(selector, types);

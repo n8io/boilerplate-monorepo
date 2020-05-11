@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Notification = props => (
+const Notification = (props) => (
   <x-Notification data-testid="notification" {...props} />
 );
 

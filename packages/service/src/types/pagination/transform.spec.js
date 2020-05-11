@@ -33,7 +33,7 @@ describe('pagination transforms', () => {
       );
 
       expect(actual).toMatchObject({
-        edges: nodes.map(node => ({
+        edges: nodes.map((node) => ({
           node,
         })),
         pageInfo: {
@@ -42,7 +42,7 @@ describe('pagination transforms', () => {
         },
       });
 
-      actual.edges.forEach(node => expect(node).toHaveProperty('cursor'));
+      actual.edges.forEach((node) => expect(node).toHaveProperty('cursor'));
     });
   });
 });

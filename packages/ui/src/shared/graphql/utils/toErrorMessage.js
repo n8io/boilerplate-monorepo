@@ -2,7 +2,7 @@ import { ApolloError } from '@apollo/client';
 import { isNullOrEmpty } from '@boilerplate-monorepo/common/src/utils/isNullOrEmpty';
 
 const toExtensionCode = (errors = []) => errors[0]?.extensions?.code;
-const parseError = error => error?.message;
+const parseError = (error) => error?.message;
 
 const parseApolloError = ({ graphQLErrors, networkError }) => {
   if (networkError?.name === 'ServerError') return 'INTERNAL_SERVER_ERROR';

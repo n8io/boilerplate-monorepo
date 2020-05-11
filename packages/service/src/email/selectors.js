@@ -1,7 +1,7 @@
 const userToFormattedEmailAddress = ({ email, givenName, familyName }) =>
   `${givenName} ${familyName} <${email}>`;
 
-const bodyToHtml = body => `
+const bodyToHtml = (body) => `
   <html>
     <body>
       ${body}

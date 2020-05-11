@@ -8,7 +8,7 @@ jest.mock('shared/Page');
 describe('<Dashboard/>', () => {
   const defaultProps = {};
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<Dashboard {...defaultProps} {...overrides} />);
 
   test('renders dashboard page', () => {

@@ -8,9 +8,6 @@ const Limits = {
   required: true,
 };
 
-const validationSchema = string()
-  .email()
-  .required()
-  .limits(Limits);
+const validationSchema = string().email().required().limits(Limits);
 
 export { Limits, validationSchema };

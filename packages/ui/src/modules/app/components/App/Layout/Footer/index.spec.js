@@ -3,7 +3,7 @@ import { render } from 'testHelpers';
 import { Footer } from '.';
 
 jest.mock('./Toggles', () => ({
-  Toggles: props => <x-Toggles {...props} />,
+  Toggles: (props) => <x-Toggles {...props} />,
 }));
 
 describe('<Footer/>', () => {
@@ -11,7 +11,7 @@ describe('<Footer/>', () => {
     children: <x-child />,
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<Footer {...defaultProps} {...overrides} />);
 
   test('renders properly', () => {

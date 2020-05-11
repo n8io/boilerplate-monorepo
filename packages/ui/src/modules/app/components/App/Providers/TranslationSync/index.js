@@ -4,7 +4,7 @@ import { object, string } from 'prop-types';
 import { useEffect } from 'react';
 import { withTranslation } from 'react-i18next';
 
-const readLocal = fallbackLocale =>
+const readLocal = (fallbackLocale) =>
   localStorage.getItem(LocalStorage.LANGUAGE) || fallbackLocale;
 
 const TranslationSync = ({ locale, i18n }) => {

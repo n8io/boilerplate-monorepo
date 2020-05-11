@@ -19,10 +19,7 @@ const Limits = pipe(
 
 const validationSchemaServer = UserRegisterInput.validationSchemaPassword.concat(
   object().shape({
-    passwordCurrent: string()
-      .trim()
-      .required()
-      .limits(Limits.passwordNew),
+    passwordCurrent: string().trim().required().limits(Limits.passwordNew),
   })
 );
 
@@ -30,10 +27,7 @@ const validationSchema = validationSchemaServer
   .concat(UserRegisterInput.validationSchemaConfirmPassword)
   .concat(
     object().shape({
-      passwordCurrent: string()
-        .trim()
-        .required()
-        .limits(Limits.passwordNew),
+      passwordCurrent: string().trim().required().limits(Limits.passwordNew),
     })
   );
 

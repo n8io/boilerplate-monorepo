@@ -13,7 +13,7 @@ describe('<GreaterThanMobile/>', () => {
     children: text,
   };
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(
       <GreaterThanMobile {...defaultProps} {...overrides}></GreaterThanMobile>
     );

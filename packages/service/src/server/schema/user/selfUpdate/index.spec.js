@@ -70,10 +70,7 @@ describe('user self profile update mutation', () => {
     });
 
     describe('the user self update', () => {
-      const save = jest
-        .fn()
-        .mockName('save')
-        .mockResolvedValue(currentUser);
+      const save = jest.fn().mockName('save').mockResolvedValue(currentUser);
 
       const db = { user: { save } };
       const clear = jest.fn().mockName('clear');

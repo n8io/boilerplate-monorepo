@@ -22,9 +22,9 @@ const readRaw = async ({
   if (!hasAtLeastOneKey) return null;
 
   // eslint-disable-next-line complexity,max-statements
-  const whereByKey = qb => {
+  const whereByKey = (qb) => {
     if (!includeDeleted) {
-      qb.where(builder =>
+      qb.where((builder) =>
         builder.where('deleted_at', null).orWhere('deleted_at', '>', 'NOW()')
       );
     }
@@ -34,7 +34,7 @@ const readRaw = async ({
     }
 
     if (email && username) {
-      qb.where(builder => builder.where({ email }).orWhere({ username }));
+      qb.where((builder) => builder.where({ email }).orWhere({ username }));
     } else if (email) {
       qb.where({ email });
     } else if (username) {
@@ -50,9 +50,7 @@ const readRaw = async ({
 
   const {
     models: [user],
-  } = await Models.User.collection()
-    .query(whereByKey)
-    .fetch();
+  } = await Models.User.collection().query(whereByKey).fetch();
 
   return user ? user.toJSON() : null;
 };

@@ -1,6 +1,6 @@
 const globals = typeof window === 'undefined' ? global : window;
 
-export const debounce = fn => {
+export const debounce = (fn) => {
   let timerId = null;
 
   return (...args) => {

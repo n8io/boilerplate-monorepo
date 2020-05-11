@@ -14,7 +14,7 @@ const useAppReady = () => {
       credentials: 'include',
       method: 'POST',
     })
-      .then(async payload => {
+      .then(async (payload) => {
         const data = await payload.json();
         const { ok, token } = data;
 

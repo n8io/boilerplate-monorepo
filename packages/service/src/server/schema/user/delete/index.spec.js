@@ -75,10 +75,7 @@ describe('user delete mutation', () => {
 
         // eslint-disable-next-line max-nested-callbacks
         describe('and there is the database throws an error', () => {
-          const saveError = jest
-            .fn()
-            .mockName('save')
-            .mockRejectedValue();
+          const saveError = jest.fn().mockName('save').mockRejectedValue();
 
           const dbError = { user: { save: saveError } };
           const contextError = makeContext({ db: dbError, user });

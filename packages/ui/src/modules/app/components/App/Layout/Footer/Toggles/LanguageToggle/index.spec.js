@@ -15,7 +15,7 @@ jest.mock('react-i18next', () => ({
 describe('<LanguageToggle/>', () => {
   const defaultProps = {};
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<LanguageToggle {...defaultProps} {...overrides} />);
 
   test('renders properly', () => {

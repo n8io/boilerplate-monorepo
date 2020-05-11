@@ -6,13 +6,13 @@ jest.mock('shared/Content');
 jest.mock('shared/Page');
 
 jest.mock('./Form', () => ({
-  Form: props => <x-Form {...props} />,
+  Form: (props) => <x-Form {...props} />,
 }));
 
 describe('<Login/>', () => {
   const defaultProps = {};
 
-  const renderComponent = overrides =>
+  const renderComponent = (overrides) =>
     render(<Login {...defaultProps} {...overrides} />);
 
   test('renders login page', () => {

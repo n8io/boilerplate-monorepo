@@ -48,7 +48,7 @@ const LanguageToggle = () => {
   const t = (key, options) =>
     key && originalT([`${component}.${key}`, key], options);
 
-  const onLanguageClick = language => {
+  const onLanguageClick = (language) => {
     i18n.changeLanguage(language);
     localStorage.setItem(LocalStorage.LANGUAGE, language);
     menu.hide();
@@ -72,7 +72,7 @@ const LanguageToggle = () => {
         aria-label={t('chooseALanguage')}
         aria-modal={undefined} // Fixes a11y violation (invalid aria attribute on role="menu")
       >
-        {Language.values.map(language => (
+        {Language.values.map((language) => (
           <StyledMenuItem
             {...menu}
             aria-label={t('setLanguage', {
