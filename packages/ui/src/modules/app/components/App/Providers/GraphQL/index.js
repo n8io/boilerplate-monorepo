@@ -1,4 +1,5 @@
 import { ApolloClient, ApolloProvider } from '@apollo/client';
+import { config } from 'config';
 import { node } from 'prop-types';
 import React from 'react';
 import { cache } from './cache';
@@ -12,6 +13,8 @@ const client = new ApolloClient({
   cache,
   fetchOptions,
   link,
+  name: 'web',
+  version: config.RELEASE,
 });
 
 export const GraphQL = ({ children }) => {
