@@ -22,7 +22,7 @@ const toSafeError = (error) => {
 };
 
 const formatError = (error) => {
-  error?.extensions?.code === 'INTERNAL_SERVER_ERROR' &&
+  if (error?.extensions?.code === 'INTERNAL_SERVER_ERROR') {
     log.error('An unhandled GraphQL error occurred', {
       error,
       tags: {
@@ -30,6 +30,7 @@ const formatError = (error) => {
         [Telemetry.Tag.MODULE]: Telemetry.Module.GRAPHQL,
       },
     });
+  }
 
   let newError = error;
   const { extensions } = error;
