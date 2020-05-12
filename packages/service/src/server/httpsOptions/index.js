@@ -2,7 +2,7 @@ import { join } from 'path';
 import { FileSystem } from 'types/fileSystem';
 
 const make = async () => {
-  const certDir = join(__dirname, '../../../../.ini/certs');
+  const certDir = join(__dirname, '../../../../../.ini/certs');
   const certFilePath = join(certDir, 'cert.pem');
   const keyFilePath = join(certDir, 'key.pem');
 

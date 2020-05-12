@@ -1,7 +1,7 @@
 import cuid from 'cuid';
 import { client } from 'db';
 import { Auth } from 'types/auth';
-import { loaders } from './loaders';
+import { loaders } from '../loaders';
 
 const make = (overrides) => ({ req, res }) => ({
   db: client,

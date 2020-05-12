@@ -2,7 +2,7 @@ import { PubSub } from 'apollo-server-express';
 import { createTestClient } from 'apollo-server-testing';
 import { subscribe as graphqlSubscribe } from 'graphql';
 import { has, head, keys, path, pipe, prop, __ } from 'ramda';
-import { make as makeServer } from '../server/server';
+import { make as makeServer } from '../server';
 import { make as makeContext } from './context';
 
 const makeGraphqlClient = (context) => {

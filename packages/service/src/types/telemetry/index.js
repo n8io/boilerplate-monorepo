@@ -12,12 +12,17 @@ const {
   version,
 } = config;
 
-isTelemetryEnabled &&
+if (isTelemetryEnabled) {
   Sentry.init({
     dsn: SENTRY_DSN,
     environment,
     release: isDev ? `${name}@unreleased` : `${name}@${version}`,
   });
+
+  Sentry.configureScope((scope) => {
+    scope.setTag('source', 'service');
+  });
+}
 
 const Telemetry = {
   Component,

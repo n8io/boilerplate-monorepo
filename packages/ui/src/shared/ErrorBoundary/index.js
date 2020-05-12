@@ -55,6 +55,10 @@ class ErrorBoundary extends Component {
       environment: SENTRY_ENV,
       release: RELEASE,
     });
+
+    Sentry.configureScope((scope) => {
+      scope.setTag('source', 'ui');
+    });
   }
 
   onFeedbackClick() {
