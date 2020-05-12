@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Awesome project developed with TypeORM.",
   "license": "MIT",
+  "private": true,
   "engines": {
     "node": "^14.2.0",
     "yarn": "^1.19.1"
