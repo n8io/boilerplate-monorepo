@@ -2,7 +2,7 @@ import { Theme } from '@boilerplate-monorepo/ui-common';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import { config } from 'config';
 import { string } from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useTheme } from 'shared/useTheme';
 import { useTranslate } from 'shared/useTranslate';
@@ -28,21 +28,32 @@ const StyledInputLabel = styled.div`
   ${({ hasError }) => hasError && themeStyles.error}
 `;
 
+// eslint-disable-next-line max-statements
 const Captcha = ({ name }) => {
   const t = useTranslate({
     component: 'common',
     namespace: 'common',
   });
 
+  const captchaRef = useRef();
   const [captchaToken, setCaptchaToken] = useState();
-  const { errors, setValue } = useFormContext();
+  const { clearError, errors, formState, setValue } = useFormContext();
+  const { submitCount } = formState;
   const { theme } = useTheme();
+
+  useEffect(() => {
+    if (!submitCount) return;
+
+    captchaRef.current.resetCaptcha();
+    setCaptchaToken(null);
+  }, [captchaRef, setCaptchaToken, submitCount]);
 
   const displayMode = Theme.displayMode(theme);
   const error = errors[name]?.message;
 
   const onVerify = (token) => {
     setValue(name, token);
+    clearError(name);
     setCaptchaToken(token);
   };
 
@@ -58,6 +69,7 @@ const Captcha = ({ name }) => {
       <HCaptcha
         error={error}
         onVerify={onVerify}
+        ref={captchaRef}
         sitekey={siteKey}
         theme={displayMode}
       />
