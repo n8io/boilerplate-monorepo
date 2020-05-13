@@ -3,20 +3,14 @@ import React from 'react';
 import { FaRegCheckCircle } from 'react-icons/fa';
 import { MdErrorOutline, MdInfoOutline, MdWarning } from 'react-icons/md';
 
-const LogLevelIcon = ({ type }) => {
-  switch (type) {
-    case LogLevel.ERROR:
-      return <MdErrorOutline />;
-    case LogLevel.INFO:
-      return <MdInfoOutline />;
-    case LogLevel.SUCCESS:
-      return <FaRegCheckCircle />;
-    case LogLevel.WARN:
-      return <MdWarning />;
-    default:
-      return <MdInfoOutline />;
-  }
+const logLevelToIconMap = {
+  [LogLevel.ERROR]: <MdErrorOutline data-testid="ERROR" />,
+  [LogLevel.INFO]: <MdInfoOutline data-testid="INFO" />,
+  [LogLevel.SUCCESS]: <FaRegCheckCircle data-testid="SUCCESS" />,
+  [LogLevel.WARN]: <MdWarning data-testid="WARN" />,
 };
+
+const LogLevelIcon = ({ type }) => logLevelToIconMap[type];
 
 LogLevelIcon.propTypes = {
   type: LogLevel.propTypes.isRequired,

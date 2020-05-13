@@ -7,10 +7,10 @@ module.exports = {
   ...baseConfig,
   coveragePathIgnorePatterns: [
     toPath('*.js'),
-    toPath('src/config/*.js'),
-    toPath('src/migrations/*.js'),
+    toPath('src/config'),
+    toPath('src/migrations'),
     toPath('src/setupTests.js'),
-    toPath('src/testHelpers/*.js'),
+    toPath('src/testHelpers'),
   ],
   setupFilesAfterEnv: [toPath('src/setupTests.js')],
 };
