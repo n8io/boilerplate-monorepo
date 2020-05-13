@@ -8,11 +8,11 @@
     "yarn": "^1.19.1"
   },
   "scripts": {
-    "build": "craco build",
-    "build:gh": "yarn -s node .prebuild && REACT_APP_PUBLIC_URL=/boilerplate-monorepo yarn -s build",
-    "deploy": "gh-pages -d build",
-    "deploy:gh": "REACT_APP_PUBLIC_URL=/boilerplate-monorepo yarn -s deploy",
+    "build": "yarn -s prebuild && craco build",
+    "postbuild": "node ./.postbuild",
+    "prebuild": "node ./.prebuild",
     "prestart": "yarn -s start:pre",
+    "publish": "yarn -s postbuild",
     "serve": "serve -s -n build",
     "start": "craco start",
     "start:pre": "(cat ../../.ini/certs/cert.pem ../../.ini/certs/key.pem > ../../node_modules/webpack-dev-server/ssl/server.pem) || :",
@@ -110,6 +110,7 @@
     "git-rev-sync": "^2.0.0",
     "graphql": "^15.0.0",
     "history": "^4.10.1",
+    "logrocket-cli": "^0.12.0",
     "prettier": "^2.0.5",
     "react-axe": "^3.2.0",
     "sentry-files": "^1.0.1",

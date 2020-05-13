@@ -2,6 +2,9 @@ const dotenv = require('dotenv');
 const path = require('path');
 const { upload } = require('sentry-files');
 const shell = require('shelljs');
+const git = require('git-rev-sync');
+
+const branch = git.branch();
 
 dotenv.config();
 
@@ -10,12 +13,14 @@ const { exec } = shell;
 const {
   LOGROCKET_API_TOKEN,
   REACT_APP_RELEASE,
+  REACT_APP_RELEASE_VERSION,
   SENTRY_API_TOKEN,
   SENTRY_ORGANIZATION,
   SENTRY_PROJECT,
 } = process.env;
 
-const RELEASE = REACT_APP_RELEASE;
+const RELEASE =
+  branch === 'master' ? REACT_APP_RELEASE_VERSION : REACT_APP_RELEASE;
 
 const uploadSentrySourcemaps = async () => {
   const getFiles = () => {
@@ -70,5 +75,6 @@ const uploadLogRocketSourcemaps = () =>
   });
 
 (async () => {
-  await Promise.all([uploadSentrySourcemaps(), uploadLogRocketSourcemaps()]);
+  await uploadSentrySourcemaps();
+  await uploadLogRocketSourcemaps();
 })();
