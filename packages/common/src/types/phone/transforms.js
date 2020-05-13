@@ -13,34 +13,41 @@ const uiToApi = (raw) => {
 
     // Check if it's less than 10 digits
     if (cleanedUpNumber.length < 10) {
-      return undefined;
+      return null;
       // Check if equal to 10
-    } else if (cleanedUpNumber.length === 10) {
+    }
+
+    if (cleanedUpNumber.length === 10) {
       return `+1${cleanedUpNumber}`;
       // Check if it has country code
-    } else if (cleanedUpNumber.length > 10) {
+    }
+
+    if (cleanedUpNumber.length > 10) {
       const countryCode = '+1';
 
       if (cleanedUpNumber.slice(0, 2) === countryCode) {
         return cleanedUpNumber;
       }
     }
-
-    return undefined;
   }
 
-  return undefined;
+  return null;
 };
 
-const toApiMasked = (api) => {
-  const number = api.replace(/[^0-9]/gu, '');
+const toApiMasked = (phone) => {
+  if (!phone) return phone;
 
+  const number = phone.replace(/[^0-9]+/gu, '');
   const [, firstOne] = number;
   const lastFour = number.slice(-4);
 
-  return `(${firstOne}**)***-${lastFour}`;
+  return `+1(${firstOne}**)***-${lastFour}`;
 };
 
-const apiToMasked = pipe(uiToApi, unless(Utils.isNullOrEmpty, toApiMasked));
+const apiToMasked = (phone) => {
+  if (!phone) return phone;
+
+  return pipe(uiToApi, unless(Utils.isNullOrEmpty, toApiMasked))(phone);
+};
 
 export { apiToMasked, uiToApi };
