@@ -1,6 +1,6 @@
 import { uiToApi } from './transforms';
 
-const uiExample = (number = '+2223334444') => uiToApi(number);
+const uiExample = (number = '+12223334444') => uiToApi(number);
 
 const apiExample = uiExample;
 

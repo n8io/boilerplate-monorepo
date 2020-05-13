@@ -1,10 +1,13 @@
-import { unless, pipe, isNil, toLower, trim } from 'ramda';
+import { unless, pipe, isNil, toLower } from 'ramda';
 import { Utils } from 'utils';
 
-const uiToApi = unless(isNil, pipe(toLower, trim));
+const uiToApi = unless(
+  isNil,
+  pipe(toLower, (x) => (x ? x.trim() : x))
+);
 
-const toApiMasked = (api) => {
-  const parts = api.split('@');
+const toApiMasked = (email) => {
+  const parts = email.split('@');
   const [user, domain] = parts;
   const [firstOne] = user;
   const lastFive = domain.slice(-5);
@@ -14,6 +17,10 @@ const toApiMasked = (api) => {
   return `${lead}@${tail}`;
 };
 
-const apiToMasked = pipe(uiToApi, unless(Utils.isNullOrEmpty, toApiMasked));
+const apiToMasked = (input) => {
+  if (!input) return input;
+
+  return unless(Utils.isNullOrEmpty, pipe(uiToApi, toApiMasked))(input);
+};
 
 export { apiToMasked, uiToApi };
