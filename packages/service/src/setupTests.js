@@ -3,7 +3,7 @@ import td from 'testdouble';
 import tdJest from 'testdouble-jest';
 import { DateTime } from 'types/dateTime';
 
-tdJest(td);
+tdJest(td, jest);
 
 global.td = td;
 
