@@ -1,31 +1,39 @@
 const Component = {
-  HAS_PERMISSION: 'HAS_PERMISSION',
-  RATE_LIMITER: 'RATE_LIMITER',
-  REFRESH_TOKEN: 'REFRESH_TOKEN',
-  USER_DELETE: 'USER_DELETE',
-  USER_LOGIN: 'USER_LOGIN',
-  USER_PASSWORD_RESET: 'USER_PASSWORD_RESET',
-  USER_PASSWORD_RESET_REQUEST: 'USER_PASSWORD_RESET_REQUEST',
-  USER_PASSWORD_RESET_TOKEN_VALIDATE: 'USER_PASSWORD_RESET_TOKEN_VALIDATE',
-  USER_RECOVERY_FIND: 'USER_RECOVERY_FIND',
-  USER_REGISTER: 'USER_REGISTER',
-  USER_REVOKE_REFRESH_TOKENS: 'USER_REVOKE_REFRESH_TOKENS',
-  USER_SELF: 'USER_SELF',
-  USER_SELF_SECURITY_UPDATE: 'USER_SELF_SECURITY_UPDATE',
-  USER_SELF_UPDATE: 'USER_SELF_UPDATE',
-  USERS: 'USERS',
+  FORMAT_ERROR: 'formatError',
+  HAS_PERMISSION: 'hasPermission',
+  IS_AUTHENTICATED: 'isAuthenticated',
+  RATE_LIMITER: 'rateLimiter',
+  REFRESH_TOKEN: 'refreshToken',
+  USER_DELETE: 'userDelete',
+  USER_LOGIN: 'userLogin',
+  USER_PASSWORD_RESET: 'userPasswordReset',
+  USER_PASSWORD_RESET_REQUEST: 'userPasswordResetRequest',
+  USER_PASSWORD_RESET_TOKEN_VALIDATE: 'userPasswordResetTokenValidate',
+  USER_RECOVERY_FIND: 'userRecoveryFind',
+  USER_REGISTER: 'userRegister',
+  USER_REVOKE_REFRESH_TOKENS: 'userRevokeRefreshTokens',
+  USER_SELF: 'userSelf',
+  USER_SELF_SECURITY_UPDATE: 'userSelfSecurityUpdate',
+  USER_SELF_UPDATE: 'userSelfUpdate',
+  USERS: 'users',
 };
 
 const Module = {
-  AUTH: 'AUTH',
-  DIRECTIVE: 'DIRECTIVE',
-  RESOLVER: 'RESOLVER',
-  UNCATEGORIZED: 'UNCATEGORIZED',
+  AUTH: 'auth',
+  DIRECTIVE: 'directive',
+  GRAPHQL: 'graphql',
+  RESOLVER: 'resolver',
+  UNCATEGORIZED: 'uncategorized',
+};
+
+const Source = {
+  SERVICE: 'service',
 };
 
 const Tag = {
-  COMPONENT: 'COMPONENT',
-  MODULE: 'MODULE',
+  COMPONENT: 'component',
+  MODULE: 'module',
+  SOURCE: 'source',
 };
 
-export { Component, Module, Tag };
+export { Component, Module, Source, Tag };

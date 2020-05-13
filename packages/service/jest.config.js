@@ -8,6 +8,7 @@ module.exports = {
   collectCoverageFrom: [toPath('src/*.js')],
   coveragePathIgnorePatterns: [
     toPath('src/config/*.js'),
+    toPath('src/migrations/*.js'),
     toPath('src/setupTests.js'),
     toPath('src/testHelpers/*.js'),
   ],

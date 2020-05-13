@@ -1,5 +1,7 @@
 import { config } from 'config';
+import { log } from 'log';
 import { path } from 'ramda';
+import { Telemetry } from 'types/telemetry';
 
 const toSafeError = (error) => {
   const code = path(['extensions', 'code'], error);
@@ -20,6 +22,16 @@ const toSafeError = (error) => {
 };
 
 const formatError = (error) => {
+  if (error?.extensions?.code === 'INTERNAL_SERVER_ERROR') {
+    log.error('An unhandled GraphQL error occurred', {
+      error,
+      tags: {
+        [Telemetry.Tag.COMPONENT]: Telemetry.Component.FORMAT_ERROR,
+        [Telemetry.Tag.MODULE]: Telemetry.Module.GRAPHQL,
+      },
+    });
+  }
+
   let newError = error;
   const { extensions } = error;
 

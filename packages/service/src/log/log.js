@@ -31,7 +31,7 @@ const printMessage = ({ data, logLevel, message }) => {
 
     isTelemetryEnabled &&
       Telemetry.Sentry.withScope((scope) => {
-        scope.setLevel(logLevel);
+        scope.setLevel(logLevel.toLowerCase());
 
         tags && scope.setTags(tags);
         user && scope.setUser(Telemetry.userToLog(user));

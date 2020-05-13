@@ -1,10 +1,26 @@
+import { ApolloServer } from 'apollo-server-express';
 import { config } from 'config';
 import http from 'http';
 import https from 'https';
+import { make as makeContext } from './context';
+import { formatError } from './formatError';
 import { make as makeHttpsOptions } from './httpsOptions';
-import { make as makeServer } from './server';
+import { resolvers, schemaDirectives, typeDefs } from './schema';
 
 const { HTTPS: isHttps } = config;
+
+const makeServer = ({ cache, context } = {}) =>
+  new ApolloServer({
+    cache,
+    context: context || makeContext(),
+    // debug is enabled on purpose to have more verbose logging in Apollo
+    // Graphql Monitor. DO NOT CHANGE!!!
+    debug: true,
+    formatError,
+    resolvers,
+    schemaDirectives,
+    typeDefs,
+  });
 
 const make = async ({ app, cache }) => {
   const apolloServer = makeServer({ cache });
