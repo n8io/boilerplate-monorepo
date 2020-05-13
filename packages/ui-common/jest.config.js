@@ -8,7 +8,6 @@ module.exports = {
   coveragePathIgnorePatterns: [
     toPath('*.js'),
     toPath('dist'),
-    toPath('**/examples.js'),
     toPath('src/setupTests.js'),
   ],
 };

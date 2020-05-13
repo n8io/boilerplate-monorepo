@@ -11,4 +11,4 @@ const values = Object.values(Enumeration);
 
 const propTypes = oneOf(values);
 
-export { Enumeration, propTypes };
+export { Enumeration, propTypes, values };

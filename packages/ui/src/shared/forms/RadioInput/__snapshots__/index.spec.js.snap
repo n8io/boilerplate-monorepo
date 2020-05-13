@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RadioInput/> renders properly 1`] = `
+<div
+  class="RadioInput__StyledInputLabel-ozbj1k-0 bOqHKh"
+>
+  LABEL
+</div>
+`;

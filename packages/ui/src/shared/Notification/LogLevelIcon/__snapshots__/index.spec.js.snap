@@ -2,6 +2,7 @@
 
 exports[`<LogLevelIcon/> renders properly 1`] = `
 <svg
+  data-testid="INFO"
   fill="currentColor"
   height="1em"
   stroke="currentColor"
