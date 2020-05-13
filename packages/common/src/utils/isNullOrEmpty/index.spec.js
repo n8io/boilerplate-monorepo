@@ -16,6 +16,13 @@ describe('isNullOrEmpty', () => {
       expect(actual).toBe(true);
     });
 
+    test('when empty array', () => {
+      const input = [];
+      const actual = Utils.isNullOrEmpty(input);
+
+      expect(actual).toBe(true);
+    });
+
     test('when empty object', () => {
       const input = {};
       const actual = Utils.isNullOrEmpty(input);
@@ -23,8 +30,8 @@ describe('isNullOrEmpty', () => {
       expect(actual).toBe(true);
     });
 
-    test('when empty array', () => {
-      const input = [];
+    test('when empty string', () => {
+      const input = '';
       const actual = Utils.isNullOrEmpty(input);
 
       expect(actual).toBe(true);
