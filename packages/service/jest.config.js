@@ -5,8 +5,8 @@ const toPath = (relativePath) => join(__dirname, relativePath);
 
 module.exports = {
   ...baseConfig,
-  collectCoverageFrom: [toPath('src/*.js')],
   coveragePathIgnorePatterns: [
+    toPath('*.js'),
     toPath('src/config/*.js'),
     toPath('src/migrations/*.js'),
     toPath('src/setupTests.js'),

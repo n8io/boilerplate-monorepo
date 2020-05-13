@@ -5,5 +5,5 @@ const toPath = (relativePath) => join(__dirname, relativePath);
 
 module.exports = {
   ...baseConfig,
-  collectCoverageFrom: [toPath('src/*.js')],
+  coveragePathIgnorePatterns: [toPath('*.js'), toPath('dist')],
 };
