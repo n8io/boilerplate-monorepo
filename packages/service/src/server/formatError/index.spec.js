@@ -3,6 +3,7 @@
 import { LogLevel } from '@boilerplate-monorepo/common';
 import * as Config from 'config';
 import { log } from 'log';
+import { identity } from 'ramda';
 import { Telemetry } from 'types/telemetry';
 import { formatError } from './index';
 
@@ -38,7 +39,10 @@ describe('formatError', () => {
 
   describe('when there is sensitive information in the error', () => {
     describe('and there is a toSafeError extension', () => {
-      const toSafeError = jest.fn().mockName('toSafeError');
+      const toSafeError = jest
+        .fn()
+        .mockName('toSafeError')
+        .mockImplementation(identity);
 
       const error = {
         ...defaultError,
@@ -83,16 +87,40 @@ describe('formatError', () => {
           td.replace(Config, 'config', { isDev });
         });
 
-        test('sensitive information is removed', () => {
-          const error = {
-            ...defaultError,
-            extensions: { exception: 'EXCEPTION' },
-            password: 'PASSWORD',
-          };
+        describe('and the there is a toSafeError extension', () => {
+          const toSafeError = jest
+            .fn()
+            .mockName('toSafeError')
+            .mockImplementation(identity);
 
-          const { extensions } = formatError(error);
+          test('sensitive information is removed', () => {
+            const error = {
+              ...defaultError,
+              extensions: { exception: 'EXCEPTION', toSafeError },
+              password: 'PASSWORD',
+            };
 
-          expect(extensions).not.toHaveProperty('exception');
+            const { extensions } = formatError(error);
+
+            expect(toSafeError).toHaveBeenCalledWith(error);
+            expect(extensions).not.toHaveProperty('exception');
+          });
+        });
+
+        describe('and the there is NOT a toSafeError extension', () => {
+          const toSafeError = null;
+
+          test('sensitive information is removed', () => {
+            const error = {
+              ...defaultError,
+              extensions: { exception: 'EXCEPTION', toSafeError },
+              password: 'PASSWORD',
+            };
+
+            const { extensions } = formatError(error);
+
+            expect(extensions).not.toHaveProperty('exception');
+          });
         });
       });
     });

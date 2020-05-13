@@ -35,19 +35,17 @@ function toBeBetween(actual, start, end) {
   const pass = startDate <= receivedDate && receivedDate <= endDate;
 
   const message = pass
-    ? () =>
-        `${this.utils.matcherHint('toBeDateBetween')}
-
-    Expected date to not be between ${this.utils.printExpected(
-      startDate.toISOString()
-    )} and ${this.utils.printExpected(endDate.toISOString())}
+    ? () => `${this.utils.matcherHint(
+        'toBeDateBetween'
+      )}\n\nExpected date to not be between ${this.utils.printExpected(
+        startDate.toISOString()
+      )} and ${this.utils.printExpected(endDate.toISOString())}
     Received ${this.utils.printReceived(receivedDate.toISOString())}`
-    : () =>
-        `${this.utils.matcherHint('toBeDateBetween')}
-
-    Expected a date to be between ${this.utils.printExpected(
-      startDate.toISOString()
-    )} and ${this.utils.printExpected(endDate.toISOString())}
+    : () => `${this.utils.matcherHint(
+        'toBeDateBetween'
+      )}\n\nExpected a date to be between ${this.utils.printExpected(
+        startDate.toISOString()
+      )} and ${this.utils.printExpected(endDate.toISOString())}
     Received ${this.utils.printReceived(receivedDate.toISOString())}`;
 
   return { actual: receivedDate, message, pass };

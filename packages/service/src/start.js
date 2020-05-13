@@ -5,10 +5,13 @@ import { makeConnection } from 'db';
 import { once } from 'events';
 import { make as makeGraphqlServer } from 'server';
 import { addListeners as addServerStopListeners } from 'stop';
+import { Telemetry } from 'types/telemetry';
 
 const { PORT } = config;
 
 const start = async ({ app, cache, connection }) => {
+  Telemetry.init();
+
   const actualConnection = connection || (await makeConnection(connection));
   const actualCache = cache || makeCache();
   const actualApp = app || makeApp();

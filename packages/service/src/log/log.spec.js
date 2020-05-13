@@ -131,7 +131,7 @@ describe('log', () => {
       test('telemetry sets the log level', () => {
         log[logLevel.toLowerCase()](message, data);
 
-        expect(setLevel).toHaveBeenCalledWith(logLevel);
+        expect(setLevel).toHaveBeenCalledWith(logLevel.toLowerCase());
       });
 
       describe('and there are tags', () => {
