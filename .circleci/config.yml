@@ -11,8 +11,9 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v1-deps
+            - v1-deps-{{ .Branch }}-{{ checksum "yarn.lock" }}
             - v1-deps-{{ checksum "yarn.lock" }}
+            - v1-deps-
       - run:
           name: Installing dependencies
           command: yarn install --frozen-lockfile
@@ -40,8 +41,9 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v1-deps
+            - v1-deps-{{ .Branch }}-{{ checksum "yarn.lock" }}
             - v1-deps-{{ checksum "yarn.lock" }}
+            - v1-deps-
       - run:
           name: Build [common] dependencies
           command: yarn -s build:common
@@ -71,8 +73,9 @@ jobs:
           command: ./.circleci/exit-untouched.sh packages/common packages/service
       - restore_cache:
           keys:
-            - v1-deps
+            - v1-deps-{{ .Branch }}-{{ checksum "yarn.lock" }}
             - v1-deps-{{ checksum "yarn.lock" }}
+            - v1-deps-
       - run:
           name: Build the [service]
           command: yarn -s build:service
@@ -91,8 +94,9 @@ jobs:
           command: ./.circleci/exit-untouched.sh packages/common packages/ui-common packages/ui
       - restore_cache:
           keys:
-            - v1-deps
+            - v1-deps-{{ .Branch }}-{{ checksum "yarn.lock" }}
             - v1-deps-{{ checksum "yarn.lock" }}
+            - v1-deps-
       - run:
           name: Build the [ui]
           command: yarn -s build:ui
@@ -136,8 +140,9 @@ jobs:
           command: ./.circleci/exit-untouched.sh packages/
       - restore_cache:
           keys:
-            - v1-deps
+            - v1-deps-{{ .Branch }}-{{ checksum "yarn.lock" }}
             - v1-deps-{{ checksum "yarn.lock" }}
+            - v1-deps-
       - run:
           name: Release a new version
           command: yarn -s semantic-release
