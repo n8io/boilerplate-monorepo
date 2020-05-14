@@ -3,20 +3,14 @@ import { config } from 'config';
 import { Source, Tag } from './typedef';
 
 const init = () => {
-  const {
-    SENTRY_DSN,
-    environment,
-    isDev,
-    isTelemetryEnabled,
-    version,
-  } = config;
+  const { RELEASE, SENTRY_DSN, environment, isTelemetryEnabled } = config;
 
   if (!isTelemetryEnabled) return;
 
   Sentry.init({
     dsn: SENTRY_DSN,
     environment,
-    release: isDev ? `unreleased` : version,
+    release: RELEASE,
   });
 
   Sentry.configureScope((scope) => {

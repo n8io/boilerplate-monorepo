@@ -12,7 +12,6 @@ import { GridTemplateArea } from 'types/gridTemplateArea';
 import { Toggles } from './Toggles';
 
 const { Role } = A11y;
-const { RELEASE_VERSION, copyrightYear } = config;
 
 const Container = styled.footer`
   align-items: center;
@@ -33,6 +32,7 @@ const StyledMuted = styled(Muted)`
 `;
 
 const Footer = ({ children }) => {
+  const { RELEASE, copyrightYear } = config;
   const t = useTranslate();
 
   return (
@@ -41,7 +41,7 @@ const Footer = ({ children }) => {
         {t('footer', { copyrightYear, name: Site.name })}
       </EllipsiedText>
       <div>{children}</div>
-      <StyledMuted>v{RELEASE_VERSION}</StyledMuted>
+      <StyledMuted>v{RELEASE}</StyledMuted>
       <Toggles />
     </Container>
   );

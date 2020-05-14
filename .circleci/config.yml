@@ -62,6 +62,7 @@ jobs:
       - image: circleci/node:14.2.0
     environment:
       TERM: xterm
+      SENTRY_PROJECT: boilerplate-monorepo-service
     working_directory: ~/app
     steps:
       - checkout
@@ -81,6 +82,7 @@ jobs:
       - image: circleci/node:14.2.0
     environment:
       TERM: xterm
+      SENTRY_PROJECT: boilerplate-monorepo-ui
     working_directory: ~/app
     steps:
       - checkout

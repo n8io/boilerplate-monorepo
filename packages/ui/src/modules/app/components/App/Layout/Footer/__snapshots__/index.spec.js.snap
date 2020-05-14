@@ -8,7 +8,7 @@ exports[`<Footer/> renders properly 1`] = `
   <div
     class="EllipsiedText-o83sq0-0 SmucZ"
   >
-    t(footer, {"copyrightYear":2019,"name":"Acme Inc"})
+    t(footer, {"copyrightYear":"1900","name":"Acme Inc"})
   </div>
   <div>
     <x-child />
@@ -17,7 +17,7 @@ exports[`<Footer/> renders properly 1`] = `
     class="Muted__Container-sc-1r87izh-0 kSHSWL Footer__StyledMuted-sc-1tc55w2-1 gyNezc"
   >
     v
-    1.0.1
+    RELEASE
   </span>
   <x-toggles />
 </footer>

@@ -1,3 +1,4 @@
+import * as Config from 'config';
 import React from 'react';
 import { render } from 'testHelpers';
 import { Footer } from '.';
@@ -13,6 +14,13 @@ describe('<Footer/>', () => {
 
   const renderComponent = (overrides) =>
     render(<Footer {...defaultProps} {...overrides} />);
+
+  beforeEach(() => {
+    td.replace(Config, 'config', {
+      RELEASE: 'RELEASE',
+      copyrightYear: '1900',
+    });
+  });
 
   test('renders properly', () => {
     const { container } = renderComponent();

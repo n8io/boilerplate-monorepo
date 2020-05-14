@@ -8,16 +8,13 @@ describe('telemetry creation', () => {
   describe('init', () => {
     const dsn = 'DSN';
     const environment = 'ENVIRONMENT';
-    const name = 'NAME';
-    const version = 'VERSION';
+    const release = 'RELEASE';
 
     const defaultConfig = {
+      RELEASE: release,
       SENTRY_DSN: dsn,
       environment,
-      isDev: false,
       isTelemetryEnabled: true,
-      name,
-      version,
     };
 
     let configureScope = null;
@@ -31,52 +28,23 @@ describe('telemetry creation', () => {
     describe('when telemetry is enabled', () => {
       const isTelemetryEnabled = true;
 
-      describe('and is development', () => {
-        const isDev = true;
-
-        beforeEach(() => {
-          td.replace(Config, 'config', {
-            ...defaultConfig,
-            isDev,
-            isTelemetryEnabled,
-          });
-        });
-
-        test('initializes Sentry', () => {
-          Telemetry.init();
-
-          td.verify(
-            init({
-              dsn,
-              environment,
-              release: 'unreleased',
-            })
-          );
+      beforeEach(() => {
+        td.replace(Config, 'config', {
+          ...defaultConfig,
+          isTelemetryEnabled,
         });
       });
 
-      describe('and is NOT development', () => {
-        const isDev = false;
+      test('initializes Sentry', () => {
+        Telemetry.init();
 
-        beforeEach(() => {
-          td.replace(Config, 'config', {
-            ...defaultConfig,
-            isDev,
-            isTelemetryEnabled,
-          });
-        });
-
-        test('initializes Sentry', () => {
-          Telemetry.init();
-
-          td.verify(
-            init({
-              dsn,
-              environment,
-              release: version,
-            })
-          );
-        });
+        td.verify(
+          init({
+            dsn,
+            environment,
+            release,
+          })
+        );
       });
     });
 
