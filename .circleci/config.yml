@@ -136,7 +136,7 @@ jobs:
           command: ./.circleci/exit-untouched.sh packages/
       - run:
           name: Release a new version
-          command: yarn -s sematic-release
+          command: npx sematic-release
 
 workflows:
   version: 2
