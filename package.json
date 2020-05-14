@@ -22,7 +22,6 @@
     "build:common": "yarn -s run-all-s build:adhoc:common build:adhoc:ui-common",
     "build:service": "yarn -s build:adhoc && yarn -s build:adhoc:service",
     "build:ui": "yarn -s build:adhoc && yarn -s run-all-s build:adhoc:ui-common build:adhoc:ui",
-    "bump": "lerna version prepatch --no-commit-hooks --yes",
     "clean": "yarn run -s dcd && yarn run -s dc down --remove-orphans && docker network prune -f",
     "db:migrate:down": "lerna run migration:down --loglevel silent --stream --scope \"@${npm_package_name}/service\"",
     "db:migrate:gen": "lerna run migration:gen --loglevel silent --stream --scope \"@${npm_package_name}/service\" --",
@@ -55,6 +54,7 @@
     "logs": "yarn run -s run-all logs:*",
     "logs:service": "yarn run -s dclf service",
     "logs:ui": "yarn run -s dclf ui",
+    "release": "semantic-release",
     "run-all": "yarn -s run-all-p --silent",
     "run-all-p": "run-p",
     "run-all-s": "run-s",
@@ -78,6 +78,11 @@
     "@arkweid/lefthook": "^0.7.1",
     "@babel/core": "^7.9.6",
     "@babel/preset-env": "^7.9.6",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/commit-analyzer": "^8.0.1",
+    "@semantic-release/git": "^9.0.0",
+    "@semantic-release/npm": "^7.0.5",
+    "@semantic-release/release-notes-generator": "^9.0.1",
     "babel-eslint": "^10.0.2",
     "babel-jest": "^24.8.0",
     "babel-plugin-macros": "^2.6.1",
@@ -101,6 +106,7 @@
     "lerna": "^3.16.4",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.5",
+    "semantic-release": "^17.0.7",
     "start-server-and-test": "^1.10.6"
   }
 }
