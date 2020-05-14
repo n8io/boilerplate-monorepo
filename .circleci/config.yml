@@ -123,6 +123,21 @@ jobs:
           command: |
             git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME_UI.git master
 
+  release:
+    docker:
+      - image: circleci/node:14.2.0
+    environment:
+      TERM: xterm
+    working_directory: ~/app
+    steps:
+      - checkout
+      - run:
+          name: Check if the a release is needed
+          command: ./.circleci/exit-untouched.sh packages/
+      - run:
+          name: Release a new version
+          command: yarn -s sematic-release
+
 workflows:
   version: 2
   features:
@@ -162,6 +177,14 @@ workflows:
                 - master
       - deploy-ui:
           requires:
+            - build-ui
+          filters:
+            branches:
+              only:
+                - master
+      - release:
+          requires:
+            - build-service
             - build-ui
           filters:
             branches:

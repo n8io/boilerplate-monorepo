@@ -1,4 +1,3 @@
-/* eslint-disable max-nested-callbacks */
 import * as Sentry from '@sentry/node';
 import * as Config from 'config';
 import { neverCalled } from 'testHelpers';
@@ -64,4 +63,3 @@ describe('telemetry creation', () => {
     });
   });
 });
-/* eslint-enable max-nested-callbacks */
