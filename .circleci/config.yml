@@ -188,7 +188,8 @@ workflows:
                 - master
       - release:
           requires:
-            - install
+            - build-service
+            - build-ui
           filters:
             branches:
               only:
