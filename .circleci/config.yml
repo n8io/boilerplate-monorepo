@@ -12,7 +12,7 @@ jobs:
       - restore_cache:
           keys:
             - v1-deps
-            - v1-deps-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - v1-deps-{{ checksum "yarn.lock" }}
       - run:
           name: Installing dependencies
           command: yarn install --frozen-lockfile
@@ -41,7 +41,7 @@ jobs:
       - restore_cache:
           keys:
             - v1-deps
-            - v1-deps-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - v1-deps-{{ checksum "yarn.lock" }}
       - run:
           name: Build [common] dependencies
           command: yarn -s build:common
@@ -72,7 +72,7 @@ jobs:
       - restore_cache:
           keys:
             - v1-deps
-            - v1-deps-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - v1-deps-{{ checksum "yarn.lock" }}
       - run:
           name: Build the [service]
           command: yarn -s build:service
@@ -92,7 +92,7 @@ jobs:
       - restore_cache:
           keys:
             - v1-deps
-            - v1-deps-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - v1-deps-{{ checksum "yarn.lock" }}
       - run:
           name: Build the [ui]
           command: yarn -s build:ui
@@ -134,9 +134,13 @@ jobs:
       - run:
           name: Check if the a release is needed
           command: ./.circleci/exit-untouched.sh packages/
+      - restore_cache:
+          keys:
+            - v1-deps
+            - v1-deps-{{ checksum "yarn.lock" }}
       - run:
           name: Release a new version
-          command: npx sematic-release
+          command: yarn -s semantic-release
 
 workflows:
   version: 2
@@ -184,8 +188,7 @@ workflows:
                 - master
       - release:
           requires:
-            - build-service
-            - build-ui
+            - install
           filters:
             branches:
               only:
