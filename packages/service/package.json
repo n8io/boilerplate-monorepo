@@ -32,7 +32,7 @@
     ]
   },
   "dependencies": {
-    "@boilerplate-monorepo/common": "^1.0.2",
+    "@boilerplate-monorepo/common": "^1.0.0",
     "@sentry/node": "^5.15.5",
     "apollo-server-cache-redis": "^1.1.5",
     "apollo-server-express": "^2.9.15",
