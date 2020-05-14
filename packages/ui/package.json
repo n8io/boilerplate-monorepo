@@ -1,6 +1,6 @@
 {
   "name": "@boilerplate-monorepo/ui",
-  "version": "1.0.2",
+  "version": "1.0.0",
   "private": true,
   "homepage": "https://n8io.github.io",
   "engines": {

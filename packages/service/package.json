@@ -1,6 +1,6 @@
 {
   "name": "@boilerplate-monorepo/service",
-  "version": "1.0.2",
+  "version": "1.0.0",
   "description": "Awesome project developed with TypeORM.",
   "license": "MIT",
   "private": true,
