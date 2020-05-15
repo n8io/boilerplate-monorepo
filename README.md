@@ -129,6 +129,25 @@ yarn hook:mutation UserRegister
 yarn hook:query UserSelf
 ```
 
+### 📘 Cutting a release
+
+**WARNING**:
+Running the command below will:
+1. Bump versions in all `package.json`'s using conventional commits
+2. Update `README`s using conventional commits
+3. Tag and push a new release to GitHub
+4. Assuming you have a CircleCI workflow setup...
+   1. It will kick off a release build
+   2. Don't worry, it won't deploy until you **manually approve** the deployment in CircleCI
+
+_While it is possible to unravel_, please make sure you
+mean to release a new version of the repo when running it.
+
+Pending you have permissions to push to `master`, run the following:
+```shell
+(git checkout master && yarn semantic-release)
+```
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
