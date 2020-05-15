@@ -93,15 +93,8 @@ workflows:
       - test:
           requires:
             - install
-      # - approve-deployment-service:
-      #     type: approval
-      #     requires:
-      #       - build-service
-      # - approve-deployment-ui:
-      #     type: approval
-      #     requires:
-      #       - build-ui
-      - deploy-service:
+      - approve-deploy:
+          type: approval
           requires:
             - test
           filters:
@@ -111,9 +104,19 @@ workflows:
             tags:
               only:
                 - /.*/
+      - deploy-service:
+          requires:
+            - approve-deploy
+          filters:
+            branches:
+              only:
+                - master
+            tags:
+              only:
+                - /.*/
       - deploy-ui:
           requires:
-            - test
+            - approve-deploy
           filters:
             branches:
               only:
