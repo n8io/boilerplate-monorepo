@@ -1,6 +1,6 @@
 {
   "name": "@boilerplate-monorepo/tool-hook-generator",
-  "version": "1.0.3",
+  "version": "1.0.0",
   "private": true,
   "module": "index.js",
   "author": "Nate Clark <n8@n8io.com>",

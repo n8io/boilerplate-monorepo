@@ -59,48 +59,6 @@ jobs:
           command: |
             bash <(curl -s https://codecov.io/bash)
 
-  build-service:
-    docker:
-      - image: circleci/node:14.2.0
-    environment:
-      TERM: xterm
-      SENTRY_PROJECT: boilerplate-monorepo-service
-    working_directory: ~/app
-    steps:
-      - checkout
-      - run:
-          name: Check if the [service] needs built
-          command: ./.circleci/exit-untouched.sh packages/common packages/service
-      - restore_cache:
-          keys:
-            - v1-deps-{{ .Branch }}-{{ checksum "yarn.lock" }}
-            - v1-deps-{{ checksum "yarn.lock" }}
-            - v1-deps-
-      - run:
-          name: Build the [service]
-          command: yarn -s build:service
-
-  build-ui:
-    docker:
-      - image: circleci/node:14.2.0
-    environment:
-      TERM: xterm
-      SENTRY_PROJECT: boilerplate-monorepo-ui
-    working_directory: ~/app
-    steps:
-      - checkout
-      - run:
-          name: Check if the [ui] needs built
-          command: ./.circleci/exit-untouched.sh packages/common packages/ui-common packages/ui
-      - restore_cache:
-          keys:
-            - v1-deps-{{ .Branch }}-{{ checksum "yarn.lock" }}
-            - v1-deps-{{ checksum "yarn.lock" }}
-            - v1-deps-
-      - run:
-          name: Build the [ui]
-          command: yarn -s build:ui
-
   deploy-service:
     docker:
       - image: circleci/node:14.2.0
@@ -127,26 +85,6 @@ jobs:
           command: |
             git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME_UI.git master
 
-  release:
-    docker:
-      - image: circleci/node:14.2.0
-    environment:
-      TERM: xterm
-    working_directory: ~/app
-    steps:
-      - checkout
-      - run:
-          name: Check if the a release is needed
-          command: ./.circleci/exit-untouched.sh packages/
-      - restore_cache:
-          keys:
-            - v1-deps-{{ .Branch }}-{{ checksum "yarn.lock" }}
-            - v1-deps-{{ checksum "yarn.lock" }}
-            - v1-deps-
-      - run:
-          name: Release a new version
-          command: yarn -s semantic-release
-
 workflows:
   version: 2
   features:
@@ -155,20 +93,6 @@ workflows:
       - test:
           requires:
             - install
-      - build-service:
-          requires:
-            - test
-          filters:
-            branches:
-              only:
-                - master
-      - build-ui:
-          requires:
-            - test
-          filters:
-            branches:
-              only:
-                - master
       # - approve-deployment-service:
       #     type: approval
       #     requires:
@@ -179,23 +103,21 @@ workflows:
       #       - build-ui
       - deploy-service:
           requires:
-            - build-service
+            - test
           filters:
             branches:
               only:
                 - master
+            tags:
+              only:
+                - /.*/
       - deploy-ui:
           requires:
-            - build-ui
+            - test
           filters:
             branches:
               only:
                 - master
-      - release:
-          requires:
-            - build-service
-            - build-ui
-          filters:
-            branches:
+            tags:
               only:
-                - master
+                - /.*/
