@@ -1,13 +1,14 @@
 {
   "command": {
+    "publish": {
+      "conventionalCommits": true
+    },
     "version": {
       "allowBranch": "master"
     }
   },
   "npmClient": "yarn",
-  "packages": [
-    "packages/*"
-  ],
+  "packages": ["packages/*"],
   "useWorkspaces": true,
-  "version": "1.0.3"
+  "version": "1.0.0"
 }
