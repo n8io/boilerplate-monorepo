@@ -29,7 +29,7 @@ const Notification = ({ children, type }) => {
   const notify = prop(type.toLowerCase(), toast);
 
   const Content = () => (
-    <Container>
+    <Container data-testid="notification" type={type}>
       <IconBackground>
         <LogLevelIcon type={type} />
       </IconBackground>
