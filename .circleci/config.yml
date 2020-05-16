@@ -89,38 +89,58 @@ workflows:
   version: 2
   features:
     jobs:
-      - install
+      - install:
+          filters:
+            branches:
+              only: /.*/
+            tags:
+              ignore: /^v.*/
       - test:
           requires:
             - install
+          filters:
+            branches:
+              only: /.*/
+            tags:
+              ignore: /^v.*/
+  release:
+    jobs:
+      - install:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+      - test:
+          requires:
+            - install
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
       - approve-deploy:
           type: approval
           requires:
             - test
           filters:
             branches:
-              only:
-                - master
+              ignore: /.*/
             tags:
-              only:
-                - /.*/
+              only: /^v.*/
       - deploy-service:
           requires:
             - approve-deploy
           filters:
             branches:
-              only:
-                - master
+              ignore: /.*/
             tags:
-              only:
-                - /.*/
+              only: /^v.*/
       - deploy-ui:
           requires:
             - approve-deploy
           filters:
             branches:
-              only:
-                - master
+              ignore: /.*/
             tags:
-              only:
-                - /.*/
+              only: /^v.*/

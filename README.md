@@ -133,6 +133,7 @@ yarn hook:query UserSelf
 
 **WARNING**:
 Running the command below will:
+
 1. Bump versions in all `package.json`'s using conventional commits
 2. Update `README`s using conventional commits
 3. Tag and push a new release to GitHub
@@ -144,8 +145,12 @@ _While it is possible to unravel_, please make sure you
 mean to release a new version of the repo when running it.
 
 Pending you have permissions to push to `master`, run the following:
+
 ```shell
-(git checkout master && yarn semantic-release)
+GH_TOKEN=<YOUR_GITHUB_PERSONAL_ACCESS_TOKEN> yarn release
+
+# Follow the prompts
+
 ```
 
 ## License

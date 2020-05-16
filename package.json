@@ -54,7 +54,7 @@
     "logs": "yarn run -s run-all logs:*",
     "logs:service": "yarn run -s dclf service",
     "logs:ui": "yarn run -s dclf ui",
-    "release": "semantic-release",
+    "release": "lerna version --conventional-commits --create-release github",
     "run-all": "yarn -s run-all-p --silent",
     "run-all-p": "run-p",
     "run-all-s": "run-s",
