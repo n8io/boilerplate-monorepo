@@ -2,7 +2,7 @@ import { LocalStorage } from '@boilerplate-monorepo/ui-common';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdLanguage } from 'react-icons/md';
-import { Menu, MenuDisclosure, MenuItem, useMenuState } from 'reakit/Menu';
+import { Menu, MenuButton, MenuItem, useMenuState } from 'reakit/Menu';
 import { Context, Size, styles } from 'shared/Button';
 import styled from 'styled-components/macro';
 import { CustomProperty } from 'types/customProperties';
@@ -10,7 +10,7 @@ import { Language } from 'types/language';
 import { LanguageDisplay } from 'types/languageDisplay';
 import * as ThemeStyles from './theme';
 
-const StyledDisclosure = styled(MenuDisclosure)`
+const StyledDisclosure = styled(MenuButton)`
   ${styles}
 `;
 

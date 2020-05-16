@@ -2,7 +2,7 @@ import { url } from 'gravatar';
 import { bool, func, object } from 'prop-types';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Menu, MenuDisclosure, MenuItem, useMenuState } from 'reakit/Menu';
+import { Menu, MenuButton, MenuItem, useMenuState } from 'reakit/Menu';
 import { Context, Size, styles as buttonStyles } from 'shared/Button';
 import { Loader } from 'shared/Loader';
 import { Muted } from 'shared/Muted';
@@ -21,7 +21,7 @@ const Container = styled.div`
   grid-template-columns: 1fr auto;
 `;
 
-const StyledDisclosure = styled(MenuDisclosure)`
+const StyledDisclosure = styled(MenuButton)`
   ${buttonStyles}
 `;
 

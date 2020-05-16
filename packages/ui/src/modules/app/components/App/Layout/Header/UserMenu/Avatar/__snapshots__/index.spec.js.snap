@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Avatar/> renders properly 1`] = `
-<x-menudisclosure
+<x-menubutton
   aria-label="user menu"
   classname="Avatar__StyledDisclosure-sc-11puhtb-1 icsQwQ"
   context="LINK"
@@ -20,5 +20,5 @@ exports[`<Avatar/> renders properly 1`] = `
       src="//www.gravatar.com/avatar/0c83f57c786a0b4a39efab23731c7ebc?d=identicon&r=G&s=30"
     />
   </div>
-</x-menudisclosure>
+</x-menubutton>
 `;
