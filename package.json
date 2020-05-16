@@ -9,6 +9,11 @@
   "workspaces": [
     "packages/*"
   ],
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
   "scripts": {
     "🔥": "rm -rf {coverage,node_modules} && (cd packages/common && rm -rf {coverage,dist,node_modules}) && (cd packages/service && rm -rf {coverage,dist,node_modules}) && (cd packages/ui && rm -rf {build,coverage,node_modules}) && (cd packages/ui-common && rm -rf {coverage,dist,node_modules})",
     "🚀": "yarn -s hosts && yarn run -s run-all start:dev:*",
@@ -23,6 +28,7 @@
     "build:service": "yarn -s build:adhoc && yarn -s build:adhoc:service",
     "build:ui": "yarn -s build:adhoc && yarn -s run-all-s build:adhoc:ui-common build:adhoc:ui",
     "clean": "yarn run -s dcd && yarn run -s dc down --remove-orphans && docker network prune -f",
+    "commit": "git-cz",
     "db:migrate:down": "lerna run migration:down --loglevel silent --stream --scope \"@${npm_package_name}/service\"",
     "db:migrate:gen": "lerna run migration:gen --loglevel silent --stream --scope \"@${npm_package_name}/service\" --",
     "db:migrate": "lerna run migration:latest --loglevel silent --stream --scope \"@${npm_package_name}/service\"",
@@ -78,12 +84,16 @@
     "@arkweid/lefthook": "^0.7.1",
     "@babel/core": "^7.9.6",
     "@babel/preset-env": "^7.9.6",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
     "babel-eslint": "^10.0.2",
     "babel-jest": "^24.8.0",
     "babel-plugin-macros": "^2.6.1",
     "babel-plugin-module-resolver": "^4.0.0",
     "chalk": "^4.0.0",
+    "commitizen": "^4.1.2",
     "cypress": "^4.5.0",
+    "cz-conventional-changelog": "^3.2.0",
     "dotenv": "^8.2.0",
     "eslint": "^7.0.0",
     "eslint-config-prettier": "^6.0.0",
