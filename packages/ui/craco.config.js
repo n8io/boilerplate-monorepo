@@ -1,10 +1,12 @@
-const { ESLINT_MODES, whenProd } = require('@craco/craco');
+const { ESLINT_MODES, whenDev, whenProd } = require('@craco/craco');
+const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = {
   babel: {
     plugins: [
       'add-react-displayname',
       ['babel-plugin-styled-components', { ssr: false }],
+      ...whenDev(() => ['react-refresh/babel'], []),
       ...whenProd(() => ['babel-plugin-jsx-remove-data-test-id'], []),
     ],
   },
@@ -19,6 +21,7 @@ module.exports = {
     configure: (webpackConfig) => ({
       ...webpackConfig,
       optimization: {
+        ...webpackConfig.optimization,
         splitChunks: {
           cacheGroups: {
             vendor: {
@@ -43,6 +46,10 @@ module.exports = {
           minSize: 0,
         },
       },
+      plugins: [
+        ...(webpackConfig.plugins || []),
+        ...whenDev(() => [new ReactRefreshPlugin()], []),
+      ],
     }),
   },
 };
