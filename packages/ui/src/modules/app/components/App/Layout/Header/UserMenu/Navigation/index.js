@@ -1,3 +1,4 @@
+import { Permission } from '@boilerplate-monorepo/common';
 import { A11y } from '@boilerplate-monorepo/ui-common';
 import { func } from 'prop-types';
 import React, { useCallback, useState } from 'react';
@@ -16,7 +17,6 @@ import { styles as themeStyles } from './theme';
 
 const { Role } = A11y;
 const { LINK } = Context;
-const routes = Route.filterToNavigation(Route.values);
 const TOUCH_HANDLE_DISTANCE = 20;
 
 const StyledNav = styled.nav`
@@ -47,26 +47,52 @@ const ButtonContainer = styled.div`
   white-space: nowrap;
 `;
 
+const toNavLink = (authContext, onClick) => (route) => {
+  const { isAuthenticated, role } = authContext;
+  const { isAuthenticationRequired, requiredPermission } = route;
+
+  if (isAuthenticationRequired && !isAuthenticated) {
+    return null;
+  }
+
+  if (
+    requiredPermission &&
+    !Permission.hasPermission(role, requiredPermission)
+  ) {
+    return null;
+  }
+
+  return (
+    <NavLink
+      data-testid={route.name}
+      key={route.name}
+      onClick={onClick}
+      route={route}
+    />
+  );
+};
+
 const InnerSideBar = ({ onClose, t }) => {
   const commonT = useTranslate({
     component: 'common',
     namespace: 'common',
   });
-  const { isAuthenticated } = useAuth();
+  const authContext = useAuth();
+  const { isAuthenticated } = authContext;
+  const authRoute = isAuthenticated ? Route.LOGOUT : Route.LOGIN;
+  const routes = Route.filterToNavigation(Route.values);
 
   const authDisplayText = isAuthenticated
     ? commonT('logout')
     : commonT('login');
-  const authRoute = isAuthenticated ? Route.LOGOUT : Route.LOGIN;
 
   return (
     <StyledNav aria-label="sidebar" role={Role.NAVIGATION}>
       <Container>
-        {routes.map((route) => (
-          <NavLink key={route.name} onClick={onClose} route={route} />
-        ))}
+        {routes.map(toNavLink(authContext, onClose))}
         {isAuthenticated && (
           <NavLink
+            data-testid={Route.USER_ACCOUNT.name}
             onClick={onClose}
             route={Route.USER_ACCOUNT}
             title={t('account')}

@@ -18,7 +18,7 @@
     "start:pre": "(cat ../../.ini/certs/cert.pem ../../.ini/certs/key.pem > ../../node_modules/webpack-dev-server/ssl/server.pem) || :",
     "start:prod": "yarn run -s serve -l 3000 --ssl-cert ../../.ini/certs/cert.pem --ssl-key ../../.ini/certs/key.pem",
     "start:prod:heroku": "yarn run -s serve",
-    "test": "craco test --passWithNoTests",
+    "test": "NODE_ENV=test craco test --passWithNoTests",
     "test:ci": "JEST_JUNIT_OUTPUT_DIR=../../.tmp/test-results/jest/ui yarn -s test --ci --runInBand --reporters=default --reporters=jest-junit",
     "test:watch": "craco test --passWithNoTests --color"
   },

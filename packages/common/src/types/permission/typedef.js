@@ -1,3 +1,4 @@
+import { values as ramdaValues } from 'ramda';
 import { UserRole } from 'types/userRole';
 
 const { ADMIN } = UserRole;
@@ -10,4 +11,6 @@ const Access = {
   USERS_MANAGE: [ADMIN],
 };
 
-export { Access, Enumeration };
+const values = ramdaValues(Enumeration);
+
+export { Access, Enumeration, values };

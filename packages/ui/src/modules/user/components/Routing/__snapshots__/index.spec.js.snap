@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Routing/> renders properly 1`] = `
+<x-switch>
+  <x-route
+    path="/account/recovery"
+  />
+  <x-authroute />
+</x-switch>
+`;

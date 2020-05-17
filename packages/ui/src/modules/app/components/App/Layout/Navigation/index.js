@@ -1,5 +1,7 @@
+import { Permission } from '@boilerplate-monorepo/common';
 import { A11y, SkipToDestination } from '@boilerplate-monorepo/ui-common';
 import React from 'react';
+import { useAuth } from 'shared/useAuth';
 import styled from 'styled-components/macro';
 import { CustomProperty } from 'types/customProperties';
 import { GridTemplateArea } from 'types/gridTemplateArea';
@@ -20,10 +22,26 @@ const Container = styled.nav`
   width: max-content;
 `;
 
-const toNavLink = (route, index) => {
+// eslint-disable-next-line complexity
+const toNavLink = (authContext) => (route, index) => {
   const id = index === 0 ? SkipToDestination.NAVIGATION : undefined;
+  const { isAuthenticated, role } = authContext;
+  const { isAuthenticationRequired, requiredPermission } = route;
 
-  return <NavLink id={id} key={route.name} route={route} />;
+  if (isAuthenticationRequired && !isAuthenticated) {
+    return null;
+  }
+
+  if (
+    requiredPermission &&
+    !Permission.hasPermission(role, requiredPermission)
+  ) {
+    return null;
+  }
+
+  return (
+    <NavLink data-testid={route.name} id={id} key={route.name} route={route} />
+  );
 };
 
 const NavLinks = styled.div`
@@ -32,11 +50,15 @@ const NavLinks = styled.div`
   grid-area: ${GridTemplateArea.NAV_LINK};
 `;
 
-const Navigation = () => (
-  <Container role={Role.NAVIGATION}>
-    <NavLinks>{navRoutes.map(toNavLink)}</NavLinks>
-    <AuthLink />
-  </Container>
-);
+const Navigation = () => {
+  const authContext = useAuth();
+
+  return (
+    <Container role={Role.NAVIGATION}>
+      <NavLinks>{navRoutes.map(toNavLink(authContext))}</NavLinks>
+      <AuthLink />
+    </Container>
+  );
+};
 
 export { Navigation };
