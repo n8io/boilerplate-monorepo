@@ -4,6 +4,7 @@ import { node } from 'prop-types';
 import React, { useCallback, useState } from 'react';
 import { useUserLogout } from 'shared/graphql';
 import { AccessToken } from 'types/accessToken';
+import { Jwt } from 'types/jwt';
 import { Provider } from 'types/provider';
 
 const Auth = ({ children }) => {
@@ -12,7 +13,7 @@ const Auth = ({ children }) => {
   );
 
   const client = useApolloClient();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(Jwt.decode(AccessToken.read()));
   const [mutate] = useUserLogout();
 
   const logout = useCallback(async () => {

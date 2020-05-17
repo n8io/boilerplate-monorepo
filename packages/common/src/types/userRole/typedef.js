@@ -1,6 +1,10 @@
+import { values as ramdaValues } from 'ramda';
+
 const Enumeration = {
   ADMIN: 'ADMIN',
   USER: 'USER',
 };
 
-export { Enumeration };
+const values = ramdaValues(Enumeration);
+
+export { Enumeration, values };

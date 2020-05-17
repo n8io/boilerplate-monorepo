@@ -9,10 +9,16 @@ exports[`<Navigation/> renders properly 1`] = `
     class="Navigation__NavLinks-hlefot-1 blIUvd"
   >
     <x-navlink
+      data-testid="dashboard"
       id="navigation"
       route="[object Object]"
     />
     <x-navlink
+      data-testid="about"
+      route="[object Object]"
+    />
+    <x-navlink
+      data-testid="userManagement"
       route="[object Object]"
     />
   </div>

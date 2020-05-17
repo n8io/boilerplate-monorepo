@@ -12,6 +12,7 @@ export const app = {
       registration: 'Sign Up',
       root: 'Home',
       testPage: 'Test Page',
+      userManagement: 'Users',
     },
     openNavigation: 'Open navigation',
     tapHereOrSwipeToClose: 'Tap here or swipe to close',

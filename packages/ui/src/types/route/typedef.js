@@ -1,3 +1,4 @@
+import { Permission } from '@boilerplate-monorepo/common';
 import { config } from 'config';
 import { shape, string } from 'prop-types';
 import { values as ramdaValues } from 'ramda';
@@ -7,6 +8,7 @@ import {
   FaSignInAlt,
   FaSignOutAlt,
   FaUserAlt,
+  FaUsersCog,
 } from 'react-icons/fa';
 import { GiFireBowl } from 'react-icons/gi';
 import { MdDashboard, MdPersonAdd } from 'react-icons/md';
@@ -65,6 +67,7 @@ export const Enumeration = {
   },
   USER_ACCOUNT: {
     icon: FaUserAlt,
+    isAuthenticationRequired: true,
     name: 'account',
     path: '/account',
   },
@@ -112,6 +115,15 @@ export const Enumeration = {
     icon: FaUserAlt,
     name: 'accountSecurity',
     path: '/account/security',
+  },
+  USER_MANAGEMENT: {
+    [SORT_PROP_NAME]: 20,
+    exact,
+    icon: FaUsersCog,
+    isAuthenticationRequired: true,
+    name: 'userManagement',
+    path: '/users',
+    requiredPermission: Permission.USERS_MANAGE,
   },
 };
 

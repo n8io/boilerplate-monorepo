@@ -5,8 +5,10 @@ const example = (overrides) => ({
   [SORT_PROP_NAME]: 1,
   exact: true,
   icon: MdDashboard,
+  isAuthenticationRequired: false,
   name: 'dashboard',
   path: '/',
+  requiredPermission: null,
   ...overrides,
 });
 

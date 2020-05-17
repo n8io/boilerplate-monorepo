@@ -7,9 +7,10 @@ const Logout = () => {
   const history = useHistory();
   const { logout } = useAuth();
 
-  useTimeout(() => history.push(Route.LOGIN.path), 1);
-
-  logout();
+  useTimeout(() => {
+    logout();
+    history.push(Route.LOGIN.path);
+  }, 1);
 
   return null;
 };

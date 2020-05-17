@@ -8,6 +8,7 @@ import { NotFound } from 'modules/notFound';
 import { Signup } from 'modules/signup';
 import { TestPage } from 'modules/testPage';
 import { User } from 'modules/user';
+import { Users } from 'modules/users';
 
 const componentMap = {
   about: About,
@@ -19,10 +20,11 @@ const componentMap = {
   root: Dashboard,
   signup: Signup,
   testPage: TestPage,
+  userManagement: Users,
 };
 
 const addComponent = (route) => {
-  const component = defaultTo(Dashboard, componentMap[route.name]);
+  const component = defaultTo(NotFound, componentMap[route.name]);
 
   return mergeRight(route, { component });
 };

@@ -6,7 +6,7 @@ module.exports = {
     plugins: [
       'add-react-displayname',
       ['babel-plugin-styled-components', { ssr: false }],
-      ...whenDev(() => ['react-refresh/babel'], []),
+      ...whenDev(() => [['react-refresh/babel', { skipEnvCheck: true }]], []),
       ...whenProd(() => ['babel-plugin-jsx-remove-data-test-id'], []),
     ],
   },
@@ -48,7 +48,7 @@ module.exports = {
       },
       plugins: [
         ...(webpackConfig.plugins || []),
-        ...whenDev(() => [new ReactRefreshPlugin()], []),
+        ...whenDev(() => [new ReactRefreshPlugin({ overlay: false })], []),
       ],
     }),
   },

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<List/> renders properly 1`] = `
+<x-breadcrumbs>
+  <x-breadcrumb
+    isend="true"
+    text="t(users)"
+    to="/users"
+  />
+</x-breadcrumbs>
+`;
