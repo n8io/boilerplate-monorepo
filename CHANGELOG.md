@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/n8io/boilerplate-monorepo/compare/v1.1.1...v1.2.0) (2020-05-17)
+
+
+### Features
+
+* **ui:** ✨ Add user management page and respective nav links ([df3740f](https://github.com/n8io/boilerplate-monorepo/commit/df3740f0d8856467952119769fd3f18636a62fa3))
+
+
+
+
+
 ## [1.1.1](https://github.com/n8io/boilerplate-monorepo/compare/v1.1.0...v1.1.1) (2020-05-16)
 
 **Note:** Version bump only for package boilerplate-monorepo
