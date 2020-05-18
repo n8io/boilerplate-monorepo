@@ -8,7 +8,7 @@ export const common = {
     'Must contain at least one uppercase letter, lowercase letter, number, and special character',
   DOES_NOT_MEET_USERNAME_REQUIREMENTS:
     'Must only contain letters, numbers, dashes, and underscores',
-  GENERIC_NETWORK_ERROR: 'No internet',
+  GENERIC_NETWORK_ERROR: 'No internet connection',
   INTERNAL_SERVER_ERROR: 'An unexpected error has occurred',
   INVALID_EMAIL: 'Must be a valid email address',
   RANGE_DATE: 'Must be between {{min}} and {{max}}',
@@ -34,6 +34,8 @@ export const common = {
   login: 'Log In',
   logout: 'Log Out',
   newPassword: 'New Password',
+  offlineDetected: `Oh noooos! It seems you've lost internet connection`,
+  onlineDetected: `Sweet, you're back online`,
   password: 'Password',
   profile: 'Profile',
   proveYouAreNotARobot: "Prove You're Not a Robot",
