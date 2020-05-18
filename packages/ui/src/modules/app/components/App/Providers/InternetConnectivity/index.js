@@ -16,7 +16,7 @@ const InternetConnectivity = ({ children }) => {
     };
 
     await checkInternetConnection();
-  }, Time.seconds(5));
+  }, Time.seconds(15));
 
   return (
     <Provider.INTERNET_CONNECTIVITY value={isInternetConnected}>
