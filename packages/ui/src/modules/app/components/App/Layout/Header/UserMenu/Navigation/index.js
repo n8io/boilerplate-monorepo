@@ -73,10 +73,7 @@ const toNavLink = (authContext, onClick) => (route) => {
 };
 
 const InnerSideBar = ({ onClose, t }) => {
-  const commonT = useTranslate({
-    component: 'common',
-    namespace: 'common',
-  });
+  const commonT = useTranslate();
   const authContext = useAuth();
   const { isAuthenticated } = authContext;
   const authRoute = isAuthenticated ? Route.LOGOUT : Route.LOGIN;

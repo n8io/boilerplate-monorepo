@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NoData/> renders properly 1`] = `
+<div
+  class="NoData__Container-ejXrQk dwDQBO"
+>
+  <div>
+    t(noDataToDisplay)
+  </div>
+</div>
+`;

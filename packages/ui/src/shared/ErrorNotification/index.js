@@ -6,10 +6,7 @@ import { toErrorMessage } from '../graphql/utils/toErrorMessage';
 import { useTranslate } from '../useTranslate';
 
 const ErrorNotification = ({ error, messageKey, t: originalT }) => {
-  const fallbackT = useTranslate({
-    component: 'common',
-    namespace: 'common',
-  });
+  const fallbackT = useTranslate();
 
   if (!error) return null;
 

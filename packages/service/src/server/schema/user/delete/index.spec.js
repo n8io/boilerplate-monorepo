@@ -22,13 +22,13 @@ describe('user delete mutation', () => {
       ({ execMutation } = makeGraphqlClient(makeContext({ user: null })));
     });
 
-    test(`returns a ${ErrorType.FORBIDDEN} error`, async () => {
+    test(`returns a ${ErrorType.UNAUTHENTICATED} error`, async () => {
       const id = 'ID';
       const variables = { id };
       const response = await execMutation({ mutation, variables });
       const errorCode = responseToErrorCode(response);
 
-      expect(errorCode).toEqual(ErrorType.FORBIDDEN);
+      expect(errorCode).toEqual(ErrorType.UNAUTHENTICATED);
     });
   });
 

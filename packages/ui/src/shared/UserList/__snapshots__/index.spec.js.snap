@@ -1,24 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<UserList/> renders properly 1`] = `
+exports[`<UserList/> when there are users renders users properly 1`] = `
 <div
-  class="UserList__Container-hcXHAO hGeQFQ"
+  class="UserList__Container-hcXHAO eGQWk"
 >
   <div
-    class="UserList__Row-bzzkPz dEXDKJ"
+    class="UserList__Row-bzzkPz iTUFeF"
   >
     <div
-      class="UserList__Cell-heYRAP iAiKWD"
-    >
-      ID
-    </div>
-    <div
-      class="UserList__Cell-heYRAP iAiKWD"
+      class="UserList__Cell-heYRAP fEyKle"
     >
       USER
     </div>
     <div
-      class="UserList__Cell-heYRAP iAiKWD"
+      class="UserList__Cell-heYRAP fEyKle"
+    >
+      USERNAME
+    </div>
+    <div
+      class="UserList__Cell-heYRAP fEyKle"
     >
       GIVEN_NAME FAMILY_NAME
     </div>
