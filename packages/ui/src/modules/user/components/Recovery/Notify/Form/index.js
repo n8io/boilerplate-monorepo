@@ -19,7 +19,7 @@ import { CustomProperty } from 'types/customProperties';
 import { Route } from 'types/route';
 
 const StyledRadioInput = styled(RadioInput)`
-  font-family: ${CustomProperty.FONT_MONO};
+  font-family: ${CustomProperty.FONT_MONO}, monospace;
 `;
 
 const Form = ({ user }) => {

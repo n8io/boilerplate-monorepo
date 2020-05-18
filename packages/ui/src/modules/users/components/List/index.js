@@ -1,4 +1,4 @@
-import { pipe, pluck, propOr } from 'ramda';
+import { pathOr, pipe, pluck, propOr } from 'ramda';
 import React from 'react';
 import { Body, Breadcrumb, Breadcrumbs, Header } from 'shared/Content';
 import { ErrorNotification } from 'shared/ErrorNotification';
@@ -15,19 +15,23 @@ const List = () => {
     namespace: 'users',
   });
 
-  const input = { after: null, first: 10 };
+  const input = { after: null, first: null };
   const variables = { input };
   const { loading, data, error } = useUsers({ variables });
   const users = pipe(propOr([], 'edges'), pluck('node'))(data);
+  const total = pathOr('', ['pageInfo', 'total'], data);
   const isRefreshing = Boolean(loading && data);
   const isInitialLoad = Boolean(loading && !data && !error);
+  const totalText = total ? `(${total})` : '';
 
   return (
     <>
       <Breadcrumbs>
         <Breadcrumb isEnd text={t('users')} to={Route.USER_MANAGEMENT.path} />
       </Breadcrumbs>
-      <Header isLoading={isRefreshing} title={t('users')} />
+      <Header isLoading={isRefreshing} title={t('users')}>
+        {t('usersWithTotal', { total: totalText })}
+      </Header>
       <Body>
         <ErrorNotification error={error} messageKey="usersFetchFailed" t={t} />
         {isInitialLoad && <Loader />}

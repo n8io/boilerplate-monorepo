@@ -5,7 +5,7 @@ exports[`<UserList/> when there are users renders users properly 1`] = `
   class="UserList__Container-hcXHAO eGQWk"
 >
   <div
-    class="UserList__Row-bzzkPz iTUFeF"
+    class="UserList__Row-bzzkPz eqbTRZ"
   >
     <div
       class="UserList__Cell-heYRAP fEyKle"
