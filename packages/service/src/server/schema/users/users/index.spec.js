@@ -1,5 +1,10 @@
 /* eslint-disable max-nested-callbacks */
-import { User, UserRole, UserSnapshot } from '@boilerplate-monorepo/common';
+import {
+  Pagination,
+  User,
+  UserRole,
+  UserSnapshot,
+} from '@boilerplate-monorepo/common';
 import { gql } from 'apollo-server-express';
 import {
   makeContext,
@@ -8,7 +13,6 @@ import {
   responseToErrorCode,
 } from 'testHelpers';
 import { ErrorType } from 'types/errorType';
-import { Pagination } from 'types/pagination';
 import { toUserCursor } from './index';
 
 describe('users query', () => {
@@ -47,11 +51,11 @@ describe('users query', () => {
       ({ execMutation } = makeGraphqlClient(makeContext({ user: null })));
     });
 
-    test(`returns a ${ErrorType.FORBIDDEN} error`, async () => {
+    test(`returns a ${ErrorType.UNAUTHENTICATED} error`, async () => {
       const response = await execMutation({ query, variables });
       const errorCode = responseToErrorCode(response);
 
-      expect(errorCode).toEqual(ErrorType.FORBIDDEN);
+      expect(errorCode).toEqual(ErrorType.UNAUTHENTICATED);
     });
   });
 

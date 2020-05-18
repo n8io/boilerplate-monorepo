@@ -1,7 +1,8 @@
 import { Utils } from '@boilerplate-monorepo/common';
 import { SkipToDestination } from '@boilerplate-monorepo/ui-common';
-import { node, string } from 'prop-types';
-import React, { useLayoutEffect, useState, useCallback } from 'react';
+import { bool, node, string } from 'prop-types';
+import React, { useCallback, useLayoutEffect, useState } from 'react';
+import { Loader } from 'shared/Loader';
 import styled, { css } from 'styled-components/macro';
 import { CustomProperty } from 'types/customProperties';
 import { document } from 'types/document';
@@ -27,13 +28,13 @@ const Container = styled.div`
   height: ${CustomProperty.LAYOUT_MAIN_HEADER_HEIGHT};
   margin: calc(${CustomProperty.BASE_UNIT} * 0.5) ${CustomProperty.BASE_UNIT} 0;
   padding: 0;
-  transition: 
+  transition:
     border ${DELAY} ${CustomProperty.TRANSITION_TIMING_FUNCTION},
     height ${DELAY} ${CustomProperty.TRANSITION_TIMING_FUNCTION},
     margin ${DELAY} ${CustomProperty.TRANSITION_TIMING_FUNCTION},
     padding ${DELAY} ${CustomProperty.TRANSITION_TIMING_FUNCTION}
     ;
-  
+
   &::before {
     opacity: 0;
     transition: opacity ${DELAY} ${CustomProperty.TRANSITION_TIMING_FUNCTION};
@@ -68,7 +69,14 @@ const H1 = styled(EllipsiedText)`
     `}
 `;
 
-const Header = ({ children, title }) => {
+const LoaderContainer = styled.div`
+  position: absolute;
+  right: ${({ isScrolled }) => (isScrolled ? '2rem' : '1rem')};
+  top: 50%;
+  transition: right 0.5s ${CustomProperty.TRANSITION_TIMING_FUNCTION};
+`;
+
+const Header = ({ children, isLoading, title }) => {
   const { isEnabled: isModalityEnabled } = useModality();
   const [isScrolled, beScrolled] = useState(false);
 
@@ -105,6 +113,11 @@ const Header = ({ children, title }) => {
         {...autoFocus}
       >
         {children || title}
+        {isLoading && (
+          <LoaderContainer isScrolled={isScrolled}>
+            <Loader />
+          </LoaderContainer>
+        )}
       </H1>
       <div />
     </Container>
@@ -113,10 +126,12 @@ const Header = ({ children, title }) => {
 
 Header.defaultProps = {
   children: undefined,
+  isLoading: false,
 };
 
 Header.propTypes = {
   children: node,
+  isLoading: bool,
   title: string.isRequired,
 };
 

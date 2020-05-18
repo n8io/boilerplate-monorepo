@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UserList/> renders properly 1`] = `
+<div
+  class="UserList__Container-hcXHAO hGeQFQ"
+>
+  <div
+    class="UserList__Row-bzzkPz dEXDKJ"
+  >
+    <div
+      class="UserList__Cell-heYRAP iAiKWD"
+    >
+      ID
+    </div>
+    <div
+      class="UserList__Cell-heYRAP iAiKWD"
+    >
+      USER
+    </div>
+    <div
+      class="UserList__Cell-heYRAP iAiKWD"
+    >
+      GIVEN_NAME FAMILY_NAME
+    </div>
+  </div>
+</div>
+`;

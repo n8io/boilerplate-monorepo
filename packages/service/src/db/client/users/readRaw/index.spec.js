@@ -1,7 +1,6 @@
-import { User } from '@boilerplate-monorepo/common';
+import { Pagination, User } from '@boilerplate-monorepo/common';
 import knexMock from 'mock-knex';
 import { Db } from 'types/db';
-import { Pagination } from 'types/pagination';
 import { readRaw } from './index';
 
 describe('users readRaw', () => {

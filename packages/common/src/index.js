@@ -2,6 +2,7 @@ export { Color } from './types/color';
 export { Email } from './types/email';
 export { FetchPolicy } from './types/fetchPolicy';
 export { LogLevel } from './types/logLevel';
+export { Pagination } from './types/pagination';
 export { PaginationInput } from './types/paginationInput';
 export { Permission } from './types/permission';
 export { Phone } from './types/phone';

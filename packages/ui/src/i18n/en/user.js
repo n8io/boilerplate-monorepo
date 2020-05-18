@@ -30,6 +30,8 @@ export const user = {
   security: 'Security',
   securityUpdateError: 'Unable to update password: {{ message }}',
   securityUpdateSuccess: 'Password updated successfully',
+  selfError: 'Unable to load your profile: {{ message }}',
+  selfUpdateError: 'Unable to update profile: {{ message }}',
   sendNotificationInformation: 'Send Recovery Information',
   updatePassword: 'Update Password',
   updateProfile: 'Update Profile',

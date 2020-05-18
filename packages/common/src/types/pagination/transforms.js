@@ -1,5 +1,5 @@
-import { Utils } from '@boilerplate-monorepo/common';
 import { defaultTo, last, map, pipe, split, unless } from 'ramda';
+import { isNullOrEmpty } from 'utils/isNullOrEmpty';
 import { Enumeration } from './typedef';
 
 const Encoding = {
@@ -9,18 +9,18 @@ const Encoding = {
 
 const defaultToNull = defaultTo(null);
 
-const base64Encode = unless(Utils.isNullOrEmpty, (clearText) =>
+const base64Encode = unless(isNullOrEmpty, (clearText) =>
   Buffer.from(clearText).toString(Encoding.BASE64)
 );
 
-const base64Decode = unless(Utils.isNullOrEmpty, (encodedText) =>
+const base64Decode = unless(isNullOrEmpty, (encodedText) =>
   Buffer.from(encodedText, Encoding.BASE64).toString(Encoding.ASCII)
 );
 
 const cursorToAfter = pipe(
   defaultToNull,
   base64Decode,
-  unless(Utils.isNullOrEmpty, split(Enumeration.DELIMITER))
+  unless(isNullOrEmpty, split(Enumeration.DELIMITER))
 );
 
 const nodesToPaginatedResults = (nodes, pagination, nodeToCursor) => {

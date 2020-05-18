@@ -1,6 +1,6 @@
 import { prop } from 'ramda';
 import { Pagination } from 'types/pagination';
-import { cursorExample, nodeExample, paginationExample } from './examples';
+import { cursorExample, nodeExample, pageInfoExample } from './examples';
 
 describe('pagination transforms', () => {
   describe('cursorToAfter', () => {
@@ -23,7 +23,7 @@ describe('pagination transforms', () => {
         nodeExample({ id: 'NODE_3' }),
       ];
 
-      const pagination = paginationExample({ rowCount: nodes.length });
+      const pagination = pageInfoExample({ rowCount: nodes.length });
       const nodeToCursor = prop('id');
 
       const actual = Pagination.nodesToPaginatedResults(

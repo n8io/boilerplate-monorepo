@@ -53,9 +53,10 @@ const Form = () => {
 
   return (
     <SharedForm {...formProps} onSubmit={onSelfUpdate}>
+      <ErrorNotification error={userSelfError} messageKey="selfError" t={t} />
       <ErrorNotification
-        error={userSelfError || userSelfUpdateError}
-        messageKey="securityUpdateError"
+        error={userSelfUpdateError}
+        messageKey="selfUpdateError"
         t={t}
       />
       {isSuccessful && (
