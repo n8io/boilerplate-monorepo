@@ -1,6 +1,6 @@
 import { Pagination } from '@boilerplate-monorepo/common';
 import { Models } from 'models';
-import { clamp, defaultTo, identity, map, pipe } from 'ramda';
+import { clamp, defaultTo, map, pipe } from 'ramda';
 
 const readRaw = async ({
   after: tempAfter,
@@ -14,12 +14,12 @@ const readRaw = async ({
     clamp(1, Pagination.MAX_PAGE)
   )(first);
 
-  const whereClause = includeDeleted
-    ? identity
-    : (qb) => qb.where('deleted_at', null).orWhere('deleted_at', '>', 'NOW()');
-
   const { models, pagination } = await Models.User.collection()
-    .query(whereClause)
+    .where(function where() {
+      if (includeDeleted) return;
+
+      this.where('deleted_at', null).orWhere('deleted_at', '>', 'NOW()');
+    })
     .orderBy('family_name')
     .orderBy('given_name')
     .orderBy('id')

@@ -155,7 +155,7 @@ describe('users readRaw', () => {
         switch (step) {
           case 1:
             expect(query.sql).toEqual(
-              `select \`${Db.Schema.MAIN}\`.\`${Db.Table.USERS}\`.* from \`${Db.Schema.MAIN}\`.\`${Db.Table.USERS}\` where \`deleted_at\` is null or \`deleted_at\` > ? order by \`${Db.Schema.MAIN}\`.\`${Db.Table.USERS}\`.\`family_name\` ASC, \`${Db.Schema.MAIN}\`.\`${Db.Table.USERS}\`.\`given_name\` ASC, \`${Db.Schema.MAIN}\`.\`${Db.Table.USERS}\`.\`id\` ASC limit ?`
+              `select \`${Db.Schema.MAIN}\`.\`${Db.Table.USERS}\`.* from \`${Db.Schema.MAIN}\`.\`${Db.Table.USERS}\` where (\`deleted_at\` is null or \`deleted_at\` > ?) order by \`${Db.Schema.MAIN}\`.\`${Db.Table.USERS}\`.\`family_name\` ASC, \`${Db.Schema.MAIN}\`.\`${Db.Table.USERS}\`.\`given_name\` ASC, \`${Db.Schema.MAIN}\`.\`${Db.Table.USERS}\`.\`id\` ASC limit ?`
             );
 
             query.response([user]);
@@ -163,7 +163,7 @@ describe('users readRaw', () => {
             break;
           case 2:
             expect(query.sql).toEqual(
-              `select count(distinct \`${Db.Schema.MAIN}\`.\`${Db.Table.USERS}\`.\`id\`) from \`${Db.Schema.MAIN}\`.\`${Db.Table.USERS}\` where \`deleted_at\` is null or \`deleted_at\` > ?`
+              `select count(distinct \`${Db.Schema.MAIN}\`.\`${Db.Table.USERS}\`.\`id\`) from \`${Db.Schema.MAIN}\`.\`${Db.Table.USERS}\` where (\`deleted_at\` is null or \`deleted_at\` > ?)`
             );
 
             query.response(1);
