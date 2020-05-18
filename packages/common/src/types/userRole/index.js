@@ -1,7 +1,8 @@
-import { Enumeration, values } from './typedef';
+import { Enumeration, typeDef, values } from './typedef';
 
 const UserRole = {
   ...Enumeration,
+  typeDef,
   values,
 };
 

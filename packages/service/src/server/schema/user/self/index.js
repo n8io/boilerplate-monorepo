@@ -1,4 +1,4 @@
-import { UserSnapshot } from '@boilerplate-monorepo/common';
+import { UserRole, UserSnapshot } from '@boilerplate-monorepo/common';
 import { gql } from 'apollo-server-express';
 import { log } from 'log';
 import { logFactory } from 'log/logFactory';
@@ -68,29 +68,8 @@ const resolver = async (_parent, _args, context) => {
 };
 
 const typeDefs = gql`
-  "The user role enumeration"
-  enum UserRole {
-    "The admin user role"
-    ADMIN
-    "The default user role"
-    USER
-  }
-
-  "The user type"
-  type UserSnapshot {
-    "The user's email"
-    email: EmailAddress!
-    "The user's last name"
-    familyName: String!
-    "The user's first name"
-    givenName: String!
-    "The user's unique id"
-    id: String!
-    "The user's role"
-    role: UserRole!
-    "The user's unique username"
-    username: String!
-  }
+  ${UserRole.typeDef}
+  ${UserSnapshot.typeDef}
 
   "The root query"
   type Query {
