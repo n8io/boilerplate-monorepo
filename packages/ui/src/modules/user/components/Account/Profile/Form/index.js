@@ -49,7 +49,7 @@ const Form = () => {
     reset(UserSelfUpdateInput.makeInitial(self));
   }, [self, reset]);
 
-  if (loading || !self) return <Loader />;
+  if (loading && !self) return <Loader />;
 
   return (
     <SharedForm {...formProps} onSubmit={onSelfUpdate}>
