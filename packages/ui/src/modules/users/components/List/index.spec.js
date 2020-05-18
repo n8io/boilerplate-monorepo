@@ -14,20 +14,24 @@ describe('<List/>', () => {
 
   beforeEach(() => {
     const useUsers = td.replace(QueryHooks, 'useUsers');
-    const input = { after: null, first: 10 };
+    const input = { after: null, first: null };
     const queryOptions = { variables: { input } };
+    const cursor = 'CURSOR';
 
     td.when(useUsers(queryOptions)).thenReturn({
       data: {
         users: {
           edges: [
             {
-              cursor: 'CURSOR',
-              node: UserSnapshot.apiExample(),
+              cursor,
+              node: {
+                ...UserSnapshot.apiExample(),
+                cursor,
+              },
             },
           ],
           pageInfo: {
-            endCursor: null,
+            endCursor: cursor,
             hasNextPage: false,
             total: 0,
           },

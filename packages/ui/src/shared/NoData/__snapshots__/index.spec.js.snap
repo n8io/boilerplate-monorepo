@@ -2,7 +2,7 @@
 
 exports[`<NoData/> renders properly 1`] = `
 <div
-  class="NoData__Container-ejXrQk dwDQBO"
+  class="NoData__Container-ejXrQk cgMRDW"
 >
   <div>
     t(noDataToDisplay)

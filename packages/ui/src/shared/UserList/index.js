@@ -30,8 +30,8 @@ const Row = styled.div`
   border-left: 1px solid ${CustomProperty.CUSTOM_BORDER_COLOR};
   border-right: 1px solid ${CustomProperty.CUSTOM_BORDER_COLOR};
   border-top: 1px solid ${CustomProperty.CUSTOM_BORDER_COLOR};
-  display: grid;
   column-gap: 0.5rem;
+  display: grid;
   grid-template-columns: 5rem 10rem 1fr;
   padding: 0 calc(${CustomProperty.BASE_UNIT} * 0.5);
   width: 100%;
