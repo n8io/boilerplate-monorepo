@@ -4,9 +4,9 @@ const { all } = require('ramda');
 dotenv.config();
 
 const envCheck = () => {
-  const { CI } = process.env;
+  const { CI, YARN_PRODUCTION } = process.env;
 
-  if (!CI) {
+  if (!CI && !YARN_PRODUCTION) {
     console.log('Skipping postbuild step (not CI)');
 
     process.exit(0);
