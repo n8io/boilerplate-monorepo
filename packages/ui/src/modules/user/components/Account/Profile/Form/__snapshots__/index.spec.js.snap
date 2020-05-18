@@ -9,7 +9,11 @@ exports[`<Form/> renders properly 1`] = `
   >
     <x-errornotification
       data-testid="error-notification"
-      messagekey="securityUpdateError"
+      messagekey="selfError"
+    />
+    <x-errornotification
+      data-testid="error-notification"
+      messagekey="selfUpdateError"
     />
     <x-textinput
       disabled="true"

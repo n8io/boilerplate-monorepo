@@ -10,6 +10,8 @@ export const QUERY_USERS = gql`
         node {
           id
           email
+          givenName
+          familyName
           role
           username
         }
@@ -17,6 +19,7 @@ export const QUERY_USERS = gql`
       pageInfo {
         endCursor
         hasNextPage
+        total
       }
     }
   }
@@ -24,7 +27,7 @@ export const QUERY_USERS = gql`
 
 const useUsers = (options) =>
   useQuery(QUERY_USERS, {
-    fetchPolicy: FetchPolicy.NO_CACHE,
+    fetchPolicy: FetchPolicy.CACHE_AND_NETWORK,
     ...options,
   });
 

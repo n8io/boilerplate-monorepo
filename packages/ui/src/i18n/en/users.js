@@ -1,3 +1,6 @@
 export const users = {
-  users: 'Users',
+  list: {
+    users: 'Users',
+    usersFetchFailed: 'Unable to load users: {{message}}',
+  },
 };

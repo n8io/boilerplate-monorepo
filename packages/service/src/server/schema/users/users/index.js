@@ -1,11 +1,15 @@
-import { Permission, UserSnapshot, Utils } from '@boilerplate-monorepo/common';
+import {
+  Pagination,
+  Permission,
+  UserSnapshot,
+  Utils,
+} from '@boilerplate-monorepo/common';
 import { gql } from 'apollo-server-express';
 import { log } from 'log';
 import { logFactory } from 'log/logFactory';
 import { join, pick, pipe, take, unless, values } from 'ramda';
 import { DatabaseError } from 'types/customError';
 import { InternalErrorMessage } from 'types/errorMessage';
-import { Pagination } from 'types/pagination';
 import { Telemetry } from 'types/telemetry';
 
 const QUERY_NAME = 'users';

@@ -1,6 +1,6 @@
+import { Pagination } from '@boilerplate-monorepo/common';
 import { Models } from 'models';
 import { clamp, defaultTo, identity, map, pipe } from 'ramda';
-import { Pagination } from 'types/pagination';
 
 const readRaw = async ({
   after: tempAfter,
