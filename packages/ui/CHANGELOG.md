@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.1](https://github.com/n8io/boilerplate-monorepo/compare/v1.3.0...v1.3.1) (2020-05-18)
+
+
+### Bug Fixes
+
+* 🐛 Double posting success message on profile save ([e1faad0](https://github.com/n8io/boilerplate-monorepo/commit/e1faad025b3b065c18a44ec86b2526dee9b4ac06))
+
+
+
+
+
 # [1.3.0](https://github.com/n8io/boilerplate-monorepo/compare/v1.2.0...v1.3.0) (2020-05-18)
 
 
