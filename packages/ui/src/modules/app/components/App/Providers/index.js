@@ -8,6 +8,7 @@ import { Auth } from './Auth';
 import { FontLoader } from './FontLoader';
 import { GlobalStyle } from './GlobalStyles';
 import { GraphQL } from './GraphQL';
+import { InternetConnectivity } from './InternetConnectivity';
 import { Logging } from './Logging';
 import { Modality } from './Modality';
 import { Theme } from './Theme';
@@ -19,15 +20,17 @@ const Providers = ({ children }) => (
   <Suspense>
     <Logging />
     <Theme>
-      <GraphQL>
-        <FontLoader />
-        <GlobalStyle />
-        <Modality />
-        <TranslationSync />
-        <Router basename={basename} history={history}>
-          <Auth>{children}</Auth>
-        </Router>
-      </GraphQL>
+      <InternetConnectivity>
+        <GraphQL>
+          <FontLoader />
+          <GlobalStyle />
+          <Modality />
+          <TranslationSync />
+          <Router basename={basename} history={history}>
+            <Auth>{children}</Auth>
+          </Router>
+        </GraphQL>
+      </InternetConnectivity>
     </Theme>
   </Suspense>
 );
