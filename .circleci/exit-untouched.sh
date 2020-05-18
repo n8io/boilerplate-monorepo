@@ -8,7 +8,9 @@ LATEST_COMMIT_HEAD=$(git rev-parse --short HEAD)
 
 if [[ "$(git rev-parse --abbrev-ref HEAD)" = "master" ]]; then
   echo "On master branch, let's grab the previous merge commit..."
-  LATEST_COMMIT_HEAD=$(git rev-parse --short HEAD~2)
+  PREVIOUS_COMMIT=$(git rev-list --tags --skip=1 --max-count=1)
+  PREVIOUS_TAG=$(git describe --abbrev=0 --tags $PREVIOUS_COMMIT)
+  LATEST_COMMIT_HEAD=$(git rev-list -n 1 --abbrev-commit $PREVIOUS_TAG)
 fi
 
 LATEST_COMMIT_MASTER=$(git rev-parse --short origin/master)
