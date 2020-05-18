@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/n8io/boilerplate-monorepo/compare/v1.2.0...v1.3.0) (2020-05-18)
+
+
+### Bug Fixes
+
+* 🐛 Fix specs for Unauthenticated error instead of Forbidden ([3e2d270](https://github.com/n8io/boilerplate-monorepo/commit/3e2d270641522c65b0a88ec00cf78caf0923ca64))
+
+
+
+
+
 # 1.1.0 (2020-05-16)
 
 

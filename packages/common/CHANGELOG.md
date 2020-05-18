@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/n8io/boilerplate-monorepo/compare/v1.2.0...v1.3.0) (2020-05-18)
+
+
+### Features
+
+* ✨ Add `UserList` to users page ([fc76e9e](https://github.com/n8io/boilerplate-monorepo/commit/fc76e9e3a1dac03e512b0e8f8cae640125fd9d9a))
+
+
+
+
+
 # [1.2.0](https://github.com/n8io/boilerplate-monorepo/compare/v1.1.1...v1.2.0) (2020-05-17)
 
 

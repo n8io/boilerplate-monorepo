@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/n8io/boilerplate-monorepo/compare/v1.2.0...v1.3.0) (2020-05-18)
+
+
+### Bug Fixes
+
+* 🐛 Fix how paginated results omit deleted rows ([364c939](https://github.com/n8io/boilerplate-monorepo/commit/364c939f64ace02ca3b13289e6740ee848ed6cb3))
+* 🐛 Fix specs for Unauthenticated error instead of Forbidden ([3e2d270](https://github.com/n8io/boilerplate-monorepo/commit/3e2d270641522c65b0a88ec00cf78caf0923ca64))
+* 🐛 Send AuthenticationError instead of ForbiddenError ([73a51f1](https://github.com/n8io/boilerplate-monorepo/commit/73a51f1cdf5b5b9f875f55a2197964dcc5b519d3))
+
+
+### Features
+
+* ✨ Add `UserList` to users page ([fc76e9e](https://github.com/n8io/boilerplate-monorepo/commit/fc76e9e3a1dac03e512b0e8f8cae640125fd9d9a))
+
+
+
+
+
 # [1.2.0](https://github.com/n8io/boilerplate-monorepo/compare/v1.1.1...v1.2.0) (2020-05-17)
 
 **Note:** Version bump only for package @boilerplate-monorepo/service
