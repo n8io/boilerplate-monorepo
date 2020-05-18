@@ -1,6 +1,6 @@
 import { Utils } from '@boilerplate-monorepo/common';
 import {
-  ForbiddenError,
+  AuthenticationError,
   gql,
   SchemaDirectiveVisitor,
 } from 'apollo-server-express';
@@ -27,7 +27,7 @@ class isAuthenticated extends SchemaDirectiveVisitor {
           },
         });
 
-        throw new ForbiddenError(
+        throw new AuthenticationError(
           'You must be authenticated for this resource.'
         );
       }
