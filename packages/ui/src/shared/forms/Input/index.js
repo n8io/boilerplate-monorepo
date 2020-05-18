@@ -46,11 +46,7 @@ const Input = ({
   title = label,
   ...props
 }) => {
-  const commonT = useTranslate({
-    component: 'common',
-    namespace: 'common',
-  });
-
+  const commonT = useTranslate();
   const { errors, register } = useFormContext();
   const t = parentT || commonT;
   const error = errors[name]?.message;

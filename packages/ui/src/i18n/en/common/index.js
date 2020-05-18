@@ -34,6 +34,7 @@ export const common = {
   login: 'Log In',
   logout: 'Log Out',
   newPassword: 'New Password',
+  noDataToDisplay: 'No data to display',
   offlineDetected: `Oh noooos! It seems you've lost internet connection`,
   onlineDetected: `Sweet, you're back online`,
   password: 'Password',

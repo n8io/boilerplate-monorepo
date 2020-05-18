@@ -1,13 +1,15 @@
 import { UserSnapshot } from '@boilerplate-monorepo/common';
 import { arrayOf } from 'prop-types';
 import React from 'react';
+import { NoData } from 'shared/NoData';
 import styled from 'styled-components';
 import { CustomProperty } from 'types/customProperties';
 
 const Container = styled.div`
   align-items: start;
   display: block;
-  font-family: monospace;
+  font-family: ${CustomProperty.FONT_MONO}, monospace;
+  height: 100%;
   justify-content: start;
   justify-items: start;
   row-gap: 1rem;
@@ -15,12 +17,12 @@ const Container = styled.div`
 
 const Cell = styled.div`
   align-items: center;
-  display: inline-block;
+  display: grid;
   line-height: 2rem;
-  margin: 0.25rem;
   min-height: calc(${CustomProperty.BASE_UNIT} * 2);
   overflow-x: hidden;
   text-overflow: ellipsis;
+  user-select: all;
   white-space: nowrap;
 `;
 
@@ -30,7 +32,8 @@ const Row = styled.div`
   border-top: 1px solid ${CustomProperty.CUSTOM_BORDER_COLOR};
   display: grid;
   column-gap: 0.5rem;
-  grid-template-columns: 3rem 4rem 1fr;
+  grid-template-columns: 5rem 10rem 1fr;
+  padding: 0 calc(${CustomProperty.BASE_UNIT} * 0.5);
   width: 100%;
 
   &:last-child {
@@ -40,14 +43,18 @@ const Row = styled.div`
 
 const toRow = (user) => (
   <Row key={user.id}>
-    <Cell>{user.id}</Cell>
     <Cell>{user.role}</Cell>
+    <Cell>{user.username}</Cell>
     <Cell>{`${user.givenName} ${user.familyName}`}</Cell>
   </Row>
 );
 
 const UserList = ({ users }) => {
-  return <Container>{users.map(toRow)}</Container>;
+  return (
+    <Container>
+      {users && users.length > 0 ? users.map(toRow) : <NoData />}
+    </Container>
+  );
 };
 
 UserList.propTypes = {

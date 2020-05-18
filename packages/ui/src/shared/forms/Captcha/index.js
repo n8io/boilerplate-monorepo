@@ -30,11 +30,7 @@ const StyledInputLabel = styled.div`
 
 // eslint-disable-next-line max-statements
 const Captcha = ({ name }) => {
-  const t = useTranslate({
-    component: 'common',
-    namespace: 'common',
-  });
-
+  const t = useTranslate();
   const captchaRef = useRef();
   const [captchaToken, setCaptchaToken] = useState();
   const { clearError, errors, formState, setValue } = useFormContext();

@@ -58,10 +58,7 @@ const Ring = styled.div`
 `;
 
 const Loader = ({ size }) => {
-  const t = useTranslate({
-    component: 'common',
-    namespace: 'common',
-  });
+  const t = useTranslate();
 
   return (
     <Container>

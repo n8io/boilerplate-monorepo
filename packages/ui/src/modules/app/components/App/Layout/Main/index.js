@@ -22,10 +22,7 @@ const Main = () => {
   const isInternetConnected = useIsInternetConnected();
   const [lastIsConnected, setLastIsConnected] = useState(isInternetConnected);
 
-  const t = useTranslate({
-    component: 'common',
-    namespace: 'common',
-  });
+  const t = useTranslate();
 
   const error = isInternetConnected ? null : new Error();
 
