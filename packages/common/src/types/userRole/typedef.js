@@ -1,3 +1,4 @@
+import gql from 'graphql-tag';
 import { values as ramdaValues } from 'ramda';
 
 const Enumeration = {
@@ -5,6 +6,16 @@ const Enumeration = {
   USER: 'USER',
 };
 
+const typeDef = gql`
+  "The user role enumeration"
+  enum UserRole {
+    "The admin user role"
+    ADMIN
+    "The default user role"
+    USER
+  }
+`;
+
 const values = ramdaValues(Enumeration);
 
-export { Enumeration, values };
+export { Enumeration, typeDef, values };
