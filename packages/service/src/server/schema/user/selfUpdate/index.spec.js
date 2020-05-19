@@ -1,11 +1,13 @@
 import { User, UserSnapshot } from '@boilerplate-monorepo/common';
 import { gql } from 'apollo-server-express';
+import { toUniqueIndexName } from 'db/migrate/utils';
 import {
   makeContext,
   makeGraphqlClient,
   responseToData,
   responseToErrorCode,
 } from 'testHelpers';
+import { Db } from 'types/db';
 import { ErrorType } from 'types/errorType';
 
 describe('user self profile update mutation', () => {
@@ -43,6 +45,35 @@ describe('user self profile update mutation', () => {
 
   describe('when user is authenticated', () => {
     const currentUser = User.apiExample();
+
+    describe('and new user email is already taken', () => {
+      const uniqueEmailIndex = toUniqueIndexName(Db.Table.USERS, 'email');
+
+      const save = jest
+        .fn()
+        .mockName('save')
+        .mockImplementation(() => {
+          throw new Error(`'"${uniqueEmailIndex}"'`);
+        });
+
+      const db = { user: { save } };
+      let execMutation = null;
+
+      beforeEach(() => {
+        ({ execMutation } = makeGraphqlClient(
+          makeContext({ db, user: currentUser })
+        ));
+      });
+
+      test(`returns a ${ErrorType.USER_SELF_UPDATE_FAILED_EMAIL_IN_USE} error`, async () => {
+        const response = await execMutation({ mutation, variables });
+        const errorCode = responseToErrorCode(response);
+
+        expect(errorCode).toEqual(
+          ErrorType.USER_SELF_UPDATE_FAILED_EMAIL_IN_USE
+        );
+      });
+    });
 
     describe('and user save fails', () => {
       const save = jest

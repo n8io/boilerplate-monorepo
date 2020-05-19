@@ -1,6 +1,7 @@
 export const user = {
   FAILED_LOGIN: 'Current password is incorrect',
   USER_PASSWORD_RESET_FAILED: 'The password reset link has expired',
+  USER_SELF_UPDATE_FAILED_EMAIL_IN_USE: 'The provided email is already in use',
   accountFindError: 'Unable to find matching account',
   accountNotifyError: 'Unable to notify account: {{ message }}',
   accountNotifySuccess: 'Recovery information has been successfully sent',

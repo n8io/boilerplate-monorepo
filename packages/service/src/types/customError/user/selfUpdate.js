@@ -16,6 +16,20 @@ const appendSafeError = (props) => ({
   toSafeError,
 });
 
+class UserSelfUpdateEmailInUserError extends ApolloError {
+  constructor(properties) {
+    super(
+      InternalErrorMessage.USER_SELF_UPDATE_FAILED_EMAIL_IN_USE,
+      ErrorType.USER_SELF_UPDATE_FAILED_EMAIL_IN_USE,
+      appendSafeError(properties)
+    );
+
+    Object.defineProperty(this, 'name', {
+      value: UserSelfUpdateEmailInUserError.name,
+    });
+  }
+}
+
 class UserSelfUpdateNotFoundError extends ApolloError {
   constructor(properties) {
     super(
@@ -30,4 +44,4 @@ class UserSelfUpdateNotFoundError extends ApolloError {
   }
 }
 
-export { UserSelfUpdateNotFoundError };
+export { UserSelfUpdateEmailInUserError, UserSelfUpdateNotFoundError };
