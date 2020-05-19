@@ -1,10 +1,10 @@
 const updateDotEnv = require('update-dotenv');
 const { version } = require('../package.json');
 
-const { CI, YARN_PRODUCTION } = process.env;
+const { NODE_ENV } = process.env;
 
-if (!CI && !YARN_PRODUCTION) {
-  console.log('Skipping prebuild step (not CI)');
+if (NODE_ENV === 'development') {
+  console.log('Skipping prebuild step (NODE_ENV = development)');
 
   process.exit(0);
 }
