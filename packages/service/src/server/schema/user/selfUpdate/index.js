@@ -1,9 +1,14 @@
 import { UserSnapshot } from '@boilerplate-monorepo/common';
 import { gql } from 'apollo-server-express';
+import { toUniqueIndexName } from 'db/migrate/utils';
 import { log } from 'log';
 import { logFactory } from 'log/logFactory';
 import { DatabaseError } from 'types/customError';
-import { UserSelfUpdateNotFoundError } from 'types/customError/user/selfUpdate';
+import {
+  UserSelfUpdateEmailInUserError,
+  UserSelfUpdateNotFoundError,
+} from 'types/customError/user/selfUpdate';
+import { Db } from 'types/db';
 import { InternalErrorMessage } from 'types/errorMessage';
 import { Telemetry } from 'types/telemetry';
 
@@ -13,6 +18,14 @@ const debugLog = logFactory({
   method: MUTATION_NAME,
   module: 'resolvers/user',
 });
+
+const isDuplicateEmailError = (error) => {
+  if (!error?.message) return false;
+
+  const uniqueEmailIndex = toUniqueIndexName(Db.Table.USERS, 'email');
+
+  return error.message.indexOf(`"${uniqueEmailIndex}"`) > -1;
+};
 
 // eslint-disable-next-line max-statements
 const resolver = async (_parent, { input }, context) => {
@@ -38,6 +51,16 @@ const resolver = async (_parent, { input }, context) => {
     userSelf = await db.user.save({ ...input, id });
     userLoader.clear(id);
   } catch (error) {
+    if (isDuplicateEmailError(error)) {
+      log.error(InternalErrorMessage.USER_SELF_UPDATE_FAILED_EMAIL_IN_USE, {
+        email: input.email,
+        id,
+        ...telemetry,
+      });
+
+      throw new UserSelfUpdateEmailInUserError();
+    }
+
     log.error(InternalErrorMessage.DATABASE_REQUEST_FAILED, {
       error,
       ...telemetry,

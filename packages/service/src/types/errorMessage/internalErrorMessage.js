@@ -33,6 +33,8 @@ const InternalErrorMessage = {
   USER_SELF_FETCH_FAILED_NO_USER_ON_CONTEXT:
     'No user was found on the request context',
   USER_SELF_UPDATE_FAILED: 'Failed to update self',
+  USER_SELF_UPDATE_FAILED_EMAIL_IN_USE:
+    'Failed to update self. Email is already in use.',
   USER_SELF_UPDATE_FAILED_NOT_FOUND:
     'Failed to update self. Could not locate user info.',
   USER_SELF_UPDATE_FAILED_SECURITY: 'Failed to update self security',
