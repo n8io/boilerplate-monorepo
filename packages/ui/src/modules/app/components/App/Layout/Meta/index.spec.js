@@ -12,7 +12,6 @@ describe('<Meta/>', () => {
   test('renders properly', () => {
     td.replace(Config, 'config', {
       RELEASE: 'RELEASE',
-      RELEASE_HASH: 'RELEASE_HASH',
     });
 
     const { container } = renderComponent();

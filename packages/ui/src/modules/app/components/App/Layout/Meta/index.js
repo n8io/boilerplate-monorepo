@@ -4,13 +4,12 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 
 const Meta = () => {
-  const { RELEASE, RELEASE_HASH } = config;
+  const { RELEASE } = config;
 
   return (
     <Helmet>
       <meta name="theme-color" content={Color.PRIMARY} />
       <meta name="version" content={RELEASE} />
-      <meta name="hash" content={RELEASE_HASH} />
     </Helmet>
   );
 };

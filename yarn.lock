@@ -10962,7 +10962,7 @@ git-remote-origin-url@^2.0.0:
     gitconfiglocal "^1.0.0"
     pify "^2.3.0"
 
-git-rev-sync@2.0.0, git-rev-sync@^2.0.0:
+git-rev-sync@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/git-rev-sync/-/git-rev-sync-2.0.0.tgz#82fb77d9281efe7e7947569380dda4d1c19f4cb3"
   integrity sha512-vnHFv2eocTmt/wHqZm3ksxtVshK4vptT0cEoumk6hAYRFx3do6Qo7xHBTBCv29+r3ZZCQOQ1i328MUCsYF7AUw==

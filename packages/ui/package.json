@@ -110,7 +110,6 @@
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^4.0.0",
     "gh-pages": "^2.1.1",
-    "git-rev-sync": "^2.0.0",
     "graphql": "^15.0.0",
     "history": "^4.10.1",
     "logrocket-cli": "^0.12.0",

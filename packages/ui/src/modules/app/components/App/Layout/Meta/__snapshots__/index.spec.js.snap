@@ -10,9 +10,5 @@ exports[`<Meta/> renders properly 1`] = `
     content="RELEASE"
     name="version"
   />
-  <meta
-    content="RELEASE_HASH"
-    name="hash"
-  />
 </x-helmet>
 `;
