@@ -50,7 +50,7 @@
     "@hcaptcha/react-hcaptcha": "^0.1.7",
     "@sentry/browser": "^5.6.3",
     "@sentry/types": "^5.7.1",
-    "@splitsoftware/splitio": "^10.12.1",
+    "@splitsoftware/splitio-react": "^1.1.0",
     "apollo-link-error": "^1.1.12",
     "apollo-link-persisted-queries": "^0.2.2",
     "apollo-link-retry": "^2.2.15",

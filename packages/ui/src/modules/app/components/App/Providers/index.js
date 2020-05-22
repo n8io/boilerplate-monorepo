@@ -5,7 +5,7 @@ import { Router } from 'react-router-dom';
 import { Suspense } from 'shared/Suspense';
 import { history } from 'types/history';
 import { Auth } from './Auth';
-import { FeatureFlags } from './FeatureFlags';
+import { Features } from './Features';
 import { FontLoader } from './FontLoader';
 import { GlobalStyle } from './GlobalStyles';
 import { GraphQL } from './GraphQL';
@@ -28,9 +28,9 @@ const Providers = ({ children }) => (
           <Modality />
           <TranslationSync />
           <Router basename={basename} history={history}>
-            <Auth>
-              <FeatureFlags>{children}</FeatureFlags>
-            </Auth>
+            <Features>
+              <Auth>{children}</Auth>
+            </Features>
           </Router>
         </GraphQL>
       </InternetConnectivity>

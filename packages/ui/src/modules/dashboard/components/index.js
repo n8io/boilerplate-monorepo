@@ -1,5 +1,7 @@
+import { FeatureFlag } from '@boilerplate-monorepo/common';
 import React from 'react';
 import { Body, Content, Header } from 'shared/Content';
+import { Feature } from 'shared/Feature';
 import { Page } from 'shared/Page';
 import { useTranslate } from 'shared/useTranslate';
 
@@ -14,6 +16,16 @@ const Dashboard = () => {
       <Content>
         <Header title={t('title')} />
         <Body hasBreadcrumbs={false}>
+          <Feature flag={FeatureFlag.WEB_FEATURE_ANNOUNCEMENTS}>
+            <img
+              alt="Bill Murray"
+              height="200"
+              src="//www.fillmurray.com/300/200"
+              style={{ borderRadius: '1rem', margin: '0 auto' }}
+              width="300"
+            />
+            <br />
+          </Feature>
           <h1>H1 Lorem ipsum dolor sit amet consectetuer adipiscing elit</h1>
           <h2>H2 Aenean commodo ligula eget dolor aenean massa</h2>
           <h3>H3 Nulla consequat massa quis enimt</h3>

@@ -1,4 +1,5 @@
 import { useApolloClient } from '@apollo/client';
+import { SplitClient } from '@splitsoftware/splitio-react';
 import jwtDecode from 'jwt-decode';
 import { node } from 'prop-types';
 import React, { useCallback, useState } from 'react';
@@ -42,7 +43,15 @@ const Auth = ({ children }) => {
     user,
   };
 
-  return <Provider.AUTH value={authContext}>{children}</Provider.AUTH>;
+  return (
+    <Provider.AUTH value={authContext}>
+      {user ? (
+        <SplitClient splitKey={user.id}>{children}</SplitClient>
+      ) : (
+        children
+      )}
+    </Provider.AUTH>
+  );
 };
 
 Auth.propTypes = {
