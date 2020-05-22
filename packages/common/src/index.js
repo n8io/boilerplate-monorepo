@@ -1,5 +1,7 @@
 export { Color } from './types/color';
 export { Email } from './types/email';
+export { FeatureFlag } from './types/featureFlag';
+export { FeatureFlagValue } from './types/featureFlagValue';
 export { FetchPolicy } from './types/fetchPolicy';
 export { LogLevel } from './types/logLevel';
 export { Pagination } from './types/pagination';
