@@ -1,4 +1,5 @@
 import { useApolloClient } from '@apollo/client';
+import { SplitClient } from '@splitsoftware/splitio-react';
 import jwtDecode from 'jwt-decode';
 import { node } from 'prop-types';
 import React, { useCallback, useState } from 'react';
@@ -8,10 +9,6 @@ import { Jwt } from 'types/jwt';
 import { Provider } from 'types/provider';
 
 const Auth = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    Boolean(AccessToken.read())
-  );
-
   const client = useApolloClient();
   const [user, setUser] = useState(Jwt.decode(AccessToken.read()));
   const [mutate] = useUserLogout();
@@ -21,7 +18,6 @@ const Auth = ({ children }) => {
 
     AccessToken.clear();
     client.resetStore();
-    setIsAuthenticated(false);
     setUser(null);
   });
 
@@ -31,7 +27,6 @@ const Auth = ({ children }) => {
         const payload = jwtDecode(token);
 
         AccessToken.set(token);
-        setIsAuthenticated(true);
         setUser(payload);
       } catch {
         // Do nothing, bad token
@@ -41,13 +36,22 @@ const Auth = ({ children }) => {
   );
 
   const authContext = {
-    isAuthenticated,
+    isAuthenticated: Boolean(user),
     logout,
     role: user && user.role,
     updateAccessToken,
+    user,
   };
 
-  return <Provider.AUTH value={authContext}>{children}</Provider.AUTH>;
+  return (
+    <Provider.AUTH value={authContext}>
+      {user ? (
+        <SplitClient splitKey={user.id}>{children}</SplitClient>
+      ) : (
+        children
+      )}
+    </Provider.AUTH>
+  );
 };
 
 Auth.propTypes = {
