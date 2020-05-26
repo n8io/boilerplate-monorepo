@@ -1,6 +1,6 @@
 {
   "name": "@boilerplate-monorepo/service",
-  "version": "1.3.2",
+  "version": "1.4.0",
   "description": "Awesome project developed with TypeORM.",
   "license": "MIT",
   "private": true,
@@ -32,7 +32,7 @@
     ]
   },
   "dependencies": {
-    "@boilerplate-monorepo/common": "^1.3.0",
+    "@boilerplate-monorepo/common": "^1.4.0",
     "@sentry/node": "^5.15.5",
     "apollo-server-cache-redis": "^1.1.5",
     "apollo-server-express": "^2.9.15",

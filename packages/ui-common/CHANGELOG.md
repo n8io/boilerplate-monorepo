@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/n8io/boilerplate-monorepo/compare/v1.3.2...v1.4.0) (2020-05-26)
+
+
+### Features
+
+* **feature-flags:** ✨ Properly track anonymous users ([e8e471d](https://github.com/n8io/boilerplate-monorepo/commit/e8e471d0188c0b21516878f61128cf5114535682))
+*  ✨Add SplitIO functionality ([78276c0](https://github.com/n8io/boilerplate-monorepo/commit/78276c0f9be5dd3c97a7bac3cf73225f7429637f))
+
+
+
+
+
 # [1.3.0](https://github.com/n8io/boilerplate-monorepo/compare/v1.2.0...v1.3.0) (2020-05-18)
 
 
