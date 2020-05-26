@@ -31,6 +31,7 @@ export const common = {
   home: 'Home',
   loading: 'Loading',
   loadingScreenReader: 'Please wait while content is being loaded',
+  loggingOut: 'Logging out...',
   login: 'Log In',
   logout: 'Log Out',
   newPassword: 'New Password',

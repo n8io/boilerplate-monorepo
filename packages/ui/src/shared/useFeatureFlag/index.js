@@ -10,7 +10,7 @@ const initial = {
   isLoading: true,
 };
 
-const useFeatureFlag = (flag) => {
+const useFeatureFlag = (flag, { delay, ...options } = {}) => {
   const { client, isReady, isTimedout: hasTimedOut } = useContext(SplitContext);
   const [data, setData] = useState();
   const [error, setError] = useState();
@@ -20,11 +20,13 @@ const useFeatureFlag = (flag) => {
     if (!isReady) return;
 
     const fetchFeatureFlag = async () => {
-      log('Fetching feature flag...', flag);
+      log('Fetching feature flag...', flag, options);
 
-      const response = await client.getTreatment(flag);
+      delay && (await new Promise((r) => setTimeout(r, delay)));
 
-      log('Feature flag value for current session', response);
+      const response = await client.getTreatment(flag, options);
+
+      log('Feature flag value for current session', { [flag]: response });
       setData(response);
       beLoading(false);
     };
