@@ -15,7 +15,6 @@ const Auth = ({ children }) => {
 
   const logout = useCallback(async () => {
     await mutate();
-
     AccessToken.clear();
     client.resetStore();
     setUser(null);
