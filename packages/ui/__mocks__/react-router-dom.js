@@ -17,7 +17,8 @@ const useLocation = () => ({
   },
 });
 
-const Route = (props) => <x-Route {...props} />;
-const Switch = (props) => <x-Switch {...props} />;
+const Prompt = (props) => <x-Prompt data-testid="prompt" {...props} />;
+const Route = (props) => <x-Route data-testid="route" {...props} />;
+const Switch = (props) => <x-Switch data-testid="switch" {...props} />;
 
-export { Route, Switch, useHistory, useLocation };
+export { Prompt, Route, Switch, useHistory, useLocation };

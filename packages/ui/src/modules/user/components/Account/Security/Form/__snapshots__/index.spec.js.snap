@@ -4,6 +4,7 @@ exports[`<Form/> renders properly 1`] = `
 <div>
   <x-form
     isdirty="false"
+    isleavepromptenabled="true"
     issaveable="true"
     istouched="false"
   >
