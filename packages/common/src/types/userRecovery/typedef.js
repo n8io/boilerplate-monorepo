@@ -1,7 +1,7 @@
 import { shape, string } from 'prop-types';
 
 const propTypes = shape({
-  email: string,
+  emailMasked: string,
   id: string.isRequired,
 });
 

@@ -64,7 +64,7 @@ const resolver = async (_parent, input, context) => {
     return null;
   }
 
-  const toPropsOfInterest = pick(['email', 'id']);
+  const toPropsOfInterest = pick(['emailMasked', 'id']);
   const transform = pipe(UserRecovery.apiToMasked, toPropsOfInterest);
 
   return transform(user);
@@ -76,7 +76,7 @@ const typeDefs = gql`
   "The user recovery type"
   type UserRecovery {
     "The user's masked email. E.g. n***@****l.com"
-    email: String!
+    emailMasked: String!
     "The user's id"
     id: ID!
   }
