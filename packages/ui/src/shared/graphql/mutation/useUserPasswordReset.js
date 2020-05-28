@@ -16,4 +16,4 @@ const MUTATION_USER_PASSWORD_RESET = gql`
 const useUserPasswordReset = (options) =>
   useMutation(MUTATION_USER_PASSWORD_RESET, options);
 
-export { useUserPasswordReset };
+export { MUTATION_USER_PASSWORD_RESET, useUserPasswordReset };

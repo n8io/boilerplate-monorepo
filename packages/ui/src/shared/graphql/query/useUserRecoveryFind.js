@@ -3,7 +3,7 @@ import { FetchPolicy } from '@boilerplate-monorepo/common';
 import { useLazyQuery } from '../useLazyQuery';
 import { useQuery } from '../useQuery';
 
-export const QUERY_USER_RECOVERY_FIND = gql`
+const QUERY_USER_RECOVERY_FIND = gql`
   query userRecoveryFind($account: String!) {
     userRecoveryFind(account: $account) {
       email
@@ -23,4 +23,4 @@ const useUserRecoveryFind = ({ isLazy, ...options }) => {
     : useQuery(QUERY_USER_RECOVERY_FIND, actualOptions);
 };
 
-export { useUserRecoveryFind };
+export { QUERY_USER_RECOVERY_FIND, useUserRecoveryFind };

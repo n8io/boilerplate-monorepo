@@ -9,9 +9,9 @@ const MUTATION_USER_LOGIN = gql`
 
 /**
  * UserLoginInput
- * @param username - String!
  * @param password - String!
+ * @param username - String!
  */
 const useUserLogin = (options) => useMutation(MUTATION_USER_LOGIN, options);
 
-export { useUserLogin };
+export { MUTATION_USER_LOGIN, useUserLogin };

@@ -4,7 +4,7 @@ import { evolve } from 'ramda';
 import { DateTime } from 'types/dateTime';
 import { useQuery } from '../useQuery';
 
-export const QUERY_SYSTEM_TIME = gql`
+const QUERY_SYSTEM_TIME = gql`
   query systemTime {
     systemTime
   }
@@ -19,4 +19,4 @@ const useSystemTime = (options) => {
   return evolve({ data: DateTime.apiToUi }, results);
 };
 
-export { useSystemTime };
+export { QUERY_SYSTEM_TIME, useSystemTime };

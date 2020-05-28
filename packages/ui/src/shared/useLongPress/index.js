@@ -1,7 +1,7 @@
 import { Utils } from '@boilerplate-monorepo/common';
 import { useState, useEffect, useCallback } from 'react';
 
-export const useLongPress = (callback = Utils.noop, milliseconds = 600) => {
+const useLongPress = (callback = Utils.noop, milliseconds = 600) => {
   const [isLongPressing, beLongPressing] = useState(false);
 
   const startLongPressing = useCallback(() => beLongPressing(true));
@@ -28,3 +28,5 @@ export const useLongPress = (callback = Utils.noop, milliseconds = 600) => {
     onTouchStart: startLongPressing,
   };
 };
+
+export { useLongPress };

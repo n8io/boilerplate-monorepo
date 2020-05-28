@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 import { useQuery } from '../useQuery';
 
-export const QUERY_USER_PASSWORD_RESET_TOKEN_VALIDATE = gql`
+const QUERY_USER_PASSWORD_RESET_TOKEN_VALIDATE = gql`
   query userPasswordResetTokenValidate(
     $input: UserPasswordResetTokenValidateInput!
   ) {
@@ -12,4 +12,7 @@ export const QUERY_USER_PASSWORD_RESET_TOKEN_VALIDATE = gql`
 const useUserPasswordResetTokenValidate = (options) =>
   useQuery(QUERY_USER_PASSWORD_RESET_TOKEN_VALIDATE, options);
 
-export { useUserPasswordResetTokenValidate };
+export {
+  QUERY_USER_PASSWORD_RESET_TOKEN_VALIDATE,
+  useUserPasswordResetTokenValidate,
+};
