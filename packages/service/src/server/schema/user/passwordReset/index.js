@@ -105,7 +105,7 @@ const resolver = async (_parent, { input }, context) => {
       passwordResetTokenExpiration: null,
     });
   } catch (error) {
-    log.error(InternalErrorMessage.USER_SELF_UPDATE_FAILED, {
+    log.error(InternalErrorMessage.USER_SELF_PROFILE_UPDATE_FAILED, {
       error,
       ...telemetry,
     });

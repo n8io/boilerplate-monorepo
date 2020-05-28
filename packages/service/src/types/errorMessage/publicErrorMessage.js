@@ -11,8 +11,8 @@ const PublicErrorMessage = {
   USER_REGISTER_FAILED: 'Unable to register user',
   USER_REVOKE_REFRESH_TOKENS_FAILED: 'Unable to revoke refresh tokens',
   USER_SELF_FETCH_FAILED: 'Unable to find self info',
-  USER_SELF_UPDATE_FAILED: 'Unable to update self',
-  USER_SELF_UPDATE_FAILED_SECURITY: 'Unable to update self security',
+  USER_SELF_PROFILE_UPDATE_FAILED: 'Unable to update self',
+  USER_SELF_SECURITY_UPDATE_FAILED: 'Unable to update self security',
   USERS_FETCH_FAILED: 'Unable to fetch users',
 };
 

@@ -1,6 +1,6 @@
 import { FetchPolicy, User } from '@boilerplate-monorepo/common';
 import React from 'react';
-import * as MutationHooks from 'shared/graphql/mutation/useUserSelfUpdate';
+import * as MutationHooks from 'shared/graphql/mutation/useUserSelfProfileUpdate';
 import * as QueryHooks from 'shared/graphql/query/useUserSelf';
 import { render } from 'testHelpers';
 import { Form } from '.';
@@ -24,7 +24,11 @@ describe('<Form/>', () => {
 
   beforeEach(() => {
     const useUserSelf = td.replace(QueryHooks, 'useUserSelf');
-    const useUserSelfUpdate = td.replace(MutationHooks, 'useUserSelfUpdate');
+
+    const useUserSelfProfileUpdate = td.replace(
+      MutationHooks,
+      'useUserSelfProfileUpdate'
+    );
 
     td.when(
       useUserSelf({
@@ -35,7 +39,7 @@ describe('<Form/>', () => {
       loading: false,
     });
 
-    td.when(useUserSelfUpdate()).thenReturn([
+    td.when(useUserSelfProfileUpdate()).thenReturn([
       jest.fn().mockName('userSelfUpdate'),
       { loading: false },
     ]);

@@ -5,5 +5,5 @@ export * from './useUserPasswordReset';
 export * from './useUserPasswordResetRequest';
 export * from './useUserRegister';
 export * from './useUserRevokeRefreshTokens';
-export * from './useUserSelfUpdate';
+export * from './useUserSelfProfileUpdate';
 export * from './useUserSelfSecurityUpdate';

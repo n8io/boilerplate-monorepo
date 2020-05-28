@@ -16,8 +16,8 @@ describe('user self profile update mutation', () => {
   const variables = { input };
 
   const mutation = gql`
-    mutation UserSelfUpdate($input: UserSelfUpdateInput!) {
-      userSelfUpdate(input: $input) {
+    mutation UserSelfProfileUpdate($input: UserSelfProfileUpdateInput!) {
+      userSelfProfileUpdate(input: $input) {
         id
         email
         familyName
@@ -65,12 +65,12 @@ describe('user self profile update mutation', () => {
         ));
       });
 
-      test(`returns a ${ErrorType.USER_SELF_UPDATE_FAILED_EMAIL_IN_USE} error`, async () => {
+      test(`returns a ${ErrorType.USER_SELF_PROFILE_UPDATE_FAILED_EMAIL_IN_USE} error`, async () => {
         const response = await execMutation({ mutation, variables });
         const errorCode = responseToErrorCode(response);
 
         expect(errorCode).toEqual(
-          ErrorType.USER_SELF_UPDATE_FAILED_EMAIL_IN_USE
+          ErrorType.USER_SELF_PROFILE_UPDATE_FAILED_EMAIL_IN_USE
         );
       });
     });

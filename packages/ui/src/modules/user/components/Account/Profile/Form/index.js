@@ -11,7 +11,7 @@ import { useForm } from 'shared/forms/useForm';
 import {
   QUERY_USER_SELF,
   useUserSelf,
-  useUserSelfUpdate,
+  useUserSelfProfileUpdate,
 } from 'shared/graphql';
 import { useTranslate } from 'shared/useTranslate';
 
@@ -22,7 +22,7 @@ const Form = () => {
   });
 
   const [isSuccessful, setIsSuccessful] = useState(false);
-  const [mutate, { error: userSelfUpdateError }] = useUserSelfUpdate();
+  const [mutate, { error: userSelfUpdateError }] = useUserSelfProfileUpdate();
 
   const { data: self, error: userSelfError, loading } = useUserSelf({
     fetchPolicy: FetchPolicy.CACHE_AND_NETWORK,
