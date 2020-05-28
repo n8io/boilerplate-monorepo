@@ -37,7 +37,7 @@ const Form = () => {
   };
 
   return (
-    <SharedForm {...formProps} onSubmit={onSubmit}>
+    <SharedForm {...formProps} isLeavePromptEnabled onSubmit={onSubmit}>
       <ErrorNotification error={error} messageKey="securityUpdateError" t={t} />
       {isSuccessful && (
         <SuccessNotification message={t('securityUpdateSuccess')} />

@@ -52,7 +52,7 @@ const Form = () => {
   if (loading && !self) return <Loader />;
 
   return (
-    <SharedForm {...formProps} onSubmit={onSelfUpdate}>
+    <SharedForm {...formProps} isLeavePromptEnabled onSubmit={onSelfUpdate}>
       <ErrorNotification error={userSelfError} messageKey="selfError" t={t} />
       <ErrorNotification
         error={userSelfUpdateError}

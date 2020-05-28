@@ -24,6 +24,7 @@ export const common = {
   confirmPassword: 'Confirm Password',
   currentPassword: 'Current Password',
   dashboard: 'Dashboard',
+  dirtyFormPromptMessage: 'Are you sure? All unsaved changes will be lost.',
   emailAddress: 'Email address',
   familyName: 'Last name',
   footer: `©️ {{copyrightYear}} {{name}}. All Rights reserved.`,
