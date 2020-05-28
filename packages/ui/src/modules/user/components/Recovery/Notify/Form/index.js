@@ -48,7 +48,7 @@ const Form = ({ user }) => {
 
   const options = [
     {
-      label: user.email,
+      label: user.emailMasked,
       value: UserRecoveryNotifyMethod.EMAIL,
     },
   ];

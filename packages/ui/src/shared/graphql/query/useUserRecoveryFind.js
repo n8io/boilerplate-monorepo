@@ -6,7 +6,7 @@ import { useQuery } from '../useQuery';
 const QUERY_USER_RECOVERY_FIND = gql`
   query userRecoveryFind($account: String!) {
     userRecoveryFind(account: $account) {
-      email
+      emailMasked
       id
     }
   }

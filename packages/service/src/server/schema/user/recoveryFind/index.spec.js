@@ -9,7 +9,7 @@ describe('user recovery find query', () => {
   const query = gql`
     query UserRecoveryFind($account: String!) {
       userRecoveryFind(account: $account) {
-        email
+        emailMasked
         id
       }
     }
@@ -67,6 +67,7 @@ describe('user recovery find query', () => {
 
   describe('when user is found', () => {
     const user = User.apiExample();
+    const userMasked = UserRecovery.apiToMasked(user);
 
     let execMutation = null;
 
@@ -74,7 +75,7 @@ describe('user recovery find query', () => {
       const recoveryFind = jest
         .fn()
         .mockName('recoveryFind')
-        .mockResolvedValue(user);
+        .mockResolvedValue(userMasked);
 
       const db = { user: { recoveryFind } };
 
@@ -88,7 +89,7 @@ describe('user recovery find query', () => {
 
       const expected = pipe(
         UserRecovery.apiToMasked,
-        pick(['email', 'id'])
+        pick(['emailMasked', 'id'])
       )(user);
 
       expect(actual).toEqual(expected);
