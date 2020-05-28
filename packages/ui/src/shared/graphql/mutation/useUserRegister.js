@@ -19,4 +19,4 @@ const MUTATION_USER_REGISTER = gql`
 const useUserRegister = (options) =>
   useMutation(MUTATION_USER_REGISTER, options);
 
-export { useUserRegister };
+export { MUTATION_USER_REGISTER, useUserRegister };

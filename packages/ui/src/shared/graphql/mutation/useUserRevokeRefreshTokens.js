@@ -10,4 +10,4 @@ const MUTATION_USER_REVOKE_REFRESH_TOKENS = gql`
 const useUserRevokeRefreshTokens = (options) =>
   useMutation(MUTATION_USER_REVOKE_REFRESH_TOKENS, options);
 
-export { useUserRevokeRefreshTokens };
+export { MUTATION_USER_REVOKE_REFRESH_TOKENS, useUserRevokeRefreshTokens };

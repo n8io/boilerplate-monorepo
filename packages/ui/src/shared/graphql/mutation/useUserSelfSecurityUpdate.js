@@ -15,4 +15,4 @@ const MUTATION_USER_SELF_SECURITY_UPDATE = gql`
 const useUserSelfSecurityUpdate = (options) =>
   useMutation(MUTATION_USER_SELF_SECURITY_UPDATE, options);
 
-export { useUserSelfSecurityUpdate };
+export { MUTATION_USER_SELF_SECURITY_UPDATE, useUserSelfSecurityUpdate };

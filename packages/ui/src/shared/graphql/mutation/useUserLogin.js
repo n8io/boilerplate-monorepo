@@ -14,4 +14,4 @@ const MUTATION_USER_LOGIN = gql`
  */
 const useUserLogin = (options) => useMutation(MUTATION_USER_LOGIN, options);
 
-export { useUserLogin };
+export { MUTATION_USER_LOGIN, useUserLogin };

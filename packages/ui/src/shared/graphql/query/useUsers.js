@@ -2,7 +2,7 @@ import { gql } from '@apollo/client';
 import { FetchPolicy } from '@boilerplate-monorepo/common';
 import { useQuery } from '../useQuery';
 
-export const QUERY_USERS = gql`
+const QUERY_USERS = gql`
   query users($input: PaginationInput!) {
     users(input: $input) {
       edges {
@@ -31,4 +31,4 @@ const useUsers = (options) =>
     ...options,
   });
 
-export { useUsers };
+export { QUERY_USERS, useUsers };

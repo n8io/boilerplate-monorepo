@@ -19,4 +19,4 @@ const MUTATION_USER_SELF_UPDATE = gql`
 const useUserSelfUpdate = (options) =>
   useMutation(MUTATION_USER_SELF_UPDATE, options);
 
-export { useUserSelfUpdate };
+export { MUTATION_USER_SELF_UPDATE, useUserSelfUpdate };

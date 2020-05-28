@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 import { useQuery } from '../useQuery';
 
-export const QUERY_USER_SELF = gql`
+const QUERY_USER_SELF = gql`
   query userSelf {
     userSelf {
       email
@@ -16,4 +16,4 @@ export const QUERY_USER_SELF = gql`
 
 const useUserSelf = (options) => useQuery(QUERY_USER_SELF, options);
 
-export { useUserSelf };
+export { QUERY_USER_SELF, useUserSelf };
