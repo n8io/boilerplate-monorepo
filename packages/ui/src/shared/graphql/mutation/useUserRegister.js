@@ -9,11 +9,11 @@ const MUTATION_USER_REGISTER = gql`
 
 /**
  * UserRegisterInput
- * @param email - String!
+ * @param captchaToken - String!
+ * @param email - EmailAddress!
  * @param familyName - String!
  * @param givenName - String!
- * @param password - String!
- * @param role - String [Defaults to &#34;USER&#34;]
+ * @param passwordNew - String!
  * @param username - String!
  */
 const useUserRegister = (options) =>

@@ -14,7 +14,11 @@ const toFormatted = (fields, level) => {
 
 const toTypeFields = (name, level = 1) => {
   const query = findQuery(name) || findMutation(name);
-  const isScalar = R.pathEq(['type', 'ofType', 'kind'], 'SCALAR', query);
+
+  const isScalar = R.either(
+    R.pathEq(['type', 'ofType', 'kind'], 'SCALAR', query),
+    R.pathEq(['type', 'kind'], 'SCALAR', query)
+  );
 
   if (isScalar) return '';
 

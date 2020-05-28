@@ -1,8 +1,13 @@
+import { FetchPolicy } from '@boilerplate-monorepo/common';
 import * as UseQuery from '../useQuery';
 import { QUERY_SYSTEM_TIME, useSystemTime } from './useSystemTime';
 
 describe('useSystemTime', () => {
-  const options = { option: 'OPTION' };
+  const options = {
+    fetchPolicy: FetchPolicy.NO_CACHE,
+    option: 'OPTION',
+  };
+
   let useQuery = null;
 
   beforeEach(() => {

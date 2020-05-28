@@ -1,4 +1,5 @@
 import { FetchPolicy } from '@boilerplate-monorepo/common';
+import * as UseLazyQuery from '../useLazyQuery';
 import * as UseQuery from '../useQuery';
 import {
   QUERY_USER_RECOVERY_FIND,
@@ -11,15 +12,33 @@ describe('useUserRecoveryFind', () => {
     option: 'OPTION',
   };
 
+  let useLazyQuery = null;
   let useQuery = null;
 
   beforeEach(() => {
+    useLazyQuery = td.replace(UseLazyQuery, 'useLazyQuery');
     useQuery = td.replace(UseQuery, 'useQuery');
   });
 
-  test('should pass along the proper parameters to useQuery', () => {
-    useUserRecoveryFind(options);
+  describe('when is a lazy query', () => {
+    const isLazy = true;
+    const lazyOptions = { ...options, isLazy };
 
-    td.verify(useQuery(QUERY_USER_RECOVERY_FIND, options));
+    test('should pass along the proper parameters to useLazyQuery', () => {
+      useUserRecoveryFind(lazyOptions);
+
+      td.verify(useLazyQuery(QUERY_USER_RECOVERY_FIND, options));
+    });
+  });
+
+  describe('when NOT a lazy query', () => {
+    const isLazy = false;
+    const notLazyOptions = { ...options, isLazy };
+
+    test('should pass along the proper parameters to useQuery', () => {
+      useUserRecoveryFind(notLazyOptions);
+
+      td.verify(useQuery(QUERY_USER_RECOVERY_FIND, options));
+    });
   });
 });
