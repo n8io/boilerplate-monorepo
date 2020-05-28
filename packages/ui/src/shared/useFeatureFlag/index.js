@@ -36,7 +36,9 @@ const useFeatureFlag = (flag, { delay, ...options } = {}) => {
   }, [flag, isReady]);
 
   useEffect(() => {
-    const err = hasTimedOut ? new Error('SplitIO connection timed out') : null;
+    const err = hasTimedOut
+      ? new Error('SplitIO connection timed out')
+      : undefined;
 
     setError(err);
   }, [hasTimedOut]);
