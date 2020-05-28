@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2020-05-04T19:27:22.366Z
+__export_date: 2020-05-28T18:20:11.515Z
 __export_source: insomnia.desktop.app:v7.1.1
 resources:
   - _id: req_b14b77bd223c4a4389bfc01c92af31e3
@@ -21,7 +21,7 @@ resources:
     isPrivate: false
     metaSortKey: -1588620135560
     method: POST
-    modified: 1588620402523
+    modified: 1588982526244
     name: SystemTime
     parameters: []
     parentId: fld_5df4cbbd451e474cb5419d8a2f94e90c
@@ -78,7 +78,7 @@ resources:
     body:
       mimeType: application/graphql
       text: '{"query":"mutation UserDelete($id: ID!) {\n  userDelete(id:
-        $id)\n}\n","variables":{"id":"ck9mslx9b00001kfk14x9bbrc"},"operationName":"UserDelete"}'
+        $id)\n}\n","variables":{"id":"ck9wwdjsl0000lffkeopv3m0q"},"operationName":"UserDelete"}'
     created: 1578180146440
     description: ""
     headers:
@@ -88,7 +88,7 @@ resources:
     isPrivate: false
     metaSortKey: -1578263622701
     method: POST
-    modified: 1588620080630
+    modified: 1589302395337
     name: UserDelete
     parameters: []
     parentId: fld_69697a7d22fa4ca1ab05fff2c344cef1
@@ -136,7 +136,7 @@ resources:
     isPrivate: false
     metaSortKey: -1578263622676
     method: POST
-    modified: 1588620088932
+    modified: 1590689973793
     name: UserLogin
     parameters: []
     parentId: fld_69697a7d22fa4ca1ab05fff2c344cef1
@@ -166,7 +166,7 @@ resources:
     isPrivate: false
     metaSortKey: -1578263622663.5
     method: POST
-    modified: 1588620091159
+    modified: 1589123914009
     name: UserLogout
     parameters: []
     parentId: fld_69697a7d22fa4ca1ab05fff2c344cef1
@@ -327,29 +327,29 @@ resources:
     settingStoreCookies: true
     url: "{{ graphqlUri  }}"
     _type: request
-  - _id: req_af25446c00a04c87a0e652ffd78dc470
+  - _id: req_423ec18c65e84de5b2342ab4bd442d83
     authentication:
       prefix: "{{ accessTokenPrefix  }}"
       token: "{{accessToken}}"
       type: bearer
     body:
       mimeType: application/graphql
-      text: '{"query":"mutation UserSelfUpdate($input: UserSelfUpdateInput!)
-        {\n  userSelfUpdate(input: $input)
+      text: '{"query":"mutation UserSelfProfileUpdate($input:
+        UserSelfProfileUpdateInput!) {\n  userSelfProfileUpdate(input: $input)
         {\n    ...userSnapshotFragment\n  }\n}\n\n\nfragment
         userSnapshotFragment on UserSnapshot
-        {\n  id\n  email\n  familyName\n  givenName\n  role\n  username\n}","variables":{"input":{"email":"n8@n8io.com","givenName":"Nate"}},"operationName":"UserSelfUpdate"}'
-    created: 1579266441078
+        {\n  id\n  email\n  familyName\n  givenName\n  role\n  username\n}","variables":{"input":{"email":"n8@n8io.com","givenName":"Nate"}},"operationName":"UserSelfProfileUpdate"}'
+    created: 1590689947660
     description: ""
     headers:
       - id: pair_da0e8e267c1940c0912468bcba4fcc12
         name: Content-Type
         value: application/json
     isPrivate: false
-    metaSortKey: -1578263622651
+    metaSortKey: -1578263622651.1953
     method: POST
-    modified: 1588620085499
-    name: UserSelfUpdate
+    modified: 1590689978286
+    name: UserSelfProfileUpdate
     parameters: []
     parentId: fld_69697a7d22fa4ca1ab05fff2c344cef1
     settingDisableRenderRequestBody: false
@@ -449,7 +449,7 @@ resources:
     isPrivate: false
     metaSortKey: -1577800601444.75
     method: POST
-    modified: 1588620150432
+    modified: 1589160978106
     name: UserSelf
     parameters: []
     parentId: fld_6ad104f3579b4e2f836774614050d743
@@ -484,7 +484,7 @@ resources:
     isPrivate: false
     metaSortKey: -1583210967154.6875
     method: POST
-    modified: 1588620355841
+    modified: 1590689931381
     name: Users
     parameters: []
     parentId: fld_c9fd611688d04793b31ee6c305076933
@@ -605,28 +605,29 @@ resources:
     cookies:
       - creation: 2020-01-14T00:36:22.738Z
         domain: localhost
-        expires: 2020-05-11T18:38:53.000Z
+        expires: 2020-06-04T18:19:42.000Z
         hostOnly: true
         httpOnly: true
-        id: "23780963420665335"
+        id: "691964694299875"
         key: jid
-        lastAccessed: 2020-05-04T18:38:53.722Z
+        lastAccessed: 2020-05-28T18:19:42.493Z
         maxAge: 604800
         path: /refresh_token
-        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im44QG44aW8uY29tIiwiaWQiOiJjazk2N29vOHEwMDAwMG9mazQ3ZDM3ZXd3Iiwicm9sZSI6IkFETUlOIiwidG9rZW5WZXJzaW9uIjoyLCJ1c2VybmFtZSI6Im44aW8iLCJpYXQiOjE1ODg2MTc1MzMsImV4cCI6MTU4OTIyMjMzM30.mAPnonFk0H1cquF57APVmGiRsPLsDTa20bn8QKyfupU
+        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im44QG44aW8uY29tIiwiaWQiOiJjazl3d2Rqc2wwMDAwbGZma2VvcHYzbTBxIiwicm9sZSI6IkFETUlOIiwidG9rZW5WZXJzaW9uIjowLCJ1c2VybmFtZSI6Im44aW8iLCJpYXQiOjE1OTA2ODk5ODIsImV4cCI6MTU5MTI5NDc4Mn0.Q-VE3KPb02_NAQTSd0R7wJpZLPa7DQGRsDgn3OAPnGA
       - creation: 2020-04-19T18:13:37.101Z
         domain: n8io-boilerplate-monorepo.herokuapp.com
-        expires: 2020-05-04T15:07:49.000Z
+        expires: 2020-05-16T00:03:37.000Z
         hostOnly: true
         httpOnly: true
-        id: "32874720131044355"
+        id: "5873260789958541"
         key: jid
-        lastAccessed: 2020-04-27T15:07:49.140Z
+        lastAccessed: 2020-05-09T00:03:37.245Z
         maxAge: 604800
         path: /refresh_token
         secure: true
+        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5hdGhhbmRhdmlkY2xhcmtAZ21haWwuY29tIiwiaWQiOiJjazk3bGo0cXcwMDAwMWt2dTVzcHBhc2tvIiwicm9sZSI6IlVTRVIiLCJ0b2tlblZlcnNpb24iOjAsInVzZXJuYW1lIjoibjhpbyIsImlhdCI6MTU4ODk4MjYxNywiZXhwIjoxNTg5NTg3NDE3fQ.og_liuFUftve-7i2VxdAMhHyd9CaPxfTzPkanzVpM9Q
     created: 1577800360958
-    modified: 1588617533722
+    modified: 1590689982493
     name: Default Jar
     parentId: wrk_b673aad6c5df416ead4f262eb230cf9c
     _type: cookie_jar

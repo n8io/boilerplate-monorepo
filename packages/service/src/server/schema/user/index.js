@@ -8,8 +8,8 @@ import * as UserRecoveryFind from './recoveryFind';
 import * as UserRegister from './register';
 import * as UserRevokeRefreshTokens from './revokeRefreshTokens';
 import * as UserSelf from './self';
+import * as UserSelfProfileUpdate from './selfProfileUpdate';
 import * as UserSelfSecurityUpdate from './selfSecurityUpdate';
-import * as UserSelfUpdate from './selfUpdate';
 
 const resolver = {
   Mutation: {
@@ -20,8 +20,8 @@ const resolver = {
     userPasswordResetRequest: UserPasswordResetRequest.resolver,
     userRegister: UserRegister.resolver,
     userRevokeRefreshTokens: UserRevokeRefreshTokens.resolver,
+    userSelfProfileUpdate: UserSelfProfileUpdate.resolver,
     userSelfSecurityUpdate: UserSelfSecurityUpdate.resolver,
-    userSelfUpdate: UserSelfUpdate.resolver,
   },
   Query: {
     userPasswordResetTokenValidate: UserPasswordResetTokenValidate.resolver,
@@ -41,8 +41,8 @@ const typeDefs = [
   UserRegister.typeDefs,
   UserRevokeRefreshTokens.typeDefs,
   UserSelf.typeDefs,
+  UserSelfProfileUpdate.typeDefs,
   UserSelfSecurityUpdate.typeDefs,
-  UserSelfUpdate.typeDefs,
 ];
 
 export { resolver, typeDefs };

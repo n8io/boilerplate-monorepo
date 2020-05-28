@@ -1,10 +1,10 @@
 import * as UseMutation from '../useMutation';
 import {
-  MUTATION_USER_SELF_UPDATE,
-  useUserSelfUpdate,
-} from './useUserSelfUpdate';
+  MUTATION_USER_SELF_PROFILE_UPDATE,
+  useUserSelfProfileUpdate,
+} from './useUserSelfProfileUpdate';
 
-describe('useUserSelfUpdate', () => {
+describe('useUserSelfProfileUpdate', () => {
   const options = { option: 'OPTION' };
   let useMutation = null;
 
@@ -13,8 +13,8 @@ describe('useUserSelfUpdate', () => {
   });
 
   test('should pass along the proper parameters to useMutation', () => {
-    useUserSelfUpdate(options);
+    useUserSelfProfileUpdate(options);
 
-    td.verify(useMutation(MUTATION_USER_SELF_UPDATE, options));
+    td.verify(useMutation(MUTATION_USER_SELF_PROFILE_UPDATE, options));
   });
 });

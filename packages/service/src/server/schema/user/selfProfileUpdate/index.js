@@ -3,16 +3,16 @@ import { gql } from 'apollo-server-express';
 import { toUniqueIndexName } from 'db/migrate/utils';
 import { log } from 'log';
 import { logFactory } from 'log/logFactory';
-import { DatabaseError } from 'types/customError';
 import {
-  UserSelfUpdateEmailInUserError,
-  UserSelfUpdateNotFoundError,
-} from 'types/customError/user/selfUpdate';
+  DatabaseError,
+  UserSelfProfileUpdateEmailInUserError,
+  UserSelfProfileUpdateNotFoundError,
+} from 'types/customError';
 import { Db } from 'types/db';
 import { InternalErrorMessage } from 'types/errorMessage';
 import { Telemetry } from 'types/telemetry';
 
-const MUTATION_NAME = 'userSelfUpdate';
+const MUTATION_NAME = 'userSelfProfileUpdate';
 
 const debugLog = logFactory({
   method: MUTATION_NAME,
@@ -52,13 +52,16 @@ const resolver = async (_parent, { input }, context) => {
     userLoader.clear(id);
   } catch (error) {
     if (isDuplicateEmailError(error)) {
-      log.error(InternalErrorMessage.USER_SELF_UPDATE_FAILED_EMAIL_IN_USE, {
-        email: input.email,
-        id,
-        ...telemetry,
-      });
+      log.error(
+        InternalErrorMessage.USER_SELF_PROFILE_UPDATE_FAILED_EMAIL_IN_USE,
+        {
+          email: input.email,
+          id,
+          ...telemetry,
+        }
+      );
 
-      throw new UserSelfUpdateEmailInUserError();
+      throw new UserSelfProfileUpdateEmailInUserError();
     }
 
     log.error(InternalErrorMessage.DATABASE_REQUEST_FAILED, {
@@ -70,12 +73,12 @@ const resolver = async (_parent, { input }, context) => {
   }
 
   if (!userSelf) {
-    log.error(InternalErrorMessage.USER_SELF_UPDATE_FAILED_NOT_FOUND, {
+    log.error(InternalErrorMessage.USER_SELF_PROFILE_UPDATE_FAILED_NOT_FOUND, {
       id,
       ...telemetry,
     });
 
-    throw new UserSelfUpdateNotFoundError();
+    throw new UserSelfProfileUpdateNotFoundError();
   }
 
   return UserSnapshot.make(userSelf);
@@ -83,7 +86,7 @@ const resolver = async (_parent, { input }, context) => {
 
 const typeDefs = gql`
   "The user's self update input"
-  input UserSelfUpdateInput {
+  input UserSelfProfileUpdateInput {
     "The user provided email address"
     email: EmailAddress!
     "The user provided last name"
@@ -97,7 +100,7 @@ const typeDefs = gql`
     "The user self update mutation"
     ${MUTATION_NAME}(
       "The input for the user self update mutation"
-      input: UserSelfUpdateInput!
+      input: UserSelfProfileUpdateInput!
     ): UserSnapshot! @isAuthenticated
   }
 `;
