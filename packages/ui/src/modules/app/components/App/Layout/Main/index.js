@@ -1,6 +1,8 @@
+import { FeatureFlag } from '@boilerplate-monorepo/common';
 import { A11y } from '@boilerplate-monorepo/ui-common';
 import React, { useState, useEffect } from 'react';
 import { ErrorNotification } from 'shared/ErrorNotification';
+import { Feature } from 'shared/Feature';
 import { InfoNotification } from 'shared/InfoNotification';
 import { NotificationManager } from 'shared/NotificationContainer';
 import { useIsInternetConnected } from 'shared/useIsInternetConnected';
@@ -35,6 +37,9 @@ const Main = () => {
   return (
     <Container role={Role.MAIN}>
       <NotificationManager />
+      <Feature flag={FeatureFlag.WEB_BETA_USER}>
+        <InfoNotification message={"You're a beta user 🎉"} />
+      </Feature>
       <ErrorNotification error={error} messageKey="offlineDetected" />
       {lastIsConnected === false && isInternetConnected && (
         <InfoNotification message={t('onlineDetected')} />

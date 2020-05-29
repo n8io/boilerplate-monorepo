@@ -1,7 +1,7 @@
 import { values as ramdaValues } from 'ramda';
 
 const Enumeration = {
-  WEB_FEATURE_ANNOUNCEMENTS: 'web_feature-announcements',
+  WEB_BETA_USER: 'web_beta-user',
 };
 
 const values = ramdaValues(Enumeration);
