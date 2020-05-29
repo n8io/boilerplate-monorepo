@@ -19,9 +19,9 @@ export { UserRecoveryFindInput } from './types/userRecoveryFindInput';
 export { UserRecoveryNotifyInput } from './types/userRecoveryNotifyInput';
 export { UserRecoveryNotifyMethod } from './types/userRecoveryNotifyMethod';
 export { UserRegisterInput } from './types/userRegisterInput';
+export { UserSelfProfileUpdateInput } from './types/userSelfProfileUpdateInput';
 export { UserSelfSecurityUpdateInput } from './types/userSelfSecurityUpdateInput';
 export { UserRole } from './types/userRole';
-export { UserSelfUpdateInput } from './types/userSelfUpdateInput';
 export { UserSnapshot } from './types/userSnapshot';
 export {
   Validation,
