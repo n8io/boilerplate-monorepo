@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/n8io/boilerplate-monorepo/compare/v1.4.0...v1.5.0) (2020-05-29)
+
+
+### Features
+
+* **feature-flags:** ✨ Add attribute map to feature flag requests ([24b251a](https://github.com/n8io/boilerplate-monorepo/commit/24b251ac6e10951eee9b1420cff0e106f0c707d7))
+
+
+
+
+
 # [1.4.0](https://github.com/n8io/boilerplate-monorepo/compare/v1.3.2...v1.4.0) (2020-05-26)
 
 **Note:** Version bump only for package @boilerplate-monorepo/common

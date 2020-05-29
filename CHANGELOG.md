@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/n8io/boilerplate-monorepo/compare/v1.4.0...v1.5.0) (2020-05-29)
+
+
+### Features
+
+* **feature-flags:** ✨ Add attribute map to feature flag requests ([24b251a](https://github.com/n8io/boilerplate-monorepo/commit/24b251ac6e10951eee9b1420cff0e106f0c707d7))
+* **logrocket:** ✨ Add user info to LogRocket session tracking ([3e16eb5](https://github.com/n8io/boilerplate-monorepo/commit/3e16eb55dd6cbc32a00f2a4ac54acf30b7f77f16))
+* ✨ Add prompt when navigating away from dirty forms ([93cc9a8](https://github.com/n8io/boilerplate-monorepo/commit/93cc9a8bc731eb70d89776079a0b2bc3d50e62f7))
+
+
+
+
+
 # [1.4.0](https://github.com/n8io/boilerplate-monorepo/compare/v1.3.2...v1.4.0) (2020-05-26)
 
 
