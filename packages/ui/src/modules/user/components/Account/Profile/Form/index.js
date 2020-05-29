@@ -1,4 +1,7 @@
-import { FetchPolicy, UserSelfUpdateInput } from '@boilerplate-monorepo/common';
+import {
+  FetchPolicy,
+  UserSelfProfileUpdateInput,
+} from '@boilerplate-monorepo/common';
 import React, { useEffect, useState } from 'react';
 import { ErrorNotification } from 'shared/ErrorNotification';
 import { Loader } from 'shared/Loader';
@@ -29,7 +32,7 @@ const Form = () => {
   });
 
   const formProps = useForm({
-    validationSchema: UserSelfUpdateInput.validationSchema,
+    validationSchema: UserSelfProfileUpdateInput.validationSchema,
   });
 
   const { reset } = formProps;
@@ -39,14 +42,14 @@ const Form = () => {
 
     await mutate({
       refetchQueries: [{ query: QUERY_USER_SELF }],
-      variables: { input: UserSelfUpdateInput.formToInput(input) },
+      variables: { input: UserSelfProfileUpdateInput.formToInput(input) },
     });
 
     setIsSuccessful(true);
   };
 
   useEffect(() => {
-    reset(UserSelfUpdateInput.makeInitial(self));
+    reset(UserSelfProfileUpdateInput.makeInitial(self));
   }, [self, reset]);
 
   if (loading && !self) return <Loader />;
@@ -63,24 +66,24 @@ const Form = () => {
         <SuccessNotification message={t('profileUpdateSuccess')} />
       )}
       <TextInput
-        {...UserSelfUpdateInput.Limits.username}
+        {...UserSelfProfileUpdateInput.Limits.username}
         disabled
         label={t('username')}
         name="username"
         patternDescription={t('DOES_NOT_MEET_USERNAME_REQUIREMENTS')}
       />
       <EmailInput
-        {...UserSelfUpdateInput.Limits.email}
+        {...UserSelfProfileUpdateInput.Limits.email}
         label={t('emailAddress')}
         name="email"
       />
       <TextInput
-        {...UserSelfUpdateInput.Limits.givenName}
+        {...UserSelfProfileUpdateInput.Limits.givenName}
         label={t('givenName')}
         name="givenName"
       />
       <TextInput
-        {...UserSelfUpdateInput.Limits.familyName}
+        {...UserSelfProfileUpdateInput.Limits.familyName}
         label={t('familyName')}
         name="familyName"
       />

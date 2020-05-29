@@ -4,7 +4,7 @@ import { formToInput } from './transforms';
 import { propTypes } from './typedef';
 import { ErrorKeys, isValid, Limits, validationSchema } from './validation';
 
-const UserSelfUpdateInput = {
+const UserSelfProfileUpdateInput = {
   ErrorKeys,
   Limits,
   apiExample,
@@ -16,4 +16,4 @@ const UserSelfUpdateInput = {
   validationSchema,
 };
 
-export { UserSelfUpdateInput };
+export { UserSelfProfileUpdateInput };

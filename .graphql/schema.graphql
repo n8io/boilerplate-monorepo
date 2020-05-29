@@ -92,17 +92,17 @@ type Mutation {
     id: ID!
   ): Boolean!
 
+  """The user self update mutation"""
+  userSelfProfileUpdate(
+    """The input for the user self update mutation"""
+    input: UserSelfProfileUpdateInput!
+  ): UserSnapshot!
+
   """The user self security update mutation"""
   userSelfSecurityUpdate(
     """The input for the user self security update mutation"""
     input: UserSelfSecurityUpdateInput!
   ): Boolean!
-
-  """The user self update mutation"""
-  userSelfUpdate(
-    """The input for the user self update mutation"""
-    input: UserSelfUpdateInput!
-  ): UserSnapshot!
 }
 
 """A page info"""
@@ -204,7 +204,7 @@ input UserPasswordResetTokenValidateInput {
 """The user recovery type"""
 type UserRecovery {
   """The user's masked email. E.g. n***@****l.com"""
-  email: String!
+  emailMasked: String!
 
   """The user's id"""
   id: ID!
@@ -249,17 +249,8 @@ enum UserRole {
   USER
 }
 
-"""The user's self security update input"""
-input UserSelfSecurityUpdateInput {
-  """The user's current password"""
-  passwordCurrent: String!
-
-  """The user's new password"""
-  passwordNew: String!
-}
-
 """The user's self update input"""
-input UserSelfUpdateInput {
+input UserSelfProfileUpdateInput {
   """The user provided email address"""
   email: EmailAddress!
 
@@ -270,7 +261,16 @@ input UserSelfUpdateInput {
   givenName: String
 }
 
-"""The user type"""
+"""The user's self security update input"""
+input UserSelfSecurityUpdateInput {
+  """The user's current password"""
+  passwordCurrent: String!
+
+  """The user's new password"""
+  passwordNew: String!
+}
+
+"""The user snapshot type"""
 type UserSnapshot {
   """The user's email"""
   email: EmailAddress!

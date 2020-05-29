@@ -1,11 +1,11 @@
-import { UserSelfUpdateInput } from '.';
+import { UserSelfProfileUpdateInput } from '.';
 
-const { isValid } = UserSelfUpdateInput;
+const { isValid } = UserSelfProfileUpdateInput;
 
 describe('user self update input validation', () => {
   describe('is valid', () => {
     test('with a valid input', async () => {
-      const input = UserSelfUpdateInput.apiExample();
+      const input = UserSelfProfileUpdateInput.apiExample();
       const actual = await isValid(input);
 
       expect(actual).toEqual(true);
@@ -14,7 +14,7 @@ describe('user self update input validation', () => {
 
   describe('is not valid', () => {
     test('without a valid email', async () => {
-      const input = UserSelfUpdateInput.apiExample({
+      const input = UserSelfProfileUpdateInput.apiExample({
         email: 'NOT_A_VALID_EMAIL',
       });
 
@@ -24,14 +24,14 @@ describe('user self update input validation', () => {
     });
 
     test('without a family name', async () => {
-      const input = UserSelfUpdateInput.apiExample({ familyName: null });
+      const input = UserSelfProfileUpdateInput.apiExample({ familyName: null });
       const actual = await isValid(input);
 
       expect(actual).toEqual(false);
     });
 
     test('without a given name', async () => {
-      const input = UserSelfUpdateInput.apiExample({ givenName: null });
+      const input = UserSelfProfileUpdateInput.apiExample({ givenName: null });
       const actual = await isValid(input);
 
       expect(actual).toEqual(false);
