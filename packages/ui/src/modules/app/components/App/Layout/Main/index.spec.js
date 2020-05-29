@@ -2,6 +2,8 @@ import React from 'react';
 import { render } from 'testHelpers';
 import { Main } from '.';
 
+jest.mock('shared/Feature');
+
 jest.mock('../../Router', () => ({
   Router: (props) => <x-Router {...props} />,
 }));

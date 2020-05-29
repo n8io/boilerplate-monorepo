@@ -8,6 +8,10 @@ exports[`<Main/> renders properly 1`] = `
   <div
     class="Toastify"
   />
+  <x-feature
+    data-testid="feature"
+    flag="web_beta-user"
+  />
   <x-router />
 </main>
 `;

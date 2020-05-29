@@ -1,6 +1,8 @@
 import { SplitContext } from '@splitsoftware/splitio-react';
 import debug from 'debug';
-import { useContext, useState, useEffect } from 'react';
+import { isNil, mergeRight, pick, unless } from 'ramda';
+import { useContext, useEffect, useState } from 'react';
+import { useAuth } from 'shared/useAuth';
 
 const log = debug('shared/useFeatureFlag');
 
@@ -10,8 +12,14 @@ const initial = {
   isLoading: true,
 };
 
+const userToFeatureAttributes = unless(
+  isNil,
+  pick(['email', 'familyName', 'givenName', 'id', 'role', 'username'])
+);
+
 const useFeatureFlag = (flag, { delay, ...options } = {}) => {
   const { client, isReady, isTimedout: hasTimedOut } = useContext(SplitContext);
+  const { isAuthenticated, user } = useAuth();
   const [data, setData] = useState();
   const [error, setError] = useState();
   const [isLoading, beLoading] = useState(true);
@@ -20,11 +28,17 @@ const useFeatureFlag = (flag, { delay, ...options } = {}) => {
     if (!isReady) return;
 
     const fetchFeatureFlag = async () => {
-      log('Fetching feature flag...', flag, options);
+      const mergedOptions = mergeRight(
+        { isAuthenticated },
+        userToFeatureAttributes(user),
+        options
+      );
+
+      log('Fetching feature flag...', flag, mergedOptions);
 
       delay && (await new Promise((r) => setTimeout(r, delay)));
 
-      const response = await client.getTreatment(flag, options);
+      const response = await client.getTreatment(flag, mergedOptions);
 
       log('Feature flag value for current session', { [flag]: response });
       setData(response);
@@ -33,7 +47,7 @@ const useFeatureFlag = (flag, { delay, ...options } = {}) => {
 
     beLoading(true);
     fetchFeatureFlag();
-  }, [flag, isReady]);
+  }, [flag, isReady, user]);
 
   useEffect(() => {
     const err = hasTimedOut

@@ -5,8 +5,9 @@ import * as UseFeatureFlagHook from '../useFeatureFlag';
 import { Feature } from '.';
 
 describe('<Feature/>', () => {
-  const flag = FeatureFlag.WEB_FEATURE_ANNOUNCEMENTS;
+  const flag = FeatureFlag.WEB_BETA_USER;
   const testId = 'child';
+  const options = undefined;
 
   const defaultProps = {
     children: <x-Child data-testid={testId} />,
@@ -21,7 +22,7 @@ describe('<Feature/>', () => {
       beforeEach(() => {
         const useFeatureFlag = td.replace(UseFeatureFlagHook, 'useFeatureFlag');
 
-        td.when(useFeatureFlag(flag)).thenReturn({
+        td.when(useFeatureFlag(flag, options)).thenReturn({
           data: FeatureFlagValue.ON,
           isLoading: true,
         });
@@ -38,7 +39,7 @@ describe('<Feature/>', () => {
       beforeEach(() => {
         const useFeatureFlag = td.replace(UseFeatureFlagHook, 'useFeatureFlag');
 
-        td.when(useFeatureFlag(flag)).thenReturn({
+        td.when(useFeatureFlag(flag, options)).thenReturn({
           data: undefined,
           isLoading: true,
         });
@@ -56,7 +57,7 @@ describe('<Feature/>', () => {
     beforeEach(() => {
       const useFeatureFlag = td.replace(UseFeatureFlagHook, 'useFeatureFlag');
 
-      td.when(useFeatureFlag(flag)).thenReturn({
+      td.when(useFeatureFlag(flag, options)).thenReturn({
         data: FeatureFlagValue.ON,
         error: undefined,
         isLoading: false,
@@ -74,7 +75,7 @@ describe('<Feature/>', () => {
     beforeEach(() => {
       const useFeatureFlag = td.replace(UseFeatureFlagHook, 'useFeatureFlag');
 
-      td.when(useFeatureFlag(flag)).thenReturn({
+      td.when(useFeatureFlag(flag, options)).thenReturn({
         data: FeatureFlagValue.OFF,
         error: undefined,
         isLoading: false,

@@ -1,11 +1,13 @@
-import { FeatureFlag } from '@boilerplate-monorepo/common';
+import { FeatureFlag, User } from '@boilerplate-monorepo/common';
 import { SplitContext } from '@splitsoftware/splitio-react';
 import { act, renderHook } from '@testing-library/react-hooks';
 import React from 'react';
+import * as UseAuthHook from 'shared/useAuth';
 import { useFeatureFlag } from '.';
 
+// eslint-disable-next-line max-statements
 describe('useFeatureFlag', () => {
-  const flag = FeatureFlag.WEB_FEATURE_ANNOUNCEMENTS;
+  const flag = FeatureFlag.WEB_BETA_USER;
   const options = { option: 'OPTION' };
 
   const defaultContext = {
@@ -23,6 +25,15 @@ describe('useFeatureFlag', () => {
   };
 
   let useContext = null;
+  const user = User.uiExample();
+
+  let useAuth = null;
+
+  beforeEach(() => {
+    useAuth = td.replace(UseAuthHook, 'useAuth');
+
+    td.when(useAuth()).thenReturn({ isAuthenticated: true, user });
+  });
 
   beforeEach(() => {
     useContext = td.replace(React, 'useContext');
