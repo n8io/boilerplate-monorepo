@@ -1,8 +1,9 @@
 import { useApolloClient } from '@apollo/client';
 import { SplitClient } from '@splitsoftware/splitio-react';
 import jwtDecode from 'jwt-decode';
+import LogRocket from 'logrocket';
 import { node } from 'prop-types';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { useUserLogout } from 'shared/graphql';
 import { AccessToken } from 'types/accessToken';
 import { Jwt } from 'types/jwt';
@@ -33,6 +34,12 @@ const Auth = ({ children }) => {
     },
     [setUser]
   );
+
+  useEffect(() => {
+    if (!user) return;
+
+    LogRocket.identify(user.id, user);
+  }, [user]);
 
   const authContext = {
     isAuthenticated: Boolean(user),
