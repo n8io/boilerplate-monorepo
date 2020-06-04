@@ -9,7 +9,7 @@ const fontFamilies = pipe(
   join('&')
 )(Font);
 
-const href = `https://fonts.googleapis.com/css?${fontFamilies}`;
+const href = `https://fonts.googleapis.com/css?${fontFamilies}&display=swap`;
 
 const FontLoader = () => <link href={href} rel="stylesheet" />;
 
