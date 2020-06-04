@@ -12,12 +12,7 @@ const envCheck = () => {
     process.exit(0);
   }
 
-  const requiredKeys = [
-    'RELEASE',
-    'SENTRY_AUTH_TOKEN',
-    'SENTRY_ORG',
-    'SENTRY_PROJECT',
-  ];
+  const requiredKeys = ['SENTRY_AUTH_TOKEN', 'SENTRY_ORG', 'SENTRY_PROJECT'];
 
   const areAllEnvVarsSet = all(
     Boolean,

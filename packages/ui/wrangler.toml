@@ -1,0 +1,17 @@
+name = "boilerplate-monorepo-ui"
+type = "webpack"
+account_id = "660375070632324fc4e5b0107c089995"
+
+[site]
+bucket = "./build"
+entry-point = ".deploy"
+
+[env.development]
+workers_dev=false
+route = "app-dev.n8c.io/*"
+zone_id = "69ed1e8613773595f97cb23c753c5fb1"
+
+[env.production]
+workers_dev=false
+route = "app.n8c.io/*"
+zone_id = "69ed1e8613773595f97cb23c753c5fb1"

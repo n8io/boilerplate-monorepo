@@ -14,7 +14,6 @@ const envCheck = () => {
 
   const requiredKeys = [
     'LOGROCKET_API_TOKEN',
-    'REACT_APP_RELEASE',
     'SENTRY_AUTH_TOKEN',
     'SENTRY_ORG',
     'SENTRY_PROJECT',

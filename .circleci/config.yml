@@ -72,18 +72,45 @@ jobs:
           command: |
             git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME_SERVICE.git master
 
+  deploy-ui-dev:
+    docker:
+      - image: circleci/node:14.2.0
+    environment:
+      TERM: xterm
+    working_directory: ~/app
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-deps-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - v1-deps-{{ checksum "yarn.lock" }}
+            - v1-deps-
+      - run:
+          name: Deploy [ui] to CloudFlare Workers (https://app-dev.n8c.io)
+          command: |
+            cd packages/ui
+            NODE_ENV=development yarn -s build
+            npx wrangler publish --env development
+
   deploy-ui:
     docker:
       - image: circleci/node:14.2.0
+    environment:
+      TERM: xterm
+    working_directory: ~/app
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - v1-deps-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - v1-deps-{{ checksum "yarn.lock" }}
+            - v1-deps-
       - run:
-          name: Check the [ui] needs pushed
-          command: ./.circleci/exit-untouched.sh packages/common packages/ui-common packages/ui
-      - run:
-          name: Deploy [ui] to Heroku
+          name: Deploy [ui] to CloudFlare Workers (https://app.n8c.io)
           command: |
-            git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME_UI.git master
+            cd packages/ui
+            yarn -s build
+            npx wrangler publish --env production
 
 workflows:
   version: 2
@@ -114,6 +141,14 @@ workflows:
       - test:
           requires:
             - install
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+      - deploy-ui-dev:
+          requires:
+            - test
           filters:
             branches:
               ignore: /.*/
