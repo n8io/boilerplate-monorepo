@@ -132,7 +132,6 @@
     "stylelint-processor-styled-components": "^1.8.0",
     "testdouble": "^3.12.4",
     "testdouble-jest": "^2.0.0",
-    "update-dotenv": "^1.1.1",
     "webpack-hot-middleware": "^2.25.0"
   }
 }

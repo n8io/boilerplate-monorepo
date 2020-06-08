@@ -1,3 +1,5 @@
+.deploy/
+.tmp/
 build/
 coverage/
 dist/
@@ -6,4 +8,3 @@ node_modules/
 !.storybook/
 !.stylelintrc.js
 !cypress/
-.tmp/

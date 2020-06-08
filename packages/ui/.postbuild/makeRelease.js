@@ -1,12 +1,5 @@
-const dotenv = require('dotenv');
 const { version } = require('../package.json');
 
-dotenv.config();
-
-const makeRelease = () => {
-  const { REACT_APP_RELEASE } = process.env;
-
-  return REACT_APP_RELEASE || version;
-};
+const makeRelease = () => version;
 
 module.exports = { makeRelease };
