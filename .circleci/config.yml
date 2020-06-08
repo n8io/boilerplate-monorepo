@@ -151,9 +151,7 @@ workflows:
             - test
           filters:
             branches:
-              ignore: /.*/
-            tags:
-              only: /^v.*/
+              only: master
       - approve-deploy:
           type: approval
           requires:
