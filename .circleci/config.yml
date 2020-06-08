@@ -86,11 +86,22 @@ jobs:
             - v1-deps-{{ checksum "yarn.lock" }}
             - v1-deps-
       - run:
+          name: Build [ui]
+          command: |
+            REACT_APP_COMMIT_HASH=$(git rev-parse --short HEAD) \
+            REACT_APP_COMMIT_MESSAGE=$(git log --oneline --format=%B -n 1 HEAD | head -n 1) \
+            NODE_ENV=development \
+            yarn -s build:ui
+      - run:
+          name: Install CloudFlare cli (wrangler)
+          command: |
+            cd packages/ui
+            yarn add --dev @cloudflare/wrangler
+      - run:
           name: Deploy [ui] to CloudFlare Workers (https://app-dev.n8c.io)
           command: |
             cd packages/ui
-            NODE_ENV=development yarn -s build
-            npx wrangler publish --env development
+            yarn wrangler publish --env development
 
   deploy-ui:
     docker:
@@ -106,11 +117,21 @@ jobs:
             - v1-deps-{{ checksum "yarn.lock" }}
             - v1-deps-
       - run:
+          name: Build [ui]
+          command: |
+            REACT_APP_COMMIT_HASH=$(git rev-parse --short HEAD) \
+            REACT_APP_COMMIT_MESSAGE=$(git log --oneline --format=%B -n 1 HEAD | head -n 1) \
+            yarn -s build:ui
+      - run:
+          name: Install CloudFlare cli (wrangler)
+          command: |
+            cd packages/ui
+            yarn add --dev @cloudflare/wrangler
+      - run:
           name: Deploy [ui] to CloudFlare Workers (https://app.n8c.io)
           command: |
             cd packages/ui
-            yarn -s build
-            npx wrangler publish --env production
+            yarn wrangler publish --env production
 
 workflows:
   version: 2
@@ -130,6 +151,12 @@ workflows:
               only: /.*/
             tags:
               ignore: /^v.*/
+      - deploy-ui-dev:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
   release:
     jobs:
       - install:
@@ -146,12 +173,6 @@ workflows:
               ignore: /.*/
             tags:
               only: /^v.*/
-      - deploy-ui-dev:
-          requires:
-            - test
-          filters:
-            branches:
-              only: master
       - approve-deploy:
           type: approval
           requires:
