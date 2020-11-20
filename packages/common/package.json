@@ -10,11 +10,15 @@
   },
   "scripts": {
     "build": "babel src -d dist --ignore '**/*.spec.js'",
-    "postinstall": "yarn -s build",
     "start": "yarn -s build --watch",
     "test": "jest --passWithNoTests",
     "test:ci": "JEST_JUNIT_OUTPUT_DIR=../../.tmp/test-results/jest/common  yarn -s test --ci --runInBand --reporters=default --reporters=jest-junit",
     "test:watch": "jest --passWithNoTests --color --watch"
+  },
+  "workspaces": {
+    "nohoist": [
+      "**"
+    ]
   },
   "dependencies": {
     "es6-error": "^4.1.1",

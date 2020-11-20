@@ -1,0 +1,8 @@
+docker*
+lefthook.yml
+nodemon*
+README
+yarn.lock
+.postbuild
+.prebuild
+src/

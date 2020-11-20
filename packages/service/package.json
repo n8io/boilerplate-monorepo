@@ -26,6 +26,11 @@
     "test:watch": "jest --passWithNoTests --color --watch",
     "watch": "nodemon"
   },
+  "workspaces": {
+    "nohoist": [
+      "**"
+    ]
+  },
   "jest": {
     "setupFilesAfterEnv": [
       "<rootDir>/src/setupTests.js"

@@ -1,0 +1,23 @@
+{
+  "name": "boilerplate-monorepo-graphql",
+  "description": "A serverless graphql api for boilerplate-monorepo",
+  "profile": "aws-n8io-dev",
+  "lambda": {
+    "memory": 512,
+    "role": "arn:aws:iam::073153661971:role/lamda-vpc-role",
+    "runtime": "nodejs12.x",
+    "vpc": {
+      "security_groups": ["sg-0ec97accb5fde610b"],
+      "subnets": ["subnet-012e59ac0cdbf4088", "subnet-0e6da83a3f6fb6467"]
+    }
+  },
+  "proxy": {
+    "command": "HTTPS=false node -r dotenv/config ./dist",
+    "timeout": 10
+  },
+  "environment": {
+    "DATABASE_URL": "postgres://postgres:postgres@boilerplate-monorepo.cluster-cf9rkr0srrg5.us-east-1.rds.amazonaws.com:5432/postgres",
+    "DEBUG": "@boilerplate-monorepo/service*,-*auth.*RefreshToken*,-*db.connection*,-*stop.shutdown*",
+    "REDIS_URL": "redis://boilerplate-monorepo.apslio.0001.use1.cache.amazonaws.com"
+  }
+}

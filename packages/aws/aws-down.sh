@@ -79,6 +79,7 @@ if [[ ! -z "${VPC_SECURITY_GROUP_DB_ID:-""}" ]]; then
   ${AWS_EC2} delete-security-group --group-id ${VPC_SECURITY_GROUP_DB_ID} | true
   echo "done."
   sed -i.bak '/^VPC_SECURITY_GROUP_DB_ID/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
+  sleep 10
 fi
 
 if [[ ! -z "${VPC_SECURITY_GROUP_LAMBDA_ID:-""}" ]]; then
