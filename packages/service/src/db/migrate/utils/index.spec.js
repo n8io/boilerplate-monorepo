@@ -9,7 +9,7 @@ import {
   toUniqueIndexName,
 } from './index';
 
-const { DB_SCHEMA } = config;
+const { DATABASE_SCHEMA } = config;
 
 describe('migrate utils', () => {
   const tableName = 'TABLE_NAME';
@@ -22,7 +22,7 @@ describe('migrate utils', () => {
       const actual = toEnumName(tableName, enumName);
 
       expect(actual).toEqual(
-        `${DB_SCHEMA}.${Prefix.ENUM}_${tableName}_${enumName}`
+        `${DATABASE_SCHEMA}.${Prefix.ENUM}_${tableName}_${enumName}`
       );
     });
   });
@@ -49,7 +49,7 @@ describe('migrate utils', () => {
     test('returns the proper prefixed name', () => {
       const actual = toSchemaPrefixed(tableName);
 
-      expect(actual).toEqual(`${DB_SCHEMA}.${tableName}`);
+      expect(actual).toEqual(`${DATABASE_SCHEMA}.${tableName}`);
     });
   });
 
@@ -57,7 +57,7 @@ describe('migrate utils', () => {
     test('returns the proper prefixed name', () => {
       const actual = toTableName(tableName);
 
-      expect(actual).toEqual(`${DB_SCHEMA}.${tableName}`);
+      expect(actual).toEqual(`${DATABASE_SCHEMA}.${tableName}`);
     });
   });
 

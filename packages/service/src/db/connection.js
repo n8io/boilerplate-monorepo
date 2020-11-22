@@ -6,7 +6,7 @@ import knexMock from 'mock-knex';
 import { multiply } from 'ramda';
 import { Db } from 'types/db';
 
-const { DATABASE_URL, isSqlDebug, isTest } = config;
+const { DATABASE_URL, DATABASE_USE_SSL, isSqlDebug, isTest } = config;
 
 const debugLog = logFactory({ method: 'connection', module: 'db' });
 
@@ -31,7 +31,10 @@ const makeConnection = () => {
   if (!isTest) {
     options = {
       client: DbType.PG,
-      connection: DATABASE_URL,
+      connection: {
+        connectionString: DATABASE_URL,
+        ssl: DATABASE_USE_SSL ? { rejectUnauthorized: false } : false,
+      },
       debug: isSqlDebug,
     };
   }

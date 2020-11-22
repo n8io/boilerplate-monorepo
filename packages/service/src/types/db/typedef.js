@@ -1,9 +1,9 @@
 import { config } from 'config';
 
-const { DB_SCHEMA } = config;
+const { DATABASE_SCHEMA } = config;
 
 const Schema = {
-  MAIN: DB_SCHEMA,
+  MAIN: DATABASE_SCHEMA,
 };
 
 const SortDirection = {

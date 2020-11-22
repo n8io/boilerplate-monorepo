@@ -3,7 +3,7 @@ import { config } from 'config';
 import { node } from 'prop-types';
 import React from 'react';
 import { EllipsiedText } from 'shared/EllipsiedText';
-import { Muted } from 'shared/Muted';
+import { ExternalLink } from 'shared/ExternalLink';
 import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
 import { CustomProperty } from 'types/customProperties';
@@ -27,13 +27,15 @@ const Container = styled.footer`
   ${Fade.bottom}
 `;
 
-const StyledMuted = styled(Muted)`
-  font-size: calc(${CustomProperty.BASE_UNIT} * 0.95);
-`;
+const RELEASE_BASE_URL =
+  'https://github.com/n8io/boilerplate-monorepo/releases/tag';
 
 const Footer = ({ children }) => {
-  const { RELEASE, copyrightYear } = config;
   const t = useTranslate();
+
+  const { RELEASE, copyrightYear } = config;
+  const release = `v${RELEASE}`;
+  const releaseUrl = `${RELEASE_BASE_URL}/${release}`;
 
   return (
     <Container role={Role.FOOTER}>
@@ -41,7 +43,7 @@ const Footer = ({ children }) => {
         {t('footer', { copyrightYear, name: Site.name })}
       </EllipsiedText>
       <div>{children}</div>
-      <StyledMuted>v{RELEASE}</StyledMuted>
+      <ExternalLink href={releaseUrl}>{release}</ExternalLink>
       <Toggles />
     </Container>
   );

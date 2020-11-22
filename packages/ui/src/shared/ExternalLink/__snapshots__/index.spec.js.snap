@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ExternalLink/> renders children 1`] = `
+<a
+  class="ExternalLink__StyledLink-dCpmsY cMdWQu"
+  href="HREF"
+  rel="noopener noreferrer"
+  target="_external"
+>
+  TEXT
+</a>
+`;
