@@ -14,9 +14,10 @@ exports[`<Footer/> renders properly 1`] = `
     <x-child />
   </div>
   <a
+    class="ExternalLink__StyledLink-dCpmsY cMdWQu"
     href="https://github.com/n8io/boilerplate-monorepo/releases/tag/vRELEASE"
     rel="noopener noreferrer"
-    target="_release"
+    target="_external"
   >
     vRELEASE
   </a>
