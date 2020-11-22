@@ -3,13 +3,13 @@ import { config } from 'config';
 import { node } from 'prop-types';
 import React from 'react';
 import { EllipsiedText } from 'shared/EllipsiedText';
-import { ExternalLink } from 'shared/ExternalLink';
 import { useTranslate } from 'shared/useTranslate';
 import styled from 'styled-components/macro';
 import { CustomProperty } from 'types/customProperties';
 import { Fade } from 'types/fade';
 import { GridTemplateArea } from 'types/gridTemplateArea';
 import { Toggles } from './Toggles';
+import { VersionLink } from './VersionLink';
 
 const { Role } = A11y;
 
@@ -27,15 +27,10 @@ const Container = styled.footer`
   ${Fade.bottom}
 `;
 
-const RELEASE_BASE_URL =
-  'https://github.com/n8io/boilerplate-monorepo/releases/tag';
-
 const Footer = ({ children }) => {
   const t = useTranslate();
 
-  const { RELEASE, copyrightYear } = config;
-  const release = `v${RELEASE}`;
-  const releaseUrl = `${RELEASE_BASE_URL}/${release}`;
+  const { copyrightYear } = config;
 
   return (
     <Container role={Role.FOOTER}>
@@ -43,7 +38,7 @@ const Footer = ({ children }) => {
         {t('footer', { copyrightYear, name: Site.name })}
       </EllipsiedText>
       <div>{children}</div>
-      <ExternalLink href={releaseUrl}>{release}</ExternalLink>
+      <VersionLink />
       <Toggles />
     </Container>
   );

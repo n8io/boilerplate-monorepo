@@ -7,6 +7,10 @@ jest.mock('./Toggles', () => ({
   Toggles: (props) => <x-Toggles {...props} />,
 }));
 
+jest.mock('./VersionLink', () => ({
+  VersionLink: (props) => <x-VersionLink {...props} />,
+}));
+
 describe('<Footer/>', () => {
   const defaultProps = {
     children: <x-child />,
@@ -17,7 +21,6 @@ describe('<Footer/>', () => {
 
   beforeEach(() => {
     td.replace(Config, 'config', {
-      RELEASE: 'RELEASE',
       copyrightYear: '1900',
     });
   });
