@@ -29,13 +29,14 @@ const defaults = {
   ACCESS_TOKEN_SECRET: 'auth-token-secret',
   CAPTCHA_SECRET: '0x0000000000000000000000000000000000000000',
   CI: false,
+  DATABASE_MIGRATION_SCHEMA: 'public',
+  DATABASE_MIGRATION_TABLE_NAME: 'migrations',
+  DATABASE_SCHEMA: 'main',
   DATABASE_URL: '',
-  DB_MIGRATION_SCHEMA: 'public',
-  DB_MIGRATION_TABLE_NAME: 'migrations',
-  DB_SCHEMA: 'main',
+  DATABASE_USE_SSL: false,
   DEBUG: `${raw.npm_package_name}*`,
   EMAIL_FROM_ADDRESS: `noreply@example.com`,
-  EMAIL_FROM_NAME: 'No Reply',
+  EMAIL_FROM_NAME: '🤖 Automated Robot',
   ENGINE_API_KEY: '',
   ENGINE_SCHEMA_TAG: 'local',
   HTTPS: true,
@@ -109,6 +110,7 @@ if (isProd(config) && missingEnvVars.length) {
 
 const merged = pipe(
   evolve({
+    DATABASE_USE_SSL: Utils.toBool,
     HTTPS: Utils.toBool,
     PORT: Utils.toNumber,
     SHOW_CONFIG: Utils.toBool,

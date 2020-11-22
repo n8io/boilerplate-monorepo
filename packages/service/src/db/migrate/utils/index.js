@@ -1,6 +1,6 @@
 import { config } from 'config';
 
-const { DB_SCHEMA } = config;
+const { DATABASE_SCHEMA } = config;
 
 const Prefix = {
   ENUM: 'enum',
@@ -9,7 +9,7 @@ const Prefix = {
   UNIQUE: 'udx',
 };
 
-const toSchemaPrefixed = (name) => `${DB_SCHEMA}.${name}`;
+const toSchemaPrefixed = (name) => `${DATABASE_SCHEMA}.${name}`;
 
 const toEnumName = (schemalessTableName, schemalessEnumName) =>
   toSchemaPrefixed(
