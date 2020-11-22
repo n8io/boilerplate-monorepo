@@ -37,7 +37,7 @@
     "dclf": "yarn run -s dc logs -f",
     "dcu": "yarn run -s dc up --force-recreate",
     "dcud": "yarn run -s dcu -d",
-    "dev": "yarn run -s dcud ui service && yarn run -s run-all logs:*",
+    "dev": "yarn run -s dcud service && yarn run -s run-all logs:*",
     "down": "yarn run -s clean",
     "down:ui": "yarn run -s dcd ui",
     "e2e:run": "cypress run --config-file ./cypress/cypress.json",
