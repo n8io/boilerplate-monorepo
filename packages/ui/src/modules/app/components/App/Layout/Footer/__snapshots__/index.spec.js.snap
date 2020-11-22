@@ -13,12 +13,13 @@ exports[`<Footer/> renders properly 1`] = `
   <div>
     <x-child />
   </div>
-  <span
-    class="Muted__Container-sc-1r87izh-0 kSHSWL Footer__StyledMuted-sc-1tc55w2-1 gyNezc"
+  <a
+    href="https://github.com/n8io/boilerplate-monorepo/releases/tag/vRELEASE"
+    rel="noopener noreferrer"
+    target="_release"
   >
-    v
-    RELEASE
-  </span>
+    vRELEASE
+  </a>
   <x-toggles />
 </footer>
 `;
