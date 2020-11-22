@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/n8io/boilerplate-monorepo/compare/v1.6.0...v1.7.0) (2020-11-22)
+
+
+### Bug Fixes
+
+* 🧪 Update broken snapshot ([b7d75fd](https://github.com/n8io/boilerplate-monorepo/commit/b7d75fd2df5965e7ed0f8b23b36f2739e2ac86ae))
+
+
+### Features
+
+* **version:** ✨ Add `VersionLink` component ([1f89cdd](https://github.com/n8io/boilerplate-monorepo/commit/1f89cdd893a0b5ccb2f15943c980193102709bb7))
+* ✨ Add `REACT_APP_RELEASE` to ui build ([122c4a0](https://github.com/n8io/boilerplate-monorepo/commit/122c4a0aff8124bf0350986a3fa51f46d691f7e4))
+* ✨ Linkify app release version in footer ([1b72729](https://github.com/n8io/boilerplate-monorepo/commit/1b72729793857a94b966b43754b634615a3dc941))
+
+
+
+
+
 # [1.6.0](https://github.com/n8io/boilerplate-monorepo/compare/v1.5.0...v1.6.0) (2020-11-22)
 
 
