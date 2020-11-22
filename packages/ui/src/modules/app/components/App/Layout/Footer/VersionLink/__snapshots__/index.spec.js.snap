@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<VersionLink /> when there is a commit hash renders the release properly 1`] = `
+<a
+  class="ExternalLink__StyledLink-dCpmsY cMdWQu"
+  href="https://github.com/n8io/boilerplate-monorepo/commit/COMMIT_HASH"
+  rel="noopener noreferrer"
+  target="_external"
+>
+  COMMIT_HASH
+</a>
+`;
+
+exports[`<VersionLink /> when there is a release renders the release properly 1`] = `
+<a
+  class="ExternalLink__StyledLink-dCpmsY cMdWQu"
+  href="https://github.com/n8io/boilerplate-monorepo/releases/tag/RELEASE"
+  rel="noopener noreferrer"
+  target="_external"
+>
+  RELEASE
+</a>
+`;

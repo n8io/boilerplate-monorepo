@@ -13,14 +13,7 @@ exports[`<Footer/> renders properly 1`] = `
   <div>
     <x-child />
   </div>
-  <a
-    class="ExternalLink__StyledLink-dCpmsY cMdWQu"
-    href="https://github.com/n8io/boilerplate-monorepo/releases/tag/vRELEASE"
-    rel="noopener noreferrer"
-    target="_external"
-  >
-    vRELEASE
-  </a>
+  <x-versionlink />
   <x-toggles />
 </footer>
 `;
