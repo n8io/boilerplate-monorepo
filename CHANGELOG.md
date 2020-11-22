@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/n8io/boilerplate-monorepo/compare/v1.5.0...v1.6.0) (2020-11-22)
+
+
+### Bug Fixes
+
+* **cookie:** 🐛 Fix `SameSite` cookie issues for refresh token ([ff6db79](https://github.com/n8io/boilerplate-monorepo/commit/ff6db79664f1ab787120daf6c51f5945df98e7df))
+* **cookie:** 🐛 Fix `SameSite` cookie issues for refresh token ([2e8a64e](https://github.com/n8io/boilerplate-monorepo/commit/2e8a64e58f7930313935a50c009f8a6fcff3ae3c))
+
+
+### Features
+
+* **db:** 🌱 Add `admin` seed user to db ([6b3f22d](https://github.com/n8io/boilerplate-monorepo/commit/6b3f22d51edffefe4fef05fc886b78e41d3a8f97))
+* **internet:** 🔥 Remove `InternetConnectivity` component ([229ee18](https://github.com/n8io/boilerplate-monorepo/commit/229ee18bf71064c0695fe0fbee5a1c53098e4931))
+
+
+
+
+
 # [1.5.0](https://github.com/n8io/boilerplate-monorepo/compare/v1.4.0...v1.5.0) (2020-05-29)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/n8io/boilerplate-monorepo/compare/v1.5.0...v1.6.0) (2020-11-22)
+
+
+### Features
+
+* **internet:** 🔥 Remove `InternetConnectivity` component ([229ee18](https://github.com/n8io/boilerplate-monorepo/commit/229ee18bf71064c0695fe0fbee5a1c53098e4931))
+
+
+
+
+
 # [1.5.0](https://github.com/n8io/boilerplate-monorepo/compare/v1.4.0...v1.5.0) (2020-05-29)
 
 
