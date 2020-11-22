@@ -17,7 +17,6 @@ import { Enumeration } from './typedef';
 const {
   ACCESS_TOKEN_EXPIRY,
   ACCESS_TOKEN_SECRET,
-  NODE_ENV,
   REFRESH_TOKEN_EXPIRY,
   REFRESH_TOKEN_SECRET,
 } = config;
@@ -255,7 +254,8 @@ describe('auth selectors', () => {
             httpOnly: true,
             maxAge: ms(REFRESH_TOKEN_EXPIRY),
             path: Route.REFRESH_TOKEN,
-            secure: NODE_ENV === 'production',
+            sameSite: 'none',
+            secure: true,
           },
         ];
 
@@ -272,9 +272,10 @@ describe('auth selectors', () => {
           '',
           {
             httpOnly: true,
-            maxAge: ms(REFRESH_TOKEN_EXPIRY),
+            maxAge: 0,
             path: Route.REFRESH_TOKEN,
-            secure: NODE_ENV === 'production',
+            sameSite: 'none',
+            secure: true,
           },
         ];
 
