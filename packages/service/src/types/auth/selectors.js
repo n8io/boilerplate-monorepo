@@ -22,7 +22,6 @@ const isPast = (date) => isAfter(new Date(), unless(isDate, parseISO)(date));
 const {
   ACCESS_TOKEN_EXPIRY,
   ACCESS_TOKEN_SECRET,
-  NODE_ENV,
   REFRESH_TOKEN_EXPIRY,
   REFRESH_TOKEN_SECRET,
 } = config;
@@ -121,12 +120,17 @@ const writeRefreshToken = (res, user) => {
     httpOnly: true,
     maxAge,
     path: Route.REFRESH_TOKEN,
-    secure: NODE_ENV === 'production',
+    sameSite: 'none',
+    secure: true,
   };
 
   if (!user) {
-    debugLog('🔥 Removing refresh token cookie value');
-    res.cookie(Enumeration.JWT_REFRESH_TOKEN_COOKIE_NAME, '', options);
+    debugLog('🔥 Removing refresh token cookie value...');
+
+    res.cookie(Enumeration.JWT_REFRESH_TOKEN_COOKIE_NAME, '', {
+      ...options,
+      maxAge: 0, // Expire immediately
+    });
 
     return res;
   }

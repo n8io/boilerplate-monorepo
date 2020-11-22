@@ -23,5 +23,5 @@ release.json
 **/.eslintcache
 
 # env
-.env
+.env*
 !.env.example

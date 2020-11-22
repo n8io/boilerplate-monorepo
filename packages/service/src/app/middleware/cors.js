@@ -1,21 +1,25 @@
+import { Utils } from '@boilerplate-monorepo/common';
 import { config } from 'config';
 import cors from 'cors';
-import { defaultTo, isNil, pipe, reject, split } from 'ramda';
+import { defaultTo, pipe, reject, split } from 'ramda';
 
 const { UI_HOST_URI } = config;
+const toUnique = (array) => [...new Set(array)].filter(Boolean);
 
-const toUnique = (array) => [...new Set(array)].filter((x) => x);
+const toAllowHosts = pipe(
+  defaultTo(''),
+  split(','),
+  reject(Utils.isNullOrEmpty)
+);
 
-const toAllowHosts = pipe(defaultTo(''), split(','), reject(isNil));
+const origin = toUnique([
+  ...toAllowHosts(UI_HOST_URI),
+  'https://local.host:3000',
+]);
 
 const corsOptions = {
   credentials: true, // <-- REQUIRED backend setting
-  origin: toUnique([
-    ...toAllowHosts(UI_HOST_URI),
-    'http://localhost:3000',
-    'http://127.0.0.1:3000',
-    'https://local.host:3000',
-  ]),
+  origin,
 };
 
 const middleware = cors(corsOptions);
