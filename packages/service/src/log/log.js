@@ -6,6 +6,7 @@
 
 import { LogLevel, Utils } from '@boilerplate-monorepo/common';
 import { config } from 'config';
+import { is } from 'ramda';
 import { Telemetry } from 'types/telemetry';
 import { toSafeData } from './toSafeLog';
 
@@ -17,6 +18,20 @@ const prefix = {
 
 const prependInfo = (logLevel) =>
   `${new Date().toISOString()}: ${prefix[logLevel]}`;
+
+const reduceToStringifiedValues = (acc, [key, value]) => {
+  if (!is(Object, value)) {
+    return {
+      ...acc,
+      [key]: value,
+    };
+  }
+
+  return {
+    ...acc,
+    [key]: JSON.stringify(value),
+  };
+};
 
 const printMessage = ({ data, logLevel, message }) => {
   const { isTelemetryEnabled, isTest } = config;
@@ -36,7 +51,14 @@ const printMessage = ({ data, logLevel, message }) => {
         tags && scope.setTags(tags);
         user && scope.setUser(Telemetry.userToLog(user));
 
-        !Utils.isNullOrEmpty(rest) && scope.setExtras(rest);
+        if (!Utils.isNullOrEmpty(rest)) {
+          const extras = Object.entries(rest).reduce(
+            reduceToStringifiedValues,
+            {}
+          );
+
+          scope.setExtras(extras);
+        }
 
         error
           ? Telemetry.Sentry.captureException(error)
@@ -45,7 +67,7 @@ const printMessage = ({ data, logLevel, message }) => {
 
     return console[logLevel.toLowerCase()](
       `${prependInfo(logLevel)} ${message}`,
-      JSON.stringify(safeData)
+      safeData
     );
   }
 
