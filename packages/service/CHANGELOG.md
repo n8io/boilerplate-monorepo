@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/n8io/boilerplate-monorepo/compare/v1.7.0...v1.8.0) (2020-11-23)
+
+
+### Features
+
+* **config:** ♻ Refactor how `debug` logger is enabled ([9e7cccc](https://github.com/n8io/boilerplate-monorepo/commit/9e7cccc600791e64f571608d3b34f862b14693a4))
+
+
+
+
+
 # [1.7.0](https://github.com/n8io/boilerplate-monorepo/compare/v1.6.0...v1.7.0) (2020-11-22)
 
 **Note:** Version bump only for package @boilerplate-monorepo/service
