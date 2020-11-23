@@ -8,8 +8,10 @@ import { config } from 'config';
 import debug from 'debug';
 import { toSafeLog } from './toSafeLog';
 
-const { isTest, npm_package_name: PACKAGE_NAME } = config;
+const { DEBUG, isTest, name: PACKAGE_NAME } = config;
 const logs = {};
+
+debug.enable(DEBUG);
 
 const makeNamespace = ({ method, module }) =>
   `${PACKAGE_NAME}/${module}.${method}`;
@@ -23,10 +25,7 @@ const logFactory = (options) => {
   const namespace = makeNamespace(options);
 
   if (isTest) return () => null;
-
-  if (logs[namespace]) {
-    return logs[namespace];
-  }
+  if (logs[namespace]) return logs[namespace];
 
   const log = monkeyPatchTimestamp(debug(namespace));
 

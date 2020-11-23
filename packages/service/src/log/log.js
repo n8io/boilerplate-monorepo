@@ -45,7 +45,7 @@ const printMessage = ({ data, logLevel, message }) => {
 
     return console[logLevel.toLowerCase()](
       `${prependInfo(logLevel)} ${message}`,
-      safeData
+      JSON.stringify(safeData)
     );
   }
 
