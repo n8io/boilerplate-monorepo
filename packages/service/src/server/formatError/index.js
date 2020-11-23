@@ -12,9 +12,9 @@ const toSafeError = (error) => {
     error.extensions.code = errorCode;
   }
 
-  const { isDev } = config;
+  const { isDevelopment } = config;
 
-  if (!isDev) {
+  if (!isDevelopment) {
     error.extensions && delete error.extensions.exception;
   }
 

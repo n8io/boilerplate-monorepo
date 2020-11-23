@@ -181,6 +181,20 @@ describe('log', () => {
         });
       });
 
+      describe('and the additional data has a prop that is an object', () => {
+        const anObject = { prop1: 'PROP_1' };
+        const additionalData = { anObject };
+
+        test('telemetry captures the extra data and stringifies props that are objects', () => {
+          log[logLevel.toLowerCase()](message, { ...additionalData, ...data });
+
+          expect(setExtras).toHaveBeenCalledWith({
+            ...data,
+            anObject: JSON.stringify(anObject),
+          });
+        });
+      });
+
       describe('and there is NOT additional data', () => {
         const additionalData = {};
 

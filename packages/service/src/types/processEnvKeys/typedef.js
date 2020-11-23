@@ -13,6 +13,7 @@ const Enumeration = {
   DEBUG: 'DEBUG',
   EMAIL_FROM_ADDRESS: 'EMAIL_FROM_ADDRESS',
   EMAIL_FROM_NAME: 'EMAIL_FROM_NAME',
+  EMAIL_SMTP_CONNECTION: 'EMAIL_SMTP_CONNECTION',
   HTTPS: 'HTTPS',
   NODE_ENV: 'NODE_ENV',
   PORT: 'PORT',
@@ -21,7 +22,6 @@ const Enumeration = {
   REFRESH_TOKEN_SECRET: 'REFRESH_TOKEN_SECRET',
   SENTRY_DSN: 'SENTRY_DSN',
   SHOW_CONFIG: 'SHOW_CONFIG',
-  SMTP_CONNECTION: 'SMTP_CONNECTION',
   UI_HOST_URI: 'UI_HOST_URI',
   /* eslint-disable camelcase */
   npm_package_name: 'npm_package_name',

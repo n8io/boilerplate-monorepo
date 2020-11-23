@@ -37,6 +37,7 @@ const defaults = {
   DEBUG: `${raw.npm_package_name}*`,
   EMAIL_FROM_ADDRESS: `noreply@example.com`,
   EMAIL_FROM_NAME: '🤖 Automated Robot',
+  EMAIL_SMTP_CONNECTION: '',
   ENGINE_API_KEY: '',
   ENGINE_SCHEMA_TAG: 'local',
   HTTPS: true,
@@ -47,7 +48,6 @@ const defaults = {
   REFRESH_TOKEN_SECRET: 'refresh-token-secret',
   SENTRY_DSN: null,
   SHOW_CONFIG: false,
-  SMTP_CONNECTION: '',
   UI_HOST_URI: 'https://local.host:3000',
 };
 
@@ -59,15 +59,19 @@ const isTest = (env) =>
   includes(env, ['ci', 'jest', 'test']) ||
   (typeof describe !== 'undefined' && typeof test !== 'undefined');
 
-const isDev = pipe(normalize, either(startsWith('dev'), startsWith('local')));
-const isProd = pipe(normalize, either(startsWith('prod'), startsWith('prd')));
-const isStaging = pipe(normalize, either(startsWith('sta'), startsWith('stg')));
+const isDevelopment = pipe(
+  normalize,
+  either(startsWith('dev'), startsWith('local'))
+);
+
+const isStaging = pipe(normalize, startsWith('st'));
+const isProduction = pipe(normalize, startsWith('pr'));
 
 const toEnvironment = pipe(
   normalize,
   cond([
     [isTest, always('test')],
-    [isProd, always('production')],
+    [isProduction, always('production')],
     [isStaging, always('staging')],
     [T, always('development')],
   ])
@@ -79,7 +83,7 @@ const isSqlDebug = always(
 
 const isUndefined = (value) => typeof value === 'undefined';
 const isUndefinedOrEmpty = either(isUndefined, isEmpty);
-const isNotDevAndEmpty = both(complement(isDev), isUndefinedOrEmpty);
+const isNotDevAndEmpty = both(complement(isDevelopment), isUndefinedOrEmpty);
 
 const isTelemetryEnabled = pipe(
   propOr(false, ProcessEnvKeys.SENTRY_DSN),
@@ -95,7 +99,7 @@ const missingEnvVars = requiredEnvVars.filter(({ name, failureTest }) =>
   failureTest(config[name])
 );
 
-if (isProd(config) && missingEnvVars.length) {
+if (isProduction(config) && missingEnvVars.length) {
   const messages = missingEnvVars.map(
     ({ name }) =>
       `${name} was not set. The application will not function correctly without it.`
@@ -121,8 +125,8 @@ const merged = pipe(
   }),
   mergeRight({
     environment: toEnvironment(config),
-    isDev: isDev(config),
-    isProd: isProd(config),
+    isDevelopment: isDevelopment(config),
+    isProduciton: isProduction(config),
     isSqlDebug: isSqlDebug(),
     isStaging: isStaging(config),
     isTelemetryEnabled: isTelemetryEnabled(config),

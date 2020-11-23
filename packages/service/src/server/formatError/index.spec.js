@@ -59,10 +59,10 @@ describe('formatError', () => {
 
     describe('and there is sensitive information', () => {
       describe('and the environment is development', () => {
-        const isDev = true;
+        const isDevelopment = true;
 
         beforeEach(() => {
-          td.replace(Config, 'config', { isDev });
+          td.replace(Config, 'config', { isDevelopment });
         });
 
         test('sensitive information is NOT removed', () => {
@@ -81,10 +81,10 @@ describe('formatError', () => {
       });
 
       describe('and the environment is NOT development', () => {
-        const isDev = false;
+        const isDevelopment = false;
 
         beforeEach(() => {
-          td.replace(Config, 'config', { isDev });
+          td.replace(Config, 'config', { isDevelopment });
         });
 
         describe('and the there is a toSafeError extension', () => {
