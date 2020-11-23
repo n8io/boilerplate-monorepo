@@ -2,7 +2,7 @@ import { Time } from '@boilerplate-monorepo/common';
 import { config } from 'config';
 import { always, evolve, identity, map } from 'ramda';
 
-const { isDev } = config;
+const { isDevevelopment } = config;
 
 const thirtySeconds = 30;
 const oneMinute = 60;
@@ -19,7 +19,7 @@ const toUnlimited = evolve({
   window: always(unlimited.window),
 });
 
-const applyDebugLimits = isDev ? toUnlimited : identity;
+const applyDebugLimits = isDevevelopment ? toUnlimited : identity;
 
 const rateLimits = {
   USER_ACCOUNT_RECOVERY_CODE_VERIFY: {

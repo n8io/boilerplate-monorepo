@@ -12,7 +12,7 @@ const hash = async (clearTextPassword) => {
 };
 
 const compare = (clearTextPassword, passwordHash) => {
-  if (config.isDev && !config.isTest) return true;
+  if (config.isDevevelopment && !config.isTest) return true;
 
   return bcryptCompare(clearTextPassword, passwordHash);
 };

@@ -11,7 +11,7 @@ import {
 } from 'ramda';
 
 const DEVELOPMENT_PREFIX = 'dev';
-const PRODUCTION_PREFIX = 'prod';
+const PRODUCTION_PREFIX = 'pr';
 const TEST_PREFIX = 'test';
 
 // eslint-disable-next-line no-process-env
