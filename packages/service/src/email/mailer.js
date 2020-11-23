@@ -3,15 +3,15 @@ import { log } from 'log';
 import nodemailer from 'nodemailer';
 import url from 'url';
 
-const { EMAIL_SMTP_CONNECTION, isTest } = config;
+const { EMAIL_SMTP_URL, isTest } = config;
 
 // eslint-disable-next-line complexity,max-statements
 const make = () => {
-  if (!EMAIL_SMTP_CONNECTION) {
+  if (!EMAIL_SMTP_URL) {
     return {
       sendMail: (props) =>
         log.warn(
-          'EMAIL_SMTP_CONNECTION was not set so emails will not be sent',
+          'EMAIL_SMTP_URL was not set so emails will not be sent',
           props
         ),
     };
@@ -27,7 +27,7 @@ const make = () => {
     };
   }
 
-  const smtpUri = url.parse(EMAIL_SMTP_CONNECTION);
+  const smtpUri = url.parse(EMAIL_SMTP_URL);
 
   const { auth: authentication, hostname, port, protocol } = smtpUri;
   const isSecure = protocol.toLowerCase() !== 'smtp:';
