@@ -46,17 +46,17 @@ describe('log', () => {
     const testCases = [
       {
         args: [message, data],
-        expected: [`${isoDate}: 🛑 ${message}`, data],
+        expected: [`${isoDate}: 🛑 ${message}`, JSON.stringify(data)],
         logLevel: LogLevel.ERROR,
       },
       {
         args: [message, data],
-        expected: [`${isoDate}: ℹ️ ${message}`, data],
+        expected: [`${isoDate}: ℹ️ ${message}`, JSON.stringify(data)],
         logLevel: LogLevel.INFO,
       },
       {
         args: [message, data],
-        expected: [`${isoDate}: ⚠️ ${message}`, data],
+        expected: [`${isoDate}: ⚠️ ${message}`, JSON.stringify(data)],
         logLevel: LogLevel.WARN,
       },
     ];
