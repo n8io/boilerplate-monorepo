@@ -1,4 +1,4 @@
-import { ApolloServer as ApolloServerExpress } from 'apollo-server-express';
+import { ApolloServer as ApolloServerLamda } from 'apollo-server-lambda';
 import { make as makeStart } from 'start';
 
 /**
@@ -7,11 +7,19 @@ import { make as makeStart } from 'start';
  * */
 let lambdaCache = {};
 
-const start = makeStart(ApolloServerExpress);
+const start = makeStart(ApolloServerLamda);
 
 const main = async () => {
   // eslint-disable-next-line require-atomic-updates
   lambdaCache = await start(lambdaCache);
+
+  return lambdaCache.server.createHandler({
+    cors: {
+      credentials: false,
+      origin: '*',
+    },
+    endpointURL: '/graphql',
+  });
 };
 
-main();
+export { main as graphqlHandler };
