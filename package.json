@@ -2,7 +2,7 @@
   "name": "boilerplate-monorepo",
   "private": true,
   "engines": {
-    "node": "^14.2.0",
+    "node": ">=12.20",
     "yarn": "^1.19.1"
   },
   "license": "MIT",
@@ -26,6 +26,7 @@
     "build:adhoc:ui-common": "lerna run build --loglevel silent --scope \"@${npm_package_name}/ui-common\" --stream",
     "build:common": "yarn -s run-all-s build:adhoc:common build:adhoc:ui-common",
     "build:docker": "docker build -t \"${npm_package_name}/service\" . -f ./docker/Dockerfile.service",
+    "build:docker:lambda": "docker build -t \"${npm_package_name}/service-lambda\" . -f ./docker/Dockerfile.service.lambda",
     "build:service": "yarn -s build:adhoc && yarn -s build:adhoc:service",
     "build:ui": "yarn -s build:adhoc && yarn -s run-all-s build:adhoc:ui-common build:adhoc:ui",
     "clean": "yarn run -s dcd && yarn run -s dc down --remove-orphans && docker network prune -f",
