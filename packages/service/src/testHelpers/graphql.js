@@ -1,4 +1,4 @@
-import { ApolloServer, PubSub } from 'apollo-server-express';
+import { PubSub } from 'apollo-server-express';
 import { createTestClient } from 'apollo-server-testing';
 import { subscribe as graphqlSubscribe } from 'graphql';
 import { has, head, keys, path, pipe, prop, __ } from 'ramda';
@@ -6,7 +6,7 @@ import { makeServer } from '../server';
 import { make as makeContext } from './context';
 
 const makeGraphqlClient = (context) => {
-  const server = makeServer(ApolloServer)({ context });
+  const server = makeServer({ context });
   const { query, mutate } = createTestClient(server);
 
   const subscribe = async (subscription, pubsub) => {

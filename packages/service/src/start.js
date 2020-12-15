@@ -9,15 +9,14 @@ import { Telemetry } from 'types/telemetry';
 
 const { PORT } = config;
 
-const make = (ApolloServer) => async ({ app, cache, connection }) => {
+const start = async ({ app, cache, connection }) => {
   Telemetry.init();
 
-  const makeExpressGraphql = makeGraphqlServer(ApolloServer);
   const actualConnection = connection || (await makeConnection(connection));
   const actualCache = cache || makeCache();
   const actualApp = app || makeApp();
 
-  const graphqlServer = await makeExpressGraphql({
+  const graphqlServer = await makeGraphqlServer({
     app: actualApp,
     cache: actualCache,
   });
@@ -45,4 +44,4 @@ const make = (ApolloServer) => async ({ app, cache, connection }) => {
   };
 };
 
-export { make };
+export { start };
