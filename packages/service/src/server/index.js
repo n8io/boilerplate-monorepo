@@ -1,3 +1,4 @@
+import { ApolloServer } from 'apollo-server-express';
 import { config } from 'config';
 import http from 'http';
 import https from 'https';
@@ -8,7 +9,7 @@ import { resolvers, schemaDirectives, typeDefs } from './schema';
 
 const { HTTPS: isHttps } = config;
 
-const makeServer = (ApolloServer) => ({ cache, context } = {}) =>
+const makeServer = ({ cache, context } = {}) =>
   new ApolloServer({
     cache,
     context: context || makeContext(),
@@ -21,8 +22,8 @@ const makeServer = (ApolloServer) => ({ cache, context } = {}) =>
     typeDefs,
   });
 
-const make = (ApolloServer) => async ({ app, cache }) => {
-  const apolloServer = makeServer(ApolloServer)({ cache });
+const make = async ({ app, cache }) => {
+  const apolloServer = makeServer({ cache });
 
   apolloServer.applyMiddleware({ app, cors: false });
 
