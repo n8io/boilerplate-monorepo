@@ -9,12 +9,13 @@
 build/
 cypress/
 dist/
+docker-compose.yml
 docker/
 Dockerfile*
 lefthook.yml
 logs/
 node_modules/
-packages/ui/
-packages/ui-common/
 packages/tool-hook-generator/
+packages/ui-common/
+packages/ui/
 README.md
