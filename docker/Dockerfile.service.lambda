@@ -36,4 +36,4 @@ RUN \
   yarn install --production --ignore-scripts && \
   yarn cache clean
 
-CMD [ "packages/service/dist/handlers/app.graphqlHandler" ]
+CMD [ "./packages/service/dist/handlers/app.graphqlHandler" ]
