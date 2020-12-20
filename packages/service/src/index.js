@@ -18,7 +18,7 @@ const main = async () => {
   const { cache, connection, server } = lambdaCache;
 
   const expressServer = server.listen({ port: PORT }, () => {
-    const protocol = isHttps ? 'https': 'http';
+    const protocol = isHttps ? 'https' : 'http';
     const host = 'local.host';
     const pathname = '/graphql';
     const url = new URL(pathname, `${protocol}://${host}`);

@@ -1,9 +1,11 @@
+import { Time } from '@boilerplate-monorepo/common';
 import { config } from 'config';
 import { log } from 'log';
 import nodemailer from 'nodemailer';
 import url from 'url';
+import { debuglog } from 'util';
 
-const { EMAIL_SMTP_URL, isTest } = config;
+const { EMAIL_SMTP_TIMEOUT_SECONDS, EMAIL_SMTP_URL, isTest } = config;
 
 // eslint-disable-next-line complexity,max-statements
 const make = () => {
@@ -29,6 +31,7 @@ const make = () => {
 
   const smtpUri = url.parse(EMAIL_SMTP_URL);
 
+  const connectionTimeout = Time.seconds(EMAIL_SMTP_TIMEOUT_SECONDS);
   const { auth: authentication, hostname, port, protocol } = smtpUri;
   const isSecure = protocol.toLowerCase() !== 'smtp:';
   const [user, pass] = (authentication || '').split(':');
@@ -36,12 +39,23 @@ const make = () => {
 
   const options = {
     auth,
+    connectionTimeout,
     host: hostname,
     port,
     secure: isSecure,
   };
 
-  return nodemailer.createTransport(options);
+  const mailer = nodemailer.createTransport(options);
+
+  mailer.verify((error) => {
+    if (error) {
+      log.error(`Unable to connect to email via smtp`, error);
+    } else {
+      debuglog('✉️ Email server connection has successfully been established');
+    }
+  });
+
+  return mailer;
 };
 
 const mailer = make();

@@ -69,6 +69,8 @@ const passwordReset = async ({ passwordResetToken, user }) => {
 
   const html = bodyToHtml(body);
 
+  debugLog(`📧 Sending "${subject}" email to ${to} from ${from}`);
+
   await mailer.sendMail({
     from,
     html,
