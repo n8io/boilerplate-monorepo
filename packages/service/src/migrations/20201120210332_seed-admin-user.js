@@ -10,7 +10,7 @@ const adminId = 'admin';
 const up = (knex) =>
   knex.raw(`
     INSERT INTO ${fullyQualifiedTableName} (id, username, role, given_name, family_name, name, email, password_hash)
-    VALUES ('${adminId}', 'admin', '${UserRole.ADMIN}, 'Nate', 'Clark', 'clark,nate', 'n8@n8io.com', '');
+    VALUES ('${adminId}', 'admin', '${UserRole.ADMIN}', 'Nate', 'Clark', 'clark,nate', 'n8@n8io.com', '');
   `);
 
 const down = (knex) =>

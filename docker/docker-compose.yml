@@ -26,7 +26,7 @@ services:
   cache-ui:
     container_name: cache-ui
     image: rediscommander/redis-commander
-    restart: always
+    restart: unless-stopped
     environment:
       - REDIS_HOSTS=local:cache:6379
     ports:
@@ -35,7 +35,7 @@ services:
   email:
     container_name: email
     image: mailhog/mailhog
-    restart: always
+    restart: unless-stopped
     environment:
       MH_MAILDIR_PATH: /tmp
       MH_STORAGE: maildir
@@ -44,6 +44,43 @@ services:
       - 8025:8025
     volumes:
       - data-email:/tmp
+
+  service:
+    image: boilerplate-monorepo/service
+    container_name: service
+    restart: unless-stopped
+    depends_on:
+      - cache
+      - db
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@db:5432/boilerplate-monorepo
+      DEBUG: '@boilerplate-monorepo/service*'
+      EMAIL_SMTP_URL: smtp://user:password@email:1025
+      REDIS_URL: redis://cache:6379
+    ports:
+      - 4000:4000
+    volumes:
+      - ./.ini:/app/.ini
+
+  service-lambda:
+    image: boilerplate-monorepo/service-lambda
+    container_name: service-lambda
+    restart: unless-stopped
+    depends_on:
+      - cache
+      - db
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@db:5432/boilerplate-monorepo
+      DEBUG: '@boilerplate-monorepo/service*'
+      EMAIL_SMTP_URL: smtp://user:password@email:1025
+      HTTPS: 'false'
+      LAMBDA_TASK_ROOT: '/var/task'
+      PORT: 8080
+      REDIS_URL: redis://cache:6379
+      npm_package_name: '@boilerplate-monorepo/service'
+      # SHOW_CONFIG: 'true'
+    ports:
+      - 4000:8080
 
 volumes:
   data-cache:

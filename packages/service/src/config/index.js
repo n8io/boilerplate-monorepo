@@ -37,6 +37,7 @@ const defaults = {
   DEBUG: `${raw.npm_package_name}*`,
   EMAIL_FROM_ADDRESS: `noreply@local.host`,
   EMAIL_FROM_NAME: '🤖 Automated Robot',
+  EMAIL_SMTP_TIMEOUT_SECONDS: 3,
   EMAIL_SMTP_URL: '',
   ENGINE_API_KEY: '',
   ENGINE_SCHEMA_TAG: 'local',
@@ -115,6 +116,7 @@ if (isProduction(config) && missingEnvVars.length) {
 const merged = pipe(
   evolve({
     DATABASE_USE_SSL: Utils.toBool,
+    EMAIL_SMTP_TIMEOUT_SECONDS: Utils.toBool,
     HTTPS: Utils.toBool,
     PORT: Utils.toNumber,
     SHOW_CONFIG: Utils.toBool,

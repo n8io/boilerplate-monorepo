@@ -10,6 +10,7 @@ const debugLog = logFactory({
   module: 'email/user/passwordResetSuccess',
 });
 
+// eslint-disable-next-line max-statements
 const passwordResetSuccess = async ({ user }) => {
   const from = `${EMAIL_FROM_NAME} <${EMAIL_FROM_ADDRESS}>`;
   const to = userToFormattedEmailAddress(user);
@@ -42,6 +43,8 @@ const passwordResetSuccess = async ({ user }) => {
   `;
 
   const html = bodyToHtml(body);
+
+  debugLog(`📧 Sending "${subject}" email to ${to} from ${from}`);
 
   await mailer.sendMail({
     from,
