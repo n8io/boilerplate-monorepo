@@ -3,7 +3,7 @@ set -euf -o pipefail
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-TMP_DIR=${TMP_DIR:-"${DIR}/../../.tmp/aws"}
+TMP_DIR=${TMP_DIR:-"${DIR}/../.tmp/aws"}
 LOG_DIR=${LOG_DIR:-"${TMP_DIR}"}
 UP_ENV_FILE=${UP_ENV_FILE:-"${LOG_DIR}/.env.up"}
 ENV_FILE=${ENV_FILE:-"${LOG_DIR}/.env"}

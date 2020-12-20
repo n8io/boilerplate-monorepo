@@ -16,7 +16,7 @@ AWS_LAMBDA="${AWS_BIN} lambda"
 AWS_RDS="${AWS_BIN} rds"
 AWS_STS="${AWS_BIN} sts"
 
-TMP_DIR=${TMP_DIR:-"${DIR}/../../.tmp/aws"}
+TMP_DIR=${TMP_DIR:-"${DIR}/../.tmp/aws"}
 LOG_DIR=${LOG_DIR:-"${TMP_DIR}"}
 ENV_FILE=${ENV_FILE:-"${LOG_DIR}/.env"}
 UP_ENV_FILE=${UP_ENV_FILE:-"${LOG_DIR}/.env.up"}
