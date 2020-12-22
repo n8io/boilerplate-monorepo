@@ -46,9 +46,9 @@ const reactVars = pipe(
 )(envVars);
 
 const config = {
+  ...reactVars,
   GRAPHQL_URI: graphqlUri(reactVars.GRAPHQL_URI),
   NODE_ENV,
-  ...reactVars,
   copyrightYear: 2019,
   isDebug: Boolean(localStorage.getItem(LocalStorage.DEBUG)),
   isDevelopment: NODE_ENV.startsWith(DEVELOPMENT_PREFIX),
