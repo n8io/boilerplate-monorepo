@@ -265,20 +265,20 @@ if [[ ! -z "${VPC_ROUTE_TABLE_PUBLIC_ID:-""}" ]]; then
   sed -i.bak '/^VPC_ROUTE_TABLE_PUBLIC_ID/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
 fi
 
-if [[ ! -z "${VPC_ROUTE_TABLE_PRIVATE_2_ASSOCIATION_ID:-""}" ]]; then
+if [[ ! -z "${VPC_ROUTE_TABLE_PRIVATE_ASSOCIATION_ID_2:-""}" ]]; then
   echo -n "Disassociating route table with second private subnet..."
-  ${AWS_EC2} disassociate-route-table --association-id ${VPC_ROUTE_TABLE_PRIVATE_2_ASSOCIATION_ID} | true
+  ${AWS_EC2} disassociate-route-table --association-id ${VPC_ROUTE_TABLE_PRIVATE_ASSOCIATION_ID_2} | true
   echo "done."
 
-  sed -i.bak '/^VPC_ROUTE_TABLE_PRIVATE_2_ASSOCIATION_ID/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
+  sed -i.bak '/^VPC_ROUTE_TABLE_PRIVATE_ASSOCIATION_ID_2/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
 fi
 
-if [[ ! -z "${VPC_ROUTE_TABLE_PRIVATE_1_ASSOCIATION_ID:-""}" ]]; then
+if [[ ! -z "${VPC_ROUTE_TABLE_PRIVATE_ASSOCIATION_ID_1:-""}" ]]; then
   echo -n "Disassociating route table with first private subnet..."
-  ${AWS_EC2} disassociate-route-table --association-id ${VPC_ROUTE_TABLE_PRIVATE_1_ASSOCIATION_ID} | true
+  ${AWS_EC2} disassociate-route-table --association-id ${VPC_ROUTE_TABLE_PRIVATE_ASSOCIATION_ID_1} | true
   echo "done."
 
-  sed -i.bak '/^VPC_ROUTE_TABLE_PRIVATE_1_ASSOCIATION_ID/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
+  sed -i.bak '/^VPC_ROUTE_TABLE_PRIVATE_ASSOCIATION_ID_1/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
 fi
 
 if [[ ! -z "${VPC_ROUTE_TABLE_PRIVATE_ID:-""}" ]]; then
@@ -339,11 +339,11 @@ if [[ ! -z "${VPC_SUBNET_PRIVATE_ID_2:-""}" ]]; then
   sed -i.bak '/^VPC_SUBNET_PRIVATE_ID_2/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
 fi
 
-if [[ ! -z "${VPC_SUBNET_PRIVATE_1_ID:-""}" ]]; then
+if [[ ! -z "${VPC_SUBNET_PRIVATE_ID_1:-""}" ]]; then
   echo -n "Deleting first private subnet..."
-  ${AWS_EC2} delete-subnet --subnet-id ${VPC_SUBNET_PRIVATE_1_ID} | true
+  ${AWS_EC2} delete-subnet --subnet-id ${VPC_SUBNET_PRIVATE_ID_1} | true
   echo "done"
-  sed -i.bak '/^VPC_SUBNET_PRIVATE_1_ID/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
+  sed -i.bak '/^VPC_SUBNET_PRIVATE_ID_1/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
 fi
 
 if [[ ! -z "${VPC_ID:-""}" ]]; then

@@ -28,7 +28,7 @@ touch "${UP_ENV_FILE}"
 source "${ENV_FILE}"
 source "${UP_ENV_FILE}"
 
-VPC_NAME=${VPC_NAME:-$(cat "${DIR}/../../package.json" | ${JQ_BIN} '.name')}
+VPC_NAME=${VPC_NAME:-$(cat "${DIR}/../package.json" | ${JQ_BIN} '.name')}
 VPC_REGION=${VPC_REGION:-us-east}
 WEB_DOMAIN=${WEB_DOMAIN}
 WEB_APP_URL=${WEB_APP_URL:-"https://app.${WEB_DOMAIN}"}
@@ -100,18 +100,18 @@ fi
 
 if [[ -z "${STEP_SUBNET_PRIVATE_1_CREATED:-""}" ]]; then
   echo -n "Creating first private subnet in VPC..."
-  VPC_SUBNET_PRIVATE_1_ID=$(\
+  VPC_SUBNET_PRIVATE_ID_1=$(\
     ${AWS_EC2} create-subnet \
       --vpc-id ${VPC_ID} \
       --cidr-block ${VPC_SUBNET_PRIVATE_CIDR_BLOCK} \
       --availability-zone ${VPC_SUBNET_PRIVATE_AVAILABILITY_ZONE} \
       --output json \
       | ${JQ_BIN} '.Subnet.SubnetId')
-  echo "${VPC_SUBNET_PRIVATE_1_ID}"
-  (echo "VPC_SUBNET_PRIVATE_1_ID=${VPC_SUBNET_PRIVATE_1_ID}" >> "${ENV_FILE}")
+  echo "${VPC_SUBNET_PRIVATE_ID_1}"
+  (echo "VPC_SUBNET_PRIVATE_ID_1=${VPC_SUBNET_PRIVATE_ID_1}" >> "${ENV_FILE}")
 
   echo -n "Adding tags to private subnet..."
-  ${AWS_EC2} create-tags --resources ${VPC_SUBNET_PRIVATE_1_ID} --tags Key=Name,Value=${VPC_SUBNET_PRIVATE_NAME_1} | true
+  ${AWS_EC2} create-tags --resources ${VPC_SUBNET_PRIVATE_ID_1} --tags Key=Name,Value=${VPC_SUBNET_PRIVATE_NAME_1} | true
   echo "${VPC_SUBNET_PRIVATE_NAME_1}"
 
   (echo "STEP_SUBNET_PRIVATE_1_CREATED=true" >> "${UP_ENV_FILE}")
@@ -241,32 +241,32 @@ if [[ -z "${STEP_ROUTE_TO_NAT_GATEWAY_CREATED:-""}" ]]; then
   (echo "STEP_ROUTE_TO_NAT_GATEWAY_CREATED=true" >> "${UP_ENV_FILE}")
 fi
 
-if [[ -z "${STEP_SUBNET_PRIVATE_1_ASSOCIATED_TO_ROUTE_TABLE:-""}" ]]; then
+if [[ -z "${STEP_SUBNET_PRIVATE_ASSOCIATED_TO_ROUTE_TABLE_1:-""}" ]]; then
   echo -n "Associating first private subnet with private route table..."
-  VPC_ROUTE_TABLE_PRIVATE_1_ASSOCIATION_ID=$(\
+  VPC_ROUTE_TABLE_PRIVATE_ASSOCIATION_ID_1=$(\
     ${AWS_EC2} associate-route-table  \
-      --subnet-id ${VPC_SUBNET_PRIVATE_1_ID} \
+      --subnet-id ${VPC_SUBNET_PRIVATE_ID_1} \
       --route-table-id ${VPC_ROUTE_TABLE_PRIVATE_ID} \
       --output json \
       | ${JQ_BIN} '.AssociationId')
-  echo "${VPC_ROUTE_TABLE_PRIVATE_1_ASSOCIATION_ID}"
-  (echo "VPC_ROUTE_TABLE_PRIVATE_1_ASSOCIATION_ID=${VPC_ROUTE_TABLE_PRIVATE_1_ASSOCIATION_ID}" >> "${ENV_FILE}")
+  echo "${VPC_ROUTE_TABLE_PRIVATE_ASSOCIATION_ID_1}"
+  (echo "VPC_ROUTE_TABLE_PRIVATE_ASSOCIATION_ID_1=${VPC_ROUTE_TABLE_PRIVATE_ASSOCIATION_ID_1}" >> "${ENV_FILE}")
 
-  (echo "STEP_SUBNET_PRIVATE_1_ASSOCIATED_TO_ROUTE_TABLE=true" >> "${UP_ENV_FILE}")
+  (echo "STEP_SUBNET_PRIVATE_ASSOCIATED_TO_ROUTE_TABLE_1=true" >> "${UP_ENV_FILE}")
 fi
 
-if [[ -z "${STEP_SUBNET_PRIVATE_2_ASSOCIATED_TO_ROUTE_TABLE:-""}" ]]; then
+if [[ -z "${STEP_SUBNET_PRIVATE_ASSOCIATED_TO_ROUTE_TABLE_2:-""}" ]]; then
   echo -n "Associating second private subnet with private route table..."
-  VPC_ROUTE_TABLE_PRIVATE_2_ASSOCIATION_ID=$(\
+  VPC_ROUTE_TABLE_PRIVATE_ASSOCIATION_ID_2=$(\
     ${AWS_EC2} associate-route-table  \
       --subnet-id ${VPC_SUBNET_PRIVATE_ID_2} \
       --route-table-id ${VPC_ROUTE_TABLE_PRIVATE_ID} \
       --output json \
       | ${JQ_BIN} '.AssociationId')
-  echo "${VPC_ROUTE_TABLE_PRIVATE_2_ASSOCIATION_ID}"
-  (echo "VPC_ROUTE_TABLE_PRIVATE_2_ASSOCIATION_ID=${VPC_ROUTE_TABLE_PRIVATE_2_ASSOCIATION_ID}" >> "${ENV_FILE}")
+  echo "${VPC_ROUTE_TABLE_PRIVATE_ASSOCIATION_ID_2}"
+  (echo "VPC_ROUTE_TABLE_PRIVATE_ASSOCIATION_ID_2=${VPC_ROUTE_TABLE_PRIVATE_ASSOCIATION_ID_2}" >> "${ENV_FILE}")
 
-  (echo "STEP_SUBNET_PRIVATE_2_ASSOCIATED_TO_ROUTE_TABLE=true" >> "${UP_ENV_FILE}")
+  (echo "STEP_SUBNET_PRIVATE_ASSOCIATED_TO_ROUTE_TABLE_2=true" >> "${UP_ENV_FILE}")
 fi
 
 if [[ -z "${STEP_ROUTE_TABLE_PUBLIC_CREATED:-""}" ]]; then
@@ -418,7 +418,7 @@ if [[ -z "${STEP_CACHE_SUBNET_GROUP_CREATED:-""}" ]]; then
   ${AWS_CACHE} create-cache-subnet-group \
     --cache-subnet-group-name ${VPC_CACHE_SUBNET_GROUP_NAME} \
     --cache-subnet-group-description "${VPC_NAME} cache subnet group" \
-    --subnet-ids "${VPC_SUBNET_PRIVATE_1_ID}" "${VPC_SUBNET_PRIVATE_ID_2}" \
+    --subnet-ids "${VPC_SUBNET_PRIVATE_ID_1}" "${VPC_SUBNET_PRIVATE_ID_2}" \
     >/dev/null
   echo "done."
   (echo "VPC_CACHE_SUBNET_GROUP_NAME=${VPC_CACHE_SUBNET_GROUP_NAME}" >> "${ENV_FILE}")
@@ -492,7 +492,7 @@ if [[ -z "${STEP_DB_SUBNET_GROUP_CREATED:-""}" ]]; then
   ${AWS_RDS} create-db-subnet-group \
     --db-subnet-group-name ${VPC_DB_SUBNET_GROUP_NAME} \
     --db-subnet-group-description "${VPC_NAME} database subnet group" \
-    --subnet-ids "${VPC_SUBNET_PRIVATE_1_ID}" "${VPC_SUBNET_PRIVATE_ID_2}" \
+    --subnet-ids "${VPC_SUBNET_PRIVATE_ID_1}" "${VPC_SUBNET_PRIVATE_ID_2}" \
     >/dev/null
   echo "done."
   (echo "VPC_DB_SUBNET_GROUP_NAME=${VPC_DB_SUBNET_GROUP_NAME}" >> "${ENV_FILE}")
@@ -612,7 +612,7 @@ if [[ -z "${STEP_LAMBDA_FUNCTION_CREATED:-""}" ]]; then
       --package-type Image \
       --role ${VPC_LAMBDA_ROLE_ARN} \
       --timeout 5 \
-      --vpc-config "SubnetIds=${VPC_SUBNET_PRIVATE_1_ID},${VPC_SUBNET_PRIVATE_ID_2},SecurityGroupIds=${VPC_SECURITY_GROUP_LAMBDA_ID}" \
+      --vpc-config "SubnetIds=${VPC_SUBNET_PRIVATE_ID_1},${VPC_SUBNET_PRIVATE_ID_2},SecurityGroupIds=${VPC_SECURITY_GROUP_LAMBDA_ID}" \
       | ${JQ_BIN} '.FunctionArn'
     )
   echo "${VPC_LAMBDA_ARN}"
@@ -788,7 +788,7 @@ if [[ -z "${STEP_API_GATEWAY_DOMAIN_PATH_MAPPED:-""}" ]]; then
       | ${JQ_BIN} '.basePath'
     )
   echo "done."
-  (echo "VPC_API_GATEWAY_DOMAIN_BASE_PATH=${VPC_API_GATEWAY_DOMAIN_BASE_PATH}" >> "${ENV_FILE}")
+  (echo "VPC_API_GATEWAY_DOMAIN_BASE_PATH=\"${VPC_API_GATEWAY_DOMAIN_BASE_PATH}\"" >> "${ENV_FILE}")
 
   (echo "STEP_API_GATEWAY_DOMAIN_PATH_MAPPED=true" >> "${UP_ENV_FILE}")
 fi
