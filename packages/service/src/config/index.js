@@ -128,7 +128,7 @@ const merged = pipe(
   mergeRight({
     environment: toEnvironment(config),
     isDevelopment: isDevelopment(config),
-    isProduciton: isProduction(config),
+    isProduction: isProduction(config),
     isSqlDebug: isSqlDebug(),
     isStaging: isStaging(config),
     isTelemetryEnabled: isTelemetryEnabled(config),

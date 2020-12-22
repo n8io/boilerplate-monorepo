@@ -88,8 +88,9 @@ jobs:
       - run:
           name: Build [ui]
           command: |
-            REACT_APP_COMMIT_HASH=$(git rev-parse --short HEAD) \
-            REACT_APP_COMMIT_MESSAGE=$(git log --oneline --format=%B -n 1 HEAD | head -n 1) \
+            REACT_APP_COMMIT_HASH="$(git rev-parse --short HEAD)" \
+            REACT_APP_COMMIT_MESSAGE="$(git log --oneline --format=%B -n 1 HEAD | head -n 1)" \
+            REACT_APP_GRAPHQL_URI="${REACT_APP_GRAPHQL_URI_DEV}" \
             NODE_ENV=development \
             yarn -s build:ui
       - run:
@@ -119,7 +120,8 @@ jobs:
       - run:
           name: Build [ui]
           command: |
-            REACT_APP_RELEASE=$(git describe --abbrev=0) \
+            REACT_APP_RELEASE="$(git describe --abbrev=0)" \
+            REACT_APP_GRAPHQL_URI="${REACT_APP_GRAPHQL_URI_PRD}" \
             yarn -s build:ui
       - run:
           name: Install CloudFlare cli (wrangler)

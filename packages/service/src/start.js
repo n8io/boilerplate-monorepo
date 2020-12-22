@@ -12,12 +12,12 @@ const start = async ({ app, cache, connection }) => {
   const actualCache = cache || makeCache();
   const actualApp = app || express();
 
+  app || applyMiddleware(actualApp);
+
   const graphqlServer = await makeGraphqlServer({
     app: actualApp,
     cache: actualCache,
   });
-
-  app || applyMiddleware(actualApp);
 
   return {
     app: actualApp,
