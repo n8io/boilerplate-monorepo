@@ -2,6 +2,7 @@ import { ApolloServer } from 'apollo-server-express';
 import { config } from 'config';
 import http from 'http';
 import https from 'https';
+import { Cors } from 'types/cors';
 import { make as makeContext } from './context';
 import { formatError } from './formatError';
 import { make as makeHttpsOptions } from './httpsOptions';
@@ -27,7 +28,7 @@ const make = async ({ app, cache }) => {
 
   apolloServer.applyMiddleware({
     app,
-    cors: false,
+    cors: Cors.OPTIONS,
   });
 
   let server = null;
