@@ -1,15 +1,11 @@
-import { config } from 'config';
 import { toSafeLog } from 'log/toSafeLog';
 import serverlessHttp from 'serverless-http';
 import { start } from 'start';
 import { addListeners as addServerStopListeners } from 'stop';
 
-const { UI_HOST_URI } = config;
-
 const corsHeaders = {
   'Access-Control-Allow-Headers': '*',
   'Access-Control-Allow-Methods': 'OPTIONS,POST,GET',
-  'Access-Control-Allow-Origin': UI_HOST_URI,
 };
 
 /**
