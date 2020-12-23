@@ -6,7 +6,7 @@ import { cache } from './cache';
 import { link } from './link';
 
 const fetchOptions = {
-  credentials: 'include',
+  credentials: 'same-origin',
 };
 
 const client = new ApolloClient({

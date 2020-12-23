@@ -1,7 +1,16 @@
+import { config } from 'config';
 import { toSafeLog } from 'log/toSafeLog';
 import serverlessHttp from 'serverless-http';
 import { start } from 'start';
 import { addListeners as addServerStopListeners } from 'stop';
+
+const { UI_HOST_URI } = config;
+
+const corsHeaders = {
+  'Access-Control-Allow-Headers': '*',
+  'Access-Control-Allow-Methods': 'OPTIONS,POST,GET',
+  'Access-Control-Allow-Origin': UI_HOST_URI,
+};
 
 /**
  * Keep in-memory cache of app, cache, dbConnection, and schema because
@@ -19,9 +28,19 @@ const main = async (event, context) => {
   addServerStopListeners({ cache, connection });
 
   // eslint-disable-next-line no-console
-  console.log(toSafeLog(event));
+  console.log(toSafeLog({ event }));
 
-  return handler(event, context);
+  const response = await handler(event, context);
+
+  response.headers = {
+    ...response.headers,
+    ...corsHeaders,
+  };
+
+  // eslint-disable-next-line no-console
+  console.log(toSafeLog({ response }));
+
+  return response;
 };
 
 export { main as graphqlHandler };
