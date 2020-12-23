@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/n8io/boilerplate-monorepo/compare/v1.8.0...v1.9.0) (2020-12-23)
+
+
+### Bug Fixes
+
+* 🐛 Don't overwrite `GRAPHQL_URI` when provided by the env ([98852ca](https://github.com/n8io/boilerplate-monorepo/commit/98852ca5200a42f7f2499e6f06d20f1ddaf1b2f3))
+* **cors:** 🐛 Fix cors issues ([2b3d323](https://github.com/n8io/boilerplate-monorepo/commit/2b3d323747ce4a35ee3fcad5cc3fed85e53118ac))
+
+
+### Features
+
+* **aws:** ✨ Add aws provisioning scripts ([f89db75](https://github.com/n8io/boilerplate-monorepo/commit/f89db75ec222d1f8028c74db1cab5e60b56a8b2b))
+* **aws:** ✨ Add aws serverless postgres scripts ([a501de8](https://github.com/n8io/boilerplate-monorepo/commit/a501de8f8f910977045b2718f2dfea3e66ea42cd))
+* **cors:** ✨ Fix cors once and for all ([c96e46f](https://github.com/n8io/boilerplate-monorepo/commit/c96e46fffe3f511c1624fe157dbaa305f6cae167))
+* **docker:** ✨ Add docker lambda service stuffs ([b16bb55](https://github.com/n8io/boilerplate-monorepo/commit/b16bb55e42ef77a9d0df99ea99b804d42f6af40c))
+* **docker:** ✨ Add lambda dockerfile ([0cb3327](https://github.com/n8io/boilerplate-monorepo/commit/0cb33279b6349babc729bcbbd8b7fbf54adaeab7))
+* **docker:** ✨ Add service dockerization ([28b8888](https://github.com/n8io/boilerplate-monorepo/commit/28b8888723acd6a87d4868cc3f5850504c3b5e32))
+* **lambda:** ✨ Add lambda handler ([92bc8fa](https://github.com/n8io/boilerplate-monorepo/commit/92bc8fa337aea1e301f4f766c8661348094585e0))
+* **serverless:** ✨ Make the service lambda compatible ([96379bf](https://github.com/n8io/boilerplate-monorepo/commit/96379bfa5148bb683221473417b08cbf797bf35d))
+
+
+
+
+
 # [1.8.0](https://github.com/n8io/boilerplate-monorepo/compare/v1.7.0...v1.8.0) (2020-11-23)
 
 

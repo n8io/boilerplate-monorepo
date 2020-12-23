@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/n8io/boilerplate-monorepo/compare/v1.8.0...v1.9.0) (2020-12-23)
+
+
+### Bug Fixes
+
+* **cors:** 🐛 Fix cors issues ([2b3d323](https://github.com/n8io/boilerplate-monorepo/commit/2b3d323747ce4a35ee3fcad5cc3fed85e53118ac))
+
+
+### Features
+
+* **cors:** ✨ Fix cors once and for all ([c96e46f](https://github.com/n8io/boilerplate-monorepo/commit/c96e46fffe3f511c1624fe157dbaa305f6cae167))
+* **lambda:** ✨ Add lambda handler ([92bc8fa](https://github.com/n8io/boilerplate-monorepo/commit/92bc8fa337aea1e301f4f766c8661348094585e0))
+* **serverless:** ✨ Make the service lambda compatible ([96379bf](https://github.com/n8io/boilerplate-monorepo/commit/96379bfa5148bb683221473417b08cbf797bf35d))
+
+
+
+
+
 # [1.8.0](https://github.com/n8io/boilerplate-monorepo/compare/v1.7.0...v1.8.0) (2020-11-23)
 
 

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/n8io/boilerplate-monorepo/compare/v1.8.0...v1.9.0) (2020-12-23)
+
+
+### Bug Fixes
+
+* 🐛 Don't overwrite `GRAPHQL_URI` when provided by the env ([98852ca](https://github.com/n8io/boilerplate-monorepo/commit/98852ca5200a42f7f2499e6f06d20f1ddaf1b2f3))
+
+
+### Features
+
+* **cors:** ✨ Fix cors once and for all ([c96e46f](https://github.com/n8io/boilerplate-monorepo/commit/c96e46fffe3f511c1624fe157dbaa305f6cae167))
+
+
+
+
+
 # [1.8.0](https://github.com/n8io/boilerplate-monorepo/compare/v1.7.0...v1.8.0) (2020-11-23)
 
 **Note:** Version bump only for package @boilerplate-monorepo/ui

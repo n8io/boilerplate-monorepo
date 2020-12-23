@@ -1,6 +1,6 @@
 {
   "name": "@boilerplate-monorepo/common",
-  "version": "1.5.0",
+  "version": "1.9.0",
   "private": true,
   "main": "dist/index.js",
   "license": "MIT",

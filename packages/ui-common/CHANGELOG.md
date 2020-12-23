@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/n8io/boilerplate-monorepo/compare/v1.8.0...v1.9.0) (2020-12-23)
+
+**Note:** Version bump only for package @boilerplate-monorepo/ui-common
+
+
+
+
+
 # [1.4.0](https://github.com/n8io/boilerplate-monorepo/compare/v1.3.2...v1.4.0) (2020-05-26)
 
 
