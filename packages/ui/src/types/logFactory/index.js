@@ -1,7 +1,6 @@
 import { config } from 'config';
 import debug from 'debug';
 
-// eslint-disable-next-line no-process-env
 const { npm_package_name: PACKAGE_NAME } = config;
 const logs = {};
 

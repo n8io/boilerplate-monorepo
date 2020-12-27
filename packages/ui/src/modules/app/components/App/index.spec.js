@@ -3,6 +3,10 @@ import { render } from 'testHelpers';
 import { App } from '.';
 import * as UseAppReadyHook from './useAppReady';
 
+jest.mock('./Overlays/ColdStart', () => ({
+  ColdStart: (props) => <x-ColdStart {...props} data-testid="cold-start" />,
+}));
+
 jest.mock('./Layout', () => ({
   Layout: (props) => <x-Layout {...props} data-testid="layout" />,
 }));

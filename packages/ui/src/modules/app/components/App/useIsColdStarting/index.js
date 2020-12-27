@@ -25,12 +25,10 @@ const useIsColdStarting = () => {
   useEffect(() => {
     const doImmediateCheck = async () => {
       try {
-        // eslint-disable-next-line no-console
         debugLog('Checking heartbeat, currently cold starting...');
 
         const heartbeat = await checkHeartbeat();
 
-        // eslint-disable-next-line no-console
         debugLog(heartbeat);
 
         beColdStarting(false);
@@ -43,12 +41,10 @@ const useIsColdStarting = () => {
 
     const interval = setInterval(async () => {
       try {
-        // eslint-disable-next-line no-console
         debugLog('Checking heartbeat, currently cold starting...');
 
         const heartbeat = await checkHeartbeat();
 
-        // eslint-disable-next-line no-console
         debugLog(heartbeat);
 
         beColdStarting(false);
