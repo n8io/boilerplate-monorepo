@@ -1,11 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<App/> when app is ready renders its children 1`] = `
-<x-providers
-  data-testid="providers"
->
-  <x-layout
-    data-testid="layout"
-  />
-</x-providers>
+<x-coldstart
+  data-testid="cold-start"
+/>
 `;

@@ -1,11 +1,15 @@
 import { config } from 'config';
 import { useEffect, useState } from 'react';
 import { AccessToken } from 'types/accessToken';
+import { useIsColdStarting } from '../useIsColdStarting';
 
 const useAppReady = () => {
+  const isColdStarting = useIsColdStarting();
   const [isReady, setReady] = useState(false);
 
   useEffect(() => {
+    if (isColdStarting) return;
+
     const uri = new URL(config.GRAPHQL_URI);
 
     uri.pathname = 'refresh_token';
@@ -21,9 +25,9 @@ const useAppReady = () => {
         ok && AccessToken.set(token);
       })
       .finally(() => setReady(true));
-  }, []);
+  }, [isColdStarting]);
 
-  return isReady;
+  return !isColdStarting && isReady;
 };
 
 export { useAppReady };
