@@ -8,3 +8,4 @@ node_modules/
 !.storybook/
 !.stylelintrc.js
 !cypress/
+package.json

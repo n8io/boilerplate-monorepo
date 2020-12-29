@@ -90,6 +90,7 @@
     "html-minifier": "^4.0.0",
     "jest": "^25.5.0",
     "jest-watch-typeahead": "^0.6.0",
+    "knex-migrate": "^1.7.4",
     "nodemon": "^2.0.2",
     "sqlite3": "^4.2.0",
     "testdouble": "^3.13.1",
