@@ -31,8 +31,14 @@ source "${UP_ENV_FILE}"
 VPC_NAME=${VPC_NAME:-$(cat "${DIR}/../package.json" | ${JQ_BIN} '.name')}
 VPC_REGION=${VPC_REGION:-us-east}
 WEB_DOMAIN=${WEB_DOMAIN}
-WEB_APP_URL=${WEB_APP_URL:-"https://app.${WEB_DOMAIN}"}
-WEB_CERTIFICATE_DOMAIN="*.${WEB_DOMAIN}"
+ENV_PRD="${ENV_PRD:-"production"}"
+ENV_DEV="${ENV_DEV:-"development"}"
+WEB_ENV_SUFFIX_PRD="${WEB_ENV_SUFFIX_PRD:-""}"
+WEB_ENV_SUFFIX_DEV="${WEB_ENV_SUFFIX_DEV:-"-dev"}"
+WEB_APP_URL_PRD=${WEB_APP_URL_PRD:-"https://app${WEB_ENV_SUFFIX_PRD}.${WEB_DOMAIN}"}
+WEB_APP_URL_DEV=${WEB_APP_URL_DEV:-"https://app${WEB_ENV_SUFFIX_DEV}.${WEB_DOMAIN}"}
+WEB_CERTIFICATE_GRAPHQL_PRD="graphql${WEB_ENV_SUFFIX_PRD}.${WEB_DOMAIN}"
+WEB_CERTIFICATE_GRAPHQL_DEV="graphql${WEB_ENV_SUFFIX_DEV}.${WEB_DOMAIN}"
 
 VPC_CACHE_AZ_MODE=${VPC_CACHE_AZ_MODE:-single-az}
 VPC_CACHE_INSTANCE_SIZE=${VPC_CACHE_INSTANCE_SIZE:-cache.t2.micro}
@@ -67,14 +73,32 @@ VPC_SUBNET_PRIVATE_NAME_2=${VPC_SUBNET_PRIVATE_NAME_2:-private-2-${VPC_NAME}}
 VPC_SUBNET_PUBLIC_AVAILABILITY_ZONE=${VPC_SUBNET_PUBLIC_AVAILABILITY_ZONE:-${VPC_REGION}-1a}
 VPC_SUBNET_PUBLIC_CIDR_BLOCK=${VPC_SUBNET_PUBLIC_CIDR_BLOCK:-10.0.0.0/24}
 VPC_SUBNET_PUBLIC_NAME=${VPC_SUBNET_PUBLIC_NAME:-public-${VPC_NAME}}
-VPC_API_GATEWAY_DOMAIN="graphql.${WEB_DOMAIN}"
-VPC_API_GATEWAY_NAME=${VPC_API_GATEWAY_NAME:-${VPC_NAME}}
-VPC_API_GATEWAY_STAGE_NAME=${VPC_API_GATEWAY_STAGE_NAME:-production}
+VPC_API_GATEWAY_SUBDOMAIN_PRD="graphql${WEB_ENV_SUFFIX_PRD}"
+VPC_API_GATEWAY_SUBDOMAIN_DEV="graphql${WEB_ENV_SUFFIX_DEV}"
+VPC_API_GATEWAY_DOMAIN_PRD="${VPC_API_GATEWAY_SUBDOMAIN_PRD}.${WEB_DOMAIN}"
+VPC_API_GATEWAY_DOMAIN_DEV="${VPC_API_GATEWAY_SUBDOMAIN_DEV}.${WEB_DOMAIN}"
+VPC_API_GATEWAY_NAME_PRD=${VPC_API_GATEWAY_NAME_PRD:-${VPC_NAME-${ENV_PRD}}}
+VPC_API_GATEWAY_NAME_DEV=${VPC_API_GATEWAY_NAME_DEV:-${VPC_NAME-${ENV_DEV}}}
+VPC_API_GATEWAY_STAGE_NAME_PRD=${VPC_API_GATEWAY_STAGE_NAME_PRD:-${ENV_PRD}}
+VPC_API_GATEWAY_STAGE_NAME_DEV=${VPC_API_GATEWAY_STAGE_NAME_DEV:-${ENV_DEV}}
 VPC_ECR_REPO_NAME=${VPC_ECR_REPO_NAME:-${VPC_NAME}/lambda-graphql}
-VPC_API_GATEWAY_NAME=${VPC_API_GATEWAY_NAME:-${VPC_NAME}}
-VPC_LAMBDA_NAME=${VPC_LAMBDA_NAME:-${VPC_NAME}-graphql}
+VPC_ECR_REPO_NAME_MIGRATIONS=${VPC_ECR_REPO_NAME_MIGRATIONS:-${VPC_NAME}/lambda-migrations}
+VPC_LAMBDA_NAME_PRD=${VPC_LAMBDA_NAME_PRD:-${VPC_NAME}-graphql-${ENV_PRD}}
+VPC_LAMBDA_NAME_DEV=${VPC_LAMBDA_NAME_DEV:-${VPC_NAME}-graphql-${ENV_DEV}}
+VPC_LAMBDA_NAME_MIGRATIONS_PRD=${VPC_LAMBDA_NAME_MIGRATIONS_PRD:-${VPC_NAME}-migrations-${ENV_PRD}}
 VPC_LAMBDA_ROLE_NAME=${VPC_LAMBDA_ROLE_NAME:-${VPC_NAME}-lambda}
 VPC_LAMBDA_ROLE_POLICY_ARN=${VPC_LAMBDA_ROLE_POLICY_ARN:-arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole}
+VPC_ACCOUNT_ID=${VPC_ACCOUNT_ID:-""}
+
+if [[ -z "${VPC_ACCOUNT_ID:-""}" ]]; then
+  echo -n "Fetching aws account id..."
+  VPC_ACCOUNT_ID=$(\
+    ${AWS_STS} get-caller-identity \
+      | ${JQ_BIN} '.Account'
+    )
+  echo "${VPC_ACCOUNT_ID}"
+  (echo "VPC_ACCOUNT_ID=${VPC_ACCOUNT_ID}" >> "${ENV_FILE}")
+fi
 
 if [[ -z "${STEP_VPC_CREATED:-""}" ]]; then
   echo -n "Creating new VPC..."
@@ -544,6 +568,17 @@ if [[ -z "${STEP_ECR_REPOSITORY_CREATED:-""}" ]]; then
   (echo "STEP_ECR_REPOSITORY_CREATED=true" >> "${UP_ENV_FILE}")
 fi
 
+if [[ -z "${STEP_ECR_REPOSITORY_CREATED_MIGRATIONS:-""}" ]]; then
+  echo -n "Creating ecr repository ${VPC_ECR_REPO_NAME_MIGRATIONS}..."
+  ${AWS_ECR} create-repository \
+    --repository-name ${VPC_ECR_REPO_NAME_MIGRATIONS} \
+    >/dev/null
+  echo "done."
+  (echo "VPC_ECR_REPO_NAME_MIGRATIONS=${VPC_ECR_REPO_NAME_MIGRATIONS}" >> "${ENV_FILE}")
+
+  (echo "STEP_ECR_REPOSITORY_CREATED_MIGRATIONS=true" >> "${UP_ENV_FILE}")
+fi
+
 if [[ -z "${STEP_LAMBDA_ROLE_CREATED:-""}" ]]; then
   echo -n "Creating lambda iam role ${VPC_LAMBDA_ROLE_NAME}..."
   VPC_LAMBDA_ROLE_ARN=$(\
@@ -571,43 +606,52 @@ if [[ -z "${STEP_LAMBDA_ROLE_POLICY_ATTACHED:-""}" ]]; then
   (echo "STEP_LAMBDA_ROLE_POLICY_ATTACHED=true" >> "${UP_ENV_FILE}")
 fi
 
-if [[ -z "${STEP_LAMBDA_DOCKER_IMAGE_PUSHED:-""}" ]]; then
-  echo -n "Fetching aws account id..."
-  VPC_ACCOUNT_ID=$(\
-    ${AWS_STS} get-caller-identity \
-      | ${JQ_BIN} '.Account'
-    )
-  echo "${VPC_ACCOUNT_ID}"
+VPC_ECR_LAMBDA_IMAGE_ARN=${VPC_ECR_LAMBDA_IMAGE_ARN:-${VPC_ACCOUNT_ID}.dkr.ecr.${VPC_REGION}-1.amazonaws.com/${VPC_ECR_REPO_NAME}}
 
-  VPC_ECR_LAMBDA_IMAGE_ARN=${VPC_ECR_LAMBDA_ARN:-${VPC_ACCOUNT_ID}.dkr.ecr.${VPC_REGION}-1.amazonaws.com/${VPC_ECR_REPO_NAME}}
+if [[ -z "${STEP_LAMBDA_DOCKER_IMAGE_PUSHED:-""}" ]]; then
+  echo "Building local docker image ${VPC_ECR_REPO_NAME}..."
+  yarn run -s build:docker:graphql
+
+  echo "Tagging local docker image ${VPC_ECR_REPO_NAME}..."
+  docker tag "${VPC_ECR_REPO_NAME}:latest" "${VPC_ECR_LAMBDA_IMAGE_ARN}:latest"
 
   echo "Logging docker into ECR ${VPC_ECR_REPO_NAME}..."
   ${AWS_ECR} get-login-password --region ${VPC_REGION}-1 | docker login --username AWS --password-stdin ${VPC_ACCOUNT_ID}.dkr.ecr.${VPC_REGION}-1.amazonaws.com
 
   echo "Pushing docker ${VPC_ECR_REPO_NAME} image to ECR..."
   docker push --quiet ${VPC_ECR_LAMBDA_IMAGE_ARN}:latest
+  (echo "VPC_ECR_LAMBDA_IMAGE_ARN=${VPC_ECR_LAMBDA_IMAGE_ARN}" >> "${ENV_FILE}")
 
   (echo "STEP_LAMBDA_DOCKER_IMAGE_PUSHED=true" >> "${UP_ENV_FILE}")
 fi
 
-if [[ -z "${STEP_LAMBDA_FUNCTION_CREATED:-""}" ]]; then
-  if [[ -z "${VPC_ACCOUNT_ID:-""}" ]]; then
-    echo -n "Fetching aws account id..."
-    VPC_ACCOUNT_ID=$(\
-      ${AWS_STS} get-caller-identity \
-        | ${JQ_BIN} '.Account'
-      )
-    echo "${VPC_ACCOUNT_ID}"
-  fi
+VPC_ECR_LAMBDA_IMAGE_ARN_MIGRATIONS=${VPC_ECR_LAMBDA_IMAGE_ARN_MIGRATIONS:-${VPC_ACCOUNT_ID}.dkr.ecr.${VPC_REGION}-1.amazonaws.com/${VPC_ECR_REPO_NAME_MIGRATIONS}}
 
-  VPC_ECR_LAMBDA_IMAGE_ARN=${VPC_ECR_LAMBDA_ARN:-${VPC_ACCOUNT_ID}.dkr.ecr.${VPC_REGION}-1.amazonaws.com/${VPC_ECR_REPO_NAME}}
+if [[ -z "${STEP_LAMBDA_DOCKER_IMAGE_PUSHED_MIGRATIONS:-""}" ]]; then
+  echo "Building local docker image ${VPC_ECR_REPO_NAME_MIGRATIONS}..."
+  yarn run -s build:docker:migrations
 
-  echo -n "Creating lambda function ${VPC_LAMBDA_NAME}..."
-  VPC_LAMBDA_ARN=$(\
+  echo "Tagging local docker image ${VPC_ECR_REPO_NAME_MIGRATIONS}..."
+  docker tag "${VPC_ECR_REPO_NAME_MIGRATIONS}:latest" "${VPC_ECR_LAMBDA_IMAGE_ARN_MIGRATIONS}:latest"
+
+  echo "Logging docker into ECR ${VPC_ECR_REPO_NAME_MIGRATIONS}..."
+  ${AWS_ECR} get-login-password --region ${VPC_REGION}-1 | docker login --username AWS --password-stdin ${VPC_ACCOUNT_ID}.dkr.ecr.${VPC_REGION}-1.amazonaws.com
+
+  echo "Pushing docker ${VPC_ECR_REPO_NAME_MIGRATIONS} image to ECR..."
+  docker push --quiet ${VPC_ECR_LAMBDA_IMAGE_ARN_MIGRATIONS}:latest
+  (echo "VPC_ECR_LAMBDA_IMAGE_ARN_MIGRATIONS=${VPC_ECR_LAMBDA_IMAGE_ARN_MIGRATIONS}" >> "${ENV_FILE}")
+
+  (echo "STEP_LAMBDA_DOCKER_IMAGE_PUSHED_MIGRATIONS=true" >> "${UP_ENV_FILE}")
+fi
+
+# ========== Production specific resources ===============================================
+if [[ -z "${STEP_LAMBDA_FUNCTION_CREATED_MIGRATIONS_PRD:-""}" ]]; then
+  echo -n "Creating lambda function ${VPC_LAMBDA_NAME_MIGRATIONS_PRD}..."
+  VPC_LAMBDA_ARN_MIGRATIONS_PRD=$(\
     ${AWS_LAMBDA} create-function \
-      --function-name ${VPC_LAMBDA_NAME} \
-      --code "ImageUri=${VPC_ECR_LAMBDA_IMAGE_ARN}:latest" \
-      --environment "Variables={DATABASE_URL=postgres://${VPC_DB_USERNAME}:${VPC_DB_PASSWORD}@${VPC_DB_ENDPOINT}:5432/${VPC_DB_NAME},REDIS_URL=redis://${VPC_CACHE_ENDPOINT}:6379,HTTPS=false,DEBUG=*${VPC_NAME}*,SHOW_CONFIG=false,EMAIL_FROM_ADDRESS=\"noreply@${WEB_DOMAIN}\",EMAIL_SMTP_URL=\"${EMAIL_SMTP_URL:-""}\",npm_package_name=${VPC_NAME},UI_HOST_URI=\"${WEB_APP_URL}\"}" \
+      --function-name ${VPC_LAMBDA_NAME_MIGRATIONS_PRD} \
+      --code "ImageUri=${VPC_ECR_LAMBDA_IMAGE_ARN_MIGRATIONS}:latest" \
+      --environment "Variables={DATABASE_URL=postgres://${VPC_DB_USERNAME}:${VPC_DB_PASSWORD}@${VPC_DB_ENDPOINT}:5432/${VPC_DB_NAME},DEBUG=*${VPC_NAME}*,SHOW_CONFIG=false,npm_package_name=${VPC_NAME}}" \
       --memory-size 256 \
       --package-type Image \
       --role ${VPC_LAMBDA_ROLE_ARN} \
@@ -615,183 +659,411 @@ if [[ -z "${STEP_LAMBDA_FUNCTION_CREATED:-""}" ]]; then
       --vpc-config "SubnetIds=${VPC_SUBNET_PRIVATE_ID_1},${VPC_SUBNET_PRIVATE_ID_2},SecurityGroupIds=${VPC_SECURITY_GROUP_LAMBDA_ID}" \
       | ${JQ_BIN} '.FunctionArn'
     )
-  echo "${VPC_LAMBDA_ARN}"
-  (echo "VPC_LAMBDA_NAME=${VPC_LAMBDA_NAME}" >> "${ENV_FILE}")
-  (echo "VPC_LAMBDA_ARN=${VPC_LAMBDA_ARN}" >> "${ENV_FILE}")
+  echo "${VPC_LAMBDA_ARN_MIGRATIONS_PRD}"
+  (echo "VPC_LAMBDA_NAME_MIGRATIONS_PRD=${VPC_LAMBDA_NAME_MIGRATIONS_PRD}" >> "${ENV_FILE}")
+  (echo "VPC_LAMBDA_ARN_MIGRATIONS_PRD=${VPC_LAMBDA_ARN_MIGRATIONS_PRD}" >> "${ENV_FILE}")
 
-  (echo "STEP_LAMBDA_FUNCTION_CREATED=true" >> "${UP_ENV_FILE}")
+  (echo "STEP_LAMBDA_FUNCTION_CREATED_MIGRATIONS_PRD=true" >> "${UP_ENV_FILE}")
 fi
 
-if [[ -z "${STEP_API_GATEWAY_CREATED:-""}" ]]; then
-  echo -n "Creating api gateway ${VPC_API_GATEWAY_NAME}..."
-  VPC_API_GATEWAY_ID=$(\
+if [[ -z "${STEP_LAMBDA_FUNCTION_CREATED_PRD:-""}" ]]; then
+  echo -n "Creating lambda function ${VPC_LAMBDA_NAME_PRD}..."
+  VPC_LAMBDA_ARN_PRD=$(\
+    ${AWS_LAMBDA} create-function \
+      --function-name ${VPC_LAMBDA_NAME_PRD} \
+      --code "ImageUri=${VPC_ECR_LAMBDA_IMAGE_ARN}:latest" \
+      --environment "Variables={DATABASE_URL=postgres://${VPC_DB_USERNAME}:${VPC_DB_PASSWORD}@${VPC_DB_ENDPOINT}:5432/${VPC_DB_NAME},REDIS_URL=redis://${VPC_CACHE_ENDPOINT}:6379,HTTPS=false,DEBUG=*${VPC_NAME}*,SHOW_CONFIG=false,EMAIL_FROM_ADDRESS=\"noreply@${WEB_DOMAIN}\",EMAIL_SMTP_URL=\"${EMAIL_SMTP_URL:-""}\",npm_package_name=${VPC_NAME},UI_HOST_URI=\"${WEB_APP_URL_PRD}\"}" \
+      --memory-size 256 \
+      --package-type Image \
+      --role ${VPC_LAMBDA_ROLE_ARN} \
+      --timeout 5 \
+      --vpc-config "SubnetIds=${VPC_SUBNET_PRIVATE_ID_1},${VPC_SUBNET_PRIVATE_ID_2},SecurityGroupIds=${VPC_SECURITY_GROUP_LAMBDA_ID}" \
+      | ${JQ_BIN} '.FunctionArn'
+    )
+  echo "${VPC_LAMBDA_ARN_PRD}"
+  (echo "VPC_LAMBDA_NAME_PRD=${VPC_LAMBDA_NAME_PRD}" >> "${ENV_FILE}")
+  (echo "VPC_LAMBDA_ARN_PRD=${VPC_LAMBDA_ARN_PRD}" >> "${ENV_FILE}")
+
+  (echo "STEP_LAMBDA_FUNCTION_CREATED_PRD=true" >> "${UP_ENV_FILE}")
+fi
+
+if [[ -z "${STEP_API_GATEWAY_CREATED_PRD:-""}" ]]; then
+  echo -n "Creating api gateway ${VPC_API_GATEWAY_NAME_PRD}..."
+  VPC_API_GATEWAY_ID_PRD=$(\
     ${AWS_API_GATEWAY} create-rest-api \
-      --name ${VPC_API_GATEWAY_NAME} \
-      --description "Rest api gateway for ${VPC_NAME}" \
+      --name ${VPC_API_GATEWAY_NAME_PRD} \
+      --description "Rest api gateway for ${VPC_NAME} (${ENV_PRD})" \
       | ${JQ_BIN} '.id'
     )
-  echo "${VPC_API_GATEWAY_ID}"
-  (echo "VPC_API_GATEWAY_ID=${VPC_API_GATEWAY_ID}" >> "${ENV_FILE}")
+  echo "${VPC_API_GATEWAY_ID_PRD}"
+  (echo "VPC_API_GATEWAY_ID_PRD=${VPC_API_GATEWAY_ID_PRD}" >> "${ENV_FILE}")
 
-  (echo "STEP_API_GATEWAY_CREATED=true" >> "${UP_ENV_FILE}")
+  (echo "STEP_API_GATEWAY_CREATED_PRD=true" >> "${UP_ENV_FILE}")
 fi
 
-if [[ -z "${STEP_API_GATEWAY_PROXY_RESOURCE_CREATED:-""}" ]]; then
+if [[ -z "${STEP_API_GATEWAY_PROXY_RESOURCE_CREATED_PRD:-""}" ]]; then
   echo -n "Fetching api gateway root resource id..."
-  VPC_API_GATEWAY_ROOT_RESOURCE_ID=$(\
+  VPC_API_GATEWAY_ROOT_RESOURCE_ID_PRD=$(\
     ${AWS_API_GATEWAY} get-resources \
-      --rest-api-id ${VPC_API_GATEWAY_ID} \
+      --rest-api-id ${VPC_API_GATEWAY_ID_PRD} \
       | ${JQ_BIN} '.items[] | select(.path == "/") | .id'
   )
   echo "done."
 
   echo -n "Creating api gateway proxy resource..."
-  VPC_API_GATEWAY_PROXY_RESOURCE_ID=$(\
+  VPC_API_GATEWAY_PROXY_RESOURCE_ID_PRD=$(\
     ${AWS_API_GATEWAY} create-resource \
-      --rest-api-id ${VPC_API_GATEWAY_ID} \
-      --parent-id ${VPC_API_GATEWAY_ROOT_RESOURCE_ID} \
+      --rest-api-id ${VPC_API_GATEWAY_ID_PRD} \
+      --parent-id ${VPC_API_GATEWAY_ROOT_RESOURCE_ID_PRD} \
       --path-part "{proxy+}" \
       | ${JQ_BIN} '.id'
     )
-  echo "${VPC_API_GATEWAY_PROXY_RESOURCE_ID}"
-  (echo "VPC_API_GATEWAY_PROXY_RESOURCE_ID=${VPC_API_GATEWAY_PROXY_RESOURCE_ID}" >> "${ENV_FILE}")
+  echo "${VPC_API_GATEWAY_PROXY_RESOURCE_ID_PRD}"
+  (echo "VPC_API_GATEWAY_PROXY_RESOURCE_ID_PRD=${VPC_API_GATEWAY_PROXY_RESOURCE_ID_PRD}" >> "${ENV_FILE}")
 
-  (echo "STEP_API_GATEWAY_PROXY_RESOURCE_CREATED=true" >> "${UP_ENV_FILE}")
+  (echo "STEP_API_GATEWAY_PROXY_RESOURCE_CREATED_PRD=true" >> "${UP_ENV_FILE}")
 fi
 
-if [[ -z "${STEP_API_GATEWAY_PROXY_ANY_METHOD_CREATED:-""}" ]]; then
+if [[ -z "${STEP_API_GATEWAY_PROXY_ANY_METHOD_CREATED_PRD:-""}" ]]; then
   echo -n "Attaching api gateway ANY method to proxy resource..."
   ${AWS_API_GATEWAY} put-method \
-    --rest-api-id "${VPC_API_GATEWAY_ID}" \
+    --rest-api-id "${VPC_API_GATEWAY_ID_PRD}" \
     --request-parameters "method.request.path.proxy=true" \
-    --resource-id "${VPC_API_GATEWAY_PROXY_RESOURCE_ID}" \
+    --resource-id "${VPC_API_GATEWAY_PROXY_RESOURCE_ID_PRD}" \
     --http-method "ANY" \
     --authorization-type "NONE" \
     >/dev/null
   echo "done."
 
-  (echo "STEP_API_GATEWAY_PROXY_ANY_METHOD_CREATED=true" >> "${UP_ENV_FILE}")
+  (echo "STEP_API_GATEWAY_PROXY_ANY_METHOD_CREATED_PRD=true" >> "${UP_ENV_FILE}")
 fi
 
-if [[ -z "${STEP_API_GATEWAY_ROOT_RESOURCE_ANY_METHOD_INTEGRATION_CREATED:-""}" ]]; then
+if [[ -z "${STEP_API_GATEWAY_ROOT_RESOURCE_ANY_METHOD_INTEGRATION_CREATED_PRD:-""}" ]]; then
   echo -n "Creating api gateway proxy resource ANY method integration..."
   ${AWS_API_GATEWAY} put-integration \
     --cache-key-parameters "method.request.path.proxy" \
     --content-handling "CONVERT_TO_TEXT" \
-    --rest-api-id "${VPC_API_GATEWAY_ID}" \
-    --resource-id "${VPC_API_GATEWAY_PROXY_RESOURCE_ID}" \
+    --rest-api-id "${VPC_API_GATEWAY_ID_PRD}" \
+    --resource-id "${VPC_API_GATEWAY_PROXY_RESOURCE_ID_PRD}" \
     --http-method "ANY" \
     --integration-http-method "POST" \
     --passthrough-behavior "WHEN_NO_MATCH" \
     --type "AWS_PROXY" \
-    --uri "arn:aws:apigateway:${VPC_REGION}-1:lambda:path/2015-03-31/functions/${VPC_LAMBDA_ARN}/invocations" \
+    --uri "arn:aws:apigateway:${VPC_REGION}-1:lambda:path/2015-03-31/functions/${VPC_LAMBDA_ARN_PRD}/invocations" \
     >/dev/null
   echo "done."
 
   echo -n "Attaching api gateway root resource ANY method integration response..."
   ${AWS_API_GATEWAY} put-integration-response \
-    --rest-api-id "${VPC_API_GATEWAY_ID}" \
-    --resource-id "${VPC_API_GATEWAY_PROXY_RESOURCE_ID}" \
+    --rest-api-id "${VPC_API_GATEWAY_ID_PRD}" \
+    --resource-id "${VPC_API_GATEWAY_PROXY_RESOURCE_ID_PRD}" \
     --http-method "ANY" \
     --response-templates "application/json=" \
     --status-code "200" \
     >/dev/null
   echo "done."
 
-  (echo "STEP_API_GATEWAY_ROOT_RESOURCE_ANY_METHOD_INTEGRATION_CREATED=true" >> "${UP_ENV_FILE}")
+  (echo "STEP_API_GATEWAY_ROOT_RESOURCE_ANY_METHOD_INTEGRATION_CREATED_PRD=true" >> "${UP_ENV_FILE}")
 fi
 
-if [[ -z "${STEP_API_GATEWAY_LAMBDA_PERMISSION_GRANTED:-""}" ]]; then
+if [[ -z "${STEP_API_GATEWAY_LAMBDA_PERMISSION_GRANTED_PRD:-""}" ]]; then
   echo -n "Granting api gateway execution permission to lambda function..."
   RANDOM_STATEMENT_ID=$(date +%s | sha256sum | base64 | head -c 32 ; echo)
   ${AWS_LAMBDA} add-permission \
-    --function-name "${VPC_LAMBDA_NAME}" \
+    --function-name "${VPC_LAMBDA_NAME_PRD}" \
     --statement-id "${RANDOM_STATEMENT_ID}" \
     --action "lambda:InvokeFunction" \
     --principal apigateway.amazonaws.com \
-    --source-arn arn:aws:execute-api:us-east-1:073153661971:${VPC_API_GATEWAY_ID}/*/*/* \
+    --source-arn arn:aws:execute-api:${VPC_REGION}-1:${VPC_ACCOUNT_ID}:${VPC_API_GATEWAY_ID_PRD}/*/*/* \
     >/dev/null
   echo "done."
 
-  (echo "STEP_API_GATEWAY_LAMBDA_PERMISSION_GRANTED=true" >> "${UP_ENV_FILE}")
+  (echo "STEP_API_GATEWAY_LAMBDA_PERMISSION_GRANTED_PRD=true" >> "${UP_ENV_FILE}")
 fi
 
-if [[ -z "${STEP_API_GATEWAY_DEPLOYED:-""}" ]]; then
-  echo -n "Deploying api gateway..."
-  VPC_API_GATEWAY_DEPLOYMENT_ID=$(\
+if [[ -z "${STEP_API_GATEWAY_DEPLOYED_PRD:-""}" ]]; then
+  echo -n "Deploying api gateway to ${ENV_PRD} stage..."
+  VPC_API_GATEWAY_DEPLOYMENT_ID_PRD=$(\
     ${AWS_API_GATEWAY} create-deployment \
-      --rest-api-id ${VPC_API_GATEWAY_ID} \
-      --stage-name ${VPC_API_GATEWAY_STAGE_NAME} \
+      --rest-api-id "${VPC_API_GATEWAY_ID_PRD}" \
+      --stage-name "${ENV_PRD}" \
       | ${JQ_BIN} '.id'
     )
-  echo "${VPC_API_GATEWAY_DEPLOYMENT_ID}"
-  (echo "VPC_API_GATEWAY_STAGE_NAME=${VPC_API_GATEWAY_STAGE_NAME}" >> "${ENV_FILE}")
-  (echo "VPC_API_GATEWAY_DEPLOYMENT_ID=${VPC_API_GATEWAY_DEPLOYMENT_ID}" >> "${ENV_FILE}")
+  echo "${VPC_API_GATEWAY_DEPLOYMENT_ID_PRD}"
+  (echo "VPC_API_GATEWAY_STAGE_NAME_PRD=${ENV_PRD}" >> "${ENV_FILE}")
+  (echo "VPC_API_GATEWAY_DEPLOYMENT_ID_PRD=${VPC_API_GATEWAY_DEPLOYMENT_ID_PRD}" >> "${ENV_FILE}")
 
-  (echo "STEP_API_GATEWAY_DEPLOYED=true" >> "${UP_ENV_FILE}")
+  (echo "STEP_API_GATEWAY_DEPLOYED_PRD=true" >> "${UP_ENV_FILE}")
 fi
 
-if [[ -z "${STEP_LAMBDA_READY:-""}" ]]; then
-  echo "Checking lambda function availability..."
+if [[ -z "${STEP_LAMBDA_READY_PRD:-""}" ]]; then
+  echo "Checking lambda ${VPC_LAMBDA_NAME_PRD} function availability..."
 
-  LAMBDA_STATUS=$(${AWS_LAMBDA} get-function --function-name "${VPC_LAMBDA_NAME}" | ${JQ_BIN} ".Configuration.State")
+  LAMBDA_STATUS=$(${AWS_LAMBDA} get-function --function-name "${VPC_LAMBDA_NAME_PRD}" | ${JQ_BIN} ".Configuration.State")
   until [ $LAMBDA_STATUS == 'Active' ];
   do
     echo "  $(date +"%r") Waiting for lambda function to be available (currently ${LAMBDA_STATUS})..."
     sleep 15
-    LAMBDA_STATUS=$(${AWS_LAMBDA} get-function --function-name "${VPC_LAMBDA_NAME}" | ${JQ_BIN} ".Configuration.State")
+    LAMBDA_STATUS=$(${AWS_LAMBDA} get-function --function-name "${VPC_LAMBDA_NAME_PRD}" | ${JQ_BIN} ".Configuration.State")
   done
 
-  echo "Lambda available at https://${VPC_API_GATEWAY_ID}.execute-api.us-east-1.amazonaws.com/production/heartbeat"
+  echo "Lambda available at https://${VPC_API_GATEWAY_ID_PRD}.execute-api.us-east-1.amazonaws.com/production/heartbeat"
 
-  (echo "STEP_LAMBDA_READY=true" >> "${UP_ENV_FILE}")
+  (echo "STEP_LAMBDA_READY_PRD=true" >> "${UP_ENV_FILE}")
 fi
 
-if [[ -z "${STEP_WEB_CERT_ISSUED:-""}" ]]; then
-  echo -n "Issuing wildcard cert for ${WEB_CERTIFICATE_DOMAIN}..."
-  WEB_CERTIFICATE_ARN=$(\
+if [[ -z "${STEP_WEB_CERT_ISSUED_PRD:-""}" ]]; then
+  echo -n "Issuing wildcard cert for ${WEB_CERTIFICATE_GRAPHQL_PRD}..."
+  WEB_CERTIFICATE_ARN_PRD=$(\
     ${AWS_ACM} request-certificate \
-      --domain-name ${WEB_CERTIFICATE_DOMAIN} \
+      --domain-name ${WEB_CERTIFICATE_GRAPHQL_PRD} \
       --validation-method "DNS" \
       | ${JQ_BIN} '.CertificateArn'
     )
-  echo "${WEB_CERTIFICATE_ARN}"
-  (echo "WEB_CERTIFICATE_ARN=${WEB_CERTIFICATE_ARN}" >> "${ENV_FILE}")
+  echo "${WEB_CERTIFICATE_ARN_PRD}"
+  (echo "WEB_CERTIFICATE_ARN_PRD=${WEB_CERTIFICATE_ARN_PRD}" >> "${ENV_FILE}")
 
-  (echo "STEP_WEB_CERT_ISSUED=true" >> "${UP_ENV_FILE}")
+  (echo "STEP_WEB_CERT_ISSUED_PRD=true" >> "${UP_ENV_FILE}")
+
+  echo "...waiting for 30 seconds for the cert to be created"
+  sleep 30
 fi
 
-if [[ -z "${STEP_API_GATEWAY_DOMAIN_CREATED:-""}" ]]; then
-  echo -n "Creating api gateway custom domain ${VPC_API_GATEWAY_DOMAIN}..."
-  VPC_API_GATEWAY_DOMAIN_URL=$(\
+if [[ -z "${STEP_API_GATEWAY_DOMAIN_CREATED_PRD:-""}" ]]; then
+  echo -n "Creating api gateway custom domain ${VPC_API_GATEWAY_DOMAIN_PRD}..."
+  VPC_API_GATEWAY_DOMAIN_URL_PRD=$(\
     ${AWS_API_GATEWAY} create-domain-name \
-      --domain-name ${VPC_API_GATEWAY_DOMAIN} \
-      --regional-certificate-arn ${WEB_CERTIFICATE_ARN} \
+      --domain-name ${VPC_API_GATEWAY_DOMAIN_PRD} \
+      --regional-certificate-arn ${WEB_CERTIFICATE_ARN_PRD} \
       --endpoint-configuration "types=REGIONAL" \
       --security-policy "TLS_1_2" \
       | ${JQ_BIN} '.regionalDomainName'
     )
-  echo "${VPC_API_GATEWAY_DEPLOYMENT_ID}"
-  (echo "VPC_API_GATEWAY_DOMAIN=${VPC_API_GATEWAY_DOMAIN}" >> "${ENV_FILE}")
-  (echo "VPC_API_GATEWAY_DOMAIN_URL=${VPC_API_GATEWAY_DOMAIN_URL}" >> "${ENV_FILE}")
+  echo "${VPC_API_GATEWAY_DEPLOYMENT_ID_PRD}"
+  echo ""
+  echo "  Update your DNS with a CNAME ${VPC_API_GATEWAY_SUBDOMAIN_PRD} ${VPC_API_GATEWAY_DOMAIN_URL_PRD}"
+  echo ""
+  (echo "VPC_API_GATEWAY_DOMAIN_PRD=${VPC_API_GATEWAY_DOMAIN_PRD}" >> "${ENV_FILE}")
+  (echo "VPC_API_GATEWAY_DOMAIN_URL_PRD=${VPC_API_GATEWAY_DOMAIN_URL_PRD}" >> "${ENV_FILE}")
 
-  (echo "STEP_API_GATEWAY_DOMAIN_CREATED=true" >> "${UP_ENV_FILE}")
+  (echo "STEP_API_GATEWAY_DOMAIN_CREATED_PRD=true" >> "${UP_ENV_FILE}")
 fi
 
-if [[ -z "${STEP_API_GATEWAY_DOMAIN_PATH_MAPPED:-""}" ]]; then
-  echo -n "Creating api gateway custom domain path mapping..."
-  VPC_API_GATEWAY_DOMAIN_BASE_PATH=$(\
+if [[ -z "${STEP_API_GATEWAY_DOMAIN_PATH_MAPPED_PRD:-""}" ]]; then
+  echo -n "Creating api gateway custom domain path mapping for ${ENV_PRD}..."
+  VPC_API_GATEWAY_DOMAIN_BASE_PATH_PRD=$(\
     ${AWS_API_GATEWAY} create-base-path-mapping \
-      --domain-name ${VPC_API_GATEWAY_DOMAIN} \
-      --rest-api-id ${VPC_API_GATEWAY_ID} \
-      --stage "${VPC_API_GATEWAY_STAGE_NAME}" \
+      --domain-name ${VPC_API_GATEWAY_DOMAIN_PRD} \
+      --rest-api-id ${VPC_API_GATEWAY_ID_PRD} \
+      --stage "${VPC_API_GATEWAY_STAGE_NAME_PRD}" \
       | ${JQ_BIN} '.basePath'
     )
   echo "done."
-  (echo "VPC_API_GATEWAY_DOMAIN_BASE_PATH=\"${VPC_API_GATEWAY_DOMAIN_BASE_PATH}\"" >> "${ENV_FILE}")
+  (echo "VPC_API_GATEWAY_DOMAIN_BASE_PATH_PRD=\"${VPC_API_GATEWAY_DOMAIN_BASE_PATH_PRD}\"" >> "${ENV_FILE}")
 
-  (echo "STEP_API_GATEWAY_DOMAIN_PATH_MAPPED=true" >> "${UP_ENV_FILE}")
+  (echo "STEP_API_GATEWAY_DOMAIN_PATH_MAPPED_PRD=true" >> "${UP_ENV_FILE}")
 fi
+# ========== END Production specific resources ===============================================
+
+# ========== Development specific resources ===============================================
+if [[ -z "${STEP_LAMBDA_FUNCTION_CREATED_DEV:-""}" ]]; then
+  echo -n "Creating lambda function ${VPC_LAMBDA_NAME_DEV}..."
+  VPC_LAMBDA_ARN_DEV=$(\
+    ${AWS_LAMBDA} create-function \
+      --function-name ${VPC_LAMBDA_NAME_DEV} \
+      --code "ImageUri=${VPC_ECR_LAMBDA_IMAGE_ARN}:latest" \
+      --environment "Variables={DATABASE_URL=postgres://${VPC_DB_USERNAME}:${VPC_DB_PASSWORD}@${VPC_DB_ENDPOINT}:5432/${VPC_DB_NAME},REDIS_URL=redis://${VPC_CACHE_ENDPOINT}:6379,HTTPS=false,DEBUG=*${VPC_NAME}*,SHOW_CONFIG=false,EMAIL_FROM_ADDRESS=\"noreply@${WEB_DOMAIN}\",EMAIL_SMTP_URL=\"${EMAIL_SMTP_URL:-""}\",npm_package_name=${VPC_NAME},UI_HOST_URI=\"${WEB_APP_URL_DEV}\"}" \
+      --memory-size 256 \
+      --package-type Image \
+      --role ${VPC_LAMBDA_ROLE_ARN} \
+      --timeout 5 \
+      --vpc-config "SubnetIds=${VPC_SUBNET_PRIVATE_ID_1},${VPC_SUBNET_PRIVATE_ID_2},SecurityGroupIds=${VPC_SECURITY_GROUP_LAMBDA_ID}" \
+      | ${JQ_BIN} '.FunctionArn'
+    )
+  echo "${VPC_LAMBDA_ARN_DEV}"
+  (echo "VPC_LAMBDA_NAME_DEV=${VPC_LAMBDA_NAME_DEV}" >> "${ENV_FILE}")
+  (echo "VPC_LAMBDA_ARN_DEV=${VPC_LAMBDA_ARN_DEV}" >> "${ENV_FILE}")
+
+  (echo "STEP_LAMBDA_FUNCTION_CREATED_DEV=true" >> "${UP_ENV_FILE}")
+fi
+
+if [[ -z "${STEP_API_GATEWAY_CREATED_DEV:-""}" ]]; then
+  echo -n "Creating api gateway ${VPC_API_GATEWAY_NAME_DEV}..."
+  VPC_API_GATEWAY_ID_DEV=$(\
+    ${AWS_API_GATEWAY} create-rest-api \
+      --name ${VPC_API_GATEWAY_NAME_DEV} \
+      --description "Rest api gateway for ${VPC_NAME} (${ENV_DEV})" \
+      | ${JQ_BIN} '.id'
+    )
+  echo "${VPC_API_GATEWAY_ID_DEV}"
+  (echo "VPC_API_GATEWAY_ID_DEV=${VPC_API_GATEWAY_ID_DEV}" >> "${ENV_FILE}")
+
+  (echo "STEP_API_GATEWAY_CREATED_DEV=true" >> "${UP_ENV_FILE}")
+fi
+
+if [[ -z "${STEP_API_GATEWAY_PROXY_RESOURCE_CREATED_DEV:-""}" ]]; then
+  echo -n "Fetching api gateway root resource id..."
+  VPC_API_GATEWAY_ROOT_RESOURCE_ID_DEV=$(\
+    ${AWS_API_GATEWAY} get-resources \
+      --rest-api-id ${VPC_API_GATEWAY_ID_DEV} \
+      | ${JQ_BIN} '.items[] | select(.path == "/") | .id'
+  )
+  echo "done."
+
+  echo -n "Creating api gateway proxy resource..."
+  VPC_API_GATEWAY_PROXY_RESOURCE_ID_DEV=$(\
+    ${AWS_API_GATEWAY} create-resource \
+      --rest-api-id ${VPC_API_GATEWAY_ID_DEV} \
+      --parent-id ${VPC_API_GATEWAY_ROOT_RESOURCE_ID_DEV} \
+      --path-part "{proxy+}" \
+      | ${JQ_BIN} '.id'
+    )
+  echo "${VPC_API_GATEWAY_PROXY_RESOURCE_ID_DEV}"
+  (echo "VPC_API_GATEWAY_PROXY_RESOURCE_ID_DEV=${VPC_API_GATEWAY_PROXY_RESOURCE_ID_DEV}" >> "${ENV_FILE}")
+
+  (echo "STEP_API_GATEWAY_PROXY_RESOURCE_CREATED_DEV=true" >> "${UP_ENV_FILE}")
+fi
+
+if [[ -z "${STEP_API_GATEWAY_PROXY_ANY_METHOD_CREATED_DEV:-""}" ]]; then
+  echo -n "Attaching api gateway ANY method to proxy resource..."
+  ${AWS_API_GATEWAY} put-method \
+    --rest-api-id "${VPC_API_GATEWAY_ID_DEV}" \
+    --request-parameters "method.request.path.proxy=true" \
+    --resource-id "${VPC_API_GATEWAY_PROXY_RESOURCE_ID_DEV}" \
+    --http-method "ANY" \
+    --authorization-type "NONE" \
+    >/dev/null
+  echo "done."
+
+  (echo "STEP_API_GATEWAY_PROXY_ANY_METHOD_CREATED_DEV=true" >> "${UP_ENV_FILE}")
+fi
+
+if [[ -z "${STEP_API_GATEWAY_ROOT_RESOURCE_ANY_METHOD_INTEGRATION_CREATED_DEV:-""}" ]]; then
+  echo -n "Creating api gateway proxy resource ANY method integration..."
+  ${AWS_API_GATEWAY} put-integration \
+    --cache-key-parameters "method.request.path.proxy" \
+    --content-handling "CONVERT_TO_TEXT" \
+    --rest-api-id "${VPC_API_GATEWAY_ID_DEV}" \
+    --resource-id "${VPC_API_GATEWAY_PROXY_RESOURCE_ID_DEV}" \
+    --http-method "ANY" \
+    --integration-http-method "POST" \
+    --passthrough-behavior "WHEN_NO_MATCH" \
+    --type "AWS_PROXY" \
+    --uri "arn:aws:apigateway:${VPC_REGION}-1:lambda:path/2015-03-31/functions/${VPC_LAMBDA_ARN_DEV}/invocations" \
+    >/dev/null
+  echo "done."
+
+  echo -n "Attaching api gateway root resource ANY method integration response..."
+  ${AWS_API_GATEWAY} put-integration-response \
+    --rest-api-id "${VPC_API_GATEWAY_ID_DEV}" \
+    --resource-id "${VPC_API_GATEWAY_PROXY_RESOURCE_ID_DEV}" \
+    --http-method "ANY" \
+    --response-templates "application/json=" \
+    --status-code "200" \
+    >/dev/null
+  echo "done."
+
+  (echo "STEP_API_GATEWAY_ROOT_RESOURCE_ANY_METHOD_INTEGRATION_CREATED_DEV=true" >> "${UP_ENV_FILE}")
+fi
+
+if [[ -z "${STEP_API_GATEWAY_LAMBDA_PERMISSION_GRANTED_DEV:-""}" ]]; then
+  echo -n "Granting api gateway execution permission to lambda function..."
+  RANDOM_STATEMENT_ID=$(date +%s | sha256sum | base64 | head -c 32 ; echo)
+  ${AWS_LAMBDA} add-permission \
+    --function-name "${VPC_LAMBDA_NAME_DEV}" \
+    --statement-id "${RANDOM_STATEMENT_ID}" \
+    --action "lambda:InvokeFunction" \
+    --principal apigateway.amazonaws.com \
+    --source-arn arn:aws:execute-api:${VPC_REGION}-1:${VPC_ACCOUNT_ID}:${VPC_API_GATEWAY_ID_DEV}/*/*/* \
+    >/dev/null
+  echo "done."
+
+  (echo "STEP_API_GATEWAY_LAMBDA_PERMISSION_GRANTED_DEV=true" >> "${UP_ENV_FILE}")
+fi
+
+if [[ -z "${STEP_API_GATEWAY_DEPLOYED_DEV:-""}" ]]; then
+  echo -n "Deploying api gateway to ${ENV_DEV} stage..."
+  VPC_API_GATEWAY_DEPLOYMENT_ID_DEV=$(\
+    ${AWS_API_GATEWAY} create-deployment \
+      --rest-api-id "${VPC_API_GATEWAY_ID_DEV}" \
+      --stage-name "${ENV_DEV}" \
+      | ${JQ_BIN} '.id'
+    )
+  echo "${VPC_API_GATEWAY_DEPLOYMENT_ID_DEV}"
+  (echo "VPC_API_GATEWAY_STAGE_NAME_DEV=${ENV_DEV}" >> "${ENV_FILE}")
+  (echo "VPC_API_GATEWAY_DEPLOYMENT_ID_DEV=${VPC_API_GATEWAY_DEPLOYMENT_ID_DEV}" >> "${ENV_FILE}")
+
+  (echo "STEP_API_GATEWAY_DEPLOYED_DEV=true" >> "${UP_ENV_FILE}")
+fi
+
+if [[ -z "${STEP_LAMBDA_READY_DEV:-""}" ]]; then
+  echo "Checking lambda ${VPC_LAMBDA_NAME_DEV} function availability..."
+
+  LAMBDA_STATUS=$(${AWS_LAMBDA} get-function --function-name "${VPC_LAMBDA_NAME_DEV}" | ${JQ_BIN} ".Configuration.State")
+  until [ $LAMBDA_STATUS == 'Active' ];
+  do
+    echo "  $(date +"%r") Waiting for lambda function to be available (currently ${LAMBDA_STATUS})..."
+    sleep 15
+    LAMBDA_STATUS=$(${AWS_LAMBDA} get-function --function-name "${VPC_LAMBDA_NAME_DEV}" | ${JQ_BIN} ".Configuration.State")
+  done
+
+  echo "Lambda available at https://${VPC_API_GATEWAY_ID_DEV}.execute-api.us-east-1.amazonaws.com/production/heartbeat"
+
+  (echo "STEP_LAMBDA_READY_DEV=true" >> "${UP_ENV_FILE}")
+fi
+
+if [[ -z "${STEP_WEB_CERT_ISSUED_DEV:-""}" ]]; then
+  echo -n "Issuing wildcard cert for ${WEB_CERTIFICATE_GRAPHQL_DEV}..."
+  WEB_CERTIFICATE_ARN_DEV=$(\
+    ${AWS_ACM} request-certificate \
+      --domain-name ${WEB_CERTIFICATE_GRAPHQL_DEV} \
+      --validation-method "DNS" \
+      | ${JQ_BIN} '.CertificateArn'
+    )
+  echo "${WEB_CERTIFICATE_ARN_DEV}"
+  (echo "WEB_CERTIFICATE_ARN_DEV=${WEB_CERTIFICATE_ARN_DEV}" >> "${ENV_FILE}")
+
+  (echo "STEP_WEB_CERT_ISSUED_DEV=true" >> "${UP_ENV_FILE}")
+
+  echo "...waiting for 30 seconds for the cert to be created"
+  sleep 30
+fi
+
+if [[ -z "${STEP_API_GATEWAY_DOMAIN_CREATED_DEV:-""}" ]]; then
+  echo -n "Creating api gateway custom domain ${VPC_API_GATEWAY_DOMAIN_DEV}..."
+  VPC_API_GATEWAY_DOMAIN_URL_DEV=$(\
+    ${AWS_API_GATEWAY} create-domain-name \
+      --domain-name ${VPC_API_GATEWAY_DOMAIN_DEV} \
+      --regional-certificate-arn ${WEB_CERTIFICATE_ARN_DEV} \
+      --endpoint-configuration "types=REGIONAL" \
+      --security-policy "TLS_1_2" \
+      | ${JQ_BIN} '.regionalDomainName'
+    )
+  echo "${VPC_API_GATEWAY_DEPLOYMENT_ID_DEV}"
+  echo ""
+  echo "  Update your DNS with a CNAME ${VPC_API_GATEWAY_SUBDOMAIN_DEV} ${VPC_API_GATEWAY_DOMAIN_URL_DEV}"
+  echo ""
+  (echo "VPC_API_GATEWAY_DOMAIN_DEV=${VPC_API_GATEWAY_DOMAIN_DEV}" >> "${ENV_FILE}")
+  (echo "VPC_API_GATEWAY_DOMAIN_URL_DEV=${VPC_API_GATEWAY_DOMAIN_URL_DEV}" >> "${ENV_FILE}")
+
+  (echo "STEP_API_GATEWAY_DOMAIN_CREATED_DEV=true" >> "${UP_ENV_FILE}")
+fi
+
+if [[ -z "${STEP_API_GATEWAY_DOMAIN_PATH_MAPPED_DEV:-""}" ]]; then
+  echo -n "Creating api gateway custom domain path mapping for ${ENV_DEV}..."
+  VPC_API_GATEWAY_DOMAIN_BASE_PATH_DEV=$(\
+    ${AWS_API_GATEWAY} create-base-path-mapping \
+      --domain-name ${VPC_API_GATEWAY_DOMAIN_DEV} \
+      --rest-api-id ${VPC_API_GATEWAY_ID_DEV} \
+      --stage "${VPC_API_GATEWAY_STAGE_NAME_DEV}" \
+      | ${JQ_BIN} '.basePath'
+    )
+  echo "done."
+  (echo "VPC_API_GATEWAY_DOMAIN_BASE_PATH_DEV=\"${VPC_API_GATEWAY_DOMAIN_BASE_PATH_DEV}\"" >> "${ENV_FILE}")
+
+  (echo "STEP_API_GATEWAY_DOMAIN_PATH_MAPPED_DEV=true" >> "${UP_ENV_FILE}")
+fi
+# ========== END Development specific resources ===============================================
 
 cp -R "${ENV_FILE}" "${ENV_FILE}.bkp"
 

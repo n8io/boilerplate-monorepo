@@ -24,85 +24,182 @@ LOG_FILE=${LOG_FILE:-"${LOG_DIR}/down.log"}
 rm -f "${UP_ENV_FILE}" >/dev/null
 source "${ENV_FILE}"
 
-if [[ ! -z "${VPC_API_GATEWAY_DOMAIN_BASE_PATH:-""}" ]]; then
-  echo -n "Deleting api gateway domain ${VPC_API_GATEWAY_DOMAIN_BASE_PATH}..."
+# ========== Development specific resources ===============================================
+if [[ ! -z "${VPC_API_GATEWAY_DOMAIN_BASE_PATH_DEV:-""}" ]]; then
+  echo -n "Deleting dev api gateway domain ${VPC_API_GATEWAY_DOMAIN_BASE_PATH_DEV}..."
   ${AWS_API_GATEWAY} delete-base-path-mapping \
-    --domain-name "${VPC_API_GATEWAY_DOMAIN}" \
-    --base-path "${VPC_API_GATEWAY_DOMAIN_BASE_PATH}" \
+    --domain-name "${VPC_API_GATEWAY_DOMAIN_DEV}" \
+    --base-path "${VPC_API_GATEWAY_DOMAIN_BASE_PATH_DEV}" \
     >/dev/null
   echo "done"
 
-  sed -i.bak '/^VPC_API_GATEWAY_DOMAIN_BASE_PATH/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
+  sed -i.bak '/^VPC_API_GATEWAY_DOMAIN_BASE_PATH_DEV/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
 fi
 
-if [[ ! -z "${VPC_API_GATEWAY_DOMAIN:-""}" ]]; then
-  echo -n "Deleting api gateway domain ${VPC_API_GATEWAY_DOMAIN}..."
+if [[ ! -z "${VPC_API_GATEWAY_DOMAIN_DEV:-""}" ]]; then
+  echo -n "Deleting dev api gateway domain ${VPC_API_GATEWAY_DOMAIN_DEV}..."
   ${AWS_API_GATEWAY} delete-domain-name \
-    --domain-name "${VPC_API_GATEWAY_DOMAIN}" \
+    --domain-name "${VPC_API_GATEWAY_DOMAIN_DEV}" \
     >/dev/null
   echo "done"
 
-  sed -i.bak '/^VPC_API_GATEWAY_DOMAIN/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
-  sed -i.bak '/^VPC_API_GATEWAY_DOMAIN_URL/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
+  sed -i.bak '/^VPC_API_GATEWAY_DOMAIN_DEV/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
+  sed -i.bak '/^VPC_API_GATEWAY_DOMAIN_URL_DEV/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
 
-  # Wait a few seconds while elastic load balancers are torn down
-  sleep 5
+  echo "  ...waiting a minute for elastic load balancers to be torn down"
+  sleep 60
 fi
 
-if [[ ! -z "${WEB_CERTIFICATE_ARN:-""}" ]]; then
-  echo -n "Deleting certificate ${VPC_API_GATEWAY_STAGE_NAME}..."
+if [[ ! -z "${WEB_CERTIFICATE_ARN_DEV:-""}" ]]; then
+  echo -n "Deleting dev certificate ${VPC_API_GATEWAY_STAGE_NAME_DEV}..."
   ${AWS_ACM} delete-certificate \
-    --certificate-arn "${WEB_CERTIFICATE_ARN}" \
+    --certificate-arn "${WEB_CERTIFICATE_ARN_DEV}" \
     >/dev/null
   echo "done"
 
-  sed -i.bak '/^WEB_CERTIFICATE_ARN/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
+  sed -i.bak '/^WEB_CERTIFICATE_ARN_DEV/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
 fi
 
-if [[ ! -z "${VPC_API_GATEWAY_DEPLOYMENT_ID:-""}" ]]; then
-  VPC_API_GATEWAY_STAGE_NAME=${VPC_API_GATEWAY_STAGE_NAME:-production}
+if [[ ! -z "${VPC_API_GATEWAY_DEPLOYMENT_ID_DEV:-""}" ]]; then
+  VPC_API_GATEWAY_STAGE_NAME_DEV=${VPC_API_GATEWAY_STAGE_NAME_DEV:-production}
 
-  echo -n "Deleting api gateway stage ${VPC_API_GATEWAY_STAGE_NAME}..."
+  echo -n "Deleting dev api gateway stage ${VPC_API_GATEWAY_STAGE_NAME_DEV}..."
   ${AWS_API_GATEWAY} delete-stage \
-    --rest-api-id ${VPC_API_GATEWAY_ID} \
-    --stage-name ${VPC_API_GATEWAY_STAGE_NAME} \
+    --rest-api-id ${VPC_API_GATEWAY_ID_DEV} \
+    --stage-name ${VPC_API_GATEWAY_STAGE_NAME_DEV} \
     >/dev/null
   echo "done"
 
-  echo -n "Deleting api gateway deployment..."
+  echo -n "Deleting dev api gateway deployment..."
   ${AWS_API_GATEWAY} delete-deployment \
-    --rest-api-id ${VPC_API_GATEWAY_ID} \
-    --deployment-id ${VPC_API_GATEWAY_DEPLOYMENT_ID} \
+    --rest-api-id ${VPC_API_GATEWAY_ID_DEV} \
+    --deployment-id ${VPC_API_GATEWAY_DEPLOYMENT_ID_DEV} \
     >/dev/null
   echo "done"
 
-  sed -i.bak '/^VPC_API_GATEWAY_STAGE_NAME/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
-  sed -i.bak '/^VPC_API_GATEWAY_DEPLOYMENT_ID/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
+  sed -i.bak '/^VPC_API_GATEWAY_STAGE_NAME_DEV/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
+  sed -i.bak '/^VPC_API_GATEWAY_DEPLOYMENT_ID_DEV/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
 fi
 
-if [[ ! -z "${VPC_API_GATEWAY_ID:-""}" ]]; then
-  echo -n "Deleting api gateway..."
+if [[ ! -z "${VPC_API_GATEWAY_ID_DEV:-""}" ]]; then
+  echo -n "Deleting dev api gateway..."
   ${AWS_API_GATEWAY} delete-rest-api \
-    --rest-api-id ${VPC_API_GATEWAY_ID} \
+    --rest-api-id ${VPC_API_GATEWAY_ID_DEV} \
     >/dev/null
   echo "done."
 
-  sed -i.bak '/^VPC_API_GATEWAY_PROXY_RESOURCE_ID/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
-  sed -i.bak '/^VPC_API_GATEWAY_ID/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
+  sed -i.bak '/^VPC_API_GATEWAY_PROXY_RESOURCE_ID_DEV/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
+  sed -i.bak '/^VPC_API_GATEWAY_ID_DEV/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
 fi
 
-if [[ ! -z "${VPC_LAMBDA_ARN:-""}" ]]; then
-  VPC_LAMBDA_NAME=${VPC_LAMBDA_NAME:-${VPC_NAME}-graphql}
+if [[ ! -z "${VPC_LAMBDA_ARN_DEV:-""}" ]]; then
+  VPC_LAMBDA_NAME_DEV=${VPC_LAMBDA_NAME_DEV:-${VPC_NAME}-graphql}
 
-  echo -n "Deleting lambda function ${VPC_LAMBDA_NAME}..."
+  echo -n "Deleting dev lambda function ${VPC_LAMBDA_NAME_DEV}..."
   ${AWS_LAMBDA} delete-function \
-    --function-name ${VPC_LAMBDA_NAME} \
+    --function-name ${VPC_LAMBDA_NAME_DEV} \
     >/dev/null
   echo "done."
 
-  sed -i.bak '/^VPC_LAMBDA_NAME/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
-  sed -i.bak '/^VPC_LAMBDA_ARN/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
+  sed -i.bak '/^VPC_LAMBDA_NAME_DEV/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
+  sed -i.bak '/^VPC_LAMBDA_ARN_DEV/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
 fi
+# ========== END Development specific resources ===============================================
+
+# ========== Production specific resources ===============================================
+if [[ ! -z "${VPC_API_GATEWAY_DOMAIN_BASE_PATH_PRD:-""}" ]]; then
+  echo -n "Deleting prd api gateway domain ${VPC_API_GATEWAY_DOMAIN_BASE_PATH_PRD}..."
+  ${AWS_API_GATEWAY} delete-base-path-mapping \
+    --domain-name "${VPC_API_GATEWAY_DOMAIN_PRD}" \
+    --base-path "${VPC_API_GATEWAY_DOMAIN_BASE_PATH_PRD}" \
+    >/dev/null
+  echo "done"
+
+  sed -i.bak '/^VPC_API_GATEWAY_DOMAIN_BASE_PATH_PRD/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
+fi
+
+if [[ ! -z "${VPC_API_GATEWAY_DOMAIN_PRD:-""}" ]]; then
+  echo -n "Deleting prd api gateway domain ${VPC_API_GATEWAY_DOMAIN_PRD}..."
+  ${AWS_API_GATEWAY} delete-domain-name \
+    --domain-name "${VPC_API_GATEWAY_DOMAIN_PRD}" \
+    >/dev/null
+  echo "done"
+
+  sed -i.bak '/^VPC_API_GATEWAY_DOMAIN_PRD/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
+  sed -i.bak '/^VPC_API_GATEWAY_DOMAIN_URL_PRD/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
+
+  echo "  ...waiting a minute for elastic load balancers to be torn down"
+  sleep 60
+fi
+
+if [[ ! -z "${WEB_CERTIFICATE_ARN_PRD:-""}" ]]; then
+  echo -n "Deleting prd certificate ${VPC_API_GATEWAY_STAGE_NAME_PRD}..."
+  ${AWS_ACM} delete-certificate \
+    --certificate-arn "${WEB_CERTIFICATE_ARN_PRD}" \
+    >/dev/null
+  echo "done"
+
+  sed -i.bak '/^WEB_CERTIFICATE_ARN_PRD/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
+fi
+
+if [[ ! -z "${VPC_API_GATEWAY_DEPLOYMENT_ID_PRD:-""}" ]]; then
+  VPC_API_GATEWAY_STAGE_NAME_PRD=${VPC_API_GATEWAY_STAGE_NAME_PRD:-production}
+
+  echo -n "Deleting prd api gateway stage ${VPC_API_GATEWAY_STAGE_NAME_PRD}..."
+  ${AWS_API_GATEWAY} delete-stage \
+    --rest-api-id ${VPC_API_GATEWAY_ID_PRD} \
+    --stage-name ${VPC_API_GATEWAY_STAGE_NAME_PRD} \
+    >/dev/null
+  echo "done"
+
+  echo -n "Deleting prd api gateway deployment..."
+  ${AWS_API_GATEWAY} delete-deployment \
+    --rest-api-id ${VPC_API_GATEWAY_ID_PRD} \
+    --deployment-id ${VPC_API_GATEWAY_DEPLOYMENT_ID_PRD} \
+    >/dev/null
+  echo "done"
+
+  sed -i.bak '/^VPC_API_GATEWAY_STAGE_NAME_PRD/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
+  sed -i.bak '/^VPC_API_GATEWAY_DEPLOYMENT_ID_PRD/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
+fi
+
+if [[ ! -z "${VPC_API_GATEWAY_ID_PRD:-""}" ]]; then
+  echo -n "Deleting prd api gateway..."
+  ${AWS_API_GATEWAY} delete-rest-api \
+    --rest-api-id ${VPC_API_GATEWAY_ID_PRD} \
+    >/dev/null
+  echo "done."
+
+  sed -i.bak '/^VPC_API_GATEWAY_PROXY_RESOURCE_ID_PRD/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
+  sed -i.bak '/^VPC_API_GATEWAY_ID_PRD/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
+fi
+
+if [[ ! -z "${VPC_LAMBDA_ARN_MIGRATIONS_PRD:-""}" ]]; then
+  VPC_LAMBDA_NAME_MIGRATIONS_PRD=${VPC_LAMBDA_NAME_MIGRATIONS_PRD:-${VPC_NAME}-graphql}
+
+  echo -n "Deleting prod lambda function ${VPC_LAMBDA_NAME_MIGRATIONS_PRD}..."
+  ${AWS_LAMBDA} delete-function \
+    --function-name ${VPC_LAMBDA_NAME_MIGRATIONS_PRD} \
+    >/dev/null
+  echo "done."
+
+  sed -i.bak '/^VPC_LAMBDA_NAME_MIGRATIONS_PRD/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
+  sed -i.bak '/^VPC_LAMBDA_ARN_MIGRATIONS_PRD/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
+fi
+
+if [[ ! -z "${VPC_LAMBDA_ARN_PRD:-""}" ]]; then
+  VPC_LAMBDA_NAME_PRD=${VPC_LAMBDA_NAME_PRD:-${VPC_NAME}-graphql}
+
+  echo -n "Deleting lambda function ${VPC_LAMBDA_NAME_PRD}..."
+  ${AWS_LAMBDA} delete-function \
+    --function-name ${VPC_LAMBDA_NAME_PRD} \
+    >/dev/null
+  echo "done."
+
+  sed -i.bak '/^VPC_LAMBDA_NAME_PRD/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
+  sed -i.bak '/^VPC_LAMBDA_ARN_PRD/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
+fi
+# ========== END Production specific resources ===============================================
 
 if [[ ! -z "${VPC_LAMBDA_ROLE_ARN:-""}" ]]; then
   echo -n "Detaching lambda role policy from ${VPC_LAMBDA_ROLE_NAME} role..."
@@ -123,6 +220,18 @@ if [[ ! -z "${VPC_LAMBDA_ROLE_ARN:-""}" ]]; then
   sed -i.bak '/^VPC_LAMBDA_ROLE_NAME/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
 fi
 
+if [[ ! -z "${VPC_ECR_REPO_NAME_MIGRATIONS:-""}" ]]; then
+  echo -n "Deleting ecr repository ${VPC_ECR_REPO_NAME_MIGRATIONS}..."
+  ${AWS_ECR} delete-repository \
+    --repository-name ${VPC_ECR_REPO_NAME_MIGRATIONS} \
+    --force \
+    >/dev/null
+  echo "done."
+
+  sed -i.bak '/^VPC_ECR_REPO_NAME_MIGRATIONS/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
+  sed -i.bak '/^VPC_ECR_LAMBDA_IMAGE_ARN_MIGRATIONS/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
+fi
+
 if [[ ! -z "${VPC_ECR_REPO_NAME:-""}" ]]; then
   echo -n "Deleting ecr repository ${VPC_ECR_REPO_NAME}..."
   ${AWS_ECR} delete-repository \
@@ -132,6 +241,7 @@ if [[ ! -z "${VPC_ECR_REPO_NAME:-""}" ]]; then
   echo "done."
 
   sed -i.bak '/^VPC_ECR_REPO_NAME/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
+  sed -i.bak '/^VPC_ECR_LAMBDA_IMAGE_ARN/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
 fi
 
 if [[ ! -z "${VPC_DB_CLUSTER_NAME:-""}" ]]; then
@@ -177,6 +287,9 @@ if [[ ! -z "${VPC_CACHE_CLUSTER_NAME:-""}" ]]; then
     --cache-cluster-id ${VPC_CACHE_CLUSTER_NAME} \
     >/dev/null
 
+  sed -i.bak '/^VPC_CACHE_ENDPOINT/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
+  sed -i.bak '/^VPC_CACHE_CLUSTER_NAME/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
+
   sleep 2
   CACHE_STATUS="$(${AWS_CACHE} describe-cache-clusters | ${JQ_BIN} ".CacheClusters[] | select(.CacheClusterId == \"${VPC_CACHE_CLUSTER_NAME}\") | .CacheClusterStatus")"
   until [ -z $CACHE_STATUS ];
@@ -186,9 +299,6 @@ if [[ ! -z "${VPC_CACHE_CLUSTER_NAME:-""}" ]]; then
     CACHE_STATUS=$(${AWS_CACHE} describe-cache-clusters | ${JQ_BIN} ".CacheClusters[] | select(.CacheClusterId == \"${VPC_CACHE_CLUSTER_NAME}\") | .CacheClusterStatus")
   done
   echo "Cache deleted."
-
-  sed -i.bak '/^VPC_CACHE_ENDPOINT/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
-  sed -i.bak '/^VPC_CACHE_CLUSTER_NAME/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
 fi
 
 if [[ ! -z "${VPC_SECURITY_GROUP_CACHE_ID:-""}" ]]; then
@@ -352,6 +462,7 @@ if [[ ! -z "${VPC_ID:-""}" ]]; then
   ${AWS_EC2} delete-vpc --vpc-id ${VPC_ID} | true
   echo "done"
 
+  sed -i.bak '/^VPC_ACCOUNT_ID/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
   sed -i.bak '/^VPC_NAME/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
   sed -i.bak '/^VPC_ID/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
 fi
