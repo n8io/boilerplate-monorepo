@@ -253,6 +253,7 @@ if [[ ! -z "${VPC_DB_CLUSTER_NAME:-""}" ]]; then
 
   sed -i.bak '/^VPC_DB_ENDPOINT/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
   sed -i.bak '/^VPC_DB_CLUSTER_NAME/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
+  sed -i.bak '/^VPC_DB_PASSWORD/d' "${ENV_FILE}" && rm "${ENV_FILE}.bak"
 
   sleep 2
   DB_STATUS="$(${AWS_RDS} describe-db-clusters | ${JQ_BIN} ".DBClusters[] | select(.DBClusterIdentifier == \"${VPC_DB_CLUSTER_NAME}\") | .Status")"
