@@ -21,8 +21,6 @@ if (!DATABASE_URL) {
 
 const distMigrations = path.join(__dirname, 'dist/migrations');
 const srcMigrations = path.join(__dirname, 'src/migrations');
-
-// eslint-disable-next-line no-sync
 const directory = NODE_ENV === 'production' ? distMigrations : srcMigrations;
 
 const defaults = {
