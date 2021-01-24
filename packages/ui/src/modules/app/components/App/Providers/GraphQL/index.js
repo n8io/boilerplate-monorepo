@@ -5,13 +5,8 @@ import React from 'react';
 import { cache } from './cache';
 import { link } from './link';
 
-const fetchOptions = {
-  credentials: 'same-origin',
-};
-
 const client = new ApolloClient({
   cache,
-  fetchOptions,
   link,
   name: 'web',
   version: config.RELEASE,

@@ -1,12 +1,16 @@
 import { toSafeLog } from 'log/toSafeLog';
+import { omit } from 'ramda';
 import serverlessHttp from 'serverless-http';
 import { start } from 'start';
 import { addListeners as addServerStopListeners } from 'stop';
+import { origin } from 'types/cors';
 
 const corsHeaders = {
   'Access-Control-Allow-Headers': '*',
-  'Access-Control-Allow-Methods': 'OPTIONS,POST,GET',
+  'Access-Control-Allow-Origin': origin,
 };
+
+const omitPoweredBy = omit(['x-powered-by'])
 
 /**
  * Keep in-memory cache of app, cache, dbConnection, and schema because
@@ -29,7 +33,7 @@ const main = async (event, context) => {
   const response = await handler(event, context);
 
   response.headers = {
-    ...response.headers,
+    ...omitPoweredBy(response.headers),
     ...corsHeaders,
   };
 
