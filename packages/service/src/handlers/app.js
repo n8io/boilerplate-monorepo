@@ -6,8 +6,8 @@ import { addListeners as addServerStopListeners } from 'stop';
 import { origin } from 'types/cors';
 
 const corsHeaders = {
-  'Access-Control-Allow-Headers': '*',
-  'Access-Control-Allow-Origin': origin,
+  'access-control-allow-headers': 'accept-language,accept,apollographql-client-name,apollographql-client-version,content-language,content-type',
+  'access-control-allow-origin': origin,
 };
 
 const omitPoweredBy = omit(['x-powered-by']);
