@@ -13,11 +13,14 @@ AWS_ECR="${AWS_BIN} ecr"
 AWS_IAM="${AWS_BIN} iam"
 AWS_LAMBDA="${AWS_BIN} lambda"
 AWS_RDS="${AWS_BIN} rds"
+AWS_RDS_DATA="${AWS_BIN} rds-data"
+AWS_SECRETS="${AWS_BIN} secretsmanager"
 
 JQ_BIN="$(which jq) -r"
-TMP_DIR=${TMP_DIR:-"${DIR}/../../.tmp/aws"}
+TMP_DIR=${TMP_DIR:-"${DIR}/../.tmp/aws"}
 LOG_DIR=${LOG_DIR:-"${TMP_DIR}"}
 ENV_FILE=${ENV_FILE:-"${LOG_DIR}/.env"}
+UP_ENV_FILE=${UP_ENV_FILE:-"${LOG_DIR}/.env.up"}
 LOG_FILE=${LOG_FILE:-"${LOG_DIR}/up.log"}
 
 source "${ENV_FILE}"
