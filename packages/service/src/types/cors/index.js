@@ -26,4 +26,4 @@ const Cors = Object.freeze({
   },
 });
 
-export { Cors, origin };
+export { Cors };
