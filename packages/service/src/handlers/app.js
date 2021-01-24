@@ -3,11 +3,10 @@ import { omit } from 'ramda';
 import serverlessHttp from 'serverless-http';
 import { start } from 'start';
 import { addListeners as addServerStopListeners } from 'stop';
-import { origin } from 'types/cors';
 
 const corsHeaders = {
-  'access-control-allow-headers': 'accept-language,accept,apollographql-client-name,apollographql-client-version,content-language,content-type',
-  'access-control-allow-origin': origin,
+  'access-control-allow-headers':
+    'accept-language,accept,apollographql-client-name,apollographql-client-version,content-language,content-type',
 };
 
 const omitPoweredBy = omit(['x-powered-by']);
