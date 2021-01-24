@@ -10,7 +10,7 @@ const corsHeaders = {
   'Access-Control-Allow-Origin': origin,
 };
 
-const omitPoweredBy = omit(['x-powered-by'])
+const omitPoweredBy = omit(['x-powered-by']);
 
 /**
  * Keep in-memory cache of app, cache, dbConnection, and schema because
