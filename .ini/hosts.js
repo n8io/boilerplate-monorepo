@@ -4,6 +4,7 @@ const isElevated = require('is-elevated');
 
 const HOST = '127.0.0.1';
 const ALIAS = 'local.host';
+const ALIAS_GRAPHQL = 'graphql.local.host';
 
 const readHosts = () =>
   new Promise((resolve, reject) => {
@@ -18,37 +19,43 @@ const readHosts = () =>
     });
   });
 
+const setHost = ({ alias, host, hosts }) =>
+  new Promise((resolve, reject) => {
+    const hasMatch = hosts.some(
+      ([existingHost, existingAlias]) =>
+        existingHost === host && existingAlias.toLowerCase() === alias
+    );
+
+    if (hasMatch) return resolve();
+
+    hostile.set(host, alias, (err) => {
+      if (err) {
+        console.log(chalk.red('🛑 Failed to update your hosts file', err));
+
+        reject(err);
+      }
+
+      console.log(chalk.green(`👍 "${host} ${alias}" added to hosts file!`));
+
+      resolve();
+    });
+  });
+
 (async () => {
   const isSudo = await isElevated();
-  const pairs = await readHosts();
-
-  const hasMatch = pairs.some(
-    ([host, alias]) => host === HOST && alias.toLowerCase() === ALIAS
-  );
-
-  if (hasMatch) return;
-
-  if (!isSudo) {
-    console.log(
-      chalk.yellow(`😬 Your hosts file is missing an entry for ${ALIAS}`)
-    );
-  }
 
   if (!isSudo) {
     console.log(
       chalk.red(
-        '🤓 Please run the following command as sudo (or admin) to add:\n\n  yarn hosts\n'
+        '🤓 Please run the following command with elevated privileges to update your hosts file:\n\n sudo yarn hosts\n'
       )
     );
 
     process.exit(1);
   }
 
-  hostile.set(HOST, ALIAS, (err) => {
-    if (err) {
-      return console.log(chalk.red('🛑 Failed to update your hosts file', err));
-    }
+  const hosts = await readHosts();
 
-    console.log(chalk.green('👍 Hosts file updated successfully!'));
-  });
+  await setHost({ alias: ALIAS, host: HOST, hosts });
+  await setHost({ alias: ALIAS_GRAPHQL, host: HOST, hosts });
 })();
