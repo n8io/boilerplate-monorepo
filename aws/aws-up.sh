@@ -14,6 +14,8 @@ AWS_ECR="${AWS_BIN} ecr"
 AWS_IAM="${AWS_BIN} iam"
 AWS_LAMBDA="${AWS_BIN} lambda"
 AWS_RDS="${AWS_BIN} rds"
+AWS_RDS_DATA="${AWS_BIN} rds-data"
+AWS_SECRETS="${AWS_BIN} secretsmanager"
 AWS_STS="${AWS_BIN} sts"
 
 TMP_DIR=${TMP_DIR:-"${DIR}/../.tmp/aws"}
@@ -28,38 +30,46 @@ touch "${UP_ENV_FILE}"
 source "${ENV_FILE}"
 source "${UP_ENV_FILE}"
 
+random_alphanum() { cat /dev/urandom | env LC_CTYPE=C tr -dc A-Za-z0-9 | head -c ${1:-32}; echo; }
+
 VPC_NAME=${VPC_NAME:-$(cat "${DIR}/../package.json" | ${JQ_BIN} '.name')}
 VPC_REGION=${VPC_REGION:-us-east}
 WEB_DOMAIN=${WEB_DOMAIN}
+REDIS_URL=${REDIS_URL}
 ENV_PRD="${ENV_PRD:-"production"}"
 ENV_DEV="${ENV_DEV:-"development"}"
+GRAPHQL_PREFIX="graphql"
 WEB_ENV_SUFFIX_PRD="${WEB_ENV_SUFFIX_PRD:-""}"
 WEB_ENV_SUFFIX_DEV="${WEB_ENV_SUFFIX_DEV:-"-dev"}"
 WEB_APP_URL_PRD=${WEB_APP_URL_PRD:-"https://app${WEB_ENV_SUFFIX_PRD}.${WEB_DOMAIN}"}
 WEB_APP_URL_DEV=${WEB_APP_URL_DEV:-"https://app${WEB_ENV_SUFFIX_DEV}.${WEB_DOMAIN}"}
-WEB_CERTIFICATE_GRAPHQL_PRD="graphql${WEB_ENV_SUFFIX_PRD}.${WEB_DOMAIN}"
-WEB_CERTIFICATE_GRAPHQL_DEV="graphql${WEB_ENV_SUFFIX_DEV}.${WEB_DOMAIN}"
+WEB_CERTIFICATE_GRAPHQL_PRD="${GRAPHQL_PREFIX}${WEB_ENV_SUFFIX_PRD}.${WEB_DOMAIN}"
+WEB_CERTIFICATE_GRAPHQL_DEV="${GRAPHQL_PREFIX}${WEB_ENV_SUFFIX_DEV}.${WEB_DOMAIN}"
 
-VPC_CACHE_AZ_MODE=${VPC_CACHE_AZ_MODE:-single-az}
-VPC_CACHE_INSTANCE_SIZE=${VPC_CACHE_INSTANCE_SIZE:-cache.t2.micro}
-VPC_CACHE_CLUSTER_NAME=${VPC_CACHE_CLUSTER_NAME:-${VPC_NAME}}
-VPC_CACHE_NODE_COUNT=${VPC_CACHE_NODE_COUNT:-1}
-VPC_CACHE_PARAMETER_GROUP=${VPC_CACHE_PARAMETER_GROUP:-default.redis5.0}
-VPC_CACHE_SUBNET_GROUP_NAME=${VPC_CACHE_SUBNET_GROUP_NAME:-${VPC_NAME}}
-VPC_CACHE_VERSION=${VPC_CACHE_VERSION:-5.0.6}
+# VPC_CACHE_AZ_MODE=${VPC_CACHE_AZ_MODE:-single-az}
+# VPC_CACHE_INSTANCE_SIZE=${VPC_CACHE_INSTANCE_SIZE:-cache.t2.micro}
+# VPC_CACHE_CLUSTER_NAME_PRD=${VPC_CACHE_CLUSTER_NAME_PRD:-${VPC_NAME}-${ENV_PRD}}
+# VPC_CACHE_CLUSTER_NAME_DEV=${VPC_CACHE_CLUSTER_NAME_DEV:-${VPC_NAME}-${ENV_DEV}}
+# VPC_CACHE_NODE_COUNT=${VPC_CACHE_NODE_COUNT:-1}
+# VPC_CACHE_PARAMETER_GROUP=${VPC_CACHE_PARAMETER_GROUP:-default.redis5.0}
+# VPC_CACHE_SUBNET_GROUP_NAME=${VPC_CACHE_SUBNET_GROUP_NAME:-${VPC_NAME}}
+# VPC_CACHE_VERSION=${VPC_CACHE_VERSION:-5.0.6}
 VPC_CIDR_BLOCK=${VPC_CIDR_BLOCK:-10.0.0.0/16}
-VPC_DB_CLUSTER_NAME=${VPC_DB_CLUSTER_NAME:-${VPC_NAME}}
-VPC_DB_PASSWORD=${VPC_DB_PASSWORD:-$(date +%s | sha256sum | base64 | head -c 32 ; echo)}
+VPC_DB_CLUSTER_NAME_PRD=${VPC_DB_CLUSTER_NAME_PRD:-${VPC_NAME}-${ENV_PRD}}
+VPC_DB_PASSWORD_PRD=${VPC_DB_PASSWORD_PRD:-$(random_alphanum)}
+VPC_DB_CLUSTER_NAME_DEV=${VPC_DB_CLUSTER_NAME_DEV:-${VPC_NAME}-${ENV_DEV}}
+VPC_DB_PASSWORD_DEV=${VPC_DB_PASSWORD_DEV:-$(random_alphanum)}
 VPC_DB_HIBERNATE_IN_MINUTES=${VPC_DB_HIBERNATE_IN_MINUTES:-5}
 VPC_DB_HIBERNATE_IN_SECONDS=${VPC_DB_HIBERNATE_IN_SECONDS:-$((${VPC_DB_HIBERNATE_IN_MINUTES} * 60))}
-VPC_DB_NAME=${VPC_DB_NAME:-$(echo "${VPC_NAME}" | sed 's/[^a-zA-Z0-9]//g')}
-VPC_DB_USERNAME=${VPC_DB_USERNAME:-postgres}
+VPC_DB_NAME_PRD=${VPC_DB_NAME_PRD:-prd$(random_alphanum 16)}
+VPC_DB_NAME_DEV=${VPC_DB_NAME_DEV:-dev$(random_alphanum 16)}
+VPC_DB_USERNAME=${VPC_DB_USERNAME:-usr$(random_alphanum 16)}
 VPC_DB_VERSION=${VPC_DB_VERSION:-10.7}
 VPC_DB_SUBNET_GROUP_NAME=${VPC_DB_SUBNET_GROUP_NAME:-${VPC_NAME}}
 VPC_INTERNET_GATEWAY_NAME=${VPC_INTERNET_GATEWAY_NAME:-${VPC_NAME}}
 VPC_ROUTE_TABLE_PRIVATE_NAME=${VPC_ROUTE_TABLE_PRIVATE_NAME:-custom-${VPC_NAME}}
 VPC_ROUTE_TABLE_PUBLIC_NAME=${VPC_ROUTE_TABLE_PUBLIC_NAME:-default-${VPC_NAME}}
-VPC_SECURITY_GROUP_CACHE_NAME=${VPC_SECURITY_GROUP_CACHE_NAME:-cache-${VPC_NAME}}
+# VPC_SECURITY_GROUP_CACHE_NAME=${VPC_SECURITY_GROUP_CACHE_NAME:-cache-${VPC_NAME}}
 VPC_SECURITY_GROUP_CUSTOM_NAME=${VPC_SECURITY_GROUP_CUSTOM_NAME:-custom-${VPC_NAME}}
 VPC_SECURITY_GROUP_DB_NAME=${VPC_SECURITY_GROUP_DB_NAME:-database-${VPC_NAME}}
 VPC_SECURITY_GROUP_DEFAULT_NAME=${VPC_SECURITY_GROUP_DEFAULT_NAME:-default-${VPC_NAME}}
@@ -73,22 +83,30 @@ VPC_SUBNET_PRIVATE_NAME_2=${VPC_SUBNET_PRIVATE_NAME_2:-private-2-${VPC_NAME}}
 VPC_SUBNET_PUBLIC_AVAILABILITY_ZONE=${VPC_SUBNET_PUBLIC_AVAILABILITY_ZONE:-${VPC_REGION}-1a}
 VPC_SUBNET_PUBLIC_CIDR_BLOCK=${VPC_SUBNET_PUBLIC_CIDR_BLOCK:-10.0.0.0/24}
 VPC_SUBNET_PUBLIC_NAME=${VPC_SUBNET_PUBLIC_NAME:-public-${VPC_NAME}}
-VPC_API_GATEWAY_SUBDOMAIN_PRD="graphql${WEB_ENV_SUFFIX_PRD}"
-VPC_API_GATEWAY_SUBDOMAIN_DEV="graphql${WEB_ENV_SUFFIX_DEV}"
+VPC_API_GATEWAY_SUBDOMAIN_PRD="${GRAPHQL_PREFIX}${WEB_ENV_SUFFIX_PRD}"
+VPC_API_GATEWAY_SUBDOMAIN_DEV="${GRAPHQL_PREFIX}${WEB_ENV_SUFFIX_DEV}"
 VPC_API_GATEWAY_DOMAIN_PRD="${VPC_API_GATEWAY_SUBDOMAIN_PRD}.${WEB_DOMAIN}"
 VPC_API_GATEWAY_DOMAIN_DEV="${VPC_API_GATEWAY_SUBDOMAIN_DEV}.${WEB_DOMAIN}"
 VPC_API_GATEWAY_NAME_PRD=${VPC_API_GATEWAY_NAME_PRD:-${VPC_NAME-${ENV_PRD}}}
 VPC_API_GATEWAY_NAME_DEV=${VPC_API_GATEWAY_NAME_DEV:-${VPC_NAME-${ENV_DEV}}}
 VPC_API_GATEWAY_STAGE_NAME_PRD=${VPC_API_GATEWAY_STAGE_NAME_PRD:-${ENV_PRD}}
 VPC_API_GATEWAY_STAGE_NAME_DEV=${VPC_API_GATEWAY_STAGE_NAME_DEV:-${ENV_DEV}}
-VPC_ECR_REPO_NAME=${VPC_ECR_REPO_NAME:-${VPC_NAME}/lambda-graphql}
+VPC_ECR_REPO_NAME=${VPC_ECR_REPO_NAME:-${VPC_NAME}/lambda-${GRAPHQL_PREFIX}}
 VPC_ECR_REPO_NAME_MIGRATIONS=${VPC_ECR_REPO_NAME_MIGRATIONS:-${VPC_NAME}/lambda-migrations}
-VPC_LAMBDA_NAME_PRD=${VPC_LAMBDA_NAME_PRD:-${VPC_NAME}-graphql-${ENV_PRD}}
-VPC_LAMBDA_NAME_DEV=${VPC_LAMBDA_NAME_DEV:-${VPC_NAME}-graphql-${ENV_DEV}}
+VPC_LAMBDA_NAME_PRD=${VPC_LAMBDA_NAME_PRD:-${VPC_NAME}-${GRAPHQL_PREFIX}-${ENV_PRD}}
+VPC_LAMBDA_NAME_DEV=${VPC_LAMBDA_NAME_DEV:-${VPC_NAME}-${GRAPHQL_PREFIX}-${ENV_DEV}}
 VPC_LAMBDA_NAME_MIGRATIONS_PRD=${VPC_LAMBDA_NAME_MIGRATIONS_PRD:-${VPC_NAME}-migrations-${ENV_PRD}}
+VPC_LAMBDA_NAME_MIGRATIONS_DEV=${VPC_LAMBDA_NAME_MIGRATIONS_DEV:-${VPC_NAME}-migrations-${ENV_DEV}}
 VPC_LAMBDA_ROLE_NAME=${VPC_LAMBDA_ROLE_NAME:-${VPC_NAME}-lambda}
 VPC_LAMBDA_ROLE_POLICY_ARN=${VPC_LAMBDA_ROLE_POLICY_ARN:-arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole}
 VPC_ACCOUNT_ID=${VPC_ACCOUNT_ID:-""}
+VPC_DB_SECRET_NAME_PRD=${VPC_DB_SECRET_NAME_PRD:-${VPC_NAME}-secret-${ENV_PRD}}
+VPC_DB_SECRET_NAME_DEV=${VPC_DB_SECRET_NAME_DEV:-${VPC_NAME}-secret-${ENV_DEV}}
+
+CF_CLI="docker run --rm -it \
+  -e CF_API_KEY=${CLOUDFLARE_TOKEN:-""} \
+  -e CF_API_DOMAIN=${WEB_DOMAIN} \
+  dpig/cloudflare-cli"
 
 if [[ -z "${VPC_ACCOUNT_ID:-""}" ]]; then
   echo -n "Fetching aws account id..."
@@ -97,6 +115,7 @@ if [[ -z "${VPC_ACCOUNT_ID:-""}" ]]; then
       | ${JQ_BIN} '.Account'
     )
   echo "${VPC_ACCOUNT_ID}"
+  (echo "WEB_DOMAIN=${WEB_DOMAIN}" >> "${ENV_FILE}")
   (echo "VPC_ACCOUNT_ID=${VPC_ACCOUNT_ID}" >> "${ENV_FILE}")
 fi
 
@@ -233,7 +252,8 @@ if [[ -z "${STEP_NAT_GATEWAY_CREATED:-""}" ]]; then
 
   (echo "STEP_NAT_GATEWAY_CREATED=true" >> "${UP_ENV_FILE}")
 
-  sleep 3
+  echo "  ...waiting a few seconds for the nat gateway to propogate"
+  sleep 5
 fi
 
 if [[ -z "${STEP_ROUTE_TABLE_PRIVATE_CREATED:-""}" ]]; then
@@ -397,87 +417,59 @@ if [[ -z "${STEP_LAMBDA_SECURITY_GROUP_CREATED:-""}" ]]; then
       | ${JQ_BIN} '.GroupId')
   echo "${VPC_SECURITY_GROUP_LAMBDA_ID}"
   (echo "VPC_SECURITY_GROUP_LAMBDA_ID=${VPC_SECURITY_GROUP_LAMBDA_ID}" >> "${ENV_FILE}")
+  (echo "STEP_LAMBDA_SECURITY_GROUP_CREATED=true" >> "${UP_ENV_FILE}")
+
+  sleep 1
 
   echo -n "Adding name tag to lambda security group..."
   ${AWS_EC2} create-tags --resources ${VPC_SECURITY_GROUP_LAMBDA_ID} --tags Key=Name,Value=${VPC_SECURITY_GROUP_LAMBDA_NAME} | true
   echo "${VPC_SECURITY_GROUP_LAMBDA_NAME}"
-
-  (echo "STEP_LAMBDA_SECURITY_GROUP_CREATED=true" >> "${UP_ENV_FILE}")
 fi
 
-if [[ -z "${STEP_CACHE_SECURITY_GROUP_CREATED:-""}" ]]; then
-  echo -n "Creating cache security group..."
-  VPC_SECURITY_GROUP_CACHE_ID=$(\
-    ${AWS_EC2} create-security-group \
-      --vpc-id ${VPC_ID} \
-      --group-name ${VPC_SECURITY_GROUP_CACHE_NAME} \
-      --description "${VPC_NAME} cache security group" \
-      --output=json \
-      | ${JQ_BIN} '.GroupId')
-  echo "${VPC_SECURITY_GROUP_CACHE_ID}"
-  (echo "VPC_SECURITY_GROUP_CACHE_ID=${VPC_SECURITY_GROUP_CACHE_ID}" >> "${ENV_FILE}")
+# if [[ -z "${STEP_CACHE_SECURITY_GROUP_CREATED:-""}" ]]; then
+#   echo -n "Creating cache security group..."
+#   VPC_SECURITY_GROUP_CACHE_ID=$(\
+#     ${AWS_EC2} create-security-group \
+#       --vpc-id ${VPC_ID} \
+#       --group-name ${VPC_SECURITY_GROUP_CACHE_NAME} \
+#       --description "${VPC_NAME} cache security group" \
+#       --output=json \
+#       | ${JQ_BIN} '.GroupId')
+#   echo "${VPC_SECURITY_GROUP_CACHE_ID}"
+#   (echo "VPC_SECURITY_GROUP_CACHE_ID=${VPC_SECURITY_GROUP_CACHE_ID}" >> "${ENV_FILE}")
 
-  echo -n "Adding name tag to cache security group..."
-  ${AWS_EC2} create-tags --resources ${VPC_SECURITY_GROUP_CACHE_ID} --tags Key=Name,Value=${VPC_SECURITY_GROUP_CACHE_NAME} | true
-  echo "${VPC_SECURITY_GROUP_CACHE_NAME}"
+#   echo -n "Adding name tag to cache security group..."
+#   ${AWS_EC2} create-tags --resources ${VPC_SECURITY_GROUP_CACHE_ID} --tags Key=Name,Value=${VPC_SECURITY_GROUP_CACHE_NAME} | true
+#   echo "${VPC_SECURITY_GROUP_CACHE_NAME}"
 
-  (echo "STEP_CACHE_SECURITY_GROUP_CREATED=true" >> "${UP_ENV_FILE}")
-fi
+#   (echo "STEP_CACHE_SECURITY_GROUP_CREATED=true" >> "${UP_ENV_FILE}")
+# fi
 
-if [[ -z "${STEP_CACHE_SECURITY_GROUP_LAMBDA_INGRESS_RULES_CREATED:-""}" ]]; then
-  echo -n "Adding cache security group ingress lambdas rule..."
-  ${AWS_EC2} authorize-security-group-ingress \
-    --group-id ${VPC_SECURITY_GROUP_CACHE_ID} \
-    --port 6379 \
-    --protocol tcp \
-    --source-group ${VPC_SECURITY_GROUP_LAMBDA_ID} \
-    >/dev/null
-  echo "done."
+# if [[ -z "${STEP_CACHE_SECURITY_GROUP_LAMBDA_INGRESS_RULES_CREATED:-""}" ]]; then
+#   echo -n "Adding cache security group ingress lambdas rule..."
+#   ${AWS_EC2} authorize-security-group-ingress \
+#     --group-id ${VPC_SECURITY_GROUP_CACHE_ID} \
+#     --port 6379 \
+#     --protocol tcp \
+#     --source-group ${VPC_SECURITY_GROUP_LAMBDA_ID} \
+#     >/dev/null
+#   echo "done."
 
-  (echo "STEP_CACHE_SECURITY_GROUP_LAMBDA_INGRESS_RULES_CREATED=true" >> "${UP_ENV_FILE}")
-fi
+#   (echo "STEP_CACHE_SECURITY_GROUP_LAMBDA_INGRESS_RULES_CREATED=true" >> "${UP_ENV_FILE}")
+# fi
 
-if [[ -z "${STEP_CACHE_SUBNET_GROUP_CREATED:-""}" ]]; then
-  echo -n "Creating a cache subnet group..."
-  ${AWS_CACHE} create-cache-subnet-group \
-    --cache-subnet-group-name ${VPC_CACHE_SUBNET_GROUP_NAME} \
-    --cache-subnet-group-description "${VPC_NAME} cache subnet group" \
-    --subnet-ids "${VPC_SUBNET_PRIVATE_ID_1}" "${VPC_SUBNET_PRIVATE_ID_2}" \
-    >/dev/null
-  echo "done."
-  (echo "VPC_CACHE_SUBNET_GROUP_NAME=${VPC_CACHE_SUBNET_GROUP_NAME}" >> "${ENV_FILE}")
+# if [[ -z "${STEP_CACHE_SUBNET_GROUP_CREATED:-""}" ]]; then
+#   echo -n "Creating a cache subnet group..."
+#   ${AWS_CACHE} create-cache-subnet-group \
+#     --cache-subnet-group-name ${VPC_CACHE_SUBNET_GROUP_NAME} \
+#     --cache-subnet-group-description "${VPC_NAME} cache subnet group" \
+#     --subnet-ids "${VPC_SUBNET_PRIVATE_ID_1}" "${VPC_SUBNET_PRIVATE_ID_2}" \
+#     >/dev/null
+#   echo "done."
+#   (echo "VPC_CACHE_SUBNET_GROUP_NAME=${VPC_CACHE_SUBNET_GROUP_NAME}" >> "${ENV_FILE}")
 
-  (echo "STEP_CACHE_SUBNET_GROUP_CREATED=true" >> "${UP_ENV_FILE}")
-fi
-
-if [[ -z "${STEP_CACHE_CLUSTER_CREATED:-""}" ]]; then
-  echo "Creating redis cache cluster..."
-  ${AWS_CACHE} create-cache-cluster \
-    --cache-cluster-id ${VPC_CACHE_CLUSTER_NAME} \
-    --cache-node-type ${VPC_CACHE_INSTANCE_SIZE} \
-    --cache-parameter-group-name ${VPC_CACHE_PARAMETER_GROUP} \
-    --cache-subnet-group-name ${VPC_CACHE_SUBNET_GROUP_NAME} \
-    --engine redis \
-    --engine-version ${VPC_CACHE_VERSION} \
-    --num-cache-nodes ${VPC_CACHE_NODE_COUNT} \
-    --security-group-ids ${VPC_SECURITY_GROUP_CACHE_ID} \
-    --tags Key=Name,Value=${VPC_NAME} \
-    >/dev/null
-  (echo "VPC_CACHE_CLUSTER_NAME=${VPC_CACHE_CLUSTER_NAME}" >> "${ENV_FILE}")
-
-  (echo "STEP_CACHE_CLUSTER_CREATED=true" >> "${UP_ENV_FILE}")
-
-  CACHE_STATUS=$(${AWS_CACHE} describe-cache-clusters | ${JQ_BIN} ".CacheClusters[] | select(.CacheClusterId == \"${VPC_CACHE_CLUSTER_NAME}\") | .CacheClusterStatus")
-  until [ $CACHE_STATUS == 'available' ];
-  do
-    echo "  $(date +"%r") Waiting for cache to finish ${CACHE_STATUS}..."
-    sleep 15
-    CACHE_STATUS=$(${AWS_CACHE} describe-cache-clusters | ${JQ_BIN} ".CacheClusters[] | select(.CacheClusterId == \"${VPC_CACHE_CLUSTER_NAME}\") | .CacheClusterStatus")
-  done
-  VPC_CACHE_ENDPOINT=$(${AWS_CACHE} describe-cache-clusters --show-cache-node-info | ${JQ_BIN} ".CacheClusters[] | select(.CacheClusterId == \"${VPC_CACHE_CLUSTER_NAME}\") | .CacheNodes[] | select(.CacheNodeId == \"0001\") | .Endpoint.Address")
-  echo "Cache ready at ${VPC_CACHE_ENDPOINT}"
-  (echo "VPC_CACHE_ENDPOINT=${VPC_CACHE_ENDPOINT}" >> "${ENV_FILE}")
-fi
+#   (echo "STEP_CACHE_SUBNET_GROUP_CREATED=true" >> "${UP_ENV_FILE}")
+# fi
 
 if [[ -z "${STEP_DB_SECURITY_GROUP_CREATED:-""}" ]]; then
   echo -n "Creating database security group..."
@@ -522,40 +514,6 @@ if [[ -z "${STEP_DB_SUBNET_GROUP_CREATED:-""}" ]]; then
   (echo "VPC_DB_SUBNET_GROUP_NAME=${VPC_DB_SUBNET_GROUP_NAME}" >> "${ENV_FILE}")
 
   (echo "STEP_DB_SUBNET_GROUP_CREATED=true" >> "${UP_ENV_FILE}")
-fi
-
-if [[ -z "${STEP_DB_CLUSTER_CREATED:-""}" ]]; then
-  echo "Creating a serverless postgres instance (${VPC_DB_NAME})..."
-  ${AWS_RDS} create-db-cluster \
-    --database-name ${VPC_DB_NAME} \
-    --db-cluster-identifier "${VPC_DB_CLUSTER_NAME}" \
-    --db-subnet-group-name "${VPC_DB_SUBNET_GROUP_NAME}" \
-    --enable-http-endpoint \
-    --engine aurora-postgresql \
-    --engine-version "${VPC_DB_VERSION}" \
-    --engine-mode serverless \
-    --scaling-configuration MinCapacity=2,MaxCapacity=8,SecondsUntilAutoPause=${VPC_DB_HIBERNATE_IN_SECONDS},AutoPause=true \
-    --storage-encrypted \
-    --master-username "${VPC_DB_USERNAME}" \
-    --master-user-password "${VPC_DB_PASSWORD}" \
-    --vpc-security-group-ids "${VPC_SECURITY_GROUP_DB_ID}" \
-    >/dev/null
-  (echo "VPC_DB_CLUSTER_NAME=${VPC_DB_CLUSTER_NAME}" >> "${ENV_FILE}")
-  (echo "VPC_DB_PASSWORD=${VPC_DB_PASSWORD}" >> "${ENV_FILE}")
-
-  (echo "STEP_DB_CLUSTER_CREATED=true" >> "${UP_ENV_FILE}")
-
-  DB_STATUS=$(${AWS_RDS} describe-db-clusters | ${JQ_BIN} ".DBClusters[] | select(.DBClusterIdentifier == \"${VPC_DB_CLUSTER_NAME}\") | .Status")
-  until [ $DB_STATUS == 'available' ];
-  do
-    echo "  $(date +"%r") Waiting for database to finish ${DB_STATUS}..."
-    sleep 15
-    DB_STATUS=$(${AWS_RDS} describe-db-clusters | ${JQ_BIN} ".DBClusters[] | select(.DBClusterIdentifier == \"${VPC_DB_CLUSTER_NAME}\") | .Status")
-  done
-
-  VPC_DB_ENDPOINT=$(${AWS_RDS} describe-db-clusters | ${JQ_BIN} ".DBClusters[] | select(.DBClusterIdentifier == \"${VPC_DB_CLUSTER_NAME}\") | .Endpoint")
-  echo "Database ready at ${VPC_DB_ENDPOINT}"
-  (echo "VPC_DB_ENDPOINT=${VPC_DB_ENDPOINT}" >> "${ENV_FILE}")
 fi
 
 if [[ -z "${STEP_ECR_REPOSITORY_CREATED:-""}" ]]; then
@@ -646,13 +604,101 @@ if [[ -z "${STEP_LAMBDA_DOCKER_IMAGE_PUSHED_MIGRATIONS:-""}" ]]; then
 fi
 
 # ========== Production specific resources ===============================================
+# if [[ -z "${STEP_CACHE_CLUSTER_CREATED_PRD:-""}" ]]; then
+#   echo "Creating ${VPC_CACHE_CLUSTER_NAME_PRD} redis cache cluster..."
+#   ${AWS_CACHE} create-cache-cluster \
+#     --cache-cluster-id ${VPC_CACHE_CLUSTER_NAME_PRD} \
+#     --cache-node-type ${VPC_CACHE_INSTANCE_SIZE} \
+#     --cache-parameter-group-name ${VPC_CACHE_PARAMETER_GROUP} \
+#     --cache-subnet-group-name ${VPC_CACHE_SUBNET_GROUP_NAME} \
+#     --engine redis \
+#     --engine-version ${VPC_CACHE_VERSION} \
+#     --num-cache-nodes ${VPC_CACHE_NODE_COUNT} \
+#     --security-group-ids ${VPC_SECURITY_GROUP_CACHE_ID} \
+#     --tags Key=Name,Value=${VPC_NAME} \
+#     >/dev/null
+#   (echo "VPC_CACHE_CLUSTER_NAME_PRD=${VPC_CACHE_CLUSTER_NAME_PRD}" >> "${ENV_FILE}")
+
+#   (echo "STEP_CACHE_CLUSTER_CREATED_PRD=true" >> "${UP_ENV_FILE}")
+
+#   CACHE_STATUS=$(${AWS_CACHE} describe-cache-clusters | ${JQ_BIN} ".CacheClusters[] | select(.CacheClusterId == \"${VPC_CACHE_CLUSTER_NAME_PRD}\") | .CacheClusterStatus")
+#   until [ $CACHE_STATUS == 'available' ];
+#   do
+#     echo "  $(date +"%r") Waiting for cache to finish ${CACHE_STATUS}..."
+#     sleep 15
+#     CACHE_STATUS=$(${AWS_CACHE} describe-cache-clusters | ${JQ_BIN} ".CacheClusters[] | select(.CacheClusterId == \"${VPC_CACHE_CLUSTER_NAME_PRD}\") | .CacheClusterStatus")
+#   done
+#   VPC_CACHE_ENDPOINT_PRD=$(${AWS_CACHE} describe-cache-clusters --show-cache-node-info | ${JQ_BIN} ".CacheClusters[] | select(.CacheClusterId == \"${VPC_CACHE_CLUSTER_NAME_PRD}\") | .CacheNodes[] | select(.CacheNodeId == \"0001\") | .Endpoint.Address")
+#   echo "Cache ready at ${VPC_CACHE_ENDPOINT_PRD}"
+#   (echo "VPC_CACHE_ENDPOINT_PRD=${VPC_CACHE_ENDPOINT_PRD}" >> "${ENV_FILE}")
+# fi
+
+if [[ -z "${STEP_DB_CLUSTER_CREATED_PRD:-""}" ]]; then
+  echo "Creating a serverless postgres instance (${VPC_DB_NAME_PRD})..."
+  ${AWS_RDS} create-db-cluster \
+    --database-name ${VPC_DB_NAME_PRD} \
+    --db-cluster-identifier "${VPC_DB_CLUSTER_NAME_PRD}" \
+    --db-subnet-group-name "${VPC_DB_SUBNET_GROUP_NAME}" \
+    --enable-http-endpoint \
+    --engine aurora-postgresql \
+    --engine-version "${VPC_DB_VERSION}" \
+    --engine-mode serverless \
+    --scaling-configuration MinCapacity=2,MaxCapacity=8,SecondsUntilAutoPause=${VPC_DB_HIBERNATE_IN_SECONDS},AutoPause=true \
+    --storage-encrypted \
+    --master-username "${VPC_DB_USERNAME}" \
+    --master-user-password "${VPC_DB_PASSWORD_PRD}" \
+    --vpc-security-group-ids "${VPC_SECURITY_GROUP_DB_ID}" \
+    >/dev/null
+
+  VPC_DB_CLUSTER_ARN_PRD=$(${AWS_RDS} describe-db-clusters | ${JQ_BIN} ".DBClusters[] | select(.DBClusterIdentifier == \"${VPC_DB_CLUSTER_NAME_PRD}\") | .DBClusterArn")
+  (echo "VPC_DB_CLUSTER_NAME_PRD=${VPC_DB_CLUSTER_NAME_PRD}" >> "${ENV_FILE}")
+  (echo "VPC_DB_NAME_PRD=${VPC_DB_NAME_PRD}" >> "${ENV_FILE}")
+  (echo "VPC_DB_PASSWORD_PRD=${VPC_DB_PASSWORD_PRD}" >> "${ENV_FILE}")
+  (echo "VPC_DB_CLUSTER_ARN_PRD=${VPC_DB_CLUSTER_ARN_PRD}" >> "${ENV_FILE}")
+  (echo "STEP_DB_CLUSTER_CREATED_PRD=true" >> "${UP_ENV_FILE}")
+
+  DB_STATUS=$(${AWS_RDS} describe-db-clusters | ${JQ_BIN} ".DBClusters[] | select(.DBClusterIdentifier == \"${VPC_DB_CLUSTER_NAME_PRD}\") | .Status")
+  until [ $DB_STATUS == 'available' ];
+  do
+    echo "  $(date +"%r") Waiting for database to finish ${DB_STATUS}..."
+    sleep 15
+    DB_STATUS=$(${AWS_RDS} describe-db-clusters | ${JQ_BIN} ".DBClusters[] | select(.DBClusterIdentifier == \"${VPC_DB_CLUSTER_NAME_PRD}\") | .Status")
+  done
+
+  VPC_DB_ENDPOINT_PRD=$(${AWS_RDS} describe-db-clusters | ${JQ_BIN} ".DBClusters[] | select(.DBClusterIdentifier == \"${VPC_DB_CLUSTER_NAME_PRD}\") | .Endpoint")
+  echo "Database ready at ${VPC_DB_ENDPOINT_PRD}"
+  (echo "VPC_DB_ENDPOINT_PRD=${VPC_DB_ENDPOINT_PRD}" >> "${ENV_FILE}")
+fi
+
+if [[ -z "${STEP_DB_SECRET_CREATED_PRD:-""}" ]]; then
+  echo -n "Creating ${VPC_DB_SECRET_NAME_PRD} secret..."
+  VPC_DB_SECRET_ARN_PRD=$(\
+    ${AWS_SECRETS} create-secret \
+      --name "${VPC_DB_SECRET_NAME_PRD}" \
+      --secret-string '{
+        "username": "'${VPC_DB_USERNAME}'",
+        "password": "'${VPC_DB_PASSWORD_PRD}'",
+        "engine": "postgres",
+        "host": "'${VPC_DB_ENDPOINT_PRD}'",
+        "port": 5432,
+        "dbClusterIdentifier": "'${VPC_DB_CLUSTER_NAME_PRD}'"
+      }' \
+    | ${JQ_BIN} '.ARN'
+  )
+  echo "${VPC_DB_SECRET_ARN_PRD}"
+  (echo "VPC_DB_SECRET_ARN_PRD=${VPC_DB_SECRET_ARN_PRD}" >> "${ENV_FILE}")
+  (echo "VPC_DB_SECRET_NAME_PRD=${VPC_DB_SECRET_NAME_PRD}" >> "${ENV_FILE}")
+
+  (echo "STEP_DB_SECRET_CREATED_PRD=true" >> "${UP_ENV_FILE}")
+fi
+
 if [[ -z "${STEP_LAMBDA_FUNCTION_CREATED_MIGRATIONS_PRD:-""}" ]]; then
   echo -n "Creating lambda function ${VPC_LAMBDA_NAME_MIGRATIONS_PRD}..."
   VPC_LAMBDA_ARN_MIGRATIONS_PRD=$(\
     ${AWS_LAMBDA} create-function \
       --function-name ${VPC_LAMBDA_NAME_MIGRATIONS_PRD} \
       --code "ImageUri=${VPC_ECR_LAMBDA_IMAGE_ARN_MIGRATIONS}:latest" \
-      --environment "Variables={DATABASE_URL=postgres://${VPC_DB_USERNAME}:${VPC_DB_PASSWORD}@${VPC_DB_ENDPOINT}:5432/${VPC_DB_NAME},DEBUG=*${VPC_NAME}*,SHOW_CONFIG=false,npm_package_name=${VPC_NAME}}" \
+      --environment "Variables={DATABASE_URL=postgres://${VPC_DB_USERNAME}:${VPC_DB_PASSWORD_PRD}@${VPC_DB_ENDPOINT_PRD}:5432/${VPC_DB_NAME_PRD},DEBUG=*${VPC_NAME}*,SHOW_CONFIG=false,npm_package_name=${VPC_NAME}}" \
       --memory-size 256 \
       --package-type Image \
       --role ${VPC_LAMBDA_ROLE_ARN} \
@@ -673,7 +719,7 @@ if [[ -z "${STEP_LAMBDA_FUNCTION_CREATED_PRD:-""}" ]]; then
     ${AWS_LAMBDA} create-function \
       --function-name ${VPC_LAMBDA_NAME_PRD} \
       --code "ImageUri=${VPC_ECR_LAMBDA_IMAGE_ARN}:latest" \
-      --environment "Variables={DATABASE_URL=postgres://${VPC_DB_USERNAME}:${VPC_DB_PASSWORD}@${VPC_DB_ENDPOINT}:5432/${VPC_DB_NAME},REDIS_URL=redis://${VPC_CACHE_ENDPOINT}:6379,HTTPS=false,DEBUG=*${VPC_NAME}*,SHOW_CONFIG=false,EMAIL_FROM_ADDRESS=\"noreply@${WEB_DOMAIN}\",EMAIL_SMTP_URL=\"${EMAIL_SMTP_URL:-""}\",npm_package_name=${VPC_NAME},UI_HOST_URI=\"${WEB_APP_URL_PRD}\"}" \
+      --environment "Variables={DATABASE_URL=postgres://${VPC_DB_USERNAME}:${VPC_DB_PASSWORD_PRD}@${VPC_DB_ENDPOINT_PRD}:5432/${VPC_DB_NAME_PRD},REDIS_KEY_PREFIX=${ENV_PRD},REDIS_URL=${REDIS_URL},HTTPS=false,DEBUG=*${VPC_NAME}*,SHOW_CONFIG=false,EMAIL_FROM_ADDRESS=\"noreply@${WEB_DOMAIN}\",EMAIL_SMTP_URL=\"${EMAIL_SMTP_URL:-""}\",npm_package_name=${VPC_NAME},UI_HOST_URI=\"${WEB_APP_URL_PRD}\"}" \
       --memory-size 256 \
       --package-type Image \
       --role ${VPC_LAMBDA_ROLE_ARN} \
@@ -797,20 +843,62 @@ if [[ -z "${STEP_API_GATEWAY_DEPLOYED_PRD:-""}" ]]; then
   (echo "STEP_API_GATEWAY_DEPLOYED_PRD=true" >> "${UP_ENV_FILE}")
 fi
 
-if [[ -z "${STEP_LAMBDA_READY_PRD:-""}" ]]; then
-  echo "Checking lambda ${VPC_LAMBDA_NAME_PRD} function availability..."
+if [[ -z "${STEP_LAMBDA_MIGRATIONS_READY_PRD:-""}" ]]; then
+  echo "Checking lambda ${VPC_LAMBDA_NAME_MIGRATIONS_PRD} function availability..."
 
-  LAMBDA_STATUS=$(${AWS_LAMBDA} get-function --function-name "${VPC_LAMBDA_NAME_PRD}" | ${JQ_BIN} ".Configuration.State")
+  LAMBDA_STATUS=$(${AWS_LAMBDA} get-function --function-name "${VPC_LAMBDA_NAME_MIGRATIONS_PRD}" | ${JQ_BIN} ".Configuration.State")
   until [ $LAMBDA_STATUS == 'Active' ];
   do
     echo "  $(date +"%r") Waiting for lambda function to be available (currently ${LAMBDA_STATUS})..."
     sleep 15
-    LAMBDA_STATUS=$(${AWS_LAMBDA} get-function --function-name "${VPC_LAMBDA_NAME_PRD}" | ${JQ_BIN} ".Configuration.State")
+    LAMBDA_STATUS=$(${AWS_LAMBDA} get-function --function-name "${VPC_LAMBDA_NAME_MIGRATIONS_PRD}" | ${JQ_BIN} ".Configuration.State")
   done
 
   echo "Lambda available at https://${VPC_API_GATEWAY_ID_PRD}.execute-api.us-east-1.amazonaws.com/production/heartbeat"
 
-  (echo "STEP_LAMBDA_READY_PRD=true" >> "${UP_ENV_FILE}")
+  (echo "STEP_LAMBDA_MIGRATIONS_READY_PRD=true" >> "${UP_ENV_FILE}")
+fi
+
+if [[ -z "${STEP_DB_READY_PRD:-""}" ]]; then
+  echo -n "Warming up ${VPC_DB_CLUSTER_NAME_PRD} database cluster..."
+  ${AWS_RDS_DATA} execute-statement \
+    --resource-arn "${VPC_DB_CLUSTER_ARN_PRD}" \
+    --secret-arn "${VPC_DB_SECRET_ARN_PRD}" \
+    --database "${VPC_DB_NAME_PRD}" \
+    --sql 'SELECT NOW()' \
+    >/dev/null
+  echo "done."
+
+  (echo "STEP_DB_READY_PRD=true" >> "${UP_ENV_FILE}")
+
+  echo " ...waiting for db live-ness to propogate"
+  sleep 60
+fi
+
+if [[ -z "${STEP_DB_MIGRATED_PRD:-""}" ]]; then
+  echo "Running migrations lambda for ${VPC_DB_CLUSTER_NAME_PRD}..."
+  ${AWS_RDS_DATA} execute-statement \
+    --resource-arn "${VPC_DB_CLUSTER_ARN_PRD}" \
+    --secret-arn "${VPC_DB_SECRET_ARN_PRD}" \
+    --database "${VPC_DB_NAME_PRD}" \
+    --sql 'SELECT NOW()' \
+    >/dev/null
+
+  TMP_FILE=$(mktemp "/tmp/lambda.invoke.XXXXX")
+  ${AWS_LAMBDA} invoke \
+    --function-name "${VPC_LAMBDA_NAME_MIGRATIONS_PRD}" \
+    --cli-binary-format raw-in-base64-out \
+    --payload '{"action": "UP"}' \
+    "$TMP_FILE" \
+    >/dev/null
+
+  sed 's/${.*}//' "$TMP_FILE" \
+    | ${JQ_BIN} 'select(.migrations != null) | .migrations'
+
+  rm -f "$TMP_FILE" >/dev/null
+  echo "Migrations ran."
+
+  (echo "STEP_DB_MIGRATED_PRD=true" >> "${UP_ENV_FILE}")
 fi
 
 if [[ -z "${STEP_WEB_CERT_ISSUED_PRD:-""}" ]]; then
@@ -826,8 +914,47 @@ if [[ -z "${STEP_WEB_CERT_ISSUED_PRD:-""}" ]]; then
 
   (echo "STEP_WEB_CERT_ISSUED_PRD=true" >> "${UP_ENV_FILE}")
 
-  echo "...waiting for 30 seconds for the cert to be created"
+  echo "...waiting 30 seconds for the cert to be created"
   sleep 30
+fi
+
+if [[ -n "${CLOUDFLARE_TOKEN:-""}" ]]; then
+  if [[ -z "${STEP_CLOUDFLARE_DNS_CERT_VERIFICATION_CREATED_PRD:-""}" ]]; then
+    VPC_CLOUDFLARE_DNS_CERT_VERIFICATION_CNAME_PRD=$(\
+      ${AWS_ACM} \
+        describe-certificate \
+        --certificate-arn "${WEB_CERTIFICATE_ARN_PRD}" \
+        | ${JQ_BIN} '.Certificate.DomainValidationOptions[0].ResourceRecord.Name' \
+        | sed 's/[.]$//'
+    )
+
+    EXISTING_DNS_CNAME=$(\
+      ${CF_CLI} ls \
+      -f json \
+      | ${JQ_BIN} '.[] | select(.type=="CNAME") | select(.name=="'${VPC_CLOUDFLARE_DNS_CERT_VERIFICATION_CNAME_PRD}'") | .id'
+    )
+
+    if [[ -z "${EXISTING_DNS_CNAME}" ]]; then
+      echo "Adding new cert verficaton CNAME record ${VPC_CLOUDFLARE_DNS_CERT_VERIFICATION_CNAME_PRD}..."
+      CERT_REQUEST_CONTENT=$(\
+        ${AWS_ACM} \
+          describe-certificate \
+          --certificate-arn "${WEB_CERTIFICATE_ARN_PRD}" \
+          | ${JQ_BIN} '.Certificate.DomainValidationOptions[0].ResourceRecord.Value'
+      )
+
+      ${CF_CLI} \
+        -t "CNAME" \
+        add "${VPC_CLOUDFLARE_DNS_CERT_VERIFICATION_CNAME_PRD}" "${CERT_REQUEST_CONTENT}"
+      echo "done."
+
+      echo "...waiting a minute while that cert is verified"
+      sleep 60
+    fi
+
+    (echo "VPC_CLOUDFLARE_DNS_CERT_VERIFICATION_CNAME_PRD=${VPC_CLOUDFLARE_DNS_CERT_VERIFICATION_CNAME_PRD}" >> "${ENV_FILE}")
+    (echo "STEP_CLOUDFLARE_DNS_CERT_VERIFICATION_CREATED_PRD=true" >> "${UP_ENV_FILE}")
+  fi
 fi
 
 if [[ -z "${STEP_API_GATEWAY_DOMAIN_CREATED_PRD:-""}" ]]; then
@@ -841,9 +968,13 @@ if [[ -z "${STEP_API_GATEWAY_DOMAIN_CREATED_PRD:-""}" ]]; then
       | ${JQ_BIN} '.regionalDomainName'
     )
   echo "${VPC_API_GATEWAY_DEPLOYMENT_ID_PRD}"
-  echo ""
-  echo "  Update your DNS with a CNAME ${VPC_API_GATEWAY_SUBDOMAIN_PRD} ${VPC_API_GATEWAY_DOMAIN_URL_PRD}"
-  echo ""
+
+  if [[ -z "${CLOUDFLARE_TOKEN:-""}" ]]; then
+    echo ""
+    echo "  Update your DNS with a CNAME ${VPC_API_GATEWAY_SUBDOMAIN_PRDO} ${VPC_API_GATEWAY_DOMAIN_URL_PRDO}"
+    echo ""
+  fi
+
   (echo "VPC_API_GATEWAY_DOMAIN_PRD=${VPC_API_GATEWAY_DOMAIN_PRD}" >> "${ENV_FILE}")
   (echo "VPC_API_GATEWAY_DOMAIN_URL_PRD=${VPC_API_GATEWAY_DOMAIN_URL_PRD}" >> "${ENV_FILE}")
 
@@ -864,16 +995,152 @@ if [[ -z "${STEP_API_GATEWAY_DOMAIN_PATH_MAPPED_PRD:-""}" ]]; then
 
   (echo "STEP_API_GATEWAY_DOMAIN_PATH_MAPPED_PRD=true" >> "${UP_ENV_FILE}")
 fi
+
+if [[ -z "${STEP_CLOUDFLARE_DNS_UPDATED_PRD:-""}" ]]; then
+  if [[ -n "${CLOUDFLARE_TOKEN:-""}" ]]; then
+    echo "Ensuring there is a CloudFlare DNS CNAME record for ${WEB_CERTIFICATE_GRAPHQL_PRD}..."
+    EXISTING_DNS_CNAME=$(\
+      ${CF_CLI} ls \
+      -f json \
+      | jq -r '.[] | select(.type=="CNAME") | select(.name=="'${WEB_CERTIFICATE_GRAPHQL_PRD}'") | .id'
+    )
+
+    if [[ -n "${EXISTING_DNS_CNAME}" ]]; then
+      echo "Updating the existing ${WEB_CERTIFICATE_GRAPHQL_PRD} CNAME..."
+      ${CF_CLI} edit "${WEB_CERTIFICATE_GRAPHQL_PRD}" "${VPC_API_GATEWAY_DOMAIN_URL_PRD}"
+      echo "done."
+    else
+      echo "Adding new CNAME ${WEB_CERTIFICATE_GRAPHQL_PRD}..."
+      ${CF_CLI} \
+        -t "CNAME" \
+        add "${WEB_CERTIFICATE_GRAPHQL_PRD}" "${VPC_API_GATEWAY_DOMAIN_URL_PRD}"
+      echo "done."
+    fi
+
+    (echo "VPC_CLOUDFLARE_DNS_GRAPHQL_CNAME_PRD=${WEB_CERTIFICATE_GRAPHQL_PRD}" >> "${ENV_FILE}")
+  fi
+
+  (echo "STEP_CLOUDFLARE_DNS_UPDATED_PRD=true" >> "${UP_ENV_FILE}")
+fi
 # ========== END Production specific resources ===============================================
 
 # ========== Development specific resources ===============================================
+# if [[ -z "${STEP_CACHE_CLUSTER_CREATED_DEV:-""}" ]]; then
+#   echo "Creating ${VPC_CACHE_CLUSTER_NAME_DEV} redis cache cluster..."
+#   ${AWS_CACHE} create-cache-cluster \
+#     --cache-cluster-id ${VPC_CACHE_CLUSTER_NAME_DEV} \
+#     --cache-node-type ${VPC_CACHE_INSTANCE_SIZE} \
+#     --cache-parameter-group-name ${VPC_CACHE_PARAMETER_GROUP} \
+#     --cache-subnet-group-name ${VPC_CACHE_SUBNET_GROUP_NAME} \
+#     --engine redis \
+#     --engine-version ${VPC_CACHE_VERSION} \
+#     --num-cache-nodes ${VPC_CACHE_NODE_COUNT} \
+#     --security-group-ids ${VPC_SECURITY_GROUP_CACHE_ID} \
+#     --tags Key=Name,Value=${VPC_NAME} \
+#     >/dev/null
+#   (echo "VPC_CACHE_CLUSTER_NAME_DEV=${VPC_CACHE_CLUSTER_NAME_DEV}" >> "${ENV_FILE}")
+
+#   (echo "STEP_CACHE_CLUSTER_CREATED_DEV=true" >> "${UP_ENV_FILE}")
+
+#   CACHE_STATUS=$(${AWS_CACHE} describe-cache-clusters | ${JQ_BIN} ".CacheClusters[] | select(.CacheClusterId == \"${VPC_CACHE_CLUSTER_NAME_DEV}\") | .CacheClusterStatus")
+#   until [ $CACHE_STATUS == 'available' ];
+#   do
+#     echo "  $(date +"%r") Waiting for cache to finish ${CACHE_STATUS}..."
+#     sleep 15
+#     CACHE_STATUS=$(${AWS_CACHE} describe-cache-clusters | ${JQ_BIN} ".CacheClusters[] | select(.CacheClusterId == \"${VPC_CACHE_CLUSTER_NAME_DEV}\") | .CacheClusterStatus")
+#   done
+#   VPC_CACHE_ENDPOINT_DEV=$(${AWS_CACHE} describe-cache-clusters --show-cache-node-info | ${JQ_BIN} ".CacheClusters[] | select(.CacheClusterId == \"${VPC_CACHE_CLUSTER_NAME_DEV}\") | .CacheNodes[] | select(.CacheNodeId == \"0001\") | .Endpoint.Address")
+#   echo "Cache ready at ${VPC_CACHE_ENDPOINT_DEV}"
+#   (echo "VPC_CACHE_ENDPOINT_DEV=${VPC_CACHE_ENDPOINT_DEV}" >> "${ENV_FILE}")
+# fi
+
+if [[ -z "${STEP_DB_CLUSTER_CREATED_DEV:-""}" ]]; then
+  echo "Creating a serverless postgres instance (${VPC_DB_NAME_DEV})..."
+  ${AWS_RDS} create-db-cluster \
+    --database-name ${VPC_DB_NAME_DEV} \
+    --db-cluster-identifier "${VPC_DB_CLUSTER_NAME_DEV}" \
+    --db-subnet-group-name "${VPC_DB_SUBNET_GROUP_NAME}" \
+    --enable-http-endpoint \
+    --engine aurora-postgresql \
+    --engine-version "${VPC_DB_VERSION}" \
+    --engine-mode serverless \
+    --scaling-configuration MinCapacity=2,MaxCapacity=8,SecondsUntilAutoPause=${VPC_DB_HIBERNATE_IN_SECONDS},AutoPause=true \
+    --storage-encrypted \
+    --master-username "${VPC_DB_USERNAME}" \
+    --master-user-password "${VPC_DB_PASSWORD_DEV}" \
+    --vpc-security-group-ids "${VPC_SECURITY_GROUP_DB_ID}" \
+    >/dev/null
+
+  VPC_DB_CLUSTER_ARN_DEV=$(${AWS_RDS} describe-db-clusters | ${JQ_BIN} ".DBClusters[] | select(.DBClusterIdentifier == \"${VPC_DB_CLUSTER_NAME_DEV}\") | .DBClusterArn")
+  (echo "VPC_DB_NAME_DEV=${VPC_DB_NAME_DEV}" >> "${ENV_FILE}")
+  (echo "VPC_DB_CLUSTER_NAME_DEV=${VPC_DB_CLUSTER_NAME_DEV}" >> "${ENV_FILE}")
+  (echo "VPC_DB_PASSWORD_DEV=${VPC_DB_PASSWORD_DEV}" >> "${ENV_FILE}")
+  (echo "VPC_DB_CLUSTER_ARN_DEV=${VPC_DB_CLUSTER_ARN_DEV}" >> "${ENV_FILE}")
+  (echo "STEP_DB_CLUSTER_CREATED_DEV=true" >> "${UP_ENV_FILE}")
+
+  DB_STATUS=$(${AWS_RDS} describe-db-clusters | ${JQ_BIN} ".DBClusters[] | select(.DBClusterIdentifier == \"${VPC_DB_CLUSTER_NAME_DEV}\") | .Status")
+  until [ $DB_STATUS == 'available' ];
+  do
+    echo "  $(date +"%r") Waiting for database to finish ${DB_STATUS}..."
+    sleep 15
+    DB_STATUS=$(${AWS_RDS} describe-db-clusters | ${JQ_BIN} ".DBClusters[] | select(.DBClusterIdentifier == \"${VPC_DB_CLUSTER_NAME_DEV}\") | .Status")
+  done
+
+  VPC_DB_ENDPOINT_DEV=$(${AWS_RDS} describe-db-clusters | ${JQ_BIN} ".DBClusters[] | select(.DBClusterIdentifier == \"${VPC_DB_CLUSTER_NAME_DEV}\") | .Endpoint")
+  echo "Database ready at ${VPC_DB_ENDPOINT_DEV}"
+  (echo "VPC_DB_ENDPOINT_DEV=${VPC_DB_ENDPOINT_DEV}" >> "${ENV_FILE}")
+fi
+
+if [[ -z "${STEP_DB_SECRET_CREATED_DEV:-""}" ]]; then
+  echo -n "Creating ${VPC_DB_SECRET_NAME_DEV} secret..."
+  VPC_DB_SECRET_ARN_DEV=$(\
+    ${AWS_SECRETS} create-secret \
+      --name "${VPC_DB_SECRET_NAME_DEV}" \
+      --secret-string '{
+        "username": "'${VPC_DB_USERNAME}'",
+        "password": "'${VPC_DB_PASSWORD_DEV}'",
+        "engine": "postgres",
+        "host": "'${VPC_DB_ENDPOINT_DEV}'",
+        "port": 5432,
+        "dbClusterIdentifier": "'${VPC_DB_CLUSTER_NAME_DEV}'"
+      }' \
+    | ${JQ_BIN} '.ARN'
+  )
+  echo "${VPC_DB_SECRET_ARN_DEV}"
+  (echo "VPC_DB_SECRET_ARN_DEV=${VPC_DB_SECRET_ARN_DEV}" >> "${ENV_FILE}")
+  (echo "VPC_DB_SECRET_NAME_DEV=${VPC_DB_SECRET_NAME_DEV}" >> "${ENV_FILE}")
+
+  (echo "STEP_DB_SECRET_CREATED_DEV=true" >> "${UP_ENV_FILE}")
+fi
+
+if [[ -z "${STEP_LAMBDA_FUNCTION_CREATED_MIGRATIONS_DEV:-""}" ]]; then
+  echo -n "Creating lambda function ${VPC_LAMBDA_NAME_MIGRATIONS_DEV}..."
+  VPC_LAMBDA_ARN_MIGRATIONS_DEV=$(\
+    ${AWS_LAMBDA} create-function \
+      --function-name ${VPC_LAMBDA_NAME_MIGRATIONS_DEV} \
+      --code "ImageUri=${VPC_ECR_LAMBDA_IMAGE_ARN_MIGRATIONS}:latest" \
+      --environment "Variables={DATABASE_URL=postgres://${VPC_DB_USERNAME}:${VPC_DB_PASSWORD_DEV}@${VPC_DB_ENDPOINT_DEV}:5432/${VPC_DB_NAME_DEV},DEBUG=*${VPC_NAME}*,SHOW_CONFIG=false,npm_package_name=${VPC_NAME}}" \
+      --memory-size 256 \
+      --package-type Image \
+      --role ${VPC_LAMBDA_ROLE_ARN} \
+      --timeout 5 \
+      --vpc-config "SubnetIds=${VPC_SUBNET_PRIVATE_ID_1},${VPC_SUBNET_PRIVATE_ID_2},SecurityGroupIds=${VPC_SECURITY_GROUP_LAMBDA_ID}" \
+      | ${JQ_BIN} '.FunctionArn'
+    )
+  echo "${VPC_LAMBDA_ARN_MIGRATIONS_DEV}"
+  (echo "VPC_LAMBDA_NAME_MIGRATIONS_DEV=${VPC_LAMBDA_NAME_MIGRATIONS_DEV}" >> "${ENV_FILE}")
+  (echo "VPC_LAMBDA_ARN_MIGRATIONS_DEV=${VPC_LAMBDA_ARN_MIGRATIONS_DEV}" >> "${ENV_FILE}")
+
+  (echo "STEP_LAMBDA_FUNCTION_CREATED_MIGRATIONS_DEV=true" >> "${UP_ENV_FILE}")
+fi
+
 if [[ -z "${STEP_LAMBDA_FUNCTION_CREATED_DEV:-""}" ]]; then
   echo -n "Creating lambda function ${VPC_LAMBDA_NAME_DEV}..."
   VPC_LAMBDA_ARN_DEV=$(\
     ${AWS_LAMBDA} create-function \
       --function-name ${VPC_LAMBDA_NAME_DEV} \
       --code "ImageUri=${VPC_ECR_LAMBDA_IMAGE_ARN}:latest" \
-      --environment "Variables={DATABASE_URL=postgres://${VPC_DB_USERNAME}:${VPC_DB_PASSWORD}@${VPC_DB_ENDPOINT}:5432/${VPC_DB_NAME},REDIS_URL=redis://${VPC_CACHE_ENDPOINT}:6379,HTTPS=false,DEBUG=*${VPC_NAME}*,SHOW_CONFIG=false,EMAIL_FROM_ADDRESS=\"noreply@${WEB_DOMAIN}\",EMAIL_SMTP_URL=\"${EMAIL_SMTP_URL:-""}\",npm_package_name=${VPC_NAME},UI_HOST_URI=\"${WEB_APP_URL_DEV}\"}" \
+      --environment "Variables={DATABASE_URL=postgres://${VPC_DB_USERNAME}:${VPC_DB_PASSWORD_DEV}@${VPC_DB_ENDPOINT_DEV}:5432/${VPC_DB_NAME_DEV},REDIS_KEY_PREFIX=${ENV_DEV},REDIS_URL=${REDIS_URL},HTTPS=false,DEBUG=*${VPC_NAME}*,SHOW_CONFIG=false,EMAIL_FROM_ADDRESS=\"noreply@${WEB_DOMAIN}\",EMAIL_SMTP_URL=\"${EMAIL_SMTP_URL:-""}\",npm_package_name=${VPC_NAME},UI_HOST_URI=\"${WEB_APP_URL_DEV}\"}" \
       --memory-size 256 \
       --package-type Image \
       --role ${VPC_LAMBDA_ROLE_ARN} \
@@ -997,20 +1264,62 @@ if [[ -z "${STEP_API_GATEWAY_DEPLOYED_DEV:-""}" ]]; then
   (echo "STEP_API_GATEWAY_DEPLOYED_DEV=true" >> "${UP_ENV_FILE}")
 fi
 
-if [[ -z "${STEP_LAMBDA_READY_DEV:-""}" ]]; then
-  echo "Checking lambda ${VPC_LAMBDA_NAME_DEV} function availability..."
+if [[ -z "${STEP_LAMBDA_MIGRATIONS_READY_DEV:-""}" ]]; then
+  echo "Checking lambda ${VPC_LAMBDA_NAME_MIGRATIONS_DEV} function availability..."
 
-  LAMBDA_STATUS=$(${AWS_LAMBDA} get-function --function-name "${VPC_LAMBDA_NAME_DEV}" | ${JQ_BIN} ".Configuration.State")
+  LAMBDA_STATUS=$(${AWS_LAMBDA} get-function --function-name "${VPC_LAMBDA_NAME_MIGRATIONS_DEV}" | ${JQ_BIN} ".Configuration.State")
   until [ $LAMBDA_STATUS == 'Active' ];
   do
     echo "  $(date +"%r") Waiting for lambda function to be available (currently ${LAMBDA_STATUS})..."
     sleep 15
-    LAMBDA_STATUS=$(${AWS_LAMBDA} get-function --function-name "${VPC_LAMBDA_NAME_DEV}" | ${JQ_BIN} ".Configuration.State")
+    LAMBDA_STATUS=$(${AWS_LAMBDA} get-function --function-name "${VPC_LAMBDA_NAME_MIGRATIONS_DEV}" | ${JQ_BIN} ".Configuration.State")
   done
 
   echo "Lambda available at https://${VPC_API_GATEWAY_ID_DEV}.execute-api.us-east-1.amazonaws.com/production/heartbeat"
 
-  (echo "STEP_LAMBDA_READY_DEV=true" >> "${UP_ENV_FILE}")
+  (echo "STEP_LAMBDA_MIGRATIONS_READY_DEV=true" >> "${UP_ENV_FILE}")
+fi
+
+if [[ -z "${STEP_DB_READY_DEV:-""}" ]]; then
+  echo -n "Warming up ${VPC_DB_CLUSTER_NAME_DEV} database cluster..."
+  ${AWS_RDS_DATA} execute-statement \
+    --resource-arn "${VPC_DB_CLUSTER_ARN_DEV}" \
+    --secret-arn "${VPC_DB_SECRET_ARN_DEV}" \
+    --database "${VPC_DB_NAME_DEV}" \
+    --sql 'SELECT NOW()' \
+    >/dev/null
+  echo "done."
+
+  (echo "STEP_DB_READY_DEV=true" >> "${UP_ENV_FILE}")
+
+  echo " ...waiting for db live-ness to propogate"
+  sleep 60
+fi
+
+if [[ -z "${STEP_DB_MIGRATED_DEV:-""}" ]]; then
+  echo "Running migrations lambda for ${VPC_DB_CLUSTER_NAME_DEV}..."
+  ${AWS_RDS_DATA} execute-statement \
+    --resource-arn "${VPC_DB_CLUSTER_ARN_DEV}" \
+    --secret-arn "${VPC_DB_SECRET_ARN_DEV}" \
+    --database "${VPC_DB_NAME_DEV}" \
+    --sql 'SELECT NOW()' \
+    >/dev/null
+
+  TMP_FILE=$(mktemp "/tmp/lambda.invoke.XXXXX")
+  ${AWS_LAMBDA} invoke \
+    --function-name "${VPC_LAMBDA_NAME_MIGRATIONS_DEV}" \
+    --cli-binary-format raw-in-base64-out \
+    --payload '{"action": "UP"}' \
+    "$TMP_FILE" \
+    >/dev/null
+
+  sed 's/${.*}//' "$TMP_FILE" \
+    | ${JQ_BIN} 'select(.migrations != null) | .migrations'
+
+  rm -f "$TMP_FILE" >/dev/null
+  echo "Migrations ran."
+
+  (echo "STEP_DB_MIGRATED_DEV=true" >> "${UP_ENV_FILE}")
 fi
 
 if [[ -z "${STEP_WEB_CERT_ISSUED_DEV:-""}" ]]; then
@@ -1026,8 +1335,50 @@ if [[ -z "${STEP_WEB_CERT_ISSUED_DEV:-""}" ]]; then
 
   (echo "STEP_WEB_CERT_ISSUED_DEV=true" >> "${UP_ENV_FILE}")
 
-  echo "...waiting for 30 seconds for the cert to be created"
+  echo "...waiting 30 seconds for the cert to be created"
   sleep 30
+fi
+
+if [[ -n "${CLOUDFLARE_TOKEN:-""}" ]]; then
+  if [[ -z "${STEP_CLOUDFLARE_DNS_CERT_VERIFICATION_CREATED_DEV:-""}" ]]; then
+    VPC_CLOUDFLARE_DNS_CERT_VERIFICATION_CNAME_DEV=$(\
+      ${AWS_ACM} \
+        describe-certificate \
+        --certificate-arn "${WEB_CERTIFICATE_ARN_DEV}" \
+        | ${JQ_BIN} '.Certificate.DomainValidationOptions[0].ResourceRecord.Name' \
+        | sed 's/[.]$//'
+    )
+
+    EXISTING_DNS_CNAME=$(docker run --rm -it \
+      -e "CF_API_KEY=${CLOUDFLARE_TOKEN}" \
+      -e "CF_API_DOMAIN=${WEB_DOMAIN}" \
+      dpig/cloudflare-cli \
+      ls \
+      -f json \
+      | ${JQ_BIN} '.[] | select(.type=="CNAME") | select(.name=="'${VPC_CLOUDFLARE_DNS_CERT_VERIFICATION_CNAME_DEV}'") | .id'
+    )
+
+    if [[ -z "${EXISTING_DNS_CNAME}" ]]; then
+      echo "Adding new cert verficaton CNAME record ${VPC_CLOUDFLARE_DNS_CERT_VERIFICATION_CNAME_DEV}..."
+      CERT_REQUEST_CONTENT=$(\
+        ${AWS_ACM} \
+          describe-certificate \
+          --certificate-arn "${WEB_CERTIFICATE_ARN_DEV}" \
+          | ${JQ_BIN} '.Certificate.DomainValidationOptions[0].ResourceRecord.Value'
+      )
+
+      ${CF_CLI} \
+        -t "CNAME" \
+        add "${VPC_CLOUDFLARE_DNS_CERT_VERIFICATION_CNAME_DEV}" "${CERT_REQUEST_CONTENT}"
+      echo "done."
+
+      echo "...waiting a minute while that cert is verified"
+      sleep 60
+    fi
+
+    (echo "VPC_CLOUDFLARE_DNS_CERT_VERIFICATION_CNAME_DEV=${VPC_CLOUDFLARE_DNS_CERT_VERIFICATION_CNAME_DEV}" >> "${ENV_FILE}")
+    (echo "STEP_CLOUDFLARE_DNS_CERT_VERIFICATION_CREATED_DEV=true" >> "${UP_ENV_FILE}")
+  fi
 fi
 
 if [[ -z "${STEP_API_GATEWAY_DOMAIN_CREATED_DEV:-""}" ]]; then
@@ -1041,9 +1392,13 @@ if [[ -z "${STEP_API_GATEWAY_DOMAIN_CREATED_DEV:-""}" ]]; then
       | ${JQ_BIN} '.regionalDomainName'
     )
   echo "${VPC_API_GATEWAY_DEPLOYMENT_ID_DEV}"
-  echo ""
-  echo "  Update your DNS with a CNAME ${VPC_API_GATEWAY_SUBDOMAIN_DEV} ${VPC_API_GATEWAY_DOMAIN_URL_DEV}"
-  echo ""
+
+  if [[ -z "${CLOUDFLARE_TOKEN:-""}" ]]; then
+    echo ""
+    echo "  Update your DNS with a CNAME ${VPC_API_GATEWAY_SUBDOMAIN_DEV} ${VPC_API_GATEWAY_DOMAIN_URL_DEV}"
+    echo ""
+  fi
+
   (echo "VPC_API_GATEWAY_DOMAIN_DEV=${VPC_API_GATEWAY_DOMAIN_DEV}" >> "${ENV_FILE}")
   (echo "VPC_API_GATEWAY_DOMAIN_URL_DEV=${VPC_API_GATEWAY_DOMAIN_URL_DEV}" >> "${ENV_FILE}")
 
@@ -1063,6 +1418,33 @@ if [[ -z "${STEP_API_GATEWAY_DOMAIN_PATH_MAPPED_DEV:-""}" ]]; then
   (echo "VPC_API_GATEWAY_DOMAIN_BASE_PATH_DEV=\"${VPC_API_GATEWAY_DOMAIN_BASE_PATH_DEV}\"" >> "${ENV_FILE}")
 
   (echo "STEP_API_GATEWAY_DOMAIN_PATH_MAPPED_DEV=true" >> "${UP_ENV_FILE}")
+fi
+
+if [[ -z "${STEP_CLOUDFLARE_DNS_UPDATED_DEV:-""}" ]]; then
+  if [[ -n "${CLOUDFLARE_TOKEN:-""}" ]]; then
+    echo "Ensuring there is a CloudFlare DNS CNAME record for ${WEB_CERTIFICATE_GRAPHQL_DEV}..."
+    EXISTING_DNS_CNAME=$(\
+      ${CF_CLI} ls \
+      -f json \
+      | jq -r '.[] | select(.type=="CNAME") | select(.name=="'${WEB_CERTIFICATE_GRAPHQL_DEV}'") | .id'
+    )
+
+    if [[ -n "${EXISTING_DNS_CNAME}" ]]; then
+      echo "Updating the existing ${WEB_CERTIFICATE_GRAPHQL_DEV} CNAME..."
+      ${CF_CLI} edit "${WEB_CERTIFICATE_GRAPHQL_DEV}" "${VPC_API_GATEWAY_DOMAIN_URL_DEV}"
+      echo "done."
+    else
+      echo "Adding new CNAME ${WEB_CERTIFICATE_GRAPHQL_DEV}..."
+      ${CF_CLI} \
+        -t "CNAME" \
+        add "${WEB_CERTIFICATE_GRAPHQL_DEV}" "${VPC_API_GATEWAY_DOMAIN_URL_DEV}"
+      echo "done."
+    fi
+
+    (echo "VPC_CLOUDFLARE_DNS_GRAPHQL_CNAME_DEV=${WEB_CERTIFICATE_GRAPHQL_DEV}" >> "${ENV_FILE}")
+  fi
+
+  (echo "STEP_CLOUDFLARE_DNS_UPDATED_DEV=true" >> "${UP_ENV_FILE}")
 fi
 # ========== END Development specific resources ===============================================
 

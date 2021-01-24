@@ -44,6 +44,7 @@ const defaults = {
   HTTPS: true,
   NODE_ENV: 'development',
   PORT: 4000,
+  REDIS_KEY_PREFIX: 'development',
   REDIS_URL: '',
   REFRESH_TOKEN_EXPIRY: '7d',
   REFRESH_TOKEN_SECRET: 'refresh-token-secret',
@@ -119,6 +120,7 @@ const merged = pipe(
     EMAIL_SMTP_TIMEOUT_SECONDS: Utils.toBool,
     HTTPS: Utils.toBool,
     PORT: Utils.toNumber,
+    REDIS_KEY_PREFIX: defaultTo(config.NODE_ENV),
     SHOW_CONFIG: Utils.toBool,
   }),
   Utils.renameKeys({

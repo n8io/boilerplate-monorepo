@@ -62,26 +62,6 @@ services:
     volumes:
       - ./.ini:/app/.ini
 
-  service-lambda:
-    image: boilerplate-monorepo/service-lambda
-    container_name: service-lambda
-    restart: unless-stopped
-    depends_on:
-      - cache
-      - db
-    environment:
-      DATABASE_URL: postgres://postgres:postgres@db:5432/boilerplate-monorepo
-      DEBUG: '@boilerplate-monorepo/service*'
-      EMAIL_SMTP_URL: smtp://user:password@email:1025
-      HTTPS: 'false'
-      LAMBDA_TASK_ROOT: '/var/task'
-      PORT: 8080
-      REDIS_URL: redis://cache:6379
-      npm_package_name: '@boilerplate-monorepo/service'
-      # SHOW_CONFIG: 'true'
-    ports:
-      - 4000:8080
-
 volumes:
   data-cache:
   data-db:
